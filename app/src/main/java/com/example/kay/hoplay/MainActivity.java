@@ -1,8 +1,7 @@
 package com.example.kay.hoplay;
 
 //hello
-// ------> kdesu chawaan
-//
+
 
 import android.app.Dialog;
 import android.content.Context;
