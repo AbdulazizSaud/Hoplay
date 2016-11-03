@@ -52,15 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     private RelativeLayout signInRelativeLayout;
     private Toolbar toolbar;
 
-    // Yo biatch ^.^
-    // ...
-    //... i'm second ....................
-    ////..
-    //xxs
-    //xx..
-    // imprefect :)
-    //fdfd
-    //dsd
+    // Code changed here bitch ..
     @Override
         protected void onCreate(Bundle savedInstanceState) {
             mainActivity = this;
