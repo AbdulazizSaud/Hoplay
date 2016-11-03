@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "119510333228",
+    "firebase_url": "https://hoplay-91325.firebaseio.com",
+    "project_id": "hoplay-91325",
+    "storage_bucket": "hoplay-91325.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119510333228:android:b0dc500dd277ae63",
+        "android_client_info": {
+          "package_name": "com.example.kay.hoplay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "119510333228-q5urqp40kjn1u3ir30jbcji3r5h3aqbv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsxJ135m-NEBBTuvUXq1jJckbhFnkLZws"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

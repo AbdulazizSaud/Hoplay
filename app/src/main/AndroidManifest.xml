@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.kay.hoplay">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".MainAppMenu" />
+        <activity android:name=".ThreeButtonsActivity" />
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".UserGames"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UserRatings"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UserFollowing"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UserFollowers"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TermsAndConditions"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ChatActivity">
+
+
+
+        </activity>
+        <activity android:name=".ForgetPassword"></activity>
+    </application>
+
+</manifest>

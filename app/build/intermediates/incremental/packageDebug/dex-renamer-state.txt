@@ -1,0 +1,7 @@
+#Thu Nov 03 16:44:54 AST 2016
+base.0=C\:\\Users\\Kay\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_c7d71cd908f4479eb6c6bd5ad4224d8dde7eaf2f
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=C\:\\Users\\Kay\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_300d7abf618ea6570b3aaf05153050502b63b071\\classes.dex
+base.1=C\:\\Users\\Kay\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_300d7abf618ea6570b3aaf05153050502b63b071
+file.0=C\:\\Users\\Kay\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_c7d71cd908f4479eb6c6bd5ad4224d8dde7eaf2f\\classes.dex

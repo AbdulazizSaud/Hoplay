@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.kay.hoplay.MainActivity"
+    android:background="#E0E0E0"
+    android:id="@+id/sign_in_relativeLayout"
+    android:onClick="removeKeyboard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+
+    <!--<include android:id="@+id/app_bar" layout="@layout/app_bar"></include>-->
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:id="@+id/logo_imageview"
+        android:src="@drawable/logomainactivity"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="removeKeyboard"
+
+        />
+
+    <EditText
+        android:layout_width="320dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:background="@drawable/rectangular_edittext"
+        android:layout_height="50dp"
+        android:textColor="@color/black"
+        android:id="@+id/password_edittext"
+        android:shadowColor="@color/burgundy"
+        android:layout_below="@+id/username_sign_in_edittext"
+        android:layout_centerHorizontal="true"
+        android:hint="password"
+        android:textColorHint="@color/LightGrey"
+        android:inputType="textPassword"
+        android:layout_alignStart="@id/username_sign_in_edittext"
+        android:layout_alignLeft="@id/username_sign_in_edittext" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:onClick="goToForgetPassword"
+        android:text="F o r g o t   P a s s w o r d  ?"
+        android:id="@+id/forgot_password_textview"
+        android:layout_marginTop="30dp"
+        android:textSize="15dp"
+        android:gravity="center"
+        android:layout_below="@+id/sign_in_button"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/burgundy" />
+
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="s i g n   i n"
+        android:id="@+id/sign_in_button"
+        android:layout_marginTop="48dp"
+        android:textColor="#f8f6f6"
+        android:textSize="15dp"
+        android:background="@drawable/rounded_button"
+        android:layout_below="@+id/password_edittext"
+        android:layout_alignStart="@+id/logo_imageview"
+        android:onClick="signIn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="D o n &apos; t   h a v e   a n   a c c o u n t  ?"
+        android:id="@+id/sign_up_question_textview"
+        android:textColor="#726D6D"
+        android:textSize="15dp"
+
+        android:layout_marginBottom="17dp"
+        android:layout_above="@+id/sign_up_textview"
+        android:layout_centerHorizontal="true" />
+
+
+    <EditText
+        android:layout_width="320dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:background="@drawable/rectangular_edittext"
+        android:layout_height="50dp"
+        android:id="@+id/username_sign_in_edittext"
+        android:shadowColor="@color/burgundy"
+        android:hint="username"
+        android:textColorHint="@color/LightGrey"
+        android:layout_marginTop="14dp"
+        android:layout_below="@+id/logo_imageview"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/username"
+        android:id="@+id/username_icon_signin_imageview"
+        android:layout_above="@+id/password_edittext"
+        android:layout_alignTop="@+id/username_sign_in_edittext"
+        android:layout_toStartOf="@+id/sign_up_question_textview" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/passwordicon"
+        android:id="@+id/password_icon_signin_imageview"
+        android:layout_alignTop="@+id/password_edittext"
+        android:layout_alignBottom="@+id/password_edittext"
+        android:layout_alignStart="@+id/username_icon_signin_imageview" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/burgundy"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:padding="0dp"
+        android:text="S I G N   U P"
+        android:textSize="15dp"
+        android:id="@+id/sign_up_textview"
+        android:textColor="@color/white"
+        android:onClick="toSignUp"
+        android:layout_alignParentBottom="true"
+        />
+
+
+</RelativeLayout>
