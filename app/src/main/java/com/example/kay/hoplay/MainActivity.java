@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     //xxs
     //xx..
     // imprefect :)
-    // luffy con
 
     @Override
         protected void onCreate(Bundle savedInstanceState) {
