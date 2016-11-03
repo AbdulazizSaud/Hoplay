@@ -35,7 +35,7 @@ public class MainAppMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_app);
-      // getSupportActionBar().hide();
+        // getSupportActionBar().hide();
 
 
         // Set the screen orientation to the portrait mode :

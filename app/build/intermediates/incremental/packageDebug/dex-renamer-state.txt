@@ -1,4 +1,4 @@
-#Thu Nov 03 22:15:40 AST 2016
+#Thu Nov 03 23:49:12 AST 2016
 base.0=/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a7dac272960b7a10f2722d7f89a38f9a17360d63
 renamed.1=classes2.dex
 renamed.0=classes.dex

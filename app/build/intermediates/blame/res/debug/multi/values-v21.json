@@ -7,9 +7,9 @@
                     "startLine": 2,
                     "startColumn": 4,
                     "startOffset": 55,
-                    "endLine": 8,
+                    "endLine": 11,
                     "endColumn": 12,
-                    "endOffset": 352
+                    "endOffset": 569
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/src/main/res/values-v21/styles.xml",
@@ -17,19 +17,19 @@
                         "startLine": 2,
                         "startColumn": 4,
                         "startOffset": 17,
-                        "endLine": 8,
+                        "endLine": 11,
                         "endColumn": 12,
-                        "endOffset": 314
+                        "endOffset": 533
                     }
                 }
             },
             {
                 "to": {
-                    "startLine": 9,
+                    "startLine": 12,
                     "startColumn": 4,
-                    "startOffset": 357,
+                    "startOffset": 574,
                     "endColumn": 90,
-                    "endOffset": 443
+                    "endOffset": 660
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -44,11 +44,11 @@
             },
             {
                 "to": {
-                    "startLine": 10,
+                    "startLine": 13,
                     "startColumn": 4,
-                    "startOffset": 448,
+                    "startOffset": 665,
                     "endColumn": 102,
-                    "endOffset": 546
+                    "endOffset": 763
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -63,11 +63,11 @@
             },
             {
                 "to": {
-                    "startLine": 11,
+                    "startLine": 14,
                     "startColumn": 4,
-                    "startOffset": 551,
+                    "startOffset": 768,
                     "endColumn": 102,
-                    "endOffset": 649
+                    "endOffset": 866
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -82,11 +82,11 @@
             },
             {
                 "to": {
-                    "startLine": 12,
+                    "startLine": 15,
                     "startColumn": 4,
-                    "startOffset": 654,
+                    "startOffset": 871,
                     "endColumn": 104,
-                    "endOffset": 754
+                    "endOffset": 971
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -101,11 +101,11 @@
             },
             {
                 "to": {
-                    "startLine": 13,
+                    "startLine": 16,
                     "startColumn": 4,
-                    "startOffset": 759,
+                    "startOffset": 976,
                     "endColumn": 106,
-                    "endOffset": 861
+                    "endOffset": 1078
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -120,11 +120,11 @@
             },
             {
                 "to": {
-                    "startLine": 14,
+                    "startLine": 17,
                     "startColumn": 4,
-                    "startOffset": 866,
+                    "startOffset": 1083,
                     "endColumn": 108,
-                    "endOffset": 970
+                    "endOffset": 1187
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -139,11 +139,11 @@
             },
             {
                 "to": {
-                    "startLine": 15,
+                    "startLine": 18,
                     "startColumn": 4,
-                    "startOffset": 975,
+                    "startOffset": 1192,
                     "endColumn": 108,
-                    "endOffset": 1079
+                    "endOffset": 1296
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -158,11 +158,11 @@
             },
             {
                 "to": {
-                    "startLine": 16,
+                    "startLine": 19,
                     "startColumn": 4,
-                    "startOffset": 1084,
+                    "startOffset": 1301,
                     "endColumn": 108,
-                    "endOffset": 1188
+                    "endOffset": 1405
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -177,11 +177,11 @@
             },
             {
                 "to": {
-                    "startLine": 17,
+                    "startLine": 20,
                     "startColumn": 4,
-                    "startOffset": 1193,
+                    "startOffset": 1410,
                     "endColumn": 108,
-                    "endOffset": 1297
+                    "endOffset": 1514
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -196,11 +196,11 @@
             },
             {
                 "to": {
-                    "startLine": 18,
+                    "startLine": 21,
                     "startColumn": 4,
-                    "startOffset": 1302,
+                    "startOffset": 1519,
                     "endColumn": 108,
-                    "endOffset": 1406
+                    "endOffset": 1623
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -215,11 +215,11 @@
             },
             {
                 "to": {
-                    "startLine": 19,
+                    "startLine": 22,
                     "startColumn": 4,
-                    "startOffset": 1411,
+                    "startOffset": 1628,
                     "endColumn": 106,
-                    "endOffset": 1513
+                    "endOffset": 1730
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -234,11 +234,11 @@
             },
             {
                 "to": {
-                    "startLine": 20,
+                    "startLine": 23,
                     "startColumn": 4,
-                    "startOffset": 1518,
+                    "startOffset": 1735,
                     "endColumn": 102,
-                    "endOffset": 1616
+                    "endOffset": 1833
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -253,11 +253,11 @@
             },
             {
                 "to": {
-                    "startLine": 21,
+                    "startLine": 24,
                     "startColumn": 4,
-                    "startOffset": 1621,
+                    "startOffset": 1838,
                     "endColumn": 118,
-                    "endOffset": 1735
+                    "endOffset": 1952
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -272,12 +272,12 @@
             },
             {
                 "to": {
-                    "startLine": 22,
+                    "startLine": 25,
                     "startColumn": 4,
-                    "startOffset": 1740,
-                    "endLine": 23,
+                    "startOffset": 1957,
+                    "endLine": 26,
                     "endColumn": 12,
-                    "endOffset": 1890
+                    "endOffset": 2107
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -293,12 +293,12 @@
             },
             {
                 "to": {
-                    "startLine": 24,
+                    "startLine": 27,
                     "startColumn": 4,
-                    "startOffset": 1895,
-                    "endLine": 25,
+                    "startOffset": 2112,
+                    "endLine": 28,
                     "endColumn": 12,
-                    "endOffset": 2045
+                    "endOffset": 2262
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -314,11 +314,11 @@
             },
             {
                 "to": {
-                    "startLine": 26,
+                    "startLine": 29,
                     "startColumn": 4,
-                    "startOffset": 2050,
+                    "startOffset": 2267,
                     "endColumn": 104,
-                    "endOffset": 2150
+                    "endOffset": 2367
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -333,11 +333,11 @@
             },
             {
                 "to": {
-                    "startLine": 27,
+                    "startLine": 30,
                     "startColumn": 4,
-                    "startOffset": 2155,
+                    "startOffset": 2372,
                     "endColumn": 120,
-                    "endOffset": 2271
+                    "endOffset": 2488
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -352,11 +352,11 @@
             },
             {
                 "to": {
-                    "startLine": 28,
+                    "startLine": 31,
                     "startColumn": 4,
-                    "startOffset": 2276,
+                    "startOffset": 2493,
                     "endColumn": 100,
-                    "endOffset": 2372
+                    "endOffset": 2589
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -371,12 +371,12 @@
             },
             {
                 "to": {
-                    "startLine": 29,
+                    "startLine": 32,
                     "startColumn": 4,
-                    "startOffset": 2377,
-                    "endLine": 30,
+                    "startOffset": 2594,
+                    "endLine": 33,
                     "endColumn": 12,
-                    "endOffset": 2519
+                    "endOffset": 2736
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -392,12 +392,12 @@
             },
             {
                 "to": {
-                    "startLine": 31,
+                    "startLine": 34,
                     "startColumn": 4,
-                    "startOffset": 2524,
-                    "endLine": 32,
+                    "startOffset": 2741,
+                    "endLine": 35,
                     "endColumn": 12,
-                    "endOffset": 2660
+                    "endOffset": 2877
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -413,11 +413,11 @@
             },
             {
                 "to": {
-                    "startLine": 33,
+                    "startLine": 36,
                     "startColumn": 4,
-                    "startOffset": 2665,
+                    "startOffset": 2882,
                     "endColumn": 102,
-                    "endOffset": 2763
+                    "endOffset": 2980
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -432,11 +432,11 @@
             },
             {
                 "to": {
-                    "startLine": 34,
+                    "startLine": 37,
                     "startColumn": 4,
-                    "startOffset": 2768,
+                    "startOffset": 2985,
                     "endColumn": 118,
-                    "endOffset": 2882
+                    "endOffset": 3099
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -451,11 +451,11 @@
             },
             {
                 "to": {
-                    "startLine": 35,
+                    "startLine": 38,
                     "startColumn": 4,
-                    "startOffset": 2887,
+                    "startOffset": 3104,
                     "endColumn": 106,
-                    "endOffset": 2989
+                    "endOffset": 3206
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -470,11 +470,11 @@
             },
             {
                 "to": {
-                    "startLine": 36,
+                    "startLine": 39,
                     "startColumn": 4,
-                    "startOffset": 2994,
+                    "startOffset": 3211,
                     "endColumn": 102,
-                    "endOffset": 3092
+                    "endOffset": 3309
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -489,12 +489,12 @@
             },
             {
                 "to": {
-                    "startLine": 37,
+                    "startLine": 40,
                     "startColumn": 4,
-                    "startOffset": 3097,
-                    "endLine": 38,
+                    "startOffset": 3314,
+                    "endLine": 41,
                     "endColumn": 12,
-                    "endOffset": 3247
+                    "endOffset": 3464
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -510,12 +510,12 @@
             },
             {
                 "to": {
-                    "startLine": 39,
+                    "startLine": 42,
                     "startColumn": 4,
-                    "startOffset": 3252,
-                    "endLine": 40,
+                    "startOffset": 3469,
+                    "endLine": 43,
                     "endColumn": 12,
-                    "endOffset": 3418
+                    "endOffset": 3635
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -531,12 +531,12 @@
             },
             {
                 "to": {
-                    "startLine": 41,
+                    "startLine": 44,
                     "startColumn": 4,
-                    "startOffset": 3423,
-                    "endLine": 42,
+                    "startOffset": 3640,
+                    "endLine": 45,
                     "endColumn": 12,
-                    "endOffset": 3567
+                    "endOffset": 3784
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -552,12 +552,12 @@
             },
             {
                 "to": {
-                    "startLine": 43,
+                    "startLine": 46,
                     "startColumn": 4,
-                    "startOffset": 3572,
-                    "endLine": 44,
+                    "startOffset": 3789,
+                    "endLine": 47,
                     "endColumn": 12,
-                    "endOffset": 3732
+                    "endOffset": 3949
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -573,12 +573,12 @@
             },
             {
                 "to": {
-                    "startLine": 45,
+                    "startLine": 48,
                     "startColumn": 4,
-                    "startOffset": 3737,
-                    "endLine": 46,
+                    "startOffset": 3954,
+                    "endLine": 49,
                     "endColumn": 12,
-                    "endOffset": 3889
+                    "endOffset": 4106
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -594,12 +594,12 @@
             },
             {
                 "to": {
-                    "startLine": 47,
+                    "startLine": 50,
                     "startColumn": 4,
-                    "startOffset": 3894,
-                    "endLine": 48,
+                    "startOffset": 4111,
+                    "endLine": 51,
                     "endColumn": 12,
-                    "endOffset": 4040
+                    "endOffset": 4257
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -615,11 +615,11 @@
             },
             {
                 "to": {
-                    "startLine": 49,
+                    "startLine": 52,
                     "startColumn": 4,
-                    "startOffset": 4045,
+                    "startOffset": 4262,
                     "endColumn": 118,
-                    "endOffset": 4159
+                    "endOffset": 4376
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -634,12 +634,12 @@
             },
             {
                 "to": {
-                    "startLine": 50,
+                    "startLine": 53,
                     "startColumn": 4,
-                    "startOffset": 4164,
-                    "endLine": 51,
+                    "startOffset": 4381,
+                    "endLine": 54,
                     "endColumn": 12,
-                    "endOffset": 4308
+                    "endOffset": 4525
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -655,12 +655,12 @@
             },
             {
                 "to": {
-                    "startLine": 52,
+                    "startLine": 55,
                     "startColumn": 4,
-                    "startOffset": 4313,
-                    "endLine": 53,
+                    "startOffset": 4530,
+                    "endLine": 56,
                     "endColumn": 12,
-                    "endOffset": 4457
+                    "endOffset": 4674
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -676,11 +676,11 @@
             },
             {
                 "to": {
-                    "startLine": 54,
+                    "startLine": 57,
                     "startColumn": 4,
-                    "startOffset": 4462,
+                    "startOffset": 4679,
                     "endColumn": 111,
-                    "endOffset": 4569
+                    "endOffset": 4786
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -695,11 +695,11 @@
             },
             {
                 "to": {
-                    "startLine": 55,
+                    "startLine": 58,
                     "startColumn": 4,
-                    "startOffset": 4574,
+                    "startOffset": 4791,
                     "endColumn": 146,
-                    "endOffset": 4716
+                    "endOffset": 4933
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -714,12 +714,12 @@
             },
             {
                 "to": {
-                    "startLine": 56,
+                    "startLine": 59,
                     "startColumn": 4,
-                    "startOffset": 4721,
-                    "endLine": 57,
+                    "startOffset": 4938,
+                    "endLine": 60,
                     "endColumn": 12,
-                    "endOffset": 4869
+                    "endOffset": 5086
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -735,12 +735,12 @@
             },
             {
                 "to": {
-                    "startLine": 58,
+                    "startLine": 61,
                     "startColumn": 4,
-                    "startOffset": 4874,
-                    "endLine": 59,
+                    "startOffset": 5091,
+                    "endLine": 62,
                     "endColumn": 12,
-                    "endOffset": 5016
+                    "endOffset": 5233
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -756,11 +756,11 @@
             },
             {
                 "to": {
-                    "startLine": 60,
+                    "startLine": 63,
                     "startColumn": 4,
-                    "startOffset": 5021,
+                    "startOffset": 5238,
                     "endColumn": 74,
-                    "endOffset": 5091
+                    "endOffset": 5308
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -775,11 +775,11 @@
             },
             {
                 "to": {
-                    "startLine": 61,
+                    "startLine": 64,
                     "startColumn": 4,
-                    "startOffset": 5096,
+                    "startOffset": 5313,
                     "endColumn": 88,
-                    "endOffset": 5180
+                    "endOffset": 5397
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -794,11 +794,11 @@
             },
             {
                 "to": {
-                    "startLine": 62,
+                    "startLine": 65,
                     "startColumn": 4,
-                    "startOffset": 5185,
+                    "startOffset": 5402,
                     "endColumn": 86,
-                    "endOffset": 5267
+                    "endOffset": 5484
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -813,11 +813,11 @@
             },
             {
                 "to": {
-                    "startLine": 63,
+                    "startLine": 66,
                     "startColumn": 4,
-                    "startOffset": 5272,
+                    "startOffset": 5489,
                     "endColumn": 100,
-                    "endOffset": 5368
+                    "endOffset": 5585
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -832,12 +832,12 @@
             },
             {
                 "to": {
-                    "startLine": 64,
+                    "startLine": 67,
                     "startColumn": 4,
-                    "startOffset": 5373,
-                    "endLine": 107,
+                    "startOffset": 5590,
+                    "endLine": 110,
                     "endColumn": 12,
-                    "endOffset": 8436
+                    "endOffset": 8653
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -853,12 +853,12 @@
             },
             {
                 "to": {
-                    "startLine": 108,
+                    "startLine": 111,
                     "startColumn": 4,
-                    "startOffset": 8441,
-                    "endLine": 110,
+                    "startOffset": 8658,
+                    "endLine": 113,
                     "endColumn": 12,
-                    "endOffset": 8622
+                    "endOffset": 8839
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -874,12 +874,12 @@
             },
             {
                 "to": {
-                    "startLine": 111,
+                    "startLine": 114,
                     "startColumn": 4,
-                    "startOffset": 8627,
-                    "endLine": 154,
+                    "startOffset": 8844,
+                    "endLine": 157,
                     "endColumn": 12,
-                    "endOffset": 11702
+                    "endOffset": 11919
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -895,12 +895,12 @@
             },
             {
                 "to": {
-                    "startLine": 155,
+                    "startLine": 158,
                     "startColumn": 4,
-                    "startOffset": 11707,
-                    "endLine": 157,
+                    "startOffset": 11924,
+                    "endLine": 160,
                     "endColumn": 12,
-                    "endOffset": 11900
+                    "endOffset": 12117
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -916,12 +916,12 @@
             },
             {
                 "to": {
-                    "startLine": 158,
+                    "startLine": 161,
                     "startColumn": 4,
-                    "startOffset": 11905,
-                    "endLine": 159,
+                    "startOffset": 12122,
+                    "endLine": 162,
                     "endColumn": 12,
-                    "endOffset": 12023
+                    "endOffset": 12240
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -937,12 +937,12 @@
             },
             {
                 "to": {
-                    "startLine": 160,
+                    "startLine": 163,
                     "startColumn": 4,
-                    "startOffset": 12028,
-                    "endLine": 161,
+                    "startOffset": 12245,
+                    "endLine": 164,
                     "endColumn": 12,
-                    "endOffset": 12146
+                    "endOffset": 12363
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -958,12 +958,12 @@
             },
             {
                 "to": {
-                    "startLine": 162,
+                    "startLine": 165,
                     "startColumn": 4,
-                    "startOffset": 12151,
-                    "endLine": 163,
+                    "startOffset": 12368,
+                    "endLine": 166,
                     "endColumn": 12,
-                    "endOffset": 12259
+                    "endOffset": 12476
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -979,12 +979,12 @@
             },
             {
                 "to": {
-                    "startLine": 164,
+                    "startLine": 167,
                     "startColumn": 4,
-                    "startOffset": 12264,
-                    "endLine": 166,
+                    "startOffset": 12481,
+                    "endLine": 169,
                     "endColumn": 12,
-                    "endOffset": 12442
+                    "endOffset": 12659
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1000,12 +1000,12 @@
             },
             {
                 "to": {
-                    "startLine": 167,
+                    "startLine": 170,
                     "startColumn": 4,
-                    "startOffset": 12447,
-                    "endLine": 168,
+                    "startOffset": 12664,
+                    "endLine": 171,
                     "endColumn": 12,
-                    "endOffset": 12573
+                    "endOffset": 12790
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1021,12 +1021,12 @@
             },
             {
                 "to": {
-                    "startLine": 169,
+                    "startLine": 172,
                     "startColumn": 4,
-                    "startOffset": 12578,
-                    "endLine": 171,
+                    "startOffset": 12795,
+                    "endLine": 174,
                     "endColumn": 12,
-                    "endOffset": 12774
+                    "endOffset": 12991
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1042,11 +1042,11 @@
             },
             {
                 "to": {
-                    "startLine": 172,
+                    "startLine": 175,
                     "startColumn": 4,
-                    "startOffset": 12779,
+                    "startOffset": 12996,
                     "endColumn": 88,
-                    "endOffset": 12863
+                    "endOffset": 13080
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1061,11 +1061,11 @@
             },
             {
                 "to": {
-                    "startLine": 173,
+                    "startLine": 176,
                     "startColumn": 4,
-                    "startOffset": 12868,
+                    "startOffset": 13085,
                     "endColumn": 110,
-                    "endOffset": 12974
+                    "endOffset": 13191
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1080,11 +1080,11 @@
             },
             {
                 "to": {
-                    "startLine": 174,
+                    "startLine": 177,
                     "startColumn": 4,
-                    "startOffset": 12979,
+                    "startOffset": 13196,
                     "endColumn": 126,
-                    "endOffset": 13101
+                    "endOffset": 13318
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1099,11 +1099,11 @@
             },
             {
                 "to": {
-                    "startLine": 175,
+                    "startLine": 178,
                     "startColumn": 4,
-                    "startOffset": 13106,
+                    "startOffset": 13323,
                     "endColumn": 100,
-                    "endOffset": 13202
+                    "endOffset": 13419
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1118,11 +1118,11 @@
             },
             {
                 "to": {
-                    "startLine": 176,
+                    "startLine": 179,
                     "startColumn": 4,
-                    "startOffset": 13207,
+                    "startOffset": 13424,
                     "endColumn": 94,
-                    "endOffset": 13297
+                    "endOffset": 13514
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1137,11 +1137,11 @@
             },
             {
                 "to": {
-                    "startLine": 177,
+                    "startLine": 180,
                     "startColumn": 4,
-                    "startOffset": 13302,
+                    "startOffset": 13519,
                     "endColumn": 122,
-                    "endOffset": 13420
+                    "endOffset": 13637
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1156,11 +1156,11 @@
             },
             {
                 "to": {
-                    "startLine": 178,
+                    "startLine": 181,
                     "startColumn": 4,
-                    "startOffset": 13425,
+                    "startOffset": 13642,
                     "endColumn": 128,
-                    "endOffset": 13549
+                    "endOffset": 13766
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1175,11 +1175,11 @@
             },
             {
                 "to": {
-                    "startLine": 179,
+                    "startLine": 182,
                     "startColumn": 4,
-                    "startOffset": 13554,
+                    "startOffset": 13771,
                     "endColumn": 116,
-                    "endOffset": 13666
+                    "endOffset": 13883
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1194,12 +1194,12 @@
             },
             {
                 "to": {
-                    "startLine": 180,
+                    "startLine": 183,
                     "startColumn": 4,
-                    "startOffset": 13671,
-                    "endLine": 182,
+                    "startOffset": 13888,
+                    "endLine": 185,
                     "endColumn": 12,
-                    "endOffset": 13843
+                    "endOffset": 14060
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1215,11 +1215,11 @@
             },
             {
                 "to": {
-                    "startLine": 183,
+                    "startLine": 186,
                     "startColumn": 4,
-                    "startOffset": 13848,
+                    "startOffset": 14065,
                     "endColumn": 98,
-                    "endOffset": 13942
+                    "endOffset": 14159
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1234,12 +1234,12 @@
             },
             {
                 "to": {
-                    "startLine": 184,
+                    "startLine": 187,
                     "startColumn": 4,
-                    "startOffset": 13947,
-                    "endLine": 185,
+                    "startOffset": 14164,
+                    "endLine": 188,
                     "endColumn": 12,
-                    "endOffset": 14077
+                    "endOffset": 14294
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1255,12 +1255,12 @@
             },
             {
                 "to": {
-                    "startLine": 186,
+                    "startLine": 189,
                     "startColumn": 4,
-                    "startOffset": 14082,
-                    "endLine": 187,
+                    "startOffset": 14299,
+                    "endLine": 190,
                     "endColumn": 12,
-                    "endOffset": 14220
+                    "endOffset": 14437
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1276,12 +1276,12 @@
             },
             {
                 "to": {
-                    "startLine": 188,
+                    "startLine": 191,
                     "startColumn": 4,
-                    "startOffset": 14225,
-                    "endLine": 189,
+                    "startOffset": 14442,
+                    "endLine": 192,
                     "endColumn": 12,
-                    "endOffset": 14355
+                    "endOffset": 14572
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1297,12 +1297,12 @@
             },
             {
                 "to": {
-                    "startLine": 190,
+                    "startLine": 193,
                     "startColumn": 4,
-                    "startOffset": 14360,
-                    "endLine": 191,
+                    "startOffset": 14577,
+                    "endLine": 194,
                     "endColumn": 12,
-                    "endOffset": 14474
+                    "endOffset": 14691
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1318,12 +1318,12 @@
             },
             {
                 "to": {
-                    "startLine": 192,
+                    "startLine": 195,
                     "startColumn": 4,
-                    "startOffset": 14479,
-                    "endLine": 195,
+                    "startOffset": 14696,
+                    "endLine": 198,
                     "endColumn": 12,
-                    "endOffset": 14675
+                    "endOffset": 14892
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1339,12 +1339,12 @@
             },
             {
                 "to": {
-                    "startLine": 196,
+                    "startLine": 199,
                     "startColumn": 4,
-                    "startOffset": 14680,
-                    "endLine": 197,
+                    "startOffset": 14897,
+                    "endLine": 200,
                     "endColumn": 12,
-                    "endOffset": 14794
+                    "endOffset": 15011
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1360,11 +1360,11 @@
             },
             {
                 "to": {
-                    "startLine": 198,
+                    "startLine": 201,
                     "startColumn": 4,
-                    "startOffset": 14799,
+                    "startOffset": 15016,
                     "endColumn": 92,
-                    "endOffset": 14887
+                    "endOffset": 15104
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1379,11 +1379,11 @@
             },
             {
                 "to": {
-                    "startLine": 199,
+                    "startLine": 202,
                     "startColumn": 4,
-                    "startOffset": 14892,
+                    "startOffset": 15109,
                     "endColumn": 110,
-                    "endOffset": 14998
+                    "endOffset": 15215
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1398,11 +1398,11 @@
             },
             {
                 "to": {
-                    "startLine": 200,
+                    "startLine": 203,
                     "startColumn": 4,
-                    "startOffset": 15003,
+                    "startOffset": 15220,
                     "endColumn": 55,
-                    "endOffset": 15054
+                    "endOffset": 15271
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1417,12 +1417,12 @@
             },
             {
                 "to": {
-                    "startLine": 201,
+                    "startLine": 204,
                     "startColumn": 4,
-                    "startOffset": 15059,
-                    "endLine": 202,
+                    "startOffset": 15276,
+                    "endLine": 205,
                     "endColumn": 12,
-                    "endOffset": 15161
+                    "endOffset": 15378
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1438,12 +1438,12 @@
             },
             {
                 "to": {
-                    "startLine": 203,
+                    "startLine": 206,
                     "startColumn": 4,
-                    "startOffset": 15166,
-                    "endLine": 206,
+                    "startOffset": 15383,
+                    "endLine": 209,
                     "endColumn": 12,
-                    "endOffset": 15356
+                    "endOffset": 15573
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1459,12 +1459,12 @@
             },
             {
                 "to": {
-                    "startLine": 207,
+                    "startLine": 210,
                     "startColumn": 4,
-                    "startOffset": 15361,
-                    "endLine": 208,
+                    "startOffset": 15578,
+                    "endLine": 211,
                     "endColumn": 12,
-                    "endOffset": 15467
+                    "endOffset": 15684
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1480,12 +1480,12 @@
             },
             {
                 "to": {
-                    "startLine": 209,
+                    "startLine": 212,
                     "startColumn": 4,
-                    "startOffset": 15472,
-                    "endLine": 210,
+                    "startOffset": 15689,
+                    "endLine": 213,
                     "endColumn": 12,
-                    "endOffset": 15600
+                    "endOffset": 15817
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1501,11 +1501,11 @@
             },
             {
                 "to": {
-                    "startLine": 211,
+                    "startLine": 214,
                     "startColumn": 4,
-                    "startOffset": 15605,
+                    "startOffset": 15822,
                     "endColumn": 94,
-                    "endOffset": 15695
+                    "endOffset": 15912
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1520,11 +1520,11 @@
             },
             {
                 "to": {
-                    "startLine": 212,
+                    "startLine": 215,
                     "startColumn": 4,
-                    "startOffset": 15700,
+                    "startOffset": 15917,
                     "endColumn": 90,
-                    "endOffset": 15786
+                    "endOffset": 16003
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1539,11 +1539,11 @@
             },
             {
                 "to": {
-                    "startLine": 213,
+                    "startLine": 216,
                     "startColumn": 4,
-                    "startOffset": 15791,
+                    "startOffset": 16008,
                     "endColumn": 90,
-                    "endOffset": 15877
+                    "endOffset": 16094
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1558,11 +1558,11 @@
             },
             {
                 "to": {
-                    "startLine": 214,
+                    "startLine": 217,
                     "startColumn": 4,
-                    "startOffset": 15882,
+                    "startOffset": 16099,
                     "endColumn": 116,
-                    "endOffset": 15994
+                    "endOffset": 16211
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1577,12 +1577,12 @@
             },
             {
                 "to": {
-                    "startLine": 215,
+                    "startLine": 218,
                     "startColumn": 4,
-                    "startOffset": 15999,
-                    "endLine": 216,
+                    "startOffset": 16216,
+                    "endLine": 219,
                     "endColumn": 12,
-                    "endOffset": 16133
+                    "endOffset": 16350
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1598,12 +1598,12 @@
             },
             {
                 "to": {
-                    "startLine": 217,
+                    "startLine": 220,
                     "startColumn": 4,
-                    "startOffset": 16138,
-                    "endLine": 226,
+                    "startOffset": 16355,
+                    "endLine": 229,
                     "endColumn": 12,
-                    "endOffset": 16646
+                    "endOffset": 16863
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1619,12 +1619,12 @@
             },
             {
                 "to": {
-                    "startLine": 227,
+                    "startLine": 230,
                     "startColumn": 4,
-                    "startOffset": 16651,
-                    "endLine": 236,
+                    "startOffset": 16868,
+                    "endLine": 239,
                     "endColumn": 12,
-                    "endOffset": 17171
+                    "endOffset": 17388
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1640,12 +1640,12 @@
             },
             {
                 "to": {
-                    "startLine": 237,
+                    "startLine": 240,
                     "startColumn": 4,
-                    "startOffset": 17176,
-                    "endLine": 246,
+                    "startOffset": 17393,
+                    "endLine": 249,
                     "endColumn": 12,
-                    "endOffset": 17851
+                    "endOffset": 18068
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1661,11 +1661,11 @@
             },
             {
                 "to": {
-                    "startLine": 247,
+                    "startLine": 250,
                     "startColumn": 4,
-                    "startOffset": 17856,
+                    "startOffset": 18073,
                     "endColumn": 56,
-                    "endOffset": 17908
+                    "endOffset": 18125
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
@@ -1680,11 +1680,11 @@
             },
             {
                 "to": {
-                    "startLine": 248,
+                    "startLine": 251,
                     "startColumn": 4,
-                    "startOffset": 17913,
+                    "startOffset": 18130,
                     "endColumn": 57,
-                    "endOffset": 17966
+                    "endOffset": 18183
                 },
                 "from": {
                     "file": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v21/values-v21.xml",
