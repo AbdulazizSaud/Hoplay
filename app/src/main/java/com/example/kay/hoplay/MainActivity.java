@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     // Code changed here bitch ..
     //hello
     //ss
-    wdjwpodjopwfopwof
+    //..
     @Override
         protected void onCreate(Bundle savedInstanceState) {
             mainActivity = this;
