@@ -57,6 +57,10 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     //ss
     //..
 
+    void bitch_suck_it(){
+
+    }
+
     int shit(int ass)
     {
         return ass=100;
