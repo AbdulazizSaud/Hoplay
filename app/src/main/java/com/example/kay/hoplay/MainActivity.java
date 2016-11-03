@@ -52,19 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     private RelativeLayout signInRelativeLayout;
     private Toolbar toolbar;
 
-    // Code changed here bitch ..
-    //hello
-    //ss
-    //..
 
-    void bitch_suck_it(){
-
-    }
-
-    int shit(int ass)
-    {
-        return ass=100;
-    }
 
     @Override
         protected void onCreate(Bundle savedInstanceState) {
