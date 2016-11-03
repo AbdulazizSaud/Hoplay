@@ -5,32 +5,32 @@
     density="xxhdpi"
     format="8"
     plugin-version="2.2.2"
-    timestamp="86972446010482"
-    token="7919540971298512433"
+    timestamp="34771026186591"
+    token="2248754769947210770"
     verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="1684" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="1180" />
     <task
         name="verifier"
-        duration="0" />
+        duration="130" />
 
     <artifact
-        location="C:\Users\Kay\AndroidStudioProjects\Hoplay\app\build\outputs\apk\app-debug.apk"
+        location="/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/outputs/apk/app-debug.apk"
         type="MAIN" />
 
     <build
-        timestamp="86972446010482"
+        timestamp="34771026186591"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="C:\Users\Kay\AndroidStudioProjects\Hoplay\app\build\outputs\apk\app-debug.apk"
+            location="/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
     </build>
 
