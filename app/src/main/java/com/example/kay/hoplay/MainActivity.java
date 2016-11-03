@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     private Toolbar toolbar;
 
     // Code changed here bitch ..
+    //hello
     @Override
         protected void onCreate(Bundle savedInstanceState) {
             mainActivity = this;
