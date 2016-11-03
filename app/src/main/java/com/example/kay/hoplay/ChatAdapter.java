@@ -18,6 +18,7 @@ import java.util.List;
  */
 // i made some changes
     // I see that you see me bitch
+    /// xxxx
 public class ChatAdapter extends BaseAdapter {
 
     private final List<ChatMessage> chatMessages;
