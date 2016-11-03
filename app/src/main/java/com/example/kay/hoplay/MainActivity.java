@@ -16,8 +16,11 @@ import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -192,9 +195,19 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
                     e.printStackTrace();
                 }
 
-            } else
-                Toast.makeText(this, getResources().getString(R.string.signup_failed), Toast.LENGTH_SHORT).show();
+            } else {
+             //   Toast.makeText(this, getResources().getString(R.string.signup_failed), Toast.LENGTH_SHORT).show();
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.no_connection,
+                        (ViewGroup) findViewById(R.id.no_connection_relativelayout));
 
+                Toast toast = new Toast(getApplicationContext());
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(layout);
+                toast.show();
+
+            }
 
         } catch (InterruptedException e) {
             e.printStackTrace();
