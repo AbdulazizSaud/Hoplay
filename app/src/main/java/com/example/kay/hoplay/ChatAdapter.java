@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Kay on 10/30/2016.
  */
-
+// i made some changes
 public class ChatAdapter extends BaseAdapter {
 
     private final List<ChatMessage> chatMessages;
