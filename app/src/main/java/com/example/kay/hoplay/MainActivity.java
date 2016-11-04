@@ -179,8 +179,6 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
             startActivity(i);
         }
 
-
-
     }
 
     public  void goToForgetPassword(View view)
