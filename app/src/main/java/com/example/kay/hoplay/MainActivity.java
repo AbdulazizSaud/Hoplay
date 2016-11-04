@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 
 
     public void signIn(View v){
-        String resualt_restful_api = "nothing";
+        String resualt_restful_api = null;
         GetAPI api = new GetAPI();
         api.data.put("username", usernameSignIn.getText().toString().trim());
         api.data.put("password", passwordSignIn.getText().toString().trim());
@@ -179,8 +179,9 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         try {
 
             resualt_restful_api = api.execute(GetAPI.LOGIN).get();
+            boolean error = ErrorHandler.isError(resualt_restful_api);
 
-            if (resualt_restful_api != null) {
+            if (!error) {
                 try {
                     JSONObject jsonObject = new JSONObject(resualt_restful_api);
 
@@ -195,19 +196,8 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
                     e.printStackTrace();
                 }
 
-            } else {
-             //   Toast.makeText(this, getResources().getString(R.string.signup_failed), Toast.LENGTH_SHORT).show();
-                LayoutInflater inflater = getLayoutInflater();
-                View layout = inflater.inflate(R.layout.no_connection,
-                        (ViewGroup) findViewById(R.id.no_connection_relativelayout));
-
-                Toast toast = new Toast(getApplicationContext());
-                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                toast.setDuration(Toast.LENGTH_LONG);
-                toast.setView(layout);
-                toast.show();
-
-            }
+            } else if (resualt_restful_api == ErrorHandler.ERROR_CONNECTION)
+                ErrorHandler.showConnectionERROR(getApplicationContext());
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -217,29 +207,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 
     }
 
-    // Animate logo - fade in fade out - :
 
-    /*
-        public void animateLogo1()
-    {
-
-        for(int i = 1 ; i >=0 ; i-=0.00001)
-        {
-            logo.animate().alpha(i);
-            if(i==0)
-                break;
-        }
-          animateLogo0();
-    }
-
-    public void animateLogo0()
-    {
-         for (int i = 0 ; i <=1 ; i+=0.00001)
-            logo.animate().alpha(i);
-        animateLogo1();
-    }
-
-*/
     public  void goToForgetPassword(View view)
     {
         Intent i = new Intent(MainActivity.this,ForgetPassword.class);
