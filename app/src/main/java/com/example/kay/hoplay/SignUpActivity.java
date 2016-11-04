@@ -150,6 +150,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     public void signUp(View view) {
+
         if (startAPI().equals("success")) {
             Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
             startActivity(i);
@@ -170,7 +171,7 @@ public class SignUpActivity extends AppCompatActivity {
     private String startAPI() {
 
 
-        String resualt_restful_api = "nothing";
+        String resualt_restful_api = null;
         GetAPI api = new GetAPI();
         api.data.put("username", usernameSignUp.getText().toString().trim());
         api.data.put("password", passwordSignUp.getText().toString().trim());
@@ -179,31 +180,28 @@ public class SignUpActivity extends AppCompatActivity {
         try {
 
             resualt_restful_api = api.execute(GetAPI.REGISTER).get();
+            boolean error = ErrorHandler.isError(resualt_restful_api);
 
-            if (resualt_restful_api != null) {
-                try {
+            if (!error) {
                     JSONObject jsonObject = new JSONObject(resualt_restful_api);
 
                     Toast.makeText(this,jsonObject.getString("text"),Toast.LENGTH_SHORT).show();
-                    if (jsonObject.getString("type").equals("success")) {
-                        return "success";
-                    }
+                      return jsonObject.getString("type");
 
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            } else if (resualt_restful_api == ErrorHandler.ERROR_CONNECTION)
+                      ErrorHandler.showConnectionERROR(getApplicationContext());
 
-            } else
-                Toast.makeText(this, getResources().getString(R.string.signup_failed), Toast.LENGTH_SHORT).show();
 
+        } catch (JSONException e) {
+            e.printStackTrace();
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        return resualt_restful_api;
+        return "Failed";
     }
 
 }

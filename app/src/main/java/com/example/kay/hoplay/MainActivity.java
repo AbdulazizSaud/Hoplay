@@ -201,9 +201,8 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
                 View layout = inflater.inflate(R.layout.no_connection,
                         (ViewGroup) findViewById(R.id.no_connection_relativelayout));
 
-                //layout.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 Toast toast = new Toast(getApplicationContext());
-                toast.setGravity(Gravity.FILL, 0, 0);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                 toast.setDuration(Toast.LENGTH_LONG);
                 toast.setView(layout);
                 toast.show();
