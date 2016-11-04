@@ -4,24 +4,24 @@
         "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/src/main/res/layout/no_connection.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/layout/test.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/src/main/res/layout/test.xml"
-    },
-    {
         "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/layout/activity_main.xml",
         "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/layout/test.xml",
+        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/src/main/res/layout/test.xml"
     },
     {
         "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/layout/bb_bottom_bar_item_fixed.xml",
         "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.roughike/bottom-bar/1.2.1/res/layout/bb_bottom_bar_item_fixed.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/layout/bb_bottom_bar_item_shifting.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.roughike/bottom-bar/1.2.1/res/layout/bb_bottom_bar_item_shifting.xml"
-    },
-    {
         "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/layout/activity_user_ratings.xml",
         "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/src/main/res/layout/activity_user_ratings.xml"
+    },
+    {
+        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/layout/bb_bottom_bar_item_shifting.xml",
+        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.roughike/bottom-bar/1.2.1/res/layout/bb_bottom_bar_item_shifting.xml"
     },
     {
         "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/layout/design_navigation_item_header.xml",

@@ -13,14 +13,16 @@
         android:layout_marginTop="38dp"
         android:id="@+id/connection_error_textview"
         android:textSize="20dp"
+        android:typeface="monospace"
         android:layout_below="@+id/connection_error_imageview"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold" />
 
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:id="@+id/connection_error_imageview"
-        android:src="@drawable/squary"
+        android:src="@drawable/noconnectionpixels"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="86dp" />
