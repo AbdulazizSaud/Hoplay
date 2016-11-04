@@ -20,6 +20,10 @@
         "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/src/main/res/drawable/ic_timeline_white_18dp.png"
     },
     {
+        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/drawable/noconnectionpixels.png",
+        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/src/main/res/drawable/noconnectionpixels.png"
+    },
+    {
         "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/drawable/abc_btn_radio_material.xml",
         "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_btn_radio_material.xml"
     },
@@ -132,12 +136,12 @@
         "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/src/main/res/drawable/logomainactivity.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/drawable/onlineicon.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/src/main/res/drawable/onlineicon.png"
-    },
-    {
         "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/drawable/pcrequests.png",
         "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/src/main/res/drawable/pcrequests.png"
+    },
+    {
+        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/drawable/onlineicon.png",
+        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/src/main/res/drawable/onlineicon.png"
     },
     {
         "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/drawable/rounded_edittext.xml",
@@ -180,12 +184,12 @@
         "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/src/main/res/drawable/in_message_bg.9.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/drawable/abc_seekbar_track_material.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_seekbar_track_material.xml"
-    },
-    {
         "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/drawable/abc_text_cursor_material.xml",
         "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_text_cursor_material.xml"
+    },
+    {
+        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/drawable/abc_seekbar_track_material.xml",
+        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_seekbar_track_material.xml"
     },
     {
         "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/intermediates/res/merged/debug/drawable/bb_bottom_bar_top_shadow.xml",

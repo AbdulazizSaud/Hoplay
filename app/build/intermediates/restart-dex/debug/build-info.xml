@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="x86_64,x86"
-    api-level="24"
-    density="560dpi"
+    abi="armeabi-v7a,armeabi"
+    api-level="21"
+    density="xxhdpi"
     format="8"
     plugin-version="2.2.2"
-    timestamp="40389313173564"
+    timestamp="47764069124533"
     token="2248754769947210770"
-    verifier="FULL_BUILD_REQUESTED" >
+    verifier="MANIFEST_FILE_CHANGE" >
 
     <task
         name="javac"
-        duration="3192" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="1443" />
+        duration="0" />
     <task
         name="verifier"
-        duration="122" />
+        duration="0" />
 
     <artifact
         location="/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/outputs/apk/app-debug.apk"
         type="MAIN" />
 
     <build
-        timestamp="40389313173564"
-        verifier="FULL_BUILD_REQUESTED" >
+        timestamp="47764069124533"
+        verifier="MANIFEST_FILE_CHANGE" >
         <artifact
             location="/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
