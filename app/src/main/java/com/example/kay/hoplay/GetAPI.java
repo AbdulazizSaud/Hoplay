@@ -2,6 +2,7 @@ package com.example.kay.hoplay;
 
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 
 import java.io.BufferedReader;
@@ -17,14 +18,12 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
-/**
- * Created by Azoz-LabTop on 10/25/2016.
- */
 
 public class GetAPI extends AsyncTask<String,String,String> {
 
@@ -40,76 +39,60 @@ public class GetAPI extends AsyncTask<String,String,String> {
     }
 
     @Override
-    protected String doInBackground(String... params) {
+    protected String doInBackground(String... params)  {
 
         try {
-            String response = "";
-
-            switch (params[0]){
-                case REGISTER :
-                    response = doPostRequest(Constants.REGISTER_PATH);
-                    break;
-                case LOGIN:
-                    response = doPostRequest(Constants.LOGIN_PATH);
-                    break;
-                default:
-                    checkErros(ErrorHandler.ERROR_PATH);
-                    return null;
-            }
-
-            return response;
-
+            return doWork(params);
         }
         catch (ConnectException e) {
-            checkErros(ErrorHandler.ERROR_CONNECTION);
+            return ErrorHandler.ERROR_CONNECTION;
         } catch (UnsupportedEncodingException e) {
-            checkErros(ErrorHandler.ERROR_CONNECTION);
+            return ErrorHandler.ERROR_CONNECTION;
         } catch (ProtocolException e) {
-            checkErros(ErrorHandler.ERROR_CONNECTION);
+            return ErrorHandler.ERROR_CONNECTION;
         } catch (MalformedURLException e) {
-            checkErros(ErrorHandler.ERROR_CONNECTION);
+            return ErrorHandler.ERROR_CONNECTION;
         } catch (IOException e) {
-            e.printStackTrace();
+            return ErrorHandler.ERROR_IO_EXP;
         }
-
-
-        return null;
 
     }
 
-    private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
-        StringBuilder result = new StringBuilder();
-        boolean first = true;
-        for (Map.Entry<String, String> entry : params.entrySet()) {
-            if (first)
-                first = false;
-            else
-                result.append("&");
 
-            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
-            result.append("=");
-            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+    private String doWork(String... params) throws
+            ConnectException, UnsupportedEncodingException,ProtocolException,MalformedURLException,IOException{
+
+        switch (params[0]){
+            case REGISTER :
+                return doPostRequest(Constants.REGISTER_PATH);
+
+            case LOGIN:
+                return doPostRequest(Constants.LOGIN_PATH);
+
+            default:
+                return ErrorHandler.ERROR_PATH;
         }
 
-        return result.toString();
     }
-
 
     private HttpURLConnection makeHttp(String url) throws ProtocolException,IOException{
         URL _url = new URL(url);
 
 
         HttpURLConnection conn = (HttpURLConnection) _url.openConnection();
-        conn.setReadTimeout(15000);
-        conn.setConnectTimeout(15000);
+        conn.setReadTimeout(3000);
+        conn.setConnectTimeout(3000);
         conn.setRequestMethod("POST");
         conn.setDoInput(true);
         conn.setDoOutput(true);
+        conn.connect();
         return conn;
     }
 
     private String doPostRequest(String url) throws IOException{
         HttpURLConnection connection = makeHttp(url);
+
+
         OutputStream os = connection.getOutputStream();
 
         BufferedWriter writer = new BufferedWriter(
@@ -133,21 +116,32 @@ public class GetAPI extends AsyncTask<String,String,String> {
             }
             br.close();
 
+        } else {
+            return ErrorHandler.ERROR_CONNECTION;
         }
         return res;
 
     }
 
-    private String checkErros(String error){
-        switch (error){
-            case ErrorHandler.ERROR_CONNECTION:
-                return "ERROR";
-            case ErrorHandler.ERROR_PATH:
-                return "ERROR";
+    private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            if (first)
+                first = false;
+            else
+                result.append("&");
 
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
         }
 
-        return  "ERROR_PRINT_STACK";
+        return result.toString();
     }
+
+
+
+
 
 }

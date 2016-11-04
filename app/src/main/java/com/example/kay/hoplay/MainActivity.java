@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -149,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     @Override
     protected void onStart(){super.onStart();}
 
-         public void toSignUp(View view)
+        public void toSignUp(View view)
         {
             Intent i = new Intent(MainActivity.this, SignUpActivity.class);
             startActivity(i);
@@ -171,7 +172,30 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 
 
     public void signIn(View v){
-        String resualt_restful_api = "nothing";
+
+        if (startAPI().equals("success")) {
+
+            Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
+            startActivity(i);
+        }
+
+
+
+    }
+
+    public  void goToForgetPassword(View view)
+    {
+        Intent i = new Intent(MainActivity.this,ForgetPassword.class);
+        startActivity(i);
+    }
+    private boolean isFieldsVailed(){
+        return true;
+    }
+
+
+    private String startAPI() {
+
+        String resualt_restful_api = null;
         GetAPI api = new GetAPI();
         api.data.put("username", usernameSignIn.getText().toString().trim());
         api.data.put("password", passwordSignIn.getText().toString().trim());
@@ -179,71 +203,27 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         try {
 
             resualt_restful_api = api.execute(GetAPI.LOGIN).get();
+            boolean error = ErrorHandler.isError(resualt_restful_api);
 
-            if (resualt_restful_api != null) {
-                try {
-                    JSONObject jsonObject = new JSONObject(resualt_restful_api);
+            if (!error) {
+                JSONObject jsonObject = new JSONObject(resualt_restful_api);
 
-                    Toast.makeText(this,jsonObject.getString("text"),Toast.LENGTH_SHORT).show();
-                    if (jsonObject.getString("type").equals("success")) {
-                        Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
-                        startActivity(i);
-                    }
+                Toast.makeText(this, jsonObject.getString("text"), Toast.LENGTH_SHORT).show();
 
+                return jsonObject.getString("type");
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            } else if (resualt_restful_api == ErrorHandler.ERROR_CONNECTION)
+                ErrorHandler.showConnectionERROR(getApplicationContext());
 
-            } else {
-             //   Toast.makeText(this, getResources().getString(R.string.signup_failed), Toast.LENGTH_SHORT).show();
-                LayoutInflater inflater = getLayoutInflater();
-                View layout = inflater.inflate(R.layout.no_connection,
-                        (ViewGroup) findViewById(R.id.no_connection_relativelayout));
-
-                Toast toast = new Toast(getApplicationContext());
-                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                toast.setDuration(Toast.LENGTH_LONG);
-                toast.setView(layout);
-                toast.show();
-
-            }
-
+        }catch (JSONException e) {
+            e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
+        return "Failed";
     }
 
-    // Animate logo - fade in fade out - :
-
-    /*
-        public void animateLogo1()
-    {
-
-        for(int i = 1 ; i >=0 ; i-=0.00001)
-        {
-            logo.animate().alpha(i);
-            if(i==0)
-                break;
-        }
-          animateLogo0();
-    }
-
-    public void animateLogo0()
-    {
-         for (int i = 0 ; i <=1 ; i+=0.00001)
-            logo.animate().alpha(i);
-        animateLogo1();
-    }
-
-*/
-    public  void goToForgetPassword(View view)
-    {
-        Intent i = new Intent(MainActivity.this,ForgetPassword.class);
-        startActivity(i);
-    }
 
 }
