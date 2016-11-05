@@ -1,43 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="armeabi-v7a,armeabi"
-    api-level="21"
-    density="xxhdpi"
+    abi="arm64-v8a,armeabi-v7a,armeabi"
+    api-level="24"
+    density="420dpi"
     format="8"
     plugin-version="2.2.2"
-    timestamp="75966029504022"
+    timestamp="99743555315370"
     token="7919540971298512433"
-    verifier="COLD_SWAP_REQUESTED" >
+    verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="782" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="761" />
     <task
         name="verifier"
-        duration="0" />
+        duration="252" />
+
+    <artifact
+        location="C:\Users\Kay\AndroidStudioProjects\Hoplay\app\build\outputs\apk\app-debug.apk"
+        type="MAIN" />
 
     <build
-        timestamp="75100075625786"
+        timestamp="99743555315370"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Users\Kay\AndroidStudioProjects\Hoplay\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
-    <build
-        timestamp="75689759518535"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="C:\Users\Kay\AndroidStudioProjects\Hoplay\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_1\classes.dex"
-            type="DEX" />
-    </build>
-    <build
-        timestamp="75966029504022"
-        verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>
