@@ -37,7 +37,6 @@ public class MainAppMenu extends AppCompatActivity {
         setContentView(R.layout.activity_main_app);
         // getSupportActionBar().hide();
 
-
         // Set the screen orientation to the portrait mode :
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 

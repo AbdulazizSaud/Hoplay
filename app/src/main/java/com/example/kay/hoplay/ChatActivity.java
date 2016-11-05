@@ -3,6 +3,7 @@ package com.example.kay.hoplay;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,14 +28,7 @@ import io.socket.emitter.Emitter;
 
 public class ChatActivity extends ActionBarActivity {
 
-    private Socket socketIO;
-    {
-        try {
-            socketIO = IO.socket(Constants.CHAT_PATH);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-    }
+
 
 
     private EditText messageET;
@@ -48,8 +42,11 @@ public class ChatActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         initControls();
-        socketIO.on("message",onMessage);
-        socketIO.connect();
+        Socket socket = SocketHandler.socketIO;
+
+        socket.on("message",onMessage);
+        Log.i("2 ---->",SocketHandler.clientID);
+
     }
 
     @Override
@@ -94,7 +91,7 @@ public class ChatActivity extends ActionBarActivity {
 
                 addMessage(messageText,true);
                 messageET.setText("");
-                socketIO.emit("message",messageText);
+                SocketHandler.socketIO.emit("message",messageText);
 
             }
         });
@@ -151,6 +148,7 @@ public class ChatActivity extends ActionBarActivity {
             });
         }
     };
+
 
 
     public void addMessage(String message,boolean me){

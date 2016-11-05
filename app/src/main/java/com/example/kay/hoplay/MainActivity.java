@@ -39,6 +39,8 @@ import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
 
+import io.socket.emitter.Emitter;
+
 public class MainActivity extends AppCompatActivity implements View.OnKeyListener  {
 
     public static MainActivity mainActivity;
@@ -60,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         protected void onCreate(Bundle savedInstanceState) {
             mainActivity = this;
             super.onCreate(savedInstanceState);
-            // Set up firebase
 
             setContentView(R.layout.activity_main);
             // getSupportActionBar().hide();
@@ -86,25 +87,14 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
             }
 
 
-
-
-
-         //   Firebase alanRef = ref.child("users").child("alanisawesome");
-          //  User alan = new User("Alan Turing", 1912);
-          //  alanRef.setValue(alan);
-
-
-
-
-
             logo = (ImageView) findViewById(R.id.logo_imageview);
 
 //        // THIS IS HOW TO USE THE TOOLBAR :
 //                 toolbar = (Toolbar) findViewById(R.id.app_bar);
+
 //             setSupportActionBar(toolbar);
 //            getSupportActionBar().setTitle("YO HOPS!");
-         //   toolbar.setTitleTextColor(16711936);
-
+        //   toolbar.setTitleTextColor(16711936);
 
 
             signupTextView = (TextView) findViewById(R.id.sign_up_textview);
@@ -123,7 +113,9 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
             usernameSignIn = (EditText) findViewById(R.id.username_sign_in_edittext);
             usernameSignIn.setTypeface(sansationbold);
             passwordSignIn.setTypeface(sansationbold);
-            ///sanimateLogo1();
+
+
+        SocketHandler.socketIO.on("retID",retID);
 
         }   // End Of onCreate Method
 
@@ -149,10 +141,10 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     @Override
     protected void onStart(){super.onStart();}
 
-         public void toSignUp(View view)
-        {
+    public void toSignUp(View view) {
             Intent i = new Intent(MainActivity.this, SignUpActivity.class);
             startActivity(i);
+
         }
 
 
@@ -163,8 +155,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 
 
     // Remove keyboard when click anywhere :
-    public void removeKeyboard(View v)
-    {
+    public void removeKeyboard(View v) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
     }
@@ -172,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 
     public void signIn(View v) {
             if(startAPI().equals("success")) {
-                Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
+                Intent i = new Intent(getApplicationContext(), ChatActivity.class);
                 startActivity(i);
             }
     }
@@ -218,5 +209,12 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         Intent i = new Intent(MainActivity.this,ForgetPassword.class);
         startActivity(i);
     }
+
+    public Emitter.Listener retID = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            SocketHandler.clientID = String.valueOf(args[0]);
+        }
+    };
 
 }
