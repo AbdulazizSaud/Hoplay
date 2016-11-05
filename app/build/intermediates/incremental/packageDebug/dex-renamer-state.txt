@@ -1,4 +1,4 @@
-#Sat Nov 05 11:44:29 AST 2016
+#Sat Nov 05 18:35:41 AST 2016
 base.0=C\:\\Users\\Kay\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_c7d71cd908f4479eb6c6bd5ad4224d8dde7eaf2f
 renamed.1=classes.dex
 renamed.0=classes2.dex
