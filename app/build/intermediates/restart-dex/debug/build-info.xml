@@ -5,9 +5,9 @@
     density="xxhdpi"
     format="8"
     plugin-version="2.2.2"
-    timestamp="47764069124533"
-    token="2248754769947210770"
-    verifier="MANIFEST_FILE_CHANGE" >
+    timestamp="75966029504022"
+    token="7919540971298512433"
+    verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
@@ -22,16 +22,22 @@
         name="verifier"
         duration="0" />
 
-    <artifact
-        location="/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/outputs/apk/app-debug.apk"
-        type="MAIN" />
-
     <build
-        timestamp="47764069124533"
-        verifier="MANIFEST_FILE_CHANGE" >
+        timestamp="75100075625786"
+        verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="/Users/khaledAlhindi/AndroidStudioProjects/Hoplay002/app/build/outputs/apk/app-debug.apk"
+            location="C:\Users\Kay\AndroidStudioProjects\Hoplay\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
+    <build
+        timestamp="75689759518535"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="C:\Users\Kay\AndroidStudioProjects\Hoplay\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_1\classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="75966029504022"
+        verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>

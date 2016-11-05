@@ -14,11 +14,6 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity android:name=".SignUpActivity" />
@@ -47,7 +42,15 @@
         <activity
             android:name=".TermsAndConditions"
             android:screenOrientation="portrait" />
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".ChatActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity android:name=".ForgetPassword" />
         <activity android:name=".NoConnection">
 

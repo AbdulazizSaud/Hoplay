@@ -21,11 +21,6 @@
         <activity
             android:name="com.example.kay.hoplay.MainActivity"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.example.kay.hoplay.SignUpActivity" />
         <activity android:name="com.example.kay.hoplay.MainAppMenu" />
@@ -53,7 +48,13 @@
         <activity
             android:name="com.example.kay.hoplay.TermsAndConditions"
             android:screenOrientation="portrait" />
-        <activity android:name="com.example.kay.hoplay.ChatActivity" />
+        <activity android:name="com.example.kay.hoplay.ChatActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name="com.example.kay.hoplay.ForgetPassword" />
         <activity android:name="com.example.kay.hoplay.NoConnection" >
         </activity>

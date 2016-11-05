@@ -84,6 +84,9 @@ public class ChatAdapter extends BaseAdapter {
     private void setAlignment(ViewHolder holder, boolean isMe) {
         if (!isMe) {
             holder.contentWithBG.setBackgroundResource(R.drawable.in_message_bg);
+            // posioning fucking X and y for the text message -_-
+           // holder.txtMessage.setX((holder.contentWithBG.getX())/2);
+          //  holder.txtMessage.setY((holder.contentWithBG.getY())/2);
 
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) holder.contentWithBG.getLayoutParams();
             layoutParams.gravity = Gravity.RIGHT;
@@ -102,7 +105,7 @@ public class ChatAdapter extends BaseAdapter {
             holder.txtInfo.setLayoutParams(layoutParams);
         } else {
             holder.contentWithBG.setBackgroundResource(R.drawable.out_message_bg);
-
+            holder.txtMessage.setTextColor(context.getResources().getColor(R.color.darkenGrey));
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) holder.contentWithBG.getLayoutParams();
             layoutParams.gravity = Gravity.LEFT;
             holder.contentWithBG.setLayoutParams(layoutParams);
