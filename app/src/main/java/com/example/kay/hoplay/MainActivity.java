@@ -170,42 +170,47 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     }
 
 
-    public void signIn(View v){
-        String resualt_restful_api = null;
-        GetAPI api = new GetAPI();
-        api.data.put("username", usernameSignIn.getText().toString().trim());
-        api.data.put("password", passwordSignIn.getText().toString().trim());
+    public void signIn(View v) {
+            if(startAPI().equals("success")) {
+                Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
+                startActivity(i);
+            }
+    }
 
-        try {
 
-            resualt_restful_api = api.execute(GetAPI.LOGIN).get();
-            boolean error = ErrorHandler.isError(resualt_restful_api);
+    public String startAPI(){
+            String resualt_restful_api = null;
+            GetAPI api = new GetAPI();
+            api.data.put("username", usernameSignIn.getText().toString().trim());
+            api.data.put("password", passwordSignIn.getText().toString().trim());
 
-            if (!error) {
-                try {
-                    JSONObject jsonObject = new JSONObject(resualt_restful_api);
+            try {
 
-                    Toast.makeText(this,jsonObject.getString("text"),Toast.LENGTH_SHORT).show();
-                    if (jsonObject.getString("type").equals("success")) {
-                        Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
-                        startActivity(i);
+                resualt_restful_api = api.execute(GetAPI.LOGIN).get();
+                boolean error = ErrorHandler.isError(resualt_restful_api);
+
+                if (!error) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(resualt_restful_api);
+
+                        Toast.makeText(this,jsonObject.getString("text"),Toast.LENGTH_SHORT).show();
+                         return jsonObject.getString("type");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
 
+                } else if (resualt_restful_api == ErrorHandler.ERROR_CONNECTION)
+                    ErrorHandler.showConnectionERROR(getApplicationContext());
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
 
-            } else if (resualt_restful_api == ErrorHandler.ERROR_CONNECTION)
-                ErrorHandler.showConnectionERROR(getApplicationContext());
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+            return "Failed";
         }
-
-    }
 
 
     public  void goToForgetPassword(View view)
