@@ -191,7 +191,9 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
                         e.printStackTrace();
                     }
 
-                } else if (resualt_restful_api == ErrorHandler.ERROR_CONNECTION)
+                } else if (resualt_restful_api == ErrorHandler.ERROR_CONNECTION
+                        || resualt_restful_api == ErrorHandler.ERROR_IO_EXP)
+
                     ErrorHandler.showConnectionERROR(getApplicationContext());
 
             } catch (InterruptedException e) {
