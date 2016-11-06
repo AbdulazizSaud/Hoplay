@@ -1,5 +1,6 @@
 package com.example.kay.hoplay;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.row, parent, false);
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(),ChatActivity.class);
+                v.getContext().startActivity(i);
+            }
+        });
         // set the view's size, margins, paddings and layout parameters
 
         ViewHolder vh = new ViewHolder(v);
@@ -65,6 +73,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 favorite_user.setImageResource(R.drawable.heart_red);
             }
         });
+
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)

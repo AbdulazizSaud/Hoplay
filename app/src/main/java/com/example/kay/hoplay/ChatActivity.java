@@ -1,8 +1,11 @@
 package com.example.kay.hoplay;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +16,12 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.net.ProtocolException;
 import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -29,13 +38,16 @@ import io.socket.emitter.Emitter;
 public class ChatActivity extends ActionBarActivity {
 
 
-
-
     private EditText messageET;
     private ListView messagesContainer;
     private Button sendBtn;
     private ChatAdapter adapter;
     private ArrayList<ChatMessage> chatHistory;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +56,12 @@ public class ChatActivity extends ActionBarActivity {
         initControls();
         Socket socket = SocketHandler.socketIO;
 
-        socket.on("message",onMessage);
-        Log.i("2 ---->",SocketHandler.clientID);
+        socket.on("message", onMessage);
+//        Log.i("2 ---->",SocketHandler.clientID);
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
@@ -76,10 +91,10 @@ public class ChatActivity extends ActionBarActivity {
         messageET = (EditText) findViewById(R.id.messageEdit);
         sendBtn = (Button) findViewById(R.id.chatSendButton);
 
-        TextView meLabel = (TextView) findViewById(R.id.meLbl);
-        TextView companionLabel = (TextView) findViewById(R.id.friendLabel);
+        //  TextView meLabel = (TextView) findViewById(R.id.meLbl);
+        //TextView companionLabel = (TextView) findViewById(R.id.friendLabel);
         RelativeLayout container = (RelativeLayout) findViewById(R.id.container);
-        companionLabel.setText("My Buddy");
+        //companionLabel.setText("My Buddy");
 
         loadDummyHistory();
 
@@ -89,9 +104,26 @@ public class ChatActivity extends ActionBarActivity {
 
                 String messageText = messageET.getText().toString();
 
-                addMessage(messageText,true);
+
+                addMessage(messageText, true);
+                messageET.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        sendBtn.setBackground(getResources().getDrawable(R.drawable.sendiconnomessage));
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        sendBtn.setBackground(getResources().getDrawable(R.drawable.sendiconmessagein));
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
                 messageET.setText("");
-                SocketHandler.socketIO.emit("message",messageText);
+                SocketHandler.socketIO.emit("message", messageText);
 
             }
         });
@@ -106,10 +138,11 @@ public class ChatActivity extends ActionBarActivity {
     }
 
     private void scroll() {
-        messagesContainer.setSelection(messagesContainer.getCount() - 1);
+
+        messagesContainer.setSelection(messagesContainer.getCount());
     }
 
-    private void loadDummyHistory(){
+    private void loadDummyHistory() {
 
         chatHistory = new ArrayList<ChatMessage>();
 
@@ -129,7 +162,7 @@ public class ChatActivity extends ActionBarActivity {
         adapter = new ChatAdapter(ChatActivity.this, new ArrayList<ChatMessage>());
         messagesContainer.setAdapter(adapter);
 
-        for(int i=0; i<chatHistory.size(); i++) {
+        for (int i = 0; i < chatHistory.size(); i++) {
             ChatMessage message = chatHistory.get(i);
             displayMessage(message);
         }
@@ -142,16 +175,15 @@ public class ChatActivity extends ActionBarActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    String message =  String.valueOf(args[0]);
-                    addMessage(message,false);
+                    String message = String.valueOf(args[0]);
+                    addMessage(message, false);
                 }
             });
         }
     };
 
 
-
-    public void addMessage(String message,boolean me){
+    public void addMessage(String message, boolean me) {
 
         if (TextUtils.isEmpty(message)) {
             return;
@@ -168,6 +200,39 @@ public class ChatActivity extends ActionBarActivity {
     }
 
 
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("Chat Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        client.disconnect();
+    }
 }
