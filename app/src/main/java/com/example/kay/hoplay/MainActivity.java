@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 
                 resualt_restful_api = api.execute(GetAPI.LOGIN).get();
                 boolean error = ErrorHandler.isError(resualt_restful_api);
-
+                    Log.i("---->",resualt_restful_api);
                 if (!error) {
                     try {
                         JSONObject jsonObject = new JSONObject(resualt_restful_api);
