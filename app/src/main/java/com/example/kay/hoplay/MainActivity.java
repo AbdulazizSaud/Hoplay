@@ -66,10 +66,8 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
             setContentView(R.layout.activity_main);
             // getSupportActionBar().hide();
 
-
             // Set the screen orientation to the portrait mode :
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
 
 
             // Get the current display info :
@@ -86,40 +84,36 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
                 Log.d("Oreintation : ", "Portrait mode");
             }
 
+            setup();
 
-            logo = (ImageView) findViewById(R.id.logo_imageview);
-
-//        // THIS IS HOW TO USE THE TOOLBAR :
-//                 toolbar = (Toolbar) findViewById(R.id.app_bar);
-
-//             setSupportActionBar(toolbar);
-//            getSupportActionBar().setTitle("YO HOPS!");
-        //   toolbar.setTitleTextColor(16711936);
-
-
-            signupTextView = (TextView) findViewById(R.id.sign_up_textview);
-            signupQuestion = (TextView) findViewById(R.id.sign_up_question_textview);
-            forgotPassword = (TextView) findViewById(R.id.forgot_password_textview);
-
-            Typeface sansationbold = Typeface.createFromAsset(getAssets(), "sansationbold.ttf");
-             signupTextView.setTypeface(sansationbold);
-            signupQuestion.setTypeface(sansationbold);
-            forgotPassword.setTypeface(sansationbold);
-            signInButton = (Button) findViewById(R.id.sign_in_button);
-            signInButton.setTypeface(sansationbold);
-            passwordSignIn = (EditText) findViewById(R.id.password_edittext);
-            // Encrypt password
-            passwordSignIn.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            usernameSignIn = (EditText) findViewById(R.id.username_sign_in_edittext);
-            usernameSignIn.setTypeface(sansationbold);
-            passwordSignIn.setTypeface(sansationbold);
-
-
-        SocketHandler.socketIO.on("retID",retID);
+        SocketHandler.socketIO.on(SocketHandler.RECEIVE_CLIENT_ID,retID);
 
         }   // End Of onCreate Method
 
 
+    private void setup(){
+
+
+        logo = (ImageView) findViewById(R.id.logo_imageview);
+
+        signupTextView = (TextView) findViewById(R.id.sign_up_textview);
+        signupQuestion = (TextView) findViewById(R.id.sign_up_question_textview);
+        forgotPassword = (TextView) findViewById(R.id.forgot_password_textview);
+
+        Typeface sansationbold = Typeface.createFromAsset(getAssets(), "sansationbold.ttf");
+        signupTextView.setTypeface(sansationbold);
+        signupQuestion.setTypeface(sansationbold);
+        forgotPassword.setTypeface(sansationbold);
+        signInButton = (Button) findViewById(R.id.sign_in_button);
+        signInButton.setTypeface(sansationbold);
+        passwordSignIn = (EditText) findViewById(R.id.password_edittext);
+        // Encrypt password
+        passwordSignIn.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        usernameSignIn = (EditText) findViewById(R.id.username_sign_in_edittext);
+        usernameSignIn.setTypeface(sansationbold);
+        passwordSignIn.setTypeface(sansationbold);
+
+    }
     @Override
     protected void onPause()
     {
@@ -163,6 +157,8 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 
     public void signIn(View v) {
             if(startAPI().equals("success")) {
+                SocketHandler.socketIO.emit(SocketHandler.ADD_USER,usernameSignIn.getText().toString().trim());
+
                 Intent i = new Intent(getApplicationContext(), ChatActivity.class);
                 startActivity(i);
             }
@@ -179,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 
                 resualt_restful_api = api.execute(GetAPI.LOGIN).get();
                 boolean error = ErrorHandler.isError(resualt_restful_api);
-                    Log.i("---->",resualt_restful_api);
+
                 if (!error) {
                     try {
                         JSONObject jsonObject = new JSONObject(resualt_restful_api);
@@ -216,6 +212,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         @Override
         public void call(Object... args) {
             SocketHandler.clientID = String.valueOf(args[0]);
+            Log.i("--->",args[0]+"");
         }
     };
 

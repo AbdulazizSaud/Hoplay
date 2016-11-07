@@ -10,8 +10,11 @@ import io.socket.client.Socket;
 
 public class SocketHandler extends Application{
 
-    public static String clientID;
+    public static final String MESSAGE_EVENT = "message";
+    public static final String RECEIVE_CLIENT_ID = "retID";
+    public static final String ADD_USER = "adduser";
 
+    public static String clientID;
     public static Socket socketIO;
     {
         try {
