@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 
                 resualt_restful_api = api.execute(GetAPI.LOGIN).get();
                 boolean error = ErrorHandler.isError(resualt_restful_api);
-
+                    Log.i("---->",resualt_restful_api);
                 if (!error) {
                     try {
                         JSONObject jsonObject = new JSONObject(resualt_restful_api);
@@ -191,7 +191,9 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
                         e.printStackTrace();
                     }
 
-                } else if (resualt_restful_api == ErrorHandler.ERROR_CONNECTION)
+                } else if (resualt_restful_api == ErrorHandler.ERROR_CONNECTION
+                        || resualt_restful_api == ErrorHandler.ERROR_IO_EXP)
+
                     ErrorHandler.showConnectionERROR(getApplicationContext());
 
             } catch (InterruptedException e) {

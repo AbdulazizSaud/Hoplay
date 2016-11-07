@@ -27,6 +27,7 @@ public class ErrorHandler{
             case ERROR_CONNECTION:
             case ERROR_PATH:
             case ERROR_DATA_MISS_MATCH:
+            case  ERROR_IO_EXP:
                 return true;
         }
 

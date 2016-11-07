@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#880E4F</color>  <!-- This is the actionBar color -->
     <color name="colorPrimaryDark">#67083A</color>
-    <color name="colorAccent">#4CAF50</color>
+    <color name="colorAccent">#880E4F</color>
 
 
         <color name="darkenGrey">#424242</color>
