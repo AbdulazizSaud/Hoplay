@@ -20,7 +20,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MainAppMenu" />
@@ -48,14 +47,10 @@
         <activity
             android:name=".TermsAndConditions"
             android:screenOrientation="portrait" />
-        <activity android:name=".ChatActivity">
-
-
-        </activity>
+        <activity android:name=".ChatActivity"></activity>
         <activity android:name=".ForgetPassword" />
-        <activity android:name=".NoConnection">
-
-        </activity>
+        <activity android:name=".NoConnection"></activity>
+        <activity android:name=".MakeRequestFragment"></activity>
     </application>
 
 </manifest>

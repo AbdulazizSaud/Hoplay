@@ -101,14 +101,17 @@ public class MainAppMenu extends AppCompatActivity {
                     case R.id.requests_item:
                         mainAppMenu.setCurrentItem(0 , true);
                         break;
-                    case R.id.settings_item:
+                    case R.id.community_item:
                         mainAppMenu.setCurrentItem(1 , true);
                         break ;
-                    case R.id.community_item:
+                    case R.id.new_rquest:
                         mainAppMenu.setCurrentItem(2 , true);
                         break;
                     case R.id.profile_item:
                         mainAppMenu.setCurrentItem(3 , true);
+                        break;
+                    case R.id.settings_item:
+                        mainAppMenu.setCurrentItem(4,true);
                         break;
                 }
             }
@@ -130,6 +133,7 @@ public class MainAppMenu extends AppCompatActivity {
         bottomBar.mapColorForTab(1, "#880E4F");
         bottomBar.mapColorForTab(2, "#880E4F");
         bottomBar.mapColorForTab(3, "#880E4F");
+        bottomBar.mapColorForTab(4,"#880E4F");
 
 
 
