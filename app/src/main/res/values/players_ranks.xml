@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="players_ranks">
+        <item>Players Ranks</item>
+    <item>Hopy</item>
+        <item>Hopro</item>
+        <item>Hovet</item>
+        <item>Hochallenger</item>
+        <item>Hoore</item>
+
+
+
+    </string-array>
+
+
+</resources>
