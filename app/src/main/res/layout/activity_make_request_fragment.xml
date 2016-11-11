@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_make_request_fragment"
     android:layout_width="match_parent"
@@ -8,115 +9,28 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:windowSoftInputMode="adjustPan"
     tools:context="com.example.kay.hoplay.MakeRequestFragment">
 
-    <RadioGroup
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/make_request_message_textview"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:id="@+id/consoles_radiogroup">
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:textSize="20dp"
-        android:id="@+id/pc_choice_radiobutton"
-        android:text="PC"
-        android:layout_marginRight="20dp"
-
-        android:textColor="#E08A18"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:id="@+id/ps_choice_radiobutton"
-            android:text="Playstation"
-
-            android:textSize="20dp"
-            android:textColor="#256EB8"/>
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:id="@+id/xbox_choice_radiobutton"
-            android:textSize="20dp"
-            android:textColor="#107C0F"
-            android:text="Xbox"
-
-            android:layout_marginLeft="20dp"
-
-
-            />
-
-
-    </RadioGroup>
-
-    <Spinner
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:id="@+id/players_rank_spinner"
-        android:background="@drawable/rounded_spinner"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/number_of_players_spinner"
-        android:layout_alignStart="@+id/region_spinner" />
-
-    <Spinner
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:id="@+id/region_spinner"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_spinner"
-        android:layout_below="@+id/players_rank_spinner"
-        android:layout_centerHorizontal="true"
-        android:entries="@array/countries_array"
-        android:gravity="center"/>
-
-    <EditText
-        android:layout_width="400dp"
-        android:layout_height="100dp"
-        android:inputType="textPersonName"
-        android:text=""
-        android:background="@drawable/rectangular_edittext"
-        android:ems="10"
-        android:textColorHint="@color/LightGrey"
-        android:hint="You description here -_-"
-        android:gravity="center"
-        android:layout_below="@+id/region_spinner"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
-        android:id="@+id/request_descritption_edittext" />
 
     <Button
-        android:text="R e q u e s t"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_button"
-        android:layout_marginTop="15dp"
+        android:text="N e w   R e q u e s t"
         android:textColor="@color/white"
-        android:id="@+id/make_request_button"
-        android:layout_below="@+id/request_descritption_edittext"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Make new Request :)"
-        android:id="@+id/make_request_message_textview"
-        android:textSize="30dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <Spinner
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:id="@+id/number_of_players_spinner"
         android:layout_marginTop="20dp"
-        android:background="@drawable/rounded_spinner"
-        android:layout_below="@+id/consoles_radiogroup"
-        android:layout_alignStart="@+id/players_rank_spinner" />
+        android:id="@+id/new_request_button"
+        android:layout_alignParentTop="true"
+        android:onClick="toNewRequest"
+        android:layout_centerHorizontal="true" />
+    <include layout="@layout/generated_requests"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/new_request_button"
+        android:layout_marginTop="20dp"
+        >
+    </include>
 
 
 </RelativeLayout>
