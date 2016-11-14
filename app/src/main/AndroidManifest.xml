@@ -52,8 +52,12 @@
         <activity android:name=".ForgetPassword" />
         <activity android:name=".NoConnection" />
         <activity android:name=".MakeRequestFragment" />
-        <activity android:name=".NewRequest"  android:windowSoftInputMode="adjustResize|stateHidden" />
-
+        <activity
+            android:name=".NewRequest"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".PcRequests" />
+        <activity android:name=".PsRequests" />
+        <activity android:name=".XboxRequests"></activity>
     </application>
 
 </manifest>

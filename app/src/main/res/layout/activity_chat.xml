@@ -4,6 +4,13 @@
     android:orientation="vertical"
     android:background="#E0E0E0">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/users_toolbar"
+        >
+
+    </include>
+
     <RelativeLayout
         android:id="@+id/container"
         android:layout_width="match_parent"

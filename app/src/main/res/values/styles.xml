@@ -24,7 +24,7 @@
     </style>
 
      <!-- Toolbar style -->
-    <style name="MyCustomToolbarTheme" parent="Theme.AppCompat">
+    <style name="MyCustomToolbarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     <!--<item name="textColorPrimary">#FFFFFF</item>-->
         <!--<item name="textColorSecondary">#FFFFFF</item>-->
         <!--<item name="android:windowNoTitle">true</item>-->

@@ -1,9 +1,14 @@
 package com.example.kay.hoplay;
 
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -52,6 +57,21 @@ public class ChatActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        // Scren orientation :
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        // Users toolbar :
+        Toolbar toolbar = (Toolbar) findViewById(R.id.users_toolbar);
+        setSupportActionBar(toolbar);
+
+//       ActionBar actionBar = getSupportActionBar();
+//         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+//        // TODO: Remove the redundant calls to getSupportActionBar()
+//        //       and use variable actionBar instead
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setHomeButtonEnabled(true);
+
+
         initControls();
         Socket socket = SocketHandler.socketIO;
 
@@ -194,5 +214,10 @@ public class ChatActivity extends ActionBarActivity {
 
     }
 
+    public void toCommunityFragment(View view)
+    {
+        Intent i = new Intent(this,MainAppMenu.class);
+        startActivity(i);
+    }
 
 }
