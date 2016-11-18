@@ -1,43 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
     android:background="#E0E0E0"
     android:orientation="vertical"
     android:padding="1dp">
 
-    <TextView
-        android:text="Kathi69"
-        android:textColor="#4a4a4a"
-        android:layout_width="wrap_content"
+    <!-- Thumbnail Image -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:padding="2dp"
-        android:textSize="15dp"
-        android:layout_alignParentLeft="true"
-        android:id="@+id/username_community" />
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp">
 
-    <TextView
-        android:text="This is chat biach "
-        android:textColor="#9b9b9b"
-        android:padding="2dp"
-        android:textSize="10dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/username_community"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:id="@+id/user_text_community" />
+        <com.pkmmte.view.CircularImageView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:id="@+id/chatOpponent"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/profile_default_photo"
+            app:border="true"
+            app:border_color="#F2F2F2"
+            app:border_width="1dp"
+            app:shadow="false" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="3dp"
-        android:id="@+id/favorite_user_imageView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/chatOpponentFullname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:drawableRight="@drawable/profile_verify_icon"
+                        android:drawablePadding="5dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:fontFamily="sans-serif-light"
+                        android:text="Opponent Fullname"
+                        android:textSize="16dp"
+                        android:layout_weight="1"
+                        android:layout_marginRight="8dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4m ago"
+                    android:id="@+id/chatLastMessageAgo"
+                    android:textColor="#757575"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="right" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp">
+
+                <emojicon.EmojiconTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Last message"
+                    android:id="@+id/chatLastMessage"
+                    android:textColor="@color/LightGrey"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="14dp"
+                    android:singleLine="true"
+                    android:layout_weight="1"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/chatNewMessagesCount"
+                    android:background="@drawable/counter_bg"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -49,15 +49,7 @@ public class CommunityFragment extends Fragment {
 
         // specify an adapter (see also next example)
         ArrayList<userList> userlist=new ArrayList<userList>();
-        for (int i = 0 ; i < 20 ; i++)
-        {
-            userlist.add(new userList(
-                    "User" + i ,
-                    "Chat Text Bra" ,
-                     R.drawable.heart_black
-
-            ));
-        }
+            userlist.add(new userList("xxx","xxa","fk off i'm leaving", "100 years ago"));
 
 
         mAdapter = new MyAdapter(userlist);
