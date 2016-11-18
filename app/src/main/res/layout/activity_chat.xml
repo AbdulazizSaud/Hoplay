@@ -51,7 +51,8 @@
             android:listSelector="@android:color/transparent"
             android:transcriptMode="alwaysScroll"
             android:divider="@null"
-            android:layout_above="@+id/include"/>
+            android:layout_above="@+id/include"
+            />
 
         <include layout="@layout/send_message_bar"
             android:layout_width="match_parent"

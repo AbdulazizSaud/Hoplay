@@ -9,24 +9,27 @@
 
 
     <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
         android:src="@drawable/emojichatbar"
         android:id="@+id/emoji"
         android:layout_marginLeft="10dp"
+        android:layout_toLeftOf="@+id/messageEdit"
         android:layout_alignBottom="@+id/messageEdit"
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/chatSendButton" />
 
     <EditText
+        android:inputType="textMultiLine"
         android:id="@+id/messageEdit"
-        android:layout_width="300dp"
+        android:layout_toRightOf="@+id/emoji"
+        android:layout_width="290dp"
         android:layout_height="60dp"
         android:textColorHint="#CACACA"
         android:autoText="true"
         android:padding="2dp"
+        android:layout_marginLeft="3dp"
         android:hint="type a message -_-"
-        android:gravity="center"
         android:layout_weight="0.40"
         android:background="@android:color/transparent"
         android:layout_alignParentTop="true"

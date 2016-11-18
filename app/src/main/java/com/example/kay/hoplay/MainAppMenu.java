@@ -13,6 +13,7 @@ import com.roughike.bottombar.OnTabSelectedListener;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
@@ -39,6 +40,7 @@ public class MainAppMenu extends AppCompatActivity {
 
         // Set the screen orientation to the portrait mode :
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
 
 
@@ -148,10 +150,10 @@ public class MainAppMenu extends AppCompatActivity {
 
 
         // Make a Badge for the first tab, with red background color and a value of "4".
-        // Notification number it was 4 i put it 0
+        // Notification number it was 4 i put it 0w
         // the first argument is about which tap 1 represent the second one which is the settings .
         // try to change the  third argument to understand  it . change it to 4 ! or any number .
-        BottomBarBadge unreadMessages = bottomBar.makeBadgeForTabAt(2, "#FF0000", 4);
+        BottomBarBadge unreadMessages = bottomBar.makeBadgeForTabAt(1, "#FF0000", 4);
 
         // Control the badge's visibility
         unreadMessages.show();

@@ -62,7 +62,9 @@ public class ChatActivity extends ActionBarActivity {
 
         // Users toolbar :
         Toolbar toolbar = (Toolbar) findViewById(R.id.users_toolbar);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
+
 
 //       ActionBar actionBar = getSupportActionBar();
 //         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
@@ -100,6 +102,8 @@ public class ChatActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
     private void initControls() {
         messagesContainer = (ListView) findViewById(R.id.messagesContainer);
