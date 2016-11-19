@@ -5,47 +5,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.android.volley.toolbox.ImageLoader;
 import com.pkmmte.view.CircularImageView;
 
 import java.util.ArrayList;
 
 import emojicon.EmojiconTextView;
 
-//
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private ArrayList<userList> userList;
+    private ArrayList<CommunityUserList> CommunityUserList;
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-
-         TextView chatOpponentFullname;
-         EmojiconTextView chatLastMessage;
-         TextView chatLastMessageAgo;
-         TextView chatNewMessagesCount;
-         CircularImageView chatOpponent;
-
-        public ViewHolder(View v) {
-            super(v);
-            chatOpponentFullname =  (TextView) v.findViewById(R.id.chatOpponentFullname);
-            chatLastMessageAgo =  (TextView) v.findViewById(R.id.chatLastMessageAgo);
-            chatNewMessagesCount =  (TextView) v.findViewById(R.id.chatNewMessagesCount);
-
-            chatOpponent = (CircularImageView) v.findViewById(R.id.chatOpponent);
-            chatLastMessage = (EmojiconTextView) v.findViewById(R.id.chatLastMessage);
-
-        }
-    }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(ArrayList<userList> userLists) {
-        this.userList = userLists;
+    public MyAdapter(ArrayList<CommunityUserList> CommunityUserLists) {
+        this.CommunityUserList = CommunityUserLists;
     }
 
     // Create new views (invoked by the layout manager)
@@ -55,6 +32,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.row, parent, false);
+
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,28 +52,55 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
+        ImageLoader loader = App.getInstance().getImageLoader();
 
-        userList us = userList.get(position);
+        CommunityUserList us = CommunityUserList.get(position);
+
+        if(us.userPictureURL.length() > 0){
+            loader.get(us.userPictureURL,
+                    ImageLoader.getImageListener(
+                            holder.chatOpponentPicture
+                            ,R.drawable.profile_default_photo
+                            ,R.drawable.profile_default_photo));
+
+        } else
+            holder.chatOpponentPicture.setImageResource(R.drawable.profile_default_photo);
+
         holder.chatOpponentFullname.setText(us.fullName);
         holder.chatLastMessage.setText(us.lastMsg);
         holder.chatLastMessageAgo.setText(us.lastMsgDate);
-
-
-
-        holder.chatOpponent.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
 
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return userList.size();
+        return CommunityUserList.size();
     }
+
+    // Provide a reference to the views for each data item
+    // Complex data items may need more than one view per item, and
+    // you provide access to all the views for a data item in a view holder
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        // each data item is just a string in this case
+
+        TextView chatOpponentFullname;
+        EmojiconTextView chatLastMessage;
+        TextView chatLastMessageAgo;
+        TextView chatNewMessagesCount;
+        CircularImageView chatOpponentPicture;
+
+        public ViewHolder(View v) {
+            super(v);
+            chatOpponentFullname =  (TextView) v.findViewById(R.id.chatOpponentFullname);
+            chatLastMessageAgo =  (TextView) v.findViewById(R.id.chatLastMessageAgo);
+            chatNewMessagesCount =  (TextView) v.findViewById(R.id.chatNewMessagesCount);
+
+            chatOpponentPicture = (CircularImageView) v.findViewById(R.id.chatOpponent);
+            chatLastMessage = (EmojiconTextView) v.findViewById(R.id.chatLastMessage);
+
+        }
+    }
+
+
 }

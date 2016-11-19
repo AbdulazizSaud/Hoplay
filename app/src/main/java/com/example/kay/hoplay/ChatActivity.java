@@ -48,6 +48,7 @@ public class ChatActivity extends ActionBarActivity {
     private Button sendBtn;
     private ChatAdapter adapter;
     private ArrayList<ChatMessage> chatHistory;
+    private Socket socket;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -75,9 +76,8 @@ public class ChatActivity extends ActionBarActivity {
 
 
         initControls();
-        Socket socket = SocketHandler.socketIO;
-
-        socket.on(SocketHandler.MESSAGE_EVENT, onMessage);
+         socket = App.getInstance().getSocket();
+         socket.on(App.MESSAGE_EVENT, onMessage);
 
     }
 
@@ -142,7 +142,7 @@ public class ChatActivity extends ActionBarActivity {
                     }
                 });
                 messageET.setText("");
-                SocketHandler.socketIO.emit(SocketHandler.MESSAGE_EVENT, messageText);
+               socket.emit(App.MESSAGE_EVENT, messageText);
 
             }
         });

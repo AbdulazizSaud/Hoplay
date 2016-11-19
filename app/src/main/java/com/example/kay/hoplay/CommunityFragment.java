@@ -8,10 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -48,11 +46,16 @@ public class CommunityFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        ArrayList<userList> userlist=new ArrayList<userList>();
-            userlist.add(new userList("xxx","xxa","fk off i'm leaving", "100 years ago"));
+        ArrayList<CommunityUserList> communityUserLists=new ArrayList<CommunityUserList>();
 
 
-        mAdapter = new MyAdapter(userlist);
+
+        ///
+        String picUrl = "http://brockmentalhealth.ca/wp-content/uploads/2015/10/Community-family-and-friends-page.jpg";
+        CommunityUserList test = new CommunityUserList("azoz",picUrl);
+        communityUserLists.add(test);
+        ///
+        mAdapter = new MyAdapter(communityUserLists);
         mRecyclerView.setAdapter(mAdapter);
 
 

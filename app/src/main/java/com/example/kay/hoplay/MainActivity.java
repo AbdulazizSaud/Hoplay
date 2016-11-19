@@ -39,6 +39,7 @@ import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
 
+import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
 public class MainActivity extends AppCompatActivity implements View.OnKeyListener  {
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     private Button signInButton;
     private RelativeLayout signInRelativeLayout;
     private Toolbar toolbar;
-
+    private Socket socket;
 
     @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +87,8 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
             }
 
             setup();
-
-        SocketHandler.socketIO.on(SocketHandler.RECEIVE_CLIENT_ID,retID);
+        socket = App.getInstance().getSocket();
+        socket.on(App.RECEIVE_CLIENT_ID,retID);
 
         }   // End Of onCreate Method
 
@@ -158,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 
     public void signIn(View v) {
             if(startAPI().equals("success")) {
-                SocketHandler.socketIO.emit(SocketHandler.ADD_USER,usernameSignIn.getText().toString().trim());
+                socket.emit(App.ADD_USER,usernameSignIn.getText().toString().trim());
 
                 Intent i = new Intent(getApplicationContext(), ChatActivity.class);
                 startActivity(i);
@@ -212,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     public Emitter.Listener retID = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            SocketHandler.clientID = String.valueOf(args[0]);
+            App.clientID = String.valueOf(args[0]);
             Log.i("--->",args[0]+"");
         }
     };
