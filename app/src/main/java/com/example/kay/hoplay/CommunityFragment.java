@@ -51,8 +51,9 @@ public class CommunityFragment extends Fragment {
 
 
         ///
-        String picUrl = "http://brockmentalhealth.ca/wp-content/uploads/2015/10/Community-family-and-friends-page.jpg";
-        CommunityUserList test = new CommunityUserList("azoz",picUrl);
+        String picUrl = "https://trello-avatars.s3.amazonaws.com/287b7527a973a31518a71b15aacb11eb/original.png";
+        CommunityUserList test = new CommunityUserList("kdesu",picUrl);
+        test.lastMsg = "azoz, please DONT do a drama";
         communityUserLists.add(test);
         ///
         mAdapter = new MyAdapter(communityUserLists);
