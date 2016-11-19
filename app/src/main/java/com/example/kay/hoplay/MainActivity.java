@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
             super.onCreate(savedInstanceState);
 
             setContentView(R.layout.activity_main);
+
             // getSupportActionBar().hide();
 
             // Set the screen orientation to the portrait mode :

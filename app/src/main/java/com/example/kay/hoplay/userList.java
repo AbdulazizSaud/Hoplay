@@ -1,42 +1,15 @@
 package com.example.kay.hoplay;
 
-/**
- * Created by Kay on 10/21/2016.
- */
 
 public class userList {
 
-    String title ;
-    String desc ;
-    int image ;
+    // here it should be a behivors something like a opponent id , my id and so long.
+    String fullName,userPictureURL,lastMsg,lastMsgDate;
 
-    public userList(String title, String desc, int image) {
-        this.title = title;
-        this.desc = desc;
-        this.image = image;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
+    public userList(String fullName, String userPictureURL, String lastMsg, String lastMsgDate) {
+        this.fullName = fullName;
+        this.userPictureURL = userPictureURL;
+        this.lastMsg = lastMsg;
+        this.lastMsgDate = lastMsgDate;
     }
 }

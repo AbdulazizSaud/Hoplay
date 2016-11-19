@@ -8,7 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.pkmmte.view.CircularImageView;
+
 import java.util.ArrayList;
+
+import emojicon.EmojiconTextView;
 
 //
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -19,10 +23,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public View view;
+
+         TextView chatOpponentFullname;
+         EmojiconTextView chatLastMessage;
+         TextView chatLastMessageAgo;
+         TextView chatNewMessagesCount;
+         CircularImageView chatOpponent;
+
         public ViewHolder(View v) {
             super(v);
-            view = v;
+            chatOpponentFullname =  (TextView) v.findViewById(R.id.chatOpponentFullname);
+            chatLastMessageAgo =  (TextView) v.findViewById(R.id.chatLastMessageAgo);
+            chatNewMessagesCount =  (TextView) v.findViewById(R.id.chatNewMessagesCount);
+
+            chatOpponent = (CircularImageView) v.findViewById(R.id.chatOpponent);
+            chatLastMessage = (EmojiconTextView) v.findViewById(R.id.chatLastMessage);
+
         }
     }
 
@@ -56,19 +72,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        TextView username_community =  (TextView) holder.view.findViewById(R.id.username_community);
-        TextView user_text_community =  (TextView) holder.view.findViewById(R.id.user_text_community);
-        final ImageView favorite_user =  (ImageView) holder.view.findViewById(R.id.favorite_user_imageView);
-
-        username_community.setText(userList.get(position).getTitle());
-        user_text_community.setText(userList.get(position).getDesc());
-        favorite_user.setImageResource(userList.get(position).getImage());
 
 
-        favorite_user.setOnClickListener(new View.OnClickListener(){
+        userList us = userList.get(position);
+        holder.chatOpponentFullname.setText(us.fullName);
+        holder.chatLastMessage.setText(us.lastMsg);
+        holder.chatLastMessageAgo.setText(us.lastMsgDate);
+
+
+
+        holder.chatOpponent.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                favorite_user.setImageResource(R.drawable.heart_red);
+
             }
         });
 
