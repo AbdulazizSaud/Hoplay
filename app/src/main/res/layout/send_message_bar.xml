@@ -22,7 +22,6 @@
     <EditText
         android:inputType="textMultiLine"
         android:id="@+id/messageEdit"
-        android:layout_toRightOf="@+id/emoji"
         android:layout_width="290dp"
         android:layout_height="60dp"
         android:textColorHint="#CACACA"
