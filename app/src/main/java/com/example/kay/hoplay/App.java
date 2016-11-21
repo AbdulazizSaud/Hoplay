@@ -13,7 +13,7 @@ import io.socket.client.IO;
 import io.socket.client.Socket;
 
 
-public class App extends Application {
+public class App extends Application implements SocketIOEvents{
 
     private static App instance;
 
@@ -30,11 +30,6 @@ public class App extends Application {
             e.printStackTrace();
         }
     }
-
-    public static final String MESSAGE_EVENT = "message";
-    public static final String RECEIVE_CLIENT_ID = "retID";
-    public static final String ADD_USER = "adduser";
-
 
 
     @Override
