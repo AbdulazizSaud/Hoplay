@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.kay.hoplay.SignUpActivity"
+    tools:context="com.example.kay.hoplay.Activities.SignUpActivity"
     android:background="#E0E0E0"
     android:clickable="true"
     android:id="@+id/sign_up_relativeLayout"

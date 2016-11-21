@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.kay.hoplay.UserFragment"
+    tools:context="com.example.kay.hoplay.Fragments.UserFragment"
     android:background="#E0E0E0">
 
     <!-- TODO: Update blank fragment layout -->

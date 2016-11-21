@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.kay.hoplay.SettingsFragment"
+    tools:context="com.example.kay.hoplay.Fragments.SettingsFragment"
     android:background="#E0E0E0">
 
     <!-- TODO: Update blank fragment layout -->

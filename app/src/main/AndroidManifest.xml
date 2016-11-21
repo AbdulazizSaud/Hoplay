@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
-        android:name=".App"
+        android:name=".App.App"
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
@@ -23,7 +23,7 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,9 +31,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".MainAppMenu" />
-        <activity android:name=".ThreeButtonsActivity" />
+        <activity android:name=".Activities.SignUpActivity" />
+        <activity android:name=".Activities.MainAppMenu" />
+        <activity android:name=".Activities.ThreeButtonsActivity" />
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -43,30 +43,30 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".UserGames"
+            android:name=".ProfileRequires.UserGames"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserRatings"
+            android:name=".ProfileRequires.UserRatings"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserFollowing"
+            android:name=".ProfileRequires.UserFollowing"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserFollowers"
+            android:name=".ProfileRequires.UserFollowers"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TermsAndConditions"
+            android:name=".Activities.TermsAndConditions"
             android:screenOrientation="portrait" />
-        <activity android:name=".ChatActivity" />
-        <activity android:name=".ForgetPassword" />
-        <activity android:name=".NoConnection" />
-        <activity android:name=".MakeRequestFragment" />
+        <activity android:name=".Activities.ChatActivity" />
+        <activity android:name=".Activities.ForgetPassword" />
+        <activity android:name=".Activities.NoConnection" />
+        <activity android:name=".Fragments.MakeRequestFragment" />
         <activity
-            android:name=".NewRequest"
+            android:name=".RequestsRequires.NewRequest"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".PcRequests" />
-        <activity android:name=".PsRequests" />
-        <activity android:name=".XboxRequests"></activity>
+        <activity android:name=".RequestsRequires.PcRequests" />
+        <activity android:name=".RequestsRequires.PsRequests" />
+        <activity android:name=".RequestsRequires.XboxRequests"></activity>
     </application>
 
 </manifest>

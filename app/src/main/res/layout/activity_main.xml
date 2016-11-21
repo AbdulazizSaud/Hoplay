@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.kay.hoplay.MainActivity"
+    tools:context="com.example.kay.hoplay.Activities.MainActivity"
     android:background="#E0E0E0"
     android:id="@+id/sign_in_relativeLayout"
     android:onClick="removeKeyboard"
