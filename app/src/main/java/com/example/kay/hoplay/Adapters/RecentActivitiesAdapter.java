@@ -7,79 +7,83 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
 import com.android.volley.toolbox.ImageLoader;
-import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Activities.ChatActivity;
-import com.example.kay.hoplay.model.CommunityUserList;
+import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
+import com.example.kay.hoplay.model.CommunityUserList;
+import com.example.kay.hoplay.model.RecentActivityList;
 import com.pkmmte.view.CircularImageView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 import emojicon.EmojiconTextView;
 
+/**
+ * Created by khaledAlhindi on 11/22/2016 AD.
+ */
 
-public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.ViewHolder> {
-    private ArrayList<com.example.kay.hoplay.model.CommunityUserList> CommunityUserList;
+public class RecentActivitiesAdapter extends RecyclerView.Adapter<RecentActivitiesAdapter.ViewHolder> {
+    private ArrayList<com.example.kay.hoplay.model.RecentActivityList> recentActivityLists;
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public CommunityAdapter(ArrayList<CommunityUserList> CommunityUserLists) {
-        this.CommunityUserList = CommunityUserLists;
+    public RecentActivitiesAdapter(ArrayList<RecentActivityList> recentActivityLists) {
+        this.recentActivityLists = recentActivityLists;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public CommunityAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+    public RecentActivitiesAdapter.ViewHolder  onCreateViewHolder(ViewGroup parent,
                                                           int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.new_user_message, parent, false);
+                .inflate(R.layout.new_user_activity, parent, false);
 
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(),ChatActivity.class);
-                v.getContext().startActivity(i);
+            // WHEN ITEM CLICKED :
             }
         });
         // set the view's size, margins, paddings and layout parameters
 
-        ViewHolder vh = new ViewHolder(v);
+        RecentActivitiesAdapter.ViewHolder vh = new RecentActivitiesAdapter.ViewHolder(v);
         return vh;
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(RecentActivitiesAdapter.ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
         ImageLoader loader = App.getInstance().getImageLoader();
 
-        CommunityUserList us = CommunityUserList.get(position);
+        RecentActivityList recentActivityList = recentActivityLists.get(position);
 
-        if(us.getUserPictureURL().length() > 0){
-            loader.get(us.getUserPictureURL(),
+        if(recentActivityList.getGamePhotoURL().length() > 0){
+            loader.get(recentActivityList.getGamePhotoURL(),
                     ImageLoader.getImageListener(
-                            holder.chatOpponentPicture
+                            holder.gamePhoto
                             ,R.drawable.profile_default_photo
                             ,R.drawable.profile_default_photo));
 
         } else
-            holder.chatOpponentPicture.setImageResource(R.drawable.profile_default_photo);
+            holder.gamePhoto.setImageResource(R.drawable.profile_default_photo);
 
-        holder.chatOpponentFullname.setText(us.getFullName());
-        holder.chatLastMessage.setText(us.getLastMsg());
-        holder.chatLastMessageAgo.setText(us.getLastMsgDate());
+        holder.gameName.setText(recentActivityList.getGameName());
+        holder.activityDescription.setText(recentActivityList.getActivityDescription());
+        holder.activityDate.setText(recentActivityList.getActivityDate());
 
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return CommunityUserList.size();
+        return recentActivityLists.size();
     }
 
     // Provide a reference to the views for each data item
@@ -88,23 +92,18 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
 
-        TextView chatOpponentFullname;
-        EmojiconTextView chatLastMessage;
-        TextView chatLastMessageAgo;
-        TextView chatNewMessagesCount;
-        CircularImageView chatOpponentPicture;
+        TextView gameName;
+        TextView activityDescription;
+        CircularImageView gamePhoto;
+        TextView activityDate ;
 
         public ViewHolder(View v) {
             super(v);
-            chatOpponentFullname =  (TextView) v.findViewById(R.id.chatOpponentFullname);
-            chatLastMessageAgo =  (TextView) v.findViewById(R.id.chatLastMessageAgo);
-            chatNewMessagesCount =  (TextView) v.findViewById(R.id.chatNewMessagesCount);
-
-            chatOpponentPicture = (CircularImageView) v.findViewById(R.id.chatOpponent);
-            chatLastMessage = (EmojiconTextView) v.findViewById(R.id.chatLastMessage);
+            gameName =  (TextView) v.findViewById(R.id.game_name_textview);
+            activityDescription =  (TextView) v.findViewById(R.id.activity_description_textview);
+            gamePhoto = (CircularImageView) v.findViewById(R.id.game_photo_circularimageview);
+            activityDate = (TextView) v.findViewById(R.id.activity_date_textview);
 
         }
     }
-
-
 }

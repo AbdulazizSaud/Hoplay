@@ -61,7 +61,7 @@
         android:layout_below="@+id/account_textview"
         android:layout_centerHorizontal="true"
         android:hint="Nickname"
-        android:textColorHint="@color/LightGrey"
+        android:textColorHint="@color/hintColor"
         android:inputType="textPersonName"
         android:focusable="true"
 
@@ -80,7 +80,7 @@
         android:layout_below="@+id/nickname_sign_up_edittext"
         android:layout_centerHorizontal="true"
         android:hint="Username"
-        android:textColorHint="@color/LightGrey"
+        android:textColorHint="@color/hintColor"
 
         />
     <EditText
@@ -94,7 +94,7 @@
         android:layout_centerHorizontal="true"
         android:hint="Email Address"
         android:textColor="@color/black"
-        android:textColorHint="@color/LightGrey"
+        android:textColorHint="@color/hintColor"
         android:inputType="textEmailAddress"/>
 
 
@@ -111,7 +111,7 @@
         android:textColor="@color/black"
         android:background="@drawable/rectangular_edittext"
         android:layout_height="50dp"
-        android:textColorHint="@color/LightGrey"
+        android:textColorHint="@color/hintColor"
         android:id="@+id/password_sign_up_edittext"
         android:shadowColor="@color/burgundy"
         android:hint="Password"
@@ -120,20 +120,19 @@
         android:layout_centerVertical="true"
         android:layout_alignStart="@+id/email_sign_up_edittext" />
 
-
     <EditText
         android:layout_width="320dp"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:background="@drawable/rectangular_edittext"
         android:layout_height="50dp"
-        android:textColorHint="@color/LightGrey"
-        android:id="@+id/confirm_password_sign_up_edittext"
+        android:gravity="center"
+        android:id="@+id/confirm_password_edittext"
         android:hint="Confirm Password"
+        android:textColorHint="@color/hintColor"
         android:layout_below="@id/password_sign_up_edittext"
-        android:inputType="textPassword"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/email_sign_up_edittext" />
+        android:background="@drawable/rectangular_edittext"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif"
+        android:inputType="textPassword" />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -141,7 +140,7 @@
         android:textColor="#726D6D"
         android:text="By tapping &quot;Sign Up&quot; you agree to the"
         android:id="@+id/agreement_textview"
-        android:layout_below="@id/confirm_password_sign_up_edittext"
+        android:layout_below="@id/confirm_password_edittext"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:textSize="17dp"/>

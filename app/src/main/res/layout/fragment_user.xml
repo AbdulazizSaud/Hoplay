@@ -1,137 +1,180 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context="com.example.kay.hoplay.Fragments.UserFragment"
     android:background="#E0E0E0">
 
-    <!-- TODO: Update blank fragment layout -->
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="N i c k n a m e"
-        android:id="@+id/nickname_profile_textView"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="60dp"
-        android:textSize="25dp"
-        android:layout_centerHorizontal="true"
-        android:textColor="#404257" />
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context="com.example.kay.hoplay.Fragments.UserFragment"
+        android:background="#E0E0E0">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/nickname_profile_textView"
-        android:layout_centerInParent="true"
-        android:src="@drawable/userprofile"
-        app:civ_border_width="2dp"
-        android:id="@+id/user_profile_photo_imageView"
-        />
+        <!-- TODO: Update blank fragment layout -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="N i c k n a m e"
+            android:id="@+id/nickname_profile_textView"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="20dp"
+            android:textSize="25dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="#404257" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="130dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/nickname_profile_textView"
+            android:layout_centerInParent="true"
+            android:src="@drawable/userprofile"
+            app:civ_border_width="2dp"
+            android:id="@+id/user_profile_photo_imageView"
+            />
 
 
-    <TextView
-        android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="username"
+            android:id="@+id/username_profile"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/user_profile_photo_imageView"
+            android:textColor="#404257" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Followers"
+            android:id="@+id/followers_profile_textview"
+            android:textColor="#880E4F"
+            android:layout_alignBaseline="@+id/following_profile_textview"
+            android:layout_alignBottom="@+id/following_profile_textview"
+            android:layout_toEndOf="@+id/user_profile_photo_imageView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Following"
+            android:id="@+id/following_profile_textview"
+            android:textColor="#880E4F"
+            android:layout_alignBaseline="@+id/ratings_profile_textview"
+            android:layout_alignBottom="@+id/ratings_profile_textview"
+            android:layout_alignEnd="@+id/nickname_profile_textView"
+            android:layout_marginEnd="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="98"
+            android:id="@+id/followeing_number_textview"
+            android:textColor="#404257"
+            android:layout_below="@+id/following_profile_textview"
+            android:layout_alignEnd="@+id/username_profile" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23"
+            android:id="@+id/followers_number_textview"
+            android:textColor="#404257"
+            android:layout_below="@+id/followers_profile_textview"
+            android:layout_alignEnd="@+id/followers_profile_textview"
+            android:layout_marginEnd="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ratings"
+            android:id="@+id/ratings_profile_textview"
+            android:textColor="#880E4F"
+            android:layout_alignBaseline="@+id/games_profile_textview"
+            android:layout_alignBottom="@+id/games_profile_textview"
+            android:layout_alignStart="@+id/nickname_profile_textView" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="150"
+            android:layout_alignStart="@+id/ratings_profile_textview"
+            android:id="@+id/ratings_number_textview"
+            android:textColor="#404257"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/ratings_profile_textview"
+
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="79"
+            android:id="@+id/games_number_textview"
+            android:textColor="#404257"
+            android:layout_below="@+id/games_profile_textview"
+            android:layout_toStartOf="@+id/user_profile_photo_imageView"
+            android:layout_marginEnd="41dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Games"
+            android:id="@+id/games_profile_textview"
+            android:textColor="#880E4F"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="22dp"
+            android:layout_below="@+id/username_profile"
+            android:layout_toStartOf="@+id/user_profile_photo_imageView" />
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/linedivider"
+            android:layout_below="@+id/games_number_textview"
+            android:layout_marginTop="20dp"
+            android:id="@+id/line_divider" />
+
+        <TextView
+            android:text="Recent Activities"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textSize="22dp"
+            android:textColor="@color/burgundy"
+            android:layout_below="@+id/line_divider"
+            android:layout_marginTop="15dp"
+            android:id="@+id/recent_activities_textview" />
+
+
+
+
+        <!-- this line control the photo bordor color :
+           app:civ_border_color="@color/dark" />  -->
+
+
+    </RelativeLayout>
+
+
+    <include layout="@layout/recent_activites_user_profile"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="username"
-        android:id="@+id/username_profile"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/user_profile_photo_imageView"
-        android:textColor="#404257" />
+        android:id="@+id/include"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+</LinearLayout>
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Followers"
-        android:id="@+id/followers_profile_textview"
-        android:textColor="#880E4F"
-        android:layout_alignBaseline="@+id/following_profile_textview"
-        android:layout_alignBottom="@+id/following_profile_textview"
-        android:layout_toEndOf="@+id/user_profile_photo_imageView" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Following"
-        android:id="@+id/following_profile_textview"
-        android:textColor="#880E4F"
-        android:layout_alignBaseline="@+id/ratings_profile_textview"
-        android:layout_alignBottom="@+id/ratings_profile_textview"
-        android:layout_alignEnd="@+id/nickname_profile_textView"
-        android:layout_marginEnd="20dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="98"
-        android:id="@+id/followeing_number_textview"
-        android:textColor="#404257"
-        android:layout_below="@+id/following_profile_textview"
-        android:layout_alignEnd="@+id/username_profile" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="23"
-        android:id="@+id/followers_number_textview"
-        android:textColor="#404257"
-        android:layout_below="@+id/followers_profile_textview"
-        android:layout_alignEnd="@+id/followers_profile_textview"
-        android:layout_marginEnd="20dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ratings"
-        android:id="@+id/ratings_profile_textview"
-        android:textColor="#880E4F"
-        android:layout_alignBaseline="@+id/games_profile_textview"
-        android:layout_alignBottom="@+id/games_profile_textview"
-        android:layout_alignStart="@+id/nickname_profile_textView" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="150"
-        android:layout_alignStart="@+id/ratings_profile_textview"
-        android:id="@+id/ratings_number_textview"
-        android:textColor="#404257"
-        android:layout_marginLeft="10dp"
-        android:layout_below="@+id/ratings_profile_textview"
-
-         />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="79"
-        android:id="@+id/games_number_textview"
-        android:textColor="#404257"
-        android:layout_below="@+id/games_profile_textview"
-        android:layout_toStartOf="@+id/user_profile_photo_imageView"
-        android:layout_marginEnd="41dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Games"
-        android:id="@+id/games_profile_textview"
-        android:textColor="#880E4F"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="22dp"
-        android:layout_below="@+id/username_profile"
-        android:layout_toStartOf="@+id/user_profile_photo_imageView" />
-
-
-    <!-- this line control the photo bordor color :
-       app:civ_border_color="@color/dark" />  -->
-
-
-</RelativeLayout>

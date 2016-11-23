@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#67083A</color>
     <color name="colorAccent">#880E4F</color>
 
-
+        <color name="hintColor">#989899</color>
         <color name="darkenGrey">#424242</color>
         <color name="white">#FFFFFF</color>
         <color name="burgundy">#880E4F</color>

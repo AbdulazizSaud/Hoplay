@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -85,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
         nickName.setTypeface(sansationbold);
         signUp = (Button) findViewById(R.id.sign_in_button);
         signUp.setTypeface(sansationbold);
-        confirmPasswordEdititext = (EditText) findViewById(R.id.confirm_password_sign_up_edittext);
+        confirmPasswordEdititext = (EditText) findViewById(R.id.confirm_password_edittext);
         confirmPasswordEdititext.setTypeface(sansationbold);
 
         // I've tried the onClick method  but  it  didn't work .
@@ -94,7 +95,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         // Encrypt Password
         passwordSignUp.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        confirmPasswordEdititext.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+      //  confirmPasswordEdititext.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
 
         usernameSignUp.setTypeface(sansationbold);

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/tools"
+    android:background="#E0E0E0"
+    android:orientation="vertical"
+    android:padding="1dp">
+
+    <!-- Thumbnail Image -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:background="#E0E0E0">
+
+        <com.pkmmte.view.CircularImageView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:id="@+id/game_photo_circularimageview"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/profile_default_photo"
+            app:border="true"
+            app:border_color="#F2F2F2"
+            app:border_width="1dp"
+            app:shadow="false" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/game_name_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:drawablePadding="5dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:fontFamily="sans-serif-light"
+                        android:text="Game Name"
+                        android:textSize="16dp"
+                        android:layout_weight="1"
+                        android:layout_marginRight="8dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4m ago"
+                    android:id="@+id/activity_date_textview"
+                    android:textColor="#9B9B9B"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="right" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Game Description"
+                    android:id="@+id/activity_description_textview"
+                    android:textColor="@color/darkenGrey"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="14dp"
+                    android:singleLine="true"
+                    android:layout_weight="1"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

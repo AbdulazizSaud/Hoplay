@@ -3,7 +3,7 @@
     android:shape="rectangle" >
 
     <!-- view background color -->
-    <solid android:color="@color/colorCounterBackground" >
+    <solid android:color="@color/burgundy" >
     </solid>
 
     <!-- If you want to add some padding -->
@@ -15,7 +15,7 @@
     </padding>
 
     <!-- Here is the corner radius -->
-    <corners android:radius="2dp" >
+    <corners android:radius="1000dp" >
     </corners>
 
 </shape>

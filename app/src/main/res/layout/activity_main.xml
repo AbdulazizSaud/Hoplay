@@ -36,7 +36,7 @@
         android:layout_below="@+id/username_sign_in_edittext"
         android:layout_centerHorizontal="true"
         android:hint="password"
-        android:textColorHint="@color/LightGrey"
+        android:textColorHint="@color/hintColor"
         android:inputType="textPassword"
         android:layout_alignStart="@id/username_sign_in_edittext"
         android:layout_alignLeft="@id/username_sign_in_edittext" />
@@ -91,7 +91,7 @@
         android:id="@+id/username_sign_in_edittext"
         android:shadowColor="@color/burgundy"
         android:hint="username"
-        android:textColorHint="@color/LightGrey"
+        android:textColorHint="@color/hintColor"
         android:layout_marginTop="14dp"
         android:layout_below="@+id/logo_imageview"
         android:layout_centerHorizontal="true" />
