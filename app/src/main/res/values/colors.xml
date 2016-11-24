@@ -4,6 +4,13 @@
     <color name="colorPrimaryDark">#67083A</color>
     <color name="colorAccent">#880E4F</color>
 
+
+
+    <color name="pscolor">#256EB8</color>
+    <color name="pccolor">#E08A18</color>
+    <color name="xboxcolor">#107C0F</color>
+
+
         <color name="hintColor">#989899</color>
         <color name="darkenGrey">#424242</color>
         <color name="white">#FFFFFF</color>

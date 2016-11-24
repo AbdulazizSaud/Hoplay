@@ -1,6 +1,7 @@
 package com.example.kay.hoplay.Adapters;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -97,11 +98,19 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         public ViewHolder(View v) {
             super(v);
             chatOpponentFullname =  (TextView) v.findViewById(R.id.chatOpponentFullname);
+            Typeface sansation = Typeface.createFromAsset(chatOpponentFullname.getContext().getAssets() ,"sansationbold.ttf");
+            Typeface opensans = Typeface.createFromAsset(chatOpponentFullname.getContext().getAssets() ,"opensans.ttf");
+            chatOpponentFullname.setTypeface(opensans);
+
+
             chatLastMessageAgo =  (TextView) v.findViewById(R.id.chatLastMessageAgo);
+            chatLastMessageAgo.setTypeface(sansation);
             chatNewMessagesCount =  (TextView) v.findViewById(R.id.chatNewMessagesCount);
+            chatNewMessagesCount.setTypeface(sansation);
 
             chatOpponentPicture = (CircularImageView) v.findViewById(R.id.chatOpponent);
             chatLastMessage = (EmojiconTextView) v.findViewById(R.id.chatLastMessage);
+            chatLastMessage.setTypeface(sansation);
 
         }
     }

@@ -1,6 +1,7 @@
 package com.example.kay.hoplay.Adapters;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,10 +100,16 @@ public class RecentActivitiesAdapter extends RecyclerView.Adapter<RecentActiviti
 
         public ViewHolder(View v) {
             super(v);
-            gameName =  (TextView) v.findViewById(R.id.game_name_textview);
+
+            gameName =  (TextView) v.findViewById(R.id.game_name_recent_activity_textview);
+            Typeface sansation = Typeface.createFromAsset(gameName.getContext().getAssets() ,"sansationbold.ttf");
+            gameName.setTypeface(sansation);
+
             activityDescription =  (TextView) v.findViewById(R.id.activity_description_textview);
-            gamePhoto = (CircularImageView) v.findViewById(R.id.game_photo_circularimageview);
+            activityDescription.setTypeface(sansation);
+            gamePhoto = (CircularImageView) v.findViewById(R.id.game_photo_recent_activity_circularimageview);
             activityDate = (TextView) v.findViewById(R.id.activity_date_textview);
+            activityDate.setTypeface(sansation);
 
         }
     }
