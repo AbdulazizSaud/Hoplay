@@ -13,12 +13,12 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/emojichatbar"
-        android:id="@+id/emoji"
+        android:id="@+id/emojiBtn"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         />
 
-    <EditText
+    <emojicon.EmojiconEditText
         android:id="@+id/messageEdit"
         android:layout_width="290dp"
         android:layout_height="wrap_content"

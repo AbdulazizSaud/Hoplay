@@ -13,7 +13,6 @@ import com.example.kay.hoplay.Activities.SignUpActivity;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
 
-import com.example.kay.hoplay.Services.GettingContext;
 import com.example.kay.hoplay.model.SavedRequestsList;
 import com.pkmmte.view.CircularImageView;
 

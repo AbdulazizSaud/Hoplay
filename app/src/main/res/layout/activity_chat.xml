@@ -11,8 +11,9 @@
 
     </include>
 
+
     <RelativeLayout
-        android:id="@+id/container"
+        android:id="@+id/chatContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -63,4 +64,7 @@
 
 
     </RelativeLayout>
+
+
+
 </LinearLayout>
