@@ -4,6 +4,7 @@ package com.example.kay.hoplay.Fragments;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -249,22 +250,9 @@ public class UserFragment extends Fragment {
                 // Get the Image from data
 
                 Uri selectedImage = data.getData();
-                String[] filePathColumn = { MediaStore.Images.Media.DATA };
+                Bitmap imgBitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
 
-                // Get the cursor
-
-                Cursor cursor = getActivity().getContentResolver().query(selectedImage,
-                        filePathColumn, null, null, null);
-                // Move to first row
-                cursor.moveToFirst();
-
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                String imgDecodableString = cursor.getString(columnIndex);
-                cursor.close();
-
-                // Set the Image in ImageView after decoding the String
-                userPicture.setImageBitmap(BitmapFactory
-                        .decodeFile(imgDecodableString));
+                userPicture.setImageBitmap(imgBitmap);
 
             } else {
                 Toast.makeText(getContext(), "You haven't picked Image",
