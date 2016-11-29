@@ -64,9 +64,6 @@
         <activity
             android:name=".RequestsRequires.NewRequest"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".RequestsRequires.PcRequests" />
-        <activity android:name=".RequestsRequires.PsRequests" />
-        <activity android:name=".RequestsRequires.XboxRequests"></activity>
     </application>
 
 </manifest>

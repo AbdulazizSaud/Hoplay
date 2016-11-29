@@ -60,10 +60,10 @@ public class RecentActivitiesAdapter extends RecyclerView.Adapter<RecentActiviti
     public void onBindViewHolder(RecentActivitiesAdapter.ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
+        RecentActivityList recentActivityList = recentActivityLists.get(position);
 
         ImageLoader loader = App.getInstance().getImageLoader();
 
-        RecentActivityList recentActivityList = recentActivityLists.get(position);
 
         if(recentActivityList.getGamePhotoURL().length() > 0){
             loader.get(recentActivityList.getGamePhotoURL(),

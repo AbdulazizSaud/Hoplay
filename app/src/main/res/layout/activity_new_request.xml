@@ -70,7 +70,7 @@
             android:layout_height="50dp"
             android:layout_below="@+id/consoles_radiogroup"
             android:layout_centerHorizontal="true"
-            android:id="@+id/games_spinner"
+            android:id="@+id/games_edittext"
             android:hint="   All Games"
             android:background="@drawable/rectangular_edittext"
             />
@@ -81,14 +81,14 @@
             app:srcCompat="@drawable/ic_keyboard_arrow_down_white_18dp"
             android:id="@+id/down_arrow_games_imageview"
             android:layout_below="@+id/consoles_radiogroup"
-            android:layout_alignEnd="@+id/games_spinner" />
+            android:layout_alignEnd="@+id/games_edittext" />
 
 
         <Spinner
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:layout_below="@+id/games_spinner"
+            android:layout_below="@+id/games_edittext"
             android:layout_centerHorizontal="true"
             android:id="@+id/region_spinner"
             android:background="@drawable/rectangualr_white_shape"

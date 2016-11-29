@@ -24,7 +24,7 @@ public class NewRequest extends AppCompatActivity {
     private RadioButton pcRadiobutton ;
     private RadioButton psRadiobutton;
     private RadioButton xboxRadiobutton;
-    private  Spinner gamesSpinner ;
+    private  EditText gamesEditText;
     private EditText requestDescritopnEdittext;
 
     @Override
@@ -46,7 +46,7 @@ public class NewRequest extends AppCompatActivity {
         psRadiobutton.setTypeface(sansationbold);
         xboxRadiobutton = (RadioButton) findViewById(R.id.xbox_choice_radiobutton);
         xboxRadiobutton.setTypeface(sansationbold);
-        gamesSpinner = (Spinner)  findViewById(R.id.games_spinner);
+        gamesEditText = (EditText)  findViewById(R.id.games_edittext);
 
         requestDescritopnEdittext = (EditText)  findViewById(R.id.request_descritption_edittext);
         requestDescritopnEdittext.requestFocus();
@@ -89,7 +89,6 @@ public class NewRequest extends AppCompatActivity {
         regionAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         playersNumberAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
 
-        gamesSpinner.setAdapter(gamesAdapter);
         numberOfPlayersSpinner.setAdapter(playersNumberAdapter);
         regionSpinner.setAdapter(regionAdapter);
         playersRanksSpinner.setAdapter(playersRanksAdapter);
