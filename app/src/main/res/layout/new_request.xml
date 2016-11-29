@@ -23,7 +23,7 @@
         <com.pkmmte.view.CircularImageView
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:id="@+id/game_photo_recent_activity_circularimageview"
+            android:id="@+id/request_game_photo_circularimageview"
             android:layout_marginRight="10dp"
             android:src="@drawable/profile_default_photo"
             app:border="true"
@@ -49,7 +49,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/game_name_recent_activity_textview"
+                        android:id="@+id/request_game_name_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
@@ -63,14 +63,7 @@
                         android:layout_marginRight="8dp" />
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4m ago"
-                    android:id="@+id/activity_date_textview"
-                    android:textColor="#9B9B9B"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="right" />
+
 
             </LinearLayout>
 
@@ -84,7 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Game Description"
-                    android:id="@+id/activity_description_textview"
+                    android:id="@+id/request_description_textview"
                     android:textColor="@color/darkenGrey"
                     android:fontFamily="sans-serif-light"
                     android:textSize="14dp"
@@ -92,6 +85,32 @@
                     android:layout_weight="1"
                     android:paddingTop="3dp"
                     android:paddingBottom="3dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2/4"
+                    android:id="@+id/request_players_number_textview"
+                    android:textColor="#D50000"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="right" />
+                
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="by Kdesu"
+                    android:id="@+id/request_by_user_textview"
+                    android:textColor="#979899"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="right" />
+
 
 
             </LinearLayout>
