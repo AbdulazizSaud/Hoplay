@@ -5,6 +5,14 @@ package com.example.kay.hoplay.model;
  */
 
 public class RecentActivityList {
+    public RecentActivityList(String gameName, String gamePhotoURL,String activityDescription, String activityDate) {
+        this.gameName = gameName;
+        this.gamePhotoURL = gamePhotoURL;
+        this.activityDescription = "";
+        this.activityDate = "0 min ago";
+    }
+    public  RecentActivityList(){}
+
 
 
     public String getGameName() {
@@ -41,14 +49,6 @@ public class RecentActivityList {
 
     // here it should be a behivors something like a opponent id , my id and so long.
         String gameName,gamePhotoURL,activityDescription,activityDate;
-
-        public RecentActivityList(String gameName, String gamePhotoURL,String activityDescription, String activityDate) {
-            this.gameName = gameName;
-            this.gamePhotoURL = gamePhotoURL;
-            this.activityDescription = "";
-            this.activityDate = "0 min ago";
-        }
-    public  RecentActivityList(){}
 
 
 }

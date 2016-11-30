@@ -12,12 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.kay.hoplay.Adapters.RecentActivitiesAdapter;
-import com.example.kay.hoplay.Adapters.SavedRequestsAdapter;
+import com.android.volley.toolbox.ImageLoader;
+import com.example.kay.hoplay.Adapters.CommonAdapter;
+import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Common.ViewHolders;
 import com.example.kay.hoplay.RequestsRequires.NewRequest;
 import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.model.RecentActivityList;
 import com.example.kay.hoplay.model.SavedRequestsList;
+import com.pkmmte.view.CircularImageView;
 
 import java.util.ArrayList;
 
@@ -30,6 +32,11 @@ public class MakeRequestFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    // specify an adapter (see also next example)
+    ArrayList<SavedRequestsList> savedRequestsLists =new ArrayList<SavedRequestsList>();
+
+
 
     public MakeRequestFragment() {
         // Required empty public constructor
@@ -68,12 +75,6 @@ public class MakeRequestFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        // specify an adapter (see also next example)
-        ArrayList<SavedRequestsList> savedRequestsLists =new ArrayList<SavedRequestsList>();
-
-
-
-
 
 
 
@@ -83,7 +84,7 @@ public class MakeRequestFragment extends Fragment {
         savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick Game ?","2 Players"));
 
 
-        mAdapter = new SavedRequestsAdapter(savedRequestsLists);
+        mAdapter = createAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
 
@@ -103,5 +104,48 @@ public class MakeRequestFragment extends Fragment {
         savedRequestsList.setNumberOfPlayers(numberOfPlayers);
         return savedRequestsList;
     }
+
+    private CommonAdapter<SavedRequestsList> createAdapter(){
+        return new CommonAdapter<SavedRequestsList>(savedRequestsLists,R.layout.saved_request) {
+            @Override
+            public ViewHolders OnCreateHolder(View v) {
+
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
+                return new ViewHolders.SavedRequestHolder(v);
+            }
+
+            @Override
+            public void OnBindHolder(ViewHolders holder, SavedRequestsList model)
+            {
+                ImageLoader loader = App.getInstance().getImageLoader();
+
+
+                if(model.getGamePhotoURL().length() > 0){
+                    loader.get(model.getGamePhotoURL(),
+                            ImageLoader.getImageListener(
+                                    holder.getPicture()
+                                    ,R.drawable.profile_default_photo
+                                    ,R.drawable.profile_default_photo));
+
+                } else {
+                    CircularImageView picture = holder.getPicture();
+                    picture.setImageResource(R.drawable.profile_default_photo);
+                    holder.setPicture(picture);
+                }
+                holder.setTitle(model.getGameName());
+                holder.setSubtitle(model.getRequestDescription());
+                holder.setNumberOfPlayers(model.getNumberOfPlayers());
+
+
+            }
+        };
+    }
+
 
 }

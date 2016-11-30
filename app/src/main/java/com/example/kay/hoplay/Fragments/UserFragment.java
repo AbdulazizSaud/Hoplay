@@ -3,36 +3,32 @@ package com.example.kay.hoplay.Fragments;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.kay.hoplay.Adapters.CommunityAdapter;
-import com.example.kay.hoplay.Adapters.RecentActivitiesAdapter;
+import com.android.volley.toolbox.ImageLoader;
+import com.example.kay.hoplay.Adapters.CommonAdapter;
+import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Common.ViewHolders;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.ProfileRequires.UserFollowers;
 import com.example.kay.hoplay.ProfileRequires.UserFollowing;
 import com.example.kay.hoplay.ProfileRequires.UserGames;
 import com.example.kay.hoplay.ProfileRequires.UserRatings;
-import com.example.kay.hoplay.model.CommunityUserList;
 import com.example.kay.hoplay.model.RecentActivityList;
-
-import org.w3c.dom.Text;
+import com.pkmmte.view.CircularImageView;
 
 import java.util.ArrayList;
 
@@ -64,6 +60,7 @@ public class UserFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    ArrayList<RecentActivityList> recentActivityLists=new ArrayList<RecentActivityList>();
 
 
     public UserFragment() {
@@ -208,7 +205,6 @@ public class UserFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        ArrayList<RecentActivityList> recentActivityLists=new ArrayList<RecentActivityList>();
 
         recentActivityLists.add(addRecentActivity("Played Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Category : PC Games","15 min ago"));
         recentActivityLists.add(addRecentActivity("Played Overwatch","https://b.thumbs.redditmedia.com/ksN39DPM7HFaXTP_tBi-IuYYfWccRBjYykD6VFSePXE.jpg","Category : PC Games","24 min ago"));
@@ -220,7 +216,7 @@ public class UserFragment extends Fragment {
 
 
 
-        mAdapter = new RecentActivitiesAdapter(recentActivityLists);
+        mAdapter = createAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
 
@@ -263,6 +259,48 @@ public class UserFragment extends Fragment {
                     .show();
         }
 
+    }
+
+
+
+    private CommonAdapter<RecentActivityList> createAdapter(){
+        return new CommonAdapter<RecentActivityList>(recentActivityLists,R.layout.new_user_activity) {
+            @Override
+            public ViewHolders OnCreateHolder(View v) {
+
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
+                return new ViewHolders.RecentActivitiesHolder(v);
+            }
+
+            @Override
+            public void OnBindHolder(ViewHolders holder, RecentActivityList model)
+            {
+                ImageLoader loader = App.getInstance().getImageLoader();
+
+
+                if(model.getGamePhotoURL().length() > 0){
+                    loader.get(model.getGamePhotoURL(),
+                            ImageLoader.getImageListener(
+                                    holder.getPicture()
+                                    ,R.drawable.profile_default_photo
+                                    ,R.drawable.profile_default_photo));
+
+                } else {
+                    CircularImageView picture = holder.getPicture();
+                    picture.setImageResource(R.drawable.profile_default_photo);
+                    holder.setPicture(picture);
+                }
+                holder.setTitle(model.getGameName());
+                holder.setSubtitle(model.getActivityDescription());
+                holder.setSubtitle(model.getActivityDate());
+            }
+        };
     }
 
 

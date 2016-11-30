@@ -1,0 +1,141 @@
+package com.example.kay.hoplay.Common;
+
+import android.graphics.Typeface;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
+
+import com.example.kay.hoplay.R;
+import com.pkmmte.view.CircularImageView;
+
+import emojicon.EmojiconTextView;
+
+/**
+ * Created by azoz-pc on 11/30/2016.
+ */
+
+public abstract class ViewHolders extends RecyclerView.ViewHolder {
+
+
+    protected CircularImageView picture;
+    protected TextView title,subtitle,time;
+
+
+
+    TextView numberOfPlayers;
+
+    public ViewHolders(View v) {
+        super(v);
+    }
+
+
+    public static class CommunityHolder extends ViewHolders {
+        EmojiconTextView chatLastMessage;
+        TextView chatNewMessagesCount;
+        public CommunityHolder(View v) {
+            super(v);
+
+            picture = (CircularImageView) v.findViewById(R.id.chatOpponent);
+
+
+            title =  (TextView) v.findViewById(R.id.chatOpponentFullname);
+            Typeface sansation = Typeface.createFromAsset(title.getContext().getAssets() ,"sansationbold.ttf");
+            Typeface opensans = Typeface.createFromAsset(title.getContext().getAssets() ,"opensans.ttf");
+            title.setTypeface(opensans);
+
+
+            time =  (TextView) v.findViewById(R.id.chatLastMessageAgo);
+            time.setTypeface(sansation);
+
+            chatNewMessagesCount =  (TextView) v.findViewById(R.id.chatNewMessagesCount);
+            chatNewMessagesCount.setTypeface(sansation);
+
+
+            chatLastMessage = (EmojiconTextView) v.findViewById(R.id.chatLastMessage);
+            chatLastMessage.setTypeface(sansation);
+
+        }
+        public void setCommunitySubtitle(String subtitle){
+            this.chatLastMessage.setText(subtitle);
+        }
+    }
+    public static class SavedRequestHolder extends ViewHolders {
+        public SavedRequestHolder(View v) {
+            super(v);
+
+            title =  (TextView) v.findViewById(R.id.game_name_saved_request_textview);
+
+            // In case you want to play with the fonts and fonts color :
+            Typeface sansation = Typeface.createFromAsset(title.getContext().getAssets() ,"sansationbold.ttf");
+            title.setTypeface(sansation);
+            title.setTextColor(title.getResources().getColor(R.color.pccolor));
+
+
+            subtitle =  (TextView) v.findViewById(R.id.request_description_saved_request_textview);
+            subtitle.setTypeface(sansation);
+
+            picture = (CircularImageView) v.findViewById(R.id.game_photo_saved_request_circularimageview);
+
+            numberOfPlayers = (TextView) v.findViewById(R.id.number_of_players_saved_requests_textview);
+            numberOfPlayers.setTypeface(sansation);
+        }
+    }
+    public static class RecentActivitiesHolder extends ViewHolders {
+
+        public RecentActivitiesHolder(View v) {
+            super(v);
+
+            title =  (TextView) v.findViewById(R.id.game_name_recent_activity_textview);
+            Typeface sansation = Typeface.createFromAsset(title.getContext().getAssets() ,"sansationbold.ttf");
+            title.setTypeface(sansation);
+
+            subtitle =  (TextView) v.findViewById(R.id.activity_description_textview);
+            subtitle.setTypeface(sansation);
+            picture = (CircularImageView) v.findViewById(R.id.game_photo_recent_activity_circularimageview);
+            time = (TextView) v.findViewById(R.id.activity_date_textview);
+            time.setTypeface(sansation);
+        }
+    }
+
+
+    public void setPicture(CircularImageView picture) {
+        this.picture = picture;
+    }
+    public CircularImageView getPicture() {
+        return picture;
+    }
+    public TextView getTitleView() {
+        return title;
+    }
+    public void setTitleView(TextView title) {
+        this.title = title;
+    }
+    public TextView getSubtitleView() {
+        return subtitle;
+    }
+    public void setSubtitleView(TextView subtitle) {
+        this.subtitle = subtitle;
+    }
+    public TextView getTimeView() {
+        return time;
+    }
+    public void setTimeView(TextView time) {
+        this.time = time;
+    }
+    public String getNumberOfPlayers() {
+        return numberOfPlayers.getText().toString().trim();
+    }
+    public void setNumberOfPlayers(String numberOfPlayers) {
+        this.numberOfPlayers.setText(numberOfPlayers);
+    }
+    public void setTitle(String title){
+        this.title.setText(title);
+    }
+    public void setSubtitle(String subtitle){
+        this.subtitle.setText(subtitle);
+    }
+    public void setTime(String time){
+        this.time.setText(time);
+    }
+
+}
