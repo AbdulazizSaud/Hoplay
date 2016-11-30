@@ -187,7 +187,7 @@ public class SignUpActivity extends AppCompatActivity {
             if (!error) {
                     JSONObject jsonObject = new JSONObject(resualt_restful_api);
 
-                    Toast.makeText(this,jsonObject.getString("text"),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,jsonObject.getString("msg"),Toast.LENGTH_SHORT).show();
                       return jsonObject.getString("type");
 
 

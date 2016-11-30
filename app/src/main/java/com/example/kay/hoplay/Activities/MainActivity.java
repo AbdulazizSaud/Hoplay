@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
             if(startAPI().equals("success")) {
                 socket.emit(App.ADD_USER,usernameSignIn.getText().toString().trim());
 
-                Intent i = new Intent(getApplicationContext(), ChatActivity.class);
+                Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
                 startActivity(i);
             }
     }
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
                     try {
                         JSONObject jsonObject = new JSONObject(resualt_restful_api);
 
-                        Toast.makeText(this,jsonObject.getString("text"),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this,jsonObject.getString("msg"),Toast.LENGTH_SHORT).show();
                          return jsonObject.getString("type");
 
                     } catch (JSONException e) {
