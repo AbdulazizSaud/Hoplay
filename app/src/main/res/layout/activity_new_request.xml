@@ -71,7 +71,8 @@
             android:layout_below="@+id/consoles_radiogroup"
             android:layout_centerHorizontal="true"
             android:id="@+id/games_edittext"
-            android:hint="   All Games"
+            android:hint="All games"
+            android:gravity="center"
             android:background="@drawable/rectangular_edittext"
             />
 
@@ -92,6 +93,7 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/region_spinner"
             android:background="@drawable/rectangualr_white_shape"
+
             />
 
         <ImageView

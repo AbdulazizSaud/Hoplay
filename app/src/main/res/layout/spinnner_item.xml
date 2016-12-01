@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:textSize="15sp"
     android:gravity="left"
+    android:id="@+id/spinner_item_textview"
     android:textColor="@color/darkenGrey"
     android:padding="5dip"
     />

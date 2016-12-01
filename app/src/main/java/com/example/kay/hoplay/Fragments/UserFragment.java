@@ -298,7 +298,7 @@ public class UserFragment extends Fragment {
                 }
                 holder.setTitle(model.getGameName());
                 holder.setSubtitle(model.getActivityDescription());
-                holder.setSubtitle(model.getActivityDate());
+                holder.setTime(model.getActivityDate());
             }
         };
     }
