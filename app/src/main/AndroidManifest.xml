@@ -64,6 +64,7 @@
         <activity
             android:name=".RequestsRequires.NewRequest"
             android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".Activities.SettingsActivity" />
     </application>
 
 </manifest>
