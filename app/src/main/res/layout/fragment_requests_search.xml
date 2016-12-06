@@ -125,7 +125,7 @@
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:id="@+id/games_search_edittext"
-        android:hint="All Games"
+        android:hint="All games"
         android:gravity="center"
         android:textColorHint="@color/hintColor"
         android:background="@drawable/rectangular_edittext"

@@ -28,16 +28,18 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class GetAPI extends AsyncTask<String,String,String> implements Constants{
 
-    public HashMap<String,String> data = new HashMap<>();
+    private HashMap<String,String> data = new HashMap<>();
     public static final String REGISTER="1";
     public static final String LOGIN="2";
 
 
-    public GetAPI()
+    public GetAPI(HashMap<String,String> data)
     {
         super();
+        this.data = data;
 
     }
+
 
     @Override
     protected String doInBackground(String... params)  {

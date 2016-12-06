@@ -1,9 +1,15 @@
 package com.example.kay.hoplay.RequestsRequires;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -15,11 +21,15 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.kay.hoplay.Adapters.SpinnerAdapter;
 import com.example.kay.hoplay.R;
 
 import org.w3c.dom.Text;
 
-public class NewRequest extends AppCompatActivity {
+import java.util.Arrays;
+import java.util.List;
+
+public class NewRequest extends AppCompatActivity{
 
     private TextView makeRequestMessage ;
     private Button makeRequestButton ;
@@ -41,12 +51,13 @@ public class NewRequest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_request);
 
+
         final Typeface sansationbold = Typeface.createFromAsset(getResources().getAssets(), "sansationbold.ttf");
         makeRequestMessage = (TextView) findViewById(R.id.make_request_message_textview);
         makeRequestMessage.setTypeface(sansationbold);
         makeRequestButton = (Button)  findViewById(R.id.make_request_button);
         makeRequestButton.setTypeface(sansationbold);
-        regionSpinner = (Spinner)  findViewById(R.id.region_spinner);
+       regionSpinner = (Spinner)  findViewById(R.id.region_spinner);
         numberOfPlayersSpinner = (Spinner) findViewById(R.id.number_of_players_spinner);
         playersRanksSpinner = (Spinner)  findViewById(R.id.players_rank_spinner);
         pcRadiobutton = (RadioButton)   findViewById(R.id.pc_choice_radiobutton);
@@ -66,13 +77,21 @@ public class NewRequest extends AppCompatActivity {
         imm.showSoftInput(requestDescritopnEdittext, InputMethodManager.SHOW_IMPLICIT);
 
 
+        // (this ,R.array.players_ranks,R.layout.spinnner_item);
 
-        ArrayAdapter regionAdapter = ArrayAdapter.createFromResource(this ,R.array.countries_array,R.layout.spinnner_item);
-        ArrayAdapter playersRanksAdapter = ArrayAdapter.createFromResource(this ,R.array.players_ranks,R.layout.spinnner_item);
-        ArrayAdapter playersNumberAdapter = ArrayAdapter.createFromResource(this ,R.array.players_number,R.layout.spinnner_item);
-        ArrayAdapter gamesAdapter = ArrayAdapter.createFromResource(this,R.array.games_array,R.layout.spinnner_item);
+        ArrayAdapter regionAdapter = new SpinnerAdapter(getApplicationContext(),R.layout.spinnner_item,
+                Arrays.asList(getResources().getStringArray(R.array.countries_array)));
 
 
+        ArrayAdapter playersRanksAdapter = new SpinnerAdapter(getApplicationContext(),R.layout.spinnner_item,
+                Arrays.asList(getResources().getStringArray(R.array.players_ranks)));
+
+        ArrayAdapter playersNumberAdapter = new SpinnerAdapter(getApplicationContext(),R.layout.spinnner_item,
+                Arrays.asList(getResources().getStringArray(R.array.players_number)));
+
+
+        ArrayAdapter gamesAdapter = new SpinnerAdapter(getApplicationContext(),R.layout.spinnner_item,
+                Arrays.asList(getResources().getStringArray(R.array.games_array)));
 
 
 
@@ -87,6 +106,9 @@ public class NewRequest extends AppCompatActivity {
         playersRanksSpinner.setAdapter(playersRanksAdapter);
 
 
-
     }
+
+
+
+
 }

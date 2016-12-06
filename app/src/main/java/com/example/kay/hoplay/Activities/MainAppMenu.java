@@ -13,14 +13,26 @@ import com.roughike.bottombar.BottomBarBadge;
 import com.roughike.bottombar.OnMenuTabSelectedListener;
 import com.roughike.bottombar.OnTabSelectedListener;
 
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 
-public class MainAppMenu extends AppCompatActivity {
+public class MainAppMenu extends AppCompatActivity{
 
-    private BottomBar bottomBar;
+
+    private static MainAppMenu instance;
+
+    public static void setInstance(MainAppMenu instance) {
+        MainAppMenu.instance = instance;
+    }
+
+    private static BottomBar bottomBar;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -33,12 +45,15 @@ public class MainAppMenu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        instance = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_app);
-        // getSupportActionBar().hide();
+
+
 
         // Set the screen orientation to the portrait mode :
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
 
 
@@ -175,6 +190,7 @@ public class MainAppMenu extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onPause()
     {
@@ -195,6 +211,11 @@ public class MainAppMenu extends AppCompatActivity {
 
     @Override
     protected void onStart(){super.onStart();}
+
+    public static BottomBar getBottomBar(){
+        return bottomBar;
+    }
+
 
 
 

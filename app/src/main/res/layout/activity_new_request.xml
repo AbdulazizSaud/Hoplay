@@ -71,8 +71,10 @@
             android:layout_below="@+id/consoles_radiogroup"
             android:layout_centerHorizontal="true"
             android:id="@+id/games_edittext"
-            android:hint="All games"
+            android:hint="What do you want to play ?"
+            android:textColorHint="@color/hintColor"
             android:gravity="center"
+            android:textSize="16dp"
             android:background="@drawable/rectangular_edittext"
             />
 

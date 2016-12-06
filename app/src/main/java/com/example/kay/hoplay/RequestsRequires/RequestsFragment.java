@@ -6,18 +6,29 @@ import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.kay.hoplay.Activities.MainActivity;
+import com.example.kay.hoplay.Activities.MainAppMenu;
+import com.example.kay.hoplay.Adapters.SpinnerAdapter;
 import com.example.kay.hoplay.R;
 
 import org.w3c.dom.Text;
+
+import java.util.Arrays;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 
 /**
@@ -146,9 +157,25 @@ public class RequestsFragment extends Fragment {
 
 
 
-        ArrayAdapter regionAdapter = ArrayAdapter.createFromResource(getContext() ,R.array.countries_array,R.layout.spinnner_item);
-        ArrayAdapter playersRanksAdapter = ArrayAdapter.createFromResource(getContext() ,R.array.players_ranks,R.layout.spinnner_item);
-        ArrayAdapter playersNumberAdapter = ArrayAdapter.createFromResource(getContext() ,R.array.players_number,R.layout.spinnner_item);
+        searchGame.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b){
+                    MainAppMenu.getBottomBar().hide();
+                }
+                MainAppMenu.getBottomBar().show();
+            }
+        });
+
+
+        ArrayAdapter regionAdapter = new  SpinnerAdapter(getContext() ,R.layout.spinnner_item,
+                Arrays.asList(getResources().getStringArray(R.array.countries_array)));
+
+        ArrayAdapter playersRanksAdapter = new  SpinnerAdapter(getContext(),R.layout.spinnner_item,
+                Arrays.asList(getResources().getStringArray(R.array.players_ranks)));
+
+        ArrayAdapter playersNumberAdapter = new SpinnerAdapter(getContext(),R.layout.spinnner_item,
+                Arrays.asList(getResources().getStringArray(R.array.players_number)));
 
 
         playersRanksAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
@@ -162,5 +189,8 @@ public class RequestsFragment extends Fragment {
 
         return view;
     }
+
+
+
 
 }

@@ -2,6 +2,7 @@ package com.example.kay.hoplay.Activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -53,10 +54,12 @@ public class TermsAndConditions extends AppCompatActivity {
 
 
 
-
+        Typeface sansationbold = Typeface.createFromAsset(getAssets(), "sansationbold.ttf");
         // Initializations :
         termsAndConditionsTextView = (TextView) findViewById(R.id.terms_and_conditions_textview);
         agreeButton = (Button) findViewById(R.id.agree_terms_and_conditions_button);
+        termsAndConditionsTextView.setTypeface(sansationbold);
+        agreeButton.setTypeface(sansationbold);
 
 
         // Make the termsAndConditionsTextView scrollable :

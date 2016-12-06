@@ -12,7 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -34,6 +36,7 @@ import com.example.kay.hoplay.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import io.socket.client.Socket;
@@ -62,6 +65,16 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
             super.onCreate(savedInstanceState);
 
             setContentView(R.layout.activity_main);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View v = inflater.inflate(R.layout.start_layout,null);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setView(v);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.FILL,0,0);
+        toast.show();
+
+
 
             // getSupportActionBar().hide();
 
@@ -149,13 +162,14 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 
     // Remove keyboard when click anywhere :
     public void removeKeyboard(View v) {
+
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
     }
 
 
     public void signIn(View v) {
-            if(startAPI().equals("success")) {
+            if(startAPI() !=null) {
                 socket.emit(App.ADD_USER,usernameSignIn.getText().toString().trim());
 
                 Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
@@ -164,40 +178,15 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     }
 
 
-    public String startAPI(){
-            String resualt_restful_api = null;
-            GetAPI api = new GetAPI();
-            api.data.put("username", usernameSignIn.getText().toString().trim());
-            api.data.put("password", passwordSignIn.getText().toString().trim());
+    public JSONObject startAPI(){
+            JSONObject jsonAPI = null;
+            HashMap<String ,String> data = new HashMap<>();
 
-            try {
+            data.put("username", usernameSignIn.getText().toString().trim());
+            data.put("password", passwordSignIn.getText().toString().trim());
+            jsonAPI = App.getInstance().getAPI(GetAPI.LOGIN,data);
 
-                resualt_restful_api = api.execute(GetAPI.LOGIN).get();
-                boolean error = ErrorHandler.isError(resualt_restful_api);
-
-                if (!error) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(resualt_restful_api);
-
-                        Toast.makeText(this,jsonObject.getString("msg"),Toast.LENGTH_SHORT).show();
-                         return jsonObject.getString("type");
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                } else if (resualt_restful_api == ErrorHandler.ERROR_CONNECTION
-                        || resualt_restful_api == ErrorHandler.ERROR_IO_EXP)
-
-                    ErrorHandler.showConnectionERROR(getApplicationContext());
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-
-            return "Failed";
+           return jsonAPI;
         }
 
 

@@ -24,22 +24,24 @@ public class ErrorHandler{
     public static final String ERROR_IO_EXP = "IO_EXP";
     public static final String CLEAR = "CLEAR";
 
-    public static boolean isError(String e){
+    public static boolean isError(String e,Context context){
+
         switch (e){
             case ERROR_CONNECTION:
+                showConnectionErrorLayout(context);
             case ERROR_PATH:
             case ERROR_DATA_MISS_MATCH:
             case  ERROR_IO_EXP:
                 return true;
         }
 
-        if(e.equals(null))
+        if(e == null)
             return true;
 
         return false;
     }
 
-    public static void showConnectionERROR(Context c){
+    private static void showConnectionErrorLayout(Context c){
 
         LayoutInflater inflater =  LayoutInflater.from(c);
         View layout = inflater.inflate(R.layout.no_connection

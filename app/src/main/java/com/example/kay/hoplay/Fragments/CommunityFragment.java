@@ -55,9 +55,9 @@ public class CommunityFragment extends Fragment {
         // use a linear layout manager
 
 
-         String picUrl = "https://trello-avatars.s3.amazonaws.com/287b7527a973a31518a71b15aacb11eb/original.png";
-         CommunityUserList test = new CommunityUserList("kdesu",picUrl);
-         test.setLastMsg( "azoz, please DONT do a drama");
+         String picUrl = "https://s13.postimg.org/puvr2r9tz/test_user_copy.jpg";
+         CommunityUserList test = new CommunityUserList("Bakatsuki",picUrl);
+         test.setLastMsg( "Bakatsuki has joined your request click to replay ^^");
          communityUserLists.add(test);
         ///
         mAdapter = createAdapter();

@@ -5,7 +5,9 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.Display;
@@ -18,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Services.ErrorHandler;
 import com.example.kay.hoplay.Services.GetAPI;
 import com.example.kay.hoplay.R;
@@ -25,6 +28,7 @@ import com.example.kay.hoplay.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -105,16 +109,29 @@ public class SignUpActivity extends AppCompatActivity {
         agrrement.setTypeface(sansationbold);
         termsAndConditions.setTypeface(sansationbold);
 
-        /*Typeface SFNS = Typeface.createFromAsset(getAssets(), "SFNS.ttf");
 
-            createNewTextView.setTypeface(SFNS);
-            accountTextView.setTypeface(SFNS);   */
 
-      /*   Typeface timeburnernormal = Typeface.createFromAsset(getAssets(), "timeburnernormal.ttf");
-            createNewTextView.setTypeface(timeburnernormal);
-            accountTextView.setTypeface(timeburnernormal);
-        */
+        // ERROR DETECTOR :
+       usernameSignUp.addTextChangedListener(new TextWatcher() {
+           @Override
+           public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+           }
+
+           @Override
+           public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+           }
+
+           @Override
+           public void afterTextChanged(Editable editable) {
+               if(usernameSignUp.length()<6)
+               {
+                   usernameSignUp.setError("Minimum 6 characters");
+               }
+
+           }
+       });
 
     }  // End Of onCreate Method
 
@@ -153,7 +170,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void signUp(View view) {
 
-        if (startAPI().equals("success")) {
+        if (startAPI() !=null) {
             Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
             startActivity(i);
         }
@@ -170,40 +187,20 @@ public class SignUpActivity extends AppCompatActivity {
         inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 
-    private String startAPI() {
+    private JSONObject startAPI() {
 
 
-        String resualt_restful_api = null;
-        GetAPI api = new GetAPI();
-        api.data.put("username", usernameSignUp.getText().toString().trim());
-        api.data.put("password", passwordSignUp.getText().toString().trim());
-        api.data.put("email", emailSignUp.getText().toString().trim());
+        JSONObject jsonAPI = null;
 
-        try {
+        HashMap<String ,String> data = new HashMap<>();;
+        data.put("username", usernameSignUp.getText().toString().trim());
+        data.put("password", passwordSignUp.getText().toString().trim());
+        data.put("email", emailSignUp.getText().toString().trim());
 
-            resualt_restful_api = api.execute(GetAPI.REGISTER).get();
-            boolean error = ErrorHandler.isError(resualt_restful_api);
+        jsonAPI = App.getInstance().getAPI(GetAPI.REGISTER,data);
 
-            if (!error) {
-                    JSONObject jsonObject = new JSONObject(resualt_restful_api);
+        return jsonAPI;
 
-                    Toast.makeText(this,jsonObject.getString("msg"),Toast.LENGTH_SHORT).show();
-                      return jsonObject.getString("type");
-
-
-            } else if (resualt_restful_api == ErrorHandler.ERROR_CONNECTION)
-                      ErrorHandler.showConnectionERROR(getApplicationContext());
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        return "Failed";
     }
 
 }
