@@ -1,6 +1,7 @@
 package com.example.kay.hoplay.App;
 
 import android.app.Application;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -70,17 +71,20 @@ public class App extends Application implements SocketIOEvents,Constants{
         String api_json= null;
         JSONObject resJSON=null;
 
+
         GetAPI api = new GetAPI(data);
         try {
+
             api_json = api.execute(apiURL).get();
+            if(ErrorHandler.isError(api_json,getApplicationContext())) return null;
+
             resJSON = new JSONObject(api_json);
 
-            if(ErrorHandler.isError(api_json,getApplicationContext())) return null;
-            else
             if(resJSON.getString("type").equals("failed")) {
                 Toast.makeText(this, resJSON.getString("msg"), Toast.LENGTH_SHORT).show();
                 return null;
             }
+
 
             Toast.makeText(this, resJSON.getString("msg"), Toast.LENGTH_SHORT).show();
 

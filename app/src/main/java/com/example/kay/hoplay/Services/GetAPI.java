@@ -2,6 +2,7 @@ package com.example.kay.hoplay.Services;
 
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 
 import com.example.kay.hoplay.Interfaces.Constants;
@@ -138,10 +139,13 @@ public class GetAPI extends AsyncTask<String,String,String> implements Constants
             result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
             result.append("=");
             result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+
+            Log.i("---------------->",result.toString());
         }
 
         return result.toString();
     }
+
 
 
 

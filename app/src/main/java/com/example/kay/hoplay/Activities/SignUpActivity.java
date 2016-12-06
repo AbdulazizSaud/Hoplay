@@ -192,7 +192,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         JSONObject jsonAPI = null;
 
-        HashMap<String ,String> data = new HashMap<>();;
+        HashMap<String ,String> data = new HashMap<>();
         data.put("username", usernameSignUp.getText().toString().trim());
         data.put("password", passwordSignUp.getText().toString().trim());
         data.put("email", emailSignUp.getText().toString().trim());
