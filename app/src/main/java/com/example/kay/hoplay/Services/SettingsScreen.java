@@ -1,8 +1,8 @@
-package com.example.kay.hoplay.Fragments;
+package com.example.kay.hoplay.Services;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
-import android.support.v4.app.Fragment;
+
 import com.example.kay.hoplay.R;
 
 /**

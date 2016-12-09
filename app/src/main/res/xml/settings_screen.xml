@@ -39,7 +39,8 @@
             android:key="settings_services"
             android:title="@string/settings_services"
 
-            android:summary="@string/settings_services_summary" />
+            android:summary="@string/settings_services_summary"
+            android:id="@+id/preference" />
 
     </PreferenceCategory>
 
