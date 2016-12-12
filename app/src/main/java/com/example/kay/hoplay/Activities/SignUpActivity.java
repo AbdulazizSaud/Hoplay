@@ -159,7 +159,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-    }  // End Of onCreate Method
+    }  // End Of onCreate Method .
 
 
     @Override
