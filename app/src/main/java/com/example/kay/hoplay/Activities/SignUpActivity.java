@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ThemedSpinnerAdapter;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -24,6 +25,7 @@ import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Services.ErrorHandler;
 import com.example.kay.hoplay.Services.GetAPI;
 import com.example.kay.hoplay.R;
+import com.example.kay.hoplay.util.Helper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,11 +42,12 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText usernameSignUp;
     private EditText passwordSignUp;
     private EditText emailSignUp;
-    private EditText nickName;
+    private EditText nickNameSignUp;
     private TextView agrrement;
     private TextView termsAndConditions;
     private Button signUp;
     private EditText confirmPasswordEdititext;
+    private String username , nickname , password , email ;
 
 
     @Override
@@ -86,8 +89,8 @@ public class SignUpActivity extends AppCompatActivity {
         passwordSignUp.setTypeface(sansationbold);
         emailSignUp = (EditText) findViewById(R.id.email_sign_up_edittext);
         emailSignUp.setTypeface(sansationbold);
-        nickName = (EditText) findViewById(R.id.nickname_sign_up_edittext);
-        nickName.setTypeface(sansationbold);
+        nickNameSignUp = (EditText) findViewById(R.id.nickname_sign_up_edittext);
+        nickNameSignUp.setTypeface(sansationbold);
         signUp = (Button) findViewById(R.id.sign_in_button);
         signUp.setTypeface(sansationbold);
         confirmPasswordEdititext = (EditText) findViewById(R.id.confirm_password_edittext);
@@ -99,7 +102,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         // Encrypt Password
         passwordSignUp.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-      //  confirmPasswordEdititext.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        //  confirmPasswordEdititext.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
 
         usernameSignUp.setTypeface(sansationbold);
@@ -112,26 +115,49 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         // ERROR DETECTOR :
-       usernameSignUp.addTextChangedListener(new TextWatcher() {
-           @Override
-           public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        usernameSignUp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void afterTextChanged(Editable editable) {
+                checkUsername();
+            }
+        });
 
-           }
+        passwordSignUp.addTextChangedListener((new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void afterTextChanged(Editable editable) {
+                checkPassword();
+            }
+        }));
 
-           @Override
-           public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        nickNameSignUp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void afterTextChanged(Editable editable) {
+                checkFullname();
+            }
+        });
 
-           }
-
-           @Override
-           public void afterTextChanged(Editable editable) {
-               if(usernameSignUp.length()<6)
-               {
-                   usernameSignUp.setError("Minimum 6 characters");
-               }
-
-           }
-       });
+        emailSignUp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void afterTextChanged(Editable editable) {
+                checkEmail();
+            }
+        });
 
     }  // End Of onCreate Method
 
@@ -202,5 +228,207 @@ public class SignUpActivity extends AppCompatActivity {
         return jsonAPI;
 
     }
+
+
+
+    // CHECK USERNAME :
+    public Boolean checkUsername() {
+
+        username = usernameSignUp.getText().toString();
+        Helper helper = new Helper();
+
+        if (username.length() == 0) {
+
+            usernameSignUp.setError(getString(R.string.error_field_empty));
+
+            return false;
+        }
+
+        if (username.length() < 5) {
+
+            usernameSignUp.setError(getString(R.string.error_small_username));
+
+            return false;
+        }
+
+        if (!helper.isValidLogin(username)) {
+
+            usernameSignUp.setError(getString(R.string.error_wrong_format));
+
+            return false;
+        }
+
+        usernameSignUp.setError(null);
+
+        return  true;
+    }
+
+    // CHECK NICKNAME
+    public Boolean checkFullname() {
+
+        nickname = nickNameSignUp.getText().toString();
+
+        if (nickname.length() == 0) {
+
+            nickNameSignUp.setError(getString(R.string.error_field_empty));
+
+            return false;
+        }
+
+        if (nickname.length() < 2) {
+
+            nickNameSignUp.setError(getString(R.string.error_small_fullname));
+
+            return false;
+        }
+
+        nickNameSignUp.setError(null);
+
+        return  true;
+    }
+
+    // CHECK PASSWORD
+    public Boolean checkPassword() {
+
+        password = passwordSignUp.getText().toString();
+
+        Helper helper = new Helper();
+
+        if (password.length() == 0) {
+
+            passwordSignUp.setError(getString(R.string.error_field_empty));
+
+            return false;
+        }
+
+        if (password.length() < 6) {
+
+            passwordSignUp.setError(getString(R.string.error_small_password));
+
+            return false;
+        }
+
+        if (!helper.isValidPassword(password)) {
+
+            passwordSignUp.setError(getString(R.string.error_wrong_format));
+
+            return false;
+        }
+
+        passwordSignUp.setError(null);
+
+        return true;
+    }
+
+    // CHECK EMAIL
+    public Boolean checkEmail() {
+
+        email = emailSignUp.getText().toString();
+
+        Helper helper = new Helper();
+
+        if (email.length() == 0) {
+
+            emailSignUp.setError(getString(R.string.error_field_empty));
+
+            return false;
+        }
+
+        if (!helper.isValidEmail(email)) {
+
+            emailSignUp.setError(getString(R.string.error_wrong_format));
+
+            return false;
+        }
+
+        emailSignUp.setError(null);
+
+        return true;
+    }
+
+    public Boolean verifyRegForm() {
+
+        usernameSignUp.setError(null);
+        nickNameSignUp.setError(null);
+        passwordSignUp.setError(null);
+        emailSignUp.setError(null);
+
+        Helper helper = new Helper();
+
+        if (username.length() == 0) {
+
+            usernameSignUp.setError(getString(R.string.error_field_empty));
+
+            return false;
+        }
+
+        if (username.length() < 5) {
+
+            usernameSignUp.setError(getString(R.string.error_small_username));
+
+            return false;
+        }
+
+        if (!helper.isValidLogin(username)) {
+
+            usernameSignUp.setError(getString(R.string.error_wrong_format));
+
+            return false;
+        }
+
+        if (nickname.length() == 0) {
+
+            nickNameSignUp.setError(getString(R.string.error_field_empty));
+
+            return false;
+        }
+
+        if (nickname.length() < 2) {
+
+            nickNameSignUp.setError(getString(R.string.error_small_fullname));
+
+            return false;
+        }
+
+        if (password.length() == 0) {
+
+            passwordSignUp.setError(getString(R.string.error_field_empty));
+
+            return false;
+        }
+
+        if (password.length() < 6) {
+
+            passwordSignUp.setError(getString(R.string.error_small_password));
+
+            return false;
+        }
+
+        if (!helper.isValidPassword(password)) {
+
+            passwordSignUp.setError(getString(R.string.error_wrong_format));
+
+            return false;
+        }
+
+        if (email.length() == 0) {
+
+            emailSignUp.setError(getString(R.string.error_field_empty));
+
+            return false;
+        }
+
+        if (!helper.isValidEmail(email)) {
+
+            emailSignUp.setError(getString(R.string.error_wrong_format));
+
+            return false;
+        }
+
+        return true;
+    }
+
+
+
 
 }
