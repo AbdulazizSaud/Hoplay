@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 
         setContentView(R.layout.activity_main);
 
-
         LayoutInflater inflater = getLayoutInflater();
         View v = inflater.inflate(R.layout.start_layout, null);
         Toast toast = new Toast(getApplicationContext());
@@ -93,8 +92,8 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    //Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
-                    ///startActivity(i);
+                    Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
+                    startActivity(i);
                 } else {
                     // User is signed out
                     Log.d("---> ", "onAuthStateChanged:signed_out");
@@ -208,20 +207,20 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 //                startActivity(i);
 //            }
 
-            String username = usernameSignIn.getText().toString().trim();
-            String password  = passwordSignIn.getText().toString().trim();
+        String username = usernameSignIn.getText().toString().trim();
+        String password = passwordSignIn.getText().toString().trim();
 
-            mAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
-                        startActivity(i);
-                    }else {
-                        Toast.makeText(getApplicationContext(),"Please check your email or password",Toast.LENGTH_LONG).show();
-                    }
+        mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
+                    startActivity(i);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please check your email or password", Toast.LENGTH_LONG).show();
                 }
-            });
+            }
+        });
 
     }
 

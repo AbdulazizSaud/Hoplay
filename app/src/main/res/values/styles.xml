@@ -31,8 +31,12 @@
 
     </style>
 
+    <style name="CustomTrans" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowCloseOnTouchOutside">true</item>      
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
 
-
+    </style>
 
 
 

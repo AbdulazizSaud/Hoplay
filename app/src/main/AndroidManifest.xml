@@ -63,7 +63,9 @@
         <activity android:name=".Fragments.MakeRequestFragment" />
         <activity
             android:name=".RequestsRequires.NewRequest"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+            android:theme="@style/CustomTrans"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            />
     </application>
 
 </manifest>
