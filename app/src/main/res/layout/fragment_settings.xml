@@ -7,7 +7,7 @@
     android:background="#E0E0E0">
 
     <fragment android:name="com.example.kay.hoplay.Services.SettingsScreen"
-        android:id="@+id/list"
+        android:id="@+id/settingsPF"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

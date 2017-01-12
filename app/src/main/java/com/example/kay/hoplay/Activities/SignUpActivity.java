@@ -3,6 +3,7 @@ package com.example.kay.hoplay.Activities;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ThemedSpinnerAdapter;
@@ -26,6 +27,9 @@ import com.example.kay.hoplay.Services.ErrorHandler;
 import com.example.kay.hoplay.Services.GetAPI;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.util.Helper;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -196,10 +200,27 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void signUp(View view) {
 
-        if (startAPI() !=null) {
-            Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
-            startActivity(i);
-        }
+//        if (startAPI() !=null) {
+//            Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
+//            startActivity(i);
+//        }
+
+        String username = emailSignUp.getText().toString().trim();
+        String password  = passwordSignUp.getText().toString().trim();
+
+        MainActivity.mAuth.createUserWithEmailAndPassword(username,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(getApplicationContext(),"Your account is created successfully",Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
+                    startActivity(i);
+                }else {
+                    Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
     }
 
     public void toTermsAndConditions(View v) {

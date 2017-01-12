@@ -56,6 +56,7 @@ public class MainAppMenu extends AppCompatActivity{
 
 
 
+        Log.i("----------->",MainActivity.mAuth.getCurrentUser().getEmail());
 
 
         // Get the current display info :

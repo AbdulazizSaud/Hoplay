@@ -6,6 +6,7 @@ package com.example.kay.hoplay.Activities;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -32,6 +33,11 @@ import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Services.ErrorHandler;
 import com.example.kay.hoplay.Services.GetAPI;
 import com.example.kay.hoplay.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,15 +48,15 @@ import java.util.concurrent.ExecutionException;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
-public class MainActivity extends AppCompatActivity implements View.OnKeyListener  {
+public class MainActivity extends AppCompatActivity implements View.OnKeyListener {
 
     public static MainActivity mainActivity;
-    private TextView signupTextView ;
-    private TextView signupQuestion ;
-    private TextView forgotPassword ;
-    private EditText usernameSignIn ;
-    private EditText passwordSignIn ;
-    private ImageView logo ;
+    private TextView signupTextView;
+    private TextView signupQuestion;
+    private TextView forgotPassword;
+    private EditText usernameSignIn;
+    private EditText passwordSignIn;
+    private ImageView logo;
     private Animation fadeIn;
     private Animation fadeOut;
     private AnimationSet animation;
@@ -58,52 +64,69 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     private RelativeLayout signInRelativeLayout;
     private Toolbar toolbar;
     private Socket socket;
+    public static FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
 
     @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            mainActivity = this;
-            super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        mainActivity = this;
 
-            setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_main);
+
 
         LayoutInflater inflater = getLayoutInflater();
-        View v = inflater.inflate(R.layout.start_layout,null);
+        View v = inflater.inflate(R.layout.start_layout, null);
         Toast toast = new Toast(getApplicationContext());
         toast.setView(v);
         toast.setDuration(Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.FILL,0,0);
+        toast.setGravity(Gravity.FILL, 0, 0);
         toast.show();
 
+        mAuth = FirebaseAuth.getInstance();
 
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
-            // getSupportActionBar().hide();
-
-            // Set the screen orientation to the portrait mode :
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-
-            // Get the current display info :
-            WindowManager windowManager = getWindowManager();
-            Display display = windowManager.getDefaultDisplay();
-            if(display.getWidth() > display.getHeight())
-            {
-                // Landscape mode
-                Log.d("Oreintation :","Landscape  mode");
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    //Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
+                    ///startActivity(i);
+                } else {
+                    // User is signed out
+                    Log.d("---> ", "onAuthStateChanged:signed_out");
+                }
             }
-            else
-            {
-                // Portrait mode
-                Log.d("Oreintation : ", "Portrait mode");
-            }
+        };
 
-            setup();
+        // getSupportActionBar().hide();
+
+        // Set the screen orientation to the portrait mode :
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+
+        // Get the current display info :
+        WindowManager windowManager = getWindowManager();
+        Display display = windowManager.getDefaultDisplay();
+        if (display.getWidth() > display.getHeight()) {
+            // Landscape mode
+            Log.d("Oreintation :", "Landscape  mode");
+        } else {
+            // Portrait mode
+            Log.d("Oreintation : ", "Portrait mode");
+        }
+
+        setup();
         socket = App.getInstance().getSocket();
-        socket.on(App.RECEIVE_CLIENT_ID,retID);
+        socket.on(App.RECEIVE_CLIENT_ID, retID);
 
-        }   // End Of onCreate Method
+    }   // End Of onCreate Method
 
 
-    private void setup(){
+    private void setup() {
 
 
         logo = (ImageView) findViewById(R.id.logo_imageview);
@@ -125,33 +148,42 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         usernameSignIn.setTypeface(sansationbold);
         passwordSignIn.setTypeface(sansationbold);
 
+
     }
+
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
     }
 
     @Override
-    protected void onDestroy() {super.onDestroy();}
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
-    protected void onStop() {super.onStop();}
+    protected void onStop() {
+        super.onStop();
+        mAuth.removeAuthStateListener(authStateListener);
+    }
 
     @Override
-    protected void onStart(){super.onStart();}
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(authStateListener);
+
+    }
 
     public void toSignUp(View view) {
-            Intent i = new Intent(MainActivity.this, SignUpActivity.class);
-            startActivity(i);
+        Intent i = new Intent(MainActivity.this, SignUpActivity.class);
+        startActivity(i);
 
-        }
+    }
 
 
     @Override
@@ -164,35 +196,50 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     public void removeKeyboard(View v) {
 
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 
 
     public void signIn(View v) {
-            if(startAPI() !=null) {
-                socket.emit(App.ADD_USER,usernameSignIn.getText().toString().trim());
+//            if(startAPI() !=null) {
+//                socket.emit(App.ADD_USER,usernameSignIn.getText().toString().trim());
+//
+//                Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
+//                startActivity(i);
+//            }
 
-                Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
-                startActivity(i);
-            }
+            String username = usernameSignIn.getText().toString().trim();
+            String password  = passwordSignIn.getText().toString().trim();
+
+            mAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
+                        startActivity(i);
+                    }else {
+                        Toast.makeText(getApplicationContext(),"Please check your email or password",Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+
     }
 
 
-    public JSONObject startAPI(){
-            JSONObject jsonAPI = null;
-            HashMap<String ,String> data = new HashMap<>();
+    public JSONObject startAPI() {
+        JSONObject jsonAPI = null;
+        HashMap<String, String> data = new HashMap<>();
 
-            data.put("username", usernameSignIn.getText().toString().trim());
-            data.put("password", passwordSignIn.getText().toString().trim());
-            jsonAPI = App.getInstance().getAPI(GetAPI.LOGIN,data);
+        data.put("username", usernameSignIn.getText().toString().trim());
+        data.put("password", passwordSignIn.getText().toString().trim());
+        jsonAPI = App.getInstance().getAPI(GetAPI.LOGIN, data);
 
-           return jsonAPI;
-        }
+        return jsonAPI;
+    }
 
 
-    public  void goToForgetPassword(View view)
-    {
-        Intent i = new Intent(MainActivity.this,ForgetPassword.class);
+    public void goToForgetPassword(View view) {
+        Intent i = new Intent(MainActivity.this, ForgetPassword.class);
         startActivity(i);
     }
 
@@ -200,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         @Override
         public void call(Object... args) {
             App.clientID = String.valueOf(args[0]);
-            Log.i("--->",args[0]+"");
+            Log.i("--->", args[0] + "");
         }
     };
 

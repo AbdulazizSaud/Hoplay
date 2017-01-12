@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "119510333228",
-    "firebase_url": "https://hoplay-91325.firebaseio.com",
-    "project_id": "hoplay-91325",
-    "storage_bucket": "hoplay-91325.appspot.com"
+    "project_number": "1072815129013",
+    "firebase_url": "https://hoplay-18a08.firebaseio.com",
+    "project_id": "hoplay-18a08",
+    "storage_bucket": "hoplay-18a08.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:119510333228:android:b0dc500dd277ae63",
+        "mobilesdk_app_id": "1:1072815129013:android:b0dc500dd277ae63",
         "android_client_info": {
           "package_name": "com.example.kay.hoplay"
         }
       },
       "oauth_client": [
         {
-          "client_id": "119510333228-q5urqp40kjn1u3ir30jbcji3r5h3aqbv.apps.googleusercontent.com",
+          "client_id": "1072815129013-npniroifg0u7ndtq9dlik4ajn3up4s28.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kay.hoplay",
+            "certificate_hash": "7D23A8FCAB6CB4EF90EAC0B885048BD3CB179BD7"
+          }
+        },
+        {
+          "client_id": "1072815129013-kfhga3vtm043c7k1tjld4sm9vvhe9pov.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCsxJ135m-NEBBTuvUXq1jJckbhFnkLZws"
+          "current_key": "AIzaSyDDv5Gatnln9XK-oMCrtVd0oNzgQyRj6CI"
         }
       ],
       "services": {
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1072815129013-kfhga3vtm043c7k1tjld4sm9vvhe9pov.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
