@@ -3,6 +3,20 @@ package com.example.kay.hoplay.model;
 
 public class CommunityUserList {
 
+
+
+
+    // here it should be a behivors something like a opponent id , my id and so long.
+    private String receiverID,fullName,userPictureURL,lastMsg,lastMsgDate;
+
+    public CommunityUserList(String receiverID,String fullName, String userPictureURL) {
+        this.receiverID = receiverID;
+        this.fullName = fullName;
+        this.userPictureURL = userPictureURL;
+        this.lastMsg = "";
+        this.lastMsgDate = "0 min ago";
+    }
+
     public String getFullName() {
         return fullName;
     }
@@ -35,13 +49,11 @@ public class CommunityUserList {
         this.lastMsgDate = lastMsgDate;
     }
 
-    // here it should be a behivors something like a opponent id , my id and so long.
-    String fullName,userPictureURL,lastMsg,lastMsgDate;
+    public String getReceiverID() {
+        return receiverID;
+    }
 
-    public CommunityUserList(String fullName, String userPictureURL) {
-        this.fullName = fullName;
-        this.userPictureURL = userPictureURL;
-        this.lastMsg = "";
-        this.lastMsgDate = "0 min ago";
+    public void setReceiverID(String receiverID) {
+        this.receiverID = receiverID;
     }
 }

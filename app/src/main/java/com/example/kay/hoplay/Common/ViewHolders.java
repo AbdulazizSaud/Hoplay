@@ -19,15 +19,21 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
 
     protected CircularImageView picture;
     protected TextView title,subtitle,time;
-
+    protected View view;
 
 
     TextView numberOfPlayers;
 
     public ViewHolders(View v) {
         super(v);
+        this.view = v;
     }
 
+    public View getView(){
+
+    return view;
+
+    }
 
     public static class CommunityHolder extends ViewHolders {
         EmojiconTextView chatLastMessage;
