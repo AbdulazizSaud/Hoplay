@@ -1,6 +1,8 @@
 package com.example.kay.hoplay.App;
 
 import android.app.Application;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ public class App extends Application implements SocketIOEvents,Constants{
 
     private static App instance;
     private ImageLoader imageLoader;
+    private SQLiteDatabase sqLiteDatabase;
 
 
     public static String clientID;
@@ -48,6 +51,7 @@ public class App extends Application implements SocketIOEvents,Constants{
 
         super.onCreate();
         instance = this;
+        SQLiteManagement();
 
     }
 
@@ -102,6 +106,69 @@ public class App extends Application implements SocketIOEvents,Constants{
 
     }
 
+
+
+    public void SQLiteManagement(){
+
+
+        sqLiteDatabase = this.openOrCreateDatabase("Hoplay_Lite",MODE_PRIVATE,null);
+
+//        // delete table
+//        String deleteTables = "DROP TABLE ChatAdapter";
+//        sqLiteDatabase.execSQL(deleteTables);
+//        deleteTables="DROP TABLE ChatMessage";
+//        sqLiteDatabase.execSQL(deleteTables);
+//        //
+
+        String sql1 = "CREATE TABLE IF NOT EXISTS ChatAdapter(" +
+                "CHAT_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                "receiver_ID varchar(255) NOT NULL UNIQUE," +
+                "last_message varchar(255)," +
+                "receiver_Picture TEXT(255) )";
+
+        String sql2 = "CREATE TABLE IF NOT EXISTS ChatMessage(" +
+                "MESSAGE_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                "sender_ID varchar(255) NOT NULL," +
+                "receiver_ID varchar(255) NOT NULL," +
+                "message TEXT(255)" +
+                ")";
+
+        sqLiteDatabase.execSQL(sql1);
+        sqLiteDatabase.execSQL(sql2);
+
+
+
+    }
+
+
+    public void insertIntoCASQL(String receiverID, String lastMessage, String receiverPicture){
+
+        String sql = "INSERT INTO ChatAdapter(receiver_ID,last_message,receiver_Picture) Values("
+                 +"'"+receiverID+"',"+"'"+lastMessage+"',"+"'"+receiverPicture+"'"
+                +")";
+        sqLiteDatabase.execSQL(sql);
+
+
+    }
+
+    public void insertIntoCMSQL(String id,String toId,String message){
+
+        String sql = "INSERT INTO ChatMessage(sender_ID,receiver_ID,message) Values("
+                +"'"+id+"',"+"'"+toId+"',"+"'"+message+"')";
+        sqLiteDatabase.execSQL(sql);
+
+    }
+
+    public Cursor getCASQL(){
+        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM ChatAdapter",null);
+        return c;
+    }
+
+    public Cursor getCMSQL(String myID ,String receiverID){
+        String query ="SELECT * FROM ChatMessage WHERE (sender_ID = '"+ myID +"' AND receiver_ID = '"+receiverID+"') or (sender_ID = '"+receiverID+"' AND receiver_ID = '"+myID+"')";
+        Cursor c = sqLiteDatabase.rawQuery(query,null);
+        return c;
+    }
 
 
 

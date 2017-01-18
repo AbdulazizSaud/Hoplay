@@ -3,6 +3,7 @@ package com.example.kay.hoplay.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,6 +58,9 @@ public class ChatActivity extends ActionBarActivity {
     private ChatAdapter adapter;
     private ArrayList<ChatMessage> chatHistory;
     private Socket socket;
+    private String myUsername=null;
+    private String receiverUsername=null;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -67,6 +72,12 @@ public class ChatActivity extends ActionBarActivity {
         setContentView(R.layout.activity_chat);
         // Scren orientation :
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        Intent i = getIntent();
+
+        myUsername = i.getStringExtra("myUsername");
+        receiverUsername = i.getStringExtra("receiverUsername");
+
 
         // Users toolbar :
         Toolbar toolbar = (Toolbar) findViewById(R.id.users_toolbar);
@@ -209,6 +220,8 @@ public class ChatActivity extends ActionBarActivity {
 
 
 
+        adapter = new ChatAdapter(ChatActivity.this, new ArrayList<ChatMessage>());
+        messagesContainer.setAdapter(adapter);
 
         loadDummyHistory();
 
@@ -218,12 +231,12 @@ public class ChatActivity extends ActionBarActivity {
 
                 String messageText = messageET.getText().toString();
 
-
                 addMessage(messageText, true);
+
+                App.getInstance().insertIntoCMSQL(myUsername,receiverUsername,messageText);
 
                 messageET.setText("");
                 sendBtn.setBackground( ContextCompat.getDrawable(getApplicationContext(),R.drawable.sendiconnomessage));
-
                 socket.emit(App.MESSAGE_EVENT, messageText);
 
             }
@@ -249,6 +262,7 @@ public class ChatActivity extends ActionBarActivity {
             }
         });
 
+        getChatMessages();
 
     }
 
@@ -280,8 +294,6 @@ public class ChatActivity extends ActionBarActivity {
         msg1.setDate(DateFormat.getDateTimeInstance().format(new Date()));
         chatHistory.add(msg1);
 
-        adapter = new ChatAdapter(ChatActivity.this, new ArrayList<ChatMessage>());
-        messagesContainer.setAdapter(adapter);
 
         for (int i = 0; i < chatHistory.size(); i++) {
             ChatMessage message = chatHistory.get(i);
@@ -297,7 +309,11 @@ public class ChatActivity extends ActionBarActivity {
                 @Override
                 public void run() {
                     String message = String.valueOf(args[0]);
+                    String senderId = String.valueOf(args[1]);
+
                     addMessage(message, false);
+                    App.getInstance().insertIntoCMSQL(receiverUsername,myUsername,message);
+
                 }
             });
         }
@@ -317,6 +333,35 @@ public class ChatActivity extends ActionBarActivity {
         chatMessage.setMe(me);
 
         displayMessage(chatMessage);
+    }
+
+    public void getChatMessages(){
+
+        if(myUsername == null || receiverUsername ==null)
+            return;
+
+        Cursor c = App.getInstance().getCMSQL(myUsername,receiverUsername);
+        Log.i("COUNT --------->",c.getColumnCount() +" ");
+
+        int messageIndex = c.getColumnIndex("message");
+        int senderIdIndex = c.getColumnIndex("sender_ID");
+
+        c.moveToFirst();
+
+        while(c!=null){
+            String message = c.getColumnName(messageIndex);
+            String sender  = c.getColumnName(senderIdIndex);
+
+            // here where we will add a message
+            // check if it's my or receiver
+            if(sender.equals(myUsername)){
+                addMessage(message,true);
+            } else{
+                addMessage(message,false);
+            }
+
+            c.moveToNext();
+        }
 
     }
 

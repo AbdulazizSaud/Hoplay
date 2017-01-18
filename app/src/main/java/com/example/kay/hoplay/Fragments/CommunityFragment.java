@@ -2,10 +2,12 @@ package com.example.kay.hoplay.Fragments;
 
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import com.example.kay.hoplay.model.CommunityUserList;
 import com.pkmmte.view.CircularImageView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 /**
@@ -33,6 +36,8 @@ public class CommunityFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     ArrayList<CommunityUserList> communityUserLists=new ArrayList<CommunityUserList>();
+
+    private String myAccountUser="Test";
 
     public CommunityFragment() {
         // Required empty public constructor
@@ -55,10 +60,16 @@ public class CommunityFragment extends Fragment {
         // use a linear layout manager
 
 
-         String picUrl = "https://s13.postimg.org/puvr2r9tz/test_user_copy.jpg";
-         CommunityUserList test = new CommunityUserList("Bakatsuki",picUrl);
-         test.setLastMsg( "Bakatsuki has joined your request click to replay ^^");
-         communityUserLists.add(test);
+//        // test
+//        String picUrl = "https://s13.postimg.org/puvr2r9tz/test_user_copy.jpg";
+//        String username = "Bakatsuki";
+//        String lastMessage = "Bakatsuki has joined your request click to replay ^^";
+//        App.getInstance().insertIntoCASQL(username,lastMessage,picUrl);
+//        //
+
+
+        getAdapterData();
+
         ///
         mAdapter = createAdapter();
 
@@ -77,23 +88,28 @@ public class CommunityFragment extends Fragment {
             @Override
             public ViewHolders OnCreateHolder(View v) {
 
-                v.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(v.getContext(),ChatActivity.class);
-                        v.getContext().startActivity(i);
-                    }
-                });
-
                 return new ViewHolders.CommunityHolder(v);
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder,CommunityUserList model) {
+            public void OnBindHolder(ViewHolders holder, final CommunityUserList model) {
                 // - get element from your dataset at this position
                 // - replace the contents of the view with that element
                 ImageLoader loader = App.getInstance().getImageLoader();
                 ViewHolders.CommunityHolder communityHolder = (ViewHolders.CommunityHolder)holder;
+
+
+                holder.getView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String id = model.getReceiverID();
+                        Intent i = new Intent(v.getContext(),ChatActivity.class);
+                        i.putExtra("receiverUsername",id);
+                        i.putExtra("myUsername",myAccountUser);
+
+                        v.getContext().startActivity(i);
+                    }
+                });
 
                 if(model.getUserPictureURL().length() > 0){
                     loader.get(model.getUserPictureURL(),
@@ -112,6 +128,33 @@ public class CommunityFragment extends Fragment {
                 holder.setTime(model.getLastMsgDate());
             }
         };
+    }
+
+    private void getAdapterData(){
+        try {
+            Cursor cursor = App.getInstance().getCASQL();
+            int recIDIndex = cursor.getColumnIndex("receiver_ID");
+            int picURLIndex = cursor.getColumnIndex("receiver_Picture");
+            int lastMessageIndex = cursor.getColumnIndex("last_message");
+
+
+            cursor.moveToFirst();
+            while (cursor != null) {
+
+                String receiverID = cursor.getString(recIDIndex);
+                String picUrl = cursor.getString(picURLIndex);
+                String lastMessage = cursor.getString(lastMessageIndex);
+
+                CommunityUserList CUL = new CommunityUserList(receiverID, receiverID, picUrl);
+                CUL.setLastMsg(lastMessage);
+
+                communityUserLists.add(CUL);
+
+                cursor.moveToNext();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 
