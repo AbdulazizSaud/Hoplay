@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     public JSONObject startAPI() {
         JSONObject jsonAPI = null;
         HashMap<String, String> data = new HashMap<>();
-
+//
         data.put("username", usernameSignIn.getText().toString().trim());
         data.put("password", passwordSignIn.getText().toString().trim());
         jsonAPI = App.getInstance().getAPI(GetAPI.LOGIN, data);
