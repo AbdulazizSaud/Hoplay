@@ -96,6 +96,9 @@ public class ChatActivity extends AppCompatActivity {
 
         initControls();
          socket = App.getInstance().getSocket();
+        socket.connect();
+
+        Log.i("isCo",socket.connected()+"");
          socket.on(App.MESSAGE_EVENT, onMessage);
 
     }
@@ -263,7 +266,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        getChatMessages();
+        //getChatMessages();
 
     }
 

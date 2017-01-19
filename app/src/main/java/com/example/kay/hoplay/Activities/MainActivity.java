@@ -64,8 +64,9 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     private RelativeLayout signInRelativeLayout;
     private Toolbar toolbar;
     private Socket socket;
-    public static FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener authStateListener;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,23 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 //        toast.setGravity(Gravity.FILL, 0, 0);
 //        toast.show();
 
-        mAuth = FirebaseAuth.getInstance();
 
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
-                    startActivity(i);
-                } else {
-                    // User is signed out
-                    Log.d("---> ", "onAuthStateChanged:signed_out");
-                }
-            }
-        };
 
         // getSupportActionBar().hide();
 
@@ -165,18 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         super.onDestroy();
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mAuth.removeAuthStateListener(authStateListener);
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(authStateListener);
-
-    }
 
     public void toSignUp(View view) {
         Intent i = new Intent(MainActivity.this, SignUpActivity.class);
@@ -210,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         String username = usernameSignIn.getText().toString().trim();
         String password = passwordSignIn.getText().toString().trim();
 
-        mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        App.getInstance().getmAuth().signInWithEmailAndPassword(username, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {

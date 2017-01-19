@@ -19,26 +19,24 @@ import com.example.kay.hoplay.Services.SettingsScreen;
 public class SettingsFragment extends  Fragment {
 
 
+
     public SettingsFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.settingsPF);
-        android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
-        ft.remove(fragment);
-        ft.commit();
+    public void onStart() {
+        super.onStart();
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        View v= inflater.inflate(R.layout.fragment_settings, container, false);
+        //Fragment fragment = fi
         return v;
     }
 
