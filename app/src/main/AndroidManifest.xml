@@ -17,7 +17,7 @@
     <application
         android:name=".App.App"
         android:allowBackup="true"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/hoplayandroidicon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
@@ -25,11 +25,6 @@
         <activity
             android:name=".Activities.MainActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activities.SignUpActivity" />
         <activity android:name=".Activities.MainAppMenu" />
@@ -64,8 +59,15 @@
         <activity
             android:name=".RequestsRequires.NewRequest"
             android:theme="@style/CustomTrans"
-            android:windowSoftInputMode="adjustResize|stateHidden"
-            />
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".Activities.SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>

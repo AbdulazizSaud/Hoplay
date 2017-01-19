@@ -75,13 +75,13 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 
         setContentView(R.layout.activity_main);
 
-        LayoutInflater inflater = getLayoutInflater();
-        View v = inflater.inflate(R.layout.start_layout, null);
-        Toast toast = new Toast(getApplicationContext());
-        toast.setView(v);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.FILL, 0, 0);
-        toast.show();
+//        LayoutInflater inflater = getLayoutInflater();
+//        View v = inflater.inflate(R.layout.start_layout, null);
+//        Toast toast = new Toast(getApplicationContext());
+//        toast.setView(v);
+//        toast.setDuration(Toast.LENGTH_LONG);
+//        toast.setGravity(Gravity.FILL, 0, 0);
+//        toast.show();
 
         mAuth = FirebaseAuth.getInstance();
 

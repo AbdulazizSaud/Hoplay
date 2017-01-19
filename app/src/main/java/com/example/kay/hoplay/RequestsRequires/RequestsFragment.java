@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -50,6 +51,8 @@ public class RequestsFragment extends Fragment {
     private Spinner ranksSpinner ;
     private Spinner numberOfPlayersSpinner ;
 
+    private Button searchRequestButton;
+
 
     boolean pcIsChosen , psIsChosen , xboxIsChosen ;
 
@@ -76,9 +79,11 @@ public class RequestsFragment extends Fragment {
         regionsSpinner = (Spinner) view.findViewById(R.id.region_search_spinner);
         ranksSpinner=(Spinner) view.findViewById(R.id.players_rank_search_spinner);
         numberOfPlayersSpinner = (Spinner) view.findViewById(R.id.number_of_players_search_spinner);
+        searchRequestButton = (Button) view.findViewById(R.id.make_request_button);
 
 
-
+        // To remove the focus on the first edittext for the games
+        searchRequestButton.requestFocus();
 
         psIsChosen= false ;
         pcIsChosen=false ;

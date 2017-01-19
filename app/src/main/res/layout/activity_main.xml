@@ -13,10 +13,10 @@
     <!--<include android:id="@+id/app_bar" layout="@layout/app_bar"></include>-->
 
     <ImageView
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="100dp"
         android:id="@+id/logo_imageview"
-        android:src="@drawable/logomainactivity"
+        android:src="@drawable/hoplaytextlogo"
         android:layout_marginTop="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -63,9 +63,9 @@
         android:layout_marginTop="48dp"
         android:textColor="#f8f6f6"
         android:textSize="15dp"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_button"
         android:layout_below="@+id/password_edittext"
-        android:layout_alignStart="@+id/logo_imageview"
         android:onClick="signIn" />
 
     <TextView
