@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,10 +33,13 @@ public class ForgetPassword extends AppCompatActivity {
     }
 
     public void forgetPassword(View view) {
-        if (MainActivity.mAuth != null) {
+
+        App app = App.getInstance();
+
+        if (app.getmAuth() != null) {
 
             final String email = forgetPasswordEditText.getText().toString().trim();
-            MainActivity.mAuth.sendPasswordResetEmail(email).addOnCompleteListener(this, new OnCompleteListener<Void>() {
+            app.getmAuth().sendPasswordResetEmail(email).addOnCompleteListener(this, new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
