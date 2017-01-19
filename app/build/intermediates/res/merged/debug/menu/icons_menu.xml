@@ -4,24 +4,30 @@
     <item
         android:id="@+id/requests_item"
         android:icon="@drawable/ic_timeline_white_18dp"
-        android:title="requests"
+        android:title=""
         />
 
-    <item
-        android:id="@+id/settings_item"
-        android:icon="@drawable/ic_settings_white_18dp"
-        android:title="settings" />
+
 
     <item
         android:id="@+id/community_item"
         android:icon="@drawable/ic_chat_white_18dp"
-        android:title="community" />
+        android:title="" />
+
+    <item
+        android:id="@+id/new_rquest"
+        android:icon="@drawable/ic_control_point_white_18dp"
+        android:title=""
+        />
 
     <item
         android:id="@+id/profile_item"
         android:icon="@drawable/ic_face_white_18dp"
-        android:title="profile" />
+        android:title="" />
 
-
+    <item
+        android:id="@+id/settings_item"
+        android:icon="@drawable/ic_settings_white_18dp"
+        android:title="" />
 
 </menu>

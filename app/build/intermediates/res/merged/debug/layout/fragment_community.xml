@@ -6,7 +6,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.kay.hoplay.CommunityFragment"
+    tools:context="com.example.kay.hoplay.Fragments.CommunityFragment"
     android:orientation="vertical"
     android:background="#E0E0E0">
 
@@ -19,10 +19,21 @@
         android:layout_height="match_parent"/>
 
 
-    <!--<ListView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/community_listview"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_centerHorizontal="true" />-->
+    <ImageView
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:id="@+id/splash"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/messages_bg" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/message"
+        android:layout_below="@+id/splash"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
 </RelativeLayout>

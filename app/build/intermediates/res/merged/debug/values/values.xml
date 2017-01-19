@@ -1,5 +1,331 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string-array name="countries_array">
+        <item>All Regions</item>
+        <item>Afghanistan</item>
+        <item>Albania</item>
+        <item>Algeria</item>
+        <item>American Samoa</item>
+        <item>Andorra</item>
+        <item>Angola</item>
+        <item>Anguilla</item>
+        <item>Antarctica</item>
+        <item>Antigua and Barbuda</item>
+        <item>Argentina</item>
+        <item>Armenia</item>
+        <item>Aruba</item>
+        <item>Australia</item>
+        <item>Austria</item>
+        <item>Azerbaijan</item>
+        <item>Bahrain</item>
+        <item>Bangladesh</item>
+        <item>Barbados</item>
+        <item>Belarus</item>
+        <item>Belgium</item>
+        <item>Belize</item>
+        <item>Benin</item>
+        <item>Bermuda</item>
+        <item>Bhutan</item>
+        <item>Bolivia</item>
+        <item>Bosnia and Herzegovina</item>
+        <item>Botswana</item>
+        <item>Bouvet Island</item>
+        <item>Brazil</item>
+        <item>British Indian Ocean Territory</item>
+        <item>British Virgin Islands</item>
+        <item>Brunei</item>
+        <item>Bulgaria</item>
+        <item>Burkina Faso</item>
+        <item>Burundi</item>
+        <item>Cambodia</item>
+        <item>Cameroon</item>
+        <item>Canada</item>
+        <item>Cape Verde</item>
+        <item>Cayman Islands</item>
+        <item>Central African Republic</item>
+        <item>Chad</item>
+        <item>Chile</item>
+        <item>China</item>
+        <item>Christmas Island</item>
+        <item>Cocos (Keeling) Islands</item>
+        <item>Colombia</item>
+        <item>Comoros</item>
+        <item>Congo</item>
+        <item>Cook Islands</item>
+        <item>Costa Rica</item>
+        <item>Cote d\'Ivoire</item>
+        <item>Croatia</item>
+        <item>Cuba</item>
+        <item>Cyprus</item>
+        <item>Czech Republic</item>
+        <item>Democratic Republic of the Congo</item>
+        <item>Denmark</item>
+        <item>Djibouti</item>
+        <item>Dominica</item>
+        <item>Dominican Republic</item>
+        <item>East Timor</item>
+        <item>Ecuador</item>
+        <item>Egypt</item>
+        <item>El Salvador</item>
+        <item>Equatorial Guinea</item>
+        <item>Eritrea</item>
+        <item>Estonia</item>
+        <item>Ethiopia</item>
+        <item>Faeroe Islands</item>
+        <item>Falkland Islands</item>
+        <item>Fiji</item>
+        <item>Finland</item>
+        <item>Former Yugoslav Republic of Macedonia</item>
+        <item>France</item>
+        <item>French Guiana</item>
+        <item>French Polynesia</item>
+        <item>French Southern Territories</item>
+        <item>Gabon</item>
+        <item>Georgia</item>
+        <item>Germany</item>
+        <item>Ghana</item>
+        <item>Gibraltar</item>
+        <item>Greece</item>
+        <item>Greenland</item>
+        <item>Grenada</item>
+        <item>Guadeloupe</item>
+        <item>Guam</item>
+        <item>Guatemala</item>
+        <item>Guinea</item>
+        <item>Guinea-Bissau</item>
+        <item>Guyana</item>
+        <item>Haiti</item>
+        <item>Heard Island and McDonald Islands</item>
+        <item>Honduras</item>
+        <item>Hong Kong</item>
+        <item>Hungary</item>
+        <item>Iceland</item>
+        <item>India</item>
+        <item>Indonesia</item>
+        <item>Iran</item>
+        <item>Iraq</item>
+        <item>Ireland</item>
+        <item>Israel</item>
+        <item>Italy</item>
+        <item>Jamaica</item>
+        <item>Japan</item>
+        <item>Jordan</item>
+        <item>Kazakhstan</item>
+        <item>Kenya</item>
+        <item>Kiribati</item>
+        <item>Kuwait</item>
+        <item>Kyrgyzstan</item>
+        <item>Laos</item>
+        <item>Latvia</item>
+        <item>Lebanon</item>
+        <item>Lesotho</item>
+        <item>Liberia</item>
+        <item>Libya</item>
+        <item>Liechtenstein</item>
+        <item>Lithuania</item>
+        <item>Luxembourg</item>
+        <item>Macau</item>
+        <item>Madagascar</item>
+        <item>Malawi</item>
+        <item>Malaysia</item>
+        <item>Maldives</item>
+        <item>Mali</item>
+        <item>Malta</item>
+        <item>Marshall Islands</item>
+        <item>Martinique</item>
+        <item>Mauritania</item>
+        <item>Mauritius</item>
+        <item>Mayotte</item>
+        <item>Mexico</item>
+        <item>Micronesia</item>
+        <item>Moldova</item>
+        <item>Monaco</item>
+        <item>Mongolia</item>
+        <item>Montenegro</item>
+        <item>Montserrat</item>
+        <item>Morocco</item>
+        <item>Mozambique</item>
+        <item>Myanmar</item>
+        <item>Namibia</item>
+        <item>Nauru</item>
+        <item>Nepal</item>
+        <item>Netherlands</item>
+        <item>Netherlands Antilles</item>
+        <item>New Caledonia</item>
+        <item>New Zealand</item>
+        <item>Nicaragua</item>
+        <item>Niger</item>
+        <item>Nigeria</item>
+        <item>Niue</item>
+        <item>Norfolk Island</item>
+        <item>North Korea</item>
+        <item>Northern Marianas</item>
+        <item>Norway</item>
+        <item>Oman</item>
+        <item>Pakistan</item>
+        <item>Palau</item>
+        <item>Panama</item>
+        <item>Papua New Guinea</item>
+        <item>Paraguay</item>
+        <item>Peru</item>
+        <item>Philippines</item>
+        <item>Pitcairn Islands</item>
+        <item>Poland</item>
+        <item>Portugal</item>
+        <item>Puerto Rico</item>
+        <item>Qatar</item>
+        <item>Reunion</item>
+        <item>Romania</item>
+        <item>Russia</item>
+        <item>Rwanda</item>
+        <item>Sqo Tome and Principe</item>
+        <item>Saint Helena</item>
+        <item>Saint Kitts and Nevis</item>
+        <item>Saint Lucia</item>
+        <item>Saint Pierre and Miquelon</item>
+        <item>Saint Vincent and the Grenadines</item>
+        <item>Samoa</item>
+        <item>San Marino</item>
+        <item>Saudi Arabia</item>
+        <item>Senegal</item>
+        <item>Serbia</item>
+        <item>Seychelles</item>
+        <item>Sierra Leone</item>
+        <item>Singapore</item>
+        <item>Slovakia</item>
+        <item>Slovenia</item>
+        <item>Solomon Islands</item>
+        <item>Somalia</item>
+        <item>South Africa</item>
+        <item>South Georgia and the South Sandwich Islands</item>
+        <item>South Korea</item>
+        <item>South Sudan</item>
+        <item>Spain</item>
+        <item>Sri Lanka</item>
+        <item>Sudan</item>
+        <item>Suriname</item>
+        <item>Svalbard and Jan Mayen</item>
+        <item>Swaziland</item>
+        <item>Sweden</item>
+        <item>Switzerland</item>
+        <item>Syria</item>
+        <item>Taiwan</item>
+        <item>Tajikistan</item>
+        <item>Tanzania</item>
+        <item>Thailand</item>
+        <item>The Bahamas</item>
+        <item>The Gambia</item>
+        <item>Togo</item>
+        <item>Tokelau</item>
+        <item>Tonga</item>
+        <item>Trinidad and Tobago</item>
+        <item>Tunisia</item>
+        <item>Turkey</item>
+        <item>Turkmenistan</item>
+        <item>Turks and Caicos Islands</item>
+        <item>Tuvalu</item>
+        <item>Virgin Islands</item>
+        <item>Uganda</item>
+        <item>Ukraine</item>
+        <item>United Arab Emirates</item>
+        <item>United Kingdom</item>
+        <item>United States</item>
+        <item>United States Minor Outlying Islands</item>
+        <item>Uruguay</item>
+        <item>Uzbekistan</item>
+        <item>Vanuatu</item>
+        <item>Vatican City</item>
+        <item>Venezuela</item>
+        <item>Vietnam</item>
+        <item>Wallis and Futuna</item>
+        <item>Western Sahara</item>
+        <item>Yemen</item>
+        <item>Yugoslavia</item>
+        <item>Zambia</item>
+        <item>Zimbabwe</item>
+    </string-array>
+    <string-array name="games_array">
+
+        <item>Games</item>
+        <item>Rocket League</item>
+        <item>Overwatch</item>
+        <item>Battlefield 3</item>
+        <item>League Of Legends</item>
+        <item>World Of War Craft</item>
+
+
+    </string-array>
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="multi_select_list_preference_default_value"/>
+    <string-array name="navDrawerItems">
+        <item>Profile</item>
+        <item>Friends</item>
+        <item>Messages</item>
+        <item>Notifications</item>
+        <item>People Nearby</item>
+        <item>Search</item>
+        <item>Settings</item>
+    </string-array>
+    <string-array name="players_number">
+        <item>Number of players</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+
+    </string-array>
+    <string-array name="players_ranks">
+        <item>All ranks</item>
+    <item>Hopy</item>
+        <item>Hopro</item>
+        <item>Hovet</item>
+        <item>Hocha</item>
+        <item>Hot</item>
+
+
+
+    </string-array>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
     <attr format="boolean" name="isLightTheme"/>
@@ -80,7 +406,7 @@
     <color name="LightCyan">#E0FFFF</color>
     <color name="LightGoldenrodYellow">#FAFAD2</color>
     <color name="LightGreen">#90EE90</color>
-    <color name="LightGrey">#D3D3D3</color>
+    <color name="LightGrey">#525252</color>
     <color name="LightPink">#FFB6C1</color>
     <color name="LightSalmon">#FFA07A</color>
     <color name="LightSeaGreen">#20B2AA</color>
@@ -157,7 +483,12 @@
     <color name="abc_search_url_text_selected">@android:color/black</color>
     <color name="accent_material_dark">@color/material_deep_teal_200</color>
     <color name="accent_material_light">@color/material_deep_teal_500</color>
+    <color name="actionbar_bg">#55ACEE</color>
+    <color name="actionbar_top_bg">#1C6399</color>
+    <color name="answer_text">#ff222222</color>
+    <color name="app_bg">#0F4671</color>
     <color name="aqua">#00FFFF</color>
+    <color name="avatar_border">#F2F2F2</color>
     <color name="background_floating_material_dark">@color/material_grey_800</color>
     <color name="background_floating_material_light">@android:color/white</color>
     <color name="background_material_dark">@color/material_grey_850</color>
@@ -176,23 +507,28 @@
     <color name="burgundy">#880E4F</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
-    <color name="cardview_dark_background">#FF202020</color>
-    <color name="cardview_light_background">#FFFAFAFA</color>
+    <color name="cardview_dark_background">#FF424242</color>
+    <color name="cardview_light_background">#FFFFFFFF</color>
     <color name="cardview_shadow_end_color">#03000000</color>
     <color name="cardview_shadow_start_color">#37000000</color>
-    <color name="colorAccent">#4CAF50</color>
+    <color name="colorAccent">#880E4F</color>
+    <color name="colorCounterBackground">#34B5E5</color>
+    <color name="colorFloatActionButton">#009688</color>
     <color name="colorPrimary">#880E4F</color>
+    <color name="colorPrimaryButton">#009688</color>
+    <color name="colorPrimaryButtonPressed">#008e81</color>
     <color name="colorPrimaryDark">#67083A</color>
-    <color name="common_action_bar_splitter">#d2d2d2</color>
-    <color name="common_signin_btn_dark_text_default">@android:color/white</color>
-    <color name="common_signin_btn_dark_text_disabled">#FFAAAAAA</color>
-    <color name="common_signin_btn_dark_text_focused">@android:color/white</color>
-    <color name="common_signin_btn_dark_text_pressed">@android:color/white</color>
-    <color name="common_signin_btn_default_background">#FFDD4B39</color>
-    <color name="common_signin_btn_light_text_default">#FF737373</color>
-    <color name="common_signin_btn_light_text_disabled">#FFAAAAAA</color>
-    <color name="common_signin_btn_light_text_focused">#FF737373</color>
-    <color name="common_signin_btn_light_text_pressed">@android:color/white</color>
+    <color name="colorRipple">#00897c</color>
+    <color name="common_google_signin_btn_text_dark_default">@android:color/white</color>
+    <color name="common_google_signin_btn_text_dark_disabled">#1F000000</color>
+    <color name="common_google_signin_btn_text_dark_focused">@android:color/black</color>
+    <color name="common_google_signin_btn_text_dark_pressed">@android:color/white</color>
+    <color name="common_google_signin_btn_text_light_default">#90000000</color>
+    <color name="common_google_signin_btn_text_light_disabled">#1F000000</color>
+    <color name="common_google_signin_btn_text_light_focused">#90000000</color>
+    <color name="common_google_signin_btn_text_light_pressed">#DE000000</color>
+    <color name="content_page">#F2F2F2</color>
+    <color name="dark_blue">#204062</color>
     <color name="darkenGrey">#424242</color>
     <color name="design_fab_shadow_end_color">@android:color/transparent</color>
     <color name="design_fab_shadow_mid_color">#14000000</color>
@@ -208,16 +544,38 @@
     <color name="dim_foreground_disabled_material_light">#80323232</color>
     <color name="dim_foreground_material_dark">#ffbebebe</color>
     <color name="dim_foreground_material_light">#ff323232</color>
+    <color name="drawer_bg">#1E2531</color>
+    <color name="drawer_divider">#1E2531</color>
+    <color name="drawer_item_bg">#1E2531</color>
+    <color name="drawer_item_select_bg">#292F3B</color>
+    <color name="drawer_item_text">#FFFFFF</color>
     <color name="foreground_material_dark">@android:color/white</color>
     <color name="foreground_material_light">@android:color/black</color>
     <color name="fuchsia">#FF00FF</color>
     <color name="gray">#808080</color>
+    <color name="gray_bg">#E5E5E5</color>
+    <color name="gray_border">#D3D3D3</color>
+    <color name="gray_button_text_color">#288EC1</color>
+    <color name="gray_text">#757575</color>
     <color name="green">#009933</color>
+    <color name="green_text">#108E3A</color>
+    <color name="hashTag">#5BCFF2</color>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
     <color name="highlighted_text_material_light">#66009688</color>
+    <color name="hintColor">#989899</color>
     <color name="hint_foreground_material_dark">@color/bright_foreground_disabled_material_dark</color>
     <color name="hint_foreground_material_light">@color/bright_foreground_disabled_material_light</color>
+    <color name="invisible_request_color">#BDBDBD</color>
+    <color name="item_list_divider">#d9d9d9</color>
+    <color name="item_row_end_color">#ffffff</color>
+    <color name="item_row_hover_end_color">#ebeef0</color>
+    <color name="item_row_hover_start_color">#ebeef0</color>
+    <color name="item_row_start_color">#ffffff</color>
+    <color name="light_blue">#34B5E5</color>
+    <color name="light_gray">#ffd9d9d9</color>
     <color name="lime">#00FF00</color>
+    <color name="listViewDivider">#F0F3F5</color>
+    <color name="listViewDivider2">#E1E8ED</color>
     <color name="maroon">#800000</color>
     <color name="material_blue_grey_800">#ff37474f</color>
     <color name="material_blue_grey_900">#ff263238</color>
@@ -232,8 +590,12 @@
     <color name="material_grey_850">#ff303030</color>
     <color name="material_grey_900">#ff212121</color>
     <color name="myBackground">#E0E0E0</color>
+    <color name="navigationBarColor">#000000</color>
     <color name="navy">#000080</color>
     <color name="olive">#808000</color>
+    <color name="pc_color">#E18C00</color>
+    <color name="pccolor">#E08A18</color>
+    <color name="postSeparatorLine">#e8f0f5</color>
     <color name="primary_dark_material_dark">@android:color/black</color>
     <color name="primary_dark_material_light">@color/material_grey_600</color>
     <color name="primary_material_dark">@color/material_grey_900</color>
@@ -242,6 +604,8 @@
     <color name="primary_text_default_material_light">#de000000</color>
     <color name="primary_text_disabled_material_dark">#4Dffffff</color>
     <color name="primary_text_disabled_material_light">#39000000</color>
+    <color name="ps_color">#256EB8</color>
+    <color name="pscolor">#256EB8</color>
     <color name="purple">#800080</color>
     <color name="red">#FF0000</color>
     <color name="ripple_material_dark">#33ffffff</color>
@@ -250,13 +614,21 @@
     <color name="secondary_text_default_material_light">#8a000000</color>
     <color name="secondary_text_disabled_material_dark">#36ffffff</color>
     <color name="secondary_text_disabled_material_light">#24000000</color>
+    <color name="signup_button_text">#3D678C</color>
     <color name="silver">#E6E6E6</color>
+    <color name="statusBarColor">#029e8f</color>
     <color name="switch_thumb_disabled_material_dark">#ff616161</color>
     <color name="switch_thumb_disabled_material_light">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
+    <color name="tabLayoutBackground">#EEEEEE</color>
     <color name="teal">#008080</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="toolBar">#204062</color>
     <color name="white">#FFFFFF</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="xbox_color">#107C0F</color>
+    <color name="xboxcolor">#107C0F</color>
     <color name="yellow">#FFFF00</color>
     <declare-styleable name="ActionBar"><attr name="navigationMode"><enum name="normal" value="0"/><enum name="listMode" value="1"/><enum name="tabMode" value="2"/></attr><attr name="displayOptions"><flag name="none" value="0"/><flag name="useLogo" value="0x1"/><flag name="showHome" value="0x2"/><flag name="homeAsUp" value="0x4"/><flag name="showTitle" value="0x8"/><flag name="showCustom" value="0x10"/><flag name="disableHome" value="0x20"/></attr><attr name="title"/><attr format="string" name="subtitle"/><attr format="reference" name="titleTextStyle"/><attr format="reference" name="subtitleTextStyle"/><attr format="reference" name="icon"/><attr format="reference" name="logo"/><attr format="reference" name="divider"/><attr format="reference" name="background"/><attr format="reference|color" name="backgroundStacked"/><attr format="reference|color" name="backgroundSplit"/><attr format="reference" name="customNavigationLayout"/><attr name="height"/><attr format="reference" name="homeLayout"/><attr format="reference" name="progressBarStyle"/><attr format="reference" name="indeterminateProgressStyle"/><attr format="dimension" name="progressBarPadding"/><attr name="homeAsUpIndicator"/><attr format="dimension" name="itemPadding"/><attr format="boolean" name="hideOnContentScroll"/><attr format="dimension" name="contentInsetStart"/><attr format="dimension" name="contentInsetEnd"/><attr format="dimension" name="contentInsetLeft"/><attr format="dimension" name="contentInsetRight"/><attr format="dimension" name="elevation"/><attr format="reference" name="popupTheme"/></declare-styleable>
     <declare-styleable name="ActionBarLayout"><attr name="android:layout_gravity"/></declare-styleable>
@@ -270,27 +642,68 @@
     <declare-styleable name="AppCompatImageView"><attr name="android:src"/><attr format="reference" name="srcCompat"/></declare-styleable>
     <declare-styleable name="AppCompatTextView"><attr format="reference|boolean" name="textAllCaps"/><attr name="android:textAppearance"/></declare-styleable>
     <declare-styleable name="AppCompatTheme"><attr format="boolean" name="windowActionBar"/><attr format="boolean" name="windowNoTitle"/><attr format="boolean" name="windowActionBarOverlay"/><attr format="boolean" name="windowActionModeOverlay"/><attr format="dimension|fraction" name="windowFixedWidthMajor"/><attr format="dimension|fraction" name="windowFixedHeightMinor"/><attr format="dimension|fraction" name="windowFixedWidthMinor"/><attr format="dimension|fraction" name="windowFixedHeightMajor"/><attr format="dimension|fraction" name="windowMinWidthMajor"/><attr format="dimension|fraction" name="windowMinWidthMinor"/><attr name="android:windowIsFloating"/><attr name="android:windowAnimationStyle"/><attr format="reference" name="actionBarTabStyle"/><attr format="reference" name="actionBarTabBarStyle"/><attr format="reference" name="actionBarTabTextStyle"/><attr format="reference" name="actionOverflowButtonStyle"/><attr format="reference" name="actionOverflowMenuStyle"/><attr format="reference" name="actionBarPopupTheme"/><attr format="reference" name="actionBarStyle"/><attr format="reference" name="actionBarSplitStyle"/><attr format="reference" name="actionBarTheme"/><attr format="reference" name="actionBarWidgetTheme"/><attr format="dimension" name="actionBarSize"><enum name="wrap_content" value="0"/></attr><attr format="reference" name="actionBarDivider"/><attr format="reference" name="actionBarItemBackground"/><attr format="reference" name="actionMenuTextAppearance"/><attr format="color|reference" name="actionMenuTextColor"/><attr format="reference" name="actionModeStyle"/><attr format="reference" name="actionModeCloseButtonStyle"/><attr format="reference" name="actionModeBackground"/><attr format="reference" name="actionModeSplitBackground"/><attr format="reference" name="actionModeCloseDrawable"/><attr format="reference" name="actionModeCutDrawable"/><attr format="reference" name="actionModeCopyDrawable"/><attr format="reference" name="actionModePasteDrawable"/><attr format="reference" name="actionModeSelectAllDrawable"/><attr format="reference" name="actionModeShareDrawable"/><attr format="reference" name="actionModeFindDrawable"/><attr format="reference" name="actionModeWebSearchDrawable"/><attr format="reference" name="actionModePopupWindowStyle"/><attr format="reference" name="textAppearanceLargePopupMenu"/><attr format="reference" name="textAppearanceSmallPopupMenu"/><attr format="reference" name="dialogTheme"/><attr format="dimension" name="dialogPreferredPadding"/><attr format="reference" name="listDividerAlertDialog"/><attr format="reference" name="actionDropDownStyle"/><attr format="dimension" name="dropdownListPreferredItemHeight"/><attr format="reference" name="spinnerDropDownItemStyle"/><attr format="reference" name="homeAsUpIndicator"/><attr format="reference" name="actionButtonStyle"/><attr format="reference" name="buttonBarStyle"/><attr format="reference" name="buttonBarButtonStyle"/><attr format="reference" name="selectableItemBackground"/><attr format="reference" name="selectableItemBackgroundBorderless"/><attr format="reference" name="borderlessButtonStyle"/><attr format="reference" name="dividerVertical"/><attr format="reference" name="dividerHorizontal"/><attr format="reference" name="activityChooserViewStyle"/><attr format="reference" name="toolbarStyle"/><attr format="reference" name="toolbarNavigationButtonStyle"/><attr format="reference" name="popupMenuStyle"/><attr format="reference" name="popupWindowStyle"/><attr format="reference|color" name="editTextColor"/><attr format="reference" name="editTextBackground"/><attr format="reference" name="imageButtonStyle"/><attr format="reference" name="textAppearanceSearchResultTitle"/><attr format="reference" name="textAppearanceSearchResultSubtitle"/><attr format="reference|color" name="textColorSearchUrl"/><attr format="reference" name="searchViewStyle"/><attr format="dimension" name="listPreferredItemHeight"/><attr format="dimension" name="listPreferredItemHeightSmall"/><attr format="dimension" name="listPreferredItemHeightLarge"/><attr format="dimension" name="listPreferredItemPaddingLeft"/><attr format="dimension" name="listPreferredItemPaddingRight"/><attr format="reference" name="dropDownListViewStyle"/><attr format="reference" name="listPopupWindowStyle"/><attr format="reference" name="textAppearanceListItem"/><attr format="reference" name="textAppearanceListItemSmall"/><attr format="reference" name="panelBackground"/><attr format="dimension" name="panelMenuListWidth"/><attr format="reference" name="panelMenuListTheme"/><attr format="reference" name="listChoiceBackgroundIndicator"/><attr format="color" name="colorPrimary"/><attr format="color" name="colorPrimaryDark"/><attr format="color" name="colorAccent"/><attr format="color" name="colorControlNormal"/><attr format="color" name="colorControlActivated"/><attr format="color" name="colorControlHighlight"/><attr format="color" name="colorButtonNormal"/><attr format="color" name="colorSwitchThumbNormal"/><attr format="reference" name="controlBackground"/><attr format="reference" name="alertDialogStyle"/><attr format="reference" name="alertDialogButtonGroupStyle"/><attr format="boolean" name="alertDialogCenterButtons"/><attr format="reference" name="alertDialogTheme"/><attr format="reference|color" name="textColorAlertDialogListItem"/><attr format="reference" name="buttonBarPositiveButtonStyle"/><attr format="reference" name="buttonBarNegativeButtonStyle"/><attr format="reference" name="buttonBarNeutralButtonStyle"/><attr format="reference" name="autoCompleteTextViewStyle"/><attr format="reference" name="buttonStyle"/><attr format="reference" name="buttonStyleSmall"/><attr format="reference" name="checkboxStyle"/><attr format="reference" name="checkedTextViewStyle"/><attr format="reference" name="editTextStyle"/><attr format="reference" name="radioButtonStyle"/><attr format="reference" name="ratingBarStyle"/><attr format="reference" name="ratingBarStyleIndicator"/><attr format="reference" name="ratingBarStyleSmall"/><attr format="reference" name="seekBarStyle"/><attr format="reference" name="spinnerStyle"/><attr format="reference" name="switchStyle"/></declare-styleable>
+    <declare-styleable name="AppDataSearch"/>
     <declare-styleable name="BottomSheetBehavior_Params"><attr format="dimension" name="behavior_peekHeight"/><attr format="boolean" name="behavior_hideable"/></declare-styleable>
     <declare-styleable name="ButtonBarLayout"><attr format="boolean" name="allowStacking"/></declare-styleable>
-    <declare-styleable name="CardView"><attr format="color" name="cardBackgroundColor"/><attr format="dimension" name="cardCornerRadius"/><attr format="dimension" name="cardElevation"/><attr format="dimension" name="cardMaxElevation"/><attr format="boolean" name="cardUseCompatPadding"/><attr format="boolean" name="cardPreventCornerOverlap"/><attr format="dimension" name="contentPadding"/><attr format="dimension" name="contentPaddingLeft"/><attr format="dimension" name="contentPaddingRight"/><attr format="dimension" name="contentPaddingTop"/><attr format="dimension" name="contentPaddingBottom"/></declare-styleable>
+    <declare-styleable name="CardView"><attr format="color" name="cardBackgroundColor"/><attr format="dimension" name="cardCornerRadius"/><attr format="dimension" name="cardElevation"/><attr format="dimension" name="cardMaxElevation"/><attr format="boolean" name="cardUseCompatPadding"/><attr format="boolean" name="cardPreventCornerOverlap"/><attr format="dimension" name="contentPadding"/><attr format="dimension" name="contentPaddingLeft"/><attr format="dimension" name="contentPaddingRight"/><attr format="dimension" name="contentPaddingTop"/><attr format="dimension" name="contentPaddingBottom"/><attr name="android:minWidth"/><attr name="android:minHeight"/></declare-styleable>
     <declare-styleable name="CircleImageView"><attr format="dimension" name="civ_border_width"/><attr format="color" name="civ_border_color"/><attr format="boolean" name="civ_border_overlay"/><attr format="color" name="civ_fill_color"/></declare-styleable>
+    <declare-styleable name="CircularImageView"><attr format="boolean" name="border"/><attr format="color" name="border_color"/><attr format="dimension" name="border_width"/><attr format="boolean" name="selector"/><attr format="color" name="selector_color"/><attr format="color" name="selector_stroke_color"/><attr format="dimension" name="selector_stroke_width"/><attr format="boolean" name="shadow"/></declare-styleable>
     <declare-styleable name="CollapsingAppBarLayout_LayoutParams"><attr name="layout_collapseMode"><enum name="none" value="0"/><enum name="pin" value="1"/><enum name="parallax" value="2"/></attr><attr format="float" name="layout_collapseParallaxMultiplier"/></declare-styleable>
     <declare-styleable name="CollapsingToolbarLayout"><attr format="dimension" name="expandedTitleMargin"/><attr format="dimension" name="expandedTitleMarginStart"/><attr format="dimension" name="expandedTitleMarginTop"/><attr format="dimension" name="expandedTitleMarginEnd"/><attr format="dimension" name="expandedTitleMarginBottom"/><attr format="reference" name="expandedTitleTextAppearance"/><attr format="reference" name="collapsedTitleTextAppearance"/><attr format="color" name="contentScrim"/><attr format="color" name="statusBarScrim"/><attr format="reference" name="toolbarId"/><attr name="collapsedTitleGravity"><flag name="top" value="0x30"/><flag name="bottom" value="0x50"/><flag name="left" value="0x03"/><flag name="right" value="0x05"/><flag name="center_vertical" value="0x10"/><flag name="fill_vertical" value="0x70"/><flag name="center_horizontal" value="0x01"/><flag name="center" value="0x11"/><flag name="start" value="0x00800003"/><flag name="end" value="0x00800005"/></attr><attr name="expandedTitleGravity"><flag name="top" value="0x30"/><flag name="bottom" value="0x50"/><flag name="left" value="0x03"/><flag name="right" value="0x05"/><flag name="center_vertical" value="0x10"/><flag name="fill_vertical" value="0x70"/><flag name="center_horizontal" value="0x01"/><flag name="center" value="0x11"/><flag name="start" value="0x00800003"/><flag name="end" value="0x00800005"/></attr><attr format="boolean" name="titleEnabled"/><attr name="title"/></declare-styleable>
     <declare-styleable name="CompoundButton"><attr name="android:button"/><attr format="color" name="buttonTint"/><attr name="buttonTintMode"><enum name="src_over" value="3"/><enum name="src_in" value="5"/><enum name="src_atop" value="9"/><enum name="multiply" value="14"/><enum name="screen" value="15"/></attr></declare-styleable>
     <declare-styleable name="CoordinatorLayout"><attr format="reference" name="keylines"/><attr format="reference" name="statusBarBackground"/></declare-styleable>
     <declare-styleable name="CoordinatorLayout_LayoutParams"><attr name="android:layout_gravity"/><attr format="string" name="layout_behavior"/><attr format="reference" name="layout_anchor"/><attr format="integer" name="layout_keyline"/><attr name="layout_anchorGravity"><flag name="top" value="0x30"/><flag name="bottom" value="0x50"/><flag name="left" value="0x03"/><flag name="right" value="0x05"/><flag name="center_vertical" value="0x10"/><flag name="fill_vertical" value="0x70"/><flag name="center_horizontal" value="0x01"/><flag name="fill_horizontal" value="0x07"/><flag name="center" value="0x11"/><flag name="fill" value="0x77"/><flag name="clip_vertical" value="0x80"/><flag name="clip_horizontal" value="0x08"/><flag name="start" value="0x00800003"/><flag name="end" value="0x00800005"/></attr></declare-styleable>
+    <declare-styleable name="Corpus"><attr format="string" name="corpusId"/><attr format="string" name="corpusVersion"/><attr format="string" name="contentProviderUri"/><attr format="boolean" name="trimmable"/><attr format="string" name="schemaOrgType"/><attr format="boolean" name="semanticallySearchable"/><attr format="integer" name="documentMaxAgeSecs"/><attr format="boolean" name="perAccountTemplate"/></declare-styleable>
+    <declare-styleable name="CustomCircularImageViewTheme"><attr format="reference" name="circularImageViewStyle"/></declare-styleable>
     <declare-styleable name="DesignTheme"><attr format="reference" name="bottomSheetDialogTheme"/><attr format="reference" name="bottomSheetStyle"/><attr format="color" name="textColorError"/></declare-styleable>
     <declare-styleable name="DrawerArrowToggle"><attr format="color" name="color"/><attr format="boolean" name="spinBars"/><attr format="dimension" name="drawableSize"/><attr format="dimension" name="gapBetweenBars"/><attr format="dimension" name="arrowHeadLength"/><attr format="dimension" name="arrowShaftLength"/><attr format="dimension" name="barLength"/><attr format="dimension" name="thickness"/></declare-styleable>
+    <declare-styleable name="Emojicon"><attr format="dimension" name="emojiconSize"/><attr format="integer" name="emojiconTextStart"/><attr format="integer" name="emojiconTextLength"/></declare-styleable>
+    <declare-styleable name="FeatureParam"><attr format="string" name="paramName"/><attr format="string" name="paramValue"/></declare-styleable>
     <declare-styleable name="FloatingActionButton"><attr name="backgroundTint"/><attr name="backgroundTintMode"/><attr format="color" name="rippleColor"/><attr name="fabSize"><enum name="normal" value="0"/><enum name="mini" value="1"/></attr><attr name="elevation"/><attr format="dimension" name="pressedTranslationZ"/><attr format="dimension" name="borderWidth"/><attr format="boolean" name="useCompatPadding"/></declare-styleable>
     <declare-styleable name="ForegroundLinearLayout"><attr name="android:foreground"/><attr name="android:foregroundGravity"/><attr format="boolean" name="foregroundInsidePadding"/></declare-styleable>
+    <declare-styleable name="GlobalSearch"><attr format="boolean" name="searchEnabled"/><attr format="string" name="searchLabel"/><attr format="string" name="settingsDescription"/><attr format="string" name="defaultIntentAction"/><attr format="string" name="defaultIntentData"/><attr format="string" name="defaultIntentActivity"/></declare-styleable>
+    <declare-styleable name="GlobalSearchCorpus"><attr format="boolean" name="allowShortcuts"/></declare-styleable>
+    <declare-styleable name="GlobalSearchSection"><attr name="sectionType">
+<enum name="text1" value="0"/>
+
+<enum name="text2" value="1"/>
+
+<enum name="icon_uri" value="2"/>
+
+<enum name="intent_action" value="3"/>
+
+<enum name="intent_data" value="4"/>
+
+<enum name="intent_data_id" value="5"/>
+
+<enum name="intent_extra_data" value="6"/>
+
+<enum name="large_icon_uri" value="7"/>
+
+<enum name="intent_activity" value="8"/>
+
+<enum name="thing_proto" value="9"/>
+
+</attr><attr format="string" name="sectionContent"/></declare-styleable>
+    <declare-styleable name="IMECorpus"><attr format="boolean" name="inputEnabled"/><attr name="sourceClass">
+<enum name="email" value="0"/>
+
+<enum name="contact" value="1"/>
+
+<enum name="instant_message" value="2"/>
+
+</attr><attr format="string" name="userInputTag"/><attr format="string" name="userInputSection"/><attr format="string" name="userInputValue"/><attr format="string" name="toAddressesSection"/></declare-styleable>
     <declare-styleable name="LinearLayoutCompat"><attr name="android:orientation"/><attr name="android:gravity"/><attr name="android:baselineAligned"/><attr name="android:baselineAlignedChildIndex"/><attr name="android:weightSum"/><attr format="boolean" name="measureWithLargestChild"/><attr name="divider"/><attr name="showDividers"><flag name="none" value="0"/><flag name="beginning" value="1"/><flag name="middle" value="2"/><flag name="end" value="4"/></attr><attr format="dimension" name="dividerPadding"/></declare-styleable>
     <declare-styleable name="LinearLayoutCompat_Layout"><attr name="android:layout_width"/><attr name="android:layout_height"/><attr name="android:layout_weight"/><attr name="android:layout_gravity"/></declare-styleable>
     <declare-styleable name="ListPopupWindow"><attr name="android:dropDownVerticalOffset"/><attr name="android:dropDownHorizontalOffset"/></declare-styleable>
-    <declare-styleable name="LoadingImageView"><attr format="enum" name="imageAspectRatioAdjust">
-            <enum name="none" value="0"/>
-            <enum name="adjust_width" value="1"/>
-            <enum name="adjust_height" value="2"/>
-        </attr><attr format="float" name="imageAspectRatio"/><attr format="boolean" name="circleCrop"/></declare-styleable>
+    <declare-styleable name="LoadingImageView"><attr name="imageAspectRatioAdjust">
+<enum name="none" value="0"/>
+
+<enum name="adjust_width" value="1"/>
+
+<enum name="adjust_height" value="2"/>
+
+</attr><attr format="float" name="imageAspectRatio"/><attr format="boolean" name="circleCrop"/></declare-styleable>
     <declare-styleable name="MenuGroup"><attr name="android:id"/><attr name="android:menuCategory"/><attr name="android:orderInCategory"/><attr name="android:checkableBehavior"/><attr name="android:visible"/><attr name="android:enabled"/></declare-styleable>
     <declare-styleable name="MenuItem"><attr name="android:id"/><attr name="android:menuCategory"/><attr name="android:orderInCategory"/><attr name="android:title"/><attr name="android:titleCondensed"/><attr name="android:icon"/><attr name="android:alphabeticShortcut"/><attr name="android:numericShortcut"/><attr name="android:checkable"/><attr name="android:checked"/><attr name="android:visible"/><attr name="android:enabled"/><attr name="android:onClick"/><attr name="showAsAction"><flag name="never" value="0"/><flag name="ifRoom" value="1"/><flag name="always" value="2"/><flag name="withText" value="4"/><flag name="collapseActionView" value="8"/></attr><attr format="reference" name="actionLayout"/><attr format="string" name="actionViewClass"/><attr format="string" name="actionProviderClass"/></declare-styleable>
     <declare-styleable name="MenuView"><attr name="android:itemTextAppearance"/><attr name="android:horizontalDivider"/><attr name="android:verticalDivider"/><attr name="android:headerBackground"/><attr name="android:itemBackground"/><attr name="android:windowAnimationStyle"/><attr name="android:itemIconDisabledAlpha"/><attr format="boolean" name="preserveIconSpacing"/></declare-styleable>
@@ -301,6 +714,45 @@
     <declare-styleable name="ScrimInsetsFrameLayout"><attr format="color|reference" name="insetForeground"/></declare-styleable>
     <declare-styleable name="ScrollingViewBehavior_Params"><attr format="dimension" name="behavior_overlapTop"/></declare-styleable>
     <declare-styleable name="SearchView"><attr format="reference" name="layout"/><attr format="boolean" name="iconifiedByDefault"/><attr name="android:maxWidth"/><attr format="string" name="queryHint"/><attr format="string" name="defaultQueryHint"/><attr name="android:imeOptions"/><attr name="android:inputType"/><attr format="reference" name="closeIcon"/><attr format="reference" name="goIcon"/><attr format="reference" name="searchIcon"/><attr format="reference" name="searchHintIcon"/><attr format="reference" name="voiceIcon"/><attr format="reference" name="commitIcon"/><attr format="reference" name="suggestionRowLayout"/><attr format="reference" name="queryBackground"/><attr format="reference" name="submitBackground"/><attr name="android:focusable"/></declare-styleable>
+    <declare-styleable name="Section"><attr format="string" name="sectionId"/><attr name="sectionFormat">
+<enum name="plain" value="0"/>
+
+<enum name="html" value="1"/>
+
+<enum name="rfc822" value="2"/>
+
+<enum name="url" value="3"/>
+
+</attr><attr format="boolean" name="noIndex"/><attr format="integer" name="sectionWeight"/><attr format="boolean" name="indexPrefixes"/><attr format="string" name="subsectionSeparator"/><attr format="string" name="schemaOrgProperty"/></declare-styleable>
+    <declare-styleable name="SectionFeature"><attr name="featureType">
+<enum name="match_global_nicknames" value="1"/>
+
+<enum name="demote_common_words" value="2"/>
+
+<enum name="demote_rfc822_hostnames" value="3"/>
+
+<enum name="omnibox_url_section" value="4"/>
+
+<enum name="omnibox_title_section" value="5"/>
+
+<enum name="index_entity_types" value="6"/>
+
+</attr></declare-styleable>
+    <declare-styleable name="SignInButton"><attr format="reference" name="buttonSize">
+<enum name="standard" value="0"/>
+
+<enum name="wide" value="1"/>
+
+<enum name="icon_only" value="2"/>
+
+</attr><attr format="reference" name="colorScheme">
+<enum name="dark" value="0"/>
+
+<enum name="light" value="1"/>
+
+<enum name="auto" value="2"/>
+
+</attr><attr format="reference|string" name="scopeUris"/></declare-styleable>
     <declare-styleable name="SnackbarLayout"><attr name="android:maxWidth"/><attr name="elevation"/><attr format="dimension" name="maxActionInlineWidth"/></declare-styleable>
     <declare-styleable name="Spinner"><attr name="android:prompt"/><attr name="popupTheme"/><attr name="android:popupBackground"/><attr name="android:dropDownWidth"/><attr name="android:entries"/></declare-styleable>
     <declare-styleable name="SwitchCompat"><attr name="android:thumb"/><attr format="reference" name="track"/><attr name="android:textOn"/><attr name="android:textOff"/><attr format="dimension" name="thumbTextPadding"/><attr format="reference" name="switchTextAppearance"/><attr format="dimension" name="switchMinWidth"/><attr format="dimension" name="switchPadding"/><attr format="boolean" name="splitTrack"/><attr format="boolean" name="showText"/></declare-styleable>
@@ -418,9 +870,11 @@
     <item format="float" name="highlight_alpha_material_colored" type="dimen">0.26</item>
     <item format="float" name="highlight_alpha_material_dark" type="dimen">0.20</item>
     <item format="float" name="highlight_alpha_material_light" type="dimen">0.12</item>
+    <dimen name="item_size">192dp</dimen>
     <dimen name="item_touch_helper_max_drag_scroll_per_frame">20dp</dimen>
     <dimen name="item_touch_helper_swipe_escape_max_velocity">800dp</dimen>
     <dimen name="item_touch_helper_swipe_escape_velocity">120dp</dimen>
+    <dimen name="keyboard_height">250dp</dimen>
     <dimen name="notification_large_icon_height">64dp</dimen>
     <dimen name="notification_large_icon_width">64dp</dimen>
     <dimen name="notification_subtext_size">12dp</dimen>
@@ -442,7 +896,7 @@
     <integer name="bottom_sheet_slide_duration">150</integer>
     <integer name="cancel_button_image_alpha">127</integer>
     <integer name="design_snackbar_text_max_lines">2</integer>
-    <integer name="google_play_services_version">8115000</integer>
+    <integer name="google_play_services_version">9877000</integer>
     <integer name="status_bar_notification_info_maxnum">999</integer>
     <string name="OK">Done</string>
     <string name="abc_action_bar_home_description">Navigate home</string>
@@ -464,55 +918,186 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
+    <string name="action_about">About</string>
+    <string name="action_accept">Accept</string>
+    <string name="action_add_photo">You can add a photo now!</string>
+    <string name="action_add_to_friends">Add to friends</string>
+    <string name="action_block">Block</string>
+    <string name="action_buy_credits">Get More Credits</string>
+    <string name="action_camera">Camera</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_close">Close</string>
+    <string name="action_connect_with_facebook">Connect with Facebook</string>
+    <string name="action_continue">Continue</string>
+    <string name="action_copy">Copy</string>
+    <string name="action_copy_url">Copy link</string>
+    <string name="action_create">Create</string>
+    <string name="action_deactivate">Deactivate</string>
+    <string name="action_detail">More details</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_enable">Enable</string>
+    <string name="action_follow">Follow</string>
+    <string name="action_forgot_password">Forgot password?</string>
+    <string name="action_gallery">Choose from gallery</string>
+    <string name="action_login">Log in</string>
+    <string name="action_login_with_facebook">Log in with Facebook</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_more">Load more</string>
+    <string name="action_new">New</string>
+    <string name="action_no">No</string>
+    <string name="action_ok">OK</string>
+    <string name="action_open">Open</string>
+    <string name="action_open_settings"><u>Open Location Settings</u></string>
+    <string name="action_open_url">Open in a browser</string>
+    <string name="action_pending">Pending…</string>
+    <string name="action_profile_edit">Edit</string>
+    <string name="action_profile_edit_cover">Edit cover</string>
+    <string name="action_profile_edit_photo">Edit photo</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_regular_signup">Back to the regular registration form</string>
+    <string name="action_reject">Reject</string>
+    <string name="action_remove">Delete</string>
+    <string name="action_remove_chat">Delete chat</string>
+    <string name="action_remove_connection">Remove connection</string>
+    <string name="action_remove_from_friends">Remove from friends</string>
+    <string name="action_reply">Reply</string>
+    <string name="action_report">Report</string>
+    <string name="action_retry">Retry</string>
+    <string name="action_save">Save</string>
+    <string name="action_search">Search</string>
+    <string name="action_select_birth">Date of Birth</string>
+    <string name="action_send">Send</string>
+    <string name="action_set_location">Yes, this is my location</string>
     <string name="action_settings">Settings</string>
+    <string name="action_signup">Sign up</string>
+    <string name="action_signup_with_facebook">Sign up with Facebook</string>
+    <string name="action_turn_off">Turn off</string>
+    <string name="action_turn_on">Turn on</string>
+    <string name="action_unblock">Unblock</string>
+    <string name="action_unfollow">Unfollow</string>
+    <string name="action_yes">Yes</string>
     <string name="add">Add</string>
     <string name="add_new_friend">Add Friend</string>
+    <string name="app_copyright">qachat.ifsoft.ru</string>
+    <string name="app_email">support@ifsoft.ru</string>
     <string name="app_name">Hoplay</string>
+    <string name="app_site">http://qachat.ifsoft.ru</string>
+    <string name="app_version">1.0</string>
+    <string name="app_year">2016</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="approve_selected_friends">Approve</string>
-    <string name="auth_google_play_services_client_facebook_display_name">Facebook</string>
-    <string name="auth_google_play_services_client_google_display_name">Google</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
     <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>
     <string name="cancel">Cancel</string>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
-    <string name="common_android_wear_notification_needs_update_text"><ns1:g id="app_name">%1$s</ns1:g> requires an update to the Android Wear app.</string>
-    <string name="common_android_wear_update_text"><ns1:g id="app_name">%1$s</ns1:g> won\'t run unless you update the Android Wear app.</string>
-    <string msgid="6006316683626838685" name="common_android_wear_update_title">Update Android Wear</string>
-    <string name="common_google_play_services_api_unavailable_text"><ns1:g id="app_name">%1$s</ns1:g> requires one or more Google Play services that are not currently available. Please contact the developer for assistance.</string>
-    <string msgid="2523291102206661146" name="common_google_play_services_enable_button">Enable Google Play services</string>
+    <string msgid="2523291102206661146" name="common_google_play_services_enable_button">Enable</string>
     <string msgid="227660514972886228" name="common_google_play_services_enable_text"><ns1:g id="app_name">%1$s</ns1:g> won\'t work unless you enable Google Play services.</string>
     <string msgid="5122002158466380389" name="common_google_play_services_enable_title">Enable Google Play services</string>
-    <string name="common_google_play_services_error_notification_requested_by_msg">Requested by <ns1:g id="app_name">%1$s</ns1:g></string>
-    <string msgid="7153882981874058840" name="common_google_play_services_install_button">Get Google Play services</string>
-    <string msgid="2122112764540849864" name="common_google_play_services_install_text_phone"><ns1:g id="app_name">%1$s</ns1:g> won\'t run without Google Play services, which are missing from your phone.</string>
-    <string msgid="7351599665250191022" name="common_google_play_services_install_text_tablet"><ns1:g id="app_name">%1$s</ns1:g> won\'t run without Google Play services, which are missing from your tablet.</string>
+    <string msgid="7153882981874058840" name="common_google_play_services_install_button">Install</string>
+    <string name="common_google_play_services_install_text"><ns1:g id="app_name">%1$s</ns1:g> won\'t run without Google Play services, which are missing from your device.</string>
     <string msgid="7215213145546190223" name="common_google_play_services_install_title">Get Google Play services</string>
-    <string name="common_google_play_services_invalid_account_text">The specified account does not exist on this device. Please choose a different account.</string>
-    <string name="common_google_play_services_invalid_account_title">Invalid Account</string>
-    <string name="common_google_play_services_needs_enabling_title">An application requires Google Play services to be enabled.</string>
-    <string name="common_google_play_services_network_error_text">A data connection is required to connect to Google Play services.</string>
-    <string name="common_google_play_services_network_error_title">Network Error</string>
-    <string name="common_google_play_services_notification_needs_update_title">An application requires an update for Google Play services.</string>
     <string name="common_google_play_services_notification_ticker">Google Play services error</string>
-    <string name="common_google_play_services_sign_in_failed_text">Error signing in the specified account. Please choose a different account.</string>
-    <string name="common_google_play_services_sign_in_failed_title">Sign in failed</string>
-    <string name="common_google_play_services_unknown_issue">Unknown issue with Google Play services.</string>
-    <string name="common_google_play_services_unsupported_text"><ns1:g id="app_name">%1$s</ns1:g> relies on Google Play services, which is not supported by your device. Contact the manufacturer for assistance.</string>
-    <string name="common_google_play_services_unsupported_title">Google Play services</string>
+    <string name="common_google_play_services_unknown_issue"><ns1:g id="app_name">%1$s</ns1:g> is having trouble with Google Play services. Please try again.</string>
+    <string name="common_google_play_services_unsupported_text"><ns1:g id="app_name">%1$s</ns1:g> won\'t run without Google Play services, which are not supported by your device.</string>
     <string msgid="6556509956452265614" name="common_google_play_services_update_button">Update</string>
     <string msgid="9053896323427875356" name="common_google_play_services_update_text"><ns1:g id="app_name">%1$s</ns1:g> won\'t run unless you update Google Play services.</string>
     <string msgid="6006316683626838685" name="common_google_play_services_update_title">Update Google Play services</string>
     <string name="common_google_play_services_updating_text"><ns1:g id="app_name">%1$s</ns1:g> won\'t run without Google Play services, which are currently updating.</string>
-    <string name="common_google_play_services_updating_title">Google Play services are updating</string>
+    <string name="common_google_play_services_wear_update_text">New version of Google Play services needed. It will update itself shortly.</string>
     <string name="common_open_on_phone">Open on phone</string>
+    <string name="common_signin_button_text">Sign in</string>
+    <string name="common_signin_button_text_long">Sign in with Google</string>
+    <string name="default_web_client_id" translatable="false">1072815129013-kfhga3vtm043c7k1tjld4sm9vvhe9pov.apps.googleusercontent.com</string>
+    <string name="dialog_nearby_0">80 kilometers</string>
+    <string name="dialog_nearby_1">160 kilometers</string>
+    <string name="dialog_nearby_2">400 kilometers</string>
+    <string name="dialog_nearby_3">800 kilometers</string>
+    <string name="dialog_nearby_4">1,600 kilometers</string>
+    <string name="drawer_close">Close</string>
+    <string name="drawer_open">Open</string>
     <string name="email">Email</string>
     <string name="empty"/>
     <string name="empty1"/>
+    <string name="error_action">This user has forbidden you to do it!</string>
+    <string name="error_credits">Not enough credits!</string>
+    <string name="error_data_loading">When loading data error has occurred. Check your network connection.</string>
+    <string name="error_email">Email invalid.</string>
+    <string name="error_email_taken">User with this mail is already registered</string>
+    <string name="error_field_empty">Required fields are empty</string>
+    <string name="error_internet_connection">No internet connection</string>
+    <string name="error_login_taken">Username is already taken</string>
+    <string name="error_no_friend">This user receives messages only from his friends!</string>
+    <string name="error_password">Invalid password.</string>
+    <string name="error_signin">Incorrect username or password</string>
+    <string name="error_small_fullname">Minimum 2 characters</string>
+    <string name="error_small_password">Minimum 6 characters</string>
+    <string name="error_small_username">Minimum 5 characters</string>
+    <string name="error_wrong_format">Wrong format</string>
     <string name="exit_application">Log Out</string>
+    <string name="facebook_app_id">3453453453453453</string>
     <string name="fill_both_username_and_password">You must fill Password and Username</string>
+    <string name="firebase_database_url" translatable="false">https://hoplay-18a08.firebaseio.com</string>
     <string name="friend_list">List of Friends</string>
+    <string name="gcm_defaultSenderId" translatable="false">1072815129013</string>
+    <string name="google_api_key" translatable="false">AIzaSyDDv5Gatnln9XK-oMCrtVd0oNzgQyRj6CI</string>
+    <string name="google_app_id" translatable="false">1:1072815129013:android:b0dc500dd277ae63</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDDv5Gatnln9XK-oMCrtVd0oNzgQyRj6CI</string>
+    <string name="google_storage_bucket" translatable="false">hoplay-18a08.appspot.com</string>
     <string name="hello">AndroidChatter</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_account_connect_to_facebook">Connect this account with your social network accounts</string>
+    <string name="label_account_connected_to_facebook">Connected with Facebook</string>
+    <string name="label_account_disabled">Account blocked</string>
+    <string name="label_activity">Last Active</string>
+    <string name="label_age">Age</string>
+    <string name="label_authorization_via_facebook">Authorization via Facebook.</string>
+    <string name="label_between">between</string>
+    <string name="label_block">Block</string>
+    <string name="label_block_msg">will not be able send send to your messages, and you will not see notifications from</string>
+    <string name="label_delete">Delete</string>
+    <string name="label_delete_img">Delete image?</string>
+    <string name="label_empty_list">List is empty.</string>
+    <string name="label_female">Female</string>
+    <string name="label_friend_request_added">sent you a request to friends.</string>
+    <string name="label_friend_request_dialog_title">Friend Request</string>
+    <string name="label_friends">friends</string>
+    <string name="label_from">from</string>
+    <string name="label_gcm_friend">You have a new friend.</string>
+    <string name="label_gcm_friend_request">You have a new friend request.</string>
+    <string name="label_gcm_friend_request_accepted">Friend Request accepted.</string>
+    <string name="label_gcm_message">You have a new message.</string>
+    <string name="label_gender_select_title">Choose gender</string>
+    <string name="label_last_message_image">Image</string>
+    <string name="label_location">Location</string>
+    <string name="label_location_prompt">Allow access to your location to enable other features using location.</string>
+    <string name="label_male">Male</string>
+    <string name="label_nearby">Near you</string>
+    <string name="label_offline">Offline</string>
+    <string name="label_online">Online</string>
+    <string name="label_profile_activity">Profile Activity</string>
+    <string name="label_profile_allow_show_birth">Show date birth in the profile</string>
+    <string name="label_profile_birth">Birth Date</string>
+    <string name="label_profile_information">Profile Information</string>
+    <string name="label_profile_join">Join Date</string>
+    <string name="label_profile_report_0">Spam</string>
+    <string name="label_profile_report_1">Hate speech or violence</string>
+    <string name="label_profile_report_2">Nudity or Pornography</string>
+    <string name="label_profile_report_3">Fake profile</string>
+    <string name="label_profile_report_4">Piracy</string>
+    <string name="label_profile_reported">Profile reported.</string>
+    <string name="label_public">Public</string>
+    <string name="label_report_dialog_title">Abuse report</string>
+    <string name="label_search_results">Find people:</string>
+    <string name="label_search_results_error">No results found</string>
+    <string name="label_search_settings_dialog_title">Search Settings</string>
+    <string name="label_search_start_screen_msg">Find People by username, name, email or location.</string>
+    <string name="label_select_img">Select image</string>
+    <string name="label_sex">Gender</string>
+    <string name="label_sex_female">Gender Female</string>
+    <string name="label_sex_male">Gender Male</string>
+    <string name="label_sex_undefined">Gender Not Set</string>
+    <string name="label_share_dialog_title">Share With</string>
+    <string name="label_to">to</string>
     <string name="local_service_connected">Connected_local</string>
     <string name="local_service_started">AndroidChatter Started</string>
     <string name="local_service_stopped">AndroidChatter stopped</string>
@@ -520,22 +1105,148 @@
     <string name="make_sure_username_and_password_correct">Is your username and password correct?</string>
     <string name="message_cannot_be_sent">Message not sent</string>
     <string name="messaging">Messaging</string>
+    <string name="msg_account_blocked">This account is blocked by a moderator.</string>
+    <string name="msg_chat_has_been_removed">Chat has been removed.</string>
+    <string name="msg_connect_to_facebook_error">Your account on Facebook is already associated with another account.</string>
+    <string name="msg_connect_to_facebook_removed">Connect with your Facebook account removed.</string>
+    <string name="msg_connect_to_facebook_success">You have successfully linked application with your account on Facebook!</string>
+    <string name="msg_copied_to_clipboard">Copied to clipboard.</string>
+    <string name="msg_enter_item">Please write something or attach photo.</string>
+    <string name="msg_enter_msg">Please write something or attach photo.</string>
+    <string name="msg_loading">Please wait…</string>
+    <string name="msg_loading_2">Loading. Please wait…</string>
+    <string name="msg_location_error">We could not get your location.</string>
+    <string name="msg_network_error">Please check your Internet connection</string>
+    <string name="msg_no_such_user_in_bd">No such user in database</string>
+    <string name="msg_password_changed">Password successfully changed</string>
+    <string name="msg_password_reset_link_sent">A message with link to reset your password has been sent to your email.</string>
+    <string name="msg_profile_added_to_blacklist">The user is added to blocked list.</string>
+    <string name="msg_profile_link_copied">Profile link copied to clipboard.</string>
+    <string name="msg_profile_removed_from_blacklist">The user is removed from blocked list.</string>
+    <string name="msg_send_msg_error">You can not send a message to the user.</string>
+    <string name="msg_settings_saved">Settings successfully saved.</string>
+    <string name="msg_ticket_send_success">Your request is accepted! You will receive a response to the email, which is indicated in the request.</string>
     <string name="new_friend_request_exist">New friend request</string>
     <string name="no_friend">No Friends , select it via Menu</string>
     <string name="not_connected_to_network">No available Network</string>
     <string name="not_connected_to_service">Connection is not available</string>
+    <string name="page_1">Profile</string>
+    <string name="page_2">Friends</string>
+    <string name="page_3">Messages</string>
+    <string name="page_4">Notifications</string>
+    <string name="page_5">People Nearby</string>
+    <string name="page_6">Search</string>
+    <string name="page_7">Settings</string>
     <string name="password">Password:</string>
     <string name="password_again">Password Again:</string>
+    <string name="placeholder_bio">Bio</string>
+    <string name="placeholder_comment">Type a comment…</string>
+    <string name="placeholder_current_password">Current password</string>
+    <string name="placeholder_email">Email</string>
+    <string name="placeholder_facebook_page">Facebook page</string>
+    <string name="placeholder_fullname">Fullname</string>
+    <string name="placeholder_instagram_page">Instagram page</string>
+    <string name="placeholder_item_category">Category</string>
+    <string name="placeholder_item_description">Description</string>
+    <string name="placeholder_item_login">Username, email or phone</string>
+    <string name="placeholder_item_passw">Password</string>
+    <string name="placeholder_item_title">Title</string>
+    <string name="placeholder_item_url">Web site</string>
+    <string name="placeholder_location">Location</string>
+    <string name="placeholder_login">Username</string>
+    <string name="placeholder_message">Type a message…</string>
+    <string name="placeholder_new_password">New password</string>
+    <string name="placeholder_password">Password</string>
+    <string name="placeholder_search">Search</string>
+    <string name="placeholder_subject">Subject</string>
+    <string name="placeholder_support_detail">What are you contacting us about?</string>
+    <string name="pref_default_display_name">John Smith</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+    <string name="pref_header_general">General</string>
+    <string name="pref_header_notifications">Notifications</string>
+    <string name="pref_ringtone_silent">Silent</string>
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+    <string name="pref_title_vibrate">Vibrate</string>
     <string name="request_sent">Friend Request Sent</string>
+    <string name="settings_account_access_token">access_token</string>
+    <string name="settings_account_allow_followers_gcm">allow_followers_gcm</string>
+    <string name="settings_account_allow_messages_gcm">allow_messages_gcm</string>
+    <string name="settings_account_cover_url">account_cover_url</string>
+    <string name="settings_account_deactivation">If you proceed deactivate your account, you can never go back. If you want to come back - you\'ll have to create a new account.</string>
+    <string name="settings_account_fullname">account_fullname</string>
+    <string name="settings_account_id">account_id</string>
+    <string name="settings_account_lat">lat</string>
+    <string name="settings_account_lng">lng</string>
+    <string name="settings_account_photo_url">account_photo_url</string>
+    <string name="settings_account_username">account_username</string>
+    <string name="settings_account_verify">account_verify</string>
+    <string name="settings_allow_messages">Receive messages from anyone</string>
+    <string name="settings_allow_messages_summary">You will be able to receive messages from any user, even if the user is not in the list of your friends.</string>
+    <string name="settings_change_password">Change password</string>
+    <string name="settings_contact_us">Contact us</string>
+    <string name="settings_contact_us_summary">Report a problem</string>
+    <string name="settings_copyright_info">Copyright info</string>
+    <string name="settings_deactivate_account">Deactivate account</string>
+    <string name="settings_file">account</string>
+    <string name="settings_header_about">About</string>
+    <string name="settings_header_general">General</string>
+    <string name="settings_header_notifications">Notification</string>
+    <string name="settings_header_others">Others</string>
+    <string name="settings_logout">Log out</string>
+    <string name="settings_notifications">Push notifications</string>
+    <string name="settings_notifications_friends">Friend Requests</string>
+    <string name="settings_notifications_messages">Private messages</string>
+    <string name="settings_services">Services</string>
+    <string name="settings_services_summary">Connect with social network accounts</string>
+    <string name="settings_terms">Terms of use</string>
+    <string name="settings_thanks">Acknowledgements</string>
+    <string name="settings_version">Version</string>
+    <string name="settings_view_blocked_list">View blocked list</string>
+    <string name="settings_web_site">Our website</string>
     <string name="sign_up">Sign up</string>
     <string name="signup_failed">Sign up failed because of no connectivity of your Database or Webserver</string>
     <string name="signup_fill_all_fields">All Fields are necessary to fill up</string>
+    <string name="signup_label_1">By clicking Sign up, you agree to our</string>
+    <string name="signup_label_terms_and_policies">Terms and Policies</string>
     <string name="signup_paths">Path does not exsists </string>
     <string name="signup_successfull">You are registered successfuly now go back and log in </string>
     <string name="signup_type_same_password_in_password_fields">Same Password Please</string>
     <string name="signup_username_crashed">This username has already in our database , try other ones</string>
     <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="title_activity_account_settings">Settings</string>
+    <string name="title_activity_black_list">Blocked List</string>
+    <string name="title_activity_change_password">Change Password</string>
+    <string name="title_activity_chat">Chat</string>
+    <string name="title_activity_deactivate">Deactivate Account</string>
+    <string name="title_activity_dialogs">Messages</string>
     <string name="title_activity_friend_adder">FriendAdder</string>
+    <string name="title_activity_friends">Profile Friends</string>
+    <string name="title_activity_location">Location</string>
+    <string name="title_activity_login">Log In</string>
+    <string name="title_activity_nearby">People Nearby</string>
+    <string name="title_activity_new_photo">New Photo</string>
+    <string name="title_activity_notifications">Notifications</string>
+    <string name="title_activity_notifications_settings">Push notifications</string>
+    <string name="title_activity_photo_view">Photo</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_recovery">Password recovery</string>
+    <string name="title_activity_report">Report</string>
+    <string name="title_activity_search">Search</string>
+    <string name="title_activity_services">Services</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_signup">Sign Up</string>
+    <string name="title_activity_support">Contact us</string>
+    <string name="title_activity_web_view">Web View</string>
+    <string name="title_dialog_nearby">Select a Distance</string>
     <string name="type_friend_username">Your friend username</string>
     <string name="user_offline">User Offline</string>
     <string name="username">Username:</string>
@@ -620,6 +1331,13 @@
     <style name="Base.Animation.AppCompat.DropDownUp" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/abc_grow_fade_in_from_bottom</item>
         <item name="android:windowExitAnimation">@anim/abc_shrink_fade_out_from_bottom</item>
+    </style>
+    <style name="Base.CardView" parent="android:Widget">
+        <item name="cardCornerRadius">@dimen/cardview_default_radius</item>
+        <item name="cardElevation">@dimen/cardview_default_elevation</item>
+        <item name="cardMaxElevation">@dimen/cardview_default_elevation</item>
+        <item name="cardUseCompatPadding">false</item>
+        <item name="cardPreventCornerOverlap">true</item>
     </style>
     <style name="Base.DialogWindowTitle.AppCompat" parent="android:Widget">
         <item name="android:maxLines">1</item>
@@ -1570,13 +2288,7 @@
         <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
         <item name="tabSelectedTextColor">?android:textColorPrimary</item>
     </style>
-    <style name="CardView">
-        <item name="cardBackgroundColor">@color/cardview_light_background</item>
-        <item name="cardCornerRadius">@dimen/cardview_default_radius</item>
-        <item name="cardElevation">@dimen/cardview_default_elevation</item>
-        <item name="cardMaxElevation">@dimen/cardview_default_elevation</item>
-        <item name="cardUseCompatPadding">false</item>
-        <item name="cardPreventCornerOverlap">true</item>
+    <style name="CardView" parent="Base.CardView">
     </style>
     <style name="CardView.Dark">
         <item name="cardBackgroundColor">@color/cardview_dark_background</item>
@@ -1584,7 +2296,13 @@
     <style name="CardView.Light">
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
     </style>
-    <style name="MyCustomToolbarTheme" parent="Theme.AppCompat">
+    <style name="CustomTrans" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowCloseOnTouchOutside">true</item>      
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+
+    </style>
+    <style name="MyCustomToolbarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     <!--<item name="textColorPrimary">#FFFFFF</item>-->
         <!--<item name="textColorSecondary">#FFFFFF</item>-->
         <!--<item name="android:windowNoTitle">true</item>-->
@@ -2030,5 +2748,15 @@
         <item name="errorTextAppearance">@style/TextAppearance.Design.Error</item>
         <item name="counterTextAppearance">@style/TextAppearance.Design.Counter</item>
         <item name="counterOverflowTextAppearance">@style/TextAppearance.Design.Counter.Overflow</item>
+    </style>
+    <style name="emojiDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+
+        <!-- No backgrounds, titles or window float -->
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
     </style>
 </resources>
