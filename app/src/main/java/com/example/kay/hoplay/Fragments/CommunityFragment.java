@@ -59,7 +59,7 @@ public class CommunityFragment extends Fragment {
 
         // use a linear layout manager
 
-//
+//.
 //        // test
         String picUrl = "https://s13.postimg.org/puvr2r9tz/test_user_copy.jpg";
         String username = "Bakatsuki";
