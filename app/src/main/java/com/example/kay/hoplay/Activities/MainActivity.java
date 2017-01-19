@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     private RelativeLayout signInRelativeLayout;
     private Toolbar toolbar;
     private Socket socket;
+    private FirebaseAuth.AuthStateListener authStateListener;
 
 
 
@@ -84,7 +85,23 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 //        toast.setGravity(Gravity.FILL, 0, 0);
 //        toast.show();
 
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
+                    startActivity(i);
+                } else {
+                    // User is signed out
+                    Log.d("---> ", "onAuthStateChanged:signed_out");
+                }
+            }
+        };
+
+        App.getInstance().setmAuthListener(authStateListener);
 
         // getSupportActionBar().hide();
 

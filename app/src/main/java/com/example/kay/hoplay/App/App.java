@@ -40,13 +40,13 @@ public class App extends Application implements SocketIOEvents,Constants{
         return mAuth;
     }
 
-    public void setmAuth(FirebaseAuth mAuth) {
-        this.mAuth = mAuth;
+    public void setmAuthListener(FirebaseAuth.AuthStateListener authStateListener){
+        mAuth.addAuthStateListener(authStateListener);
     }
+
 
     private SQLiteDatabase sqLiteDatabase;
     private   FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener authStateListener;
 
 
     public static String clientID;
@@ -69,26 +69,13 @@ public class App extends Application implements SocketIOEvents,Constants{
         instance = this;
         mAuth = FirebaseAuth.getInstance();
 
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
-                    startActivity(i);
-                } else {
-                    // User is signed out
-                    Log.d("---> ", "onAuthStateChanged:signed_out");
-                }
-            }
-        };
-        mAuth.addAuthStateListener(authStateListener);
 
         SQLiteManagement();
 
     }
+
+
 
 
 
