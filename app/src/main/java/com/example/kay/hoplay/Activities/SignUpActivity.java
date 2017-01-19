@@ -208,7 +208,7 @@ public class SignUpActivity extends AppCompatActivity {
         String username = emailSignUp.getText().toString().trim();
         String password  = passwordSignUp.getText().toString().trim();
 
-        MainActivity.mAuth.createUserWithEmailAndPassword(username,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        App.getInstance().getmAuth().createUserWithEmailAndPassword(username,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
