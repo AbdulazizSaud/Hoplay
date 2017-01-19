@@ -146,6 +146,7 @@ public class MainAppMenu extends AppCompatActivity{
                 }
             }
         };
+        App.getInstance().setmAuthListener(authStateListener);
 
 
        /*  bottomBar.setFragmentItems(getSupportFragmentManager(), R.id.view_pager,
@@ -220,14 +221,12 @@ public class MainAppMenu extends AppCompatActivity{
     @Override
     protected void onStop() {
         super.onStop();
-        App.getInstance().removemAuthListener(authStateListener);
 
     }
 
     @Override
     protected void onStart(){
         super.onStart();
-        App.getInstance().setmAuthListener(authStateListener);
     }
 
     public static BottomBar getBottomBar(){
