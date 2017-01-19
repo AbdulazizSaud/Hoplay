@@ -25,9 +25,9 @@
         android:icon="@drawable/ic_face_white_18dp"
         android:title="" />
 
-    <item
-        android:id="@+id/settings_item"
-        android:icon="@drawable/ic_settings_white_18dp"
-        android:title="" />
+    <!--<item-->
+        <!--android:id="@+id/settings_item"-->
+        <!--android:icon="@drawable/ic_settings_white_18dp"-->
+        <!--android:title="" />-->
 
 </menu>

@@ -24,8 +24,7 @@
         android:windowSoftInputMode="adjustPan">
         <activity
             android:name=".Activities.MainActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity android:name=".Activities.SignUpActivity" />
         <activity android:name=".Activities.MainAppMenu" />
         <activity android:name=".Activities.ThreeButtonsActivity" />
@@ -66,8 +65,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity android:name=".Activities.SettingsActivity"></activity>
     </application>
 
 </manifest>

@@ -3,6 +3,11 @@ package com.example.kay.hoplay.Services;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.CheckBoxPreference;
+import android.preference.Preference;
+import android.preference.PreferenceCategory;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 import android.preference.PreferenceFragment;
 import android.widget.Toast;
 
@@ -26,7 +31,7 @@ public class SettingsScreen extends PreferenceFragment {
         preferences.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
                 //Do whatever you want here
-                App.getInstance().getmAuth().signOut();
+               App.getInstance().getmAuth().signOut();
 
 //                goToMainActivity();
 

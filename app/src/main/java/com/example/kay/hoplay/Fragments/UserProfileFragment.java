@@ -11,18 +11,16 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
+import com.example.kay.hoplay.Activities.SettingsActivity;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Common.ViewHolders;
@@ -31,6 +29,7 @@ import com.example.kay.hoplay.ProfileRequires.UserFollowers;
 import com.example.kay.hoplay.ProfileRequires.UserFollowing;
 import com.example.kay.hoplay.ProfileRequires.UserGames;
 import com.example.kay.hoplay.ProfileRequires.UserRatings;
+import com.example.kay.hoplay.Services.SettingsScreen;
 import com.example.kay.hoplay.model.RecentActivityList;
 import com.pkmmte.view.CircularImageView;
 
@@ -183,27 +182,38 @@ public class UserProfileFragment extends Fragment {
         profileSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Creating the instance of PopupMenu
-                PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), profileSettings);
-                //Inflating the Popup using xml file
-                popup.getMenuInflater()
-                        .inflate(R.menu.settings_in_profile, popup.getMenu());
 
-                //registering popup with OnMenuItemClickListener
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-                        Toast.makeText(
-                                getActivity().getApplicationContext() ,
-                                "You Clicked : " + item.getTitle(),
-                                Toast.LENGTH_SHORT
-                        ).show();
-                        return true;
-                    }
-                });
 
-                popup.show(); //showing popup menu
+                Intent i = new Intent(getActivity().getApplicationContext(), SettingsActivity.class);
+                startActivity(i);
+
             }
-        }); //closing the setOnClickListener method
+        });
+
+//        profileSettings.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //Creating the instance of PopupMenu
+//                PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), profileSettings);
+//                //Inflating the Popup using xml file
+//                popup.getMenuInflater()
+//                        .inflate(R.menu.settings_in_profile, popup.getMenu());
+//
+//                //registering popup with OnMenuItemClickListener
+//                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                    public boolean onMenuItemClick(MenuItem item) {
+//                        Toast.makeText(
+//                                getActivity().getApplicationContext() ,
+//                                "You Clicked : " + item.getTitle(),
+//                                Toast.LENGTH_SHORT
+//                        ).show();
+//                        return true;
+//                    }
+//                });
+//
+//                popup.show(); //showing popup menu
+//            }
+//        }); //closing the setOnClickListener method
 
 
         userPicture.setOnClickListener(new View.OnClickListener() {
