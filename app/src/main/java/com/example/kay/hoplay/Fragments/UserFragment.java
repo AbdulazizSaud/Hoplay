@@ -11,10 +11,14 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +60,7 @@ public class UserFragment extends Fragment {
     private TextView recentActivitiesTextView;
     private TextView nickname;
     private CircleImageView userPicture;
+    private ImageView profileSettings;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -88,6 +93,8 @@ public class UserFragment extends Fragment {
         recentActivitiesTextView = (TextView) view.findViewById(R.id.recent_activities_textview);
         nickname = (TextView) view.findViewById(R.id.nickname_profile_textView);
         userPicture = (CircleImageView) view.findViewById(R.id.user_profile_photo_imageView);
+        profileSettings = (ImageView) view.findViewById(R.id.user_profile_settings_imageview);
+
 
         Typeface sansation = Typeface.createFromAsset(getActivity().getAssets() ,"sansationbold.ttf");
         usernameProfile.setTypeface(sansation);
@@ -170,6 +177,33 @@ public class UserFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+
+
+        profileSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Creating the instance of PopupMenu
+                PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), profileSettings);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater()
+                        .inflate(R.menu.settings_in_profile, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Toast.makeText(
+                                getActivity().getApplicationContext() ,
+                                "You Clicked : " + item.getTitle(),
+                                Toast.LENGTH_SHORT
+                        ).show();
+                        return true;
+                    }
+                });
+
+                popup.show(); //showing popup menu
+            }
+        }); //closing the setOnClickListener method
 
 
         userPicture.setOnClickListener(new View.OnClickListener() {

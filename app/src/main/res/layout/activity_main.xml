@@ -12,6 +12,8 @@
 
     <!--<include android:id="@+id/app_bar" layout="@layout/app_bar"></include>-->
 
+
+
     <ImageView
         android:layout_width="250dp"
         android:layout_height="100dp"
