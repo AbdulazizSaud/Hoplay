@@ -50,12 +50,6 @@ public class NewRequest extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        getWindow().setLayout((int) (dm.widthPixels * .8), (int) (dm.heightPixels * .8));
-
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_request);

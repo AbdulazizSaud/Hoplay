@@ -205,13 +205,31 @@ public class SignUpActivity extends AppCompatActivity {
 //            startActivity(i);
 //        }
 
-        String username = emailSignUp.getText().toString().trim();
-        String password  = passwordSignUp.getText().toString().trim();
 
-        App.getInstance().getmAuth().createUserWithEmailAndPassword(username,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        final String email = emailSignUp.getText().toString().trim();
+        final String username  =usernameSignUp.getText().toString().trim();
+        final String password  = passwordSignUp.getText().toString().trim();
+
+        App.getInstance().getmAuth().createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
                 if(task.isSuccessful()){
+
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("username",username);
+                        jsonObject.put("email",email);
+                        Log.i("---->",username +" "+email);
+
+
+                        App.getInstance().getSocket().emit("signup_database",jsonObject);
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                     Toast.makeText(getApplicationContext(),"Your account is created successfully",Toast.LENGTH_LONG).show();
                     Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
                     startActivity(i);
@@ -220,6 +238,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
+
 
     }
 
