@@ -56,9 +56,7 @@
         <activity android:name=".Activities.NoConnection" />
         <activity android:name=".Fragments.MakeRequestFragment" />
         <activity
-            android:name=".RequestsRequires.NewRequest"
-            android:theme="@style/CustomTrans"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+             android:name=".RequestsRequires.NewRequest" />
         <activity android:name=".Activities.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

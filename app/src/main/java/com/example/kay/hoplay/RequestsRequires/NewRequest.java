@@ -55,6 +55,7 @@ public class NewRequest extends AppCompatActivity {
         setContentView(R.layout.activity_new_request);
 
 
+
         final Typeface sansationbold = Typeface.createFromAsset(getResources().getAssets(), "sansationbold.ttf");
         makeRequestMessage = (TextView) findViewById(R.id.make_request_message_textview);
         makeRequestMessage.setTypeface(sansationbold);
@@ -74,7 +75,8 @@ public class NewRequest extends AppCompatActivity {
 
 
         requestDescritopnEdittext = (EditText) findViewById(R.id.request_descritption_edittext);
-        requestDescritopnEdittext.requestFocus();
+
+        makeRequestMessage.requestFocus();
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(requestDescritopnEdittext, InputMethodManager.SHOW_IMPLICIT);

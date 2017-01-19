@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/requests_item"
-        android:icon="@drawable/ic_timeline_white_18dp"
+        android:icon="@drawable/ic_search_white_18dp"
         android:title=""
         />
 
