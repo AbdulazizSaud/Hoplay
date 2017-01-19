@@ -1,13 +1,18 @@
 package com.example.kay.hoplay.Activities;
 
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.kay.hoplay.Adapters.MenuPagerAdapter;
+import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarBadge;
 import com.roughike.bottombar.OnMenuTabSelectedListener;
@@ -40,7 +45,7 @@ public class MainAppMenu extends AppCompatActivity{
 
   private  ViewPager mainAppMenu ;
   private  boolean changeBar = true ;
-
+    private FirebaseAuth.AuthStateListener authStateListener;
 
 
     @Override
@@ -129,6 +134,19 @@ public class MainAppMenu extends AppCompatActivity{
 
 
 
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    // User is sign out
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(i);
+                }
+            }
+        };
+
 
        /*  bottomBar.setFragmentItems(getSupportFragmentManager(), R.id.view_pager,
                 new BottomBarFragment(NavigatorFragment.newInstance("Content for requests."), R.drawable.ic_public_black_24dp, "requests"),
@@ -200,10 +218,17 @@ public class MainAppMenu extends AppCompatActivity{
     protected void onDestroy() {super.onDestroy();}
 
     @Override
-    protected void onStop() {super.onStop();}
+    protected void onStop() {
+        super.onStop();
+        App.getInstance().removemAuthListener(authStateListener);
+
+    }
 
     @Override
-    protected void onStart(){super.onStart();}
+    protected void onStart(){
+        super.onStart();
+        App.getInstance().setmAuthListener(authStateListener);
+    }
 
     public static BottomBar getBottomBar(){
         return bottomBar;

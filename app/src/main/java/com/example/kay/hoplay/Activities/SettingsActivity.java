@@ -15,6 +15,9 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         android.app.Fragment fragment = new SettingsScreen();
+
+        ((SettingsScreen)fragment).setContext(getApplicationContext());
+
         android.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         if(savedInstanceState ==null)
         {

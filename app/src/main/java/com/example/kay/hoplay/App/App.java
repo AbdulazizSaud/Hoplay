@@ -43,7 +43,9 @@ public class App extends Application implements SocketIOEvents,Constants{
     public void setmAuthListener(FirebaseAuth.AuthStateListener authStateListener){
         mAuth.addAuthStateListener(authStateListener);
     }
-
+    public void removemAuthListener(FirebaseAuth.AuthStateListener authStateListener){
+        mAuth.removeAuthStateListener(authStateListener);
+    }
 
     private SQLiteDatabase sqLiteDatabase;
     private   FirebaseAuth mAuth;

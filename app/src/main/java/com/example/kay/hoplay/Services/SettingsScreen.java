@@ -1,5 +1,6 @@
 package com.example.kay.hoplay.Services;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -11,6 +12,7 @@ import android.preference.PreferenceScreen;
 import android.preference.PreferenceFragment;
 import android.widget.Toast;
 
+import com.example.kay.hoplay.Activities.MainActivity;
 import com.example.kay.hoplay.Activities.MainAppMenu;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
@@ -20,6 +22,19 @@ import com.example.kay.hoplay.R;
  */
 
 public class SettingsScreen extends PreferenceFragment {
+
+    private  Context context;
+
+    public SettingsScreen(){
+
+
+    }
+
+    public void setContext(Context c){
+        this.context = c;
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +48,8 @@ public class SettingsScreen extends PreferenceFragment {
                 //Do whatever you want here
                App.getInstance().getmAuth().signOut();
 
-//                goToMainActivity();
+                Intent i = new Intent(context, MainActivity.class);
+                startActivity(i);
 
                 Toast.makeText(getActivity().getApplicationContext(),"YOYOYOOYOYO",Toast.LENGTH_LONG).show();
 
