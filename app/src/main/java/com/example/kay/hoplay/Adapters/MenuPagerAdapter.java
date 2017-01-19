@@ -8,7 +8,7 @@ import com.example.kay.hoplay.Fragments.CommunityFragment;
 import com.example.kay.hoplay.Fragments.MakeRequestFragment;
 import com.example.kay.hoplay.RequestsRequires.RequestsFragment;
 import com.example.kay.hoplay.Fragments.SettingsFragment;
-import com.example.kay.hoplay.Fragments.UserFragment;
+import com.example.kay.hoplay.Fragments.UserProfileFragment;
 
 /**
  * Created by Kay on 6/15/2016.
@@ -32,7 +32,7 @@ public class MenuPagerAdapter extends FragmentStatePagerAdapter {
                 case 2 :
                     return new MakeRequestFragment();
                 case 3  :
-                    return new UserFragment();
+                    return new UserProfileFragment();
                 case 4 :
                     return new SettingsFragment();
 

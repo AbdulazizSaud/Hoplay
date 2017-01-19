@@ -1,10 +1,13 @@
 package com.example.kay.hoplay.Services;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.widget.Toast;
 
+import com.example.kay.hoplay.Activities.MainAppMenu;
+import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
 
 /**
@@ -23,6 +26,10 @@ public class SettingsScreen extends PreferenceFragment {
         preferences.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
                 //Do whatever you want here
+                App.getInstance().getmAuth().signOut();
+
+//                goToMainActivity();
+
                 Toast.makeText(getActivity().getApplicationContext(),"YOYOYOOYOYO",Toast.LENGTH_LONG).show();
 
                 return true;

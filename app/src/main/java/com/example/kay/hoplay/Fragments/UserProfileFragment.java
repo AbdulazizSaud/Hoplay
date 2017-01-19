@@ -44,7 +44,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UserFragment extends Fragment {
+public class UserProfileFragment extends Fragment {
 
     private final static int RESULT_LOAD_IMG=1;
 
@@ -68,7 +68,7 @@ public class UserFragment extends Fragment {
     ArrayList<RecentActivityList> recentActivityLists=new ArrayList<RecentActivityList>();
 
 
-    public UserFragment() {
+    public UserProfileFragment() {
         // Required empty public constructor
     }
 
