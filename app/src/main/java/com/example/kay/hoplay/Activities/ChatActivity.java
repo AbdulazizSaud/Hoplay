@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -44,7 +45,7 @@ import io.socket.emitter.Emitter;
  * Created by Kay on 10/30/2016.
  */
 
-public class ChatActivity extends ActionBarActivity {
+public class ChatActivity extends AppCompatActivity {
 
 
     private EmojiconEditText messageET;
@@ -318,6 +319,35 @@ public class ChatActivity extends ActionBarActivity {
             });
         }
     };
+
+
+    public Emitter.Listener OnTyping = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    String username  = String.valueOf(args[0]);
+
+                }
+            });
+        }
+    };
+
+
+    public Emitter.Listener OnAddUser = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    String username  = String.valueOf(args[0]);
+
+                }
+            });
+        }
+    };
+
 
 
     public void addMessage(String message, boolean me) {
