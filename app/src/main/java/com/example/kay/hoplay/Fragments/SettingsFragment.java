@@ -35,7 +35,7 @@ public class SettingsFragment extends  Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v= inflater.inflate(R.layout.fragment_settings, container, false);
+        View v= inflater.inflate(R.layout.fragment_community, container, false);
         //Fragment fragment = fi
         return v;
     }
