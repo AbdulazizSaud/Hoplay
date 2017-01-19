@@ -55,10 +55,6 @@ public class MainAppMenu extends AppCompatActivity{
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
-
-        Log.i("----------->",MainActivity.mAuth.getCurrentUser().getEmail());
-
-
         // Get the current display info :
         WindowManager windowManager = getWindowManager();
         Display display = windowManager.getDefaultDisplay();
