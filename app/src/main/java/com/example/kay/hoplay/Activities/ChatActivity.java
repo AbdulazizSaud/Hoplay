@@ -30,9 +30,13 @@ import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.model.ChatMessage;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 import emojicon.EmojiconEditText;
 import emojicon.EmojiconGridView;
@@ -52,15 +56,16 @@ public class ChatActivity extends AppCompatActivity {
     private EmojiconsPopup emojiconsPopup;
     private ImageView emojiBtn;
 
-    private View  rootView;
+    private View rootView;
 
     private ListView messagesContainer;
     private Button sendBtn;
     private ChatAdapter adapter;
     private ArrayList<ChatMessage> chatHistory;
     private Socket socket;
-    private String myUsername=null;
-    private String receiverUsername=null;
+    private String myUsername = null;
+    private String receiverUsername = null;
+    private String username = "aziz";
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -80,6 +85,11 @@ public class ChatActivity extends AppCompatActivity {
         receiverUsername = i.getStringExtra("receiverUsername");
 
 
+        Random random = new Random();
+        int num1 = random.nextInt() + 3000,num2 = random.nextInt() + 200;
+        username = num1+num2 + ((char)(random.nextInt()+100)) +"";
+        Log.i("-->",username);
+
         // Users toolbar :
         Toolbar toolbar = (Toolbar) findViewById(R.id.users_toolbar);
         toolbar.setTitle("");
@@ -95,11 +105,9 @@ public class ChatActivity extends AppCompatActivity {
 
 
         initControls();
-         socket = App.getInstance().getSocket();
-        socket.connect();
-
-        Log.i("isCo",socket.connected()+"");
-         socket.on(App.MESSAGE_EVENT, onMessage);
+        socket = App.getInstance().getSocket();
+        Log.i("isCo", socket.connected() + "");
+        socket.on(App.MESSAGE_EVENT, onMessage);
 
     }
 
@@ -126,8 +134,8 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-    void doPopupEmoji(){
-        emojiconsPopup = new EmojiconsPopup(rootView,getApplicationContext());
+    void doPopupEmoji() {
+        emojiconsPopup = new EmojiconsPopup(rootView, getApplicationContext());
         emojiconsPopup.setSizeForSoftKeyboard();
 
         //If the emoji popup is dismissed, change emojiButton to smiley icon
@@ -145,6 +153,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onKeyboardOpen(int keyBoardHeight) {
             }
+
             @Override
             public void onKeyboardClose() {
                 if (emojiconsPopup.isShowing())
@@ -199,14 +208,14 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //If popup is not showing => emoji keyboard is not visible, we need to show it
-                if(!emojiconsPopup.isShowing()){
+                if (!emojiconsPopup.isShowing()) {
                     //If keyboard is visible, simply show the emoji popup
-                    if(emojiconsPopup.isKeyBoardOpen()){
+                    if (emojiconsPopup.isKeyBoardOpen()) {
                         emojiconsPopup.showAtBottom();
                         emojiBtn.setImageResource(R.drawable.ic_keyboard);
                     }
                     //else, open the text keyboard first and immediately after that show the emoji popup
-                    else{
+                    else {
                         messageET.setFocusableInTouchMode(true);
                         messageET.requestFocus();
                         emojiconsPopup.showAtBottomPending();
@@ -216,12 +225,11 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 }
                 //If popup is showing, simply dismiss it to show the undelying text keyboard
-                else{
+                else {
                     emojiconsPopup.dismiss();
                 }
             }
         });
-
 
 
         adapter = new ChatAdapter(ChatActivity.this, new ArrayList<ChatMessage>());
@@ -234,14 +242,26 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String messageText = messageET.getText().toString();
+                if(messageText.equals("\\s++") ||messageText.equals("")||messageText ==null)
+                    return;
 
                 addMessage(messageText, true);
 
-                App.getInstance().insertIntoCMSQL(myUsername,receiverUsername,messageText);
+                //App.getInstance().insertIntoCMSQL(myUsername, receiverUsername, messageText);
 
                 messageET.setText("");
-                sendBtn.setBackground( ContextCompat.getDrawable(getApplicationContext(),R.drawable.sendiconnomessage));
-                socket.emit(App.MESSAGE_EVENT, messageText);
+                sendBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.sendiconnomessage));
+                JSONObject data = new JSONObject();
+
+                try {
+                    data.put("username", username);
+                    data.put("message", messageText);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                socket.emit(App.MESSAGE_EVENT, data);
 
             }
         });
@@ -252,7 +272,6 @@ public class ChatActivity extends AppCompatActivity {
             }
 
 
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
@@ -261,7 +280,7 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                sendBtn.setBackground( ContextCompat.getDrawable(getApplicationContext(),R.drawable.sendiconmessagein));
+                sendBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.sendiconmessagein));
 
             }
         });
@@ -312,11 +331,21 @@ public class ChatActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    String message = String.valueOf(args[0]);
-                    String senderId = String.valueOf(args[1]);
 
-                    addMessage(message, false);
-                    App.getInstance().insertIntoCMSQL(receiverUsername,myUsername,message);
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+
+                        String user = jsonObject.getString("username");
+                        String message = jsonObject.getString("message");
+                        if (!user.equals(username)) {
+                            addMessage(message, false);
+                            App.getInstance().insertIntoCMSQL(receiverUsername, myUsername, message);
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
                 }
             });
@@ -330,7 +359,7 @@ public class ChatActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    String username  = String.valueOf(args[0]);
+                    String username = String.valueOf(args[0]);
 
                 }
             });
@@ -344,13 +373,12 @@ public class ChatActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    String username  = String.valueOf(args[0]);
+                    String username = String.valueOf(args[0]);
 
                 }
             });
         }
     };
-
 
 
     public void addMessage(String message, boolean me) {
@@ -368,29 +396,29 @@ public class ChatActivity extends AppCompatActivity {
         displayMessage(chatMessage);
     }
 
-    public void getChatMessages(){
+    public void getChatMessages() {
 
-        if(myUsername == null || receiverUsername ==null)
+        if (myUsername == null || receiverUsername == null)
             return;
 
-        Cursor c = App.getInstance().getCMSQL(myUsername,receiverUsername);
-        Log.i("COUNT --------->",c.getColumnCount() +" ");
+        Cursor c = App.getInstance().getCMSQL(myUsername, receiverUsername);
+        Log.i("COUNT --------->", c.getColumnCount() + " ");
 
         int messageIndex = c.getColumnIndex("message");
         int senderIdIndex = c.getColumnIndex("sender_ID");
 
         c.moveToFirst();
 
-        while(c!=null){
+        while (c != null) {
             String message = c.getColumnName(messageIndex);
-            String sender  = c.getColumnName(senderIdIndex);
+            String sender = c.getColumnName(senderIdIndex);
 
             // here where we will add a message
             // check if it's my or receiver
-            if(sender.equals(myUsername)){
-                addMessage(message,true);
-            } else{
-                addMessage(message,false);
+            if (sender.equals(myUsername)) {
+                addMessage(message, true);
+            } else {
+                addMessage(message, false);
             }
 
             c.moveToNext();
@@ -398,9 +426,8 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
-    public void toCommunityFragment(View view)
-    {
-        Intent i = new Intent(this,MainAppMenu.class);
+    public void toCommunityFragment(View view) {
+        Intent i = new Intent(this, MainAppMenu.class);
         startActivity(i);
     }
 

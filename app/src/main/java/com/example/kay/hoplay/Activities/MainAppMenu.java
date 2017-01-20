@@ -226,6 +226,7 @@ public class MainAppMenu extends AppCompatActivity{
 
     @Override
     protected void onStart(){
+
         super.onStart();
     }
 

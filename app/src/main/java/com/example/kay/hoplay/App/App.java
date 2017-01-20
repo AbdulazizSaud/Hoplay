@@ -29,12 +29,15 @@ import java.util.concurrent.ExecutionException;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 
 
 public class App extends Application implements SocketIOEvents,Constants{
 
     private static App instance;
     private ImageLoader imageLoader;
+    private String accessToken = "mdaX5LzLOOXaxor0xzxaax87987xu8d";
+
 
     public FirebaseAuth getmAuth() {
         return mAuth;
@@ -70,13 +73,37 @@ public class App extends Application implements SocketIOEvents,Constants{
         super.onCreate();
         instance = this;
         mAuth = FirebaseAuth.getInstance();
+        socketIO.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
+                    @Override
+                    public void call(Object... args) {
+                       JSONObject jsonObject = new JSONObject();
+                        try {
+                            jsonObject.put("accessToken",accessToken);
+                            jsonObject.put("email","80a.tutorial@gmail.com");
+
+                            socketIO.emit("userInfo",jsonObject);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+
+        socketIO.on("userInfo", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                String values = String.valueOf(args[0]);
+                Log.i("baka--->",values);
+            }
+        });
+
+                socketIO.connect();
 
 
-
-        SQLiteManagement();
+                SQLiteManagement();
 
     }
-
 
 
 
@@ -97,6 +124,10 @@ public class App extends Application implements SocketIOEvents,Constants{
         return imageLoader;
     }
 
+    public void  getMyInfo(){
+        Log.i("------------->","hi");
+
+    }
     public JSONObject getAPI(String apiURL, HashMap<String,String> data){
         String api_json= null;
         JSONObject resJSON=null;
