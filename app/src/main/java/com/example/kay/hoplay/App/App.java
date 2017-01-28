@@ -1,5 +1,6 @@
 package com.example.kay.hoplay.App;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,6 +14,9 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.example.kay.hoplay.Activities.MainAppMenu;
 import com.example.kay.hoplay.Interfaces.Constants;
+import com.example.kay.hoplay.PatternStrategyComponents.DataCommon;
+import com.example.kay.hoplay.PatternStrategyComponents.PattrenContext;
+import com.example.kay.hoplay.PatternStrategyComponents.PattrenStrategyInterface;
 import com.example.kay.hoplay.Services.ErrorHandler;
 import com.example.kay.hoplay.Services.GetAPI;
 import com.example.kay.hoplay.Services.LruBitmapCache;
@@ -35,8 +39,11 @@ import io.socket.emitter.Emitter;
 public class App extends Application implements SocketIOEvents,Constants{
 
     private static App instance;
+    private PattrenContext pattrenContext;
+
     private ImageLoader imageLoader;
     private String accessToken = "mdaX5LzLOOXaxor0xzxaax87987xu8d";
+    private Activity currentActivity;
 
 
     public FirebaseAuth getmAuth() {
@@ -51,7 +58,7 @@ public class App extends Application implements SocketIOEvents,Constants{
     }
 
     private SQLiteDatabase sqLiteDatabase;
-    private   FirebaseAuth mAuth;
+    private  FirebaseAuth mAuth;
 
 
     public static String clientID;
@@ -73,6 +80,7 @@ public class App extends Application implements SocketIOEvents,Constants{
         super.onCreate();
         instance = this;
         mAuth = FirebaseAuth.getInstance();
+        pattrenContext = new PattrenContext();
         socketIO.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
                     @Override
                     public void call(Object... args) {
@@ -229,4 +237,16 @@ public class App extends Application implements SocketIOEvents,Constants{
 
 
 
+    public void setPattrenStrargey(Activity activity,PattrenStrategyInterface strargey){
+        this.currentActivity = activity;
+        pattrenContext.setStrategy(strargey);
+    }
+
+    public String excutePattrenStrargey(DataCommon ... dataCommons){
+        return pattrenContext.excute(dataCommons);
+    }
+
+    public Activity getCurrentActivity() {
+        return currentActivity;
+    }
 }

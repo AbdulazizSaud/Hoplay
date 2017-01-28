@@ -14,4 +14,14 @@ public interface  Constants {
     public static final String REGISTER_PATH = URL +"user/signup";
     public static final String LOGIN_PATH = URL +"user/signin";
 
+
+    public static final String SUCCESSED = "PROCESS IS SUCCESSED";
+    public static final String FAILED =  "PROCESS IS FAILED";
+
+
+    public static final String SUCCESSED_CREATED_ACCOUNT = "Your account is created successfully";
+    public static final String FAILED_CREATED_ACCOUNT = "Your account is created successfully";
+    public static final String FAILED_MESSAGE = "Some issues";
+
+
 }

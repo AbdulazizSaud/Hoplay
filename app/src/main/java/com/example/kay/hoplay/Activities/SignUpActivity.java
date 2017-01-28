@@ -23,6 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.PatternStrategyComponents.DataCommon;
+import com.example.kay.hoplay.PatternStrategyComponents.PattrenStrategyInterface;
+import com.example.kay.hoplay.PatternStrategyComponents.Strategies.FirebaseSignupStrategy;
 import com.example.kay.hoplay.Services.ErrorHandler;
 import com.example.kay.hoplay.Services.GetAPI;
 import com.example.kay.hoplay.R;
@@ -205,40 +208,34 @@ public class SignUpActivity extends AppCompatActivity {
 //            startActivity(i);
 //        }
 
+        App app = App.getInstance();
 
         final String email = emailSignUp.getText().toString().trim();
         final String username  =usernameSignUp.getText().toString().trim();
         final String password  = passwordSignUp.getText().toString().trim();
 
-        App.getInstance().getmAuth().createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+        if(email.equals(null)|| email.equals("") || username.equals(null)|| password.equals(""))
+            return;
 
-                if(task.isSuccessful()){
+        DataCommon<String> passData = new DataCommon<String>(username,email,password);
 
-                    JSONObject jsonObject = new JSONObject();
-                    try {
-                        jsonObject.put("username",username);
-                        jsonObject.put("email",email);
-                        Log.i("---->",username +" "+email);
+        app.setPattrenStrargey(this,new FirebaseSignupStrategy());
 
+        String messages = app.excutePattrenStrargey(passData);
 
-                        App.getInstance().getSocket().emit("signup_database",jsonObject);
+        String[] messages_split = messages.split("_Message_");
+        Log.i("message-------->",messages_split[0]);
 
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    Toast.makeText(getApplicationContext(),"Your account is created successfully",Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
-                    startActivity(i);
-                }else {
-                    Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
+        if(messages_split[0].equals(App.SUCCESSED)){
+            Toast.makeText(getApplicationContext(),App.SUCCESSED_CREATED_ACCOUNT,Toast.LENGTH_LONG).show();
+            Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
+            startActivity(i);
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(),messages_split[1],Toast.LENGTH_LONG).show();
+        }
 
     }
 
