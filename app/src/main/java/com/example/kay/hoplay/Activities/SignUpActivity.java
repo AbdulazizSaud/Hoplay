@@ -3,14 +3,12 @@ package com.example.kay.hoplay.Activities;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ThemedSpinnerAdapter;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -20,25 +18,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.PatternStrategyComponents.DataCommon;
-import com.example.kay.hoplay.PatternStrategyComponents.PattrenStrategyInterface;
-import com.example.kay.hoplay.PatternStrategyComponents.Strategies.FirebaseSignupStrategy;
-import com.example.kay.hoplay.Services.ErrorHandler;
+import com.example.kay.hoplay.PatternStrategyComponents.Strategies.FirebaseAuthStrategy;
 import com.example.kay.hoplay.Services.GetAPI;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.util.Helper;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.concurrent.ExecutionException;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -214,28 +204,13 @@ public class SignUpActivity extends AppCompatActivity {
         final String username  =usernameSignUp.getText().toString().trim();
         final String password  = passwordSignUp.getText().toString().trim();
 
-        if(email.equals(null)|| email.equals("") || username.equals(null)|| password.equals(""))
+        if(email.equals(null)|| email.equals("") || username.equals(null)|| password.equals("")) {
             return;
-
-        DataCommon<String> passData = new DataCommon<String>(username,email,password);
-
-        app.setPattrenStrargey(this,new FirebaseSignupStrategy());
-
-        String messages = app.excutePattrenStrargey(passData);
-
-        String[] messages_split = messages.split("_Message_");
-        Log.i("message-------->",messages_split[0]);
-
-
-        if(messages_split[0].equals(App.SUCCESSED)){
-            Toast.makeText(getApplicationContext(),App.SUCCESSED_CREATED_ACCOUNT,Toast.LENGTH_LONG).show();
-            Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
-            startActivity(i);
         }
-        else
-        {
-            Toast.makeText(getApplicationContext(),messages_split[1],Toast.LENGTH_LONG).show();
-        }
+
+        DataCommon<String> passData = new DataCommon<String>(FirebaseAuthStrategy.SIGN_UP,username,email,password);
+        app.setPattrenStrargey(this,new FirebaseAuthStrategy());
+        app.excutePattrenStrargey(passData);
 
     }
 
@@ -468,4 +443,10 @@ public class SignUpActivity extends AppCompatActivity {
 
 
 
+    class AuthFirebase extends AsyncTask<String,String,String>{
+        @Override
+        protected String doInBackground(String... params) {
+            return null;
+        }
+    }
 }

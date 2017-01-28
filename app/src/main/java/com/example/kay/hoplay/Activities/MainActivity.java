@@ -30,6 +30,8 @@ import android.widget.Toast;
 
 
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.PatternStrategyComponents.DataCommon;
+import com.example.kay.hoplay.PatternStrategyComponents.Strategies.FirebaseAuthStrategy;
 import com.example.kay.hoplay.Services.ErrorHandler;
 import com.example.kay.hoplay.Services.GetAPI;
 import com.example.kay.hoplay.R;
@@ -64,8 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     private RelativeLayout signInRelativeLayout;
     private Toolbar toolbar;
     private Socket socket;
-    private FirebaseAuth.AuthStateListener authStateListener;
-
+    private App app =  App.getInstance();
 
 
 
@@ -84,24 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 //        toast.setDuration(Toast.LENGTH_LONG);
 //        toast.setGravity(Gravity.FILL, 0, 0);
 //        toast.show();
-
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
-                    startActivity(i);
-                } else {
-                    // User is signed out
-                    Log.d("---> ", "onAuthStateChanged:signed_out");
-                }
-            }
-        };
-
-        App.getInstance().setmAuthListener(authStateListener);
+        app.setPattrenStrargey(this,new FirebaseAuthStrategy(this));
 
         // getSupportActionBar().hide();
 
@@ -198,21 +182,12 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
 //                startActivity(i);
 //            }
 
-        String username = usernameSignIn.getText().toString().trim();
+        String email = usernameSignIn.getText().toString().trim();
         String password = passwordSignIn.getText().toString().trim();
 
-        App.getInstance().getmAuth().signInWithEmailAndPassword(username, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
-                    startActivity(i);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Please check your email or password", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
 
+        DataCommon<String> passData = new DataCommon<String>(FirebaseAuthStrategy.SIGN_IN,"<<>>",email,password);
+        app.excutePattrenStrargey(passData);
     }
 
 

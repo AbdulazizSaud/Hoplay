@@ -19,9 +19,12 @@ public interface  Constants {
     public static final String FAILED =  "PROCESS IS FAILED";
 
 
+    public static final String SUCCESSED_LOGIN = "Signed in successfully";
     public static final String SUCCESSED_CREATED_ACCOUNT = "Your account is created successfully";
     public static final String FAILED_CREATED_ACCOUNT = "Your account is created successfully";
+    public static final String FAILED_LOGIN = "Failed to login";
     public static final String FAILED_MESSAGE = "Some issues";
+
 
 
 }
