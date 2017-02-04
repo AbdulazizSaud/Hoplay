@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.kay.hoplay.Activities.MainActivity;
 import com.example.kay.hoplay.Activities.MainAppMenu;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Interfaces.Constants;
@@ -167,7 +168,10 @@ public  class FirebaseAuthStrategy implements PattrenStrategyInterface{
                     activity.startActivity(i);
                 } else {
                     // User is signed out
-                    Log.d("---> ", "onAuthStateChanged:signed_out");
+                     if(applicationContext != MainActivity.mainActivity.getApplicationContext()) {
+                         Intent i = new Intent(applicationContext, MainActivity.class);
+                         activity.startActivity(i);
+                     }
                 }
             }
         };

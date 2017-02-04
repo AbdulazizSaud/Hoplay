@@ -5,7 +5,7 @@ package com.example.kay.hoplay.model;
  */
 
 public class  ChatMessage {
-    private long id;
+    private String id;
     private boolean isMe;
     private String message;
     private Long userId;
@@ -15,11 +15,11 @@ public class  ChatMessage {
     {
 
     }
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

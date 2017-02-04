@@ -7,13 +7,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.example.kay.hoplay.Activities.ChatActivity;
+import com.example.kay.hoplay.ChatRequires.ChatActivity;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Common.ViewHolders;
@@ -22,7 +21,6 @@ import com.example.kay.hoplay.model.CommunityUserList;
 import com.pkmmte.view.CircularImageView;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 
 /**
