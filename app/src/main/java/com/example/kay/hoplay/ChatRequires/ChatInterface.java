@@ -8,4 +8,5 @@ import io.socket.emitter.Emitter;
 
 public interface ChatInterface {
 
+    void setupChat();
 }

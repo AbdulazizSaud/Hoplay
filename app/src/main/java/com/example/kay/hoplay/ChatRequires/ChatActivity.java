@@ -50,40 +50,6 @@ public class ChatActivity extends Chat {
     // socket
     protected Socket socket;
 
-    // set up chat app using socket io
-    @Override
-    protected void setupChat() {
-        // get socket io instance and init events
-        socket = App.getInstance().getSocket();
-        socket.on(App.MESSAGE_EVENT, onMessage);
-        socket.on(App.TYPEING_EVENT,onTyping);
-        socket.on(App.ADD_USER_EVENT,onAddUser);
-    }
-
-    // this method for send message , execute only when a user click on send button
-    public void sendMessage(String message) {
-        super.sendMessage(message);
-
-        // here pass a data as json and emit to socket event
-        JSONObject data = new JSONObject();
-        try {
-            data.put("username", myUsername);
-            data.put("message", message);
-            socket.emit(App.MESSAGE_EVENT, data);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    // this method for receive message , execute only when a user receive a message
-    public void receiveMessage(Objects... args) {
-        super.receiveMessage(args);
-        //........
-    }
-
-
     /********** Events **********/
 
     // this events on execute when user receive the message
@@ -129,5 +95,41 @@ public class ChatActivity extends Chat {
     };
 
     /**************************/
+
+    // set up chat app using socket io
+    @Override
+    public void setupChat() {
+        // get socket io instance and init events
+        socket = App.getInstance().getSocket();
+        socket.on(App.MESSAGE_EVENT, onMessage);
+        socket.on(App.TYPEING_EVENT,onTyping);
+        socket.on(App.ADD_USER_EVENT,onAddUser);
+    }
+
+    // this method for send message , execute only when a user click on send button
+    protected void sendMessage(String message) {
+        super.sendMessage(message);
+
+        // here pass a data as json and emit to socket event
+        JSONObject data = new JSONObject();
+        try {
+            data.put("username", myUsername);
+            data.put("message", message);
+            socket.emit(App.MESSAGE_EVENT, data);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    // this method for receive message , execute only when a user receive a message
+    protected void receiveMessage(Objects... args) {
+        super.receiveMessage(args);
+        //........
+    }
+
+
+
 
 }

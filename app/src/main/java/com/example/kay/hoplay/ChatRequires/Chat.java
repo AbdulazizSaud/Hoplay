@@ -376,6 +376,6 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
     }
 
     // this abstract method is for implements the chat mechinsim
-    protected abstract void setupChat();
+    public abstract void setupChat();
 
 }
