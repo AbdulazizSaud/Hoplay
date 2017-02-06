@@ -23,9 +23,9 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".Authentication.LoginActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activities.SignUpActivity" />
+        <activity android:name=".Authentication.SignUpActivity" />
         <activity android:name=".Activities.MainAppMenu" />
         <activity android:name=".Activities.ThreeButtonsActivity" />
         <!--

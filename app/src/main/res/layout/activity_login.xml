@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.kay.hoplay.Activities.MainActivity"
+    tools:context="com.example.kay.hoplay.Authentication.LoginActivity"
     android:background="#E0E0E0"
     android:id="@+id/sign_in_relativeLayout"
     android:onClick="removeKeyboard"
@@ -68,7 +68,7 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_button"
         android:layout_below="@+id/password_edittext"
-        android:onClick="signIn" />
+         />
 
     <TextView
         android:layout_width="wrap_content"
@@ -77,9 +77,8 @@
         android:id="@+id/sign_up_question_textview"
         android:textColor="#726D6D"
         android:textSize="15dp"
-
         android:layout_marginBottom="17dp"
-        android:layout_above="@+id/sign_up_textview"
+        android:layout_above="@+id/sign_up_btn"
         android:layout_centerHorizontal="true" />
 
 
@@ -126,9 +125,8 @@
         android:padding="0dp"
         android:text="S I G N   U P"
         android:textSize="15dp"
-        android:id="@+id/sign_up_textview"
+        android:id="@+id/sign_up_btn"
         android:textColor="@color/white"
-        android:onClick="toSignUp"
         android:layout_alignParentBottom="true"
         />
 

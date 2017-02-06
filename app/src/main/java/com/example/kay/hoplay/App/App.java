@@ -2,27 +2,21 @@ package com.example.kay.hoplay.App;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-import com.example.kay.hoplay.Activities.MainAppMenu;
 import com.example.kay.hoplay.Interfaces.Constants;
-import com.example.kay.hoplay.PatternStrategyComponents.DataCommon;
 import com.example.kay.hoplay.PatternStrategyComponents.PattrenContext;
 import com.example.kay.hoplay.PatternStrategyComponents.PattrenStrategyInterface;
 import com.example.kay.hoplay.Services.ErrorHandler;
 import com.example.kay.hoplay.Services.GetAPI;
 import com.example.kay.hoplay.Services.LruBitmapCache;
 import com.example.kay.hoplay.Interfaces.SocketIOEvents;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,19 +40,8 @@ public class App extends Application implements SocketIOEvents,Constants{
     private Activity currentActivity;
 
 
-    public FirebaseAuth getmAuth() {
-        return mAuth;
-    }
-
-    public void setmAuthListener(FirebaseAuth.AuthStateListener authStateListener){
-        mAuth.addAuthStateListener(authStateListener);
-    }
-    public void removemAuthListener(FirebaseAuth.AuthStateListener authStateListener){
-        mAuth.removeAuthStateListener(authStateListener);
-    }
 
     private SQLiteDatabase sqLiteDatabase;
-    private  FirebaseAuth mAuth;
 
 
     public static String clientID;
@@ -79,7 +62,6 @@ public class App extends Application implements SocketIOEvents,Constants{
 
         super.onCreate();
         instance = this;
-        mAuth = FirebaseAuth.getInstance();
         pattrenContext = new PattrenContext();
         socketIO.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
                     @Override
@@ -249,4 +231,6 @@ public class App extends Application implements SocketIOEvents,Constants{
     public Activity getCurrentActivity() {
         return currentActivity;
     }
+
+
 }

@@ -2,17 +2,12 @@ package com.example.kay.hoplay.RequestsRequires;
 
 
 import android.graphics.Typeface;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,16 +15,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.kay.hoplay.Activities.MainActivity;
 import com.example.kay.hoplay.Activities.MainAppMenu;
 import com.example.kay.hoplay.Adapters.SpinnerAdapter;
 import com.example.kay.hoplay.R;
 
-import org.w3c.dom.Text;
-
 import java.util.Arrays;
-
-import static android.content.Context.INPUT_METHOD_SERVICE;
 
 
 /**

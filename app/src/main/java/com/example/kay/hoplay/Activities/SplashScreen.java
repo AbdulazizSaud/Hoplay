@@ -1,11 +1,10 @@
 package com.example.kay.hoplay.Activities;
 
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
 
+import com.example.kay.hoplay.Authentication.LoginActivity;
 import com.example.kay.hoplay.R;
 
 public class SplashScreen extends AppCompatActivity {
@@ -20,7 +19,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 try {
                     sleep(3000);
-                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
                     startActivity(intent);
                     finish();
                 } catch (InterruptedException e) {

@@ -8,19 +8,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Authentication.LoginActivity;
 import com.example.kay.hoplay.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgetPassword extends AppCompatActivity {
 
 
     private Button forgetPasswordButton;
     private EditText forgetPasswordEditText;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class ForgetPassword extends AppCompatActivity {
 
         forgetPasswordButton = (Button) findViewById(R.id.search_account_button);
         forgetPasswordEditText = (EditText) findViewById(R.id.find_username_edittext);
+        mAuth = FirebaseAuth.getInstance();
 
     }
 
@@ -36,10 +39,10 @@ public class ForgetPassword extends AppCompatActivity {
 
         App app = App.getInstance();
 
-        if (app.getmAuth() != null) {
+        if (mAuth != null) {
 
             final String email = forgetPasswordEditText.getText().toString().trim();
-            app.getmAuth().sendPasswordResetEmail(email).addOnCompleteListener(this, new OnCompleteListener<Void>() {
+            mAuth.sendPasswordResetEmail(email).addOnCompleteListener(this, new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
@@ -56,7 +59,7 @@ public class ForgetPassword extends AppCompatActivity {
 
 
     public void goToMMainActivity() {
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
     }
 }

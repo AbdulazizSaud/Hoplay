@@ -119,7 +119,7 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
     }
 
 
-    // this method to set up a chat
+    // this method to set up a chat layout containts
     private void initControls() {
 
         // init a layout contatins

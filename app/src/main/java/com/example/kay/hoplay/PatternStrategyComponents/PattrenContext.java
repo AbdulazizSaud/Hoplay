@@ -8,17 +8,11 @@ import android.util.Log;
 
 public class PattrenContext {
 
+
+    public static final String SUCCESSED_CREATED_ACCOUNT = "Your account is created successfully";
+
+
     private PattrenStrategyInterface strategy;
-
-    public void setStrategy(PattrenStrategyInterface strategy){
-        this.strategy = strategy;
-    }
-
-    public String excute(DataCommon ... args){
-        String message = strategy.excute(args);
-        return  message;
-    }
-
 
 
 }

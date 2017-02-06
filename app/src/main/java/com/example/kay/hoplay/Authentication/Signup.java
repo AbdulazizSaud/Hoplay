@@ -1,11 +1,10 @@
-package com.example.kay.hoplay.Activities;
+package com.example.kay.hoplay.Authentication;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -19,32 +18,66 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.kay.hoplay.Activities.MainAppMenu;
+import com.example.kay.hoplay.Activities.TermsAndConditions;
 import com.example.kay.hoplay.App.App;
-import com.example.kay.hoplay.PatternStrategyComponents.DataCommon;
-import com.example.kay.hoplay.PatternStrategyComponents.Strategies.FirebaseAuthStrategy;
-import com.example.kay.hoplay.Services.GetAPI;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.util.Helper;
 
 import org.json.JSONObject;
 
-import java.util.HashMap;
+/**
+ * Created by azoz-pc on 2/6/2017.
+ */
 
-public class SignUpActivity extends AppCompatActivity {
+public abstract class Signup extends AppCompatActivity implements Auth {
 
 
-    private TextView createNewTextView;
-    private TextView accountTextView;
-    private ImageView goBackToMain;
-    private EditText usernameSignUp;
-    private EditText passwordSignUp;
-    private EditText emailSignUp;
-    private EditText nickNameSignUp;
-    private TextView agrrement;
-    private TextView termsAndConditions;
-    private Button signUp;
-    private EditText confirmPasswordEdititext;
-    private String username , nickname , password , email ;
+    /***************************************/
+
+    protected TextView createNewTextView;
+    protected TextView accountTextView;
+    protected ImageView goBackToMain;
+    protected EditText usernameSignUp;
+    protected EditText passwordSignUp;
+    protected EditText emailSignUp;
+    protected EditText nickNameSignUp;
+    protected TextView agrrement;
+    protected TextView termsAndConditions;
+    protected Button signUpBtn;
+    protected EditText confirmPasswordEdititext;
+    protected App app =  App.getInstance();
+
+    /***************************************/
+
+    // Main methods
+
+    // Remove keyboard when click anywhere :
+    public void removeKeyboard(View v) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 
 
     @Override
@@ -69,6 +102,23 @@ public class SignUpActivity extends AppCompatActivity {
             Log.d("Oreintation : ", "Portrait mode");
         }
 
+
+        OnStartActivity();
+
+        initControls();
+
+
+    }
+
+    //---------------------
+
+
+    // this method will init layout contents
+    private void initControls(){
+
+
+        // init layout contents
+
         Typeface sansationbold = Typeface.createFromAsset(getAssets(), "sansationbold.ttf");
 
         createNewTextView = (TextView) findViewById(R.id.create_new_textview);
@@ -88,8 +138,8 @@ public class SignUpActivity extends AppCompatActivity {
         emailSignUp.setTypeface(sansationbold);
         nickNameSignUp = (EditText) findViewById(R.id.nickname_sign_up_edittext);
         nickNameSignUp.setTypeface(sansationbold);
-        signUp = (Button) findViewById(R.id.sign_in_button);
-        signUp.setTypeface(sansationbold);
+        signUpBtn = (Button) findViewById(R.id.sign_in_button);
+        signUpBtn.setTypeface(sansationbold);
         confirmPasswordEdititext = (EditText) findViewById(R.id.confirm_password_edittext);
         confirmPasswordEdititext.setTypeface(sansationbold);
 
@@ -109,9 +159,37 @@ public class SignUpActivity extends AppCompatActivity {
         agrrement.setTypeface(sansationbold);
         termsAndConditions.setTypeface(sansationbold);
 
-
-
         // ERROR DETECTOR :
+        errorDetection();
+
+
+        // it will execute on click sign up button
+        // take all requirements and pass to sign up methods
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                final String email = emailSignUp.getText().toString().trim();
+                final String username  =usernameSignUp.getText().toString().trim();
+                final String password  = passwordSignUp.getText().toString().trim();
+                final String nickname = nickNameSignUp.getText().toString().trim();
+                if(checkUsername() && checkEmail() && checkPassword() && checkNickname() )
+                signUp(email,username,password,nickname);
+            }
+        });
+
+        goBackToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toLogin();
+            }
+        });
+
+    }
+
+    //ERROR DETECTION
+    private void errorDetection() {
         usernameSignUp.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -141,7 +219,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void afterTextChanged(Editable editable) {
-                checkFullname();
+                checkNickname();
             }
         });
 
@@ -155,98 +233,12 @@ public class SignUpActivity extends AppCompatActivity {
                 checkEmail();
             }
         });
-
-    }  // End Of onCreate Method .
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-
-    public void toMain(View view) {
-        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(i);
-    }
-
-
-    public void signUp(View view) {
-
-//        if (startAPI() !=null) {
-//            Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
-//            startActivity(i);
-//        }
-
-        App app = App.getInstance();
-
-        final String email = emailSignUp.getText().toString().trim();
-        final String username  =usernameSignUp.getText().toString().trim();
-        final String password  = passwordSignUp.getText().toString().trim();
-
-        if(email.equals(null)|| email.equals("") || username.equals(null)|| password.equals("")) {
-            return;
-        }
-
-        DataCommon<String> passData = new DataCommon<String>(FirebaseAuthStrategy.SIGN_UP,username,email,password);
-        app.setPattrenStrargey(this,new FirebaseAuthStrategy());
-        app.excutePattrenStrargey(passData);
-
-    }
-
-    public void toTermsAndConditions(View v) {
-        Intent i = new Intent(SignUpActivity.this, TermsAndConditions.class);
-        startActivity(i);
-    }
-
-    // Remove keyboard when click anywhere :
-    public void removeKeyboard(View v) {
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-    }
-
-    private JSONObject startAPI() {
-
-
-        JSONObject jsonAPI = null;
-
-        HashMap<String ,String> data = new HashMap<>();
-        data.put("username", usernameSignUp.getText().toString().trim());
-        data.put("password", passwordSignUp.getText().toString().trim());
-        data.put("email", emailSignUp.getText().toString().trim());
-
-        jsonAPI = App.getInstance().getAPI(GetAPI.REGISTER,data);
-
-        return jsonAPI;
-
-    }
-
-
 
     // CHECK USERNAME :
-    public Boolean checkUsername() {
+    protected Boolean checkUsername() {
 
-        username = usernameSignUp.getText().toString();
+        String username = usernameSignUp.getText().toString().trim();
         Helper helper = new Helper();
 
         if (username.length() == 0) {
@@ -276,9 +268,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     // CHECK NICKNAME
-    public Boolean checkFullname() {
+    protected Boolean checkNickname() {
 
-        nickname = nickNameSignUp.getText().toString();
+        String nickname = nickNameSignUp.getText().toString().trim();
 
         if (nickname.length() == 0) {
 
@@ -300,9 +292,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     // CHECK PASSWORD
-    public Boolean checkPassword() {
+    protected Boolean checkPassword() {
 
-        password = passwordSignUp.getText().toString();
+        String password = passwordSignUp.getText().toString().trim();
 
         Helper helper = new Helper();
 
@@ -333,9 +325,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     // CHECK EMAIL
-    public Boolean checkEmail() {
+    protected Boolean checkEmail() {
 
-        email = emailSignUp.getText().toString();
+        String email = emailSignUp.getText().toString().trim();
 
         Helper helper = new Helper();
 
@@ -358,7 +350,7 @@ public class SignUpActivity extends AppCompatActivity {
         return true;
     }
 
-    public Boolean verifyRegForm() {
+    protected Boolean verifyRegForm(String email,String username,String password,String nickname) {
 
         usernameSignUp.setError(null);
         nickNameSignUp.setError(null);
@@ -441,12 +433,25 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-
-
-    class AuthFirebase extends AsyncTask<String,String,String>{
-        @Override
-        protected String doInBackground(String... params) {
-            return null;
-        }
+    // switch activity methods
+    public void toLogin() {
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivity(i);
     }
+    public void toMainMenuApp(){
+        Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
+        startActivity(i);
+
+    }
+    public void toTermsAndConditions(View v) {
+        Intent i = new Intent(this, TermsAndConditions.class);
+        startActivity(i);
+    }
+
+    // abstract methods
+    protected abstract void signUp(String email,String username,String password,String nickname);
+    protected abstract JSONObject startAPI();
+
+
+
 }

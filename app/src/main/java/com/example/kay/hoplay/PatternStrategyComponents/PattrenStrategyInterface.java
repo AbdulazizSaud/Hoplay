@@ -6,8 +6,5 @@ package com.example.kay.hoplay.PatternStrategyComponents;
 
 public interface PattrenStrategyInterface {
 
-     void sendData(DataCommon data);
-     DataCommon receiveData();
-     String excute(DataCommon ... args);
 
 }

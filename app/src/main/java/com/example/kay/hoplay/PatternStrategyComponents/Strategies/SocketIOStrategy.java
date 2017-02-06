@@ -1,6 +1,5 @@
 package com.example.kay.hoplay.PatternStrategyComponents.Strategies;
 
-import com.example.kay.hoplay.PatternStrategyComponents.DataCommon;
 import com.example.kay.hoplay.PatternStrategyComponents.PattrenStrategyInterface;
 
 /**

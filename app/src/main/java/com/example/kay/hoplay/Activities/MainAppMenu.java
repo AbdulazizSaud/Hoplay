@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import com.example.kay.hoplay.Adapters.MenuPagerAdapter;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Authentication.LoginActivity;
 import com.example.kay.hoplay.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,14 +19,9 @@ import com.roughike.bottombar.BottomBarBadge;
 import com.roughike.bottombar.OnMenuTabSelectedListener;
 import com.roughike.bottombar.OnTabSelectedListener;
 
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Display;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 
 
 public class MainAppMenu extends AppCompatActivity{
@@ -42,10 +38,11 @@ public class MainAppMenu extends AppCompatActivity{
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-
-  private  ViewPager mainAppMenu ;
-  private  boolean changeBar = true ;
+    private FirebaseAuth mAuth;
+    private  ViewPager mainAppMenu ;
+    private  boolean changeBar = true ;
     private FirebaseAuth.AuthStateListener authStateListener;
+
 
 
     @Override
@@ -134,6 +131,7 @@ public class MainAppMenu extends AppCompatActivity{
 
 
 
+        mAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -141,13 +139,12 @@ public class MainAppMenu extends AppCompatActivity{
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user == null) {
                     // User is sign out
-                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    Log.i("---------->"," Go baaaaack");
+                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(i);
                 }
             }
         };
-        App.getInstance().setmAuthListener(authStateListener);
-
 
        /*  bottomBar.setFragmentItems(getSupportFragmentManager(), R.id.view_pager,
                 new BottomBarFragment(NavigatorFragment.newInstance("Content for requests."), R.drawable.ic_public_black_24dp, "requests"),
@@ -221,13 +218,14 @@ public class MainAppMenu extends AppCompatActivity{
     @Override
     protected void onStop() {
         super.onStop();
-
+        mAuth.removeAuthStateListener(authStateListener);
     }
 
     @Override
     protected void onStart(){
 
         super.onStart();
+        mAuth.addAuthStateListener(authStateListener);
     }
 
     public static BottomBar getBottomBar(){

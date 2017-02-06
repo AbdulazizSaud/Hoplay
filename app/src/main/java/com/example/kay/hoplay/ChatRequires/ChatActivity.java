@@ -106,6 +106,7 @@ public class ChatActivity extends Chat {
         socket.on(App.ADD_USER_EVENT,onAddUser);
     }
 
+    @Override
     // this method for send message , execute only when a user click on send button
     protected void sendMessage(String message) {
         super.sendMessage(message);
@@ -122,7 +123,7 @@ public class ChatActivity extends Chat {
         }
 
     }
-
+    @Override
     // this method for receive message , execute only when a user receive a message
     protected void receiveMessage(Objects... args) {
         super.receiveMessage(args);
