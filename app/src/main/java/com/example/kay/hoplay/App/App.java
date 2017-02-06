@@ -219,14 +219,6 @@ public class App extends Application implements SocketIOEvents,Constants{
 
 
 
-    public void setPattrenStrargey(Activity activity,PattrenStrategyInterface strargey){
-        this.currentActivity = activity;
-        pattrenContext.setStrategy(strargey);
-    }
-
-    public String excutePattrenStrargey(DataCommon ... dataCommons){
-        return pattrenContext.excute(dataCommons);
-    }
 
     public Activity getCurrentActivity() {
         return currentActivity;
