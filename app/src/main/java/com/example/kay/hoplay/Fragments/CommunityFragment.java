@@ -133,32 +133,7 @@ public class CommunityFragment extends Fragment {
         };
     }
 
-    private void getAdapterData(){
-        try {
-            Cursor cursor = App.getInstance().getCASQL();
-            int recIDIndex = cursor.getColumnIndex("receiver_ID");
-            int picURLIndex = cursor.getColumnIndex("receiver_Picture");
-            int lastMessageIndex = cursor.getColumnIndex("last_message");
 
-
-            cursor.moveToFirst();
-            while (cursor != null) {
-
-                String receiverID = cursor.getString(recIDIndex);
-                String picUrl = cursor.getString(picURLIndex);
-                String lastMessage = cursor.getString(lastMessageIndex);
-
-                CommunityUserList CUL = new CommunityUserList(receiverID, receiverID, picUrl);
-                CUL.setLastMsg(lastMessage);
-
-                communityUserLists.add(CUL);
-
-                cursor.moveToNext();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
 
 }

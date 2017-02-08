@@ -36,7 +36,7 @@ public class SettingsScreen extends PreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings_screen);
 
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = App.getInstance().getAuth();
 
         // Log out on click preference
         Preference preferences = (Preference) findPreference("settings_logout");

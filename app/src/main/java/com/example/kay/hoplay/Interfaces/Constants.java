@@ -27,4 +27,9 @@ public interface  Constants {
 
 
 
+ public static final String RESULTS_MESSAGE = "message";
+ public static final String RESULTS_STATUS = "status";
+
+
+
 }

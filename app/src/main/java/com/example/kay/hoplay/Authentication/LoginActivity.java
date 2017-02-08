@@ -13,10 +13,9 @@ import android.widget.Toast;
 import com.example.kay.hoplay.Activities.MainAppMenu;
 import com.example.kay.hoplay.App.App;
 
+import com.example.kay.hoplay.PatternStrategyComponents.Startgies.FirebaseLogin;
 import com.example.kay.hoplay.Services.GetAPI;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -52,7 +51,7 @@ public class LoginActivity extends Login {
     // this method will do some init to check if user is authenticated , if yes .. it will switch to MainAppMenu
     @Override
     public void OnStartActivity() {
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = app.getAuth();
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -78,25 +77,6 @@ public class LoginActivity extends Login {
 
     @Override
     protected void login(String username, String password) {
-
-        mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-
-                    // switch to main menu activity
-                    toMainMenu();
-
-                    // successed + welcome message
-                    Toast.makeText(getApplicationContext(), "Welcome " + App.SUCCESSED_LOGIN + " ;)", Toast.LENGTH_LONG).show();
-
-                } else {
-                    // failed message
-                    Toast.makeText(getApplicationContext(), "Please check your email or password", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
 
     }
 

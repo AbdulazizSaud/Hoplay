@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1072815129013-bfisi14lc29clvcetrflj1bc2hcrpvc7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kay.hoplay",
+            "certificate_hash": "86ABC7E95ABD99DE8F919B3FDF351A7743CBC54B"
+          }
+        },
+        {
           "client_id": "1072815129013-npniroifg0u7ndtq9dlik4ajn3up4s28.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -17,6 +17,7 @@ import com.example.kay.hoplay.Services.ErrorHandler;
 import com.example.kay.hoplay.Services.GetAPI;
 import com.example.kay.hoplay.Services.LruBitmapCache;
 import com.example.kay.hoplay.Interfaces.SocketIOEvents;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,18 +34,10 @@ import io.socket.emitter.Emitter;
 public class App extends Application implements SocketIOEvents,Constants{
 
     private static App instance;
+    private FirebaseAuth mAuth;
     private PattrenContext pattrenContext;
-
     private ImageLoader imageLoader;
-    private String accessToken = "mdaX5LzLOOXaxor0xzxaax87987xu8d";
-    private Activity currentActivity;
 
-
-
-    private SQLiteDatabase sqLiteDatabase;
-
-
-    public static String clientID;
 
 
     private  Socket socketIO;
@@ -63,35 +56,8 @@ public class App extends Application implements SocketIOEvents,Constants{
         super.onCreate();
         instance = this;
         pattrenContext = new PattrenContext();
-        socketIO.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
-                    @Override
-                    public void call(Object... args) {
-                       JSONObject jsonObject = new JSONObject();
-                        try {
-                            jsonObject.put("accessToken",accessToken);
-                            jsonObject.put("email","80a.tutorial@gmail.com");
-
-                            socketIO.emit("userInfo",jsonObject);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                });
-
-        socketIO.on("userInfo", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                String values = String.valueOf(args[0]);
-                Log.i("baka--->",values);
-            }
-        });
-
-                socketIO.connect();
-
-
-                SQLiteManagement();
+        mAuth = FirebaseAuth.getInstance();
+        socketIO.connect();
 
     }
 
@@ -114,10 +80,7 @@ public class App extends Application implements SocketIOEvents,Constants{
         return imageLoader;
     }
 
-    public void  getMyInfo(){
-        Log.i("------------->","hi");
 
-    }
     public JSONObject getAPI(String apiURL, HashMap<String,String> data){
         String api_json= null;
         JSONObject resJSON=null;
@@ -153,76 +116,14 @@ public class App extends Application implements SocketIOEvents,Constants{
 
     }
 
-
-
-    public void SQLiteManagement(){
-
-
-        sqLiteDatabase = this.openOrCreateDatabase("Hoplay_Lite",MODE_PRIVATE,null);
-
-//        // delete table
-//        String deleteTables = "DROP TABLE ChatAdapter";
-//        sqLiteDatabase.execSQL(deleteTables);
-//        deleteTables="DROP TABLE ChatMessage";
-//        sqLiteDatabase.execSQL(deleteTables);
-//        //
-
-        String sql1 = "CREATE TABLE IF NOT EXISTS ChatAdapter(" +
-                "CHAT_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
-                "receiver_ID varchar(255) NOT NULL UNIQUE," +
-                "last_message varchar(255)," +
-                "receiver_Picture TEXT(255) )";
-
-        String sql2 = "CREATE TABLE IF NOT EXISTS ChatMessage(" +
-                "MESSAGE_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
-                "sender_ID varchar(255) NOT NULL," +
-                "receiver_ID varchar(255) NOT NULL," +
-                "message TEXT(255)" +
-                ")";
-
-        sqLiteDatabase.execSQL(sql1);
-        sqLiteDatabase.execSQL(sql2);
-
-
-
+    public FirebaseAuth getAuth(){
+        return mAuth;
     }
 
-
-    public void insertIntoCASQL(String receiverID, String lastMessage, String receiverPicture){
-
-        String sql = "INSERT INTO ChatAdapter(receiver_ID,last_message,receiver_Picture) Values("
-                 +"'"+receiverID+"',"+"'"+lastMessage+"',"+"'"+receiverPicture+"'"
-                +")";
-        sqLiteDatabase.execSQL(sql);
-
-
+    public HashMap<String ,String> executeStratgy(PattrenStrategyInterface strategyInterface){
+        return  pattrenContext.executeStratgy(strategyInterface);
     }
 
-    public void insertIntoCMSQL(String id,String toId,String message){
-
-        String sql = "INSERT INTO ChatMessage(sender_ID,receiver_ID,message) Values("
-                +"'"+id+"',"+"'"+toId+"',"+"'"+message+"')";
-        sqLiteDatabase.execSQL(sql);
-
-    }
-
-    public Cursor getCASQL(){
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM ChatAdapter",null);
-        return c;
-    }
-
-    public Cursor getCMSQL(String myID ,String receiverID){
-        String query ="SELECT * FROM ChatMessage WHERE (sender_ID = '"+ myID +"' AND receiver_ID = '"+receiverID+"') or (sender_ID = '"+receiverID+"' AND receiver_ID = '"+myID+"')";
-        Cursor c = sqLiteDatabase.rawQuery(query,null);
-        return c;
-    }
-
-
-
-
-    public Activity getCurrentActivity() {
-        return currentActivity;
-    }
 
 
 }
