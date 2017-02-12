@@ -1,10 +1,8 @@
 package com.example.kay.hoplay.Authentication;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
-import com.example.kay.hoplay.Activities.MainAppMenu;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Services.GetAPI;
 import com.google.android.gms.tasks.OnCompleteListener;

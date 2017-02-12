@@ -21,8 +21,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.kay.hoplay.Activities.ForgetPassword;
-import com.example.kay.hoplay.Activities.MainAppMenu;
+import com.example.kay.hoplay.Activities.ForgetPasswordActivity.ForgetPasswordActivity;
+import com.example.kay.hoplay.Activities.MainMenu.MainAppMenuActivity;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
 
@@ -174,14 +174,14 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
     }
     protected void toMainMenu() {
-        Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
+        Intent i = new Intent(getApplicationContext(), MainAppMenuActivity.class);
         startActivity(i);
 
     }
 
     //this method switching a to forget password actitvty
     public void goToForgetPassword(View view) {
-        Intent i = new Intent(this, ForgetPassword.class);
+        Intent i = new Intent(this, ForgetPasswordActivity.class);
         startActivity(i);
     }
 

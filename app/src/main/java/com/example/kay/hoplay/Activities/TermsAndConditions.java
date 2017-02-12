@@ -13,7 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.kay.hoplay.Activities.MainAppMenu;
+import com.example.kay.hoplay.Activities.MainMenu.MainAppMenu;
 import com.example.kay.hoplay.R;
 
 public class TermsAndConditions extends AppCompatActivity {

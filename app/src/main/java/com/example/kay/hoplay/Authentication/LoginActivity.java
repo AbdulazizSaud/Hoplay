@@ -3,19 +3,18 @@ package com.example.kay.hoplay.Authentication;
 //hello
 
 
-import android.content.Intent;
-
 import android.support.annotation.NonNull;
 
 import android.widget.Toast;
 
 
-import com.example.kay.hoplay.Activities.MainAppMenu;
 import com.example.kay.hoplay.App.App;
 
-import com.example.kay.hoplay.PatternStrategyComponents.Startgies.FirebaseLogin;
 import com.example.kay.hoplay.Services.GetAPI;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -60,8 +59,7 @@ public class LoginActivity extends Login {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
-                    startActivity(i);
+                    toMainMenu();
                 }
             }
         };
@@ -77,7 +75,24 @@ public class LoginActivity extends Login {
 
     @Override
     protected void login(String username, String password) {
+        mAuth = App.getInstance().getAuth();
 
+
+        mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if (task.isSuccessful()) {
+                    toMainMenu();
+                    // results if it's successed
+                    Toast.makeText(getApplicationContext(),"Welcome :) , "+ App.SUCCESSED_LOGIN,Toast.LENGTH_LONG).show();
+
+                } else {
+                    // results if it's failed
+                    Toast.makeText(getApplicationContext(),App.FAILED_LOGIN + ". Please check your email or password",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     // old method .. perhaps we will need it in feature

@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.kay.hoplay.Activities.MainAppMenu;
+import com.example.kay.hoplay.Activities.MainMenu.MainAppMenu;
 import com.example.kay.hoplay.Activities.TermsAndConditions;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;

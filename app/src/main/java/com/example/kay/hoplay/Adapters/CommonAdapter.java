@@ -1,20 +1,12 @@
 package com.example.kay.hoplay.Adapters;
 
-import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-
-import com.example.kay.hoplay.Common.ViewHolders;
-import com.example.kay.hoplay.R;
-import com.pkmmte.view.CircularImageView;
 
 import java.util.ArrayList;
-
-import emojicon.EmojiconTextView;
 
 
 public abstract class  CommonAdapter<T> extends RecyclerView.Adapter<ViewHolders> {

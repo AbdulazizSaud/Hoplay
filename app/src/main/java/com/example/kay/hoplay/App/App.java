@@ -30,24 +30,26 @@ import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
+/*
+    this class basiclly do linking between all difreent activity that trying to get a same specfic values
+    it's impelmented as singleton stratgey
+ */
 
 public class App extends Application implements SocketIOEvents,Constants{
 
     private static App instance;
-    private FirebaseAuth mAuth;
-    private PattrenContext pattrenContext;
-    private ImageLoader imageLoader;
 
 
+    private FirebaseAuth mAuth;  // firebase auth
+    private PattrenContext pattrenContext; // pattren stratgey
+    private ImageLoader imageLoader; // Image loader from url
 
-    private  Socket socketIO;
+    private  Socket socketIO; // socket io
     {
-        try {
-            socketIO = IO.socket(CHAT_PATH);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+        //this method call init socket
+        initSocket();
     }
+
 
 
     @Override
@@ -62,25 +64,16 @@ public class App extends Application implements SocketIOEvents,Constants{
     }
 
 
-
-
-    public static synchronized App getInstance(){
-        return instance;
+    // this method init socket io
+    private void initSocket() {
+        try {
+            socketIO = IO.socket(CHAT_PATH);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
-    public Socket getSocket(){
-        return socketIO;
-    }
-
-    public ImageLoader getImageLoader(){
-        RequestQueue requestQueue  = Volley.newRequestQueue(getApplicationContext());
-
-            if(imageLoader == null)
-                imageLoader = new ImageLoader(requestQueue,new LruBitmapCache());
-        return imageLoader;
-    }
-
-
+    // this old method, basiclly it get/pass a data android from api as json
     public JSONObject getAPI(String apiURL, HashMap<String,String> data){
         String api_json= null;
         JSONObject resJSON=null;
@@ -116,10 +109,28 @@ public class App extends Application implements SocketIOEvents,Constants{
 
     }
 
+
+    // this method return a instance of this app class
+    public static synchronized App getInstance(){
+        return instance;
+    }
+    // this method return a socket io
+    public Socket getSocket(){
+        return socketIO;
+    }
+    // this method return firebase auth
     public FirebaseAuth getAuth(){
         return mAuth;
     }
-
+    // thi method return a imageloader
+    public ImageLoader getImageLoader(){
+        // create a new request queue for picture
+        RequestQueue requestQueue  = Volley.newRequestQueue(getApplicationContext());
+        if(imageLoader == null)
+            imageLoader = new ImageLoader(requestQueue,new LruBitmapCache());
+        return imageLoader;
+    }
+    //this method execute stratgey which it pass as parameter and return a results as hash
     public HashMap<String ,String> executeStratgy(PattrenStrategyInterface strategyInterface){
         return  pattrenContext.executeStratgy(strategyInterface);
     }

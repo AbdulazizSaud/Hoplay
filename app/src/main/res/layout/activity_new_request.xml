@@ -14,18 +14,9 @@
         android:background="#E0E0E3"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.example.kay.hoplay.Fragments.MakeRequestFragment">
+        tools:context=".RequestComponents.MakeRequestFragment">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Make new Request :)"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:id="@+id/make_request_message_textview"
-            android:textSize="30dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+
         <RadioGroup
 
             android:layout_width="match_parent"
@@ -187,6 +178,37 @@
             android:layout_alignTop="@+id/make_request_button"
             android:layout_alignEnd="@+id/players_rank_spinner"
             android:layout_marginTop="11dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Make New Request :)"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:paddingTop="20dp"
+            android:id="@+id/make_request_message_textview"
+            android:textSize="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/greyx"
+            android:onClick="goBackToMainAppMenu"
+            android:id="@+id/go_back_toMainAppMenu_imageView"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/gamesicon"
+            android:id="@+id/imageView5"
+            android:layout_marginStart="14dp"
+            android:layout_above="@+id/region_spinner"
+            android:layout_toEndOf="@+id/go_back_toMainAppMenu_imageView"
+            android:layout_marginBottom="11dp" />
 
 
     </RelativeLayout>
