@@ -40,6 +40,8 @@ public class MainAppMenuActivity extends MainAppMenu {
     public void OnStartActivity() {
         // init a firebase auth states to check if the user is already signued
         // if no , move the user to loginActivity to sign in again.
+
+
         mAuth = App.getInstance().getAuth();
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -51,8 +53,12 @@ public class MainAppMenuActivity extends MainAppMenu {
                     Log.i("---------->"," Go baaaaack");
                     Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(i);
+                } else {
+                    Log.i("---------->",firebaseAuth.getCurrentUser().getUid());
+
                 }
             }
         };
+
     }
 }

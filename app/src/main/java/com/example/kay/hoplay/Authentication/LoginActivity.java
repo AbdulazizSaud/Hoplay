@@ -5,6 +5,7 @@ package com.example.kay.hoplay.Authentication;
 
 import android.support.annotation.NonNull;
 
+import android.util.Log;
 import android.widget.Toast;
 
 
@@ -32,7 +33,7 @@ public class LoginActivity extends Login {
     // Get firebase authentication from App
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
-
+    private FirebaseUser mFirebaseUser;
 
     @Override
     protected void onStart() {
@@ -51,6 +52,8 @@ public class LoginActivity extends Login {
     @Override
     public void OnStartActivity() {
         mAuth = app.getAuth();
+        mFirebaseUser = mAuth.getCurrentUser();
+
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -58,6 +61,8 @@ public class LoginActivity extends Login {
 
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
+
+                    //Log.i("--->",mFirebaseUser.getDisplayName());
                     // User is signed in
                     toMainMenu();
                 }

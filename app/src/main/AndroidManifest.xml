@@ -26,7 +26,7 @@
             android:name=".Authentication.LoginActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Authentication.SignUpActivity" />
-        <activity android:name=".Activities.MainAppMenu" />
+        <activity android:name=".Activities.MainMenu.MainAppMenuActivity" />
         <activity android:name=".Activities.ThreeButtonsActivity" />
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -37,26 +37,26 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".ProfileRequires.UserGames"
+            android:name=".UserProfile.ProfileRequires.UserGames"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ProfileRequires.UserRatings"
+            android:name=".UserProfile.ProfileRequires.UserRatings"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ProfileRequires.UserFollowing"
+            android:name=".UserProfile.ProfileRequires.UserFollowing"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ProfileRequires.UserFollowers"
+            android:name=".UserProfile.ProfileRequires.UserFollowers"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.TermsAndConditions"
             android:screenOrientation="portrait" />
-        <activity android:name=".ChatRequires.ChatActivity" />
-        <activity android:name=".Activities.ForgetPassword" />
+        <activity android:name=".Chat.ChatActivity" />
+        <activity android:name=".Activities.ForgetPasswordActivity.ForgetPasswordActivity" />
         <activity android:name=".Activities.NoConnection" />
-        <activity android:name=".Fragments.MakeRequestFragment" />
+        <activity android:name=".RequestComponents.MakeRequestFragment" />
         <activity
-             android:name=".RequestsRequires.NewRequest" />
+             android:name=".RequestComponents.RequestsRequires.NewRequestActivity" />
         <activity android:name=".Activities.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

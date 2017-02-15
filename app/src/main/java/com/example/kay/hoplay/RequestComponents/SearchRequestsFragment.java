@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.kay.hoplay.Activities.MainMenu.MainAppMenu;
 import com.example.kay.hoplay.Adapters.SpinnerAdapter;
 import com.example.kay.hoplay.R;
+import com.example.kay.hoplay.model.SavedRequestsList;
 
 import java.util.Arrays;
 
@@ -25,23 +26,23 @@ import java.util.Arrays;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchRequestsFragment extends Fragment {
+public abstract class SearchRequestsFragment extends Fragment {
 
-    private ImageView pcChoice;
-    private ImageView psChoice;
-    private ImageView xboxChoice;
+    protected ImageView pcChoice;
+    protected ImageView psChoice;
+    protected ImageView xboxChoice;
 
-    private TextView searchGameMessage ;
-    private TextView pcMessage ;
-    private TextView psMessage ;
-    private TextView xboxMessage ;
-    private EditText searchGame ;
+    protected TextView searchGameMessage ;
+    protected TextView pcMessage ;
+    protected TextView psMessage ;
+    protected TextView xboxMessage ;
+    protected EditText searchGame ;
 
-    private Spinner regionsSpinner;
-    private Spinner ranksSpinner ;
-    private Spinner numberOfPlayersSpinner ;
+    protected Spinner regionsSpinner;
+    protected Spinner ranksSpinner ;
+    protected Spinner numberOfPlayersSpinner ;
 
-    private Button searchRequestButton;
+    protected Button searchRequestButton;
 
 
     boolean pcIsChosen , psIsChosen , xboxIsChosen ;
@@ -186,6 +187,7 @@ public class SearchRequestsFragment extends Fragment {
     }
 
 
+    protected abstract void searchForRequest();
 
 
 }

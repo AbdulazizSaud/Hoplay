@@ -270,11 +270,7 @@ public class UserProfileFragment extends Fragment {
 
     public RecentActivityList addRecentActivity(String gameName , String gamePhoto , String activityDescription , String activityDate)
     {
-        RecentActivityList recentActivity = new RecentActivityList();
-        recentActivity.setGameName(gameName);
-        recentActivity.setGamePhotoURL(gamePhoto);
-        recentActivity.setActivityDescription(activityDescription);
-        recentActivity.setActivityDate(activityDate);
+        RecentActivityList recentActivity = new RecentActivityList(gameName,gamePhoto,activityDescription,activityDate);
         return recentActivity;
     }
 
