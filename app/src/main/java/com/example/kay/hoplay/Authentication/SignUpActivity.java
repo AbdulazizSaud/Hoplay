@@ -1,6 +1,7 @@
 package com.example.kay.hoplay.Authentication;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.kay.hoplay.App.App;
@@ -9,6 +10,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,41 +38,37 @@ public class SignUpActivity extends Signup {
     // if fail , it will give the user a failed message
 
     @Override
-    protected void signUp(final String email,final String username,final String password,final String nickname) {
+    protected void signUp(final String email, final String username, final String password, final String nickname) {
 
 //        if (startAPI() !=null) {
 //            Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
 //            startActivity(i);
 //        }
 
-        appAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this
-                ,new OnCompleteListener<AuthResult>() {
+        Log.i("---------->","ASi");
+
+        appAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this
+                , new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if(task.isSuccessful()){
-
-                            JSONObject jsonObject = new JSONObject();
-                            try {
-
-                                // here we pass the username and email to emit them via socket io to server
-                                jsonObject.put("username",username);
-                                jsonObject.put("email",email);
-                                app.getSocket().emit("signup_database",jsonObject);
+                        if (task.isSuccessful()) {
 
 
-                                // success message
-                                Toast.makeText(getApplicationContext(),App.SUCCESSED_CREATED_ACCOUNT,Toast.LENGTH_LONG).show();
-                                // switch to main AppMenu
-                                toMainMenuApp();
+                            FirebaseUser user = appAuth.getCurrentUser();
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                            doDatabaseProcess(user.getUid(),email,username,nickname);
 
-                        }else {
+                            //doDatabaseProcess(appAuth.getCurrentUser().getUid(),email, username, password, nickname);
+                            // success message
+                            Toast.makeText(getApplicationContext(), App.SUCCESSED_CREATED_ACCOUNT, Toast.LENGTH_LONG).show();
+                            // switch to main AppMenu
+                            toMainMenuApp();
+
+
+                        } else {
                             // failed message
-                            Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -83,14 +83,32 @@ public class SignUpActivity extends Signup {
 
         JSONObject jsonAPI = null;
 
-        HashMap<String ,String> data = new HashMap<>();
+        HashMap<String, String> data = new HashMap<>();
         data.put("username", usernameSignUp.getText().toString().trim());
         data.put("password", passwordSignUp.getText().toString().trim());
         data.put("email", emailSignUp.getText().toString().trim());
 
-        jsonAPI = App.getInstance().getAPI(GetAPI.REGISTER,data);
+        jsonAPI = App.getInstance().getAPI(GetAPI.REGISTER, data);
 
         return jsonAPI;
+
+    }
+
+
+    private void doDatabaseProcess(final String UID,final String email, final String username, final String nickname) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference rotRef = (firebaseDatabase.getReference("_users_info_")).child(UID);
+
+
+        rotRef.child("_chat_refs_").child("public").child("test").setValue("test");
+        rotRef.child("_chat_refs_").child("private").child("test").setValue("test");
+        rotRef.child("_friends_list_").child("test").setValue("testchh");
+        rotRef.child("_info_").child("_username_").setValue(username);
+        rotRef.child("_info_").child("_nickname_").setValue(nickname);
+        rotRef.child("_info_").child("_email_").setValue(email);
+        rotRef.child("_info_").child("_picUrl_").setValue("default");
+
+
 
     }
 

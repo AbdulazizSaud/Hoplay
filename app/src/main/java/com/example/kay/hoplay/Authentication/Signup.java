@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kay.hoplay.Activities.MainMenu.MainAppMenu;
+import com.example.kay.hoplay.Activities.MainMenu.MainAppMenuActivity;
 import com.example.kay.hoplay.Activities.TermsAndConditions;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
@@ -439,7 +440,7 @@ public abstract class Signup extends AppCompatActivity implements Auth {
         startActivity(i);
     }
     public void toMainMenuApp(){
-        Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
+        Intent i = new Intent(getApplicationContext(), MainAppMenuActivity.class);
         startActivity(i);
 
     }

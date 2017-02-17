@@ -191,6 +191,14 @@ public abstract class MainAppMenu extends AppCompatActivity implements ActivityI
         return bottomBar;
     }
 
+
+    protected void toLogin() {
+        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(i);
+
+    }
+
     public abstract void OnStartActivity();
 
 }
+

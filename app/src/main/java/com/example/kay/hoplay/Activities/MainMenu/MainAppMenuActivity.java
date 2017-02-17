@@ -51,8 +51,7 @@ public class MainAppMenuActivity extends MainAppMenu {
                 if (user == null) {
                     // User is sign out
                     Log.i("---------->"," Go baaaaack");
-                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(i);
+                    toLogin();
                 } else {
                     Log.i("---------->",firebaseAuth.getCurrentUser().getUid());
 
