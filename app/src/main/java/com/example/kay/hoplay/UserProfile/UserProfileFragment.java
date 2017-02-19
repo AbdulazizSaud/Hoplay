@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.sax.StartElementListener;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,8 +27,7 @@ import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.UserProfile.ProfileRequires.UserFollowers;
-import com.example.kay.hoplay.UserProfile.ProfileRequires.UserFollowing;
+import com.example.kay.hoplay.UserProfile.ProfileRequires.UserFriends;
 import com.example.kay.hoplay.UserProfile.ProfileRequires.UserGames;
 import com.example.kay.hoplay.UserProfile.ProfileRequires.UserRatings;
 import com.example.kay.hoplay.model.RecentActivityList;
@@ -47,19 +48,19 @@ public class UserProfileFragment extends Fragment {
     private final static int RESULT_LOAD_IMG=1;
 
     private TextView usernameProfile;
-    private TextView toUserGames;
-    private TextView toUserRatings;
-    private TextView toUserFollowing;
-    private TextView toUserFollowers ;
-    private TextView games_number;
-    private TextView ratings_number ;
-    private TextView followings_number;
-    private TextView followers_number;
+    private TextView userGamesTextView;
+    private TextView userRatingsTextView;
+    private TextView userFriendsTextView;
+    private TextView gamesNumberTextView;
+    private TextView ratingsNumberTextView ;
+    private TextView friendsNumberTextView;
     private TextView recentActivitiesTextView;
-    private TextView nickname;
-    private CircleImageView userPicture;
-    private ImageView profileSettings;
-
+    private TextView nicknameTextView;
+    private CircleImageView userPictureCircleImageView;
+    private ImageView profileSettingsImageView;
+    private LinearLayout toUserGamesLinearLayout ;
+    private LinearLayout toUserFriendsLinearLayout;
+    private LinearLayout toUserRatingsLinearLayout;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -80,105 +81,65 @@ public class UserProfileFragment extends Fragment {
         //usernameProfile.setText(" Y O Y O  I'm username Fragment");
 
 
-        toUserGames = (TextView) view.findViewById(R.id.games_profile_textview);
-        toUserFollowers = (TextView) view.findViewById(R.id.followers_profile_textview);
-        toUserRatings = (TextView) view.findViewById(R.id.ratings_profile_textview);
-        toUserFollowing = (TextView) view.findViewById(R.id.following_profile_textview);
-        games_number = (TextView) view.findViewById(R.id.games_number_textview);
-        ratings_number = (TextView) view.findViewById(R.id.ratings_number_textview);
-        followings_number = (TextView) view.findViewById(R.id.followeing_number_textview);
-        followers_number = (TextView) view.findViewById(R.id.followers_number_textview);
+        userFriendsTextView = (TextView) view.findViewById(R.id.friends_profile_textview);
+        friendsNumberTextView = (TextView) view.findViewById(R.id.friends_number_profile_textview);
+        userGamesTextView = (TextView) view.findViewById(R.id.games_profile_textview);
+        userRatingsTextView = (TextView) view.findViewById(R.id.ratings_profile_textview);
+        gamesNumberTextView = (TextView) view.findViewById(R.id.games_number_profile_textview);
+        ratingsNumberTextView = (TextView) view.findViewById(R.id.ratings_number_profile_textview);
         recentActivitiesTextView = (TextView) view.findViewById(R.id.recent_activities_textview);
-        nickname = (TextView) view.findViewById(R.id.nickname_profile_textView);
-        userPicture = (CircleImageView) view.findViewById(R.id.user_profile_photo_imageView);
-        profileSettings = (ImageView) view.findViewById(R.id.user_profile_settings_imageview);
+        nicknameTextView = (TextView) view.findViewById(R.id.nickname_profile_textView);
+        userPictureCircleImageView = (CircleImageView) view.findViewById(R.id.user_profile_photo_imageView);
+        profileSettingsImageView = (ImageView) view.findViewById(R.id.user_profile_settings_imageview);
+        toUserGamesLinearLayout = (LinearLayout) view.findViewById(R.id.games_user_profile_linearlayout);
+        toUserFriendsLinearLayout = (LinearLayout) view.findViewById(R.id.friends_user_profile_linearlayout);
+        toUserRatingsLinearLayout = (LinearLayout) view.findViewById(R.id.ratings_user_profile_linearlayout);
 
 
         Typeface sansation = Typeface.createFromAsset(getActivity().getAssets() ,"sansationbold.ttf");
         usernameProfile.setTypeface(sansation);
-        toUserGames.setTypeface(sansation);
-        toUserFollowers.setTypeface(sansation);
-        toUserRatings.setTypeface(sansation);
-        toUserFollowing.setTypeface(sansation);
-        games_number.setTypeface(sansation);
-        ratings_number.setTypeface(sansation);
-        followers_number.setTypeface(sansation);
-        followings_number.setTypeface(sansation);
+        friendsNumberTextView.setTypeface(sansation);
+        userFriendsTextView.setTypeface(sansation);
+        userGamesTextView.setTypeface(sansation);
+        userRatingsTextView.setTypeface(sansation);
+        gamesNumberTextView.setTypeface(sansation);
+        ratingsNumberTextView.setTypeface(sansation);
         recentActivitiesTextView.setTypeface(sansation);
-        nickname.setTypeface(sansation);
+        nicknameTextView.setTypeface(sansation);
 
 
         // these  methods used to jump to ( games , scores , following , followers ) activity .
         // I've tried the onClick(View view) method  but  it didn't work .
-        toUserGames.setOnClickListener(new View.OnClickListener() {
+
+        toUserGamesLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), UserGames.class);
-                startActivity(intent);
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity().getApplicationContext(),UserGames.class);
+                startActivity(i);
+
             }
         });
 
-        games_number.setOnClickListener(new View.OnClickListener() {
+        toUserFriendsLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), UserGames.class);
-                startActivity(intent);
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity().getApplicationContext() , UserFriends.class);
+                startActivity(i);
             }
         });
 
-
-        toUserRatings.setOnClickListener(new View.OnClickListener() {
+        toUserRatingsLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), UserRatings.class);
-                startActivity(intent);
-            }
-        });
-
-        ratings_number.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), UserRatings.class);
-                startActivity(intent);
-            }
-        });
-
-
-        toUserFollowing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), UserFollowing.class);
-                startActivity(intent);
-            }
-        });
-
-        followings_number.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), UserFollowing.class);
-                startActivity(intent);
-            }
-        });
-
-        toUserFollowers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), UserFollowers.class);
-                startActivity(intent);
-            }
-        });
-
-        followers_number.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), UserFollowers.class);
-                startActivity(intent);
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity().getApplicationContext() , UserRatings.class);
+                startActivity(i);
             }
         });
 
 
 
-        profileSettings.setOnClickListener(new View.OnClickListener() {
+
+        profileSettingsImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -215,7 +176,7 @@ public class UserProfileFragment extends Fragment {
 //        }); //closing the setOnClickListener method
 
 
-        userPicture.setOnClickListener(new View.OnClickListener() {
+        userPictureCircleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                  new AlertDialog.Builder(v.getContext())
@@ -287,7 +248,7 @@ public class UserProfileFragment extends Fragment {
                 Uri selectedImage = data.getData();
                 Bitmap imgBitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
 
-                userPicture.setImageBitmap(imgBitmap);
+                userPictureCircleImageView.setImageBitmap(imgBitmap);
 
             } else {
                 Toast.makeText(getContext(), "You haven't picked Image",

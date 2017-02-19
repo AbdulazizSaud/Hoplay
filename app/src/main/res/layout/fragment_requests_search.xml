@@ -211,6 +211,39 @@
 
     </Button>
 
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/playersnumbericon"
+        android:id="@+id/players_number_icon_search_request_imageview"
+        android:layout_alignTop="@+id/down_arrow_number_of_players_search_imageview"
+        android:layout_alignStart="@+id/region_icon_search_request_imageview" />
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/gamesicon"
+        android:id="@+id/games_icon_search_request_imageview"
+        android:layout_marginTop="12dp"
+        android:layout_alignTop="@+id/games_search_edittext"
+        android:layout_alignStart="@+id/games_search_edittext"
+        android:layout_marginStart="15dp" />
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ranksicon"
+        android:id="@+id/ranks_icon_search_request_imageview"
+        android:layout_alignTop="@+id/down_arrow_players_rank_search_imageview"
+        android:layout_alignStart="@+id/players_number_icon_search_request_imageview" />
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/regionicon"
+        android:id="@+id/region_icon_search_request_imageview"
+        android:layout_alignTop="@+id/down_arrow_region_search_imageview"
+        android:layout_alignStart="@+id/games_icon_search_request_imageview" />
 
 
 </RelativeLayout>

@@ -73,7 +73,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="D o n &apos; t   h a v e   a n   a c c o u n t  ?"
+        android:text="D o n &apos;t   h a v e   a n   a c c o u n t  ?"
         android:id="@+id/sign_up_question_textview"
         android:textColor="#726D6D"
         android:textSize="15dp"
@@ -100,7 +100,7 @@
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/username"
+        android:src="@drawable/usernameicon"
         android:id="@+id/username_icon_signin_imageview"
         android:layout_above="@+id/password_edittext"
         android:layout_alignTop="@+id/username_sign_in_edittext"
