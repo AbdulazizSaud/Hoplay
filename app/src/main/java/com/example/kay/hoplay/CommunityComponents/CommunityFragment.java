@@ -1,6 +1,7 @@
 package com.example.kay.hoplay.CommunityComponents;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,12 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.R;
+import com.example.kay.hoplay.UserProfile.ProfileRequires.UserFriends;
 import com.example.kay.hoplay.model.CommunityUserList;
 import com.pkmmte.view.CircularImageView;
 
@@ -29,6 +32,7 @@ public abstract class CommunityFragment extends Fragment {
 
 
     private RecyclerView mRecyclerView;
+    private ImageView newPrivateChatImageView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<CommunityUserList> communityUserLists=new ArrayList<CommunityUserList>();
@@ -79,6 +83,15 @@ public abstract class CommunityFragment extends Fragment {
 //        communityListview = (ListView)  view.findViewById(R.id.community_listview);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+        newPrivateChatImageView = (ImageView) view.findViewById(R.id.new_private_chat_imageview);
+        // Go to Friends List to start new private chat
+        newPrivateChatImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(),UserFriends.class);
+                startActivity(i);
+            }
+        });
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -132,6 +145,9 @@ public abstract class CommunityFragment extends Fragment {
             holder.setPicture(picture);
         }
     }
+
+
+
 
 
     protected abstract void OnClickHolders(CommunityUserList model,View v);

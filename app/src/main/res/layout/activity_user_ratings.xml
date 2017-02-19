@@ -10,10 +10,11 @@
     tools:context=".UserProfile.ProfileRequires.UserRatings"
     android:background="#E0E0E0">
 
-    <ListView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ratings_listview"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:textSize="20pt"
+        android:text="I'm ratings list activity"/>
 </RelativeLayout>

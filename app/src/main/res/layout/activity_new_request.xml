@@ -17,6 +17,9 @@
         tools:context=".RequestComponents.MakeRequestFragment">
 
 
+
+
+
         <RadioGroup
 
             android:layout_width="match_parent"
@@ -24,7 +27,6 @@
             android:orientation="horizontal"
             android:layout_below="@+id/make_request_message_textview"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
             android:gravity="center"
             android:id="@+id/consoles_radiogroup">
             <RadioButton
@@ -57,6 +59,7 @@
                 />
 
         </RadioGroup>
+
 
         <EditText
             android:layout_width="300dp"
@@ -203,35 +206,37 @@
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@drawable/regionsicon"
+            android:src="@drawable/regionicon"
             android:id="@+id/region_icon_new_request_imageview"
             android:layout_alignBottom="@+id/down_arrow_region_imageview"
-            android:layout_alignStart="@+id/imageView5" />
+            android:layout_alignStart="@+id/games_icon_new_request_imageview" />
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/playersnumbericon"
-            android:layout_alignTop="@+id/down_arrow_number_of_players_imageview"
-            android:layout_alignStart="@+id/region_icon_new_request_imageview"
-            android:id="@+id/players_number_icon_new_request_imageview" />
+            android:id="@+id/players_number_icon_new_request_imageview"
+            android:layout_alignBottom="@+id/down_arrow_number_of_players_imageview"
+            android:layout_alignStart="@+id/region_icon_new_request_imageview" />
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/ranksicon"
-            android:layout_alignBottom="@+id/down_arrow_ranks_imageview"
             android:id="@+id/ranks_icon_new_request_imageview"
+            android:layout_alignBottom="@+id/down_arrow_ranks_imageview"
             android:layout_alignStart="@+id/players_number_icon_new_request_imageview" />
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/gamesicon"
-            android:id="@+id/imageView5"
+            android:id="@+id/games_icon_new_request_imageview"
+            android:layout_marginTop="12dp"
             android:layout_below="@+id/consoles_radiogroup"
-            android:layout_toStartOf="@+id/make_request_message_textview"
-            android:layout_marginTop="9dp" />
+            android:layout_alignStart="@+id/games_edittext"
+            android:layout_marginStart="14dp" />
+
 
     </RelativeLayout>
 

@@ -150,9 +150,9 @@ public abstract class MainAppMenu extends AppCompatActivity implements ActivityI
 
         // Setting colors for different tabs when there's more than three of them.
         bottomBar.mapColorForTab(0, "#880E4F");
-        bottomBar.mapColorForTab(1, "#00897B");
-        bottomBar.mapColorForTab(2, "#FF9800");
-        bottomBar.mapColorForTab(3, "#6200EA");
+        bottomBar.mapColorForTab(1, "#880E4F");
+        bottomBar.mapColorForTab(2, "#880E4F");
+        bottomBar.mapColorForTab(3, "#880E4F");
 
 
         bottomBar.setOnItemSelectedListener(new OnTabSelectedListener() {

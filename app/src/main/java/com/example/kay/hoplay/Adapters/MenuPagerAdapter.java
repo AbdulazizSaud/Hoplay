@@ -33,10 +33,9 @@ public class MenuPagerAdapter extends FragmentStatePagerAdapter {
                     return new CommunityActivity();
                 case 2 :
                     return new MakeRequest();
-                case 3  :
+                case 3 :
                     return new UserProfileFragment();
-                case 4 :
-                    return new SettingsFragment();
+
 
             }
 
@@ -47,7 +46,7 @@ public class MenuPagerAdapter extends FragmentStatePagerAdapter {
         @Override
         public int getCount()
         {
-            return 5;
+            return 4;
         }
 
 }

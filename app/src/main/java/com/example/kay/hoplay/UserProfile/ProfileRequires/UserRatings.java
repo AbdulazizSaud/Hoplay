@@ -17,7 +17,7 @@ public class UserRatings extends AppCompatActivity {
         setContentView(R.layout.activity_user_ratings);
       //  getSupportActionBar().hide();
 
-        ratingsListview = (ListView) findViewById(R.id.ratings_listview);
+
 
 
 

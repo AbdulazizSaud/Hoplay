@@ -16,7 +16,7 @@ public class UserGames extends AppCompatActivity {
         setContentView(R.layout.activity_user_games);
       //  getSupportActionBar().hide();
 
-        gamesListview = (ListView) findViewById(R.id.games_listview);
+
 
 
     }
