@@ -18,6 +18,8 @@ import com.example.kay.hoplay.Services.GetAPI;
 import com.example.kay.hoplay.Services.LruBitmapCache;
 import com.example.kay.hoplay.Interfaces.SocketIOEvents;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,6 +42,9 @@ public class App extends Application implements SocketIOEvents,Constants{
     private static App instance;
 
 
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseRoot;
+    private DatabaseReference databaseUsers;
     private FirebaseAuth mAuth;  // firebase auth
     private PattrenContext pattrenContext; // pattren stratgey
     private ImageLoader imageLoader; // Image loader from url
@@ -59,6 +64,9 @@ public class App extends Application implements SocketIOEvents,Constants{
         instance = this;
         pattrenContext = new PattrenContext();
         mAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseRoot = firebaseDatabase.getReference();
+        databaseUsers = databaseRoot.child("_users_info_");
         socketIO.connect();
 
     }
@@ -135,6 +143,16 @@ public class App extends Application implements SocketIOEvents,Constants{
         return  pattrenContext.executeStratgy(strategyInterface);
     }
 
+
+    public FirebaseDatabase getFirebaseDatabase() {
+        return firebaseDatabase;
+    }
+    public DatabaseReference getDatabaseRoot() {
+        return databaseRoot;
+    }
+    public DatabaseReference getDatabaseUsers() {
+        return databaseUsers;
+    }
 
 
 }

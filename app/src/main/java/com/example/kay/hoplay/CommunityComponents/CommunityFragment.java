@@ -27,6 +27,7 @@ public abstract class CommunityFragment extends Fragment {
 
 //    ListView communityListview ;
 
+
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -62,9 +63,11 @@ public abstract class CommunityFragment extends Fragment {
     };
 
 
+    protected App app;
 
     public CommunityFragment() {
         // Required empty public constructor
+        app = App.getInstance();
     }
 
 
@@ -81,23 +84,6 @@ public abstract class CommunityFragment extends Fragment {
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
-
-//.
-//        // test
-        String picUrl = "https://s13.postimg.org/puvr2r9tz/test_user_copy.jpg";
-        String username = "Test";
-        String lastMessage = "Test has joined your request click to replay ^^";
-//        //
-
-
-        //getAdapterData();
-
-        ///
-        CommunityUserList clu = new CommunityUserList(username,username,picUrl);
-        clu.setLastMsg(lastMessage);
-        communityUserLists.add(clu);
-
 
         mAdapter = createAdapter();
         mRecyclerView.setAdapter(mAdapter);
@@ -105,10 +91,28 @@ public abstract class CommunityFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+
+        // test
+        String picUrl = "https://s13.postimg.org/puvr2r9tz/test_user_copy.jpg";
+        String username = "Test";
+        String lastMessage = "Test has joined your request click to replay ^^";
+
+        CommunityUserList clu = new CommunityUserList(username,username,picUrl);
+        clu.setLastMsg(lastMessage);
+
+        addToList(clu);
+
+        OnStartActivity();
+
         return view;
     }
 
 
+
+    public void addToList(CommunityUserList communityUserList){
+        communityUserLists.add(communityUserList);
+        mAdapter.notifyDataSetChanged();
+    }
     private CommonAdapter<CommunityUserList> createAdapter(){
         return commonAdapter;
     }
@@ -131,5 +135,5 @@ public abstract class CommunityFragment extends Fragment {
 
 
     protected abstract void OnClickHolders(CommunityUserList model,View v);
-
+    protected abstract void OnStartActivity();
 }

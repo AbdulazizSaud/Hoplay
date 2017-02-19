@@ -203,13 +203,35 @@
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
+            android:src="@drawable/regionsicon"
+            android:id="@+id/region_icon_new_request_imageview"
+            android:layout_alignBottom="@+id/down_arrow_region_imageview"
+            android:layout_alignStart="@+id/imageView5" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/playersnumbericon"
+            android:layout_alignTop="@+id/down_arrow_number_of_players_imageview"
+            android:layout_alignStart="@+id/region_icon_new_request_imageview"
+            android:id="@+id/players_number_icon_new_request_imageview" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ranksicon"
+            android:layout_alignBottom="@+id/down_arrow_ranks_imageview"
+            android:id="@+id/ranks_icon_new_request_imageview"
+            android:layout_alignStart="@+id/players_number_icon_new_request_imageview" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:src="@drawable/gamesicon"
             android:id="@+id/imageView5"
-            android:layout_marginStart="14dp"
-            android:layout_above="@+id/region_spinner"
-            android:layout_toEndOf="@+id/go_back_toMainAppMenu_imageView"
-            android:layout_marginBottom="11dp" />
-
+            android:layout_below="@+id/consoles_radiogroup"
+            android:layout_toStartOf="@+id/make_request_message_textview"
+            android:layout_marginTop="9dp" />
 
     </RelativeLayout>
 
