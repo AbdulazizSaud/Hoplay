@@ -15,7 +15,7 @@ import io.socket.emitter.Emitter;
  */
 
 public class ChatActivity extends Chat {
-
+//
 
     // set up chat app using socket io
     @Override

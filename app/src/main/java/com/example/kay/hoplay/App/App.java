@@ -55,7 +55,7 @@ public class App extends Application implements SocketIOEvents,Constants{
         initSocket();
     }
 
-
+//
 
     @Override
     public void onCreate() {

@@ -35,7 +35,7 @@ public class CommunityActivity extends CommunityFragment {
 
         final String uid = app.getAuth().getCurrentUser().getUid();
 
-
+//
         DatabaseReference user = app.getDatabaseUsers().child(uid);
 
         user.addListenerForSingleValueEvent(new ValueEventListener() {

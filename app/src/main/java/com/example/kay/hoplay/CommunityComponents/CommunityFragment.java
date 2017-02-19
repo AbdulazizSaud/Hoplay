@@ -147,7 +147,7 @@ public abstract class CommunityFragment extends Fragment {
     }
 
 
-
+//
 
 
     protected abstract void OnClickHolders(CommunityUserList model,View v);
