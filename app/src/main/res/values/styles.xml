@@ -23,6 +23,12 @@
 
     </style>
 
+    <style name="PreferencesTheme">
+        <item name="android:windowBackground">@drawable/background</item>
+        <item name="android:background">#E0E0</item>
+    </style>
+
+
      <!-- Toolbar style -->
     <style name="MyCustomToolbarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     <!--<item name="textColorPrimary">#FFFFFF</item>-->

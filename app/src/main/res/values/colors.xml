@@ -24,7 +24,7 @@
         <color name="blue">#3399FF</color>
         <color name="silver">#E6E6E6</color>
 
-        <color name="myBackground">#E0E0E0</color>
+        <color name="AppBackground">#E0E0E0</color>
 
     <color name="yellow">#FFFF00</color>
     <color name="fuchsia">#FF00FF</color>

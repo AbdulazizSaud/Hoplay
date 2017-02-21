@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="#E0E0E0"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="20dp"
         >
 
       <Space
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="#E0E0E0"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         >
 
 
@@ -86,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="username"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_gravity="center"
                 android:id="@+id/username_profile"
                 android:textColor="#404257"
@@ -108,7 +108,7 @@
         android:orientation="horizontal" android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/user_games_friends_ratings_background"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         >
 
 
@@ -127,8 +127,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Games"
+                android:textColor="@color/burgundy"
                 android:textSize="15dp"
-                android:layout_margin="2dp"
+                android:layout_margin="5dp"
                 android:layout_gravity="center"
                 android:id="@+id/games_profile_textview"
                 />
@@ -140,7 +141,7 @@
                 android:id="@+id/games_number_profile_textview"
                 android:layout_gravity="center"
                 android:textSize="15dp"
-                android:layout_margin="2dp"
+                android:layout_margin="5dp"
                 android:text="50" />
 
         </LinearLayout>
@@ -163,7 +164,8 @@
                 android:id="@+id/friends_profile_textview"
                 android:text="Friends"
                 android:textSize="15dp"
-                android:layout_margin="2dp"
+                android:textColor="@color/burgundy"
+                android:layout_margin="5dp"
                 android:layout_gravity="center"
                 />
 
@@ -171,7 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="2dp"
+                android:layout_margin="5dp"
                 android:id="@+id/friends_number_profile_textview"
                 android:textSize="15dp"
                 android:text="50" />
@@ -194,8 +196,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/ratings_profile_textview"
                 android:text="Ratings"
-                android:layout_margin="2dp"
+                android:layout_margin="5dp"
                 android:textSize="15dp"
+                android:textColor="@color/burgundy"
                 android:layout_gravity="center"
                 />
 
@@ -205,7 +208,7 @@
                 android:id="@+id/ratings_number_profile_textview"
                 android:layout_gravity="center"
                 android:textSize="15dp"
-                android:layout_margin="2dp"
+                android:layout_margin="5dp"
                 android:text="50" />
 
         </LinearLayout>

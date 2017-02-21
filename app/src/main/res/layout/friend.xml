@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content" android:background="@color/AppBackground"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="250px"
+        android:layout_height="250px"
+        android:src="@drawable/userprofile"
+        android:id="@+id/friend_profile_photo_circleimageview"
+        android:clickable="true"
+        android:layout_margin="5dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Khaled"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:id="@+id/friend_nickname_friends_list_textview"
+        android:textSize="15dp"/>
+
+
+</LinearLayout>
