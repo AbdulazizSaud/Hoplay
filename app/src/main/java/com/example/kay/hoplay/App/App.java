@@ -22,8 +22,11 @@ import com.example.kay.hoplay.Interfaces.SocketIOEvents;
 import com.example.kay.hoplay.model.CommonModel;
 import com.example.kay.hoplay.model.CommunityUserList;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.pkmmte.view.CircularImageView;
 
 import org.json.JSONException;
@@ -156,7 +159,7 @@ public class App extends Application implements SocketIOEvents,Constants{
         holder.setPicture(picture);
 
         if(model.getUserPictureURL() != null) {
-            if (model.getUserPictureURL().length() > 0) {
+            if (model.getUserPictureURL().length() > 0 && !model.getUserPictureURL().startsWith("default")) {
                 getImageLoader().get(model.getUserPictureURL(),
                         ImageLoader.getImageListener(
                                 holder.getPicture()
@@ -166,7 +169,6 @@ public class App extends Application implements SocketIOEvents,Constants{
             }
         }
     }
-
 
     public FirebaseDatabase getFirebaseDatabase() {
         return firebaseDatabase;
