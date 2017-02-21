@@ -57,8 +57,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.SettingsActivity"/>
-        <activity android:name=".UserProfile.ProfileRequires.UserFriends"></activity>
+        <activity android:name=".Activities.SettingsActivity" />
+        <activity android:name=".CommunityComponents.UserFriendsActivity"></activity>
     </application>
 
 </manifest>

@@ -41,14 +41,8 @@ public class CommunityActivity extends CommunityFragment {
         user.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChild("_friends_list_")) {
-
-                    Iterator i = dataSnapshot.child("_friends_list_").getChildren().iterator();
-                    while (i.hasNext()){
-                        Log.i("---------->","hello = " +i.next());
-                    }
-                } else {
-
+                if (dataSnapshot.hasChild("_chat_refs_")) {
+                    //..
                 }
 
             }

@@ -6,9 +6,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.kay.hoplay.R;
-import com.pkmmte.view.CircularImageView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import emojicon.EmojiconTextView;
+
 
 /**
  * Created by azoz-pc on 11/30/2016.
@@ -17,7 +18,8 @@ import emojicon.EmojiconTextView;
 public abstract class ViewHolders extends RecyclerView.ViewHolder {
 
 
-    protected CircularImageView picture;
+
+    protected CircleImageView picture;
     protected TextView title,subtitle,time;
     protected View view;
 
@@ -41,7 +43,7 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
         public CommunityHolder(View v) {
             super(v);
 
-            picture = (CircularImageView) v.findViewById(R.id.chatOpponent);
+            picture = (CircleImageView) v.findViewById(R.id.chatOpponent);
 
 
             title =  (TextView) v.findViewById(R.id.chatOpponentFullname);
@@ -65,6 +67,7 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
             this.chatLastMessage.setText(subtitle);
         }
     }
+
     public static class SavedRequestHolder extends ViewHolders {
         public SavedRequestHolder(View v) {
             super(v);
@@ -80,7 +83,7 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
             subtitle =  (TextView) v.findViewById(R.id.request_description_saved_request_textview);
             subtitle.setTypeface(sansation);
 
-            picture = (CircularImageView) v.findViewById(R.id.game_photo_saved_request_circularimageview);
+            picture = (CircleImageView) v.findViewById(R.id.game_photo_saved_request_circularimageview);
 
             numberOfPlayers = (TextView) v.findViewById(R.id.number_of_players_saved_requests_textview);
             numberOfPlayers.setTypeface(sansation);
@@ -97,17 +100,29 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
 
             subtitle =  (TextView) v.findViewById(R.id.activity_description_textview);
             subtitle.setTypeface(sansation);
-            picture = (CircularImageView) v.findViewById(R.id.game_photo_recent_activity_circularimageview);
+            picture = (CircleImageView) v.findViewById(R.id.game_photo_recent_activity_circularimageview);
             time = (TextView) v.findViewById(R.id.activity_date_textview);
             time.setTypeface(sansation);
         }
     }
 
 
-    public void setPicture(CircularImageView picture) {
+    public static class FriendListHolder extends ViewHolders {
+
+        public FriendListHolder(View v) {
+            super(v);
+
+
+
+            picture = (CircleImageView)v.findViewById(R.id.friend_profile_photo_circleimageview);
+            title  = (TextView)v.findViewById(R.id.friend_nickname_friends_list_textview);
+        }
+    }
+
+    public void setPicture(CircleImageView picture) {
         this.picture = picture;
     }
-    public CircularImageView getPicture() {
+    public CircleImageView getPicture() {
         return picture;
     }
     public TextView getTitleView() {

@@ -1,13 +1,13 @@
 package com.example.kay.hoplay.model;
 
 
-public class CommunityUserList {
+public class CommunityUserList  extends CommonModel {
 
 
 
 
     // here it should be a behivors something like a opponent id , my id and so long.
-    private String receiverID,fullName,userPictureURL,lastMsg,lastMsgDate;
+    private String fullName,receiverID,lastMsg,lastMsgDate;
 
     public CommunityUserList(String receiverID,String fullName, String userPictureURL) {
         this.receiverID = receiverID;
@@ -24,15 +24,6 @@ public class CommunityUserList {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-
-    public String getUserPictureURL() {
-        return userPictureURL;
-    }
-
-    public void setUserPictureURL(String userPictureURL) {
-        this.userPictureURL = userPictureURL;
-    }
-
     public String getLastMsg() {
         return lastMsg;
     }

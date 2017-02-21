@@ -16,7 +16,6 @@ import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.UserProfile.ProfileRequires.UserFriends;
 import com.example.kay.hoplay.model.CommunityUserList;
 import com.pkmmte.view.CircularImageView;
 
@@ -48,10 +47,7 @@ public abstract class CommunityFragment extends Fragment {
         public void OnBindHolder(ViewHolders holder, final CommunityUserList model) {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
-            ImageLoader loader = App.getInstance().getImageLoader();
             ViewHolders.CommunityHolder communityHolder = (ViewHolders.CommunityHolder)holder;
-
-
             holder.getView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -59,7 +55,7 @@ public abstract class CommunityFragment extends Fragment {
                 }
             });
 
-            loadingImage(holder, model, loader);
+            app.loadingImage(holder, model);
             holder.setTitle(model.getFullName());
             communityHolder.setCommunitySubtitle(model.getLastMsg());
             holder.setTime(model.getLastMsgDate());
@@ -82,16 +78,29 @@ public abstract class CommunityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_community, container, false) ;
 //        communityListview = (ListView)  view.findViewById(R.id.community_listview);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+        setupRecyclerView(view);
+
         newPrivateChatImageView = (ImageView) view.findViewById(R.id.new_private_chat_imageview);
         // Go to Friends List to start new private chat
         newPrivateChatImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(),UserFriends.class);
+                Intent i = new Intent(getContext(),UserFriendsActivity.class);
                 startActivity(i);
             }
         });
+
+
+        testList();
+
+        OnStartActivity();
+
+        return view;
+    }
+
+
+    private void setupRecyclerView(View view) {
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -103,8 +112,22 @@ public abstract class CommunityFragment extends Fragment {
 
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
+    }
 
 
+    public void addToList(CommunityUserList communityUserList){
+        communityUserLists.add(communityUserList);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    private CommonAdapter<CommunityUserList> createAdapter(){
+        return commonAdapter;
+    }
+
+
+
+
+    private void testList() {
         // test
         String picUrl = "https://s13.postimg.org/puvr2r9tz/test_user_copy.jpg";
         String username = "Test";
@@ -115,38 +138,7 @@ public abstract class CommunityFragment extends Fragment {
 
         addToList(clu);
 
-        OnStartActivity();
-
-        return view;
     }
-
-
-
-    public void addToList(CommunityUserList communityUserList){
-        communityUserLists.add(communityUserList);
-        mAdapter.notifyDataSetChanged();
-    }
-    private CommonAdapter<CommunityUserList> createAdapter(){
-        return commonAdapter;
-    }
-
-
-    private void loadingImage(ViewHolders holder, CommunityUserList model, ImageLoader loader) {
-        if(model.getUserPictureURL().length() > 0){
-            loader.get(model.getUserPictureURL(),
-                    ImageLoader.getImageListener(
-                            holder.getPicture()
-                            , R.drawable.profile_default_photo
-                            ,R.drawable.profile_default_photo));
-
-        } else {
-            CircularImageView picture = holder.getPicture();
-            picture.setImageResource(R.drawable.profile_default_photo);
-            holder.setPicture(picture);
-        }
-    }
-
-
 //
 
 

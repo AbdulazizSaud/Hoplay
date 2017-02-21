@@ -8,7 +8,6 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.sax.StartElementListener;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,7 +26,7 @@ import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.UserProfile.ProfileRequires.UserFriends;
+import com.example.kay.hoplay.CommunityComponents.UserFriendsActivity;
 import com.example.kay.hoplay.UserProfile.ProfileRequires.UserGames;
 import com.example.kay.hoplay.UserProfile.ProfileRequires.UserRatings;
 import com.example.kay.hoplay.model.RecentActivityList;
@@ -89,7 +88,7 @@ public class UserProfileFragment extends Fragment {
         ratingsNumberTextView = (TextView) view.findViewById(R.id.ratings_number_profile_textview);
         recentActivitiesTextView = (TextView) view.findViewById(R.id.recent_activities_textview);
         nicknameTextView = (TextView) view.findViewById(R.id.nickname_profile_textView);
-        userPictureCircleImageView = (CircleImageView) view.findViewById(R.id.user_profile_photo_imageView);
+        userPictureCircleImageView = (CircleImageView) view.findViewById(R.id.user_profile_photo_circleimageview);
         profileSettingsImageView = (ImageView) view.findViewById(R.id.user_profile_settings_imageview);
         toUserGamesLinearLayout = (LinearLayout) view.findViewById(R.id.games_user_profile_linearlayout);
         toUserFriendsLinearLayout = (LinearLayout) view.findViewById(R.id.friends_user_profile_linearlayout);
@@ -123,7 +122,7 @@ public class UserProfileFragment extends Fragment {
         toUserFriendsLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity().getApplicationContext() , UserFriends.class);
+                Intent i = new Intent(getActivity().getApplicationContext() , UserFriendsActivity.class);
                 startActivity(i);
             }
         });
@@ -292,7 +291,7 @@ public class UserProfileFragment extends Fragment {
                                     ,R.drawable.profile_default_photo));
 
                 } else {
-                    CircularImageView picture = holder.getPicture();
+                    CircleImageView picture = holder.getPicture();
                     picture.setImageResource(R.drawable.profile_default_photo);
                     holder.setPicture(picture);
                 }

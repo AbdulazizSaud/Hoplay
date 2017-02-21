@@ -24,6 +24,8 @@ import com.pkmmte.view.CircularImageView;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public abstract class MakeRequestFragment extends Fragment {
 
     private  Button newRequestButton;
@@ -141,7 +143,7 @@ public abstract class MakeRequestFragment extends Fragment {
                             ,R.drawable.profile_default_photo));
 
         } else {
-            CircularImageView picture = holder.getPicture();
+            CircleImageView picture = holder.getPicture();
             picture.setImageResource(R.drawable.profile_default_photo);
             holder.setPicture(picture);
         }

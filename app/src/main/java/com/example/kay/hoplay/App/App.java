@@ -10,16 +10,21 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.Interfaces.Constants;
 import com.example.kay.hoplay.PatternStrategyComponents.PattrenContext;
 import com.example.kay.hoplay.PatternStrategyComponents.PattrenStrategyInterface;
+import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Services.ErrorHandler;
 import com.example.kay.hoplay.Services.GetAPI;
 import com.example.kay.hoplay.Services.LruBitmapCache;
 import com.example.kay.hoplay.Interfaces.SocketIOEvents;
+import com.example.kay.hoplay.model.CommonModel;
+import com.example.kay.hoplay.model.CommunityUserList;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.pkmmte.view.CircularImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,6 +33,7 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
@@ -141,6 +147,24 @@ public class App extends Application implements SocketIOEvents,Constants{
     //this method execute stratgey which it pass as parameter and return a results as hash
     public HashMap<String ,String> executeStratgy(PattrenStrategyInterface strategyInterface){
         return  pattrenContext.executeStratgy(strategyInterface);
+    }
+
+    public void loadingImage(ViewHolders holder, CommonModel model) {
+
+        CircleImageView picture = holder.getPicture();
+        picture.setImageResource(R.drawable.profile_default_photo);
+        holder.setPicture(picture);
+
+        if(model.getUserPictureURL() != null) {
+            if (model.getUserPictureURL().length() > 0) {
+                getImageLoader().get(model.getUserPictureURL(),
+                        ImageLoader.getImageListener(
+                                holder.getPicture()
+                                , R.drawable.profile_default_photo
+                                , R.drawable.profile_default_photo));
+
+            }
+        }
     }
 
 
