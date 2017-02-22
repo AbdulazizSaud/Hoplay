@@ -20,7 +20,7 @@
         android:background="#E0E0E0"
         >
 
-        <com.pkmmte.view.CircularImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:id="@+id/request_game_photo_circularimageview"
