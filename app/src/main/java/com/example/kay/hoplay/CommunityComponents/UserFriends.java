@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -41,9 +42,20 @@ public abstract class UserFriends extends AppCompatActivity {
         }
 
         @Override
-        public void OnBindHolder(ViewHolders holder, FriendCommonModel model) {
-            app.loadingImage(holder, model);
+        public void OnBindHolder(ViewHolders holder, final FriendCommonModel model) {
+
+
+
+            holder.getView().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    OnClickHolders(model);
+                }
+            });
+
             holder.setTitle(model.getUsername());
+            app.loadingImage(holder, model);
+
         }
     };
 
@@ -56,6 +68,7 @@ public abstract class UserFriends extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.rec_friend_list);
 
         setupRecyclerView();
+        //testList();
         loadFriendList();
     }
 
@@ -72,30 +85,35 @@ public abstract class UserFriends extends AppCompatActivity {
         mAdapter = friendListAdapter;
         mRecyclerView.setAdapter(mAdapter);
 
+       // mLayoutManager = new GridLayoutManager(getApplicationContext(),3);
+
         mLayoutManager = new GridLayoutManager(getApplicationContext(),3);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        testList();
     }
 
 
 
     private void testList() {
-        // test
-        String picUrl = "https://s13.postimg.org/puvr2r9tz/test_user_copy.jpg";
-        String username = "Test";
-        FriendCommonModel flu = new FriendCommonModel();
-        flu.setUserPictureURL(picUrl);
-        flu.setUsername(username +" ");
-        addToList(flu);
+
+        for(int i=0;i<3;i++) {
+            // test
+            String picUrl = "https://s13.postimg.org/puvr2r9tz/test_user_copy.jpg";
+            String username = "Test";
+            FriendCommonModel flu = new FriendCommonModel();
+            flu.setKey("test"+i);
+            flu.setUserPictureURL(picUrl);
+            flu.setUsername(username + " ");
+            addToList(flu);
+        }
     }
 
-    public void addToList(FriendCommonModel communityUserList){
-        friendList.add(communityUserList);
+    public void addToList(FriendCommonModel friendCommonModel){
+        friendList.add(friendCommonModel);
         mAdapter.notifyDataSetChanged();
     }
 
-    protected abstract void OnClickHolders();
+    protected abstract void OnClickHolders(FriendCommonModel model);
 
     public abstract void loadFriendList();
 }

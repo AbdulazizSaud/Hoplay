@@ -50,10 +50,9 @@ public class MainAppMenuActivity extends MainAppMenu {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user == null) {
                     // User is sign out
-                    Log.i("---------->"," Go baaaaack");
                     toLogin();
                 } else {
-                    Log.i("---------->",firebaseAuth.getCurrentUser().getUid());
+                    Log.i("My id ---------->",firebaseAuth.getCurrentUser().getUid());
 
                 }
             }

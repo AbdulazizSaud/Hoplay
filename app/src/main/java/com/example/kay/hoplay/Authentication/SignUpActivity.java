@@ -100,8 +100,8 @@ public class SignUpActivity extends Signup {
         DatabaseReference rotRef = app.getDatabaseUsers().child(UID);
 
 
-        rotRef.child("_chat_refs_").child("_public_").child("test").setValue("test");
-        rotRef.child("_chat_refs_").child("_private_").child("test").setValue("test");
+//        rotRef.child("_chat_refs_").child("_public_").child("test").setValue("test");
+//        rotRef.child("_chat_refs_").child("_private_").child("test").setValue("test");
         rotRef.child("_friends_list_").child("test").setValue("testchh");
         rotRef.child("_info_").child("_username_").setValue(username);
         rotRef.child("_info_").child("_nickname_").setValue(nickname);

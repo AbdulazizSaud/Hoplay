@@ -13,7 +13,6 @@
         app:civ_border_color="@color/burgundy"
         android:src="@drawable/userprofile"
         android:id="@+id/friend_profile_photo_circleimageview"
-        android:clickable="true"
         android:layout_margin="5dp"
         />
 
