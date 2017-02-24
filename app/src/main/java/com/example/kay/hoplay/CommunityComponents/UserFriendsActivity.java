@@ -34,8 +34,10 @@ public class UserFriendsActivity extends UserFriends {
     private void createChat(final String userKey , final String friendKey)
     {
 
-        final DatabaseReference refPrivate =  app.getDatabasChat().child("private").child(userKey);
+        final DatabaseReference refPrivate =  app.getDatabasChat().child("private");
 
+
+        String roomKey = refPrivate.push().getKey();
 
         DatabaseReference messagesRef =   refPrivate.child(friendKey).child("Messages");
 
@@ -45,8 +47,8 @@ public class UserFriendsActivity extends UserFriends {
 
 
 
-//        DatabaseReference user =  app.getDatabaseUsers().child(userKey);
-//        user.child("_chat_refs_").child("_private_").child(friendKey).setValue(friendKey);
+        DatabaseReference user =  app.getDatabaseUsers().child(userKey);
+        user.child("_chat_refs_").child("_private_").child(friendKey).setValue(friendKey);
 
         DatabaseReference pendingChat = app.getDatabaseRoot().child("PendingChat");
         pendingChat.child(friendKey).child("private").child(userKey).setValue("private");
