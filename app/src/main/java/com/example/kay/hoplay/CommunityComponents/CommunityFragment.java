@@ -3,6 +3,7 @@ package com.example.kay.hoplay.CommunityComponents;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,6 +36,7 @@ public abstract class CommunityFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<CommunityUserList> communityUserLists=new ArrayList<CommunityUserList>();
+    private  FloatingActionButton newPrivateChatFloatingActionButton;
 
     private CommonAdapter<CommunityUserList> commonAdapter =  new CommonAdapter<CommunityUserList>(communityUserLists,R.layout.new_user_message) {
         @Override
@@ -80,16 +82,17 @@ public abstract class CommunityFragment extends Fragment {
 
         setupRecyclerView(view);
 
-        newPrivateChatImageView = (ImageView) view.findViewById(R.id.new_private_chat_imageview);
+
+
         // Go to Friends List to start new private chat
-        newPrivateChatImageView.setOnClickListener(new View.OnClickListener() {
+        newPrivateChatFloatingActionButton = (FloatingActionButton) view.findViewById(R.id.new_private_chat_floatingactionbutton);
+        newPrivateChatFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getContext(),UserFriendsActivity.class);
                 startActivity(i);
             }
         });
-
 
         testList();
 

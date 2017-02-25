@@ -1,28 +1,25 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#E0E0E0">
 
-    <include layout="@layout/new_private_chat_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-        ></include>
+
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100px"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
         tools:context=".CommunityComponents.CommunityFragment"
         android:orientation="vertical"
-        android:background="#E0E0E0">
+        android:background="#E0E0E0"
+        android:layout_alignParentTop="true">
 
         <!-- TODO: Update blank fragment layout -->
 
@@ -42,14 +39,17 @@
             android:layout_centerHorizontal="true"
             android:background="@drawable/messages_bg" />
 
-        <TextView
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/new_private_chat_floatingactionbutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/message"
-            android:layout_below="@+id/splash"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp" />
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_add_white_36dp"
+
+           />
 
     </RelativeLayout>
 
