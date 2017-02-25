@@ -22,6 +22,7 @@ import android.widget.PopupWindow;
 
 import com.example.kay.hoplay.Activities.MainMenu.MainAppMenuActivity;
 import com.example.kay.hoplay.Adapters.ChatAdapter;
+import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.model.ChatMessage;
 
@@ -45,6 +46,9 @@ import emojicon.emoji.Objects;
 public abstract class Chat extends AppCompatActivity implements ChatInterface {
 
     /***************************************/
+
+    // App
+     protected App app;
 
     // layout contents
     protected EmojiconEditText messageET;
@@ -85,6 +89,8 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
+
+        app = App.getInstance();
 
         // set up chat app mechanisms
         setupChat();
