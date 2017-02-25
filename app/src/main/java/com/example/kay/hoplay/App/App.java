@@ -54,6 +54,8 @@ public class App extends Application implements SocketIOEvents,Constants{
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseRoot;
     private DatabaseReference databaseUsers;
+    private DatabaseReference databaseChat;
+
     private FirebaseAuth mAuth;  // firebase auth
     private PattrenContext pattrenContext; // pattren stratgey
     private ImageLoader imageLoader; // Image loader from url
@@ -76,6 +78,7 @@ public class App extends Application implements SocketIOEvents,Constants{
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseRoot = firebaseDatabase.getReference();
         databaseUsers = databaseRoot.child("_users_info_");
+        databaseChat = databaseRoot.child("Chat");
         socketIO.connect();
 
     }
@@ -178,6 +181,9 @@ public class App extends Application implements SocketIOEvents,Constants{
     }
     public DatabaseReference getDatabaseUsers() {
         return databaseUsers;
+    }
+    public DatabaseReference getDatabasChat() {
+        return databaseChat;
     }
 
 

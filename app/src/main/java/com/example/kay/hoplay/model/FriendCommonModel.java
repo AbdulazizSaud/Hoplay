@@ -9,6 +9,9 @@ public class FriendCommonModel extends CommonModel {
     private String username;
 
 
+    private String key;
+
+
     public String getUsername() {
         return username;
     }
@@ -19,6 +22,14 @@ public class FriendCommonModel extends CommonModel {
 
     public String getPictureUrl() {
         return userPictureURL;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
 
