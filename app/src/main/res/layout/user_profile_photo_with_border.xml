@@ -20,7 +20,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="250px"
             android:layout_height="250px"
-            android:src="@drawable/userprofile"
+            android:src="@drawable/profile_default_photo"
             android:layout_gravity="center"
             android:id="@+id/user_profile_photo_circleimageview"
             android:clickable="true"

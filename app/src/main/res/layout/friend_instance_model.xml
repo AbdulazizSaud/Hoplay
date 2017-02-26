@@ -11,7 +11,7 @@
         android:layout_height="250px"
         app:civ_border_width="2dp"
         app:civ_border_color="@color/burgundy"
-        android:src="@drawable/userprofile"
+        android:src="@drawable/profile_default_photo"
         android:id="@+id/friend_profile_photo_circleimageview"
         android:layout_margin="5dp"
         />
