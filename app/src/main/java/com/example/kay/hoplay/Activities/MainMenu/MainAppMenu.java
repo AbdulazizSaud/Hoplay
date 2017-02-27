@@ -34,7 +34,7 @@ public abstract class MainAppMenu extends AppCompatActivity implements ActivityI
     private ViewPager mainAppMenu;
     private boolean changeBar = true;
     private static BottomBar bottomBar;
-
+    protected App app;
 
     /***************************************/
 
@@ -75,6 +75,8 @@ public abstract class MainAppMenu extends AppCompatActivity implements ActivityI
             Log.d("Oreintation : ", "Portrait mode");
         }
 
+        //
+        app = App.getInstance();
         // this method for init Main menu
         initControl(savedInstanceState);
         // this method for work only on create , basiclly init a mechinsims

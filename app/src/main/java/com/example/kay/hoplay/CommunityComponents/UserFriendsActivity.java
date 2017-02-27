@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.kay.hoplay.Chat.ChatActivity;
+import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.PatternStrategyComponents.PattrenStrategy;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.model.FriendCommonModel;
@@ -21,17 +22,19 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class UserFriendsActivity extends UserFriends {
+public class UserFriendsActivity extends UserFriends implements FirebasePaths{
 
 
+    private FriendCommonModel friendCommonModel;
 
     @Override
     protected void OnClickHolders(FriendCommonModel model) {
         Log.i("---------->", model.getKey());
         String UID =  app.getAuth().getCurrentUser().getUid();
-        String room_key =  createChat(UID,model.getKey());
+        String room_key =  createPrivateChat(UID,model.getKey(),model.getPictureUrl(),model.getUsername());
 
         Intent chatActivity = new Intent(this, ChatActivity.class);
+
 
         chatActivity.putExtra("room_key",room_key);
         chatActivity.putExtra("friend_key",model.getKey());
@@ -39,89 +42,113 @@ public class UserFriendsActivity extends UserFriends {
         chatActivity.putExtra("friend_picture",model.getPictureUrl());
 
         startActivity(chatActivity);
+        finish();
 
     }
 
 
-
-
-
-
-    private String createChat(String UID, String friendKey)
+    private String createPrivateChat(String UID, String friendKey,String picture,String username)
     {
 
-        DatabaseReference refPrivate =  app.getDatabasChat().child("private");
+        //app.getDatabasChat().child("_private_");
+
+        // path --> /Chat/_private_
+        DatabaseReference refPrivate = app.getFirebaseDatabase().getReferenceFromUrl(FB_PRIVATE_PATH);
         String key  = refPrivate.push().getKey();
 
+        // path --> /Chat/_private/[KEY]
         DatabaseReference chatRoom = refPrivate.child(key);
 
+        // path --> /Chat/_private/[KEY]/_details_
+        DatabaseReference roomInfo =   chatRoom.child(FIREBASE_DETAILS_ATTR);
 
-        DatabaseReference roomInfo =   chatRoom.child("Details");
+        // path --> /Chat/_private/[KEY]/_details_/_users_
+        DatabaseReference roomUsers = roomInfo.child(FIREBASE_USERS_LIST_ATTR);
 
-        roomInfo.child("Users").child(UID).setValue(UID);
-        roomInfo.child("Users").child(friendKey).setValue(friendKey);
-
+        roomUsers.child(UID).setValue(UID);
+        roomUsers.child(friendKey).setValue(friendKey);
 
         String accessKey = roomInfo.push().getKey();
         roomInfo.child("access_key").setValue(accessKey);
 
-        DatabaseReference messages =   chatRoom.child("Messages");
-        messages.child("Test_Message_").child("Username").setValue("test");
-        messages.child("Test_Message_").child("Message").setValue("test");
+        // path --> /Chat/_private/[KEY]/_messages_
+        DatabaseReference messages =   chatRoom.child(FIREBASE_CHAT_MESSAGES);
+        messages.child("Test Message").child("_username_").setValue("test");
+        messages.child("Test Message").child("_messages_").setValue("test");
 
 
 
         // Set Referance
-        DatabaseReference refChat = app.getDatabaseUsers().child(UID).child("_chat_refs_");
-        refChat.child("_private_").child(key).setValue(accessKey);
+
+        // path --> /_users_info_/[UID]/_chat_refs_/_private_
+
+        String privateChatPath = FB_USERS_PATH+UID+"/"+FIREBASE_USER_PRIVATE_CHAT;
+        DatabaseReference refUsePrivaterChats = app.getFirebaseDatabase().getReferenceFromUrl(privateChatPath);
+        refUsePrivaterChats.child(key).setValue(accessKey);
 
 
         // Pending
-        DatabaseReference refPendingChat = app.getDatabasChat().child("PendingChat");
-        DatabaseReference pendingChat = refPendingChat.child(friendKey).child("private").child(UID);
 
-        pendingChat.child("ChatID").setValue(key);
-        pendingChat.child("access_key").setValue(accessKey);
+        // path --> /Chat/_pending_chat_/[FRIEND_KEY]/_private_/[UID]
+        DatabaseReference refPendingChat = app.getDatabasChat().child(FIREBASE_PENDING_CHAT_ATTR).child(friendKey).child(FIREBASE_PRIVATE_ATTR).child(UID);
+        refPendingChat.child("chat_id").setValue(key);
+        refPendingChat.child("access_key").setValue(accessKey);
 
         return key;
     }
 
 
+
     @Override
     public void loadFriendList()
     {
+        final String UID =  app.getAuth().getCurrentUser().getUid();
 
-        String UID =  app.getAuth().getCurrentUser().getUid();
-        DatabaseReference usersData = app.getDatabaseUsers();
-        DatabaseReference user = usersData.child(UID).child("_friends_list_");
 
-        user.addListenerForSingleValueEvent(new ValueEventListener() {
+        final DatabaseReference usersData = app.getDatabaseUsers();
+        DatabaseReference friendList = usersData.child(UID).child(FIREBASE_FRIENDS_LIST_ATTR);
+
+        friendList.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onChildAdded(final DataSnapshot rootSnapshots, String s) {
 
 
-                Iterator i = dataSnapshot.getChildren().iterator();
-                FriendCommonModel friendCommonModel;
-                Object data;
+                usersData.child(rootSnapshots.getKey()).child(FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        friendCommonModel= new FriendCommonModel();
+                        friendCommonModel.setKey(rootSnapshots.getKey());
+                        friendCommonModel.setUserPictureURL(dataSnapshot.child("_picUrl_").getValue().toString());
+                        friendCommonModel.setUsername(dataSnapshot.child("_username_").getValue().toString());
+                        addToList(friendCommonModel);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
 
-                String friend_key, friend_username, friend_picture_url = "default";
-                while (i.hasNext()) {
+            }
 
-                    friendCommonModel = new FriendCommonModel();
-                    data = i.next();
-                    Log.i("--------->",data.toString());
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-                    DataSnapshot shot = (DataSnapshot) data;
 
-                    friend_key = shot.getKey();
-                    friend_username = (String)shot.getValue();
 
-                    friendCommonModel.setKey(friend_key);
-                    friendCommonModel.setUsername(friend_username);
 
-                    addToList(friendCommonModel);
-                }
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
@@ -129,7 +156,6 @@ public class UserFriendsActivity extends UserFriends {
 
             }
         });
-
     }
 
 }

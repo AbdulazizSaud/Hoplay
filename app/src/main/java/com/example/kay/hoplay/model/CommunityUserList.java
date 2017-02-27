@@ -7,12 +7,14 @@ public class CommunityUserList  extends CommonModel {
 
 
     // here it should be a behivors something like a opponent id , my id and so long.
-    private String fullName,receiverID,lastMsg,lastMsgDate;
+    private String chatKey,fullName,receiverID,lastMsg,lastMsgDate;
 
-    public CommunityUserList(String receiverID,String fullName, String userPictureURL) {
-        this.receiverID = receiverID;
-        this.fullName = fullName;
-        this.userPictureURL = userPictureURL;
+    public CommunityUserList() {
+        this.chatKey = null;
+        this.receiverID = "none";
+        this.fullName = "none";
+        this.userPictureURL = "default";
+
         this.lastMsg = "";
         this.lastMsgDate = "0 min ago";
     }
@@ -46,5 +48,13 @@ public class CommunityUserList  extends CommonModel {
 
     public void setReceiverID(String receiverID) {
         this.receiverID = receiverID;
+    }
+
+    public String getChatKey() {
+        return chatKey;
+    }
+
+    public void setChatKey(String chatKey) {
+        this.chatKey = chatKey;
     }
 }

@@ -53,7 +53,6 @@ public class MainAppMenuActivity extends MainAppMenu {
                     toLogin();
                 } else {
                     Log.i("My id ---------->",firebaseAuth.getCurrentUser().getUid());
-
                 }
             }
         };

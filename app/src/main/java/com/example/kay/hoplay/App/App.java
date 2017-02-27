@@ -1,10 +1,6 @@
 package com.example.kay.hoplay.App;
 
-import android.app.Activity;
 import android.app.Application;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -18,16 +14,11 @@ import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Services.ErrorHandler;
 import com.example.kay.hoplay.Services.GetAPI;
 import com.example.kay.hoplay.Services.LruBitmapCache;
-import com.example.kay.hoplay.Interfaces.SocketIOEvents;
+import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.model.CommonModel;
-import com.example.kay.hoplay.model.CommunityUserList;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.pkmmte.view.CircularImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,14 +30,13 @@ import java.util.concurrent.ExecutionException;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.socket.client.IO;
 import io.socket.client.Socket;
-import io.socket.emitter.Emitter;
 
 /*
     this class basiclly do linking between all difreent activity that trying to get a same specfic values
     it's impelmented as singleton stratgey
  */
 
-public class App extends Application implements SocketIOEvents,Constants{
+public class App extends Application implements FirebasePaths,Constants{
 
     private static App instance;
 
@@ -55,6 +45,7 @@ public class App extends Application implements SocketIOEvents,Constants{
     private DatabaseReference databaseRoot;
     private DatabaseReference databaseUsers;
     private DatabaseReference databaseChat;
+    private DatabaseReference databaseAuthUserDataRef;
 
     private FirebaseAuth mAuth;  // firebase auth
     private PattrenContext pattrenContext; // pattren stratgey
@@ -76,9 +67,11 @@ public class App extends Application implements SocketIOEvents,Constants{
         pattrenContext = new PattrenContext();
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseRoot = firebaseDatabase.getReference();
-        databaseUsers = databaseRoot.child("_users_info_");
-        databaseChat = databaseRoot.child("Chat");
+        getFirebaseDatabase().setPersistenceEnabled(true);
+        databaseRoot = firebaseDatabase.getReferenceFromUrl(FB_ROOT);
+        databaseUsers = databaseRoot.child(FIREBASE_USERS_INFO_ATTR);
+        databaseChat = databaseRoot.child(FIREBASE_CHAT_ATTR);
+
         socketIO.connect();
 
     }
@@ -143,6 +136,8 @@ public class App extends Application implements SocketIOEvents,Constants{
         return mAuth;
     }
     // thi method return a imageloader
+
+
     public ImageLoader getImageLoader(){
         // create a new request queue for picture
         RequestQueue requestQueue  = Volley.newRequestQueue(getApplicationContext());
@@ -186,5 +181,11 @@ public class App extends Application implements SocketIOEvents,Constants{
         return databaseChat;
     }
 
+    public DatabaseReference getDatabaseAuthUserDataRef() {
+        return databaseAuthUserDataRef;
+    }
 
+    public void setDatabaseAuthUserDataRef(DatabaseReference databaseAuthUserDataRef) {
+        this.databaseAuthUserDataRef = databaseAuthUserDataRef;
+    }
 }

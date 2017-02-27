@@ -19,12 +19,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.example.kay.hoplay.Activities.MainMenu.MainAppMenuActivity;
 import com.example.kay.hoplay.Adapters.ChatAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.model.ChatMessage;
+import com.pkmmte.view.CircularImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +35,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import emojicon.EmojiconEditText;
 import emojicon.EmojiconGridView;
 import emojicon.EmojiconsPopup;
@@ -62,6 +65,9 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
     protected ListView messagesContainer;
 
 
+    protected CircleImageView roomPicture;
+    protected TextView roomName;
+
     // adapter impalement
     protected ChatAdapter adapter;
     protected ArrayList<ChatMessage> chatHistory = new ArrayList<ChatMessage>();
@@ -82,7 +88,6 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
         // Scren orientation :
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        getIntentInfo();
 
         // Users toolbar :
         Toolbar toolbar = (Toolbar) findViewById(R.id.users_toolbar);
@@ -92,10 +97,11 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
 
         app = App.getInstance();
 
+        initControls();
+
         // set up chat app mechanisms
         setupChat();
 
-        initControls();
 
 
     }
@@ -138,10 +144,13 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
         adapter = new ChatAdapter(this, new ArrayList<ChatMessage>());
         messagesContainer.setAdapter(adapter);
 
+        roomName = (TextView)findViewById(R.id.user_name_in_toolbar_textview);
+        roomPicture = (CircleImageView)findViewById(R.id.user_in_toolbar_imageview);
+
         // set up emojis
         setupPopupEmoji();
         // add some dummy texts for test
-        loadDummyHistory();
+       // loadDummyHistory();
 
 
         // implement a send button to send text
@@ -217,22 +226,9 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
 
     // this method for receive message , execute only when a user receive a message
     protected void receiveMessage(Objects ... args) {
-        JSONObject jsonObject = new JSONObject();
-        try {
 
-            String user = jsonObject.getString("username");
-            String userID = jsonObject.getString("username");
-            String message = jsonObject.getString("message");
-
-            if (!user.equals(myUsername)) {
-                addMessage(userID,message, false);
-            }
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
+
     // check if message is empty
     private boolean isMessageEmpty(String message) {
         return message.equals("\\s++") ||message.equals("")||message ==null || TextUtils.isEmpty(message);
@@ -359,19 +355,6 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
 
     }
 
-    // this method to set up intent info
-    private void getIntentInfo() {
-        Intent i = getIntent();
-
-        myUsername = i.getStringExtra("myUsername");
-        receiverUsername = i.getStringExtra("receiverUsername");
-
-
-//        Random random = new Random();
-//        int num1 = random.nextInt() + 3000,num2 = random.nextInt() + 200;
-//        username = num1+num2 + ((char)(random.nextInt()+100)) +"";
-//        Log.i("-->",username);
-    }
 
     // this method to switch the current to community frag
     public void toCommunityFragment(View view) {

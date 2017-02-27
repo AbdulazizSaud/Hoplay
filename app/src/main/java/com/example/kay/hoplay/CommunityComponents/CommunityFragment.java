@@ -94,7 +94,7 @@ public abstract class CommunityFragment extends Fragment {
             }
         });
 
-        testList();
+        //testList();
 
         OnStartActivity();
 
@@ -136,7 +136,8 @@ public abstract class CommunityFragment extends Fragment {
         String username = "Test";
         String lastMessage = "Test has joined your request click to replay ^^";
 
-        CommunityUserList clu = new CommunityUserList(username,username,picUrl);
+        CommunityUserList clu = new CommunityUserList();
+        clu.setUserPictureURL(picUrl);
         clu.setLastMsg(lastMessage);
 
         addToList(clu);
@@ -147,4 +148,5 @@ public abstract class CommunityFragment extends Fragment {
 
     protected abstract void OnClickHolders(CommunityUserList model,View v);
     protected abstract void OnStartActivity();
+
 }

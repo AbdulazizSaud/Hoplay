@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Services.GetAPI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -100,13 +101,10 @@ public class SignUpActivity extends Signup {
         DatabaseReference rotRef = app.getDatabaseUsers().child(UID);
 
 
-//        rotRef.child("_chat_refs_").child("_public_").child("test").se\tValue("test");
-//        rotRef.child("_chat_refs_").child("_private_").child("test").setValue("test");
-        rotRef.child("_friends_list_").child("test").setValue("testchh");
-        rotRef.child("_info_").child("_username_").setValue(username);
-        rotRef.child("_info_").child("_nickname_").setValue(nickname);
-        rotRef.child("_info_").child("_email_").setValue(email);
-        rotRef.child("_info_").child("_picUrl_").setValue("default");
+        rotRef.child(FirebasePaths.FIREBASE_DETAILS_ATTR).child("_username_").setValue(username);
+        rotRef.child(FirebasePaths.FIREBASE_DETAILS_ATTR).child("_nickname_").setValue(nickname);
+        rotRef.child(FirebasePaths.FIREBASE_DETAILS_ATTR).child("_email_").setValue(email);
+        rotRef.child(FirebasePaths.FIREBASE_DETAILS_ATTR).child("_picUrl_").setValue("default");
 
 
 
