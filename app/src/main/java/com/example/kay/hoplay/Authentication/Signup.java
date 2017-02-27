@@ -1,5 +1,6 @@
 package com.example.kay.hoplay.Authentication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
@@ -440,6 +441,11 @@ public abstract class Signup extends AppCompatActivity implements Auth {
         startActivity(i);
     }
     public void toMainMenuApp(){
+
+        ProgressDialog loadingDialog = new ProgressDialog(this);
+        loadingDialog.setTitle("Signin Up...");
+        loadingDialog.setMessage("Just a moment");
+        loadingDialog.show();
         Intent i = new Intent(getApplicationContext(), MainAppMenuActivity.class);
         startActivity(i);
 
