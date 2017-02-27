@@ -1,5 +1,6 @@
 package com.example.kay.hoplay.Authentication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
@@ -18,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -174,6 +176,11 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
     }
     protected void toMainMenu() {
+
+        ProgressDialog loadigDialog = new ProgressDialog(this);
+        loadigDialog.setTitle("Signing in ..");
+        loadigDialog.setMessage("Just one moment");
+        loadigDialog.show();
         Intent i = new Intent(getApplicationContext(), MainAppMenuActivity.class);
         startActivity(i);
 

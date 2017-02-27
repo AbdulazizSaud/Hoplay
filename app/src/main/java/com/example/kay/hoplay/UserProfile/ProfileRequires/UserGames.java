@@ -10,6 +10,7 @@ public class UserGames extends AppCompatActivity {
 
     private ListView gamesListview ;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
