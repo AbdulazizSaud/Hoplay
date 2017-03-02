@@ -182,6 +182,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         loadigDialog.setMessage("Just one moment");
         loadigDialog.show();
         Intent i = new Intent(getApplicationContext(), MainAppMenuActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
 
     }

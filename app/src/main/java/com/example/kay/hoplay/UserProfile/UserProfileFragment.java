@@ -222,7 +222,8 @@ public class UserProfileFragment extends Fragment {
         mAdapter = createAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
-
+        usernameProfile.setText("@"+App.getInstance().getUsername());
+        nicknameTextView.setText(App.getInstance().getNickName());
 
         return view;
     }

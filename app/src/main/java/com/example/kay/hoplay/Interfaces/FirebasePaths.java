@@ -23,7 +23,7 @@ public interface FirebasePaths {
     public static final String FB_ROOT = "https://hoplay-18a08.firebaseio.com/";
     public static final String FB_USERS_PATH = FB_ROOT+FIREBASE_USERS_INFO_ATTR+"/";
     public static final String FB_CHAT_PATH = FB_ROOT+FIREBASE_CHAT_ATTR+"/";
-    public static final String FB_PRIVATE_PATH = FB_CHAT_PATH+FIREBASE_PRIVATE_ATTR+"/";
+    public static final String FB_PRIVATE_CHAT_PATH = FB_CHAT_PATH+FIREBASE_PRIVATE_ATTR+"/";
     public static final String FB_PENDING_CHAT_PATH = FB_CHAT_PATH+FIREBASE_PENDING_CHAT_ATTR+"/";
 
 }

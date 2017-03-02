@@ -51,6 +51,9 @@ public class App extends Application implements FirebasePaths,Constants{
     private PattrenContext pattrenContext; // pattren stratgey
     private ImageLoader imageLoader; // Image loader from url
 
+
+    private String username,pictureURL,UID,nickName;
+
     private  Socket socketIO; // socket io
     {
         //this method call init socket
@@ -71,6 +74,10 @@ public class App extends Application implements FirebasePaths,Constants{
         databaseRoot = firebaseDatabase.getReferenceFromUrl(FB_ROOT);
         databaseUsers = databaseRoot.child(FIREBASE_USERS_INFO_ATTR);
         databaseChat = databaseRoot.child(FIREBASE_CHAT_ATTR);
+        username="";
+        pictureURL="";
+        nickName = "";
+        UID =( mAuth.getCurrentUser() == null) ?  "" :  mAuth.getCurrentUser().getUid();
 
         socketIO.connect();
 
@@ -187,5 +194,33 @@ public class App extends Application implements FirebasePaths,Constants{
 
     public void setDatabaseAuthUserDataRef(DatabaseReference databaseAuthUserDataRef) {
         this.databaseAuthUserDataRef = databaseAuthUserDataRef;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public String getPictureURL() {
+        return pictureURL;
+    }
+    public void setPictureURL(String pictureURL) {
+        this.pictureURL = pictureURL;
+    }
+    public String getUID() {
+        return UID;
+    }
+    public void setUID(String UID) {
+        this.UID = UID;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }

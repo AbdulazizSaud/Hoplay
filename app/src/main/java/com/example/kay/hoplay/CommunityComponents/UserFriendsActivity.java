@@ -53,7 +53,7 @@ public class UserFriendsActivity extends UserFriends implements FirebasePaths{
         //app.getDatabasChat().child("_private_");
 
         // path --> /Chat/_private_
-        DatabaseReference refPrivate = app.getFirebaseDatabase().getReferenceFromUrl(FB_PRIVATE_PATH);
+        DatabaseReference refPrivate = app.getFirebaseDatabase().getReferenceFromUrl(FB_PRIVATE_CHAT_PATH);
         String key  = refPrivate.push().getKey();
 
         // path --> /Chat/_private/[KEY]
@@ -73,8 +73,7 @@ public class UserFriendsActivity extends UserFriends implements FirebasePaths{
 
         // path --> /Chat/_private/[KEY]/_messages_
         DatabaseReference messages =   chatRoom.child(FIREBASE_CHAT_MESSAGES);
-        messages.child("Test Message").child("_username_").setValue("test");
-        messages.child("Test Message").child("_messages_").setValue("test");
+        messages.child("_last_message_").setValue("none");
 
 
 

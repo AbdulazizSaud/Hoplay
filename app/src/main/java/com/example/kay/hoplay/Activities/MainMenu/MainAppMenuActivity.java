@@ -6,14 +6,18 @@ import android.util.Log;
 
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Authentication.LoginActivity;
+import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by Kay on 2/10/2017.
  */
 
-public class MainAppMenuActivity extends MainAppMenu {
+public class MainAppMenuActivity extends MainAppMenu implements FirebasePaths{
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -52,10 +56,28 @@ public class MainAppMenuActivity extends MainAppMenu {
                     // User is sign out
                     toLogin();
                 } else {
-                    Log.i("My id ---------->",firebaseAuth.getCurrentUser().getUid());
+                    setupUserInformation(firebaseAuth);
                 }
             }
         };
 
+    }
+
+    private void setupUserInformation(@NonNull FirebaseAuth firebaseAuth) {
+        app.setUID(firebaseAuth.getCurrentUser().getUid());
+        app.getDatabaseUsers().child(app.getUID()).child(FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                app.setUsername(dataSnapshot.child("_username_").getValue().toString());
+                app.setNickName(dataSnapshot.child("_nickname_").getValue().toString());
+                app.setPictureURL(dataSnapshot.child("_picUrl_").getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }
