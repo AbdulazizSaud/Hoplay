@@ -286,22 +286,9 @@ public class UserProfileFragment extends Fragment {
             @Override
             public void OnBindHolder(ViewHolders holder, RecentActivityList model)
             {
-              //  ImageLoader loader = App.getInstance().getImageLoader();
 
                 App.getInstance().loadingImage(holder,model.getGamePhotoURL());
-//
-//                if(model.getGamePhotoURL().length() > 0){
-//                    loader.get(model.getGamePhotoURL(),
-//                            ImageLoader.getImageListener(
-//                                    holder.getPicture()
-//                                    ,R.drawable.profile_default_photo
-//                                    ,R.drawable.profile_default_photo));
-//
-//                } else {
-//                    CircleImageView picture = holder.getPicture();
-//                    picture.setImageResource(R.drawable.profile_default_photo);
-//                    holder.setPicture(picture);
-//                }
+
                 holder.setTitle(model.getGameName());
                 holder.setSubtitle(model.getActivityDescription());
                 holder.setTime(model.getActivityDate());
