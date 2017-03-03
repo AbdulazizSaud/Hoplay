@@ -114,7 +114,7 @@ public abstract class MakeRequestFragment extends Fragment {
             @Override
             public void OnBindHolder(ViewHolders holder, final SavedRequestsList model)
             {
-                ImageLoader loader = App.getInstance().getImageLoader();
+                //ImageLoader loader = App.getInstance().getImageLoader();
 
 
                 holder.getView().setOnClickListener(new View.OnClickListener() {
@@ -125,7 +125,10 @@ public abstract class MakeRequestFragment extends Fragment {
                 });
 
 
-                loadingImage(holder, model, loader);
+
+                App.getInstance().loadingImage(holder,model.getGamePhotoURL());
+
+               // loadingImage(holder, model, loader);
                 holder.setTitle(model.getGameName());
                 holder.setSubtitle(model.getActivityDescription());
                 holder.setNumberOfPlayers(model.getNumberOfPlayers());

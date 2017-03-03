@@ -195,6 +195,5 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
 
     // abstract methods, Note : I made some comment descripe these methods on Login Activity
-    protected abstract JSONObject startAPI();
     protected abstract void login(String username, String password);
 }

@@ -1,6 +1,8 @@
 package com.example.kay.hoplay.App;
 
 import android.app.Application;
+import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -16,6 +18,7 @@ import com.example.kay.hoplay.Services.GetAPI;
 import com.example.kay.hoplay.Services.LruBitmapCache;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.model.CommonModel;
+import com.example.kay.hoplay.model.UserInformation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -42,7 +45,6 @@ public class App extends Application implements FirebasePaths,Constants{
 
 
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseRoot;
     private DatabaseReference databaseUsers;
     private DatabaseReference databaseChat;
     private DatabaseReference databaseAuthUserDataRef;
@@ -51,16 +53,9 @@ public class App extends Application implements FirebasePaths,Constants{
     private PattrenContext pattrenContext; // pattren stratgey
     private ImageLoader imageLoader; // Image loader from url
 
+    private UserInformation userInformation;
 
-    private String username,pictureURL,UID,nickName;
 
-    private  Socket socketIO; // socket io
-    {
-        //this method call init socket
-        initSocket();
-    }
-
-//
 
     @Override
     public void onCreate() {
@@ -71,63 +66,11 @@ public class App extends Application implements FirebasePaths,Constants{
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         getFirebaseDatabase().setPersistenceEnabled(true);
-        databaseRoot = firebaseDatabase.getReferenceFromUrl(FB_ROOT);
-        databaseUsers = databaseRoot.child(FIREBASE_USERS_INFO_ATTR);
-        databaseChat = databaseRoot.child(FIREBASE_CHAT_ATTR);
-        username="";
-        pictureURL="";
-        nickName = "";
-        UID =( mAuth.getCurrentUser() == null) ?  "" :  mAuth.getCurrentUser().getUid();
-
-        socketIO.connect();
-
+        databaseUsers = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_USERS_INFO_ATTR);
+        databaseChat = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_CHAT_ATTR);
+        userInformation = new UserInformation();
     }
 
-
-    // this method init socket io
-    private void initSocket() {
-        try {
-            socketIO = IO.socket(CHAT_PATH);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // this old method, basiclly it get/pass a data android from api as json
-    public JSONObject getAPI(String apiURL, HashMap<String,String> data){
-        String api_json= null;
-        JSONObject resJSON=null;
-
-
-        GetAPI api = new GetAPI(data);
-        try {
-
-            api_json = api.execute(apiURL).get();
-            if(ErrorHandler.isError(api_json,getApplicationContext())) return null;
-
-            resJSON = new JSONObject(api_json);
-
-            if(resJSON.getString("type").equals("failed")) {
-                Toast.makeText(this, resJSON.getString("msg"), Toast.LENGTH_SHORT).show();
-                return null;
-            }
-
-
-            Toast.makeText(this, resJSON.getString("msg"), Toast.LENGTH_SHORT).show();
-
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        return resJSON;
-
-    }
 
 
     // this method return a instance of this app class
@@ -135,39 +78,45 @@ public class App extends Application implements FirebasePaths,Constants{
         return instance;
     }
     // this method return a socket io
-    public Socket getSocket(){
-        return socketIO;
-    }
     // this method return firebase auth
     public FirebaseAuth getAuth(){
         return mAuth;
     }
+
     // thi method return a imageloader
-
-
-    public ImageLoader getImageLoader(){
+    private ImageLoader getImageLoader(){
         // create a new request queue for picture
         RequestQueue requestQueue  = Volley.newRequestQueue(getApplicationContext());
         if(imageLoader == null)
             imageLoader = new ImageLoader(requestQueue,new LruBitmapCache());
         return imageLoader;
     }
-    //this method execute stratgey which it pass as parameter and return a results as hash
-    public HashMap<String ,String> executeStratgy(PattrenStrategyInterface strategyInterface){
-        return  pattrenContext.executeStratgy(strategyInterface);
-    }
 
-    public void loadingImage(ViewHolders holder, CommonModel model) {
+
+    public void loadingImage(ViewHolders holder, String pictureURL) {
 
         CircleImageView picture = holder.getPicture();
         picture.setImageResource(R.drawable.profile_default_photo);
         holder.setPicture(picture);
+        loadPicture(pictureURL, holder.getPicture());
+    }
 
-        if(model.getUserPictureURL() != null) {
-            if (model.getUserPictureURL().length() > 0 && !model.getUserPictureURL().startsWith("default")) {
-                getImageLoader().get(model.getUserPictureURL(),
+
+
+    public CircleImageView loadingImage(CircleImageView pictureView ,String pictureURL) {
+
+        pictureView.setImageResource(R.drawable.profile_default_photo);
+        loadPicture(pictureURL,pictureView);
+        return pictureView;
+    }
+
+
+    private void loadPicture(String pictureURL,CircleImageView circleImageView) {
+        if(pictureURL != null) {
+            if (pictureURL.length() > 0 && !pictureURL.startsWith("default")) {
+                getImageLoader().get(pictureURL,
                         ImageLoader.getImageListener(
-                                holder.getPicture()
+                                circleImageView
                                 , R.drawable.profile_default_photo
                                 , R.drawable.profile_default_photo));
 
@@ -175,11 +124,14 @@ public class App extends Application implements FirebasePaths,Constants{
         }
     }
 
+
+    public void signOut()
+    {
+        mAuth.signOut();
+    }
+
     public FirebaseDatabase getFirebaseDatabase() {
         return firebaseDatabase;
-    }
-    public DatabaseReference getDatabaseRoot() {
-        return databaseRoot;
     }
     public DatabaseReference getDatabaseUsers() {
         return databaseUsers;
@@ -196,31 +148,7 @@ public class App extends Application implements FirebasePaths,Constants{
         this.databaseAuthUserDataRef = databaseAuthUserDataRef;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getPictureURL() {
-        return pictureURL;
-    }
-    public void setPictureURL(String pictureURL) {
-        this.pictureURL = pictureURL;
-    }
-    public String getUID() {
-        return UID;
-    }
-    public void setUID(String UID) {
-        this.UID = UID;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public UserInformation getUserInformation() {
+        return userInformation;
     }
 }

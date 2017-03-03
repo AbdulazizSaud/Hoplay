@@ -368,7 +368,7 @@ public abstract class Signup extends AppCompatActivity implements Auth {
             return false;
         }
 
-        if (username.length() < 5) {
+        if (username.length() < 3) {
 
             usernameSignUp.setError(getString(R.string.error_small_username));
 
@@ -457,7 +457,6 @@ public abstract class Signup extends AppCompatActivity implements Auth {
 
     // abstract methods
     protected abstract void signUp(String email,String username,String password,String nickname);
-    protected abstract JSONObject startAPI();
 
 
 

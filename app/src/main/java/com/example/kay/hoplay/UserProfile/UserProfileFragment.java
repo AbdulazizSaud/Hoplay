@@ -66,6 +66,7 @@ public class UserProfileFragment extends Fragment {
     ArrayList<RecentActivityList> recentActivityLists=new ArrayList<RecentActivityList>();
 
 
+
     public UserProfileFragment() {
         // Required empty public constructor
     }
@@ -222,8 +223,11 @@ public class UserProfileFragment extends Fragment {
         mAdapter = createAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
-        usernameProfile.setText("@"+App.getInstance().getUsername());
-        nicknameTextView.setText(App.getInstance().getNickName());
+
+        App app = App.getInstance();
+
+        usernameProfile.setText("@"+app.getUserInformation().getUsername());
+        nicknameTextView.setText(app.getUserInformation().getNickName());
 
         return view;
     }
@@ -281,21 +285,22 @@ public class UserProfileFragment extends Fragment {
             @Override
             public void OnBindHolder(ViewHolders holder, RecentActivityList model)
             {
-                ImageLoader loader = App.getInstance().getImageLoader();
+              //  ImageLoader loader = App.getInstance().getImageLoader();
 
-
-                if(model.getGamePhotoURL().length() > 0){
-                    loader.get(model.getGamePhotoURL(),
-                            ImageLoader.getImageListener(
-                                    holder.getPicture()
-                                    ,R.drawable.profile_default_photo
-                                    ,R.drawable.profile_default_photo));
-
-                } else {
-                    CircleImageView picture = holder.getPicture();
-                    picture.setImageResource(R.drawable.profile_default_photo);
-                    holder.setPicture(picture);
-                }
+                App.getInstance().loadingImage(holder,model.getGamePhotoURL());
+//
+//                if(model.getGamePhotoURL().length() > 0){
+//                    loader.get(model.getGamePhotoURL(),
+//                            ImageLoader.getImageListener(
+//                                    holder.getPicture()
+//                                    ,R.drawable.profile_default_photo
+//                                    ,R.drawable.profile_default_photo));
+//
+//                } else {
+//                    CircleImageView picture = holder.getPicture();
+//                    picture.setImageResource(R.drawable.profile_default_photo);
+//                    holder.setPicture(picture);
+//                }
                 holder.setTitle(model.getGameName());
                 holder.setSubtitle(model.getActivityDescription());
                 holder.setTime(model.getActivityDate());

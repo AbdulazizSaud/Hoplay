@@ -56,22 +56,33 @@ public class MainAppMenuActivity extends MainAppMenu implements FirebasePaths{
                     // User is sign out
                     toLogin();
                 } else {
-                    setupUserInformation(firebaseAuth);
+                    setupUserInformation(user);
                 }
             }
         };
 
     }
 
-    private void setupUserInformation(@NonNull FirebaseAuth firebaseAuth) {
-        app.setUID(firebaseAuth.getCurrentUser().getUid());
-        app.getDatabaseUsers().child(app.getUID()).child(FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
+    private void setupUserInformation(FirebaseUser user) {
+        app.getUserInformation().setUID(user.getUid());
+        app.getDatabaseUsers().child(app.getUserInformation().getUID()).child(FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                app.setUsername(dataSnapshot.child("_username_").getValue().toString());
-                app.setNickName(dataSnapshot.child("_nickname_").getValue().toString());
-                app.setPictureURL(dataSnapshot.child("_picUrl_").getValue().toString());
+
+                if(isInfoValid(dataSnapshot))
+                {
+
+                    app.getUserInformation().setUsername(dataSnapshot.child("_username_").getValue().toString());
+                    app.getUserInformation().setNickName(dataSnapshot.child("_nickname_").getValue().toString());
+                    app.getUserInformation().setPictureURL(dataSnapshot.child("_picUrl_").getValue().toString());
+                }
+                else
+                {
+                    app.signOut();
+                    toLogin();
+                }
+
             }
 
             @Override
@@ -79,5 +90,9 @@ public class MainAppMenuActivity extends MainAppMenu implements FirebasePaths{
 
             }
         });
+    }
+
+    private boolean isInfoValid(DataSnapshot dataSnapshot) {
+        return dataSnapshot.hasChild("_username_") && dataSnapshot.hasChild("_nickname_") && dataSnapshot.hasChild("_picUrl_");
     }
 }

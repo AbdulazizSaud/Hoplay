@@ -58,7 +58,7 @@ public abstract class CommunityFragment extends Fragment {
                 }
             });
 
-            app.loadingImage(holder, model);
+            app.loadingImage(holder, model.getUserPictureURL());
             holder.setTitle(model.getFullName());
             communityHolder.setCommunitySubtitle(model.getLastMsg());
             holder.setTime(model.getLastMsgDate());

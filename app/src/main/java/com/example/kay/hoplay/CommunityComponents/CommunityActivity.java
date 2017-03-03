@@ -42,8 +42,7 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
 
     @Override
     protected void OnStartActivity() {
-        refAuthUserChats = app.getDatabaseUsers().child(app.getUID()).child(FIREBASE_USER_CHAT_REFERENCES);
-
+        refAuthUserChats = app.getDatabaseUsers().child(app.getUserInformation().getUID()).child(FIREBASE_USER_CHAT_REFERENCES);
         loadChats();
 
     }
@@ -57,7 +56,7 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
 
     private void loadPrivatePendingChats()
     {
-        final DatabaseReference refPendingChat = app.getDatabasChat().child(FIREBASE_PENDING_CHAT_ATTR).child(app.getUID()).child(FIREBASE_PRIVATE_ATTR);
+        final DatabaseReference refPendingChat = app.getDatabasChat().child(FIREBASE_PENDING_CHAT_ATTR).child(app.getUserInformation().getUID()).child(FIREBASE_PRIVATE_ATTR);
 
         refPendingChat.addChildEventListener(new ChildEventListenerModel() {
             @Override
@@ -131,7 +130,7 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
                 while (usersInChat.hasNext())
                 {
                     DataSnapshot data = (DataSnapshot) usersInChat.next();
-                    if(!data.getKey().equals(app.getUID()))
+                    if(!data.getKey().equals(app.getUserInformation().getUID()))
                     {
                         String userKey = data.getKey();
 
