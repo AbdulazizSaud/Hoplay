@@ -226,6 +226,7 @@ public class UserProfileFragment extends Fragment {
 
         App app = App.getInstance();
 
+        app.loadingImage(userPictureCircleImageView,app.getUserInformation().getPictureURL());
         usernameProfile.setText("@"+app.getUserInformation().getUsername());
         nicknameTextView.setText(app.getUserInformation().getNickName());
 
