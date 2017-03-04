@@ -1,37 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="armeabi-v7a,armeabi"
-    api-level="21"
-    density="xxhdpi"
+    abi="x86_64,x86"
+    api-level="25"
+    density="420dpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="40147502675624"
-    token="-2213493393297045911"
-    verifier="FULL_BUILD_REQUESTED" >
+    timestamp="289363665481216"
+    token="4949594494763244893"
+    verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="1235" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="867" />
+        duration="0" />
     <task
         name="verifier"
-        duration="190" />
-
-    <artifact
-        location="/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/outputs/apk/app-debug.apk"
-        type="MAIN" />
+        duration="0" />
 
     <build
-        timestamp="40147502675624"
+        timestamp="248608926971192"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/outputs/apk/app-debug.apk"
+            location="C:\Users\Kay\Hoplay002\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
+    <build
+        timestamp="283701853064560"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="C:\Users\Kay\Hoplay002\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_8\classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="286855184585074"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="C:\Users\Kay\Hoplay002\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_2\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Kay\Hoplay002\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_7\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Kay\Hoplay002\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_6\classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="287386276799275"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="C:\Users\Kay\Hoplay002\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_0\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Kay\Hoplay002\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_1\classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="288804722675157"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="C:\Users\Kay\Hoplay002\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="289333215318362"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="C:\Users\Kay\Hoplay002\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_5\classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="289363665481216"
+        verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>

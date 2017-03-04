@@ -35,6 +35,8 @@ public class SettingsScreen extends PreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings_screen);
 
+            // fk it
+
 
         // Log out on click preference
         Preference preferences = (Preference) findPreference("settings_logout");
@@ -46,7 +48,7 @@ public class SettingsScreen extends PreferenceFragment {
                 Intent i = new Intent(context, LoginActivity.class);
                 startActivity(i);
 
-                Toast.makeText(getActivity().getApplicationContext(),"YOYOYOOYOYO",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(),"signout [message<#?#>]",Toast.LENGTH_LONG).show();
 
                 return true;
             }

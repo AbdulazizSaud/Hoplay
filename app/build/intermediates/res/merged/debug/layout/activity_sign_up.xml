@@ -51,16 +51,18 @@
 
     <EditText
         android:layout_width="320dp"
-        android:gravity="center"
+        android:gravity="left|center"
         android:textColor="@color/black"
         android:background="@drawable/rectangular_edittext"
         android:layout_height="50dp"
+        android:maxLength="25"
         android:layout_marginTop="20dp"
         android:id="@+id/nickname_sign_up_edittext"
         android:shadowColor="@color/burgundy"
         android:layout_below="@+id/account_textview"
         android:layout_centerHorizontal="true"
         android:hint="Nickname"
+        android:paddingLeft="20dp"
         android:textColorHint="@color/hintColor"
         android:inputType="textPersonName"
         android:focusable="true"
@@ -71,21 +73,23 @@
 
     <EditText
         android:layout_width="320dp"
-        android:gravity="center"
+        android:gravity="left|center"
         android:textColor="@color/black"
         android:background="@drawable/rectangular_edittext"
         android:layout_height="50dp"
+        android:maxLength="25"
         android:id="@+id/username_sign_up_edittext"
         android:shadowColor="@color/burgundy"
         android:layout_below="@+id/nickname_sign_up_edittext"
         android:layout_centerHorizontal="true"
         android:hint="Username"
+        android:paddingLeft="20dp"
         android:textColorHint="@color/hintColor"
 
         />
     <EditText
         android:layout_width="320dp"
-        android:gravity="center"
+        android:gravity="left|center"
         android:background="@drawable/rectangular_edittext"
         android:layout_height="50dp"
         android:id="@+id/email_sign_up_edittext"
@@ -93,6 +97,8 @@
         android:layout_below="@+id/username_sign_up_edittext"
         android:layout_centerHorizontal="true"
         android:hint="Email Address"
+        android:paddingLeft="20dp"
+        android:maxLength="40"
         android:textColor="@color/black"
         android:textColorHint="@color/hintColor"
         android:inputType="textEmailAddress"/>
@@ -107,7 +113,7 @@
 
     <EditText
         android:layout_width="320dp"
-        android:gravity="center"
+        android:gravity="left|center"
         android:textColor="@color/black"
         android:background="@drawable/rectangular_edittext"
         android:layout_height="50dp"
@@ -117,13 +123,17 @@
         android:hint="Password"
         android:layout_below="@id/email_sign_up_edittext"
         android:inputType="textPassword"
+        android:paddingLeft="20dp"
+        android:maxLength="25"
         android:layout_centerVertical="true"
         android:layout_alignStart="@+id/email_sign_up_edittext" />
 
     <EditText
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:gravity="center"
+        android:maxLength="25"
+        android:paddingLeft="20dp"
+        android:gravity="left|center"
         android:id="@+id/confirm_password_edittext"
         android:hint="Confirm Password"
         android:textColorHint="@color/hintColor"
