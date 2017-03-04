@@ -341,6 +341,7 @@
     <bool name="bb_bottom_bar_is_tablet_mode">false</bool>
     <color name="AliceBlue">#F0F8FF</color>
     <color name="AntiqueWhite">#FAEBD7</color>
+    <color name="AppBackground">#E0E0E0</color>
     <color name="Aqua">#00FFFF</color>
     <color name="Aquamarine">#7FFFD4</color>
     <color name="Azure">#F0FFFF</color>
@@ -589,7 +590,6 @@
     <color name="material_grey_800">#ff424242</color>
     <color name="material_grey_850">#ff303030</color>
     <color name="material_grey_900">#ff212121</color>
-    <color name="myBackground">#E0E0E0</color>
     <color name="navigationBarColor">#000000</color>
     <color name="navy">#000080</color>
     <color name="olive">#808000</color>
@@ -883,11 +883,15 @@
     <item name="action_bar_spinner" type="id"/>
     <item name="action_menu_divider" type="id"/>
     <item name="action_menu_presenter" type="id"/>
+    <item name="dataBinding" type="id"/>
     <item name="home" type="id"/>
     <item name="item_touch_helper_previous_elevation" type="id"/>
+    <item name="onAttachStateChangeListener" type="id"/>
+    <item name="onDateChanged" type="id"/>
     <item name="progress_circular" type="id"/>
     <item name="progress_horizontal" type="id"/>
     <item name="split_action_bar" type="id"/>
+    <item name="textWatcher" type="id"/>
     <item name="up" type="id"/>
     <item name="view_offset_helper" type="id"/>
     <integer name="abc_config_activityDefaultDur">220</integer>
@@ -2406,6 +2410,10 @@
         <item name="android:dropDownItemStyle">@style/Widget.AppCompat.DropDownItem.Spinner</item>
     </style>
     <style name="Platform.Widget.AppCompat.Spinner" parent="android:Widget.Spinner"/>
+    <style name="PreferencesTheme">
+        <item name="android:windowBackground">@drawable/background</item>
+        <item name="android:background">#E0E0</item>
+    </style>
     <style name="RtlOverlay.DialogWindowTitle.AppCompat" parent="Base.DialogWindowTitle.AppCompat">
     </style>
     <style name="RtlOverlay.Widget.AppCompat.ActionBar.TitleItem" parent="android:Widget">

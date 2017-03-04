@@ -1,482 +1,922 @@
 [
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/signup_bar.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/signup_bar.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_text_light_focused.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.8.0\\res\\drawable\\common_google_signin_btn_text_light_focused.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/rounded_spinner_shape.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/rounded_spinner_shape.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\less_rounded_button.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\less_rounded_button.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_more_vert_white_24dp.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_more_vert_white_24dp.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_small_material.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_ratingbar_small_material.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ps_logo.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ps_logo.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_keyboard_arrow_down_white_18dp.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_keyboard_arrow_down_white_18dp.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/xboxlogo.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/xboxlogo.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\messages_bg.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\messages_bg.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/orca_composer_popup_button_active.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/orca_composer_popup_button_active.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_composer_popup_button.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_composer_popup_button.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_emoji_people_light.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_emoji_people_light.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\signup_bar.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\signup_bar.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_dark.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\rectangular_edittext.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\rectangular_edittext.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/pcrequests.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/pcrequests.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\profile_verify_icon.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\profile_verify_icon.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/orca_composer_popup_button.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/orca_composer_popup_button.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_emoji_tab_dark_background.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_emoji_tab_dark_background.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/rounded_button.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/rounded_button.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\rectangualr_white_shape.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\rectangualr_white_shape.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/userprofile.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/userprofile.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_emoji_places_light.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_emoji_places_light.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_btn_radio_material.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_btn_radio_material.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_dark.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_holo_dark.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_cab_background_internal_bg.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_cab_background_internal_bg.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_sync_black_24dp.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_sync_black_24dp.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_seekbar_thumb_material.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_seekbar_thumb_material.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\heart_red.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\heart_red.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background_dark.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_dialog_material_background_dark.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\noconnectionpixels.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\noconnectionpixels.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_emoji_nature_light.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_emoji_nature_light.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\in_message.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\in_message.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/in_message.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/in_message.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\username.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\username.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_edit_text_material.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_edit_text_material.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\heart_black.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\heart_black.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_light_focused.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.8.0/res/drawable/common_google_signin_btn_text_light_focused.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_icon_light_focused.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.8.0\\res\\drawable\\common_google_signin_btn_icon_light_focused.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/heart_red.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/heart_red.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_composer_popup_button_active.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_composer_popup_button_active.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/linedivider.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/linedivider.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ps_colorful_logo.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ps_colorful_logo.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/line.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/line.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_face_white_18dp.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_face_white_18dp.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/orca_composer_attach_location_button.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/orca_composer_attach_location_button.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_light.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_item_background_holo_light.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/heart_black.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/heart_black.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_borderless_material.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_borderless_material.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_light.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.8.0/res/drawable/common_google_signin_btn_text_light.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\linedivider.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\linedivider.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_dark.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_item_background_holo_dark.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\pic4.PNG",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\pic4.PNG"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_keyboard_backspace_white_24dp.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_keyboard_backspace_white_24dp.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\design_snackbar_background.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.4.0\\res\\drawable\\design_snackbar_background.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/orca_emoji_tab_dark_background.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/orca_emoji_tab_dark_background.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\pc_colorful_logo.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\pc_colorful_logo.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/pc_logo.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/pc_logo.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_text_dark_focused.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.8.0\\res\\drawable\\common_google_signin_btn_text_dark_focused.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_dark.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.8.0/res/drawable/common_google_signin_btn_text_dark.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\noconnectionpixels.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\noconnectionpixels.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/orca_emoji_more_front_button.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/orca_emoji_more_front_button.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\background.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\background.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/less_rounded_button.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/less_rounded_button.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background_light.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_dialog_material_background_light.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_emoji_recent_light.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_emoji_recent_light.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\passwordicon.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\passwordicon.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_light.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_item_background_holo_light.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background_dark.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_dialog_material_background_dark.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/sendiconnomessage.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/sendiconnomessage.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_emoji_backspace_front_button.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_emoji_backspace_front_button.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_dark.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.8.0/res/drawable/common_google_signin_btn_icon_dark.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\circular_imageview.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\circular_imageview.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/design_fab_background.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/design/23.4.0/res/drawable/design_fab_background.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\counter_bg.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\counter_bg.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/makerequest.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/makerequest.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\sendiconnomessage.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\sendiconnomessage.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_emoji_places_light.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_emoji_places_light.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\downarrow.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\downarrow.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_emoji_symbols_light.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_emoji_symbols_light.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_internal_bg.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_cab_background_internal_bg.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/emojichatbar.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/emojichatbar.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\in_message_bg.9.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\in_message_bg.9.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ps_colorful_logo.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ps_colorful_logo.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background_light.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_dialog_material_background_light.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/orca_composer_attach_photo_button.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/orca_composer_attach_photo_button.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_text_dark_focused.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.8.0\\res\\drawable\\common_google_signin_btn_text_dark_focused.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/playstationrequests.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/playstationrequests.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\in_message.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\in_message.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/rounded_darken_grey_shape.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/rounded_darken_grey_shape.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_small_material.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_ratingbar_small_material.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_dark.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_list_selector_holo_dark.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\design_snackbar_background.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.4.0\\res\\drawable\\design_snackbar_background.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/circular_imageview.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/circular_imageview.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\emojichatbar.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\emojichatbar.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/pc_colorful_logo.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/pc_colorful_logo.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_keyboard_backspace_white_24dp.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_keyboard_backspace_white_24dp.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/design_snackbar_background.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/design/23.4.0/res/drawable/design_snackbar_background.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_keyboard_arrow_down_grey_18dp.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_keyboard_arrow_down_grey_18dp.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_timeline_white_18dp.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_timeline_white_18dp.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_composer_popup_button.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_composer_popup_button.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/out_message_bg.9.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/out_message_bg.9.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\emojichatbar.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\emojichatbar.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/orca_emoji_backspace_front_button.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/orca_emoji_backspace_front_button.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_composer_attach_camera_button.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_composer_attach_camera_button.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/logomainactivity.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/logomainactivity.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\rectangualr_white_shape.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\rectangualr_white_shape.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/logo.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/logo.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\newrequest.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\newrequest.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_info_black_24dp.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_info_black_24dp.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_colored_material.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_colored_material.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/pic2.PNG",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/pic2.PNG"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_indicator_material.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_ratingbar_indicator_material.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/rectangular_edittext.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/rectangular_edittext.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ps_logo.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ps_logo.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/noconnectionpixels.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/noconnectionpixels.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\usernameicon.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\usernameicon.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/xboxrequests.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/xboxrequests.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\downarrow.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\downarrow.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/offlineicon.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/offlineicon.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_emoji_objects_light.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_emoji_objects_light.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/onlineicon.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/onlineicon.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_default_mtrl_shape.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_chat_white_18dp.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_chat_white_18dp.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\playstationrequests.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\playstationrequests.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_emoji_objects_light.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_emoji_objects_light.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ps_logo.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ps_logo.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_light.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_list_selector_holo_light.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\notificationicon.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\notificationicon.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/pic1.PNG",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/pic1.PNG"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_emoji_nature_light.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_emoji_nature_light.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/xbox_colorful_logo.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/xbox_colorful_logo.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\counter_bg.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\counter_bg.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/squary.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/squary.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_full_material.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_ratingbar_full_material.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_face_white_18dp.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_face_white_18dp.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ps_colorful_logo.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ps_colorful_logo.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/passwordicon.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/passwordicon.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\bb_bottom_bar_top_shadow.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.roughike\\bottom-bar\\1.2.1\\res\\drawable\\bb_bottom_bar_top_shadow.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_notifications_black_24dp.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_notifications_black_24dp.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_emoji_nature_light.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_emoji_nature_light.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_btn_borderless_material.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_btn_borderless_material.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\logomainactivity.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\logomainactivity.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/in_message_bg.9.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/in_message_bg.9.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_light.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_item_background_holo_light.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_cab_background_top_material.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_cab_background_top_material.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_thumb_material.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_seekbar_thumb_material.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/messages_bg.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/messages_bg.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_composer_popup_button_active.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_composer_popup_button_active.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/username.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/username.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\background.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\background.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/pclogo.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/pclogo.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_tab_indicator_material.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_tab_indicator_material.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/profile_default_photo.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/profile_default_photo.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\pc_colorful_logo.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\pc_colorful_logo.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_dark_focused.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.8.0/res/drawable/common_google_signin_btn_text_dark_focused.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\pic3.PNG",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\pic3.PNG"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_light_focused.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.8.0/res/drawable/common_google_signin_btn_icon_light_focused.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\xboxlogo.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\xboxlogo.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_seekbar_track_material.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_seekbar_track_material.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_keyboard_arrow_down_grey_18dp.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_keyboard_arrow_down_grey_18dp.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_sync_black_24dp.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_sync_black_24dp.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_text_dark.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.8.0\\res\\drawable\\common_google_signin_btn_text_dark.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_btn_check_material.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_btn_check_material.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_text_light.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.8.0\\res\\drawable\\common_google_signin_btn_text_light.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_ratingbar_full_material.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_ratingbar_full_material.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_icon_dark.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.8.0\\res\\drawable\\common_google_signin_btn_icon_dark.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_btn_colored_material.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_btn_colored_material.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_emoji_places_light.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_emoji_places_light.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background_light.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_dialog_material_background_light.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\heart_red.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\heart_red.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/pic4.PNG",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/pic4.PNG"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_emoji_more_front_button.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_emoji_more_front_button.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/xbox_logo.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/xbox_logo.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_light.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/background.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/background.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\sendiconmessagein.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\sendiconmessagein.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/orca_composer_attach_camera_button.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/orca_composer_attach_camera_button.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\pic4.PNG",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\pic4.PNG"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/newrequest.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/newrequest.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\rounded_edittext.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\rounded_edittext.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_tab_indicator_material.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_tab_indicator_material.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\messages_bg.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\messages_bg.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_control_point_white_18dp.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_control_point_white_18dp.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\userprofile.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\userprofile.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_spinner_textfield_background_material.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_spinner_textfield_background_material.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_edit_text_material.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_edit_text_material.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_switch_thumb_material.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_switch_thumb_material.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\pic2.PNG",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\pic2.PNG"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/pic3.PNG",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/pic3.PNG"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_composer_attach_location_button.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_composer_attach_location_button.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_settings_white_18dp.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_settings_white_18dp.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\heart_black.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\heart_black.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/profile_verify_icon.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/profile_verify_icon.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_emoji_tab_dark_background.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_emoji_tab_dark_background.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/rectangualr_white_shape.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/rectangualr_white_shape.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\logo.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\logo.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_textfield_search_material.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_textfield_search_material.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\pc_logo.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\pc_logo.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/orca_emoji_tab_background.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/orca_emoji_tab_background.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_internal_bg.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_cab_background_internal_bg.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/downarrow.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/downarrow.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_notifications_black_24dp.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_notifications_black_24dp.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/test_user.jpg",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/test_user.jpg"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_face_white_18dp.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_face_white_18dp.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/rounded_spinner.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/rounded_spinner.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_sync_black_24dp.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_sync_black_24dp.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_ratingbar_indicator_material.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_ratingbar_indicator_material.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\close.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\close.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/close.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/close.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_text_cursor_material.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_text_cursor_material.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_keyboard_arrow_down_grey_18dp.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_keyboard_arrow_down_grey_18dp.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_icon_light_focused.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.8.0\\res\\drawable\\common_google_signin_btn_icon_light_focused.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_dark_focused.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.8.0/res/drawable/common_google_signin_btn_icon_dark_focused.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\offlineicon.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\offlineicon.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_btn_default_mtrl_shape.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_btn_default_mtrl_shape.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_top_material.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_cab_background_top_material.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/greyx.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/greyx.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\sendiconnomessage.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\sendiconnomessage.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/bb_bottom_bar_top_shadow.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.roughike/bottom-bar/1.2.1/res/drawable/bb_bottom_bar_top_shadow.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\pic1.PNG",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\pic1.PNG"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_ratingbar_small_material.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_ratingbar_small_material.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_switch_thumb_material.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_switch_thumb_material.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_text_cursor_material.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_text_cursor_material.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_composer_attach_location_button.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_composer_attach_location_button.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/drawable/abc_list_selector_background_transition_holo_light.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_more_vert_white_24dp.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_more_vert_white_24dp.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/sendiconmessagein.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/sendiconmessagein.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_textfield_search_material.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_textfield_search_material.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/rounded_edittext.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/rounded_edittext.xml"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_light.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_holo_light.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/ic_keyboard_arrow_down_white_18dp.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/ic_keyboard_arrow_down_white_18dp.png"
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\profile_default_photo.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\profile_default_photo.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_light.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.8.0/res/drawable/common_google_signin_btn_icon_light.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\user_games_friends_ratings_background.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\user_games_friends_ratings_background.xml"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/notificationicon.png",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/notificationicon.png"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\greyx.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\greyx.png"
     },
     {
-        "merged": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/build/intermediates/res/merged/debug/drawable/counter_bg.xml",
-        "source": "/Users/khaledAlhindi/AndroidStudioProjects/Hoplay/app/src/main/res/drawable/counter_bg.xml"
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_radio_material.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_timeline_white_18dp.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_timeline_white_18dp.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\offlineicon.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\offlineicon.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_icon_light.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.8.0\\res\\drawable\\common_google_signin_btn_icon_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\pcrequests.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\pcrequests.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_textfield_search_material.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_textfield_search_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_keyboard_backspace_white_24dp.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_keyboard_backspace_white_24dp.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\xboxrequests.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\xboxrequests.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\line.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\line.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\rounded_button.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\rounded_button.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\rectangular_edittext.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\rectangular_edittext.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_spinner_textfield_background_material.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_spinner_textfield_background_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_emoji_more_front_button.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_emoji_more_front_button.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_chat_white_18dp.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_chat_white_18dp.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\xbox_logo.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\xbox_logo.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\pclogo.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\pclogo.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_notifications_black_24dp.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_notifications_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\xbox_logo.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\xbox_logo.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_track_material.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_seekbar_track_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\rounded_darken_grey_shape.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\rounded_darken_grey_shape.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_info_black_24dp.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_info_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\pcrequests.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\pcrequests.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_composer_attach_camera_button.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_composer_attach_camera_button.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_composer_attach_photo_button.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_composer_attach_photo_button.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_emoji_people_light.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_emoji_people_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\xboxlogo.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\xboxlogo.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\pic3.PNG",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\pic3.PNG"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_check_material.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_check_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\in_message_bg.9.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\in_message_bg.9.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_full_material.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_ratingbar_full_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\profile_default_photo.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\profile_default_photo.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_edit_text_material.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_edit_text_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_dark.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_item_background_holo_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\pic2.PNG",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\pic2.PNG"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_radio_material.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_text_light_focused.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.8.0\\res\\drawable\\common_google_signin_btn_text_light_focused.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_composer_attach_photo_button.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_composer_attach_photo_button.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_text_light.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.8.0\\res\\drawable\\common_google_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\test_user.jpg",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\test_user.jpg"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_timeline_white_18dp.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_timeline_white_18dp.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_icon_light.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.8.0\\res\\drawable\\common_google_signin_btn_icon_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\squary.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\squary.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_spinner_textfield_background_material.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_spinner_textfield_background_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\out_message_bg.9.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\out_message_bg.9.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\makerequest.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\makerequest.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\design_fab_background.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.4.0\\res\\drawable\\design_fab_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\rounded_spinner_shape.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\rounded_spinner_shape.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\rounded_edittext.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\rounded_edittext.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\less_rounded_button.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\less_rounded_button.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_keyboard_arrow_down_white_18dp.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_keyboard_arrow_down_white_18dp.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_dark.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_item_background_holo_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\passwordicon.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\passwordicon.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_emoji_people_light.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_emoji_people_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_emoji_symbols_light.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_emoji_symbols_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_track_material.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_seekbar_track_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_light.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\pic1.PNG",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\pic1.PNG"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_emoji_symbols_light.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_emoji_symbols_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_light.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_holo_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_settings_white_18dp.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_settings_white_18dp.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\circular_imageview.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\circular_imageview.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\greyx.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\greyx.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\onlineicon.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\onlineicon.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_dark.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_emoji_backspace_front_button.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_emoji_backspace_front_button.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_more_vert_white_24dp.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_more_vert_white_24dp.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_info_black_24dp.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_info_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_control_point_white_18dp.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_control_point_white_18dp.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_chat_white_18dp.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_chat_white_18dp.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\onlineicon.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\onlineicon.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\userprofile.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\userprofile.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_emoji_objects_light.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_emoji_objects_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\line.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\line.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background_dark.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_dialog_material_background_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\sendiconmessagein.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\sendiconmessagein.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_emoji_tab_background.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_emoji_tab_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\rounded_button.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\rounded_button.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_icon_dark_focused.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.8.0\\res\\drawable\\common_google_signin_btn_icon_dark_focused.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_borderless_material.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_borderless_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_icon_dark.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.8.0\\res\\drawable\\common_google_signin_btn_icon_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\rounded_spinner.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\rounded_spinner.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_default_mtrl_shape.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_thumb_material.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_seekbar_thumb_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\profilesettings.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\profilesettings.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_text_cursor_material.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_text_cursor_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\xbox_colorful_logo.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\xbox_colorful_logo.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\signup_bar.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\signup_bar.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_emoji_recent_light.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_emoji_recent_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\pc_logo.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\pc_logo.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_switch_thumb_material.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_switch_thumb_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_indicator_material.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_ratingbar_indicator_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\out_message_bg.9.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\out_message_bg.9.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\rounded_spinner_shape.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\rounded_spinner_shape.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_text_dark.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.8.0\\res\\drawable\\common_google_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\design_fab_background.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.4.0\\res\\drawable\\design_fab_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\linedivider.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\linedivider.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_check_material.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_check_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\profile_verify_icon.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\profile_verify_icon.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_settings_white_18dp.png",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_settings_white_18dp.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\pclogo.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\pclogo.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_tab_indicator_material.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_tab_indicator_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_control_point_white_18dp.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_control_point_white_18dp.png"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_icon_dark_focused.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.8.0\\res\\drawable\\common_google_signin_btn_icon_dark_focused.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\xbox_colorful_logo.png",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\xbox_colorful_logo.png"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_top_material.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_cab_background_top_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_emoji_recent_light.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\ic_emoji_recent_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\bb_bottom_bar_top_shadow.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.roughike\\bottom-bar\\1.2.1\\res\\drawable\\bb_bottom_bar_top_shadow.xml"
+    },
+    {
+        "merged": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\orca_emoji_tab_background.xml",
+        "source": "C:\\Users\\khaledAlhindi\\AndroidStudioProjects\\Hoplay\\app\\src\\main\\res\\drawable\\orca_emoji_tab_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_colored_material.xml",
+        "source": "C:\\Users\\azoz-pc\\AndroidStudioProjects\\Hoplay\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_colored_material.xml"
     }
 ]

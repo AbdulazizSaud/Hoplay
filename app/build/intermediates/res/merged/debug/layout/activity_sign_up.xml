@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.kay.hoplay.Activities.SignUpActivity"
+    tools:context="com.example.kay.hoplay.Authentication.SignUpActivity"
     android:background="#E0E0E0"
     android:clickable="true"
     android:id="@+id/sign_up_relativeLayout"
@@ -22,7 +22,7 @@
         android:layout_marginRight="20dp"
         android:padding="0dp"
         android:layout_alignParentTop="true"
-        android:onClick="toMain" />
+         />
 
     <TextView
         android:layout_width="wrap_content"
@@ -168,7 +168,6 @@
         android:textColor="#f8f6f6"
         android:layout_marginTop="22dp"
         android:textStyle="bold"
-        android:onClick="signUp"
         android:layout_below="@+id/terms_and_conditions_textview"
         android:layout_centerHorizontal="true" />
 
