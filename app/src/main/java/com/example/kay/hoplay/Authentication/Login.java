@@ -182,6 +182,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         loadigDialog.setMessage("Just one moment");
         loadigDialog.show();
         Intent i = new Intent(getApplicationContext(), MainAppMenuActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
 
     }
@@ -194,6 +195,5 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
 
     // abstract methods, Note : I made some comment descripe these methods on Login Activity
-    protected abstract JSONObject startAPI();
     protected abstract void login(String username, String password);
 }

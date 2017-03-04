@@ -2,11 +2,13 @@ package com.example.kay.hoplay.CommunityComponents;
 
 import android.content.Intent;
 import android.databinding.tool.util.L;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 
 import com.example.kay.hoplay.Chat.ChatActivity;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
+import com.example.kay.hoplay.model.ChildEventListenerModel;
 import com.example.kay.hoplay.model.CommunityUserList;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -25,7 +27,6 @@ import java.util.Iterator;
 public class CommunityActivity extends CommunityFragment implements FirebasePaths {
 
 
-    private String uid;
     private DatabaseReference refAuthUserChats;
     private ArrayList<String> roomKeys;
 
@@ -41,9 +42,7 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
 
     @Override
     protected void OnStartActivity() {
-        uid =  app.getAuth().getCurrentUser().getUid();
-        refAuthUserChats = app.getDatabaseUsers().child(uid).child(FIREBASE_USER_CHAT_REFERENCES);
-
+        refAuthUserChats = app.getDatabaseUsers().child(app.getUserInformation().getUID()).child(FIREBASE_USER_CHAT_REFERENCES);
         loadChats();
 
     }
@@ -54,48 +53,12 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
         loadPrivateChat();
     }
 
-    private void loadPrivateChat()
-    {
-
-        // path -->
-//        refAuthUserChats.child(FIREBASE_PRIVATE_ATTR).addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//
-//                CommunityUserList communityUserList = new CommunityUserList();
-//                communityUserList.setChatKey(dataSnapshot.getKey());
-//                addToList(communityUserList);
-//            }
-//
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-    }
-
-
 
     private void loadPrivatePendingChats()
     {
-        final DatabaseReference refPendingChat = app.getDatabasChat().child(FIREBASE_PENDING_CHAT_ATTR).child(uid).child(FIREBASE_PRIVATE_ATTR);
+        final DatabaseReference refPendingChat = app.getDatabasChat().child(FIREBASE_PENDING_CHAT_ATTR).child(app.getUserInformation().getUID()).child(FIREBASE_PRIVATE_ATTR);
 
-        refPendingChat.addChildEventListener(new ChildEventListener() {
+        refPendingChat.addChildEventListener(new ChildEventListenerModel() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String chatId = dataSnapshot.child("chat_id").getValue().toString();
@@ -107,14 +70,91 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
             }
+        });
+    }
 
+    private void loadPrivateChat()
+    {
+        // path -->
+        refAuthUserChats.child(FIREBASE_PRIVATE_ATTR).addChildEventListener(new ChildEventListenerModel() {
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            public void onChildAdded(final DataSnapshot privateChat, String s) {
+
+                DatabaseReference refChat = app.getFirebaseDatabase().getReferenceFromUrl(FB_PRIVATE_CHAT_PATH+privateChat.getKey());
+                refChat.addListenerForSingleValueEvent(readUsersInformationOnChat(privateChat));
+
+
+                refChat.child("_messages_").child("_last_message_").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        Log.i("private------->",privateChat.toString());
+                        for(CommunityUserList chats : communityUserLists)
+                        {
+                            if(chats.getChatKey().equals(privateChat.getKey()))
+                            {
+                                Log.i("------->","hello");
+                                chats.setLastMsg(dataSnapshot.getValue().toString());
+                                mAdapter.notifyDataSetChanged();
+                                break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
 
             }
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Log.i("------->",dataSnapshot.toString());
+            }
+        });
+
+
+    }
+
+    @NonNull
+    private ValueEventListener readUsersInformationOnChat(final DataSnapshot dataSnapshot) {
+        return new ValueEventListener() {
+            @Override
+            public void onDataChange(final DataSnapshot chatInfo) {
+
+                Iterator usersInChat = chatInfo.child(FIREBASE_DETAILS_ATTR).child("_users_").getChildren().iterator();
+
+                while (usersInChat.hasNext())
+                {
+                    DataSnapshot data = (DataSnapshot) usersInChat.next();
+                    if(!data.getKey().equals(app.getUserInformation().getUID()))
+                    {
+                        String userKey = data.getKey();
+
+                        // hna fe b8
+                        app.getDatabaseUsers().child(userKey).child(FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot userInfo) {
+
+                                String  lastMessage= "none";
+
+                                if(chatInfo.child("_messages_").hasChild("_last_message_"))
+                                    lastMessage = chatInfo.child("_messages_").child("_last_message_").getValue().toString();
+
+                                addUserChat(dataSnapshot.getKey(),userInfo.child("_username_").getValue().toString(),userInfo.child("_picUrl_").getValue().toString(),lastMessage);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                }
+
 
             }
 
@@ -122,8 +162,27 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        };
     }
+
+
+
+    private void addUserChat(String userKey, String username,String pictureURL,String lastMessage) {
+
+        CommunityUserList communityUserList = new CommunityUserList();
+        communityUserList.setChatKey(userKey);
+        communityUserList.setFullName(username);
+        communityUserList.setUserPictureURL(pictureURL);
+        communityUserList.setLastMsg(lastMessage);
+        addToList(communityUserList);
+    }
+
+    private void modifyChatAdapter()
+    {
+
+    }
+
+
 
 
 }

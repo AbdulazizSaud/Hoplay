@@ -77,24 +77,6 @@ public class SignUpActivity extends Signup {
 
     }
 
-    // old method .. perhaps we will need it in feature
-    @Override
-    protected JSONObject startAPI() {
-
-
-        JSONObject jsonAPI = null;
-
-        HashMap<String, String> data = new HashMap<>();
-        data.put("username", usernameSignUp.getText().toString().trim());
-        data.put("password", passwordSignUp.getText().toString().trim());
-        data.put("email", emailSignUp.getText().toString().trim());
-
-        jsonAPI = App.getInstance().getAPI(GetAPI.REGISTER, data);
-
-        return jsonAPI;
-
-    }
-
 
     private void doDatabaseProcess(final String UID,final String email, final String username, final String nickname) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();

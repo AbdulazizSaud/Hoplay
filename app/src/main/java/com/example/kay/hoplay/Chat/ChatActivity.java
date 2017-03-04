@@ -7,6 +7,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.R;
+import com.example.kay.hoplay.model.ChildEventListenerModel;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,11 +31,10 @@ import okhttp3.internal.cache.DiskLruCache;
  */
 
 public class ChatActivity extends Chat implements FirebasePaths {
+
     private String chatRoomKey=null;
+    private String friendUsername=null,friendPictureURL=null,friendKey=null;
 
-    private String username,uid;
-
-    private String friendUsername=null,friendPicture=null,friendKey=null;
     DatabaseReference refRoom,refMessages;
     // set up chat app
     @Override
@@ -43,80 +43,63 @@ public class ChatActivity extends Chat implements FirebasePaths {
         Intent i = getIntent();
         chatRoomKey = i.getStringExtra("room_key");
         friendUsername = i.getStringExtra("friend_username");
-        friendPicture = i.getStringExtra("friend_picture");
-        refRoom = app.getFirebaseDatabase().getReferenceFromUrl(FB_PRIVATE_PATH+chatRoomKey);
+        friendPictureURL = i.getStringExtra("friend_picture");
+        refRoom = app.getFirebaseDatabase().getReferenceFromUrl(FB_PRIVATE_CHAT_PATH+chatRoomKey);
+        Log.i("------->",refRoom.toString());
         refMessages = refRoom.child("_messages_");
 
-        uid =  app.getAuth().getCurrentUser().getUid();
         setupRoomDetails();
         loadMessage();
 
 
     }
 
+
+
+    private void addMessageToChat(DataSnapshot dataSnapshot,boolean isAddChild)
+    {
+        if(isEmpty(dataSnapshot))
+            return;
+        String username = dataSnapshot.child("_username_").getValue().toString();
+        String message = dataSnapshot.child("_message_").getValue().toString();
+
+        boolean isYou = username.equals(app.getUserInformation().getUID());
+
+
+        if(!isYou)
+            addMessage(username,message,false);
+        else if(isAddChild)
+            addMessage(username,message,true);
+
+    }
     private void loadMessage() {
 
-        refMessages.addChildEventListener(new ChildEventListener() {
+
+        refMessages.addChildEventListener(new ChildEventListenerModel() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                if( dataSnapshot.child("_username_").getValue() == null || dataSnapshot.child("_message_").getValue() == null)
-                    return;
+                addMessageToChat(dataSnapshot,true);
 
-                String username = dataSnapshot.child("_username_").getValue().toString();
-                String message = dataSnapshot.child("_message_").getValue().toString();
-
-                if(username.equals(uid))
-                {
-                    addMessage(username,message,true);
-                }
-                else
-                {
-                    addMessage(username,message,false);
-                }
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                if( dataSnapshot.child("_username_").getValue() == null || dataSnapshot.child("_message_").getValue() == null)
-                    return;
-                String username = dataSnapshot.child("_username_").getValue().toString();
-                String message = dataSnapshot.child("_message_").getValue().toString();
-                if(!username.equals(uid))
-                addMessage(username,message,false);
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                addMessageToChat(dataSnapshot,false);
 
             }
         });
+
+    }
+
+    private boolean isEmpty(DataSnapshot dataSnapshot) {
+        return dataSnapshot.child("_username_").getValue() == null || dataSnapshot.child("_message_").getValue() == null;
     }
 
 
     private void setupRoomDetails() {
 
         roomPicture.setImageResource(R.drawable.profile_default_photo);
-
-            if (friendPicture.length() > 0 && !friendPicture.equals("default"))
-            {
-                app.getImageLoader().get(friendPicture,
-                        ImageLoader.getImageListener(
-                                roomPicture
-                                , R.drawable.profile_default_photo
-                                , R.drawable.profile_default_photo));
-            }
-
-
+        app.loadingImage(roomPicture,friendPictureURL);
         roomName.setText(friendUsername);
 
     }
@@ -124,12 +107,12 @@ public class ChatActivity extends Chat implements FirebasePaths {
     @Override
     // this method for send message , execute only when a user click on send button
     protected void sendMessage(String message) {
-        String uid =  app.getAuth().getCurrentUser().getUid();
         super.sendMessage(message);
         String message_key = refMessages.push().getKey();
 
-        refMessages.child(message_key).child("_username_").setValue(uid);
+        refMessages.child(message_key).child("_username_").setValue(app.getUserInformation().getUID());
         refMessages.child(message_key).child("_message_").setValue(message);
+        refMessages.child("_last_message_").setValue(message);
 
     }
     @Override

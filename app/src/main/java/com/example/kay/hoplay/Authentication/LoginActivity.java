@@ -61,9 +61,7 @@ public class LoginActivity extends Login {
 
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-
-                    //Log.i("--->",mFirebaseUser.getDisplayName());
-                    // User is signed in
+                    app.getUserInformation().setUID(user.getUid());
                     toMainMenu();
                 }
             }
@@ -100,18 +98,6 @@ public class LoginActivity extends Login {
         });
     }
 
-    // old method .. perhaps we will need it in feature
-    @Override
-    public JSONObject startAPI() {
-        JSONObject jsonAPI = null;
-        HashMap<String, String> data = new HashMap<>();
-
-        data.put("username", usernameSignIn.getText().toString().trim());
-        data.put("password", passwordSignIn.getText().toString().trim());
-        jsonAPI = App.getInstance().getAPI(GetAPI.LOGIN, data);
-
-        return jsonAPI;
-    }
 
 
 }

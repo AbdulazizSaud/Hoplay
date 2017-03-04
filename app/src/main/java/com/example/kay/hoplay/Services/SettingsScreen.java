@@ -19,7 +19,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SettingsScreen extends PreferenceFragment {
 
     private  Context context;
-    private FirebaseAuth mAuth;
 
     public SettingsScreen(){
 
@@ -36,14 +35,13 @@ public class SettingsScreen extends PreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings_screen);
 
-        mAuth = App.getInstance().getAuth();
 
         // Log out on click preference
         Preference preferences = (Preference) findPreference("settings_logout");
         preferences.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
                 //Do whatever you want here
-                mAuth.signOut();
+                App.getInstance().signOut();
 
                 Intent i = new Intent(context, LoginActivity.class);
                 startActivity(i);

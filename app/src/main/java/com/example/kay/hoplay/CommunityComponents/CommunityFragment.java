@@ -33,10 +33,11 @@ public abstract class CommunityFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private ImageView newPrivateChatImageView;
-    private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<CommunityUserList> communityUserLists=new ArrayList<CommunityUserList>();
     private  FloatingActionButton newPrivateChatFloatingActionButton;
+
+    protected ArrayList<CommunityUserList> communityUserLists=new ArrayList<CommunityUserList>();
+    protected RecyclerView.Adapter mAdapter;
 
     private CommonAdapter<CommunityUserList> commonAdapter =  new CommonAdapter<CommunityUserList>(communityUserLists,R.layout.new_user_message) {
         @Override
@@ -57,7 +58,7 @@ public abstract class CommunityFragment extends Fragment {
                 }
             });
 
-            app.loadingImage(holder, model);
+            app.loadingImage(holder, model.getUserPictureURL());
             holder.setTitle(model.getFullName());
             communityHolder.setCommunitySubtitle(model.getLastMsg());
             holder.setTime(model.getLastMsgDate());
