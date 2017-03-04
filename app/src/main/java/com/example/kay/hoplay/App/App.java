@@ -50,6 +50,7 @@ public class App extends Application implements FirebasePaths,Constants{
     private DatabaseReference databaseAuthUserDataRef;
 
     private FirebaseAuth mAuth;  // firebase auth
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
     private PattrenContext pattrenContext; // pattren stratgey
     private ImageLoader imageLoader; // Image loader from url
 
@@ -151,4 +152,14 @@ public class App extends Application implements FirebasePaths,Constants{
     public UserInformation getUserInformation() {
         return userInformation;
     }
+
+    public FirebaseAuth.AuthStateListener getmAuthStateListener() {
+        return mAuthStateListener;
+    }
+
+    public void setmAuthStateListener(FirebaseAuth.AuthStateListener mAuthStateListener) {
+        this.mAuthStateListener = mAuthStateListener;
+    }
 }
+
+

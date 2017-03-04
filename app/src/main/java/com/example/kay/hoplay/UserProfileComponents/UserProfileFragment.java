@@ -1,4 +1,4 @@
-package com.example.kay.hoplay.UserProfile;
+package com.example.kay.hoplay.UserProfileComponents;
 
 
 import android.content.DialogInterface;
@@ -20,17 +20,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.toolbox.ImageLoader;
 import com.example.kay.hoplay.Activities.SettingsActivity;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.CommunityComponents.UserFriendsActivity;
-import com.example.kay.hoplay.UserProfile.ProfileRequires.UserGames;
-import com.example.kay.hoplay.UserProfile.ProfileRequires.UserRatings;
+import com.example.kay.hoplay.UserProfileComponents.ProfileRequires.UserGames;
+import com.example.kay.hoplay.UserProfileComponents.ProfileRequires.UserRatings;
 import com.example.kay.hoplay.model.RecentActivityList;
-import com.pkmmte.view.CircularImageView;
 
 import java.util.ArrayList;
 
@@ -66,10 +64,6 @@ public class UserProfileFragment extends Fragment {
     ArrayList<RecentActivityList> recentActivityLists=new ArrayList<RecentActivityList>();
 
 
-
-    public UserProfileFragment() {
-        // Required empty public constructor
-    }
 
 
     @Override
@@ -224,13 +218,17 @@ public class UserProfileFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
 
 
+        setUserProfileInformation();
+
+        return view;
+    }
+
+    private void setUserProfileInformation() {
         App app = App.getInstance();
 
         app.loadingImage(userPictureCircleImageView,app.getUserInformation().getPictureURL());
         usernameProfile.setText("@"+app.getUserInformation().getUsername());
         nicknameTextView.setText(app.getUserInformation().getNickName());
-
-        return view;
     }
 
 

@@ -56,6 +56,7 @@ public class MainAppMenuActivity extends MainAppMenu implements FirebasePaths{
                     // User is sign out
                     toLogin();
                 } else {
+                    app.setmAuthStateListener(authStateListener);
                     setupUserInformation(user);
                 }
             }

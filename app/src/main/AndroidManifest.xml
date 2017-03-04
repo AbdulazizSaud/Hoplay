@@ -36,10 +36,10 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".UserProfile.ProfileRequires.UserGames"
+            android:name=".UserProfileComponents.ProfileRequires.UserGames"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserProfile.ProfileRequires.UserRatings"
+            android:name=".UserProfileComponents.ProfileRequires.UserRatings"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.TermsAndConditions"

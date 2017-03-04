@@ -1,4 +1,4 @@
-package com.example.kay.hoplay.UserProfile.ProfileRequires;
+package com.example.kay.hoplay.UserProfileComponents.ProfileRequires;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

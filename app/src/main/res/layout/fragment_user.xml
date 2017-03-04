@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".UserProfile.UserProfileFragment"
+    tools:context=".UserProfileComponents.UserProfileFragment"
     android:background="@color/app_background">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".UserProfile.UserProfileFragment"
+        tools:context=".UserProfileComponents.UserProfileFragment"
         android:background="@color/app_background">
 
         <!-- TODO: Update blank fragment layout -->

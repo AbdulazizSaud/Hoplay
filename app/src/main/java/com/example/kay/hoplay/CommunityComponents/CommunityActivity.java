@@ -55,7 +55,12 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
 
     private void loadPrivatePendingChats()
     {
-        final DatabaseReference refPendingChat = app.getDatabasChat().child(FIREBASE_PENDING_CHAT_ATTR).child(app.getUserInformation().getUID()).child(FIREBASE_PRIVATE_ATTR);
+
+
+
+        String uid = app.getUserInformation().getUID();
+
+        final DatabaseReference refPendingChat = app.getDatabasChat().child(FIREBASE_PENDING_CHAT_ATTR).child(uid).child(FIREBASE_PRIVATE_ATTR);
 
         refPendingChat.addChildEventListener(new ChildEventListenerModel() {
             @Override
@@ -74,6 +79,10 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
 
     private void loadPrivateChat()
     {
+
+
+        String uid = app.getUserInformation().getUID();
+
         // path -->
         refAuthUserChats.child(FIREBASE_PRIVATE_ATTR).addChildEventListener(new ChildEventListenerModel() {
             @Override
