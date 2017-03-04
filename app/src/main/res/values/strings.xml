@@ -4,6 +4,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- aman app strings -->
+    <string name="entering_code_instructions">Please enter the 6 digit code that shows in your authenticator application</string>
+    <string name="submit_code">submit code</string>
+    <!-- End aman -->
+
+
+
+
     <string name="hello">AndroidChatter</string>
     <string name="friend_list">List of Friends</string>
     <string name="username">Username:</string>
@@ -11,8 +19,6 @@
     <string name="login">Get In</string>
     <string name="cancel">Cancel</string>
     <string name="messaging">Messaging</string>
-    <string name="local_service_started">AndroidChatter Started</string>
-    <string name="local_service_stopped">AndroidChatter stopped</string>
     <string name="local_service_connected">Connected_local</string>
     <string name="OK">Done</string>
     <string name="not_connected_to_service">Connection is not available</string>

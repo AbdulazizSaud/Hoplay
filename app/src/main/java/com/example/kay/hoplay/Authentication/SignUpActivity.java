@@ -30,6 +30,7 @@ public class SignUpActivity extends Signup {
     public void OnStartActivity() {
         //.
         appAuth = FirebaseAuth.getInstance();
+
     }
 
 
@@ -45,6 +46,8 @@ public class SignUpActivity extends Signup {
 //            Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
 //            startActivity(i);
 //        }
+
+
 
         Log.i("---------->","ASi");
 
