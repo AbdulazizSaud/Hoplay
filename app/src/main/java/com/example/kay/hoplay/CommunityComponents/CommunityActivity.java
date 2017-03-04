@@ -1,7 +1,6 @@
 package com.example.kay.hoplay.CommunityComponents;
 
 import android.content.Intent;
-import android.databinding.tool.util.L;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;

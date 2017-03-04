@@ -217,7 +217,7 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
             return;
 
         // add message to adapter
-        addMessage(myUsername,message, true);
+        //addMessage(myUsername,message, true);
 
         messageET.setText("");
         sendBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.sendiconnomessage));

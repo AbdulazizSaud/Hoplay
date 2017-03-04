@@ -66,10 +66,9 @@ public class ChatActivity extends Chat implements FirebasePaths {
         boolean isYou = username.equals(app.getUserInformation().getUID());
 
 
-        if(!isYou)
-            addMessage(username,message,false);
-        else if(isAddChild)
-            addMessage(username,message,true);
+
+            addMessage(username,message,isYou);
+            //addMessage(username,message,true);
 
     }
     private void loadMessage() {
