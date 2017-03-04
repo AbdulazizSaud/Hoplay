@@ -78,6 +78,10 @@ public class LoginActivity extends Login {
 
     @Override
     protected void login(String username, String password) {
+
+        if (username.equals("") || password.equals(""))
+            return;
+        loadingDialog(true);
         mAuth = App.getInstance().getAuth();
 
 
@@ -92,6 +96,7 @@ public class LoginActivity extends Login {
 
                 } else {
                     // results if it's failed
+                    loadingDialog(false);
                     Toast.makeText(getApplicationContext(),App.FAILED_LOGIN + ". Please check your email or password",Toast.LENGTH_LONG).show();
                 }
             }

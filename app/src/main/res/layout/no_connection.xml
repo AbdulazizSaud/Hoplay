@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E0E0E0"
+    android:background="@color/app_background"
     android:id="@+id/no_connection_relativelayout">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Service Unavailable (-_-)"
-        android:textColor="@color/darkenGrey"
+        android:textColor="@color/text_color"
         android:layout_marginTop="38dp"
         android:id="@+id/connection_error_textview"
         android:textSize="20dp"

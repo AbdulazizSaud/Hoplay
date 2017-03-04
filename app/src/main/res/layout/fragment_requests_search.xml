@@ -4,7 +4,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
-    android:background="#E0E0E0">
+    android:background="@color/app_background">
 
 
 
@@ -14,7 +14,7 @@
         android:text="Search for a game"
         android:layout_width="wrap_content"
         android:textSize="25dp"
-        android:textColor="@color/burgundy"
+        android:textColor="@color/app_color"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:id="@+id/search_game_message_textview"
@@ -130,7 +130,7 @@
         android:id="@+id/games_search_edittext"
         android:hint="All games"
         android:gravity="center"
-        android:textColorHint="@color/hintColor"
+        android:textColorHint="@color/hint_color"
         android:background="@drawable/rectangular_edittext"
         android:layout_below="@+id/platforms_container_linearlayout"
         android:layout_centerHorizontal="true"

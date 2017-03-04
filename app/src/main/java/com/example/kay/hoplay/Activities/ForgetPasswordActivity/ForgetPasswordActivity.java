@@ -29,11 +29,12 @@ public class ForgetPasswordActivity extends ForgetPassword{
 
         if (mAuth != null) {
             final String email = forgetPasswordEditText.getText().toString().trim();
+            if(!email.equals(""))
             mAuth.sendPasswordResetEmail(email).addOnCompleteListener(this, new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Password rest sent it to your email : " + email + ", Please check your inbox", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Password reset sent it to your email : " + email + ", Please check your inbox", Toast.LENGTH_LONG).show();
                         goToLogin();
                     }
                 }

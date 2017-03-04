@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/tools"
-    android:background="#E0E0E0"
+    android:background="@color/app_background"
     android:orientation="vertical"
     android:padding="1dp"
     >
@@ -17,7 +17,7 @@
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:background="#E0E0E0"
+        android:background="@color/app_background"
         >
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -27,8 +27,8 @@
             android:layout_marginRight="10dp"
             android:src="@drawable/profile_default_photo"
             app:border="true"
-            app:border_color="#F2F2F2"
-            app:border_width="1dp"
+            app:border_color="@color/app_color"
+            app:border_width="2dp"
             app:shadow="false" />
 
         <LinearLayout
@@ -55,7 +55,7 @@
                         android:singleLine="true"
                         android:drawablePadding="5dp"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/text_color"
                         android:fontFamily="sans-serif-light"
                         android:text="Game Name"
                         android:textSize="16dp"
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:text="Game Description"
                     android:id="@+id/request_description_textview"
-                    android:textColor="@color/darkenGrey"
+                    android:textColor="@color/text_color"
                     android:fontFamily="sans-serif-light"
                     android:textSize="14dp"
                     android:singleLine="true"
@@ -89,8 +89,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2/4"
+                    android:textStyle="bold"
                     android:id="@+id/request_players_number_textview"
-                    android:textColor="#D50000"
+                    android:textColor="@android:color/holo_red_dark"
                     android:fontFamily="sans-serif-light"
                     android:gravity="right" />
                 
@@ -107,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:text="by Kdesu"
                     android:id="@+id/request_by_user_textview"
-                    android:textColor="#979899"
+                    android:textColor="@color/text_color"
                     android:fontFamily="sans-serif-light"
                     android:gravity="right" />
 

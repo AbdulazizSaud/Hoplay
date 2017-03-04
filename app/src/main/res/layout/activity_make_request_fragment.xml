@@ -48,7 +48,7 @@
             android:layout_below="@id/line_divider_linearlayout"
             android:text="Saved Requests"
             android:textSize="23dp"
-            android:textColor="@color/burgundy"
+            android:textColor="@color/app_color"
             android:id="@+id/saved_activity_message_textview"
             android:layout_marginTop="10dp"
             />

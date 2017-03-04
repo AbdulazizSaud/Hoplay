@@ -9,7 +9,7 @@
     tools:context=".UserProfile.UserProfileFragment"
     android:orientation="vertical"
     android:id="@+id/recent_activites_relativelayout"
-    android:background="#E0E0E0">
+    android:background="@color/app_background">
 
     <!-- TODO: Update blank fragment layout -->
 

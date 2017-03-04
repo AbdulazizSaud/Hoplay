@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -19,6 +20,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -53,6 +55,9 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     protected RelativeLayout signInRelativeLayout;
     protected Toolbar toolbar;
     protected App app = App.getInstance();
+    ProgressDialog loadigDialog ;
+
+
 
     /***************************************/
 
@@ -140,11 +145,15 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         passwordSignIn = (EditText) findViewById(R.id.password_edittext);
         // Encrypt password
         passwordSignIn.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        passwordSignIn.setTypeface(sansationbold);
+
 
         usernameSignIn = (EditText) findViewById(R.id.username_sign_in_edittext);
-        usernameSignIn.setTypeface(sansationbold);
 
+
+        // Init progress dialog
+         loadigDialog = new ProgressDialog(this,R.style.AppCompatAlertDialogStyle);
+        loadigDialog.setTitle("Signing in ..");
+        loadigDialog.setMessage("Just one moment");
 
 
         // it execute login method when click on button
@@ -177,10 +186,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     }
     protected void toMainMenu() {
 
-        ProgressDialog loadigDialog = new ProgressDialog(this);
-        loadigDialog.setTitle("Signing in ..");
-        loadigDialog.setMessage("Just one moment");
-        loadigDialog.show();
+
         Intent i = new Intent(getApplicationContext(), MainAppMenuActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
@@ -196,4 +202,15 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
     // abstract methods, Note : I made some comment descripe these methods on Login Activity
     protected abstract void login(String username, String password);
+
+
+    protected void loadingDialog(boolean show)
+    {
+
+        if (show)
+        loadigDialog.show();
+        else
+            loadigDialog.hide();
+    }
 }
+

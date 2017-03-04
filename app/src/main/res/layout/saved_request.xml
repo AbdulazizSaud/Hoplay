@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/tools"
-    android:background="#E0E0E0"
+    android:background="@color/app_background"
     android:orientation="vertical"
     android:padding="1dp">
 
@@ -16,7 +16,7 @@
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:background="#E0E0E0">
+        android:background="@color/app_background">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="55dp"
@@ -25,8 +25,8 @@
             android:layout_marginRight="10dp"
             android:src="@drawable/profile_default_photo"
             app:border="true"
-            app:border_color="#F2F2F2"
-            app:border_width="1dp"
+            app:border_color="@color/app_color"
+            app:border_width="4dp"
             app:shadow="false" />
 
         <LinearLayout
@@ -53,7 +53,7 @@
                         android:singleLine="true"
                         android:drawablePadding="5dp"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/text_color"
                         android:fontFamily="sans-serif-light"
                         android:text="Game Name"
                         android:textSize="16dp"
@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:text="Request Description"
                     android:id="@+id/request_description_saved_request_textview"
-                    android:textColor="@color/darkenGrey"
+                    android:textColor="@color/text_color"
                     android:fontFamily="sans-serif-light"
                     android:textSize="14dp"
                     android:singleLine="true"
@@ -94,7 +94,7 @@
                     android:text="4 players"
                     android:layout_gravity="center"
                     android:id="@+id/number_of_players_saved_requests_textview"
-                    android:textColor="@color/burgundy"
+                    android:textColor="@color/app_color"
                     android:fontFamily="sans-serif-light"
                     android:gravity="center" />
 

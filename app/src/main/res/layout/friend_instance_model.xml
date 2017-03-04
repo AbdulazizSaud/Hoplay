@@ -4,13 +4,13 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/AppBackground">
+    android:background="@color/app_background">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="250px"
         android:layout_height="250px"
-        app:civ_border_width="2dp"
-        app:civ_border_color="@color/burgundy"
+        app:civ_border_width="4dp"
+        app:civ_border_color="@color/app_color"
         android:src="@drawable/profile_default_photo"
         android:id="@+id/friend_profile_photo_circleimageview"
         android:layout_margin="5dp"
@@ -22,6 +22,7 @@
         android:text="Khaled"
         android:layout_margin="5dp"
         android:gravity="center"
+        android:textColor="@color/text_color"
         android:id="@+id/friend_nickname_friends_list_textview"
         android:textSize="15dp"/>
 

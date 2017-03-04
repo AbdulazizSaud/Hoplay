@@ -14,6 +14,12 @@
 
     </style>
 
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/app_color</item>
+        <item name="android:textColorPrimary">@color/app_color</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <!--<item name="windowActionBar">false</item>-->
         <!--<item name="windowNoTitle">true</item>-->
@@ -23,10 +29,7 @@
 
     </style>
 
-    <style name="PreferencesTheme">
-        <item name="android:windowBackground">@drawable/background</item>
-        <item name="android:background">#E0E0</item>
-    </style>
+
 
 
      <!-- Toolbar style -->

@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#E0E0E0">
+    android:background="@color/app_background">
 
     <include
         android:id="@+id/toolbar"
@@ -18,7 +18,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="20dp"
-        android:background="#E0E0E0">
+        android:background="@color/app_background">
 
         <!--<EditText-->
             <!--android:id="@+id/messageEdit"-->

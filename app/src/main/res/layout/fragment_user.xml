@@ -6,14 +6,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".UserProfile.UserProfileFragment"
-    android:background="#E0E0E0">
+    android:background="@color/app_background">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".UserProfile.UserProfileFragment"
-        android:background="#E0E0E0">
+        android:background="@color/app_background">
 
         <!-- TODO: Update blank fragment layout -->
 
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:textSize="22dp"
-            android:textColor="@color/burgundy"
+            android:textColor="@color/app_color"
             android:layout_below="@+id/user_games_friends_ratings_bar"
             android:layout_marginTop="5dp"
             android:id="@+id/recent_activities_textview" />

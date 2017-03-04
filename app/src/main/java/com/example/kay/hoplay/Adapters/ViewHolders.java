@@ -77,7 +77,7 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
             // In case you want to play with the fonts and fonts color :
             Typeface sansation = Typeface.createFromAsset(title.getContext().getAssets() ,"sansationbold.ttf");
             title.setTypeface(sansation);
-            title.setTextColor(title.getResources().getColor(R.color.pccolor));
+            title.setTextColor(title.getResources().getColor(R.color.pc_color));
 
 
             subtitle =  (TextView) v.findViewById(R.id.request_description_saved_request_textview);

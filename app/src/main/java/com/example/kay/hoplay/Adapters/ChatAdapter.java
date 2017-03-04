@@ -88,7 +88,7 @@ public class ChatAdapter extends BaseAdapter {
         if (!isMe) {
             holder.contentWithBG.setBackgroundResource(R.drawable.out_message_bg);
 
-            holder.txtMessage.setTextColor(context.getResources().getColor(R.color.darkenGrey));
+            holder.txtMessage.setTextColor(context.getResources().getColor(R.color.text_color));
 
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) holder.contentWithBG.getLayoutParams();
             layoutParams.gravity = Gravity.LEFT;
