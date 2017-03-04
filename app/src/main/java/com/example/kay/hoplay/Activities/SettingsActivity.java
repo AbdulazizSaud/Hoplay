@@ -4,6 +4,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Services.SettingsScreen;
 
@@ -29,6 +30,12 @@ public class SettingsActivity extends AppCompatActivity {
             fragment = getFragmentManager().findFragmentByTag("settings_fragment");
         }
 
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
     }
 }

@@ -25,8 +25,8 @@ public class SettingsScreen extends PreferenceFragment {
 
     }
 
-    public void setContext(Context c){
-        this.context = c;
+        public void setContext(Context c){
+            this.context = c;
 
     }
 

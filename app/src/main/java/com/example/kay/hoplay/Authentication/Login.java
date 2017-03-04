@@ -86,7 +86,9 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
     @Override
     protected void onDestroy() {
+
         super.onDestroy();
+        loadigDialog.dismiss();
     }
 
     @Override
@@ -155,7 +157,6 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         loadigDialog.setTitle("Signing in ..");
         loadigDialog.setMessage("Just one moment");
 
-
         // it execute login method when click on button
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,7 +211,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         if (show)
         loadigDialog.show();
         else
-            loadigDialog.hide();
+            loadigDialog.dismiss();
     }
 }
 
