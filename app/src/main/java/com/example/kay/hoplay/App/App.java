@@ -31,8 +31,6 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import io.socket.client.IO;
-import io.socket.client.Socket;
 
 /*
     this class basiclly do linking between all difreent activity that trying to get a same specfic values

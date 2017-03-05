@@ -21,9 +21,7 @@ import java.util.Iterator;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import emojicon.emoji.Objects;
-import io.socket.client.Socket;
-import io.socket.emitter.Emitter;
-import okhttp3.internal.cache.DiskLruCache;
+
 
 /**
  * Created by Kay on 10/30/2016.
