@@ -86,14 +86,14 @@ public abstract class CommunityFragment extends Fragment {
 
 
         // Go to Friends List to start new private chat
-//        newPrivateChatFloatingActionButton = (FloatingActionButton) view.findViewById(R.id.new_private_chat_floatingactionbutton);
-//        newPrivateChatFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(getContext(),UserFriendsActivity.class);
-//                startActivity(i);
-//            }
-//        });
+        newPrivateChatFloatingActionButton = (FloatingActionButton) view.findViewById(R.id.new_private_chat_floatingactionbutton);
+        newPrivateChatFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(),UserFriendsActivity.class);
+                startActivity(i);
+            }
+        });
 
         //testList();
 

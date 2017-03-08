@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <tabs>
+        <tab
+            id="@+id/tab_search_game"
+            icon="@drawable/ic_search_white_18dp"
+             />
+
+        <tab
+            id="@+id/tab_chat_community"
+            icon="@drawable/ic_chat_white_18dp"
+             />
+        <tab
+            id="@+id/tab_make_request"
+            icon="@drawable/ic_control_point_white_18dp"
+             />
+        <tab
+            id="@+id/tab_user_profile"
+            icon="@drawable/ic_face_white_18dp"
+             />
+
+    </tabs>
+
+</PreferenceScreen>

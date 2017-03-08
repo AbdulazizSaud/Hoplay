@@ -152,16 +152,16 @@ public abstract class SearchRequestsFragment extends Fragment {
         });
 
 
-
-        searchGame.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if(b){
-                    MainAppMenu.getBottomBar().hide();
-                }
-                MainAppMenu.getBottomBar().show();
-            }
-        });
+//
+//        searchGame.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View view, boolean b) {
+//                if(b){
+//                    MainAppMenu.getInstance().getBottomBar().hide();
+//                }
+//                MainAppMenu.getInstance().getBottomBar().show();
+//            }
+//        });
 
 
         ArrayAdapter regionAdapter = new  SpinnerAdapter(getContext() ,R.layout.spinnner_item,
