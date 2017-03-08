@@ -57,8 +57,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="5"
+                    android:textColorHint="@color/hint_color"
                     android:digits="qwertyuiopasdfghjklzxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890-@_."
                     android:hint="Username"
+                    android:textColor="@color/text_color"
                     android:inputType="textEmailAddress"
                     android:maxLength="25" />
 
@@ -76,6 +78,8 @@
                     android:layout_height="wrap_content"
                     android:ems="5"
                     android:hint="Password"
+                    android:textColor="@color/text_color"
+                    android:textColorHint="@color/hint_color"
                     android:inputType="textPassword"
                     android:maxLength="10" />
 

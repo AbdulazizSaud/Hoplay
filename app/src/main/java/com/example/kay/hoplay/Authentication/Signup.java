@@ -133,17 +133,12 @@ public abstract class Signup extends AppCompatActivity implements Auth {
         termsAndConditions.setTypeface(sansationbold);
         goBackToMain = (ImageView) findViewById(R.id.go_back_to_main_imageview);
         usernameSignUp = (EditText) findViewById(R.id.username_sign_up_edittext);
-        usernameSignUp.setTypeface(sansationbold);
         passwordSignUp = (EditText) findViewById(R.id.password_sign_up_edittext);
-        passwordSignUp.setTypeface(sansationbold);
         emailSignUp = (EditText) findViewById(R.id.email_sign_up_edittext);
-        emailSignUp.setTypeface(sansationbold);
         nickNameSignUp = (EditText) findViewById(R.id.nickname_sign_up_edittext);
-        nickNameSignUp.setTypeface(sansationbold);
         signUpBtn = (Button) findViewById(R.id.sign_in_button);
         signUpBtn.setTypeface(sansationbold);
         confirmPasswordEdititext = (EditText) findViewById(R.id.confirm_password_edittext);
-        confirmPasswordEdititext.setTypeface(sansationbold);
 
         // I've tried the onClick method  but  it  didn't work .
         // or sometimes  it  work but  it will not  make the
