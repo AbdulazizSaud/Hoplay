@@ -8,8 +8,6 @@
 
 
 
-
-
     <TextView
         android:text="Search for a game"
         android:layout_width="wrap_content"
@@ -22,8 +20,6 @@
         android:layout_centerHorizontal="true">
 
     </TextView>
-
-
 
 
     <LinearLayout
@@ -90,29 +86,29 @@
             android:layout_alignStart="@+id/platforms_images_container_linearlayout"
             android:gravity="center_horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="PS Requests"
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="PS Requests"-->
 
-                android:textColor="@color/invisible_request_color"
-                android:id="@+id/ps_requests_message_textview" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="PC Requests"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/invisible_request_color"
-                android:id="@+id/pc_requests_message_textview" />
+                <!--android:textColor="@color/invisible_request_color"-->
+                <!--android:id="@+id/ps_requests_message_textview" />-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="PC Requests"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:textColor="@color/invisible_request_color"-->
+                <!--android:id="@+id/pc_requests_message_textview" />-->
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Xbox Requests"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/invisible_request_color"
-                android:id="@+id/xbox_requests_message_textview" />
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Xbox Requests"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:textColor="@color/invisible_request_color"-->
+                <!--android:id="@+id/xbox_requests_message_textview" />-->
 
 
 

@@ -2,6 +2,7 @@ package com.example.kay.hoplay.App;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.example.kay.hoplay.Services.LruBitmapCache;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.model.CommonModel;
 import com.example.kay.hoplay.model.UserInformation;
+import com.example.kay.hoplay.util.BitmapOptimizer;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
@@ -92,35 +95,56 @@ public class App extends Application implements FirebasePaths,Constants{
     }
 
 
-    public void loadingImage(ViewHolders holder, String pictureURL) {
+    public Bitmap loadingImage(ViewHolders holder, String pictureURL) {
 
         CircleImageView picture = holder.getPicture();
         picture.setImageResource(R.drawable.profile_default_photo);
         holder.setPicture(picture);
-        loadPicture(pictureURL, holder.getPicture());
+
+        Bitmap bitmap = loadPicture(pictureURL, holder.getPicture());
+
+//        if(bitmap !=null)
+//        resizeBitmap(holder.getPicture(), bitmap);
+
+        return bitmap;
     }
 
 
 
-    public CircleImageView loadingImage(CircleImageView pictureView ,String pictureURL) {
+    public Bitmap loadingImage(CircleImageView pictureView ,String pictureURL) {
 
         pictureView.setImageResource(R.drawable.profile_default_photo);
-        loadPicture(pictureURL,pictureView);
-        return pictureView;
+        Bitmap bitmap = loadPicture(pictureURL,pictureView);
+
+//        if(bitmap !=null)
+//        resizeBitmap(pictureView, bitmap);
+
+        return bitmap;
+    }
+
+    private void resizeBitmap(CircleImageView pictureView, Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        BitmapOptimizer optimizer = new BitmapOptimizer();
+        optimizer.decodeSampledBitmapFromByteArray(byteArray, 10, 10);
+
+        pictureView.setImageBitmap(bitmap);
     }
 
 
-    private void loadPicture(String pictureURL,CircleImageView circleImageView) {
+    private Bitmap loadPicture(String pictureURL,CircleImageView circleImageView) {
         if(pictureURL != null) {
             if (pictureURL.length() > 0 && !pictureURL.startsWith("default")) {
-                getImageLoader().get(pictureURL,
+
+               return getImageLoader().get(pictureURL,
                         ImageLoader.getImageListener(
                                 circleImageView
                                 , R.drawable.profile_default_photo
-                                , R.drawable.profile_default_photo));
-
+                                , R.drawable.profile_default_photo)).getBitmap();
             }
         }
+        return null;
     }
 
 

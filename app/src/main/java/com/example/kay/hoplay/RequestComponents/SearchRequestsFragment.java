@@ -1,6 +1,9 @@
 package com.example.kay.hoplay.RequestComponents;
 
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +22,7 @@ import com.example.kay.hoplay.Activities.MainMenu.MainAppMenu;
 import com.example.kay.hoplay.Adapters.SpinnerAdapter;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.model.SavedRequestsList;
+import com.example.kay.hoplay.util.BitmapOptimizer;
 
 import java.util.Arrays;
 
@@ -44,13 +48,16 @@ public abstract class SearchRequestsFragment extends Fragment {
 
     protected Button searchRequestButton;
 
+    private BitmapOptimizer bitmapOptimizer;
 
     boolean pcIsChosen , psIsChosen , xboxIsChosen ;
 
+    private Bitmap pcLogoUnPressed, pcLogoPressed,psLogoUnPressed, psLogoPressed,xboxLogoUnPressed, xboxLogoPressed;
 
 
     public SearchRequestsFragment() {
         // Required empty public constructor
+        bitmapOptimizer = new BitmapOptimizer();
     }
 
 
@@ -62,15 +69,29 @@ public abstract class SearchRequestsFragment extends Fragment {
         pcChoice = (ImageView) view.findViewById(R.id.pc_choice_imageview);
         psChoice = (ImageView) view.findViewById(R.id.ps_choice_imageview);
         xboxChoice = (ImageView) view.findViewById(R.id.xbox_choice_imageview);
-        pcMessage = (TextView) view.findViewById(R.id.pc_requests_message_textview);
-        psMessage = (TextView) view.findViewById(R.id.ps_requests_message_textview);
-        xboxMessage = (TextView) view.findViewById(R.id.xbox_requests_message_textview);
+//        pcMessage = (TextView) view.findViewById(R.id.pc_requests_message_textview);
+//        psMessage = (TextView) view.findViewById(R.id.ps_requests_message_textview);
+//        xboxMessage = (TextView) view.findViewById(R.id.xbox_requests_message_textview);
         searchGameMessage = (TextView) view.findViewById(R.id.search_game_message_textview);
         searchGame = (EditText) view.findViewById(R.id.games_search_edittext);
         regionsSpinner = (Spinner) view.findViewById(R.id.region_search_spinner);
         ranksSpinner=(Spinner) view.findViewById(R.id.players_rank_search_spinner);
         numberOfPlayersSpinner = (Spinner) view.findViewById(R.id.number_of_players_search_spinner);
         searchRequestButton = (Button) view.findViewById(R.id.make_request_button);
+
+
+        pcLogoUnPressed = bitmapOptimizer.decodeSampledBitmapFromResource(getResources(), R.drawable.pc_logo, 100, 100);
+        pcLogoPressed = bitmapOptimizer.decodeSampledBitmapFromResource(getResources(), R.drawable.pc_colorful_logo, 100, 100);
+
+        psLogoUnPressed = bitmapOptimizer.decodeSampledBitmapFromResource(getResources(), R.drawable.ps_logo, 100, 100);
+        psLogoPressed = bitmapOptimizer.decodeSampledBitmapFromResource(getResources(), R.drawable.ps_colorful_logo, 100, 100);
+
+        xboxLogoUnPressed = bitmapOptimizer.decodeSampledBitmapFromResource(getResources(), R.drawable.xbox_logo, 100, 100);
+        xboxLogoPressed = bitmapOptimizer.decodeSampledBitmapFromResource(getResources(), R.drawable.xbox_colorful_logo, 100, 100);
+
+
+        setBitmapLogo(pcLogoUnPressed,psLogoUnPressed,xboxLogoUnPressed);
+
 
 
         // To remove the focus on the first edittext for the games
@@ -82,9 +103,9 @@ public abstract class SearchRequestsFragment extends Fragment {
 
         Typeface sansation = Typeface.createFromAsset(getActivity().getAssets() ,"sansationbold.ttf");
         searchGameMessage.setTypeface(sansation);
-        pcMessage.setTypeface(sansation);
-        psMessage.setTypeface(sansation);
-        xboxMessage.setTypeface(sansation);
+//        pcMessage.setTypeface(sansation);
+//        psMessage.setTypeface(sansation);
+//        xboxMessage.setTypeface(sansation);
         searchGame.setTypeface(sansation);
 
 
@@ -97,12 +118,11 @@ public abstract class SearchRequestsFragment extends Fragment {
 
                 if(pcIsChosen==false)
                 {
-                    pcChoice.setImageResource(R.drawable.pc_colorful_logo);
-                    pcMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.pc_color));
-                    psMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.invisible_request_color));
-                    xboxMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.invisible_request_color));
-                    xboxChoice.setImageResource(R.drawable.xbox_logo);
-                    psChoice.setImageResource(R.drawable.ps_logo);
+                    setBitmapLogo(pcLogoPressed,psLogoUnPressed,xboxLogoUnPressed);
+                    //    pcMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.pc_color));
+                //    psMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.invisible_request_color));
+                 //   xboxMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.invisible_request_color));
+
                     pcIsChosen = true;
                     xboxIsChosen= false;
                     psIsChosen = false;
@@ -118,12 +138,12 @@ public abstract class SearchRequestsFragment extends Fragment {
 
                 if(psIsChosen==false)
                 {
-                    psChoice.setImageResource(R.drawable.ps_colorful_logo);
-                    psMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.ps_color));
-                    pcChoice.setImageResource(R.drawable.pc_logo);
-                    pcMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.invisible_request_color));
-                    xboxMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.invisible_request_color));
-                    xboxChoice.setImageResource(R.drawable.xbox_logo);
+
+                    setBitmapLogo(pcLogoUnPressed,psLogoPressed,xboxLogoUnPressed);
+
+                    //  psMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.ps_color));
+                   // pcMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.invisible_request_color));
+                  //  xboxMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.invisible_request_color));
                     psIsChosen=true;
                     pcIsChosen=false ;
                     xboxIsChosen=false ;
@@ -137,12 +157,11 @@ public abstract class SearchRequestsFragment extends Fragment {
 
                 if(xboxIsChosen==false)
                 {
-                    xboxChoice.setImageResource(R.drawable.xbox_colorful_logo);
-                    xboxMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.xbox_color));
-                    pcChoice.setImageResource(R.drawable.pc_logo);
-                    psChoice.setImageResource(R.drawable.ps_logo);
-                    psMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.invisible_request_color));
-                    pcMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.invisible_request_color));
+                    setBitmapLogo(pcLogoUnPressed,psLogoUnPressed,xboxLogoPressed);
+
+                    //                    xboxMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.xbox_color));
+                   // psMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.invisible_request_color));
+                   // pcMessage.setTextColor(ContextCompat.getColor(getContext(),R.color.invisible_request_color));
                     xboxIsChosen=true;
                     pcIsChosen=false;
                     psIsChosen=false;
@@ -187,7 +206,18 @@ public abstract class SearchRequestsFragment extends Fragment {
     }
 
 
+
+    private void setBitmapLogo(Bitmap pcLogo,Bitmap psLogo,Bitmap ps4Logo)
+    {
+        pcChoice.setImageBitmap(pcLogo);
+        psChoice.setImageBitmap(psLogo);
+        xboxChoice.setImageBitmap(ps4Logo);
+
+    }
     protected abstract void searchForRequest();
+
+
+
 
 
 }

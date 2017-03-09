@@ -2,11 +2,13 @@ package com.example.kay.hoplay.CommunityComponents;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +20,13 @@ import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.model.CommunityUserList;
+import com.example.kay.hoplay.util.BitmapOptimizer;
 import com.pkmmte.view.CircularImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 /**
@@ -32,7 +38,7 @@ public abstract class CommunityFragment extends Fragment {
 
 
     private RecyclerView mRecyclerView;
-    private ImageView newPrivateChatImageView;
+    private ImageView bgChatImageView;
     private RecyclerView.LayoutManager mLayoutManager;
     private  FloatingActionButton newPrivateChatFloatingActionButton;
 
@@ -58,7 +64,8 @@ public abstract class CommunityFragment extends Fragment {
                 }
             });
 
-            app.loadingImage(holder, model.getUserPictureURL());
+           app.loadingImage(holder, model.getUserPictureURL());
+
             holder.setTitle(model.getFullName());
             communityHolder.setCommunitySubtitle(model.getLastMsg());
             holder.setTime(model.getLastMsgDate());
@@ -84,6 +91,7 @@ public abstract class CommunityFragment extends Fragment {
         setupRecyclerView(view);
 
 
+        bgChatImageView = (ImageView) view.findViewById(R.id.splash);
 
         // Go to Friends List to start new private chat
         newPrivateChatFloatingActionButton = (FloatingActionButton) view.findViewById(R.id.new_private_chat_floatingactionbutton);
@@ -96,6 +104,8 @@ public abstract class CommunityFragment extends Fragment {
         });
 
         //testList();
+
+
 
         OnStartActivity();
 
@@ -122,6 +132,9 @@ public abstract class CommunityFragment extends Fragment {
     public void addToList(CommunityUserList communityUserList){
         communityUserLists.add(communityUserList);
         mAdapter.notifyDataSetChanged();
+
+        if(communityUserLists.size() > 0)
+            bgChatImageView.setVisibility(View.INVISIBLE);
     }
 
     private CommonAdapter<CommunityUserList> createAdapter(){
@@ -131,10 +144,10 @@ public abstract class CommunityFragment extends Fragment {
 
 
 
-    private void testList() {
+    protected void testList(String name) {
         // test
         String picUrl = "https://s13.postimg.org/puvr2r9tz/test_user_copy.jpg";
-        String username = "Test";
+        String username = name;
         String lastMessage = "Test has joined your request click to replay ^^";
 
         CommunityUserList clu = new CommunityUserList();

@@ -49,7 +49,8 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
     private void loadChats()
     {
         loadPrivatePendingChats();
-        loadPrivateChat();
+         loadPrivateChat();
+
     }
 
 
@@ -99,13 +100,12 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
                         Log.i("private------->",privateChat.toString());
                         for(CommunityUserList chats : communityUserLists)
                         {
-                            if(chats.getChatKey().equals(privateChat.getKey()))
-                            {
-                                Log.i("------->","hello");
-                                chats.setLastMsg(dataSnapshot.getValue().toString());
-                                mAdapter.notifyDataSetChanged();
+                              if(chats.getChatKey().equals(privateChat.getKey()))
+                                {
+                                    chats.setLastMsg(dataSnapshot.getValue().toString());
+                                    mAdapter.notifyDataSetChanged();
                                 break;
-                            }
+                                }
                         }
                     }
 
@@ -183,11 +183,6 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
         communityUserList.setUserPictureURL(pictureURL);
         communityUserList.setLastMsg(lastMessage);
         addToList(communityUserList);
-    }
-
-    private void modifyChatAdapter()
-    {
-
     }
 
 
