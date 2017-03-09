@@ -84,7 +84,8 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
 
         String uid = app.getUserInformation().getUID();
 
-        // path -->
+        // path --> /_users_info/[UID]/_chat_refs_/_private_
+
         refAuthUserChats.child(FIREBASE_PRIVATE_ATTR).addChildEventListener(new ChildEventListenerModel() {
             @Override
             public void onChildAdded(final DataSnapshot privateChat, String s) {
@@ -92,12 +93,10 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
                 DatabaseReference refChat = app.getFirebaseDatabase().getReferenceFromUrl(FB_PRIVATE_CHAT_PATH+privateChat.getKey());
                 refChat.addListenerForSingleValueEvent(readUsersInformationOnChat(privateChat));
 
-
                 refChat.child("_messages_").child("_last_message_").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        Log.i("private------->",privateChat.toString());
                         for(CommunityUserList chats : communityUserLists)
                         {
                               if(chats.getChatKey().equals(privateChat.getKey()))

@@ -110,7 +110,7 @@ public abstract class MainAppMenu extends AppCompatActivity implements ActivityI
             @Override
             public void onPageSelected(int position) {
                 bottomBar.selectTabAtPosition(position, true);
-
+                bottomBar.setInActiveTabColor(0x000033);
             }
 
 
