@@ -4,7 +4,7 @@
         <tab
             id="@+id/tab_search_game"
             icon="@drawable/ic_search_white_18dp"
-             />
+            />
 
         <tab
             id="@+id/tab_chat_community"
