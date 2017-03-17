@@ -7,21 +7,18 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -29,8 +26,6 @@ import com.example.kay.hoplay.Activities.ForgetPasswordActivity.ForgetPasswordAc
 import com.example.kay.hoplay.Activities.MainMenu.MainAppMenuActivity;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
-
-import org.json.JSONObject;
 
 
 /*
@@ -48,14 +43,12 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     protected EditText usernameSignIn;
     protected EditText passwordSignIn;
     protected ImageView logo;
-    protected Animation fadeIn;
-    protected Animation fadeOut;
-    protected AnimationSet animation;
     protected Button signInButton;
     protected RelativeLayout signInRelativeLayout;
     protected Toolbar toolbar;
     protected App app = App.getInstance();
     ProgressDialog loadigDialog ;
+
 
 
 
@@ -119,6 +112,55 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
         initControls();
 
+
+
+        // Update username and password field icon
+        usernameSignIn.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                    usernameSignIn.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_person_outline_focuesed_32dp, 0);
+                    if(s.length() == 0)
+                    {
+                        usernameSignIn.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_person_outline_not_focuesed_32dp, 0);
+                    }
+
+            }
+        });
+        passwordSignIn.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                passwordSignIn.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_lock_outline_focused_32dp, 0);
+                if(s.length() == 0)
+                {
+                    passwordSignIn.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_lock_open_not_focused_32dp, 0);
+                }
+
+            }
+        });
+
+
+
     }
 
 //---------------------
@@ -129,6 +171,8 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
 
         logo = (ImageView) findViewById(R.id.logo_imageview);
+
+
 
         signupBtn = (Button) findViewById(R.id.sign_up_btn);
         signupBtn.setTypeface(sansationbold);
@@ -152,10 +196,15 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         usernameSignIn = (EditText) findViewById(R.id.username_sign_in_edittext);
 
 
+
+
+
+
         // Init progress dialog
          loadigDialog = new ProgressDialog(this,R.style.AppCompatAlertDialogStyle);
-        loadigDialog.setTitle("Signing in ..");
-        loadigDialog.setMessage("Just one moment");
+        loadigDialog.setTitle(R.string.login_signing_in);
+        loadigDialog.setMessage(Login.this.getString(R.string.login_just_a_moment));
+
 
         // it execute login method when click on button
         signInButton.setOnClickListener(new View.OnClickListener() {
@@ -178,6 +227,10 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         });
 
     }
+
+
+
+
 
     //this method switching a to signup actitvty
     protected void toSignUp() {

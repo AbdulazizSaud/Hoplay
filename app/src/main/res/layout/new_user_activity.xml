@@ -57,7 +57,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:fontFamily="sans-serif-light"
-                        android:text="Game Name"
+                        android:text="@string/user_activity_game_name"
                         android:textSize="16dp"
                         android:layout_weight="1"
                         android:layout_marginRight="8dp" />
@@ -66,7 +66,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4m ago"
+                    android:text="@string/user_activity_time_stamp"
                     android:id="@+id/activity_date_textview"
                     android:textColor="#9B9B9B"
                     android:fontFamily="sans-serif-light"
@@ -83,7 +83,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Game Description"
+                    android:text="@string/user_activity_game_description"
                     android:id="@+id/activity_description_textview"
                     android:textColor="@color/text_color"
                     android:fontFamily="sans-serif-light"

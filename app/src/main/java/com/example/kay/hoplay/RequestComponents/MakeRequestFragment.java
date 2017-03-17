@@ -18,9 +18,7 @@ import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.RequestComponents.RequestsRequires.NewRequestActivity;
 import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.model.CommunityUserList;
 import com.example.kay.hoplay.model.SavedRequestsList;
-import com.pkmmte.view.CircularImageView;
 
 import java.util.ArrayList;
 
@@ -105,7 +103,7 @@ public abstract class MakeRequestFragment extends Fragment {
     }
 
     private CommonAdapter<SavedRequestsList> createAdapter(){
-        return new CommonAdapter<SavedRequestsList>(savedRequestsLists,R.layout.saved_request) {
+        return new CommonAdapter<SavedRequestsList>(savedRequestsLists,R.layout.saved_request_instance) {
             @Override
             public ViewHolders OnCreateHolder(View v) {
                 return new ViewHolders.SavedRequestHolder(v);

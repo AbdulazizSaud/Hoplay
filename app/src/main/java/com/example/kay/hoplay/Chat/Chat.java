@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -59,7 +60,7 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
 
 
     protected ImageView emojiBtn;
-    protected Button sendBtn;
+    protected ImageButton sendBtn;
 
     protected View rootView;
     protected ListView messagesContainer;
@@ -138,7 +139,7 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
         messageET = (EmojiconEditText) findViewById(R.id.messageEdit);
 
 
-        sendBtn = (Button) findViewById(R.id.chatSendButton);
+        sendBtn = (ImageButton) findViewById(R.id.chatSendButton);
         emojiBtn = (ImageView) findViewById(R.id.emojiBtn);
 
         adapter = new ChatAdapter(this, new ArrayList<ChatMessage>());
@@ -178,8 +179,8 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
 
             @Override
             public void afterTextChanged(Editable s) {
-                sendBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.sendiconmessagein));
-
+               // sendBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.sendiconmessagein));
+                sendBtn.setImageResource(R.drawable.ic_send_focused_24dp);
             }
         });
 
@@ -220,8 +221,8 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
         //addMessage(myUsername,message, true);
 
         messageET.setText("");
-        sendBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.sendiconnomessage));
-
+       // sendBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.sendiconnomessage));
+        sendBtn.setImageResource(R.drawable.ic_send_not_focused_24dp);
     }
 
     // this method for receive message , execute only when a user receive a message
@@ -249,7 +250,7 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
             @Override
             public void onDismiss() {
 
-                emojiBtn.setImageResource(R.drawable.emojichatbar);
+                emojiBtn.setImageResource(R.drawable.ic_sentiment_neutral_32dp);
 
             }
         });
@@ -313,7 +314,7 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
                         emojiconsPopup.showAtBottomPending();
                         final InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                         inputMethodManager.showSoftInput(messageET, InputMethodManager.SHOW_IMPLICIT);
-                        emojiBtn.setImageResource(R.drawable.emojichatbar);
+                        emojiBtn.setImageResource(R.drawable.ic_sentiment_neutral_32dp);
                     }
                 }
                 //If popup is showing, simply dismiss it to show the undelying text keyboard

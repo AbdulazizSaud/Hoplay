@@ -2,31 +2,23 @@ package com.example.kay.hoplay.CommunityComponents;
 
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.android.volley.toolbox.ImageLoader;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.model.CommunityUserList;
-import com.example.kay.hoplay.util.BitmapOptimizer;
-import com.pkmmte.view.CircularImageView;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 
 /**
@@ -45,7 +37,7 @@ public abstract class CommunityFragment extends Fragment {
     protected ArrayList<CommunityUserList> communityUserLists=new ArrayList<CommunityUserList>();
     protected RecyclerView.Adapter mAdapter;
 
-    private CommonAdapter<CommunityUserList> commonAdapter =  new CommonAdapter<CommunityUserList>(communityUserLists,R.layout.new_user_message) {
+    private CommonAdapter<CommunityUserList> commonAdapter =  new CommonAdapter<CommunityUserList>(communityUserLists,R.layout.new_user_message_instance) {
         @Override
         public ViewHolders OnCreateHolder(View v) {
 
@@ -148,7 +140,7 @@ public abstract class CommunityFragment extends Fragment {
         // test
         String picUrl = "https://s13.postimg.org/puvr2r9tz/test_user_copy.jpg";
         String username = name;
-        String lastMessage = "Test has joined your request click to replay ^^";
+        String lastMessage = "Test has joined your request click to replay";
 
         CommunityUserList clu = new CommunityUserList();
         clu.setUserPictureURL(picUrl);

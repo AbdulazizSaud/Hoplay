@@ -7,7 +7,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Display;
@@ -19,14 +18,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.kay.hoplay.Activities.MainMenu.MainAppMenu;
 import com.example.kay.hoplay.Activities.MainMenu.MainAppMenuActivity;
 import com.example.kay.hoplay.Activities.TermsAndConditions;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.util.Helper;
-
-import org.json.JSONObject;
 
 /**
  * Created by azoz-pc on 2/6/2017.
@@ -49,6 +45,7 @@ public abstract class Signup extends AppCompatActivity implements Auth {
     protected Button signUpBtn;
     protected EditText confirmPasswordEdititext;
     protected App app =  App.getInstance();
+
 
     /***************************************/
 
@@ -109,6 +106,91 @@ public abstract class Signup extends AppCompatActivity implements Auth {
 
         initControls();
 
+        // username  , email , password , confirm password  icon changing :
+        usernameSignUp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                usernameSignUp.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_person_outline_focuesed_32dp, 0);
+                if(s.length() == 0)
+                {
+                    usernameSignUp.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_person_outline_not_focuesed_32dp, 0);
+                }
+
+            }
+        });
+        passwordSignUp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                passwordSignUp.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_lock_outline_focused_32dp, 0);
+                if(s.length() == 0)
+                {
+                    passwordSignUp.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_lock_open_not_focused_32dp, 0);
+                }
+
+            }
+        });
+        confirmPasswordEdititext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                confirmPasswordEdititext.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_done_all_done_focused_32dp, 0);
+                if(s.length() == 0)
+                {
+                    confirmPasswordEdititext.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_done_all_done_not_focused_32dp, 0);
+                }
+            }
+        });
+        emailSignUp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                emailSignUp.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_mail_outline_focused_32dp, 0);
+                if(s.length() == 0)
+                {
+                    emailSignUp.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_mail_outline_not_focused_32dp, 0);
+                }
+            }
+        });
 
     }
 
@@ -135,22 +217,20 @@ public abstract class Signup extends AppCompatActivity implements Auth {
         usernameSignUp = (EditText) findViewById(R.id.username_sign_up_edittext);
         passwordSignUp = (EditText) findViewById(R.id.password_sign_up_edittext);
         emailSignUp = (EditText) findViewById(R.id.email_sign_up_edittext);
-        nickNameSignUp = (EditText) findViewById(R.id.nickname_sign_up_edittext);
+      //  nickNameSignUp = (EditText) findViewById(R.id.nickname_sign_up_edittext);
         signUpBtn = (Button) findViewById(R.id.sign_in_button);
         signUpBtn.setTypeface(sansationbold);
         confirmPasswordEdititext = (EditText) findViewById(R.id.confirm_password_edittext);
+
 
         // I've tried the onClick method  but  it  didn't work .
         // or sometimes  it  work but  it will not  make the
         // onItemSelected for the Bottom bar show the activities .
 
         // Encrypt Password
-        passwordSignUp.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        //  confirmPasswordEdititext.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+//        passwordSignUp.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+//        confirmPasswordEdititext.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
-
-        usernameSignUp.setTypeface(sansationbold);
-        passwordSignUp.setTypeface(sansationbold);
 
 
         agrrement.setTypeface(sansationbold);
@@ -171,7 +251,15 @@ public abstract class Signup extends AppCompatActivity implements Auth {
                 final String username  =usernameSignUp.getText().toString().trim();
                 final String password  = passwordSignUp.getText().toString().trim();
                 final String nickname = nickNameSignUp.getText().toString().trim();
-                if(checkUsername() && checkEmail() && checkPassword() && checkNickname() )
+                final String confrimPassword = confirmPasswordEdititext.getText().toString().trim();
+
+//                if(!confrimPassword.equals(password))
+//                {
+//                    Toast.makeText(getApplicationContext(),"Password does not match",Toast.LENGTH_LONG).show();
+//                    return;
+//                }
+
+                if(checkUsername() && checkEmail() && checkPassword())
                 signUp(email,username,password,nickname);
             }
         });
@@ -209,16 +297,16 @@ public abstract class Signup extends AppCompatActivity implements Auth {
             }
         }));
 
-        nickNameSignUp.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-            @Override
-            public void afterTextChanged(Editable editable) {
-                checkNickname();
-            }
-        });
+//        nickNameSignUp.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                checkNickname();
+//            }
+//        });
 
         emailSignUp.addTextChangedListener(new TextWatcher() {
             @Override
@@ -245,7 +333,7 @@ public abstract class Signup extends AppCompatActivity implements Auth {
             return false;
         }
 
-        if (username.length() < 5) {
+        if (username.length() < 3) {
 
             usernameSignUp.setError(getString(R.string.error_small_username));
 
@@ -265,28 +353,28 @@ public abstract class Signup extends AppCompatActivity implements Auth {
     }
 
     // CHECK NICKNAME
-    protected Boolean checkNickname() {
-
-        String nickname = nickNameSignUp.getText().toString().trim();
-
-        if (nickname.length() == 0) {
-
-            nickNameSignUp.setError(getString(R.string.error_field_empty));
-
-            return false;
-        }
-
-        if (nickname.length() < 2) {
-
-            nickNameSignUp.setError(getString(R.string.error_small_fullname));
-
-            return false;
-        }
-
-        nickNameSignUp.setError(null);
-
-        return  true;
-    }
+//     protected Boolean checkNickname() {
+//
+//        String nickname = nickNameSignUp.getText().toString().trim();
+//
+//        if (nickname.length() == 0) {
+//
+//            nickNameSignUp.setError(getString(R.string.error_field_empty));
+//
+//            return false;
+//        }
+//
+//        if (nickname.length() < 2) {
+//
+//            nickNameSignUp.setError(getString(R.string.error_small_fullname));
+//
+//            return false;
+//        }
+//
+//        nickNameSignUp.setError(null);
+//
+//        return  true;
+//    }
 
     // CHECK PASSWORD
     protected Boolean checkPassword() {
@@ -432,14 +520,13 @@ public abstract class Signup extends AppCompatActivity implements Auth {
 
     // switch activity methods
     public void toLogin() {
-        Intent i = new Intent(this, LoginActivity.class);
-        startActivity(i);
+       finish();
     }
     public void toMainMenuApp(){
 
         ProgressDialog loadingDialog = new ProgressDialog(this);
-        loadingDialog.setTitle("Signin Up...");
-        loadingDialog.setMessage("Just a moment");
+        loadingDialog.setTitle(R.string.signup_signin_up);
+        loadingDialog.setMessage(Signup.this.getString(R.string.signup_just_a_moment));
         loadingDialog.show();
         Intent i = new Intent(getApplicationContext(), MainAppMenuActivity.class);
         startActivity(i);

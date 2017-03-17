@@ -48,7 +48,7 @@ public class SettingsScreen extends PreferenceFragment {
                 Intent i = new Intent(context, LoginActivity.class);
                 startActivity(i);
 
-                Toast.makeText(getActivity().getApplicationContext(),"signout [message<#?#>]",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(),R.string.settings_screen_logout_message,Toast.LENGTH_LONG).show();
 
                 return true;
             }

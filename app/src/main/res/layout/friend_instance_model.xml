@@ -19,7 +19,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Khaled"
+        android:text="@string/friend_instance_model_nickname"
         android:layout_margin="5dp"
         android:gravity="center"
         android:textColor="@color/text_color"

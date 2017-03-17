@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Service Unavailable (-_-)"
+        android:text="@string/no_connection_service_unavailable"
         android:textColor="@color/text_color"
         android:layout_marginTop="38dp"
         android:id="@+id/connection_error_textview"

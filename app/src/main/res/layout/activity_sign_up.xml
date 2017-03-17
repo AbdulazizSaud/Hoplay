@@ -27,7 +27,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="C R E A T E   N E W  "
+        android:text="@string/signup_create_new"
         android:id="@+id/create_new_textview"
         android:textSize="25dp"
         android:textStyle="bold"
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="A C C O U N T "
+        android:text="@string/signup_account"
         android:textSize="25dp"
         android:layout_marginRight="90dp"
         android:id="@+id/account_textview"
@@ -52,41 +52,16 @@
 
 
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/nickname_text_input_layoput"
-            android:layout_below="@id/create_new_textview"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp">
-
-
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:gravity="left|center"
-                android:textColor="@color/text_color"
-                android:layout_height="wrap_content"
-                android:maxLength="25"
-                android:digits="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
-                style="@style/Base.TextAppearance.AppCompat.Large"
-                android:id="@+id/nickname_sign_up_edittext"
-                android:layout_centerHorizontal="true"
-                android:hint="Nickname"
-                android:textColorHint="@color/hint_color"
-                android:inputType="textPersonName"
-                android:focusable="true"
-                />
-
-        </android.support.design.widget.TextInputLayout>
 
 
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="320dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:id="@+id/username_text_input_layout"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/nickname_text_input_layoput">
+        android:layout_below="@id/create_new_textview">
 
 
         <android.support.design.widget.TextInputEditText
@@ -96,10 +71,11 @@
             android:textColor="@color/text_color"
             android:layout_height="wrap_content"
             style="@style/Base.TextAppearance.AppCompat.Large"
-            android:maxLength="25"
+            android:maxLength="35"
+            android:drawableRight="@drawable/ic_person_outline_not_focuesed_32dp"
             android:id="@+id/username_sign_up_edittext"
             android:layout_centerHorizontal="true"
-            android:hint="Username"
+            android:hint="@string/signup_username"
             android:textColorHint="@color/hint_color"
 
             />
@@ -119,12 +95,13 @@
             android:gravity="left|center"
             style="@style/Base.TextAppearance.AppCompat.Large"
             android:layout_height="50dp"
+            android:drawableRight="@drawable/ic_mail_outline_not_focused_32dp"
             android:id="@+id/email_sign_up_edittext"
             android:shadowColor="@color/app_color"
             android:digits="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890-_.@"
             android:layout_centerHorizontal="true"
-            android:hint="Email Address"
-            android:maxLength="40"
+            android:hint="@string/signup_email"
+            android:maxLength="100"
             android:textColor="@color/text_color"
             android:textColorHint="@color/hint_color"
             android:inputType="textEmailAddress"/>
@@ -147,12 +124,13 @@
             android:layout_width="match_parent"
             android:textColor="@color/text_color"
             android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_lock_open_not_focused_32dp"
             style="@style/Base.TextAppearance.AppCompat.Large"
             android:textColorHint="@color/hint_color"
             android:id="@+id/password_sign_up_edittext"
-            android:hint="Password"
+            android:hint="@string/signup_password"
             android:inputType="textPassword"
-            android:maxLength="25"
+            android:maxLength="35"
             android:layout_centerVertical="true"
            />
 
@@ -172,16 +150,17 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="25"
+            android:maxLength="35"
             android:gravity="left|center"
             style="@style/Base.TextAppearance.AppCompat.Large"
             android:id="@+id/confirm_password_edittext"
-            android:hint="Confirm Password"
+            android:hint="@string/signup_confirm_password"
             android:textColor="@color/text_color"
             android:textColorHint="@color/hint_color"
             android:layout_below="@id/password_sign_up_edittext"
             android:layout_centerHorizontal="true"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:drawableRight="@drawable/ic_done_all_done_not_focused_32dp"/>
     </android.support.design.widget.TextInputLayout>
 
 
@@ -192,7 +171,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#726D6D"
-        android:text="By tapping &quot;Sign Up&quot; you agree to the"
+        android:text="@string/signup_agrement_message"
         android:id="@+id/agreement_textview"
         android:layout_below="@id/confirm_password_text_input_layout"
         android:layout_centerHorizontal="true"
@@ -203,7 +182,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="terms and conditions "
+        android:text="@string/signup_terms_and_conditios"
         android:id="@+id/terms_and_conditions_textview"
         android:textSize="17dp"
         android:layout_marginTop="15dp"
@@ -218,7 +197,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         style="@style/Base.Widget.AppCompat.Button.Colored"
-        android:text="S I G N  U P"
+        android:text="@string/signup_signup"
         android:id="@+id/sign_in_button"
         android:textColor="#f8f6f6"
         android:layout_marginTop="22dp"

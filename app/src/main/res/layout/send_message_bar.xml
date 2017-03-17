@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/rectangular_edittext"
     android:orientation="horizontal"
 
@@ -9,43 +10,45 @@
     >
 
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/emojichatbar"
+    <ImageButton
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@null"
+        app:srcCompat="@drawable/ic_sentiment_neutral_32dp"
         android:id="@+id/emojiBtn"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         />
 
     <emojicon.EmojiconEditText
         android:id="@+id/messageEdit"
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:textColorHint="@color/hint_color"
-        android:autoText="true"
         android:padding="2dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:minHeight="48dp"
         android:maxLines="10"
-        android:hint="type a message -_-"
+        android:hint="@string/send_message_bar_type_message"
         android:layout_weight="1"
         android:background="@android:color/transparent"
-        android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/chatSendButton" />
+       />
     <Space
         android:layout_width="wrap_content"
         android:layout_height="55dp"
         />
 
-    <Button
+    <ImageButton
         android:id="@+id/chatSendButton"
-        android:layout_width="26dp"
-        android:layout_height="25sp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_gravity="center"
-        android:background="@drawable/sendiconnomessage"
-        android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true" />
+        android:background="@null"
+        app:srcCompat="@drawable/ic_send_not_focused_24dp"
+       />
 
 </LinearLayout>

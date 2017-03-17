@@ -2,11 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/tools"
     android:background="@color/app_background"
     android:orientation="vertical"
-    android:padding="1dp"
-    >
+    android:padding="1dp">
 
     <!-- Thumbnail Image -->
     <LinearLayout
@@ -17,18 +17,17 @@
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:background="@color/app_background"
-        >
+        android:background="@color/app_background">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:id="@+id/request_game_photo_circularimageview"
+            android:id="@+id/chatOpponent"
             android:layout_marginRight="10dp"
             android:src="@drawable/profile_default_photo"
             app:border="true"
             app:border_color="@color/app_color"
-            app:border_width="2dp"
+            app:border_width="4dp"
             app:shadow="false" />
 
         <LinearLayout
@@ -49,21 +48,27 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/request_game_name_textview"
+                        android:id="@+id/chatOpponentFullname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:singleLine="true"
                         android:drawablePadding="5dp"
                         android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:fontFamily="sans-serif-light"
-                        android:text="Game Name"
+                        android:text="@string/new_user_message_instance_opponent"
                         android:textSize="16dp"
                         android:layout_weight="1"
                         android:layout_marginRight="8dp" />
                 </LinearLayout>
 
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/new_user_message_instance_time_stamp"
+                    android:id="@+id/chatLastMessageAgo"
+                    android:textColor="@color/text_color"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="right" />
 
             </LinearLayout>
 
@@ -73,11 +78,11 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp">
 
-                <TextView
+                <emojicon.EmojiconTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Game Description"
-                    android:id="@+id/request_description_textview"
+                    android:text="@string/new_user_message_instance_last_message"
+                    android:id="@+id/chatLastMessage"
                     android:textColor="@color/text_color"
                     android:fontFamily="sans-serif-light"
                     android:textSize="14dp"
@@ -85,35 +90,14 @@
                     android:layout_weight="1"
                     android:paddingTop="3dp"
                     android:paddingBottom="3dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2/4"
-                    android:textStyle="bold"
-                    android:id="@+id/request_players_number_textview"
-                    android:textColor="@android:color/holo_red_dark"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="right" />
-                
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="by Kdesu"
-                    android:id="@+id/request_by_user_textview"
-                    android:textColor="@color/text_color"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="right" />
-
-
-
+                    android:text="@string/new_user_message_instance_messages_number"
+                    android:id="@+id/chatNewMessagesCount"
+                    android:background="@drawable/counter_bg"
+                    android:textColor="@color/white" />
             </LinearLayout>
 
         </LinearLayout>

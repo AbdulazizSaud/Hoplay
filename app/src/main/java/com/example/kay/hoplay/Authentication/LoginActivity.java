@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.kay.hoplay.App.App;
 
+import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Services.GetAPI;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -92,12 +93,12 @@ public class LoginActivity extends Login {
                 if (task.isSuccessful()) {
                     toMainMenu();
                     // results if it's successed
-                    Toast.makeText(getApplicationContext(),"Welcome :) , "+ App.SUCCESSED_LOGIN,Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.login_auth_welcome + App.SUCCESSED_LOGIN,Toast.LENGTH_LONG).show();
 
                 } else {
                     // results if it's failed
                     loadingDialog(false);
-                    Toast.makeText(getApplicationContext(),App.FAILED_LOGIN + ". Please check your email or password",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),App.FAILED_LOGIN + R.string.login_please_check_email_or_password ,Toast.LENGTH_LONG).show();
                 }
             }
         });

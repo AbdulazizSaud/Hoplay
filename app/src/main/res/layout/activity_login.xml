@@ -56,10 +56,12 @@
                     style="@style/Base.TextAppearance.AppCompat.Large"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="5"
+                    android:drawableEnd="@drawable/ic_person_outline_not_focuesed_32dp"
+                    android:drawableRight="@drawable/ic_person_outline_not_focuesed_32dp"
+                    android:ems="3"
                     android:textColorHint="@color/hint_color"
                     android:digits="qwertyuiopasdfghjklzxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890-@_."
-                    android:hint="Username"
+                    android:hint="@string/login_username"
                     android:textColor="@color/text_color"
                     android:inputType="textEmailAddress"
                     android:maxLength="100" />
@@ -77,7 +79,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="5"
-                    android:hint="Password"
+                    android:hint="@string/login_password"
+                    android:drawableEnd="@drawable/ic_lock_open_not_focused_32dp"
+                    android:drawableRight="@drawable/ic_lock_open_not_focused_32dp"
                     android:textColor="@color/text_color"
                     android:textColorHint="@color/hint_color"
                     android:inputType="textPassword"
@@ -94,7 +98,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/global_margin"
                 android:layout_marginTop="@dimen/global_margin"
-                android:text="Sign in" />
+                android:textStyle="bold"
+                android:text="@string/login_signin" />
 
         </android.support.v7.widget.LinearLayoutCompat>
 
@@ -104,7 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:onClick="goToForgetPassword"
-            android:text="F o r g o t   P a s s w o r d  ?"
+            android:text="@string/login_forget_password"
             android:id="@+id/forgot_password_textview"
             android:layout_marginTop="30dp"
             android:textSize="15dp"
@@ -119,7 +124,7 @@
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="D o n &apos;t   h a v e   a n   a c c o u n t  ?"
+            android:text="@string/login_do_not_have_account"
             android:id="@+id/sign_up_question_textview"
             android:textColor="#726D6D"
             android:textSize="15dp"
@@ -139,8 +144,9 @@
             android:gravity="center"
             android:layout_centerHorizontal="true"
             android:padding="0dp"
-            android:text="S I G N   U P"
+            android:text="@string/login_signup"
             android:textSize="15dp"
+            android:textStyle="bold"
             android:id="@+id/sign_up_btn"
             android:textColor="@color/white"
             android:layout_alignParentBottom="true"

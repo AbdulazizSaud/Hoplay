@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:text="Search for a game"
+        android:text="@string/search_request_search_message"
         android:layout_width="wrap_content"
         android:textSize="25dp"
         android:textColor="@color/app_color"
@@ -124,7 +124,7 @@
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:id="@+id/games_search_edittext"
-        android:hint="All games"
+        android:hint="@string/search_request_all_games"
         android:gravity="center"
         android:textColorHint="@color/hint_color"
         android:background="@drawable/rectangular_edittext"
@@ -149,7 +149,8 @@
         android:id="@+id/number_of_players_search_spinner"
         android:background="@drawable/rectangualr_white_shape"
         android:layout_below="@+id/region_search_spinner"
-        android:layout_alignStart="@+id/region_search_spinner" />
+        android:layout_alignStart="@+id/region_search_spinner"
+        android:layout_alignLeft="@id/region_search_spinner"/>
 
     <Spinner
         android:layout_width="320dp"
@@ -193,7 +194,7 @@
 
 
     <Button
-        android:text="Search"
+        android:text="@string/search_request_search"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:background="@drawable/less_rounded_button"

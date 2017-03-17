@@ -34,7 +34,7 @@ public class ForgetPasswordActivity extends ForgetPassword{
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Password reset sent it to your email : " + email + ", Please check your inbox", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), R.string.forget_password_reset_password + email + R.string.forget_password_check_inbox, Toast.LENGTH_LONG).show();
                         goToLogin();
                     }
                 }

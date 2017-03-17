@@ -34,7 +34,7 @@
                 android:layout_height="70dp"
                 android:textSize="20dp"
                 android:id="@+id/pc_choice_radiobutton"
-                android:text="PC"
+                android:text="@string/new_request_pc"
                 android:layout_marginRight="20dp"
 
                 android:textColor="@color/pc_color"/>
@@ -42,8 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
                 android:id="@+id/ps_choice_radiobutton"
-                android:text="Playstation"
-
+                android:text="@string/new_request_playstation"
                 android:textSize="20dp"
                 android:textColor="@color/ps_color"/>
 
@@ -53,8 +52,7 @@
                 android:id="@+id/xbox_choice_radiobutton"
                 android:textSize="20dp"
                 android:textColor="@color/xbox_color"
-                android:text="Xbox"
-
+                android:text="@string/new_request_Xbox"
                 android:layout_marginLeft="20dp"
                 />
 
@@ -67,7 +65,7 @@
             android:layout_below="@+id/consoles_radiogroup"
             android:layout_centerHorizontal="true"
             android:id="@+id/games_edittext"
-            android:hint="What do you want to play ?"
+            android:hint="@string/new_request_what_do_you_want_to_play"
             android:textColorHint="@color/hint_color"
             android:gravity="center"
             android:textSize="16dp"
@@ -80,7 +78,9 @@
             app:srcCompat="@drawable/ic_keyboard_arrow_down_white_18dp"
             android:id="@+id/down_arrow_games_imageview"
             android:layout_below="@+id/consoles_radiogroup"
-            android:layout_alignEnd="@+id/games_edittext" />
+            android:layout_alignEnd="@+id/games_edittext"
+            android:layout_alignRight="@id/games_edittext"
+            />
 
 
         <Spinner
@@ -151,7 +151,7 @@
             android:background="@drawable/rectangular_edittext"
             android:ems="10"
             android:textColorHint="@color/hint_color"
-            android:hint="You description here -_-"
+            android:hint="@string/new_request_your_description"
             android:gravity="center"
             android:layout_below="@id/players_rank_spinner"
             android:layout_centerHorizontal="true"
@@ -160,7 +160,7 @@
 
 
         <Button
-            android:text="Request"
+            android:text="@string/new_request_request"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:background="@drawable/less_rounded_button"
@@ -172,7 +172,7 @@
             android:layout_alignStart="@+id/players_rank_spinner" />
 
         <Button
-            android:text="Save"
+            android:text="@string/new_request_save_request"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:background="@drawable/less_rounded_button"
@@ -185,7 +185,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Make New Request :)"
+            android:text="@string/new_request_make_new_request"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:paddingTop="20dp"

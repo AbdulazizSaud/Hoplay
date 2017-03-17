@@ -2,375 +2,17 @@
     <string name="app_name">Hoplay</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <!-- aman app strings -->
-    <string name="entering_code_instructions">Please enter the 6 digit code that shows in your authenticator application</string>
-    <string name="submit_code">submit code</string>
-    <!-- End aman -->
-
-
-
-
-    <string name="hello">AndroidChatter</string>
-    <string name="friend_list">List of Friends</string>
-    <string name="username">Username:</string>
-    <string name="password">Password:</string>
-    <string name="login">Get In</string>
-    <string name="cancel">Cancel</string>
-    <string name="messaging">Messaging</string>
-    <string name="local_service_connected">Connected_local</string>
-    <string name="OK">Done</string>
-    <string name="not_connected_to_service">Connection is not available</string>
-    <string name="fill_both_username_and_password">You must fill Password and Username</string>
-    <string name="make_sure_username_and_password_correct">Is your username and password correct?</string>
-    <string name="user_offline">User Offline</string>
-    <string name="sign_up">Sign up</string>
-    <string name="exit_application">Log Out</string>
-    <string name="password_again">Password Again:</string>
-    <string name="email">Email</string>
-    <string name="signup_fill_all_fields">All Fields are necessary to fill up</string>
-    <string name="signup_type_same_password_in_password_fields">Same Password Please</string>
-    <string name="signup_failed">Sign up failed because of no connectivity of your Database or Webserver</string>
-    <string name="signup_username_crashed">This username has already in our database , try other ones</string>
-    <string name="signup_successfull">You are registered successfuly now go back and log in </string>
-    <string name="signup_paths">Path does not exsists </string>
-    <string name="username_and_password_length_short">Password/Username length must be 5 characters</string>
-    <string name="add_new_friend">Add Friend</string>
-    <string name="no_friend">No Friends , select it via Menu</string>
-    <string name="add">Add</string>
-    <string name="request_sent">Friend Request Sent</string>
-    <string name="type_friend_username">Your friend username</string>
-    <string name="new_friend_request_exist">New friend request</string>
-    <string name="approve_selected_friends">Approve</string>
-    <string name="not_connected_to_network">No available Network</string>
-    <string name="message_cannot_be_sent">Message not sent</string>
-    <string name="empty"></string>
-    <string name="empty1"></string>
-    <string name="title_activity_friend_adder">FriendAdder</string>
-    <string name="action_settings">Settings</string>
-
-
-    <!-- Other Resources is here :  -->
-    <!-- ###################################################################################################################-->
-
-
-    <!-- Edit the following data -->
-
-
-    <string name="app_version">1.0</string>
-    <string name="app_year">2016</string>
-    <string name="app_copyright">qachat.ifsoft.ru</string>
-    <string name="app_email">support@ifsoft.ru</string>
-    <string name="app_site">http://qachat.ifsoft.ru</string>
-
-    <!-- Facebook App Id -->
-
-    <string name="facebook_app_id">3453453453453453</string>
-
-    <!-- AdMob Banner Id -->
-
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
-
-    <string name="action_login">Log in</string>
-    <string name="action_signup">Sign up</string>
-    <string name="action_logout">Logout</string>
-
-    <string name="action_continue">Continue</string>
-    <string name="action_unblock">Unblock</string>
-    <string name="action_block">Block</string>
-    <string name="action_about">About</string>
-    <string name="action_ok">OK</string>
-    <string name="action_yes">Yes</string>
-    <string name="action_no">No</string>
-    <string name="action_copy">Copy</string>
-    <string name="action_save">Save</string>
-    <string name="action_send">Send</string>
-    <string name="action_open">Open</string>
-    <string name="action_edit">Edit</string>
-    <string name="action_reply">Reply</string>
-    <string name="action_refresh">Refresh</string>
-    <string name="action_report">Report</string>
-    <string name="action_remove">Delete</string>
-    <string name="action_remove_chat">Delete chat</string>
-    <string name="action_deactivate">Deactivate</string>
-    <string name="action_create">Create</string>
-    <string name="action_cancel">Cancel</string>
-    <string name="action_close">Close</string>
-    <string name="action_more">Load more</string>
-    <string name="action_search">Search</string>
-    <string name="action_retry">Retry</string>
-    <string name="action_turn_on">Turn on</string>
-    <string name="action_turn_off">Turn off</string>
-    <string name="action_select_birth">Date of Birth</string>
-    <string name="action_camera">Camera</string>
-    <string name="action_gallery">Choose from gallery</string>
-    <string name="action_copy_url">Copy link</string>
-    <string name="action_open_url">Open in a browser</string>
-    <string name="settings_allow_messages">Receive messages from anyone</string>
-    <string name="settings_allow_messages_summary">You will be able to receive messages from any user, even if the user is not in the list of your friends.</string>
-    <string name="action_enable">Enable</string>
-    <string name="action_accept">Accept</string>
-    <string name="action_reject">Reject</string>
-    <string name="action_pending">Pending&#8230;</string>
-    <string name="action_add_to_friends">Add to friends</string>
-    <string name="action_remove_from_friends">Remove from friends</string>
-
-    <string name="action_buy_credits">Get More Credits</string>
-
-    <string name="action_follow">Follow</string>
-    <string name="action_unfollow">Unfollow</string>
-    <string name="action_new">New</string>
-    <string name="action_profile_edit_photo">Edit photo</string>
-    <string name="action_profile_edit_cover">Edit cover</string>
-    <string name="action_profile_edit">Edit</string>
-
-    <string name="action_login_with_facebook">Log in with Facebook</string>
-    <string name="action_signup_with_facebook">Sign up with Facebook</string>
-    <string name="action_connect_with_facebook">Connect with Facebook</string>
-    <string name="action_remove_connection">Remove connection</string>
-    <string name="action_regular_signup">Back to the regular registration form</string>
-    <string name="action_forgot_password">Forgot password?</string>
-
-    <string name="label_profile_report_0">Spam</string>
-    <string name="label_profile_report_1">Hate speech or violence</string>
-    <string name="label_profile_report_2">Nudity or Pornography</string>
-    <string name="label_profile_report_3">Fake profile</string>
-    <string name="label_profile_report_4">Piracy</string>
-
-    <string name="label_gender_select_title">Choose gender</string>
-    <string name="label_age">Age</string>
-    <string name="label_sex">Gender</string>
-    <string name="label_male">Male</string>
-    <string name="label_female">Female</string>
-    <string name="label_sex_undefined">Gender Not Set</string>
-    <string name="label_sex_male">Gender Male</string>
-    <string name="label_sex_female">Gender Female</string>
-
-    <string name="label_profile_information">Profile Information</string>
-    <string name="label_profile_activity">Profile Activity</string>
-    <string name="label_profile_join">Join Date</string>
-
-    <string name="placeholder_password">Password</string>
-    <string name="placeholder_login">Username</string>
-    <string name="placeholder_fullname">Fullname</string>
-    <string name="placeholder_location">Location</string>
-    <string name="placeholder_facebook_page">Facebook page</string>
-    <string name="placeholder_instagram_page">Instagram page</string>
-    <string name="placeholder_bio">Bio</string>
-    <string name="placeholder_email">Email</string>
-    <string name="placeholder_subject">Subject</string>
-    <string name="placeholder_support_detail">What are you contacting us about?</string>
-    <string name="placeholder_current_password">Current password</string>
-    <string name="placeholder_new_password">New password</string>
-    <string name="placeholder_item_category">Category</string>
-    <string name="placeholder_item_title">Title</string>
-    <string name="placeholder_item_login">Username, email or phone</string>
-    <string name="placeholder_item_passw">Password</string>
-    <string name="placeholder_item_url">Web site</string>
-    <string name="placeholder_item_description">Description</string>
-    <string name="placeholder_search">Search</string>
-    <string name="placeholder_comment">Type a comment&#8230;</string>
-    <string name="placeholder_message">Type a message&#8230;</string>
-
-    <string name="msg_loading">Please wait&#8230;</string>
-    <string name="msg_loading_2">Loading. Please wait&#8230;</string>
-    <string name="msg_network_error">Please check your Internet connection</string>
-    <string name="msg_account_blocked">This account is blocked by a moderator.</string>
-    <string name="msg_copied_to_clipboard">Copied to clipboard.</string>
-    <string name="msg_enter_item">Please write something or attach photo.</string>
-    <string name="msg_enter_msg">Please write something or attach photo.</string>
-    <string name="msg_send_msg_error">You can not send a message to the user.</string>
-    <string name="msg_password_changed">Password successfully changed</string>
-    <string name="msg_settings_saved">Settings successfully saved.</string>
-    <string name="msg_ticket_send_success">Your request is accepted! You will receive a response to the email, which is indicated in the request.</string>
-    <string name="msg_password_reset_link_sent">A message with link to reset your password has been sent to your email.</string>
-    <string name="msg_no_such_user_in_bd">No such user in database</string>
-    <string name="msg_connect_to_facebook_success">You have successfully linked application with your account on Facebook!</string>
-    <string name="msg_connect_to_facebook_error">Your account on Facebook is already associated with another account.</string>
-    <string name="msg_connect_to_facebook_removed">Connect with your Facebook account removed.</string>
-    <string name="msg_chat_has_been_removed">Chat has been removed.</string>
-    <string name="msg_profile_removed_from_blacklist">The user is removed from blocked list.</string>
-    <string name="msg_profile_link_copied">Profile link copied to clipboard.</string>
-    <string name="msg_profile_added_to_blacklist">The user is added to blocked list.</string>
-
-    <string name="error_signin">Incorrect username or password</string>
-    <string name="error_internet_connection">No internet connection</string>
-    <string name="error_data_loading">When loading data error has occurred. Check your network connection.</string>
-    <string name="error_field_empty">Required fields are empty</string>
-    <string name="error_small_password">Minimum 6 characters</string>
-    <string name="error_small_username">Minimum 5 characters</string>
-    <string name="error_small_fullname">Minimum 2 characters</string>
-    <string name="error_wrong_format">Wrong format</string>
-    <string name="error_login_taken">Username is already taken</string>
-    <string name="error_email_taken">User with this mail is already registered</string>
-    <string name="error_password">Invalid password.</string>
-    <string name="error_email">Email invalid.</string>
-    <string name="error_credits">Not enough credits!</string>
-    <string name="error_action">This user has forbidden you to do it!</string>
-    <string name="error_no_friend">This user receives messages only from his friends!</string>
-
-    <string name="label_gcm_friend_request">You have a new friend request.</string>
-    <string name="label_gcm_friend_request_accepted">Friend Request accepted.</string>
-    <string name="label_gcm_friend">You have a new friend.</string>
-    <string name="label_gcm_message">You have a new message.</string>
-
-    <string name="label_authorization_via_facebook">Authorization via Facebook.</string>
-    <string name="label_account_connected_to_facebook">Connected with Facebook</string>
-    <string name="label_account_connect_to_facebook">Connect this account with your social network accounts</string>
-    <string name="label_empty_list">List is empty.</string>
-    <string name="label_nearby">Near you</string>
-
-    <string name="label_location">Location</string>
-    <string name="label_block">Block</string>
-    <string name="label_block_msg">will not be able send send to your messages, and you will not see notifications from</string>
-    <string name="label_delete">Delete</string>
-    <string name="label_report_dialog_title">Abuse report</string>
-    <string name="label_last_message_image">Image</string>
-    <string name="label_profile_reported">Profile reported.</string>
-    <string name="label_select_img">Select image</string>
-    <string name="label_delete_img">Delete image?</string>
-    <string name="label_account_disabled">Account blocked</string>
-    <string name="label_search_start_screen_msg">Find People by username, name, email or location.</string>
-    <string name="label_search_results">Find people:</string>
-    <string name="label_search_results_error">No results found</string>
-    <string name="label_friend_request_added">sent you a request to friends.</string>
-    <string name="label_share_dialog_title">Share With</string>
-    <string name="label_public">Public</string>
-    <string name="label_friend_request_dialog_title">Friend Request</string>
-    <string name="label_search_settings_dialog_title">Search Settings</string>
-    <string name="label_activity">Last Active</string>
-
-    <string name="label_friends">friends</string>
-    <string name="label_online">Online</string>
-    <string name="label_offline">Offline</string>
-
-    <string name="label_to">to</string>
-    <string name="label_from">from</string>
-    <string name="label_between">between</string>
-
-    <string name="signup_label_1">By clicking Sign up, you agree to our</string>
-    <string name="signup_label_terms_and_policies">Terms and Policies</string>
-
-    <string name="settings_header_general">General</string>
-    <string name="settings_header_others">Others</string>
-    <string name="settings_header_about">About</string>
-    <string name="settings_header_notifications">Notification</string>
-
-    <string name="settings_notifications_friends">Friend Requests</string>
-    <string name="settings_notifications_messages">Private messages</string>
-
-    <string name="settings_version">Version</string>
-    <string name="settings_logout">Log out</string>
-    <string name="settings_copyright_info">Copyright info</string>
-    <string name="settings_contact_us">Contact us</string>
-    <string name="settings_contact_us_summary">Report a problem</string>
-    <string name="settings_web_site">Our website</string>
-    <string name="settings_view_blocked_list">View blocked list</string>
-    <string name="settings_deactivate_account">Deactivate account</string>
-    <string name="settings_thanks">Acknowledgements</string>
-    <string name="settings_terms">Terms of use</string>
-    <string name="settings_change_password">Change password</string>
-    <string name="settings_services">Services</string>
-    <string name="settings_notifications">Push notifications</string>
-    <string name="settings_services_summary">Connect with social network accounts</string>
-    <string name="settings_account_deactivation">If you proceed deactivate your account, you can never go back. If you want to come back - you\'ll have to create a new account.</string>
-
-    <string name="settings_file">account</string>
-    <string name="settings_account_id">account_id</string>
-    <string name="settings_account_username">account_username</string>
-    <string name="settings_account_access_token">access_token</string>
-    <string name="settings_account_allow_messages_gcm">allow_messages_gcm</string>
-    <string name="settings_account_allow_followers_gcm">allow_followers_gcm</string>
-    <string name="settings_account_verify">account_verify</string>
-    <string name="settings_account_photo_url">account_photo_url</string>
-    <string name="settings_account_cover_url">account_cover_url</string>
-    <string name="settings_account_fullname">account_fullname</string>
-
-    <string name="page_1">Profile</string>
-    <string name="page_2">Friends</string>
-    <string name="page_3">Messages</string>
-    <string name="page_4">Notifications</string>
-    <string name="page_5">People Nearby</string>
-    <string name="page_6">Search</string>
-    <string name="page_7">Settings</string>
-
-    <string-array name="navDrawerItems">
-        <item>Profile</item>
-        <item>Friends</item>
-        <item>Messages</item>
-        <item>Notifications</item>
-        <item>People Nearby</item>
-        <item>Search</item>
-        <item>Settings</item>
-    </string-array>
-
-
-    <string name="drawer_open">Open</string>
-    <string name="drawer_close">Close</string>
-
-    <string name="title_activity_login">Log In</string>
-    <string name="title_activity_signup">Sign Up</string>
-    <string name="title_activity_recovery">Password recovery</string>
-    <string name="title_activity_settings">Settings</string>
-    <string name="title_activity_web_view">Web View</string>
-    <string name="title_activity_change_password">Change Password</string>
-    <string name="title_activity_services">Services</string>
-    <string name="title_activity_new_photo">New Photo</string>
-    <string name="title_activity_profile">Profile</string>
-
-    <string name="title_activity_search">Search</string>
-    <string name="title_activity_notifications">Notifications</string>
-    <string name="title_activity_photo_view">Photo</string>
-    <string name="title_activity_account_settings">Settings</string>
-    <string name="title_activity_report">Report</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="title_activity_black_list">Blocked List</string>
-    <string name="title_activity_dialogs">Messages</string>
-    <string name="title_activity_chat">Chat</string>
-    <string name="title_activity_notifications_settings">Push notifications</string>
-    <string name="title_activity_support">Contact us</string>
-    <string name="title_activity_location">Location</string>
-    <string name="title_activity_deactivate">Deactivate Account</string>
-    <string name="title_activity_friends">Profile Friends</string>
-    <string name="title_activity_nearby">People Nearby</string>
-
-    <string name="title_dialog_nearby">Select a Distance</string>
-
-    <string name="dialog_nearby_0">80 kilometers</string>
-    <string name="dialog_nearby_1">160 kilometers</string>
-    <string name="dialog_nearby_2">400 kilometers</string>
-    <string name="dialog_nearby_3">800 kilometers</string>
-    <string name="dialog_nearby_4">1,600 kilometers</string>
-
-    <string name="label_profile_birth">Birth Date</string>
-    <string name="label_profile_allow_show_birth">Show date birth in the profile</string>
-    <string name="action_open_settings"><u>Open Location Settings</u></string>
-    <string name="action_set_location">Yes, this is my location</string>
-    <string name="action_detail">More details</string>
-    <string name="msg_location_error">We could not get your location.</string>
-
-    <string name="label_location_prompt">Allow access to your location to enable other features using location.</string>
-
-    <string name="settings_account_lat">lat</string>
-    <string name="settings_account_lng">lng</string>
-
-    <string name="action_add_photo">You can add a photo now!</string>
-
-    <!-- Strings related to Settings -->
+    <!--                                   Strings related to Settings                                       -->
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
-
     <string name="pref_title_social_recommendations">Enable social recommendations</string>
     <string name="pref_description_social_recommendations">Recommendations for people to contact
         based on your message history
     </string>
-
     <string name="pref_title_display_name">Display name</string>
     <string name="pref_default_display_name">John Smith</string>
-
     <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
     <string-array name="pref_example_list_titles">
         <item>Always</item>
@@ -382,10 +24,8 @@
         <item>0</item>
         <item>-1</item>
     </string-array>
-
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
-
     <string name="pref_title_sync_frequency">Sync frequency</string>
     <string-array name="pref_sync_frequency_titles">
         <item>15 minutes</item>
@@ -403,32 +43,202 @@
         <item>360</item>
         <item>-1</item>
     </string-array>
-
     <string-array name="list_preference_entries">
         <item>Entry 1</item>
         <item>Entry 2</item>
         <item>Entry 3</item>
     </string-array>
-
     <string-array name="list_preference_entry_values">
         <item>1</item>
         <item>2</item>
         <item>3</item>
     </string-array>
-
     <string-array name="multi_select_list_preference_default_value" />
-
     <string name="pref_title_system_sync_settings">System sync settings</string>
-
-    <!-- Example settings for Notifications -->
-    <string name="pref_header_notifications">Notifications</string>
-
     <string name="pref_title_new_message_notifications">New message notifications</string>
-
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
-
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="settings_header_general">General</string>
+    <string name="settings_allow_messages">Receive messages from anyone</string>
+    <string name="settings_allow_messages_summary">You will be able to receive messages from any user, even if the user is not in the list of your friends.</string>
+    <string name="msg_password_changed">Password successfully changed</string>
+    <string name="action_deactivate">Deactivate</string>
+    <string name="msg_account_blocked">This account is blocked by a moderator.</string>
+    <string name="settings_services_summary">Connect with social network accounts</string>
+    <string name="settings_header_about">About</string>
+    <string name="settings_terms">Terms of use</string>
+    <string name="settings_thanks">Acknowledgements</string>
+    <string name="settings_version">Version</string>
+    <string name="settings_copyright_info">Copyright info</string>
+    <string name="settings_header_others">Others</string>
+    <string name="settings_contact_us">Contact us</string>
+    <string name="settings_logout">Log out</string>
+    <string name="settings_notifications">Push notifications</string>
+    <string name="settings_change_password">Change password</string>
+    <string name="settings_deactivate_account">Deactivate account</string>
+    <string name="settings_view_blocked_list">View blocked list</string>
+    <string name="settings_services">Services</string>
+    <string name="settings_contact_us_summary">Report a problem</string>
+    <string name="action_settings">Settings</string>
+
+
+    <!--                                        Settings  Screen                                    -->
+    <string name="settings_screen_logout_message">Come back soon</string>
+
+
+
+
+    <!--                               Errors  Messages                                              -->
+    <string name="error_field_empty">Required fields are empty</string>
+    <string name="error_small_password">Minimum 6 characters</string>
+    <string name="error_small_username">Minimum 3 characters</string>
+    <string name="error_small_fullname">Minimum 2 characters</string>
+    <string name="error_wrong_format">Wrong format</string>
+    <string name="error_login_taken">Username is already taken</string>
+    <string name="error_email_taken">User with this mail is already registered</string>
+    <string name="error_password">Invalid password.</string>
+    <string name="error_email">Email invalid.</string>
+
+
+
+
+    <!--                                Forget Password Layout                                       -->
+    <string name="forget_password_find_your_account">Find your Hoplay account</string>
+    <string name="forget_password_your_email">Email Address</string>
+    <string name="forget_password_search_account">S e a r c h</string>
+
+
+    <!--                                Forget Password Activity                                      -->
+    <string name="forget_password_reset_password">Reset password has been sent to your email : </string>
+    <string name="forget_password_check_inbox">, Please check your inbox</string>
+
+
+
+    <!--                                Login Layout                                                    -->
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_signin">S I G N &#160; I N</string>
+    <string name="login_forget_password">F o r g o t   P a s s w o r d  ?</string>
+    <string name="login_do_not_have_account">D o n\'t   h a v e   a n   a c c o u n t  ?</string>
+    <string name="login_signup">S I G N &#160; U P</string>
+
+
+    <!--                                Login                                                           -->
+    <string name="login_signing_in">Signing in ...</string>
+    <string name="login_just_a_moment">Just one moment</string>
+
+
+    <!--                                Login Activity                                                 -->
+    <string name="login_auth_welcome">Welcome , </string>
+    <string name="login_please_check_email_or_password">Please check your email or password</string>
+
+
+    <!--                                Make Request Fragment Layout                                -->
+    <string name="make_request_fragment_new_request">N e w   R e q u e s t</string>
+    <string name="make_request_fragment_saved_request">Saved Requests</string>
+
+
+    <!--                                New Request Activity Layout                                          -->
+    <string name="new_request_pc">PC</string>
+    <string name="new_request_playstation">Playstation</string>
+    <string name="new_request_Xbox">Xbox</string>
+    <string name="new_request_what_do_you_want_to_play">What do you want to play ?</string>
+    <string name="new_request_your_description">You description here -_-</string>
+    <string name="new_request_make_new_request">Make New Request :)</string>
+    <string name="new_request_request">Request</string>
+    <string name="new_request_save_request">Save</string>
+
+
+
+    <!--                                SignUp Layout                                                        -->
+    <string name="signup_username">Username</string>
+    <string name="signup_password">Password</string>
+    <string name="signup_email">Email Address</string>
+    <string name="signup_confirm_password">Confirm Password</string>
+    <string name="signup_agrement_message">By tapping &quot;Sign Up&quot; you agree to the</string>
+    <string name="signup_terms_and_conditios">terms and conditions </string>
+    <string name="signup_signup">S I G N &#160; U P</string>
+    <string name="signup_create_new">C R E A T E   N E W</string>
+    <string name="signup_account">A C C O U N T</string>
+
+
+    <!--                                SignUp                                                              -->
+    <string name="signup_signin_up">Signin Up...</string>
+    <string name="signup_just_a_moment">Just a moment</string>
+
+
+    <!--                                Terms And Conditions Layout                                               -->
+    <string name="terms_and_conditions_agree">A g r e e</string>
+    <string name="terms_and_conditions_message">Terms and conditions</string>
+
+
+
+    <!--                                Search Request Fragment Layout                                           -->
+    <string name="search_request_search_message">Search For a Team</string>
+    <string name="search_request_all_games">All games</string>
+    <string name="search_request_search">S E A R C H</string>
+
+
+    <!--                                User Profile Fragment Layout                                            -->
+    <string name="user_fragment_recent_activities">Recent Activities</string>
+
+
+
+    <!--                                Friend Instance Model                                                   -->
+    <string name="friend_instance_model_nickname">nickname</string>
+
+
+    <!--                                Request Instance                                                        -->
+    <string name="new_request_instance_game_name">Game Name</string>
+    <string name="new_request_instance_description">Game Description</string>
+    <string name="new_request_instance_players_number">2/4</string>
+    <string name="new_request_by_username">by Username</string>
+
+
+    <!--                                User Activity Instance - Inside the User fragment                      -->
+    <string name="user_activity_game_name">Game Name</string>
+    <string name="user_activity_time_stamp">4m ago</string>
+    <string name="user_activity_game_description">Game Description</string>
+
+
+    <!--                                 New User Message Instance                                              -->
+    <string name="new_user_message_instance_opponent">Opponent Fullname</string>
+    <string name="new_user_message_instance_time_stamp">4m ago</string>
+    <string name="new_user_message_instance_last_message">Last message</string>
+    <string name="new_user_message_instance_messages_number">3</string>
+
+    
+    <!--                                 No Connection Layout                                                   -->
+    <string name="no_connection_service_unavailable">Service Unavailable (-_-)</string>
+
+
+    <!--                                 Saved Request Instance                                                 -->
+    <string name="saved_request_instance_game_name">Game Name</string>
+    <string name="saved_request_description">Request Description</string>
+    <string name="saved_request_players_number">4 players</string>
+
+    <!--                                Send Message Bar                                                        -->
+    <string name="send_message_bar_type_message">type a message -_-</string>
+
+
+    <!--                                User Profile Details - inside user fragment                             -->
+    <string name="user_profile_details_nickname">Nickname</string>
+    <string name="user_profile_details_username">Username</string>
+    <string name="user_profile_details_games">Games</string>
+    <string name="user_profile_details_friends">Friends</string>
+    <string name="user_profile_details_ratings">Ratings</string>
+    <string name="user_profile_details_games_number">50</string>
+    <string name="user_profile_details_friends_number">50</string>
+    <string name="user_profile_details_ratings_number">50</string>
+
+
+
+    <!--                                 Users Toolbar - for chat activity                                     -->
+    <string name="users_toolbar_username">Bakatsuki</string>
+
+
+
 
 
 </resources>

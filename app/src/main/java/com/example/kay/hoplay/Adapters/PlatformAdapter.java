@@ -30,7 +30,7 @@ public class PlatformAdapter extends RecyclerView.Adapter<PlatformAdapter.ViewHo
                                                                   int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.new_request, parent, false);
+                .inflate(R.layout.new_request_instance, parent, false);
 
         v.setOnClickListener(new View.OnClickListener() {
             @Override
