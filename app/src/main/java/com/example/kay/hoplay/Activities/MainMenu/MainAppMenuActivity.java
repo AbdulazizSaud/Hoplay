@@ -66,7 +66,7 @@ public class MainAppMenuActivity extends MainAppMenu implements FirebasePaths{
 
     private void setupUserInformation(FirebaseUser user) {
         app.getUserInformation().setUID(user.getUid());
-        app.getDatabaseUsers().child(app.getUserInformation().getUID()).addListenerForSingleValueEvent(new ValueEventListener() {
+        app.getDatabaseUsers().child(app.getUserInformation().getUID()).child(FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -75,8 +75,8 @@ public class MainAppMenuActivity extends MainAppMenu implements FirebasePaths{
                 {
 
                     app.getUserInformation().setUsername(dataSnapshot.child("_username_").getValue().toString());
-                    app.getUserInformation().setNickName(dataSnapshot.child(FIREBASE_DETAILS_ATTR).child("_nickname_").getValue().toString());
-                    app.getUserInformation().setPictureURL(dataSnapshot.child(FIREBASE_DETAILS_ATTR).child("_picUrl_").getValue().toString());
+                    app.getUserInformation().setNickName(dataSnapshot.child("_nickname_").getValue().toString());
+                    app.getUserInformation().setPictureURL(dataSnapshot.child("_picUrl_").getValue().toString());
                 }
                 else
                 {
