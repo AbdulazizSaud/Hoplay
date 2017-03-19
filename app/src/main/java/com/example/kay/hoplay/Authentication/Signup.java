@@ -250,7 +250,7 @@ public abstract class Signup extends AppCompatActivity implements Auth {
                 final String email = emailSignUp.getText().toString().trim();
                 final String username  =usernameSignUp.getText().toString().trim();
                 final String password  = passwordSignUp.getText().toString().trim();
-                final String nickname = nickNameSignUp.getText().toString().trim();
+                final String nickname = username;
                 final String confrimPassword = confirmPasswordEdititext.getText().toString().trim();
 
 //                if(!confrimPassword.equals(password))

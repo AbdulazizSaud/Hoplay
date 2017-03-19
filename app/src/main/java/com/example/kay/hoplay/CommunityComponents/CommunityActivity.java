@@ -41,6 +41,8 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
 
     @Override
     protected void OnStartActivity() {
+
+        // bug error on creation right here
         refAuthUserChats = app.getDatabaseUsers().child(app.getUserInformation().getUID()).child(FIREBASE_USER_CHAT_REFERENCES);
         loadChats();
 

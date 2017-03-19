@@ -1,6 +1,7 @@
 package com.example.kay.hoplay.CommunityComponents;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -147,6 +149,63 @@ public class UserFriendsActivity extends UserFriends implements FirebasePaths{
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void searchForUser(String value) {
+
+
+        DatabaseReference userRef = app.getDatabaseUsers();
+
+        Query query = userRef.orderByChild("_username_").startAt(value).endAt(value+"\uf8ff").limitToFirst(10);
+        getData(query);
+    }
+
+
+
+
+
+    private void getData(Query query) {
+
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.i("----------->",dataSnapshot.toString());
+
+                if(dataSnapshot.getValue() != null)
+                {
+
+
+                    Iterable<DataSnapshot> iterable = dataSnapshot.getChildren();
+
+                    FriendCommonModel friendCommonModel;
+
+                    for (DataSnapshot shot : iterable)
+                    {
+                         String username = shot.child("_info_").child("_username_").getValue().toString();
+                         String picUrl = shot.child("_info_").child("_picUrl_").getValue().toString();
+
+                        friendCommonModel = new FriendCommonModel();
+                        friendCommonModel.setKey(shot.getKey());
+                        friendCommonModel.setUserPictureURL(picUrl);
+                        friendCommonModel.setUsername(username);
+
+
+                        addToList(friendCommonModel);
+
+                    }
+                }
+
+
 
             }
 

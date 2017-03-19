@@ -239,6 +239,11 @@
 
 
 
+    <!--                                 New Chat                                     -->
+
+    <string name="search_user_message">Search for user</string>
+
+
 
 
 </resources>

@@ -2,12 +2,16 @@ package com.example.kay.hoplay.CommunityComponents;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -31,7 +35,7 @@ public abstract class UserFriends extends AppCompatActivity {
     protected RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-
+    private TextInputEditText searchEditText;
 
     private ArrayList<FriendCommonModel> friendList = new ArrayList<FriendCommonModel>();
 
@@ -63,9 +67,36 @@ public abstract class UserFriends extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_friends);
+        setContentView(R.layout.new_chat_activity);
+
         app = App.getInstance();
-        mRecyclerView = (RecyclerView) findViewById(R.id.rec_friend_list);
+        mRecyclerView = (RecyclerView) findViewById(R.id.rec_new_chat);
+        searchEditText = (TextInputEditText)findViewById(R.id.search_new_friend_bar_textinputedittext);
+
+
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String value = s.toString().trim();
+
+                if(isTextVaild(value))
+                {
+                    updateAdapter(true);
+                    searchForUser(value);
+                }
+
+            }
+        });
 
         setupRecyclerView();
         //testList();
@@ -74,8 +105,8 @@ public abstract class UserFriends extends AppCompatActivity {
 
 
 
+
     private void setupRecyclerView() {
-        mRecyclerView = (RecyclerView) findViewById(R.id.rec_friend_list);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -108,12 +139,26 @@ public abstract class UserFriends extends AppCompatActivity {
         }
     }
 
-    public void addToList(FriendCommonModel friendCommonModel){
+    protected void addToList(FriendCommonModel friendCommonModel){
         friendList.add(friendCommonModel);
+         updateAdapter(false);
+    }
+
+    protected void updateAdapter(boolean clearList)
+    {
+         if(clearList)
+         friendList.clear();
+
         mAdapter.notifyDataSetChanged();
+
+    }
+
+    private boolean isTextVaild(String value) {
+        return !value.equals("") && !value.equals("\\s+") && null != value;
     }
 
     protected abstract void OnClickHolders(FriendCommonModel model);
 
-    public abstract void loadFriendList();
+    protected abstract void loadFriendList();
+    protected abstract void searchForUser(String value);
 }

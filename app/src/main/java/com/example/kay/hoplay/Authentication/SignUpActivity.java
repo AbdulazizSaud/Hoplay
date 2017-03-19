@@ -86,6 +86,7 @@ public class SignUpActivity extends Signup {
         DatabaseReference rotRef = app.getDatabaseUsers().child(UID);
 
 
+        rotRef.child("_username_").setValue(username);
         rotRef.child(FirebasePaths.FIREBASE_DETAILS_ATTR).child("_username_").setValue(username);
         rotRef.child(FirebasePaths.FIREBASE_DETAILS_ATTR).child("_nickname_").setValue(nickname);
         rotRef.child(FirebasePaths.FIREBASE_DETAILS_ATTR).child("_email_").setValue(email);
