@@ -49,6 +49,7 @@ public abstract class NewRequest extends AppCompatActivity {
 
     private TextView makeRequestMessage;
     private Button makeRequestButton;
+    private Button saveRequestButton;
     private MaterialBetterSpinner countrySpinner;
     private MaterialBetterSpinner numberOfPlayersSpinner;
     private MaterialBetterSpinner playersRanksSpinner;
@@ -62,6 +63,7 @@ public abstract class NewRequest extends AppCompatActivity {
     private TextView spinnerItem;
     private  String[] gamesArray;
     private  int layoutItemId;
+    private EditText descriptionEdittext;
     private List<String> gamesList;
     private   ArrayAdapter<String> gamesAdapter;
     /***************************************/
@@ -96,24 +98,31 @@ public abstract class NewRequest extends AppCompatActivity {
     private void initControl() {
         final Typeface sansationbold = Typeface.createFromAsset(getResources().getAssets(), "sansationbold.ttf");
         final Typeface playregular = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
+        final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
         makeRequestMessage = (TextView) findViewById(R.id.make_request_message_textview);
         makeRequestMessage.setTypeface(sansationbold);
-//        makeRequestButton = (Button) findViewById(R.id.make_request_button);
-//        makeRequestButton.setTypeface(sansationbold);
+        makeRequestButton = (Button) findViewById(R.id.request_button_new_request);
+        makeRequestButton.setTypeface(sansationbold);
         countrySpinner = (MaterialBetterSpinner) findViewById(R.id.country_spinner_new_request);
         numberOfPlayersSpinner = (MaterialBetterSpinner) findViewById(R.id.players_number_spinner_new_request);
-        countrySpinner.setTypeface(playregular);
-        numberOfPlayersSpinner.setTypeface(playregular);
+        countrySpinner.setTypeface(playbold);
+        numberOfPlayersSpinner.setTypeface(playbold);
         playersRanksSpinner = (MaterialBetterSpinner) findViewById(R.id.players_rank_spinner_new_request);
-        playersRanksSpinner.setTypeface(playregular);
-//        pcRadiobutton = (RadioButton) findViewById(R.id.pc_choice_radiobutton);
-//        pcRadiobutton.setTypeface(sansationbold);
-//        psRadiobutton = (RadioButton) findViewById(R.id.ps_choice_radiobutton);
-//        psRadiobutton.setTypeface(sansationbold);
-//        xboxRadiobutton = (RadioButton) findViewById(R.id.xbox_choice_radiobutton);
-//        xboxRadiobutton.setTypeface(sansationbold);
+        playersRanksSpinner.setTypeface(playbold);
+        saveRequestButton = (Button) findViewById(R.id.save_request_button_new_request);
+        saveRequestButton.setTypeface(sansationbold);
+        pcRadiobutton = (RadioButton) findViewById(R.id.pc_choice_radiobutton);
+        pcRadiobutton.setTypeface(sansationbold);
+        psRadiobutton = (RadioButton) findViewById(R.id.ps_choice_radiobutton);
+        psRadiobutton.setTypeface(sansationbold);
+        xboxRadiobutton = (RadioButton) findViewById(R.id.xbox_choice_radiobutton);
+        xboxRadiobutton.setTypeface(sansationbold);
         gamesAutoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.games_autocompletetextview_new_request);
-        gamesAutoCompleteTextView.setTypeface(playregular);
+        gamesAutoCompleteTextView.setTypeface(playbold);
+
+        descriptionEdittext = (EditText) findViewById(R.id.description_edittext_new_request);
+        descriptionEdittext.setTypeface(playbold);
+
         gamesArray = getResources().getStringArray(R.array.games_list);
         layoutItemId = android.R.layout.simple_dropdown_item_1line;
         gamesArray = getResources().getStringArray(R.array.games_list);
@@ -182,6 +191,7 @@ public abstract class NewRequest extends AppCompatActivity {
                 {
                     gamesAutoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_games_unfocused_24dp , 0, 0, 0);
                 }
+
 
             }
         });
