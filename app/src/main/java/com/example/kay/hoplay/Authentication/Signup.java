@@ -103,9 +103,15 @@ public abstract class Signup extends AppCompatActivity implements Auth {
 
 
         OnStartActivity();
-
         initControls();
+        changeIcon();
 
+
+    }
+
+
+    // Change icon on edittexts
+    private void changeIcon() {
         // username  , email , password , confirm password  icon changing :
         usernameSignUp.addTextChangedListener(new TextWatcher() {
             @Override
@@ -191,7 +197,6 @@ public abstract class Signup extends AppCompatActivity implements Auth {
                 }
             }
         });
-
     }
 
     //---------------------
@@ -204,6 +209,8 @@ public abstract class Signup extends AppCompatActivity implements Auth {
         // init layout contents
 
         Typeface sansationbold = Typeface.createFromAsset(getAssets(), "sansationbold.ttf");
+        Typeface playregular = Typeface.createFromAsset(getAssets(), "playregular.ttf");
+
 
         createNewTextView = (TextView) findViewById(R.id.create_new_textview);
         createNewTextView.setTypeface(sansationbold);
@@ -215,12 +222,16 @@ public abstract class Signup extends AppCompatActivity implements Auth {
         termsAndConditions.setTypeface(sansationbold);
         goBackToMain = (ImageView) findViewById(R.id.go_back_to_main_imageview);
         usernameSignUp = (EditText) findViewById(R.id.username_sign_up_edittext);
+        usernameSignUp.setTypeface(playregular);
         passwordSignUp = (EditText) findViewById(R.id.password_sign_up_edittext);
+        passwordSignUp.setTypeface(playregular);
         emailSignUp = (EditText) findViewById(R.id.email_sign_up_edittext);
+        emailSignUp.setTypeface(playregular);
       //  nickNameSignUp = (EditText) findViewById(R.id.nickname_sign_up_edittext);
         signUpBtn = (Button) findViewById(R.id.sign_in_button);
         signUpBtn.setTypeface(sansationbold);
         confirmPasswordEdititext = (EditText) findViewById(R.id.confirm_password_edittext);
+        confirmPasswordEdititext.setTypeface(playregular);
 
 
         // I've tried the onClick method  but  it  didn't work .

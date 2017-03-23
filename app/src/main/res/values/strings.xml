@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Hoplay</string>
 
+    <string name="hello_world">Hello World</string>
+
     <!-- TODO: Remove or change this placeholder text -->
 
     <!--                                   Strings related to Settings                                       -->
@@ -135,7 +137,7 @@
 
 
     <!--                                Make Request Fragment Layout                                -->
-    <string name="make_request_fragment_new_request">N e w   R e q u e s t</string>
+    <string name="make_request_fragment_new_request">N e w &#160; &#160; R e q u e s t</string>
     <string name="make_request_fragment_saved_request">Saved Requests</string>
 
 
@@ -145,9 +147,16 @@
     <string name="new_request_Xbox">Xbox</string>
     <string name="new_request_what_do_you_want_to_play">What do you want to play ?</string>
     <string name="new_request_your_description">You description here -_-</string>
-    <string name="new_request_make_new_request">Make New Request :)</string>
+    <string name="new_request_create_new_request">Create New Request</string>
     <string name="new_request_request">Request</string>
     <string name="new_request_save_request">Save</string>
+    <string name="new_request_country">All Countries</string>
+    <string name="new_request_players_number">Players Number</string>
+    <string name="new_request_players_ranks">Players Ranks</string>
+    <string name="new_request_description">Description</string>
+    <string name="new_request_request_button">Request</string>
+    <string name="new_request_save_request_button">Save</string>
+
 
 
 

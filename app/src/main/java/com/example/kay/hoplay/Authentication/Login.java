@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -111,9 +112,14 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         OnStartActivity();
 
         initControls();
+        changeIconListener();
 
 
+    }
 
+
+    // Listener for editexts to change icons whenever the user type anything
+    private void changeIconListener() {
         // Update username and password field icon
         usernameSignIn.addTextChangedListener(new TextWatcher() {
             @Override
@@ -158,9 +164,6 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
             }
         });
-
-
-
     }
 
 //---------------------
@@ -168,6 +171,8 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     // this method will init layout contents
     private void initControls() {
         Typeface sansationbold = Typeface.createFromAsset(getAssets(), "sansationbold.ttf");
+        Typeface playregular = Typeface.createFromAsset(getAssets(),"playregular.ttf");
+
 
 
         logo = (ImageView) findViewById(R.id.logo_imageview);
@@ -191,9 +196,11 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         passwordSignIn = (EditText) findViewById(R.id.password_edittext);
         // Encrypt password
         passwordSignIn.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        passwordSignIn.setTypeface(playregular);
 
 
         usernameSignIn = (EditText) findViewById(R.id.username_sign_in_edittext);
+        usernameSignIn.setTypeface(playregular);
 
 
 
@@ -257,12 +264,13 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     // abstract methods, Note : I made some comment descripe these methods on Login Activity
     protected abstract void login(String username, String password);
 
-
     protected void loadingDialog(boolean show)
     {
 
         if (show)
-        loadigDialog.show();
+            loadigDialog.show();
+
+
         else
             loadigDialog.dismiss();
     }

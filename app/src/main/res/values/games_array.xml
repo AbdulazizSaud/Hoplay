@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="games_list">
+        <item>Overwatch</item>
+        <item>Rocket League</item>
+        <item>Grand Theft Auto V</item>
+        <item>World of War Craft</item>
+        <item>League of Legends</item>
+        <item>Titanfall 2</item>
+        <item>H1Z1</item>
+        <item>Battlefield 1</item>
+    </string-array>
+
+
+</resources>

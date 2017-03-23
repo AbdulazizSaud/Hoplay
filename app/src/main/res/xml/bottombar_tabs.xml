@@ -3,20 +3,20 @@
     <tabs>
         <tab
             id="@+id/tab_search_game"
-            icon="@drawable/ic_search_white_18dp"
+            icon="@drawable/ic_search_32dp"
             />
 
         <tab
             id="@+id/tab_chat_community"
-            icon="@drawable/ic_chat_white_18dp"
+            icon="@drawable/ic_chat_32dp"
              />
         <tab
             id="@+id/tab_make_request"
-            icon="@drawable/ic_control_point_white_18dp"
+            icon="@drawable/ic_add_circle_outline_32dp"
              />
         <tab
             id="@+id/tab_user_profile"
-            icon="@drawable/ic_face_white_18dp"
+            icon="@drawable/ic_face_32dp"
              />
 
     </tabs>

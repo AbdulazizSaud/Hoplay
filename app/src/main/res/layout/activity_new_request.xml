@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView android:layout_width="match_parent" android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#E0E0E0">
+    android:background="@color/app_background">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,6 +18,17 @@
 
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_request_create_new_request"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:paddingTop="20dp"
+            android:id="@+id/make_request_message_textview"
+            android:textSize="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
 
         <RadioGroup
@@ -59,183 +70,138 @@
         </RadioGroup>
 
 
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/consoles_radiogroup"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/games_edittext"
-            android:hint="@string/new_request_what_do_you_want_to_play"
-            android:textColorHint="@color/hint_color"
-            android:gravity="center"
-            android:textSize="16dp"
-            android:background="@drawable/rectangular_edittext"
-            />
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:srcCompat="@drawable/ic_keyboard_arrow_down_white_18dp"
-            android:id="@+id/down_arrow_games_imageview"
-            android:layout_below="@+id/consoles_radiogroup"
-            android:layout_alignEnd="@+id/games_edittext"
-            android:layout_alignRight="@id/games_edittext"
-            />
-
-
-        <Spinner
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/games_edittext"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/region_spinner"
-            android:background="@drawable/rectangualr_white_shape"
-
-            />
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_keyboard_arrow_down_grey_18dp"
-            android:id="@+id/down_arrow_region_imageview"
-            android:layout_marginBottom="10dp"
-            android:layout_alignBottom="@+id/region_spinner"
-            android:layout_alignEnd="@+id/make_request_message_textview" />
-
-        <Spinner
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/number_of_players_spinner"
-            android:background="@drawable/rectangualr_white_shape"
-            android:layout_alignEnd="@+id/region_spinner"
-            android:layout_below="@+id/region_spinner"/>
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_keyboard_arrow_down_grey_18dp"
-            android:id="@+id/down_arrow_number_of_players_imageview"
-            android:layout_marginTop="10dp"
-            android:layout_alignTop="@+id/number_of_players_spinner"
-            android:layout_alignStart="@+id/down_arrow_region_imageview" />
-
-
-        <Spinner
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/number_of_players_spinner"
-            android:layout_alignStart="@+id/region_spinner"
-            android:id="@+id/players_rank_spinner"
-            android:background="@drawable/rectangualr_white_shape"
-            />
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_keyboard_arrow_down_grey_18dp"
-            android:id="@+id/down_arrow_ranks_imageview"
-            android:layout_alignTop="@+id/players_rank_spinner"
-            android:layout_marginTop="10dp"
-            android:layout_alignStart="@+id/down_arrow_number_of_players_imageview" />
-
-
-
-        <EditText
-            android:layout_width="400dp"
-            android:layout_height="100dp"
-            android:inputType="textMultiLine"
-            android:text=""
-            android:background="@drawable/rectangular_edittext"
-            android:ems="10"
-            android:textColorHint="@color/hint_color"
-            android:hint="@string/new_request_your_description"
-            android:gravity="center"
-            android:layout_below="@id/players_rank_spinner"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="28dp"
-            android:id="@+id/request_descritption_edittext" />
-
-
-        <Button
-            android:text="@string/new_request_request"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/less_rounded_button"
-            android:textColor="@color/white"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/make_request_button"
-            android:layout_below="@id/request_descritption_edittext"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/players_rank_spinner" />
-
-        <Button
-            android:text="@string/new_request_save_request"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/less_rounded_button"
-            android:textColor="@color/white"
-            android:id="@+id/generate_request_button"
-            android:layout_alignTop="@+id/make_request_button"
-            android:layout_alignEnd="@+id/players_rank_spinner"
-            android:layout_marginTop="11dp" />
-
-        <TextView
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/new_request_make_new_request"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:paddingTop="20dp"
-            android:id="@+id/make_request_message_textview"
-            android:textSize="25dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:id="@+id/inputs_relativelayout_new_request"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/white_card_background"
+            android:layout_below="@id/consoles_radiogroup">
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/greyx"
-            android:onClick="goBackToMainAppMenu"
-            android:id="@+id/go_back_toMainAppMenu_imageView"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/regionicon"
-            android:id="@+id/region_icon_new_request_imageview"
-            android:layout_alignBottom="@+id/down_arrow_region_imageview"
-            android:layout_alignStart="@+id/games_icon_new_request_imageview" />
+            <AutoCompleteTextView
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/games_autocompletetextview_new_request"
+                android:hint="@string/new_request_what_do_you_want_to_play"
+                android:textColorHint="@color/hint_color"
+                android:gravity="center"
+                android:inputType="textAutoComplete"
+                android:maxLength="30"
+                android:textSize="18dp"
+                android:digits="1234567890qwertyuiopasdfghjklzxcvbnm "
+                android:drawableStart="@drawable/ic_games_unfocused_24dp"
+                android:drawableLeft="@drawable/ic_games_unfocused_24dp"
+                android:textStyle="normal"
+                android:textColor="@color/text_color"
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/playersnumbericon"
-            android:id="@+id/players_number_icon_new_request_imageview"
-            android:layout_alignBottom="@+id/down_arrow_number_of_players_imageview"
-            android:layout_alignStart="@+id/region_icon_new_request_imageview" />
+                />
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/ranksicon"
-            android:id="@+id/ranks_icon_new_request_imageview"
-            android:layout_alignBottom="@+id/down_arrow_ranks_imageview"
-            android:layout_alignStart="@+id/players_number_icon_new_request_imageview" />
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/country_spinner_new_request"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:hint="@string/new_request_country"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:paddingStart="3dp"
+                android:drawableStart="@drawable/ic_location_unfocused_24dp"
+                android:drawableLeft="@drawable/ic_location_unfocused_24dp"
+                android:gravity="center"
+                android:layout_below="@+id/games_autocompletetextview_new_request"
+                android:textColorHint="@color/hint_color"
+                android:layout_centerHorizontal="true"
+                />
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/gamesicon"
-            android:id="@+id/games_icon_new_request_imageview"
-            android:layout_marginTop="12dp"
-            android:layout_below="@+id/consoles_radiogroup"
-            android:layout_alignStart="@+id/games_edittext"
-            android:layout_marginStart="14dp" />
+
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/players_number_spinner_new_request"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:hint="@string/new_request_players_number"
+                android:paddingLeft="3dp"
+                android:drawableLeft="@drawable/ic_group_unfocused_24dp"
+                android:gravity="center"
+                android:layout_below="@+id/country_spinner_new_request"
+                android:textColorHint="@color/hint_color"
+                android:layout_centerHorizontal="true"
+                />
+
+
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/players_rank_spinner_new_request"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:hint="@string/new_request_players_ranks"
+                android:paddingLeft="3dp"
+                android:drawableLeft="@drawable/ic_grade_unfocused_24dp"
+                android:gravity="center"
+                android:layout_below="@+id/players_number_spinner_new_request"
+                android:textColorHint="@color/hint_color"
+                android:layout_centerHorizontal="true"
+                />
+
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/players_rank_spinner_new_request"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:ems="3"
+                    android:textColorHint="@color/hint_color"
+                    android:inputType="textMultiLine"
+                    android:maxLength="200"
+                    android:scrollbarAlwaysDrawHorizontalTrack="true"
+                    android:scrollbarAlwaysDrawVerticalTrack="true"
+                    android:textColor="@color/text_color"
+                    style="@style/Base.TextAppearance.AppCompat.Small"
+                    android:hint="@string/new_request_description"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+
+
+        </RelativeLayout>
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/request_button_new_request"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_below="@+id/inputs_relativelayout_new_request"
+            android:text="@string/new_request_request_button"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@id/inputs_relativelayout_new_request"
+            android:layout_alignLeft="@id/inputs_relativelayout_new_request"
+             />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/save_request_button_new_request"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/new_request_save_request_button"
+            android:layout_below="@id/inputs_relativelayout_new_request"
+            android:layout_alignEnd="@id/inputs_relativelayout_new_request"
+            android:layout_alignRight="@id/inputs_relativelayout_new_request"/>
+
+
+
 
 
     </RelativeLayout>

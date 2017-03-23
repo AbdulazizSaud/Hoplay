@@ -90,16 +90,17 @@ public class UserProfileFragment extends Fragment {
         toUserRatingsLinearLayout = (LinearLayout) view.findViewById(R.id.ratings_user_profile_linearlayout);
 
 
-        Typeface sansation = Typeface.createFromAsset(getActivity().getAssets() ,"sansationbold.ttf");
-        usernameProfile.setTypeface(sansation);
-        friendsNumberTextView.setTypeface(sansation);
-        userFriendsTextView.setTypeface(sansation);
-        userGamesTextView.setTypeface(sansation);
-        userRatingsTextView.setTypeface(sansation);
-        gamesNumberTextView.setTypeface(sansation);
-        ratingsNumberTextView.setTypeface(sansation);
-        recentActivitiesTextView.setTypeface(sansation);
-        nicknameTextView.setTypeface(sansation);
+        Typeface playregular = Typeface.createFromAsset(getActivity().getAssets() ,"playregular.ttf");
+
+        usernameProfile.setTypeface(playregular);
+        friendsNumberTextView.setTypeface(playregular);
+        userFriendsTextView.setTypeface(playregular);
+        userGamesTextView.setTypeface(playregular);
+        userRatingsTextView.setTypeface(playregular);
+        gamesNumberTextView.setTypeface(playregular);
+        ratingsNumberTextView.setTypeface(playregular);
+        recentActivitiesTextView.setTypeface(playregular);
+        nicknameTextView.setTypeface(playregular);
 
 
         // these  methods used to jump to ( games , scores , following , followers ) activity .
