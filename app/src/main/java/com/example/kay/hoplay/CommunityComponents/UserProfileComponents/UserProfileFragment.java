@@ -28,7 +28,7 @@ import com.example.kay.hoplay.CommunityComponents.UserListActivities.ViewFriendP
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.CommunityComponents.UserProfileComponents.ProfileRequires.UserGames;
 import com.example.kay.hoplay.CommunityComponents.UserProfileComponents.ProfileRequires.UserRatings;
-import com.example.kay.hoplay.model.RecentActivityList;
+import com.example.kay.hoplay.Models.RecentActivityList;
 
 import java.util.ArrayList;
 
@@ -205,13 +205,13 @@ public class UserProfileFragment extends Fragment {
 
         // specify an adapter (see also next example)
 
-        recentActivityLists.add(addRecentActivity("Played Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Category : PC Game","15 min ago"));
-        recentActivityLists.add(addRecentActivity("Played Overwatch","https://b.thumbs.redditmedia.com/ksN39DPM7HFaXTP_tBi-IuYYfWccRBjYykD6VFSePXE.jpg","Category : PC Game","24 min ago"));
-        recentActivityLists.add(addRecentActivity("Played Dying Light","http://shinigaming.com/wp-content/uploads/2015/01/dying-light-logo-high-resolution.jpg","Category : PC Game","5 hours ago"));
-        recentActivityLists.add(addRecentActivity("Played Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Category : Playstation Game","12 hours ago"));
-        recentActivityLists.add(addRecentActivity("Played Naruto Shippuden Ultimate Ninja Storm 4","http://1.bp.blogspot.com/-DYU2tIaTLYo/VlyFVdvpy1I/AAAAAAAADbo/zCxfuIm0YlM/s1600/Untitled.png","Category : Playstation Game","17" +
+        recentActivityLists.add(addRecentActivity("Played Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Category : PC GameDetails","15 min ago"));
+        recentActivityLists.add(addRecentActivity("Played Overwatch","https://b.thumbs.redditmedia.com/ksN39DPM7HFaXTP_tBi-IuYYfWccRBjYykD6VFSePXE.jpg","Category : PC GameDetails","24 min ago"));
+        recentActivityLists.add(addRecentActivity("Played Dying Light","http://shinigaming.com/wp-content/uploads/2015/01/dying-light-logo-high-resolution.jpg","Category : PC GameDetails","5 hours ago"));
+        recentActivityLists.add(addRecentActivity("Played Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Category : Playstation GameDetails","12 hours ago"));
+        recentActivityLists.add(addRecentActivity("Played Naruto Shippuden Ultimate Ninja Storm 4","http://1.bp.blogspot.com/-DYU2tIaTLYo/VlyFVdvpy1I/AAAAAAAADbo/zCxfuIm0YlM/s1600/Untitled.png","Category : Playstation GameDetails","17" +
                 " hours ago"));
-        recentActivityLists.add(addRecentActivity("World of Warcraft","http://www.technologytell.com/gaming/files/2014/02/world-of-warcraft.png","Category : PC Game","1 day ago"));
+        recentActivityLists.add(addRecentActivity("World of Warcraft","http://www.technologytell.com/gaming/files/2014/02/world-of-warcraft.png","Category : PC GameDetails","1 day ago"));
 
 
 

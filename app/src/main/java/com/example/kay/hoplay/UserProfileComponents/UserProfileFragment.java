@@ -28,7 +28,7 @@ import com.example.kay.hoplay.CommunityComponents.UserListActivities.ViewFriendP
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.UserProfileComponents.ProfileRequires.UserGames;
 import com.example.kay.hoplay.UserProfileComponents.ProfileRequires.UserRatings;
-import com.example.kay.hoplay.model.RecentActivityList;
+import com.example.kay.hoplay.Models.RecentActivityList;
 
 import java.util.ArrayList;
 

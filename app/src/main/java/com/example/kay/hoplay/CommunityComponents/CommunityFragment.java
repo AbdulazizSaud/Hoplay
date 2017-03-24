@@ -17,7 +17,7 @@ import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.CommunityComponents.UserListActivities.CreateChat;
 import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.model.CommunityUserList;
+import com.example.kay.hoplay.Models.CommunityChatModel;
 
 import java.util.ArrayList;
 
@@ -35,10 +35,10 @@ public abstract class CommunityFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private  FloatingActionButton newPrivateChatFloatingActionButton;
 
-    protected ArrayList<CommunityUserList> communityUserLists=new ArrayList<CommunityUserList>();
+    protected ArrayList<CommunityChatModel> communityUserLists=new ArrayList<CommunityChatModel>();
     protected RecyclerView.Adapter mAdapter;
 
-    private CommonAdapter<CommunityUserList> commonAdapter =  new CommonAdapter<CommunityUserList>(communityUserLists,R.layout.new_user_message_instance) {
+    private CommonAdapter<CommunityChatModel> commonAdapter =  new CommonAdapter<CommunityChatModel>(communityUserLists,R.layout.new_user_message_instance) {
         @Override
         public ViewHolders OnCreateHolder(View v) {
 
@@ -46,7 +46,7 @@ public abstract class CommunityFragment extends Fragment {
         }
 
         @Override
-        public void OnBindHolder(ViewHolders holder, final CommunityUserList model) {
+        public void OnBindHolder(ViewHolders holder, final CommunityChatModel model) {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
             ViewHolders.CommunityHolder communityHolder = (ViewHolders.CommunityHolder)holder;
@@ -122,7 +122,7 @@ public abstract class CommunityFragment extends Fragment {
     }
 
 
-    public void addToList(CommunityUserList communityUserList){
+    public void addToList(CommunityChatModel communityUserList){
         communityUserLists.add(communityUserList);
         mAdapter.notifyDataSetChanged();
 
@@ -130,7 +130,7 @@ public abstract class CommunityFragment extends Fragment {
             bgChatImageView.setVisibility(View.INVISIBLE);
     }
 
-    private CommonAdapter<CommunityUserList> createAdapter(){
+    private CommonAdapter<CommunityChatModel> createAdapter(){
         return commonAdapter;
     }
 
@@ -143,7 +143,7 @@ public abstract class CommunityFragment extends Fragment {
         String username = name;
         String lastMessage = "Test has joined your request click to replay";
 
-        CommunityUserList clu = new CommunityUserList();
+        CommunityChatModel clu = new CommunityChatModel();
         clu.setUserPictureURL(picUrl);
         clu.setLastMsg(lastMessage);
 
@@ -153,7 +153,7 @@ public abstract class CommunityFragment extends Fragment {
 //
 
 
-    protected abstract void OnClickHolders(CommunityUserList model,View v);
+    protected abstract void OnClickHolders(CommunityChatModel model, View v);
     protected abstract void OnStartActivity();
 
 }

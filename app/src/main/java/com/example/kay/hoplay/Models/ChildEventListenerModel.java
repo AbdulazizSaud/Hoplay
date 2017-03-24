@@ -1,4 +1,4 @@
-package com.example.kay.hoplay.model;
+package com.example.kay.hoplay.Models;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;

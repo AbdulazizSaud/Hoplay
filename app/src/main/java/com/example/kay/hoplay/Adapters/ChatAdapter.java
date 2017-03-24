@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.kay.hoplay.model.ChatMessage;
+import com.example.kay.hoplay.Models.ChatMessage;
 import com.example.kay.hoplay.R;
 
 import java.util.List;

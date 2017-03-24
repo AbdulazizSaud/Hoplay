@@ -14,7 +14,7 @@ import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.model.FriendCommonModel;
+import com.example.kay.hoplay.Models.FriendCommonModel;
 
 import java.util.ArrayList;
 

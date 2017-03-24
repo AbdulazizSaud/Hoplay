@@ -1,7 +1,7 @@
-package com.example.kay.hoplay.model;
+package com.example.kay.hoplay.Models;
 
 
-public class CommunityUserList  extends CommonModel {
+public class CommunityChatModel extends CommonModel {
 
 
 
@@ -9,7 +9,7 @@ public class CommunityUserList  extends CommonModel {
     // here it should be a behivors something like a opponent id , my id and so long.
     private String chatKey,fullName,receiverID,lastMsg,lastMsgDate;
 
-    public CommunityUserList() {
+    public CommunityChatModel() {
         this.chatKey = null;
         this.receiverID = "none";
         this.fullName = "none";

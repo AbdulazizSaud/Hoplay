@@ -5,7 +5,7 @@ import android.content.Intent;
 import com.example.kay.hoplay.Chat.ChatActivity;
 import com.example.kay.hoplay.CommunityComponents.UserListActivity;
 import com.example.kay.hoplay.PatternStrategyComponents.Startgies.FirebaseCreateChatRoom;
-import com.example.kay.hoplay.model.FriendCommonModel;
+import com.example.kay.hoplay.Models.FriendCommonModel;
 
 /**
  * Created by Kay on 3/19/2017.

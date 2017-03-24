@@ -1,4 +1,4 @@
-package com.example.kay.hoplay.model;
+package com.example.kay.hoplay.Models;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by khaledAlhindi on 3/19/2017 AD.
  */
 
-public class Game {
+public class GameDetails {
     private String gameName ;
     private String gameID;
     private String gamePhotoUrl;
@@ -16,7 +16,7 @@ public class Game {
     private int madxPlayers;
     private ArrayList<String> gameRanks;
 
-    public Game(String gameID,String gameName,int maxPlayers, String gamePhotoUrl) {
+    public GameDetails(String gameID, String gameName, int maxPlayers, String gamePhotoUrl) {
         this.gameName = gameName;
         this.gameID = gameID;
         this.gamePhotoUrl = gamePhotoUrl;

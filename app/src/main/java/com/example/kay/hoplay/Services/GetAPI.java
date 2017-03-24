@@ -5,8 +5,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 
-import com.example.kay.hoplay.Interfaces.Constants;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;

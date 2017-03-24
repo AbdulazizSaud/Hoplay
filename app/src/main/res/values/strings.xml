@@ -156,8 +156,8 @@
     <string name="new_request_save_request_button">S A V E</string>
 
 
-    <!--                               No Game Added Popup Layout                                             -->
-    <string name="no_game_popup_message">Sorry ,You have to add \n a game to your games library</string>
+    <!--                               No GameDetails Added Popup Layout                                             -->
+    <string name="no_game_popup_message">Sorry ,You have to add \n a gameDetails to your games library</string>
     <string name="no_game_popup_add_game_button">A D D &#160; G A M E</string>
 
 

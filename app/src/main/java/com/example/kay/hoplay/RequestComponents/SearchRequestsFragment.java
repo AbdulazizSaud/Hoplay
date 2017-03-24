@@ -1,9 +1,7 @@
 package com.example.kay.hoplay.RequestComponents;
 
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,15 +14,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.kay.hoplay.Activities.MainMenu.MainAppMenu;
 import com.example.kay.hoplay.Adapters.SpinnerAdapter;
 import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.model.SavedRequestsList;
 import com.example.kay.hoplay.util.BitmapOptimizer;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 

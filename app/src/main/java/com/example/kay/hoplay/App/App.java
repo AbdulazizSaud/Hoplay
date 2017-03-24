@@ -2,17 +2,15 @@ package com.example.kay.hoplay.App;
 
 import android.app.Application;
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.example.kay.hoplay.Adapters.ViewHolders;
-import com.example.kay.hoplay.Interfaces.Constants;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Services.LruBitmapCache;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
-import com.example.kay.hoplay.model.UserInformation;
+import com.example.kay.hoplay.Models.UserInformation;
 import com.example.kay.hoplay.util.BitmapOptimizer;
 import com.example.kay.hoplay.util.GameManager;
 import com.google.firebase.auth.FirebaseAuth;

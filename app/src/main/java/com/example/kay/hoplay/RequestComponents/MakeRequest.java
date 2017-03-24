@@ -2,7 +2,7 @@ package com.example.kay.hoplay.RequestComponents;
 
 import android.view.View;
 
-import com.example.kay.hoplay.model.SavedRequestsList;
+import com.example.kay.hoplay.Models.SavedRequestsList;
 
 /**
  * Created by Kay on 2/14/2017.

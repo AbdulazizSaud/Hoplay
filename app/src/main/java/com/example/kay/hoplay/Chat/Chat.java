@@ -23,7 +23,7 @@ import android.widget.TextView;
 import com.example.kay.hoplay.Adapters.ChatAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.model.ChatMessage;
+import com.example.kay.hoplay.Models.ChatMessage;
 
 import java.text.DateFormat;
 import java.util.ArrayList;

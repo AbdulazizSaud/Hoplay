@@ -7,13 +7,11 @@ import android.view.View;
 
 import com.example.kay.hoplay.Chat.ChatActivity;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
-import com.example.kay.hoplay.model.ChildEventListenerModel;
-import com.example.kay.hoplay.model.CommunityUserList;
-import com.google.firebase.database.ChildEventListener;
+import com.example.kay.hoplay.Models.ChildEventListenerModel;
+import com.example.kay.hoplay.Models.CommunityChatModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -30,7 +28,7 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
     private ArrayList<String> roomKeys;
 
     @Override
-    protected void OnClickHolders(CommunityUserList model, View v) {
+    protected void OnClickHolders(CommunityChatModel model, View v) {
         Intent i = new Intent(v.getContext(), ChatActivity.class);
         i.putExtra("room_key",model.getChatKey());
         i.putExtra("friend_username", model.getFullName());
@@ -99,7 +97,7 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        for(CommunityUserList chats : communityUserLists)
+                        for(CommunityChatModel chats : communityUserLists)
                         {
                               if(chats.getChatKey().equals(privateChat.getKey()))
                                 {
@@ -178,7 +176,7 @@ public class CommunityActivity extends CommunityFragment implements FirebasePath
 
     private void addUserChat(String userKey, String username,String pictureURL,String lastMessage) {
 
-        CommunityUserList communityUserList = new CommunityUserList();
+        CommunityChatModel communityUserList = new CommunityChatModel();
         communityUserList.setChatKey(userKey);
         communityUserList.setFullName(username);
         communityUserList.setUserPictureURL(pictureURL);

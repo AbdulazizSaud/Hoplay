@@ -1,18 +1,15 @@
 package com.example.kay.hoplay.Activities.MainMenu;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.kay.hoplay.App.App;
-import com.example.kay.hoplay.Authentication.LoginActivity;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.model.ChildEventListenerModel;
+import com.example.kay.hoplay.Models.ChildEventListenerModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;

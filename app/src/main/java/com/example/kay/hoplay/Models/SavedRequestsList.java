@@ -1,4 +1,4 @@
-package com.example.kay.hoplay.model;
+package com.example.kay.hoplay.Models;
 
 /**
  * Created by khaledAlhindi on 11/23/2016 AD.

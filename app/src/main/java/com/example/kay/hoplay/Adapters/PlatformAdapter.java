@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.model.PlatformModel;
 import com.pkmmte.view.CircularImageView;
 
 import java.util.ArrayList;

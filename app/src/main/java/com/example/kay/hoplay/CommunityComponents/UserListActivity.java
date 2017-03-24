@@ -1,14 +1,9 @@
 package com.example.kay.hoplay.CommunityComponents;
 
-import android.content.Intent;
-import android.util.Log;
-
-import com.example.kay.hoplay.Chat.ChatActivity;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.PatternStrategyComponents.Startgies.FirebaseCreateChatRoom;
-import com.example.kay.hoplay.model.ChildEventListenerModel;
-import com.example.kay.hoplay.model.FriendCommonModel;
-import com.google.firebase.database.ChildEventListener;
+import com.example.kay.hoplay.Models.ChildEventListenerModel;
+import com.example.kay.hoplay.Models.FriendCommonModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

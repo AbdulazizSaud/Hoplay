@@ -1,26 +1,19 @@
 package com.example.kay.hoplay.CommunityComponents;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
 
-import com.android.volley.toolbox.ImageLoader;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.model.CommunityUserList;
-import com.example.kay.hoplay.model.FriendCommonModel;
+import com.example.kay.hoplay.Models.FriendCommonModel;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,6 @@
 package com.example.kay.hoplay.RequestComponents;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -21,9 +20,8 @@ import com.android.volley.toolbox.ImageLoader;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
-import com.example.kay.hoplay.RequestComponents.RequestsRequires.NewRequestActivity;
 import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.model.SavedRequestsList;
+import com.example.kay.hoplay.Models.SavedRequestsList;
 
 import java.util.ArrayList;
 
@@ -94,21 +92,21 @@ public abstract class MakeRequestFragment extends Fragment {
         savedRequestsLists.add(saveRequest("Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Doubles ranked ?","2 Players"));
         savedRequestsLists.add(saveRequest("Overwatch","https://b.thumbs.redditmedia.com/ksN39DPM7HFaXTP_tBi-IuYYfWccRBjYykD6VFSePXE.jpg","-_- I need to get diamond","6 Players"));
         savedRequestsLists.add(saveRequest("Dying Light","http://shinigaming.com/wp-content/uploads/2015/01/dying-light-logo-high-resolution.jpg","Lets Kill some zombies * ^ *","3 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick Game ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick Game ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick Game ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick Game ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick Game ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick Game ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick Game ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick Game ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick Game ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick Game ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick Game ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick Game ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick Game ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick Game ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick Game ?","2 Players"));
+        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
+        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
+        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
+        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
+        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
+        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
+        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
+        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
+        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
+        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
+        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
+        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
+        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
+        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
+        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
 
 
 

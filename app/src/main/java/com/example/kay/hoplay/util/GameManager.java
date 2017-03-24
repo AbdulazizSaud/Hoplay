@@ -1,6 +1,6 @@
 package com.example.kay.hoplay.util;
 
-import com.example.kay.hoplay.model.Game;
+import com.example.kay.hoplay.Models.GameDetails;
 
 import java.util.ArrayList;
 
@@ -10,23 +10,23 @@ import java.util.ArrayList;
 
 public class GameManager {
 
-    private ArrayList<Game> gamesCompList;
-    private ArrayList<Game> gamesCOOPList;
+    private ArrayList<GameDetails> gamesCompList;
+    private ArrayList<GameDetails> gamesCOOPList;
 
     public void addGame(String gameId , String gamename , int maxPlayers, String gamePicture, String[] ranks,boolean isCompetitive)
     {
 
-        Game game = new Game(gameId,gamename,maxPlayers,gamePicture);
+        GameDetails gameDetails = new GameDetails(gameId,gamename,maxPlayers,gamePicture);
 
         for(String rank : ranks)
         {
-            game.addRank(rank);
+            gameDetails.addRank(rank);
         }
 
         if(isCompetitive)
-        gamesCompList.add(game);
+        gamesCompList.add(gameDetails);
         else
-            gamesCOOPList.add(game);
+            gamesCOOPList.add(gameDetails);
     }
 
 

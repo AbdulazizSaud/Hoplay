@@ -1,25 +1,13 @@
 package com.example.kay.hoplay.Chat;
 
 import android.content.Intent;
-import android.util.Log;
 
-import com.android.volley.toolbox.ImageLoader;
-import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.model.ChildEventListenerModel;
-import com.google.firebase.database.ChildEventListener;
+import com.example.kay.hoplay.Models.ChildEventListenerModel;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Iterator;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 import emojicon.emoji.Objects;
 
 
@@ -43,7 +31,6 @@ public class ChatActivity extends Chat implements FirebasePaths {
         friendUsername = i.getStringExtra("friend_username");
         friendPictureURL = i.getStringExtra("friend_picture");
         refRoom = app.getFirebaseDatabase().getReferenceFromUrl(FB_PRIVATE_CHAT_PATH+chatRoomKey);
-        Log.i("------->",refRoom.toString());
         refMessages = refRoom.child("_messages_");
 
         setupRoomDetails();
