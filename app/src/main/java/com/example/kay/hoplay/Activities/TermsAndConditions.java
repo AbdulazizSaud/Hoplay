@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.kay.hoplay.Activities.MainMenu.MainAppMenu;
+import com.example.kay.hoplay.Authentication.SignUpActivity;
+import com.example.kay.hoplay.Authentication.Signup;
 import com.example.kay.hoplay.R;
 
 public class TermsAndConditions extends AppCompatActivity {
@@ -68,7 +70,7 @@ public class TermsAndConditions extends AppCompatActivity {
 
     public void toAppMenu(View view)
     {
-        Intent i = new Intent(getApplicationContext() , MainAppMenu.class);
+        Intent i = new Intent(getApplicationContext() , SignUpActivity.class);
         startActivity(i);
     }
 }

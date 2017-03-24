@@ -124,6 +124,8 @@
     <!--                                Login                                                           -->
     <string name="login_signing_in">Signing in ...</string>
     <string name="login_just_a_moment">Just one moment</string>
+    <string name="login_successful_message">Welcome %1$s ❤️</string>
+
 
 
     <!--                                Login Activity                                                 -->
@@ -175,6 +177,7 @@
     <!--                                SignUp                                                              -->
     <string name="signup_signin_up">Signin Up...</string>
     <string name="signup_just_a_moment">Just a moment</string>
+    <string name="signup_successful_message">Welcome %1$s ❤️</string>
 
 
     <!--                                Terms And Conditions Layout                                               -->

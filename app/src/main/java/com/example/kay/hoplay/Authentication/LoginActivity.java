@@ -11,8 +11,9 @@ import android.widget.Toast;
 
 import com.example.kay.hoplay.App.App;
 
+import com.example.kay.hoplay.PatternStrategyComponents.Startgies.FirebaseLogin;
 import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.Services.GetAPI;
+
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,9 +21,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import org.json.JSONObject;
-
-import java.util.HashMap;
 
 /*
 
@@ -80,30 +78,26 @@ public class LoginActivity extends Login {
     @Override
     protected void login(String username, String password) {
 
-        if (username.equals("") || password.equals(""))
-            return;
-        loadingDialog(true);
-        mAuth = App.getInstance().getAuth();
+        if (!username.equals("") || !password.equals("")) {
 
+            loadingDialog(true);
 
-        mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-
-                if (task.isSuccessful()) {
-                    toMainMenu();
-                    // results if it's successed
-                    Toast.makeText(getApplicationContext(), R.string.login_auth_welcome + App.SUCCESSED_LOGIN,Toast.LENGTH_LONG).show();
-
-                } else {
-                    // results if it's failed
-                    loadingDialog(false);
-                    Toast.makeText(getApplicationContext(),App.FAILED_LOGIN + R.string.login_please_check_email_or_password ,Toast.LENGTH_LONG).show();
+            mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        toMainMenu();
+                    } else {
+                        // results if it's failed
+                        loadingDialog(false);
+                        Toast.makeText(getApplicationContext(), "Hi i'm fail message in LoginActivity.class", Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
-        });
-    }
+            });
 
+
+        }
+    }
 
 
 }

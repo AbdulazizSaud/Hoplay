@@ -3,12 +3,16 @@ package com.example.kay.hoplay.Activities.MainMenu;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Authentication.LoginActivity;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
+import com.example.kay.hoplay.R;
+import com.example.kay.hoplay.model.ChildEventListenerModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -58,6 +62,7 @@ public class MainAppMenuActivity extends MainAppMenu implements FirebasePaths{
                 } else {
                     app.setmAuthStateListener(authStateListener);
                     setupUserInformation(user);
+                    loadGames();
                 }
             }
         };
@@ -66,7 +71,7 @@ public class MainAppMenuActivity extends MainAppMenu implements FirebasePaths{
 
     private void setupUserInformation(FirebaseUser user) {
         app.getUserInformation().setUID(user.getUid());
-        app.getDatabaseUsers().child(app.getUserInformation().getUID()).child(FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
+        app.getDatabaseUsers().child(app.getUserInformation().getUID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -74,9 +79,21 @@ public class MainAppMenuActivity extends MainAppMenu implements FirebasePaths{
                 if(isInfoValid(dataSnapshot))
                 {
 
-                    app.getUserInformation().setUsername(dataSnapshot.child("_username_").getValue().toString());
-                    app.getUserInformation().setNickName(dataSnapshot.child("_nickname_").getValue().toString());
-                    app.getUserInformation().setPictureURL(dataSnapshot.child("_picUrl_").getValue().toString());
+                    String username = dataSnapshot.child(FIREBASE_USERNAME_PATH).getValue().toString();
+                    String nickname = dataSnapshot.child(FIREBASE_NICKNAME_PATH).getValue().toString();
+                    String picUrl = dataSnapshot.child(FIREBASE_PICTURE_URL_PATH).getValue().toString();
+
+
+                    // success message
+                    String Msg = String.format(getResources().getString(R.string.signup_successful_message), username);
+
+                    // results if it's successed
+                    Toast.makeText(getApplicationContext(), Msg,Toast.LENGTH_LONG).show();
+
+
+                    app.getUserInformation().setUsername(username);
+                    app.getUserInformation().setNickName(nickname);
+                    app.getUserInformation().setPictureURL(picUrl);
                 }
                 else
                 {
@@ -94,6 +111,40 @@ public class MainAppMenuActivity extends MainAppMenu implements FirebasePaths{
     }
 
     private boolean isInfoValid(DataSnapshot dataSnapshot) {
-        return dataSnapshot.hasChild("_username_") && dataSnapshot.hasChild("_nickname_") && dataSnapshot.hasChild("_picUrl_");
+        return dataSnapshot.hasChild(FIREBASE_USERNAME_PATH) && dataSnapshot.hasChild(FIREBASE_NICKNAME_PATH) && dataSnapshot.hasChild(FIREBASE_PICTURE_URL_PATH);
     }
+
+
+    private void loadGames()
+    {
+
+        app.getDatabaseGames().child("_competitive_").addChildEventListener(new ChildEventListenerModel() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Log.i("Comp ------>",dataSnapshot.toString());
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+        });
+
+
+        app.getDatabaseGames().child("_coop_").addChildEventListener(new ChildEventListenerModel() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Log.i("Coop ------>",dataSnapshot.toString());
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+        });
+
+
+    }
+
 }

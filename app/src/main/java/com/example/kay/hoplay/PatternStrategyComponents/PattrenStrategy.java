@@ -1,18 +1,13 @@
 package com.example.kay.hoplay.PatternStrategyComponents;
 
-import com.example.kay.hoplay.PatternStrategyComponents.PattrenStrategyInterface;
-
 import java.util.HashMap;
 
 /**
  * Created by Kay on 2/7/2017.
  */
 
-public abstract class PattrenStrategy implements PattrenStrategyInterface {
+public interface PattrenStrategy<T>
+{
 
-    protected HashMap<String ,String> results;
-
-    public PattrenStrategy(){
-        results = new HashMap<String,String>();
-    }
+    void afterComplete(T results);
 }

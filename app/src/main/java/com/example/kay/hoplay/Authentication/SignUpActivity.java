@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
+import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Services.GetAPI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,7 +34,6 @@ public class SignUpActivity extends Signup {
 
     }
 
-
     // this method will do auth to crearte a new user
     // receive:  username , password, email
     // if success, it will switch to a mainApp and give a success message
@@ -41,15 +41,6 @@ public class SignUpActivity extends Signup {
 
     @Override
     protected void signUp(final String email, final String username, final String password, final String nickname) {
-
-//        if (startAPI() !=null) {
-//            Intent i = new Intent(getApplicationContext(), MainAppMenu.class);
-//            startActivity(i);
-//        }
-
-
-
-        Log.i("---------->","ASi");
 
         appAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this
                 , new OnCompleteListener<AuthResult>() {
@@ -61,11 +52,13 @@ public class SignUpActivity extends Signup {
 
                             FirebaseUser user = appAuth.getCurrentUser();
 
-                            doDatabaseProcess(user.getUid(),email,username,nickname);
+                            insertInfoToDatabase(user.getUid(),email,username,nickname);
 
-                            //doDatabaseProcess(appAuth.getCurrentUser().getUid(),email, username, password, nickname);
                             // success message
-                            Toast.makeText(getApplicationContext(), App.SUCCESSED_CREATED_ACCOUNT, Toast.LENGTH_LONG).show();
+                            String strMeatMsg = String.format(getResources().getString(R.string.signup_successful_message), username);
+
+
+                            Toast.makeText(getApplicationContext(), strMeatMsg, Toast.LENGTH_LONG).show();
                             // switch to main AppMenu
                             toMainMenuApp();
 
@@ -81,16 +74,15 @@ public class SignUpActivity extends Signup {
     }
 
 
-    private void doDatabaseProcess(final String UID,final String email, final String username, final String nickname) {
+    private void insertInfoToDatabase(final String UID,final String email, final String username, final String nickname) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference rotRef = app.getDatabaseUsers().child(UID);
+        DatabaseReference usersInfoRef = app.getDatabaseUsers().child(UID);
 
 
-        rotRef.child("_username_").setValue(username);
-        rotRef.child(FirebasePaths.FIREBASE_DETAILS_ATTR).child("_username_").setValue(username);
-        rotRef.child(FirebasePaths.FIREBASE_DETAILS_ATTR).child("_nickname_").setValue(nickname);
-        rotRef.child(FirebasePaths.FIREBASE_DETAILS_ATTR).child("_email_").setValue(email);
-        rotRef.child(FirebasePaths.FIREBASE_DETAILS_ATTR).child("_picUrl_").setValue("default");
+        usersInfoRef.child(FirebasePaths.FIREBASE_USERNAME_PATH).setValue(username.toLowerCase());
+        usersInfoRef.child(FirebasePaths.FIREBASE_NICKNAME_PATH).setValue(nickname);
+        usersInfoRef.child(FirebasePaths.FIREBASE_EMAIL_PATH).setValue(email);
+        usersInfoRef.child(FirebasePaths.FIREBASE_PICTURE_URL_PATH).setValue("default");
 
 
 

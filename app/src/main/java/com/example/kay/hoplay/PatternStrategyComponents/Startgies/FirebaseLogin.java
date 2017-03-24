@@ -3,8 +3,10 @@ package com.example.kay.hoplay.PatternStrategyComponents.Startgies;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Authentication.LoginActivity;
 import com.example.kay.hoplay.PatternStrategyComponents.PattrenStrategy;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,56 +19,29 @@ import java.util.HashMap;
  * Created by Kay on 2/7/2017.
  */
 
-public class FirebaseLogin extends PattrenStrategy {
+public  abstract class FirebaseLogin implements PattrenStrategy<Task<AuthResult>>
+{
 
-
-    // Get firebase authentication from App
-    private FirebaseAuth mAuth;
-
-    private String username,password;
-
-    private Activity activity;
-
-    public FirebaseLogin(Activity activity,String username, String password)
+    public  FirebaseLogin(Activity activity, String username, String password)
     {
-        this.username = username;
-        this.password = password;
-        this.activity = activity;
+        exceute(activity,username,password);
     }
 
-    @Override
-    public void execute() {
-        mAuth = App.getInstance().getAuth();
+    private void exceute(Activity activity,String username,String password)
+    {
+
+        FirebaseAuth  mAuth = App.getInstance().getAuth();
 
 
         mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-
-                if (task.isSuccessful()) {
-
-                    // results if it's successed
-                    results.put(App.RESULTS_STATUS,App.SUCCESSED);
-                    results.put(App.RESULTS_MESSAGE, App.SUCCESSED_LOGIN);
-
-                } else {
-                    // results if it's failed
-                    results.put(App.RESULTS_STATUS,App.FAILED);
-                    results.put(App.RESULTS_MESSAGE, App.FAILED_LOGIN);
-                }
+                afterComplete(task);
             }
         });
 
-
     }
 
+    public abstract void afterComplete(Task<AuthResult> results);
 
-    @Override
-    public HashMap<String ,String> get() {
-        if(results.get(App.RESULTS_STATUS) == null) {
-            results.put(App.RESULTS_STATUS, App.FAILED);
-            results.put(App.RESULTS_MESSAGE, App.FAILED_MESSAGE);
-        }
-        return results;
-    }
 }
