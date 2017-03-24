@@ -89,8 +89,6 @@
     <string name="settings_screen_logout_message">Come back soon</string>
 
 
-
-
     <!--                               Errors  Messages                                              -->
     <string name="error_field_empty">Required fields are empty</string>
     <string name="error_small_password">Minimum 6 characters</string>
@@ -103,8 +101,6 @@
     <string name="error_email">Email invalid.</string>
 
 
-
-
     <!--                                Forget Password Layout                                       -->
     <string name="forget_password_find_your_account">Find your Hoplay account</string>
     <string name="forget_password_your_email">Email Address</string>
@@ -114,7 +110,6 @@
     <!--                                Forget Password Activity                                      -->
     <string name="forget_password_reset_password">Reset password has been sent to your email : </string>
     <string name="forget_password_check_inbox">, Please check your inbox</string>
-
 
 
     <!--                                Login Layout                                                    -->
@@ -139,6 +134,7 @@
     <!--                                Make Request Fragment Layout                                -->
     <string name="make_request_fragment_new_request">N e w &#160; &#160; R e q u e s t</string>
     <string name="make_request_fragment_saved_request">Saved Requests</string>
+    <string name="make_request_fragment_add_game">Add Game</string>
 
 
     <!--                                New Request Activity Layout                                          -->
@@ -157,6 +153,10 @@
     <string name="new_request_request_button">R E Q U E S T</string>
     <string name="new_request_save_request_button">S A V E</string>
 
+
+    <!--                               No Game Added Popup Layout                                             -->
+    <string name="no_game_popup_message">Sorry ,You have to add \n a game to your games library</string>
+    <string name="no_game_popup_add_game_button">A D D &#160; G A M E</string>
 
 
 
@@ -182,7 +182,6 @@
     <string name="terms_and_conditions_message">Terms and conditions</string>
 
 
-
     <!--                                Search Request Fragment Layout                                           -->
     <string name="search_request_search_message">Search For a Team</string>
     <string name="search_request_all_games">All games</string>
@@ -191,7 +190,6 @@
 
     <!--                                User Profile Fragment Layout                                            -->
     <string name="user_fragment_recent_activities">Recent Activities</string>
-
 
 
     <!--                                Friend Instance Model                                                   -->
@@ -217,7 +215,7 @@
     <string name="new_user_message_instance_last_message">Last message</string>
     <string name="new_user_message_instance_messages_number">3</string>
 
-    
+
     <!--                                 No Connection Layout                                                   -->
     <string name="no_connection_service_unavailable">Service Unavailable (-_-)</string>
 
@@ -242,17 +240,13 @@
     <string name="user_profile_details_ratings_number">50</string>
 
 
-
     <!--                                 Users Toolbar - for chat activity                                     -->
     <string name="users_toolbar_username">Bakatsuki</string>
-
 
 
     <!--                                 New Chat                                     -->
 
     <string name="search_user_message">Search for user</string>
-
-
 
 
 </resources>

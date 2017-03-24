@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/rectangular_edittext"
+    android:background="@drawable/chat_bar_background"
     android:orientation="horizontal"
 
 
@@ -27,6 +27,7 @@
         android:layout_height="match_parent"
         android:textColorHint="@color/hint_color"
         android:padding="2dp"
+        android:textColor="@color/text_color"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
         android:minHeight="48dp"
@@ -48,7 +49,7 @@
         android:layout_marginRight="10dp"
         android:layout_gravity="center"
         android:background="@null"
-        app:srcCompat="@drawable/ic_send_not_focused_24dp"
+        app:srcCompat="@drawable/ic_send_not_focused_32dp"
        />
 
 </LinearLayout>

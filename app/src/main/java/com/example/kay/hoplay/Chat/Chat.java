@@ -1,10 +1,9 @@
 package com.example.kay.hoplay.Chat;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -15,22 +14,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.example.kay.hoplay.Activities.MainMenu.MainAppMenuActivity;
 import com.example.kay.hoplay.Adapters.ChatAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.model.ChatMessage;
-import com.pkmmte.view.CircularImageView;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -90,6 +83,7 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
+
         // Users toolbar :
         Toolbar toolbar = (Toolbar) findViewById(R.id.users_toolbar);
         toolbar.setTitle("");
@@ -133,11 +127,12 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
     // this method to set up a chat layout containts
     private void initControls() {
 
+        final Typeface playregular = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
         // init a layout contatins
         rootView = findViewById(R.id.chatContainer);
         messagesContainer = (ListView) findViewById(R.id.messagesContainer);
         messageET = (EmojiconEditText) findViewById(R.id.messageEdit);
-
+        messageET.setTypeface(playregular);
 
         sendBtn = (ImageButton) findViewById(R.id.chatSendButton);
         emojiBtn = (ImageView) findViewById(R.id.emojiBtn);
@@ -180,7 +175,7 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
             @Override
             public void afterTextChanged(Editable s) {
                // sendBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.sendiconmessagein));
-                sendBtn.setImageResource(R.drawable.ic_send_focused_24dp);
+                sendBtn.setImageResource(R.drawable.ic_send_focused_32dp);
             }
         });
 
@@ -222,7 +217,7 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
 
         messageET.setText("");
        // sendBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.sendiconnomessage));
-        sendBtn.setImageResource(R.drawable.ic_send_not_focused_24dp);
+        sendBtn.setImageResource(R.drawable.ic_send_not_focused_32dp);
     }
 
     // this method for receive message , execute only when a user receive a message
@@ -305,7 +300,7 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
                     //If keyboard is visible, simply show the emoji popup
                     if (emojiconsPopup.isKeyBoardOpen()) {
                         emojiconsPopup.showAtBottom();
-                        emojiBtn.setImageResource(R.drawable.ic_keyboard);
+                        emojiBtn.setImageResource(R.drawable.ic_keyboard_hide_18dp);
                     }
                     //else, open the text keyboard first and immediately after that show the emoji popup
                     else {
