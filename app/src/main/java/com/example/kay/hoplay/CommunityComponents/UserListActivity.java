@@ -1,7 +1,6 @@
 package com.example.kay.hoplay.CommunityComponents;
 
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
-import com.example.kay.hoplay.PatternStrategyComponents.Startgies.FirebaseCreateChatRoom;
 import com.example.kay.hoplay.Models.ChildEventListenerModel;
 import com.example.kay.hoplay.Models.FriendCommonModel;
 import com.google.firebase.database.DataSnapshot;

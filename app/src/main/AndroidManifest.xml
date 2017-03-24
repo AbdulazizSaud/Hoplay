@@ -44,11 +44,14 @@
         <activity
             android:name=".Activities.TermsAndConditions"
             android:screenOrientation="portrait" />
+
         <activity android:name=".Chat.ChatActivity" />
         <activity android:name=".Activities.ForgetPasswordActivity.ForgetPasswordActivity" />
         <activity android:name=".Activities.NoConnection" />
         <activity android:name=".RequestComponents.MakeRequestFragment" />
         <activity android:name=".RequestComponents.RequestsRequires.NewRequestActivity" />
+
+
         <activity android:name=".Activities.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,6 +59,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".Activities.SettingsActivity" />
         <activity android:name=".CommunityComponents.UserListActivities.CreateChat" />
         <activity android:name=".CommunityComponents.UserListActivities.ViewFriendProfile" />

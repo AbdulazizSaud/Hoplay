@@ -7,20 +7,20 @@ import java.util.ArrayList;
  */
 
 public class GameDetails {
-    private String gameName ;
-    private String gameID;
-    private String gamePhotoUrl;
+    protected String gameName ;
+    protected String gameID;
+    protected String gamePhotoUrl;
 
 
 
-    private int madxPlayers;
-    private ArrayList<String> gameRanks;
+    protected int maxPlayers;
+    protected ArrayList<String> gameRanks;
 
     public GameDetails(String gameID, String gameName, int maxPlayers, String gamePhotoUrl) {
         this.gameName = gameName;
         this.gameID = gameID;
         this.gamePhotoUrl = gamePhotoUrl;
-        this.madxPlayers = maxPlayers;
+        this.maxPlayers = maxPlayers;
 
     }
 
@@ -54,12 +54,12 @@ public class GameDetails {
     }
 
 
-    public int getMadxPlayers() {
-        return madxPlayers;
+    public int getMaxPlayers() {
+        return maxPlayers;
     }
 
-    public void setMadxPlayers(int madxPlayers) {
-        this.madxPlayers = madxPlayers;
+    public void setMaxPlayers(int maxPlayers) {
+        this.maxPlayers = maxPlayers;
     }
 
     public ArrayList<String> getGameRanks() {

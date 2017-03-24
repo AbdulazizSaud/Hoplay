@@ -26,7 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
     it's impelmented as singleton stratgey
  */
 
-public class App extends Application implements FirebasePaths,Constants{
+public class App extends Application implements FirebasePaths{
 
     private static App instance;
 

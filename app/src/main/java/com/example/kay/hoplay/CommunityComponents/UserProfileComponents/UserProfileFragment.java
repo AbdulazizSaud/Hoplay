@@ -28,7 +28,7 @@ import com.example.kay.hoplay.CommunityComponents.UserListActivities.ViewFriendP
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.CommunityComponents.UserProfileComponents.ProfileRequires.UserGames;
 import com.example.kay.hoplay.CommunityComponents.UserProfileComponents.ProfileRequires.UserRatings;
-import com.example.kay.hoplay.Models.RecentActivityList;
+import com.example.kay.hoplay.Models.RecentGameModel;
 
 import java.util.ArrayList;
 
@@ -61,7 +61,7 @@ public class UserProfileFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    ArrayList<RecentActivityList> recentActivityLists=new ArrayList<RecentActivityList>();
+    ArrayList<RecentGameModel> recentGameModels =new ArrayList<RecentGameModel>();
 
 
 
@@ -205,13 +205,13 @@ public class UserProfileFragment extends Fragment {
 
         // specify an adapter (see also next example)
 
-        recentActivityLists.add(addRecentActivity("Played Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Category : PC GameDetails","15 min ago"));
-        recentActivityLists.add(addRecentActivity("Played Overwatch","https://b.thumbs.redditmedia.com/ksN39DPM7HFaXTP_tBi-IuYYfWccRBjYykD6VFSePXE.jpg","Category : PC GameDetails","24 min ago"));
-        recentActivityLists.add(addRecentActivity("Played Dying Light","http://shinigaming.com/wp-content/uploads/2015/01/dying-light-logo-high-resolution.jpg","Category : PC GameDetails","5 hours ago"));
-        recentActivityLists.add(addRecentActivity("Played Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Category : Playstation GameDetails","12 hours ago"));
-        recentActivityLists.add(addRecentActivity("Played Naruto Shippuden Ultimate Ninja Storm 4","http://1.bp.blogspot.com/-DYU2tIaTLYo/VlyFVdvpy1I/AAAAAAAADbo/zCxfuIm0YlM/s1600/Untitled.png","Category : Playstation GameDetails","17" +
+        recentGameModels.add(addRecentActivity("XXX1","Played Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Category : PC GameDetails","15 min ago"));
+        recentGameModels.add(addRecentActivity("XXX1","Played Overwatch","https://b.thumbs.redditmedia.com/ksN39DPM7HFaXTP_tBi-IuYYfWccRBjYykD6VFSePXE.jpg","Category : PC GameDetails","24 min ago"));
+        recentGameModels.add(addRecentActivity("XXX1","Played Dying Light","http://shinigaming.com/wp-content/uploads/2015/01/dying-light-logo-high-resolution.jpg","Category : PC GameDetails","5 hours ago"));
+        recentGameModels.add(addRecentActivity("XXX1","Played Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Category : Playstation GameDetails","12 hours ago"));
+        recentGameModels.add(addRecentActivity("XXX1","Played Naruto Shippuden Ultimate Ninja Storm 4","http://1.bp.blogspot.com/-DYU2tIaTLYo/VlyFVdvpy1I/AAAAAAAADbo/zCxfuIm0YlM/s1600/Untitled.png","Category : Playstation GameDetails","17" +
                 " hours ago"));
-        recentActivityLists.add(addRecentActivity("World of Warcraft","http://www.technologytell.com/gaming/files/2014/02/world-of-warcraft.png","Category : PC GameDetails","1 day ago"));
+        recentGameModels.add(addRecentActivity("XXX1","World of Warcraft","http://www.technologytell.com/gaming/files/2014/02/world-of-warcraft.png","Category : PC GameDetails","1 day ago"));
 
 
 
@@ -233,9 +233,10 @@ public class UserProfileFragment extends Fragment {
     }
 
 
-    public RecentActivityList addRecentActivity(String gameName , String gamePhoto , String activityDescription , String activityDate)
+    public RecentGameModel addRecentActivity(String gameID, String gameName , String gamePhoto , String activityDescription , String activityDate)
     {
-        RecentActivityList recentActivity = new RecentActivityList(gameName,gamePhoto,activityDescription,activityDate);
+        RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,activityDescription,activityDate);
+
         return recentActivity;
     }
 
@@ -267,8 +268,8 @@ public class UserProfileFragment extends Fragment {
 
 
 
-    private CommonAdapter<RecentActivityList> createAdapter(){
-        return new CommonAdapter<RecentActivityList>(recentActivityLists,R.layout.new_user_activity) {
+    private CommonAdapter<RecentGameModel> createAdapter(){
+        return new CommonAdapter<RecentGameModel>(recentGameModels,R.layout.new_user_activity) {
             @Override
             public ViewHolders OnCreateHolder(View v) {
 
@@ -283,10 +284,10 @@ public class UserProfileFragment extends Fragment {
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder, RecentActivityList model)
+            public void OnBindHolder(ViewHolders holder, RecentGameModel model)
             {
 
-                App.getInstance().loadingImage(holder,model.getGamePhotoURL());
+                App.getInstance().loadingImage(holder,model.getGamePhotoUrl());
 
                 holder.setTitle(model.getGameName());
                 holder.setSubtitle(model.getActivityDescription());

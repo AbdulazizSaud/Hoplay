@@ -21,7 +21,7 @@ import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.Models.SavedRequestsList;
+import com.example.kay.hoplay.Models.SavedRequestModel;
 
 import java.util.ArrayList;
 
@@ -40,7 +40,7 @@ public abstract class MakeRequestFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
 
     // specify an adapter (see also next example)
-   private ArrayList<SavedRequestsList> savedRequestsLists =new ArrayList<SavedRequestsList>();
+   private ArrayList<SavedRequestModel> savedRequestModels =new ArrayList<SavedRequestModel>();
 
 
 
@@ -89,24 +89,12 @@ public abstract class MakeRequestFragment extends Fragment {
 
 
 
-        savedRequestsLists.add(saveRequest("Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Doubles ranked ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Overwatch","https://b.thumbs.redditmedia.com/ksN39DPM7HFaXTP_tBi-IuYYfWccRBjYykD6VFSePXE.jpg","-_- I need to get diamond","6 Players"));
-        savedRequestsLists.add(saveRequest("Dying Light","http://shinigaming.com/wp-content/uploads/2015/01/dying-light-logo-high-resolution.jpg","Lets Kill some zombies * ^ *","3 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
-        savedRequestsLists.add(saveRequest("Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Quick GameDetails ?","2 Players"));
+        savedRequestModels.add(saveRequest("","Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Doubles ranked ?",2));
+        savedRequestModels.add(saveRequest("","Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Doubles ranked ?",2));
+        savedRequestModels.add(saveRequest("","Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Doubles ranked ?",2));
+        savedRequestModels.add(saveRequest("","Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Doubles ranked ?",2));
+
+        savedRequestModels.add(saveRequest("","Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Doubles ranked ?",2));
 
 
 
@@ -121,20 +109,21 @@ public abstract class MakeRequestFragment extends Fragment {
 
 
 
-    public SavedRequestsList saveRequest(String gameName , String gamePhoto , String requestDescription , String numberOfPlayers)
+    public SavedRequestModel saveRequest(String gameID, String gameName , String gamePhoto , String requestDescription , int numberOfPlayers)
     {
-        return new SavedRequestsList(gameName,gamePhoto,requestDescription,numberOfPlayers);
+        return  new SavedRequestModel(gameID,gameName,numberOfPlayers,gamePhoto,requestDescription,"");
+
     }
 
-    private CommonAdapter<SavedRequestsList> createAdapter(){
-        return new CommonAdapter<SavedRequestsList>(savedRequestsLists,R.layout.saved_request_instance) {
+    private CommonAdapter<SavedRequestModel> createAdapter(){
+        return new CommonAdapter<SavedRequestModel>(savedRequestModels,R.layout.saved_request_instance) {
             @Override
             public ViewHolders OnCreateHolder(View v) {
                 return new ViewHolders.SavedRequestHolder(v);
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder, final SavedRequestsList model)
+            public void OnBindHolder(ViewHolders holder, final SavedRequestModel model)
             {
                 //ImageLoader loader = App.getInstance().getImageLoader();
 
@@ -148,33 +137,20 @@ public abstract class MakeRequestFragment extends Fragment {
 
 
 
-                App.getInstance().loadingImage(holder,model.getGamePhotoURL());
+                App.getInstance().loadingImage(holder,model.getGamePhotoUrl());
 
                // loadingImage(holder, model, loader);
                 holder.setTitle(model.getGameName());
                 holder.setSubtitle(model.getActivityDescription());
-                holder.setNumberOfPlayers(model.getNumberOfPlayers());
+                holder.setNumberOfPlayers(String.valueOf(model.getNumberOfPlayers()) + " Players");
 
 
             }
         };
     }
-    private void loadingImage(ViewHolders holder, SavedRequestsList model, ImageLoader loader) {
-        if(model.getGamePhotoURL().length() > 0){
-            loader.get(model.getGamePhotoURL(),
-                    ImageLoader.getImageListener(
-                            holder.getPicture()
-                            , R.drawable.profile_default_photo
-                            ,R.drawable.profile_default_photo));
 
-        } else {
-            CircleImageView picture = holder.getPicture();
-            picture.setImageResource(R.drawable.profile_default_photo);
-            holder.setPicture(picture);
-        }
-    }
 
-    protected abstract void OnClickHolders(SavedRequestsList model, View v);
+    protected abstract void OnClickHolders(SavedRequestModel model, View v);
 
     public void createNoGameDialog()
     {

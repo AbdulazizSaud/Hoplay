@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.example.kay.hoplay.App.App;
 
-import com.example.kay.hoplay.PatternStrategyComponents.Startgies.FirebaseLogin;
 import com.example.kay.hoplay.R;
 
 
