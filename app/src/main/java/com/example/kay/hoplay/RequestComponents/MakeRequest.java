@@ -13,6 +13,6 @@ public class MakeRequest extends MakeRequestFragment {
 
     @Override
     protected void OnClickHolders(SavedRequestsList model, View v) {
-        // here .. blablabla .. f9f9
+        // here .. blablabla ..
     }
 }
