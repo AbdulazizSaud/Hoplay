@@ -23,10 +23,10 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
         <activity
-            android:name=".Authentication.LoginActivity"
+            android:name=".Authentication.LoginCore"
             android:screenOrientation="portrait" />
-        <activity android:name=".Authentication.SignUpActivity" />
-        <activity android:name=".Activities.MainMenu.MainAppMenuActivity" />
+        <activity android:name=".Authentication.SignUpCore" />
+        <activity android:name=".Activities.MainMenu.MainAppMenuCore" />
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -46,11 +46,11 @@
             android:name=".Activities.TermsAndConditions"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".Chat.ChatActivity" />
-        <activity android:name=".Activities.ForgetPasswordActivity.ForgetPasswordActivity" />
+        <activity android:name=".Chat.ChatCore" />
+        <activity android:name=".Activities.ForgetPasswordActivity.ForgetPasswordCore" />
         <activity android:name=".Activities.NoConnection" />
-        <activity android:name=".RequestComponents.MakeRequestFragment" />
-        <activity android:name=".RequestComponents.RequestsRequires.NewRequestActivity" />
+        <activity android:name=".RequestComponents.MakeRequest" />
+        <activity android:name=".RequestComponents.RequestsRequires.NewRequestCore" />
 
 
         <activity android:name=".Activities.SplashScreen">
@@ -65,7 +65,7 @@
         <activity android:name=".CommunityComponents.UserListActivities.CreateChat" />
         <activity android:name=".CommunityComponents.UserListActivities.ViewFriendProfile" />
         <activity android:name=".RequestComponents.RequestsRequires.NoGamePopUp" />
-        <activity android:name=".UserProfileComponents.AddGame"></activity>
+        <activity android:name=".UserProfileComponents.AddGameCore"/>
     </application>
 
 </manifest>

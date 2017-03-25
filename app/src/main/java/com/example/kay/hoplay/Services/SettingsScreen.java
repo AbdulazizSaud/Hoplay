@@ -7,10 +7,9 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.widget.Toast;
 
-import com.example.kay.hoplay.Authentication.LoginActivity;
+import com.example.kay.hoplay.Authentication.LoginCore;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
-import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Created by Kay on 12/1/2016.
@@ -45,7 +44,7 @@ public class SettingsScreen extends PreferenceFragment {
                 //Do whatever you want here
                 App.getInstance().signOut();
 
-                Intent i = new Intent(context, LoginActivity.class);
+                Intent i = new Intent(context, LoginCore.class);
                 startActivity(i);
 
                 Toast.makeText(getActivity().getApplicationContext(),R.string.settings_screen_logout_message,Toast.LENGTH_LONG).show();

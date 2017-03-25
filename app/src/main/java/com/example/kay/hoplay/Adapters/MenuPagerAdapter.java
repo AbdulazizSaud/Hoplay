@@ -4,10 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.kay.hoplay.CommunityComponents.CommunityActivity;
-import com.example.kay.hoplay.RequestComponents.MakeRequest;
-import com.example.kay.hoplay.RequestComponents.SearchRequest;
-import com.example.kay.hoplay.UserProfileComponents.UserProfileFragment;
+import com.example.kay.hoplay.CommunityComponents.CommunityCore;
+import com.example.kay.hoplay.RequestComponents.MakeRequestCore;
+import com.example.kay.hoplay.RequestComponents.SearchRequestCore;
+import com.example.kay.hoplay.UserProfileComponents.UserProfile;
 
 /**
  * Created by Kay on 6/15/2016.
@@ -25,13 +25,13 @@ public class MenuPagerAdapter extends FragmentStatePagerAdapter {
             switch (position)
             {
                 case 0:
-                    return new SearchRequest();
+                    return new SearchRequestCore();
                 case 1  :
-                    return new CommunityActivity();
+                    return new CommunityCore();
                 case 2 :
-                    return new MakeRequest();
+                    return new MakeRequestCore();
                 case 3 :
-                    return new UserProfileFragment();
+                    return new UserProfile();
 
 
             }

@@ -8,7 +8,7 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context="com.example.kay.hoplay.Authentication.LoginActivity"
+        tools:context="com.example.kay.hoplay.Authentication.LoginCore"
         android:background="@color/app_background"
         android:id="@+id/sign_in_relativeLayout"
         android:onClick="removeKeyboard"

@@ -20,7 +20,7 @@ import com.example.kay.hoplay.R;
 
 import java.util.Arrays;
 
-public class NewRequestActivity extends NewRequest {
+public class NewRequestCore extends NewRequest {
 
 // mechinsems
 

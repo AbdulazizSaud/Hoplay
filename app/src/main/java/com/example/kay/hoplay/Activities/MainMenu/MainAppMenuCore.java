@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
  * Created by Kay on 2/10/2017.
  */
 
-public class MainAppMenuActivity extends MainAppMenu implements FirebasePaths{
+public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -59,7 +59,6 @@ public class MainAppMenuActivity extends MainAppMenu implements FirebasePaths{
                 } else {
                     app.setmAuthStateListener(authStateListener);
                     setupUserInformation(user);
-                    loadGames();
                 }
             }
         };
@@ -111,37 +110,5 @@ public class MainAppMenuActivity extends MainAppMenu implements FirebasePaths{
         return dataSnapshot.hasChild(FIREBASE_USERNAME_PATH) && dataSnapshot.hasChild(FIREBASE_NICKNAME_PATH) && dataSnapshot.hasChild(FIREBASE_PICTURE_URL_PATH);
     }
 
-
-    private void loadGames()
-    {
-
-        app.getDatabaseGames().child("_competitive_").addChildEventListener(new ChildEventListenerModel() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.i("Comp ------>",dataSnapshot.toString());
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-        });
-
-
-        app.getDatabaseGames().child("_coop_").addChildEventListener(new ChildEventListenerModel() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.i("Coop ------>",dataSnapshot.toString());
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-        });
-
-
-    }
 
 }

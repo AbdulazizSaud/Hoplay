@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.kay.hoplay.Authentication.LoginActivity;
+import com.example.kay.hoplay.Authentication.LoginCore;
 import com.example.kay.hoplay.R;
 
 public class SplashScreen extends AppCompatActivity {
@@ -23,7 +23,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 try {
                     sleep(3000);
-                    Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),LoginCore.class);
                     startActivity(intent);
 
                     finish();

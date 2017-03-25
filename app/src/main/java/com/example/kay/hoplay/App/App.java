@@ -82,18 +82,26 @@ public class App extends Application implements FirebasePaths{
     }
 
 
-    public Bitmap loadingImage(ViewHolders holder, String pictureURL) {
+    public void loadingImage(ViewHolders holder, String pictureURL) {
 
         CircleImageView picture = holder.getPicture();
-        picture.setImageResource(R.drawable.profile_default_photo);
-        holder.setPicture(picture);
+
+        if(pictureURL.startsWith("default"))
+            picture.setImageResource(R.drawable.profile_default_photo);
+         else if (pictureURL.startsWith("game"))
+            picture.setImageResource(R.drawable.hoplaylogo);
+
+
 
         Bitmap bitmap = loadPicture(pictureURL, holder.getPicture());
+        picture.setImageResource(R.drawable.profile_default_photo);
+
+        holder.setPicture(picture);
+
 
 //        if(bitmap !=null)
 //        resizeBitmap(holder.getPicture(), bitmap);
 
-        return bitmap;
     }
 
 
@@ -122,7 +130,7 @@ public class App extends Application implements FirebasePaths{
 
     private Bitmap loadPicture(String pictureURL,CircleImageView circleImageView) {
         if(pictureURL != null) {
-            if (pictureURL.length() > 0 && !pictureURL.startsWith("default")) {
+            if (pictureURL.length() > 5 && !pictureURL.startsWith("default") && !pictureURL.startsWith("game") ) {
 
                return getImageLoader().get(pictureURL,
                         ImageLoader.getImageListener(

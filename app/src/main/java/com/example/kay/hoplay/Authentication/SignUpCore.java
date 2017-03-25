@@ -21,7 +21,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class SignUpActivity extends Signup {
+public class SignUpCore extends Signup {
 
     // Get firebase authentication from App
     private FirebaseAuth appAuth;

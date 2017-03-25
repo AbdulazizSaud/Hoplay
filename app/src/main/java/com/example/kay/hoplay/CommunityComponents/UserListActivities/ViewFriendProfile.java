@@ -2,14 +2,14 @@ package com.example.kay.hoplay.CommunityComponents.UserListActivities;
 
 import android.widget.EditText;
 
-import com.example.kay.hoplay.CommunityComponents.UserListActivity;
+import com.example.kay.hoplay.CommunityComponents.UserListCore;
 import com.example.kay.hoplay.Models.FriendCommonModel;
 
 /**
  * Created by Kay on 3/19/2017.
  */
 
-public class ViewFriendProfile extends UserListActivity {
+public class ViewFriendProfile extends UserListCore {
 
 
 

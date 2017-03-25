@@ -89,9 +89,9 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
             numberOfPlayers.setTypeface(sansation);
         }
     }
-    public static class RecentActivitiesHolder extends ViewHolders {
+    public static class RecentGameHolder extends ViewHolders {
 
-        public RecentActivitiesHolder(View v) {
+        public RecentGameHolder(View v) {
             super(v);
 
             title =  (TextView) v.findViewById(R.id.game_name_recent_activity_textview);
@@ -105,17 +105,23 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
             time.setTypeface(sansation);
         }
     }
-
-
     public static class FriendListHolder extends ViewHolders {
 
         public FriendListHolder(View v) {
             super(v);
 
-
-
             picture = (CircleImageView)v.findViewById(R.id.friend_profile_photo_circleimageview);
             title  = (TextView)v.findViewById(R.id.friend_nickname_friends_list_textview);
+        }
+    }
+    public static class UserGameHolder extends ViewHolders {
+
+        public UserGameHolder(View v) {
+            super(v);
+
+            title =  (TextView) v.findViewById(R.id.game_name_add_game_textview);
+            picture = (CircleImageView) v.findViewById(R.id.game_photo_add_game_circleimageview);
+
         }
     }
 

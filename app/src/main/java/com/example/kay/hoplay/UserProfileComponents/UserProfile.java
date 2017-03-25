@@ -40,10 +40,11 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UserProfileFragment extends Fragment {
+public class UserProfile extends Fragment {
 
     private final static int RESULT_LOAD_IMG=1;
 
+    private  App app;
     private TextView usernameProfile;
     private TextView userGamesTextView;
     private TextView userRatingsTextView;
@@ -71,6 +72,9 @@ public class UserProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user, container, false);
+
+        app = App.getInstance();
+
         usernameProfile = (TextView) view.findViewById(R.id.username_profile);
         //usernameProfile.setText(" Y O Y O  I'm username Fragment");
 
@@ -225,7 +229,7 @@ public class UserProfileFragment extends Fragment {
     }
 
     private void setUserProfileInformation() {
-        App app = App.getInstance();
+         app = App.getInstance();
 
         app.loadingImage(userPictureCircleImageView,app.getUserInformation().getPictureURL());
         usernameProfile.setText("@"+app.getUserInformation().getUsername());
@@ -280,14 +284,14 @@ public class UserProfileFragment extends Fragment {
                     }
                 });
 
-                return new ViewHolders.RecentActivitiesHolder(v);
+                return new ViewHolders.RecentGameHolder(v);
             }
 
             @Override
             public void OnBindHolder(ViewHolders holder, RecentGameModel model)
             {
 
-                App.getInstance().loadingImage(holder,model.getGamePhotoUrl());
+               app.loadingImage(holder,model.getGamePhotoUrl());
 
                 holder.setTitle(model.getGameName());
                 holder.setSubtitle(model.getActivityDescription());

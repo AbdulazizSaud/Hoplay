@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public abstract class CommunityFragment extends Fragment {
+public abstract class Community extends Fragment {
 
 //    ListView communityListview ;
 
@@ -38,37 +39,9 @@ public abstract class CommunityFragment extends Fragment {
     protected ArrayList<CommunityChatModel> communityUserLists=new ArrayList<CommunityChatModel>();
     protected RecyclerView.Adapter mAdapter;
 
-    private CommonAdapter<CommunityChatModel> commonAdapter =  new CommonAdapter<CommunityChatModel>(communityUserLists,R.layout.new_user_message_instance) {
-        @Override
-        public ViewHolders OnCreateHolder(View v) {
-
-            return new ViewHolders.CommunityHolder(v);
-        }
-
-        @Override
-        public void OnBindHolder(ViewHolders holder, final CommunityChatModel model) {
-            // - get element from your dataset at this position
-            // - replace the contents of the view with that element
-            ViewHolders.CommunityHolder communityHolder = (ViewHolders.CommunityHolder)holder;
-            holder.getView().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    OnClickHolders(model,v);
-                }
-            });
-
-           app.loadingImage(holder, model.getUserPictureURL());
-
-            holder.setTitle(model.getFullName());
-            communityHolder.setCommunitySubtitle(model.getLastMsg());
-            holder.setTime(model.getLastMsgDate());
-        }
-    };
-
-
     protected App app;
 
-    public CommunityFragment() {
+    public Community() {
         // Required empty public constructor
         app = App.getInstance();
     }
@@ -131,7 +104,32 @@ public abstract class CommunityFragment extends Fragment {
     }
 
     private CommonAdapter<CommunityChatModel> createAdapter(){
-        return commonAdapter;
+        return new CommonAdapter<CommunityChatModel>(communityUserLists,R.layout.new_user_message_instance) {
+            @Override
+            public ViewHolders OnCreateHolder(View v) {
+
+                return new ViewHolders.CommunityHolder(v);
+            }
+
+            @Override
+            public void OnBindHolder(ViewHolders holder, final CommunityChatModel model) {
+                // - get element from your dataset at this position
+                // - replace the contents of the view with that element
+                ViewHolders.CommunityHolder communityHolder = (ViewHolders.CommunityHolder)holder;
+                holder.getView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        OnClickHolders(model,v);
+                    }
+                });
+
+                app.loadingImage(holder, model.getUserPictureURL());
+
+                holder.setTitle(model.getFullName());
+                communityHolder.setCommunitySubtitle(model.getLastMsg());
+                holder.setTime(model.getLastMsgDate());
+            }
+        };
     }
 
 

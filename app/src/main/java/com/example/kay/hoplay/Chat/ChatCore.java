@@ -16,7 +16,7 @@ import emojicon.emoji.Objects;
  * this class implemetns a chat activity
  */
 
-public class ChatActivity extends Chat implements FirebasePaths {
+public class ChatCore extends Chat implements FirebasePaths {
 
     private String chatRoomKey=null;
     private String friendUsername=null,friendPictureURL=null,friendKey=null;
@@ -38,7 +38,6 @@ public class ChatActivity extends Chat implements FirebasePaths {
 
 
     }
-
 
 
     private void addMessageToChat(DataSnapshot dataSnapshot,boolean isAddChild)

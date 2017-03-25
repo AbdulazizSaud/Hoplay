@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 
-import com.example.kay.hoplay.Chat.ChatActivity;
+import com.example.kay.hoplay.Chat.ChatCore;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.ChildEventListenerModel;
 import com.example.kay.hoplay.Models.CommunityChatModel;
@@ -14,22 +14,20 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
  * Created by Kay on 2/12/2017.
  */
 
-public class CommunityActivity extends CommunityFragment implements FirebasePaths {
+public class CommunityCore extends Community implements FirebasePaths {
 
 
     private DatabaseReference refAuthUserChats;
-    private ArrayList<String> roomKeys;
 
     @Override
     protected void OnClickHolders(CommunityChatModel model, View v) {
-        Intent i = new Intent(v.getContext(), ChatActivity.class);
+        Intent i = new Intent(v.getContext(), ChatCore.class);
         i.putExtra("room_key",model.getChatKey());
         i.putExtra("friend_username", model.getFullName());
         i.putExtra("friend_picture",model.getUserPictureURL());

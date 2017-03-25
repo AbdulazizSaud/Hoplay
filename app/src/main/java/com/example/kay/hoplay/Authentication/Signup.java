@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.kay.hoplay.Activities.MainMenu.MainAppMenuActivity;
+import com.example.kay.hoplay.Activities.MainMenu.MainAppMenuCore;
 import com.example.kay.hoplay.Activities.TermsAndConditions;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
@@ -539,7 +539,7 @@ public abstract class Signup extends AppCompatActivity implements Auth {
         loadingDialog.setTitle(R.string.signup_signin_up);
         loadingDialog.setMessage(Signup.this.getString(R.string.signup_just_a_moment));
         loadingDialog.show();
-        Intent i = new Intent(getApplicationContext(), MainAppMenuActivity.class);
+        Intent i = new Intent(getApplicationContext(), MainAppMenuCore.class);
         startActivity(i);
 
     }

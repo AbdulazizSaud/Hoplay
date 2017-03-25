@@ -354,7 +354,7 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
 
     // this method to switch the current to community frag
     public void toCommunityFragment(View view) {
-//        Intent i = new Intent(this, MainAppMenuActivity.class);
+//        Intent i = new Intent(this, MainAppMenuCore.class);
 //        startActivity(i);
        finish();
     }

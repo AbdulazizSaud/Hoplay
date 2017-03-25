@@ -9,11 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.kay.hoplay.Activities.ActivityInterface;
-import com.example.kay.hoplay.Authentication.LoginActivity;
+import com.example.kay.hoplay.Authentication.LoginCore;
 import com.example.kay.hoplay.R;
-import com.google.firebase.auth.FirebaseAuth;
-
-import static java.security.AccessController.getContext;
 
 /**
  * Created by Kay on 2/10/2017.
@@ -48,7 +45,7 @@ public abstract class ForgetPassword extends AppCompatActivity implements Activi
 
 
     public void goToLogin() {
-        Intent i = new Intent(this, LoginActivity.class);
+        Intent i = new Intent(this, LoginCore.class);
         startActivity(i);
     }
 

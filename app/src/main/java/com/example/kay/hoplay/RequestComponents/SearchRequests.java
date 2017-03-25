@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public abstract class SearchRequestsFragment extends Fragment {
+public abstract class SearchRequests extends Fragment {
 
     protected ImageView pcChoice;
     protected ImageView psChoice;
@@ -58,7 +58,7 @@ public abstract class SearchRequestsFragment extends Fragment {
     private Bitmap pcLogoUnPressed, pcLogoPressed,psLogoUnPressed, psLogoPressed,xboxLogoUnPressed, xboxLogoPressed;
 
 
-    public SearchRequestsFragment() {
+    public SearchRequests() {
         // Required empty public constructor
         bitmapOptimizer = new BitmapOptimizer();
     }

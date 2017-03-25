@@ -3,9 +3,7 @@ package com.example.kay.hoplay.Activities.MainMenu;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Rect;
 import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,22 +11,12 @@ import android.os.Bundle;
 import com.example.kay.hoplay.Activities.ActivityInterface;
 import com.example.kay.hoplay.Adapters.MenuPagerAdapter;
 import com.example.kay.hoplay.App.App;
-import com.example.kay.hoplay.Authentication.LoginActivity;
+import com.example.kay.hoplay.Authentication.LoginCore;
 import com.example.kay.hoplay.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
-
-
-import android.support.v7.widget.ButtonBarLayout;
-import android.util.Log;
-import android.view.Display;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
 
 
 /*
@@ -153,7 +141,7 @@ public abstract class MainAppMenu extends AppCompatActivity implements ActivityI
         return instance;
     }
     protected void toLogin() {
-        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+        Intent i = new Intent(getApplicationContext(), LoginCore.class);
         startActivity(i);
 
     }

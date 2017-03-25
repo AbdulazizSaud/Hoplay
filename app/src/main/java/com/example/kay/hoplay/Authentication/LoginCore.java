@@ -26,7 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
 
  */
 
-public class LoginActivity extends Login {
+public class LoginCore extends Login {
 
     // Get firebase authentication from App
     private FirebaseAuth mAuth;
@@ -89,7 +89,7 @@ public class LoginActivity extends Login {
                     } else {
                         // results if it's failed
                         loadingDialog(false);
-                        Toast.makeText(getApplicationContext(), "Hi i'm fail message in LoginActivity.class", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Hi i'm fail message in LoginCore.class", Toast.LENGTH_LONG).show();
                     }
                 }
             });

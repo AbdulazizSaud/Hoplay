@@ -13,7 +13,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -23,8 +22,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.kay.hoplay.Activities.ForgetPasswordActivity.ForgetPasswordActivity;
-import com.example.kay.hoplay.Activities.MainMenu.MainAppMenuActivity;
+import com.example.kay.hoplay.Activities.ForgetPasswordActivity.ForgetPasswordCore;
+import com.example.kay.hoplay.Activities.MainMenu.MainAppMenuCore;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
 
@@ -241,14 +240,14 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
     //this method switching a to signup actitvty
     protected void toSignUp() {
-        Intent i = new Intent(this, SignUpActivity.class);
+        Intent i = new Intent(this, SignUpCore.class);
         startActivity(i);
 
     }
     protected void toMainMenu() {
 
 
-        Intent i = new Intent(getApplicationContext(), MainAppMenuActivity.class);
+        Intent i = new Intent(getApplicationContext(), MainAppMenuCore.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
 
@@ -256,7 +255,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
     //this method switching a to forget password actitvty
     public void goToForgetPassword(View view) {
-        Intent i = new Intent(this, ForgetPasswordActivity.class);
+        Intent i = new Intent(this, ForgetPasswordCore.class);
         startActivity(i);
     }
 

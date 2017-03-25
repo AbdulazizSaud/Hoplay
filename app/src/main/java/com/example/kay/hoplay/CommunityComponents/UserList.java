@@ -160,8 +160,7 @@ public abstract class UserList extends AppCompatActivity {
         return !value.equals("") && !value.equals("\\s+") && null != value;
     }
 
-    private void reloadFriendList()
-    {
+    private void reloadFriendList() {
         usersList.clear();
 
         for(FriendCommonModel commonModel : friendsList)

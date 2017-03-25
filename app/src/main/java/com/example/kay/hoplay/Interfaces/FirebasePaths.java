@@ -35,6 +35,7 @@ public interface FirebasePaths {
     public static final String FIREBASE_PICTURE_URL_ATTR =  "_picUrl_";
     public static final String FIREBASE_NICKNAME_ATTR =  "_nickname_";
     public static final String FIREBASE_EMAIL_ATTR = "_email_";
+    public static final String FIREBASE_GAMES_ATTR = "_games_";
 
     // USER INFO
     public static final String FIREBASE_USERNAME_PATH = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_USERNAME_ATTR;

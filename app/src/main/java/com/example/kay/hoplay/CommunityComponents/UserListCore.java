@@ -9,7 +9,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public abstract class UserListActivity extends UserList implements FirebasePaths{
+public abstract class UserListCore extends UserList implements FirebasePaths{
 
 
 
