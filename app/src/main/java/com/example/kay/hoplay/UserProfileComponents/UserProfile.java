@@ -113,7 +113,7 @@ public class UserProfile extends Fragment {
         toUserGamesLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity().getApplicationContext(),AddGame.class);
+                Intent i = new Intent(getActivity().getApplicationContext(),AddGameCore.class);
                 startActivity(i);
             }
         });
@@ -209,13 +209,10 @@ public class UserProfile extends Fragment {
 
         // specify an adapter (see also next example)
 
-        recentGameModels.add(addRecentActivity("XXX1","Played Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Category : PC GameDetails","15 min ago"));
-        recentGameModels.add(addRecentActivity("XXX1","Played Overwatch","https://b.thumbs.redditmedia.com/ksN39DPM7HFaXTP_tBi-IuYYfWccRBjYykD6VFSePXE.jpg","Category : PC GameDetails","24 min ago"));
-        recentGameModels.add(addRecentActivity("XXX1","Played Dying Light","http://shinigaming.com/wp-content/uploads/2015/01/dying-light-logo-high-resolution.jpg","Category : PC GameDetails","5 hours ago"));
-        recentGameModels.add(addRecentActivity("XXX1","Played Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Category : Playstation GameDetails","12 hours ago"));
-        recentGameModels.add(addRecentActivity("XXX1","Played Naruto Shippuden Ultimate Ninja Storm 4","http://1.bp.blogspot.com/-DYU2tIaTLYo/VlyFVdvpy1I/AAAAAAAADbo/zCxfuIm0YlM/s1600/Untitled.png","Category : Playstation GameDetails","17" +
-                " hours ago"));
-        recentGameModels.add(addRecentActivity("XXX1","World of Warcraft","http://www.technologytell.com/gaming/files/2014/02/world-of-warcraft.png","Category : PC GameDetails","1 day ago"));
+        recentGameModels.add(addRecentActivity("XXX1","Played Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Category : PS","15 min ago"));
+        recentGameModels.add(addRecentActivity("XXX1","Played Overwatch","https://b.thumbs.redditmedia.com/ksN39DPM7HFaXTP_tBi-IuYYfWccRBjYykD6VFSePXE.jpg","Category : PC","24 min ago"));
+        recentGameModels.add(addRecentActivity("XXX1","Played Dying Light","http://shinigaming.com/wp-content/uploads/2015/01/dying-light-logo-high-resolution.jpg","Category : Xbox","5 hours ago"));
+        recentGameModels.add(addRecentActivity("XXX1","World of Warcraft","http://www.technologytell.com/gaming/files/2014/02/world-of-warcraft.png","Category : PC","1 day ago"));
 
 
 

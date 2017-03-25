@@ -104,11 +104,11 @@ public abstract class MakeRequest extends Fragment {
 
 
         savedRequestModels.add(saveRequest("","Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Doubles ranked ?",2));
-        savedRequestModels.add(saveRequest("","Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Doubles ranked ?",2));
-        savedRequestModels.add(saveRequest("","Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Doubles ranked ?",2));
-        savedRequestModels.add(saveRequest("","Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Doubles ranked ?",2));
+        savedRequestModels.add(saveRequest("","Overwatch","https://overwatch-a.akamaihd.net/img/logos/overwatch-share-3d5a268515283007bdf3452e877adac466d579f4b44abbd05aa0a98aba582eeaebc4541f1154e57ec5a43693345bebda953381a7b75b58adbd29d3f3eb439ad2.jpg","Need healing -_- ",6));
+        savedRequestModels.add(saveRequest("","League of Legends","https://s-media-cache-ak0.pinimg.com/originals/30/0e/58/300e58c8416a68dcfcf1761501348243.jpg","I have the best team !",4));
+        savedRequestModels.add(saveRequest("","World of Warcraft","https://s-media-cache-ak0.pinimg.com/236x/18/f2/c2/18f2c237688c6a4395e0f6a702743a7c.jpg","I'm bored",6));
 
-        savedRequestModels.add(saveRequest("","Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Doubles ranked ?",2));
+        savedRequestModels.add(saveRequest("","Dying Light","https://upload.wikimedia.org/wikipedia/en/c/c0/Dying_Light_cover.jpg","Lets kill some zombies",3));
 
 
 
