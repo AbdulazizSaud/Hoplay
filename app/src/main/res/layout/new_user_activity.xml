@@ -25,7 +25,7 @@
             android:layout_height="55dp"
             android:id="@+id/game_photo_recent_activity_circularimageview"
             android:layout_marginRight="10dp"
-            android:src="@drawable/profile_default_photo"
+            android:src="@drawable/hoplaylogo"
             app:border="true"
             app:border_color="@color/app_color"
             app:border_width="4dp"

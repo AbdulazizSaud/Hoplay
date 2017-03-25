@@ -37,7 +37,8 @@
 
         <activity
             android:name=".UserProfileComponents.ProfileRequires.UserGames"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".UserProfileComponents.ProfileRequires.UserRatings"
             android:screenOrientation="portrait" />
@@ -63,7 +64,8 @@
         <activity android:name=".Activities.SettingsActivity" />
         <activity android:name=".CommunityComponents.UserListActivities.CreateChat" />
         <activity android:name=".CommunityComponents.UserListActivities.ViewFriendProfile" />
-        <activity android:name=".RequestComponents.RequestsRequires.NoGamePopUp"></activity>
+        <activity android:name=".RequestComponents.RequestsRequires.NoGamePopUp" />
+        <activity android:name=".UserProfileComponents.AddGame"></activity>
     </application>
 
 </manifest>

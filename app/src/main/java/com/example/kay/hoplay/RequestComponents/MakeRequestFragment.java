@@ -1,9 +1,11 @@
 package com.example.kay.hoplay.RequestComponents;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +24,7 @@ import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.SavedRequestModel;
+import com.example.kay.hoplay.UserProfileComponents.AddGame;
 
 import java.util.ArrayList;
 
@@ -33,6 +36,7 @@ public abstract class MakeRequestFragment extends Fragment {
     private TextView savedRequestsMessage ;
     private TextView addGameTextView;
     private Dialog  noGameDialog;
+    private FloatingActionButton addGameFloationActionButton;
 
 
     private RecyclerView mRecyclerView;
@@ -56,6 +60,14 @@ public abstract class MakeRequestFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.activity_make_request_fragment, container, false);
         newRequestButton = (Button) view.findViewById(R.id.new_request_button);
+        addGameFloationActionButton = (FloatingActionButton) view.findViewById(R.id.add_new_game_floatinactionbutton);
+        addGameFloationActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity().getApplicationContext(), AddGame.class);
+                startActivity(i);
+            }
+        });
         savedRequestsMessage = (TextView) view.findViewById(R.id.saved_activity_message_textview);
         addGameTextView = (TextView) view.findViewById(R.id.add_game_textview_make_request_fragment);
         newRequestButton.setOnClickListener(new View.OnClickListener() {
@@ -174,7 +186,13 @@ public abstract class MakeRequestFragment extends Fragment {
         noGameMessage.setTypeface(playbold);
 
 
-
+        addGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity().getApplicationContext(), AddGame.class);
+                startActivity(i);
+            }
+        });
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         Window window = noGameDialog.getWindow();
         lp.copyFrom(window.getAttributes());

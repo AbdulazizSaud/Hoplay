@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/app_background"
     android:orientation="vertical"
     android:padding="1dp">
@@ -16,12 +16,13 @@
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:background="@color/app_background">
+        android:background="@color/app_background"
+        >
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:id="@+id/game_photo_saved_request_circularimageview"
+            android:id="@+id/game_photo_add_game_circleimageview"
             android:layout_marginRight="10dp"
             android:src="@drawable/hoplaylogo"
             app:border="true"
@@ -41,30 +42,24 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/game_name_saved_request_textview"
+                        android:id="@+id/game_name_add_game_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:singleLine="true"
                         android:drawablePadding="5dp"
                         android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:fontFamily="sans-serif-light"
-                        android:text="@string/saved_request_instance_game_name"
+                        android:text="@string/game_instance_game_name"
                         android:textSize="16dp"
                         android:layout_weight="1"
                         android:layout_marginRight="8dp" />
-
-
-
-
                 </LinearLayout>
-
 
 
             </LinearLayout>
@@ -78,8 +73,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/saved_request_description"
-                    android:id="@+id/request_description_saved_request_textview"
+                    android:text="@string/game_instance_game_description"
+                    android:id="@+id/game_available_platforms_textview"
                     android:textColor="@color/text_color"
                     android:fontFamily="sans-serif-light"
                     android:textSize="14dp"
@@ -88,15 +83,35 @@
                     android:paddingTop="3dp"
                     android:paddingBottom="3dp" />
 
-                <TextView
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/saved_request_players_number"
-                    android:layout_gravity="center"
-                    android:id="@+id/number_of_players_saved_requests_textview"
-                    android:textColor="@color/app_color"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="center" />
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/game_instance_pc_available"
+                        android:layout_weight="1"
+                        android:id="@+id/pc_available_game_instance_textview"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/game_instance_ps_available"
+                        android:layout_weight="1"
+                        android:id="@+id/ps_available_game_instance_textview"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/game_instance_xbox_available"
+                        android:layout_weight="1"
+                        android:id="@+id/xbox_available_game_instance_textview"/>
+                </LinearLayout>
+
 
 
             </LinearLayout>

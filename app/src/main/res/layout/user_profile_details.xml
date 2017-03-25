@@ -120,6 +120,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1.0"
+            android:clickable="true"
             android:id="@+id/games_user_profile_linearlayout"
             android:background="@drawable/user_games_friends_ratings_background"
             >

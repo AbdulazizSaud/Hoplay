@@ -127,7 +127,6 @@
     <string name="login_successful_message">Welcome %1$s ❤️</string>
 
 
-
     <!--                                Login Activity                                                 -->
     <string name="login_auth_welcome">Welcome , </string>
     <string name="login_please_check_email_or_password">Please check your email or password</string>
@@ -138,6 +137,9 @@
     <string name="make_request_fragment_saved_request">Saved Requests</string>
     <string name="make_request_fragment_add_game">Add Game</string>
 
+
+    <!--                                Add Game Layout                                                            -->
+    <string name="add_game_search_bar">Search for a Game</string>
 
     <!--                                New Request Activity Layout                                          -->
     <string name="new_request_pc">PC</string>
@@ -156,10 +158,17 @@
     <string name="new_request_save_request_button">S A V E</string>
 
 
+    <!--                               Game Instance                                                    -->
+    <string name="game_instance_game_name">Game Name</string>
+    <string name="game_instance_game_description">Available Platforms :</string>
+    <string name="game_instance_pc_available">PC</string>
+    <string name="game_instance_ps_available">PS</string>
+    <string name="game_instance_xbox_available">Xbox</string>
+
+
     <!--                               No GameDetails Added Popup Layout                                             -->
     <string name="no_game_popup_message">Sorry ,You have to add \n a gameDetails to your games library</string>
     <string name="no_game_popup_add_game_button">A D D &#160; G A M E</string>
-
 
 
     <!--                                SignUp Layout                                                        -->

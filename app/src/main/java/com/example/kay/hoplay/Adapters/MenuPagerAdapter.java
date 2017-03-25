@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.example.kay.hoplay.CommunityComponents.CommunityActivity;
 import com.example.kay.hoplay.RequestComponents.MakeRequest;
 import com.example.kay.hoplay.RequestComponents.SearchRequest;
-import com.example.kay.hoplay.CommunityComponents.UserProfileComponents.UserProfileFragment;
+import com.example.kay.hoplay.UserProfileComponents.UserProfileFragment;
 
 /**
  * Created by Kay on 6/15/2016.

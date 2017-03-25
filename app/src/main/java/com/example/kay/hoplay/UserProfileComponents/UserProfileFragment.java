@@ -109,9 +109,8 @@ public class UserProfileFragment extends Fragment {
         toUserGamesLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity().getApplicationContext(),UserGames.class);
+                Intent i = new Intent(getActivity().getApplicationContext(),AddGame.class);
                 startActivity(i);
-
             }
         });
 
@@ -120,6 +119,7 @@ public class UserProfileFragment extends Fragment {
             public void onClick(View v) {
                 Intent i = new Intent(getActivity().getApplicationContext() , ViewFriendProfile.class);
                 startActivity(i);
+
             }
         });
 
@@ -205,13 +205,13 @@ public class UserProfileFragment extends Fragment {
 
         // specify an adapter (see also next example)
 
-        recentGameModels.add(addRecentActivity("xx","Played Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Category : PC Games","15 min ago"));
-        recentGameModels.add(addRecentActivity("xx","Played Overwatch","https://b.thumbs.redditmedia.com/ksN39DPM7HFaXTP_tBi-IuYYfWccRBjYykD6VFSePXE.jpg","Category : PC Games","24 min ago"));
-        recentGameModels.add(addRecentActivity("xx","Played Dying Light","http://shinigaming.com/wp-content/uploads/2015/01/dying-light-logo-high-resolution.jpg","Category : PC Games","5 hours ago"));
-        recentGameModels.add(addRecentActivity("xx","Played Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Category : Playstation Games","12 hours ago"));
-        recentGameModels.add(addRecentActivity("xx","Played Naruto Shippuden Ultimate Ninja Storm 4","http://1.bp.blogspot.com/-DYU2tIaTLYo/VlyFVdvpy1I/AAAAAAAADbo/zCxfuIm0YlM/s1600/Untitled.png","Category : Playstation Games","17" +
+        recentGameModels.add(addRecentActivity("XXX1","Played Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Category : PC GameDetails","15 min ago"));
+        recentGameModels.add(addRecentActivity("XXX1","Played Overwatch","https://b.thumbs.redditmedia.com/ksN39DPM7HFaXTP_tBi-IuYYfWccRBjYykD6VFSePXE.jpg","Category : PC GameDetails","24 min ago"));
+        recentGameModels.add(addRecentActivity("XXX1","Played Dying Light","http://shinigaming.com/wp-content/uploads/2015/01/dying-light-logo-high-resolution.jpg","Category : PC GameDetails","5 hours ago"));
+        recentGameModels.add(addRecentActivity("XXX1","Played Tekken 6","http://vignette2.wikia.nocookie.net/tekken/images/0/04/T6-logo-trophy.png/revision/latest?cb=20140330054519&path-prefix=en","Category : Playstation GameDetails","12 hours ago"));
+        recentGameModels.add(addRecentActivity("XXX1","Played Naruto Shippuden Ultimate Ninja Storm 4","http://1.bp.blogspot.com/-DYU2tIaTLYo/VlyFVdvpy1I/AAAAAAAADbo/zCxfuIm0YlM/s1600/Untitled.png","Category : Playstation GameDetails","17" +
                 " hours ago"));
-        recentGameModels.add(addRecentActivity("xx","World of Warcraft","http://www.technologytell.com/gaming/files/2014/02/world-of-warcraft.png","Category : PC Games","1 day ago"));
+        recentGameModels.add(addRecentActivity("XXX1","World of Warcraft","http://www.technologytell.com/gaming/files/2014/02/world-of-warcraft.png","Category : PC GameDetails","1 day ago"));
 
 
 
@@ -233,9 +233,10 @@ public class UserProfileFragment extends Fragment {
     }
 
 
-    public RecentGameModel addRecentActivity(String gameID,String gameName , String gamePhoto , String activityDescription , String activityDate)
+    public RecentGameModel addRecentActivity(String gameID, String gameName , String gamePhoto , String activityDescription , String activityDate)
     {
         RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,activityDescription,activityDate);
+
         return recentActivity;
     }
 
