@@ -132,7 +132,7 @@ public abstract class AddGame extends AppCompatActivity {
                     }
                 });
 
-                app.loadingImage(holder, model.getGamePhotoUrl());
+                app.loadingImage(getApplication(),holder, model.getGamePhotoUrl());
                 holder.setTitle(model.getGameName());
 
             }

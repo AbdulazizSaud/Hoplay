@@ -151,7 +151,7 @@ public abstract class MakeRequest extends Fragment {
 
 
 
-                App.getInstance().loadingImage(holder,model.getGamePhotoUrl());
+                App.getInstance().loadingImage(getContext(),holder,model.getGamePhotoUrl());
 
                // loadingImage(holder, model, loader);
                 holder.setTitle(model.getGameName());

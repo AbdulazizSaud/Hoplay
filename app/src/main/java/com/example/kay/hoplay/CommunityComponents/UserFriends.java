@@ -51,7 +51,7 @@ public abstract class UserFriends extends AppCompatActivity {
             });
 
             holder.setTitle(model.getUsername());
-            app.loadingImage(holder, model.getUserPictureURL());
+            app.loadingImage(getApplication(),holder, model.getUserPictureURL());
 
         }
     };

@@ -1,7 +1,11 @@
 package com.example.kay.hoplay.CommunityComponents;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -19,7 +23,11 @@ import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.CommunityComponents.UserListActivities.CreateChat;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.CommunityChatModel;
+import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -123,7 +131,10 @@ public abstract class Community extends Fragment {
                     }
                 });
 
-                app.loadingImage(holder, model.getUserPictureURL());
+
+
+
+                app.loadingImage(getContext(),holder, model.getUserPictureURL());
 
                 holder.setTitle(model.getFullName());
                 communityHolder.setCommunitySubtitle(model.getLastMsg());

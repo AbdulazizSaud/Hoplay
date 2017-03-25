@@ -26,7 +26,9 @@ public class ForgetPasswordCore extends ForgetPassword{
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), R.string.forget_password_reset_password + email + R.string.forget_password_check_inbox, Toast.LENGTH_LONG).show();
+
+                        String Msg = String.format(getResources().getString( R.string.forget_password_reset_password), email);
+                        Toast.makeText(getApplicationContext(), Msg, Toast.LENGTH_LONG).show();
                         goToLogin();
                     }
                 }

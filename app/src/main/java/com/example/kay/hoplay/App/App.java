@@ -1,6 +1,7 @@
 package com.example.kay.hoplay.App;
 
 import android.app.Application;
+import android.content.Context;
 import android.graphics.Bitmap;
 
 import com.android.volley.RequestQueue;
@@ -16,6 +17,7 @@ import com.example.kay.hoplay.util.GameManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 
@@ -82,21 +84,29 @@ public class App extends Application implements FirebasePaths{
     }
 
 
-    public void loadingImage(ViewHolders holder, String pictureURL) {
-
-        CircleImageView picture = holder.getPicture();
-
-        if(pictureURL.startsWith("default"))
-            picture.setImageResource(R.drawable.profile_default_photo);
-         else if (pictureURL.startsWith("game"))
-            picture.setImageResource(R.drawable.hoplaylogo);
+    public void loadingImage(Context c, ViewHolders holder, String pictureURL) {
 
 
 
-        Bitmap bitmap = loadPicture(pictureURL, holder.getPicture());
-        picture.setImageResource(R.drawable.profile_default_photo);
+        Picasso.with(c)
+                .load(pictureURL)
+                .error(R.drawable.profile_default_photo)
+                .into(holder.getPicture());
 
-        holder.setPicture(picture);
+
+//        CircleImageView picture = holder.getPicture();
+//
+//        if(pictureURL.startsWith("default"))
+//            picture.setImageResource(R.drawable.profile_default_photo);
+//         else if (pictureURL.startsWith("game"))
+//            picture.setImageResource(R.drawable.hoplaylogo);
+//
+//
+//
+//        Bitmap bitmap = loadPicture(pictureURL, holder.getPicture());
+//        picture.setImageResource(R.drawable.profile_default_photo);
+//
+//        holder.setPicture(picture);
 
 
 //        if(bitmap !=null)

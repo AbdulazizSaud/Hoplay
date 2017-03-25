@@ -288,7 +288,7 @@ public class UserProfile extends Fragment {
             public void OnBindHolder(ViewHolders holder, RecentGameModel model)
             {
 
-               app.loadingImage(holder,model.getGamePhotoUrl());
+               app.loadingImage(getContext(),holder,model.getGamePhotoUrl());
 
                 holder.setTitle(model.getGameName());
                 holder.setSubtitle(model.getActivityDescription());

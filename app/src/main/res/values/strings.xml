@@ -108,8 +108,7 @@
 
 
     <!--                                Forget Password Activity                                      -->
-    <string name="forget_password_reset_password">Reset password has been sent to your email : </string>
-    <string name="forget_password_check_inbox">, Please check your inbox</string>
+    <string name="forget_password_reset_password">Reset password has been sent to your email : %1$s , Please check your inbox</string>
 
 
     <!--                                Login Layout                                                    -->
