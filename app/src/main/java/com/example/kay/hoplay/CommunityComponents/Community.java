@@ -1,17 +1,12 @@
 package com.example.kay.hoplay.CommunityComponents;
 
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,15 +18,8 @@ import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.CommunityComponents.UserListActivities.CreateChat;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.CommunityChatModel;
-import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 
 /**
@@ -115,7 +103,7 @@ public abstract class Community extends Fragment {
     }
 
     private CommonAdapter<CommunityChatModel> createAdapter(){
-        return new CommonAdapter<CommunityChatModel>(communityUserLists,R.layout.new_user_message_instance) {
+        return new CommonAdapter<CommunityChatModel>(communityUserLists,R.layout.new_user_chat_instance) {
             @Override
             public ViewHolders OnCreateHolder(View v) {
 
@@ -139,8 +127,9 @@ public abstract class Community extends Fragment {
 
                 app.loadingImage(getContext(),holder, model.getUserPictureURL());
 
-                holder.setTitle(model.getFullName());
+                holder.setTitle(model.getChatName());
                 communityHolder.setCommunitySubtitle(model.getLastMsg());
+                communityHolder.setCounter(String.valueOf(model.getChatCounter()));
                 holder.setTime(model.getLastMsgDate());
             }
         };
@@ -148,20 +137,6 @@ public abstract class Community extends Fragment {
 
 
 
-
-    protected void testList(String name) {
-        // test
-        String picUrl = "https://s13.postimg.org/puvr2r9tz/test_user_copy.jpg";
-        String username = name;
-        String lastMessage = "Test has joined your request click to replay";
-
-        CommunityChatModel clu = new CommunityChatModel();
-        clu.setUserPictureURL(picUrl);
-        clu.setLastMsg(lastMessage);
-
-        addToList(clu);
-
-    }
 
 
     protected abstract void OnClickHolders(CommunityChatModel model, View v);

@@ -1,6 +1,7 @@
 package com.example.kay.hoplay.Chat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -20,8 +21,10 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.example.kay.hoplay.Activities.MainMenu.MainAppMenuCore;
 import com.example.kay.hoplay.Adapters.ChatAdapter;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.CommunityComponents.CommunityCore;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.ChatMessage;
 
@@ -206,16 +209,17 @@ public abstract class Chat extends AppCompatActivity {
     }
 
     // this method for send message , execute only when a user click on send button
-    protected void sendMessage(String message) {
+    protected boolean sendMessage(String message) {
+
+
+        sendBtn.setImageResource(R.drawable.ic_send_not_focused_32dp);
 
         // check if the message is empty
         if(isMessageEmpty(message))
-            return;
-
-
+            return false;
         messageET.setText("");
-       // sendBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.sendiconnomessage));
-        sendBtn.setImageResource(R.drawable.ic_send_not_focused_32dp);
+
+        return true;
     }
 
     // this method for receive message , execute only when a user receive a message
@@ -329,7 +333,7 @@ public abstract class Chat extends AppCompatActivity {
 
     // this method to switch the current to community frag
     protected void toCommunityFragment(View view) {
-       finish();
+        finish();
     }
 
     // this abstract method is for implements the chat mechinsim

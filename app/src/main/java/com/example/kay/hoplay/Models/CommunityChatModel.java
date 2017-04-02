@@ -1,31 +1,48 @@
 package com.example.kay.hoplay.Models;
 
 
-public class CommunityChatModel extends CommonModel {
+public class CommunityChatModel {
+
 
 
 
 
     // here it should be a behivors something like a opponent id , my id and so long.
-    private String chatKey,fullName,receiverID,lastMsg,lastMsgDate;
+    private String chatKey,chatType,chatName,lastMsg,lastMsgDate,userPictureURL;
+    private long chatCounter;
 
     public CommunityChatModel() {
         this.chatKey = null;
-        this.receiverID = "none";
-        this.fullName = "none";
+        this.chatName = "none";
         this.userPictureURL = "default";
 
         this.lastMsg = "";
         this.lastMsgDate = "0 min ago";
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getUserPictureURL() {
+        return userPictureURL;
+    }
+    public void setUserPictureURL(String userPictureURL) {
+        this.userPictureURL = userPictureURL;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public String getChatKey() {
+        return chatKey;
     }
+
+    public void setChatKey(String chatKey) {
+        this.chatKey = chatKey;
+    }
+
+    public String getChatName() {
+        return chatName;
+    }
+
+    public void setChatName(String chatName) {
+        this.chatName = chatName;
+    }
+
     public String getLastMsg() {
         return lastMsg;
     }
@@ -42,19 +59,19 @@ public class CommunityChatModel extends CommonModel {
         this.lastMsgDate = lastMsgDate;
     }
 
-    public String getReceiverID() {
-        return receiverID;
+    public long getChatCounter() {
+        return chatCounter;
     }
 
-    public void setReceiverID(String receiverID) {
-        this.receiverID = receiverID;
+    public void setChatCounter(long chatCounter) {
+        this.chatCounter = chatCounter;
     }
 
-    public String getChatKey() {
-        return chatKey;
+    public String getChatType() {
+        return chatType;
     }
 
-    public void setChatKey(String chatKey) {
-        this.chatKey = chatKey;
+    public void setChatType(String chatType) {
+        this.chatType = chatType;
     }
 }

@@ -203,11 +203,19 @@ public class App extends Application implements FirebasePaths{
         // SimpleDateFormat format1 = new SimpleDateFormat("dd MMM");
         SimpleDateFormat format2 = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         String timestamp = format2.format(date);
-        Log.i("--->",timestamp);
         return timestamp;
 
     }
 
+    public String convertFromTimeStampToDate(String time)
+    {
+
+        // SimpleDateFormat format1 = new SimpleDateFormat("dd MMM");
+        SimpleDateFormat format2 = new SimpleDateFormat("yyyy:MMdd:HHm:mss:SSS");
+        String date = format2.format(time);
+        return time;
+
+    }
     public void addGame(String gameID,String gameName,int maxPlayers, String gamePicURL,String[] ranks,boolean isCompetitive)
     {
         gameManager.addGame(gameID,gameName,maxPlayers,gamePicURL,ranks,isCompetitive);

@@ -89,7 +89,7 @@ public class LoginCore extends Login {
                     } else {
                         // results if it's failed
                         loadingDialog(false);
-                        Toast.makeText(getApplicationContext(), "Hi i'm fail message in LoginCore.class", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
             });

@@ -16,7 +16,7 @@ public class CreateChat extends UserListCore {
     @Override
     protected void OnClickHolders(final FriendCommonModel model) {
         String myUID =  app.getAuth().getCurrentUser().getUid();
-        String friendUID = model.getKey();
+        String friendUID = model.getFriendKey();
 
 
         // create new chat
@@ -24,9 +24,10 @@ public class CreateChat extends UserListCore {
         String roomKey = createPrivateChat(myUID,friendUID);
         Intent chatActivity = new Intent(getApplicationContext(), ChatCore.class);
         chatActivity.putExtra("room_key", roomKey);
-        chatActivity.putExtra("friend_key", model.getKey());
-        chatActivity.putExtra("friend_username", model.getUsername());
-        chatActivity.putExtra("friend_picture", model.getPictureUrl());
+        chatActivity.putExtra("room_type","_private_");
+        chatActivity.putExtra("friend_key", model.getFriendKey());
+        chatActivity.putExtra("friend_username", model.getFriendUsername());
+        chatActivity.putExtra("friend_picture", model.getUserPictureURL());
 
         finish();
 
@@ -47,6 +48,8 @@ public class CreateChat extends UserListCore {
         // path --> /Chat/_private/[KEY]
         DatabaseReference chatRoom = refPrivate.child(key);
 
+        chatRoom.child("x").setValue("s");
+
         // path --> /Chat/_private/[KEY]/_details_
         DatabaseReference roomInfo =   chatRoom.child(FIREBASE_DETAILS_ATTR);
 
@@ -60,9 +63,11 @@ public class CreateChat extends UserListCore {
         roomInfo.child("access_key").setValue(accessKey);
 
         // path --> /Chat/_private/[KEY]/_messages_
-        DatabaseReference messages =   chatRoom.child(FIREBASE_CHAT_MESSAGES);
-        messages.child("_last_message_").setValue("none");
-        messages.child("_counter_").setValue("A000000000");
+        DatabaseReference messagesRef =   chatRoom.child(FIREBASE_CHAT_MESSAGES);
+        messagesRef.child("_last_message_").child("_username_").child("");
+        messagesRef.child("_last_message_").child("_message_").child("");
+
+        messagesRef.child("_counter_").setValue(0);
 
 
         // Set Referance
@@ -71,7 +76,7 @@ public class CreateChat extends UserListCore {
 
         String privateChatPath = FB_USERS_PATH+UID+"/"+FIREBASE_USER_PRIVATE_CHAT;
         DatabaseReference refUsePrivaterChats = app.getFirebaseDatabase().getReferenceFromUrl(privateChatPath);
-        refUsePrivaterChats.child(key).setValue(accessKey);
+        refUsePrivaterChats.child(key).setValue(0);
 
 
         // Pending

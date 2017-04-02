@@ -55,7 +55,7 @@ public abstract class UserList extends AppCompatActivity {
                 }
             });
 
-            holder.setTitle(model.getUsername());
+            holder.setTitle(model.getFriendUsername());
             app.loadingImage(getApplication(),holder, model.getUserPictureURL());
 
         }
@@ -125,21 +125,7 @@ public abstract class UserList extends AppCompatActivity {
     }
 
 
-
-    private void testList() {
-
-        for(int i=0;i<3;i++) {
-            // test
-            String picUrl = "https://s13.postimg.org/puvr2r9tz/test_user_copy.jpg";
-            String username = "Test";
-            FriendCommonModel flu = new FriendCommonModel();
-            flu.setKey("test"+i);
-            flu.setUserPictureURL(picUrl);
-            flu.setUsername(username + " ");
-            addToUserList(flu);
-        }
-    }
-
+    
     protected void addToUserList(FriendCommonModel friendCommonModel){
         usersList.add(friendCommonModel);
         updateAdapter(false);

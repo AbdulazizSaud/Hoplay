@@ -66,6 +66,11 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
         public void setCommunitySubtitle(String subtitle){
             this.chatLastMessage.setText(subtitle);
         }
+
+        public void setCounter(String counter){
+            this.chatNewMessagesCount.setText(counter);
+        }
+
     }
 
     public static class SavedRequestHolder extends ViewHolders {

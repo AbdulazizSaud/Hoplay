@@ -4,34 +4,31 @@ package com.example.kay.hoplay.Models;
  * Created by Kay on 2/21/2017.
  */
 
-public class FriendCommonModel extends CommonModel {
+public class FriendCommonModel {
 
-    private String username;
+    private String friendKey,chatType,friendUsername,userPictureURL;
 
-
-    private String key;
-
-
-    public String getUsername() {
-        return username;
+    public String getFriendKey() {
+        return friendKey;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFriendKey(String friendKey) {
+        this.friendKey = friendKey;
     }
 
-    public String getPictureUrl() {
+    public String getFriendUsername() {
+        return friendUsername;
+    }
+
+    public void setFriendUsername(String friendUsername) {
+        this.friendUsername = friendUsername;
+    }
+
+    public String getUserPictureURL() {
         return userPictureURL;
     }
 
-    public String getKey() {
-        return key;
+    public void setUserPictureURL(String userPictureURL) {
+        this.userPictureURL = userPictureURL;
     }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-
-
 }

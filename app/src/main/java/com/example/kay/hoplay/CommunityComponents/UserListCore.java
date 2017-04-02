@@ -100,8 +100,8 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
         if(!username.equals(app.getUserInformation().getUsername()))
         {
             friendCommonModel = new FriendCommonModel();
-            friendCommonModel.setKey(key);
-            friendCommonModel.setUsername(username);
+            friendCommonModel.setFriendKey(key);
+            friendCommonModel.setFriendUsername(username);
             friendCommonModel.setUserPictureURL(picUrl);
             addToUserList(friendCommonModel);
         }
