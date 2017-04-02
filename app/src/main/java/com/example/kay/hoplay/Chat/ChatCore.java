@@ -13,6 +13,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 import emojicon.emoji.Objects;
 
 
@@ -107,15 +109,17 @@ public class ChatCore extends Chat implements FirebasePaths {
 
             String messageKey = refMessages.push().getKey();
 
-            DatabaseReference messageRef = refMessages.child("_packets_").child(messageKey);
-            messageRef.child("_message_").setValue(messageText);
-            messageRef.child("_username_").setValue(app.getUserInformation().getUID());
+            HashMap<String,String> map = new HashMap<>();
+            map.put("_message_",messageText);
+            map.put("_username_",app.getUserInformation().getUID());
+            map.put("_time_stamp_",app.getTimeStamp());
 
+            DatabaseReference messageRef = refMessages.child("_packets_").child(messageKey);
+            messageRef.setValue(map);
 
             DatabaseReference lastMessageRef = refMessages.child("_last_message_");
+            lastMessageRef.setValue(map);
 
-            lastMessageRef.child("_username_").setValue(app.getUserInformation().getUID());
-            lastMessageRef.child("_message_").setValue(messageText);
             refMessages.child("_counter_").setValue(++lastMessageCounter);
         }
     }

@@ -37,7 +37,6 @@ public class CommunityCore extends Community implements FirebasePaths {
         @Override
         public void onChildAdded(DataSnapshot chatRef, String s) {
 
-            Log.i("-->",chatRef.toString());
             // on first time
             refPrivateChat = app.getDatabasChat().child(FIREBASE_PRIVATE_ATTR).child(chatRef.getKey());
             refPrivateChatUsersInfo = refPrivateChat.child(FIREBASE_DETAILS_ATTR).child(FIREBASE_USERS_LIST_ATTR);
@@ -46,7 +45,6 @@ public class CommunityCore extends Community implements FirebasePaths {
                 @Override
                 public void onDataChange(DataSnapshot usersSnap) {
                     Iterable<DataSnapshot> users = usersSnap.getChildren();
-                    Log.i("-->",usersSnap.toString());
 
                     for(DataSnapshot user : users)
                     {
@@ -91,7 +89,6 @@ public class CommunityCore extends Community implements FirebasePaths {
     private ValueEventListener retreiveUserInfoListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-            Log.i("-->",dataSnapshot.toString());
 
             String userId =  dataSnapshot.getRef().getParent().getKey();
             if(!userId.equals(app.getUserInformation().getUID()))

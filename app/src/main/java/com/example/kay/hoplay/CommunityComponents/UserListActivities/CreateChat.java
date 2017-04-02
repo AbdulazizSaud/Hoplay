@@ -7,6 +7,9 @@ import com.example.kay.hoplay.CommunityComponents.UserListCore;
 import com.example.kay.hoplay.Models.FriendCommonModel;
 import com.google.firebase.database.DatabaseReference;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 /**
  * Created by Kay on 3/19/2017.
  */
@@ -48,8 +51,6 @@ public class CreateChat extends UserListCore {
         // path --> /Chat/_private/[KEY]
         DatabaseReference chatRoom = refPrivate.child(key);
 
-        chatRoom.child("x").setValue("s");
-
         // path --> /Chat/_private/[KEY]/_details_
         DatabaseReference roomInfo =   chatRoom.child(FIREBASE_DETAILS_ATTR);
 
@@ -64,10 +65,17 @@ public class CreateChat extends UserListCore {
 
         // path --> /Chat/_private/[KEY]/_messages_
         DatabaseReference messagesRef =   chatRoom.child(FIREBASE_CHAT_MESSAGES);
-        messagesRef.child("_last_message_").child("_username_").child("");
-        messagesRef.child("_last_message_").child("_message_").child("");
+        HashMap<String,Object> messageMap = new HashMap<>();
+        HashMap<String,String> lastMessage = new HashMap<>();
 
-        messagesRef.child("_counter_").setValue(0);
+        lastMessage.put("_message_","hello");
+        lastMessage.put("_username_","test");
+        lastMessage.put("_time_stamp_",app.getTimeStamp());
+
+        messageMap.put("_last_message_",lastMessage);
+        messageMap.put("_counter_",0);
+
+        messagesRef.setValue(messageMap);
 
 
         // Set Referance
