@@ -10,7 +10,7 @@ public class GameDetails {
     protected String gameName ;
     protected String gameID;
     protected String gamePhotoUrl;
-
+    protected String gameType;
 
 
     protected int maxPlayers;
@@ -68,5 +68,13 @@ public class GameDetails {
 
     public void setGameRanks(ArrayList<String> gameRanks) {
         this.gameRanks = gameRanks;
+    }
+
+    public String getGameType() {
+        return gameType;
+    }
+
+    public void setGameType(String gameType) {
+        this.gameType = gameType;
     }
 }

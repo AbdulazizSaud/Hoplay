@@ -28,7 +28,10 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -159,7 +162,6 @@ public abstract class Community extends Fragment {
         addToList(clu);
 
     }
-//
 
 
     protected abstract void OnClickHolders(CommunityChatModel model, View v);

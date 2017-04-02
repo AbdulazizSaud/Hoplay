@@ -79,9 +79,8 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
     @Override
     protected void onDestroy() {
-
-        super.onDestroy();
         loadigDialog.dismiss();
+        super.onDestroy();
     }
 
     @Override
@@ -207,7 +206,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
 
         // Init progress dialog
-         loadigDialog = new ProgressDialog(this,R.style.AppCompatAlertDialogStyle);
+        loadigDialog = new ProgressDialog(this,R.style.AppCompatAlertDialogStyle);
         loadigDialog.setTitle(R.string.login_signing_in);
         loadigDialog.setMessage(Login.this.getString(R.string.login_just_a_moment));
 

@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
@@ -75,7 +76,7 @@ public abstract class AddGame extends AppCompatActivity {
                 }
             }
         });
-
+        OnStartActivity();
     }
 
 
@@ -86,7 +87,11 @@ public abstract class AddGame extends AppCompatActivity {
 
         for(GameDetails gameDetails : gamesList)
         {
-            addGame(gameDetails.getGameID(),gameDetails.getGameName(),gameDetails.getMaxPlayers(),gameDetails.getGamePhotoUrl());
+            addGame(gameDetails.getGameID(),
+                    gameDetails.getGameName(),
+                    gameDetails.getGameType()
+                    ,gameDetails.getMaxPlayers()
+                    ,gameDetails.getGamePhotoUrl());
         }
     }
 
@@ -105,9 +110,11 @@ public abstract class AddGame extends AppCompatActivity {
     }
 
 
-    public void addGame(String gameId,String gameName,int maxPlayers,String gamePic)
+    protected void addGame(String gameId,String gameName,String gameType,int maxPlayers,String gamePic)
     {
         GameDetails gameDetails = new GameDetails(gameId,gameName,maxPlayers,gamePic);
+        gameDetails.setGameType(gameType);
+
         gamesList.add(gameDetails);
         mAdapter.notifyDataSetChanged();
     }
@@ -139,6 +146,16 @@ public abstract class AddGame extends AppCompatActivity {
         };
     }
 
+    protected void gameAddedMessage(String gameName)
+    {
+        // success message
+       // String Msg = String.format(getResources().getString(R.string.signup_successful_message), username);
+
+        // results if it's successed
+        Toast.makeText(getApplicationContext(), "Game ("+gameName+") Added",Toast.LENGTH_LONG).show();
+    }
+
     protected abstract void searchForGame(String value);
     protected abstract  void OnClickHolders(GameDetails gameDetails, View v);
+    protected abstract void OnStartActivity();
 }

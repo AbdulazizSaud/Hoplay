@@ -40,7 +40,7 @@ import emojicon.emoji.Objects;
  * Created by azoz-pc on 2/4/2017.
  */
 
-public abstract class Chat extends AppCompatActivity implements ChatInterface {
+public abstract class Chat extends AppCompatActivity {
 
     /***************************************/
 
@@ -59,8 +59,8 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
     protected ListView messagesContainer;
 
 
-    protected CircleImageView roomPicture;
-    protected TextView roomName;
+    protected CircleImageView roomPictureImageView;
+    protected TextView roomNameTextView;
 
     // adapter impalement
     protected ChatAdapter adapter;
@@ -140,8 +140,8 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
         adapter = new ChatAdapter(this, new ArrayList<ChatMessage>());
         messagesContainer.setAdapter(adapter);
 
-        roomName = (TextView)findViewById(R.id.user_name_in_toolbar_textview);
-        roomPicture = (CircleImageView)findViewById(R.id.user_in_toolbar_imageview);
+        roomNameTextView = (TextView)findViewById(R.id.user_name_in_toolbar_textview);
+        roomPictureImageView = (CircleImageView)findViewById(R.id.user_in_toolbar_imageview);
 
         // set up emojis
         setupPopupEmoji();
@@ -154,7 +154,7 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
             @Override
             public void onClick(View v) {
                 String messageText = messageET.getText().toString();
-                sendMessage(messageText);
+                sendMessageToFirebase(messageText);
 
             }
         });
@@ -212,8 +212,6 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
         if(isMessageEmpty(message))
             return;
 
-        // add message to adapter
-        //addMessage(myUsername,message, true);
 
         messageET.setText("");
        // sendBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.sendiconnomessage));
@@ -320,46 +318,23 @@ public abstract class Chat extends AppCompatActivity implements ChatInterface {
         });
     }
 
-    // this method add some testing stuffs
-    private void loadDummyHistory() {
 
-        chatHistory = new ArrayList<ChatMessage>();
+    protected void setRoomDetails(String roomName,String roomPicture) {
 
-        ChatMessage msg = new ChatMessage();
-        msg.setId("dummyID");
-        msg.setMe(false);
-        msg.setMessage("Hi");
-        msg.setDate(DateFormat.getDateTimeInstance().format(new Date()));
-        chatHistory.add(msg);
-        ChatMessage msg1 = new ChatMessage();
-        msg1.setId("dummyID");
-        msg1.setMe(false);
-        msg1.setMessage("How r u doing???");
-        msg1.setDate(DateFormat.getDateTimeInstance().format(new Date()));
-        chatHistory.add(msg1);
-
-
-        for (int i = 0; i < chatHistory.size(); i++) {
-            ChatMessage message = chatHistory.get(i);
-            // add to adapter and display it
-            adapter.add(msg1);
-            adapter.notifyDataSetChanged();
-
-            // scroll the message layout container
-            scroll();
-        }
+        roomNameTextView.setText(roomName);
+        roomPictureImageView.setImageResource(R.drawable.profile_default_photo);
+        app.loadingImage(roomPictureImageView,roomPicture);
 
     }
 
-
     // this method to switch the current to community frag
-    public void toCommunityFragment(View view) {
-//        Intent i = new Intent(this, MainAppMenuCore.class);
-//        startActivity(i);
+    protected void toCommunityFragment(View view) {
        finish();
     }
 
     // this abstract method is for implements the chat mechinsim
-    public abstract void setupChat();
+    protected abstract void setupChat();
+
+    protected abstract void sendMessageToFirebase(String message);
 
 }

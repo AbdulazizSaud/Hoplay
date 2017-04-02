@@ -35,13 +35,16 @@ public interface FirebasePaths {
     public static final String FIREBASE_PICTURE_URL_ATTR =  "_picUrl_";
     public static final String FIREBASE_NICKNAME_ATTR =  "_nickname_";
     public static final String FIREBASE_EMAIL_ATTR = "_email_";
-    public static final String FIREBASE_GAMES_ATTR = "_games_";
+    public static final String FIREBASE_FAVOR_GAME_ATTR = "_favor_games_";
+
+
+
 
     // USER INFO
     public static final String FIREBASE_USERNAME_PATH = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_USERNAME_ATTR;
     public static final String FIREBASE_PICTURE_URL_PATH =  FIREBASE_DETAILS_ATTR+"/"+FIREBASE_PICTURE_URL_ATTR;
     public static final String FIREBASE_NICKNAME_PATH = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_NICKNAME_ATTR;
     public static final String FIREBASE_EMAIL_PATH = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_EMAIL_ATTR;
-
+    public static final String FIREBASE_FAVOR_GAMES_PATH =FIREBASE_GAMES_REFERENCES+"/"+FIREBASE_FAVOR_GAME_ATTR;
 
 }

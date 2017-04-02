@@ -35,15 +35,15 @@ public class LoginCore extends Login {
 
     @Override
     protected void onStart() {
-        super.onStart();
         mAuth.addAuthStateListener(authStateListener);
+        super.onStart();
 
     }
 
     @Override
     protected void onStop() {
-        super.onStop();
         mAuth.removeAuthStateListener(authStateListener);
+        super.onStop();
     }
 
     // this method will do some init to check if user is authenticated , if yes .. it will switch to MainAppMenu

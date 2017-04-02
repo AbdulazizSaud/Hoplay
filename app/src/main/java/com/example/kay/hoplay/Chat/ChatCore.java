@@ -33,14 +33,14 @@ public class ChatCore extends Chat implements FirebasePaths {
         refRoom = app.getFirebaseDatabase().getReferenceFromUrl(FB_PRIVATE_CHAT_PATH+chatRoomKey);
         refMessages = refRoom.child("_messages_");
 
-        setupRoomDetails();
+        setRoomDetails(friendUsername,friendPictureURL);
         loadMessage();
 
 
     }
 
 
-    private void addMessageToChat(DataSnapshot dataSnapshot,boolean isAddChild)
+    private void addMessageToChat(DataSnapshot dataSnapshot)
     {
         if(isEmpty(dataSnapshot))
             return;
@@ -49,10 +49,7 @@ public class ChatCore extends Chat implements FirebasePaths {
 
         boolean isYou = username.equals(app.getUserInformation().getUID());
 
-
-
-            addMessage(username,message,isYou);
-            //addMessage(username,message,true);
+         addMessage(username,message,isYou);
 
     }
     private void loadMessage() {
@@ -61,13 +58,13 @@ public class ChatCore extends Chat implements FirebasePaths {
         refMessages.addChildEventListener(new ChildEventListenerModel() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                addMessageToChat(dataSnapshot,true);
+                addMessageToChat(dataSnapshot);
 
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                addMessageToChat(dataSnapshot,false);
+                addMessageToChat(dataSnapshot);
 
             }
         });
@@ -79,23 +76,18 @@ public class ChatCore extends Chat implements FirebasePaths {
     }
 
 
-    private void setupRoomDetails() {
 
-        roomPicture.setImageResource(R.drawable.profile_default_photo);
-        app.loadingImage(roomPicture,friendPictureURL);
-        roomName.setText(friendUsername);
-
-    }
-
-    @Override
     // this method for send message , execute only when a user click on send button
-    protected void sendMessage(String message) {
-        super.sendMessage(message);
-        String message_key = refMessages.push().getKey();
+    protected void sendMessageToFirebase(String message) {
+
+        sendMessage(message);
+
+       String message_key = refMessages.push().getKey();
 
         refMessages.child(message_key).child("_username_").setValue(app.getUserInformation().getUID());
         refMessages.child(message_key).child("_message_").setValue(message);
         refMessages.child("_last_message_").setValue(message);
+       // refMessages.child("_counter_").setValue(messageCounter);
 
     }
     @Override

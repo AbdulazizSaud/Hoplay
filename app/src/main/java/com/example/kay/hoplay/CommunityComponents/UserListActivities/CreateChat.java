@@ -62,7 +62,7 @@ public class CreateChat extends UserListCore {
         // path --> /Chat/_private/[KEY]/_messages_
         DatabaseReference messages =   chatRoom.child(FIREBASE_CHAT_MESSAGES);
         messages.child("_last_message_").setValue("none");
-
+        messages.child("_counter_").setValue("A000000000");
 
 
         // Set Referance

@@ -3,6 +3,7 @@ package com.example.kay.hoplay.App;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
@@ -20,6 +21,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -189,6 +193,19 @@ public class App extends Application implements FirebasePaths{
 
     public void setmAuthStateListener(FirebaseAuth.AuthStateListener mAuthStateListener) {
         this.mAuthStateListener = mAuthStateListener;
+    }
+
+
+    public String getTimeStamp()
+    {
+        Calendar cc = Calendar.getInstance();
+        Date date = cc.getTime();
+        // SimpleDateFormat format1 = new SimpleDateFormat("dd MMM");
+        SimpleDateFormat format2 = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        String timestamp = format2.format(date);
+        Log.i("--->",timestamp);
+        return timestamp;
+
     }
 
     public void addGame(String gameID,String gameName,int maxPlayers, String gamePicURL,String[] ranks,boolean isCompetitive)

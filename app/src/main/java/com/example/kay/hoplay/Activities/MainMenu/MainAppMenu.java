@@ -7,6 +7,7 @@ import android.support.annotation.IdRes;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.kay.hoplay.Activities.ActivityInterface;
 import com.example.kay.hoplay.Adapters.MenuPagerAdapter;
@@ -133,6 +134,16 @@ public abstract class MainAppMenu extends AppCompatActivity implements ActivityI
 
     }
 
+
+    protected void welcomeMessage(String username)
+    {
+        // success message
+        String Msg = String.format(getResources().getString(R.string.signup_successful_message), username);
+
+        // results if it's successed
+        Toast.makeText(getApplicationContext(), Msg,Toast.LENGTH_LONG).show();
+
+    }
 
     public BottomBar getBottomBar() {
         return bottomBar;

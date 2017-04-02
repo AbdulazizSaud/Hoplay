@@ -40,7 +40,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UserProfile extends Fragment {
+public abstract class UserProfile extends Fragment {
 
     private final static int RESULT_LOAD_IMG=1;
 
@@ -75,6 +75,62 @@ public class UserProfile extends Fragment {
 
         app = App.getInstance();
 
+        initControls(view);
+
+        setClickableControls();
+        OnStartActitvty();
+
+//        profileSettings.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //Creating the instance of PopupMenu
+//                PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), profileSettings);
+//                //Inflating the Popup using xml file
+//                popup.getMenuInflater()
+//                        .inflate(R.menu.settings_in_profile, popup.getMenu());
+//
+//                //registering popup with OnMenuItemClickListener
+//                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                    public boolean onMenuItemClick(MenuItem item) {
+//                        Toast.makeText(
+//                                getActivity().getApplicationContext() ,
+//                                "You Clicked : " + item.getTitle(),
+//                                Toast.LENGTH_SHORT
+//                        ).show();
+//                        return true;
+//                    }
+//                });
+//
+//                popup.show(); //showing popup menu
+//            }
+//        }); //closing the setOnClickListener method
+
+
+
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recent_activities_recyclerview);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+
+
+        mAdapter = createAdapter();
+        mRecyclerView.setAdapter(mAdapter);
+
+
+        setUserProfileInformation();
+
+        return view;
+    }
+
+    private void initControls(View view) {
         usernameProfile = (TextView) view.findViewById(R.id.username_profile);
         //usernameProfile.setText(" Y O Y O  I'm username Fragment");
 
@@ -105,8 +161,9 @@ public class UserProfile extends Fragment {
         ratingsNumberTextView.setTypeface(playregular);
         recentActivitiesTextView.setTypeface(playregular);
         nicknameTextView.setTypeface(playregular);
+    }
 
-
+    private void setClickableControls() {
         // these  methods used to jump to ( games , scores , following , followers ) activity .
         // I've tried the onClick(View view) method  but  it didn't work .
 
@@ -136,8 +193,6 @@ public class UserProfile extends Fragment {
         });
 
 
-
-
         profileSettingsImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,36 +204,11 @@ public class UserProfile extends Fragment {
             }
         });
 
-//        profileSettings.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //Creating the instance of PopupMenu
-//                PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), profileSettings);
-//                //Inflating the Popup using xml file
-//                popup.getMenuInflater()
-//                        .inflate(R.menu.settings_in_profile, popup.getMenu());
-//
-//                //registering popup with OnMenuItemClickListener
-//                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                    public boolean onMenuItemClick(MenuItem item) {
-//                        Toast.makeText(
-//                                getActivity().getApplicationContext() ,
-//                                "You Clicked : " + item.getTitle(),
-//                                Toast.LENGTH_SHORT
-//                        ).show();
-//                        return true;
-//                    }
-//                });
-//
-//                popup.show(); //showing popup menu
-//            }
-//        }); //closing the setOnClickListener method
-
 
         userPictureCircleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 new AlertDialog.Builder(v.getContext())
+                new AlertDialog.Builder(v.getContext())
                         .setTitle("Change Profile Picture")
                         .setPositiveButton("Change Picture", new DialogInterface.OnClickListener() {
                             @Override
@@ -195,34 +225,6 @@ public class UserProfile extends Fragment {
 
             }
         });
-
-
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recent_activities_recyclerview);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        // specify an adapter (see also next example)
-
-        recentGameModels.add(addRecentActivity("XXX1","Played Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Category : PS","15 min ago"));
-        recentGameModels.add(addRecentActivity("XXX1","Played Overwatch","https://b.thumbs.redditmedia.com/ksN39DPM7HFaXTP_tBi-IuYYfWccRBjYykD6VFSePXE.jpg","Category : PC","24 min ago"));
-        recentGameModels.add(addRecentActivity("XXX1","Played Dying Light","http://shinigaming.com/wp-content/uploads/2015/01/dying-light-logo-high-resolution.jpg","Category : Xbox","5 hours ago"));
-        recentGameModels.add(addRecentActivity("XXX1","World of Warcraft","http://www.technologytell.com/gaming/files/2014/02/world-of-warcraft.png","Category : PC","1 day ago"));
-
-
-
-        mAdapter = createAdapter();
-        mRecyclerView.setAdapter(mAdapter);
-
-
-        setUserProfileInformation();
-
-        return view;
     }
 
     private void setUserProfileInformation() {
@@ -234,11 +236,14 @@ public class UserProfile extends Fragment {
     }
 
 
-    public RecentGameModel addRecentActivity(String gameID, String gameName , String gamePhoto , String activityDescription , String activityDate)
-    {
-        RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,activityDescription,activityDate);
 
-        return recentActivity;
+
+    public void addRecentGame(String gameID, String gameName , String gamePhoto , String activityDescription , String activityDate)
+    {
+
+        RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,activityDescription,activityDate);
+        recentGameModels.add(recentActivity);
+        mAdapter.notifyDataSetChanged();
     }
 
 
@@ -296,7 +301,7 @@ public class UserProfile extends Fragment {
             }
         };
     }
-
+    protected abstract void OnStartActitvty();
 
 
 }

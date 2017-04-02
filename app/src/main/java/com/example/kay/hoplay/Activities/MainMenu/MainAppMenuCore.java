@@ -27,17 +27,18 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
     @Override
     protected void onStop() {
-        super.onStop();
         // remove authstate.listenr to firebase auth
         mAuth.removeAuthStateListener(authStateListener);
+        super.onStop();
+
     }
 
     @Override
     protected void onStart(){
-
-        super.onStart();
         // add authstate.listenr to firebase auth
         mAuth.addAuthStateListener(authStateListener);
+        super.onStart();
+
     }
 
     // init method work only on start
@@ -79,13 +80,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     String nickname = dataSnapshot.child(FIREBASE_NICKNAME_PATH).getValue().toString();
                     String picUrl = dataSnapshot.child(FIREBASE_PICTURE_URL_PATH).getValue().toString();
 
-
-                    // success message
-                    String Msg = String.format(getResources().getString(R.string.signup_successful_message), username);
-
-                    // results if it's successed
-                    Toast.makeText(getApplicationContext(), Msg,Toast.LENGTH_LONG).show();
-
+                    welcomeMessage(username);
 
                     app.getUserInformation().setUsername(username);
                     app.getUserInformation().setNickName(nickname);

@@ -24,7 +24,12 @@
         android:windowSoftInputMode="adjustPan">
         <activity
             android:name=".Authentication.LoginCore"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            >
+
+
+        </activity>
+
         <activity android:name=".Authentication.SignUpCore" />
         <activity android:name=".Activities.MainMenu.MainAppMenuCore" />
         <!--
@@ -49,11 +54,11 @@
         <activity android:name=".Chat.ChatCore" />
         <activity android:name=".Activities.ForgetPasswordActivity.ForgetPasswordCore" />
         <activity android:name=".Activities.NoConnection" />
-        <activity android:name=".RequestComponents.MakeRequest" />
         <activity android:name=".RequestComponents.RequestsRequires.NewRequestCore" />
 
 
         <activity android:name=".Activities.SplashScreen">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -17,6 +17,8 @@ import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.FriendCommonModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * Created by Kay on 2/19/2017.
@@ -87,7 +89,7 @@ public abstract class UserList extends AppCompatActivity {
 
                 if(isTextVaild(value))
                 {
-                    updateAdapter(true);
+                    //updateAdapter(true);
                     searchForUser(value);
                 } else
                 {
@@ -140,7 +142,7 @@ public abstract class UserList extends AppCompatActivity {
 
     protected void addToUserList(FriendCommonModel friendCommonModel){
         usersList.add(friendCommonModel);
-         updateAdapter(false);
+        updateAdapter(false);
     }
 
     protected void addToFriendUserList(FriendCommonModel friendCommonModel){
@@ -168,6 +170,8 @@ public abstract class UserList extends AppCompatActivity {
             addToUserList(commonModel);
         }
     }
+
+
 
     protected void setSearchEditTextVisibility(int v)
     {

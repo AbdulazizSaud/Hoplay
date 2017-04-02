@@ -8,6 +8,7 @@ import com.example.kay.hoplay.CommunityComponents.CommunityCore;
 import com.example.kay.hoplay.RequestComponents.MakeRequestCore;
 import com.example.kay.hoplay.RequestComponents.SearchRequestCore;
 import com.example.kay.hoplay.UserProfileComponents.UserProfile;
+import com.example.kay.hoplay.UserProfileComponents.UserProfileCore;
 
 /**
  * Created by Kay on 6/15/2016.
@@ -31,7 +32,7 @@ public class MenuPagerAdapter extends FragmentStatePagerAdapter {
                 case 2 :
                     return new MakeRequestCore();
                 case 3 :
-                    return new UserProfile();
+                    return new UserProfileCore();
 
 
             }

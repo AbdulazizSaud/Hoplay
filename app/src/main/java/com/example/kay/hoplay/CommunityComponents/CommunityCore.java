@@ -25,6 +25,10 @@ public class CommunityCore extends Community implements FirebasePaths {
 
     private DatabaseReference refAuthUserChats;
 
+
+    // chunks var
+    String userKey;
+
     @Override
     protected void OnClickHolders(CommunityChatModel model, View v) {
         Intent i = new Intent(v.getContext(), ChatCore.class);
@@ -59,14 +63,23 @@ public class CommunityCore extends Community implements FirebasePaths {
 
         String uid = app.getUserInformation().getUID();
 
-        final DatabaseReference refPendingChat = app.getDatabasChat().child(FIREBASE_PENDING_CHAT_ATTR).child(uid).child(FIREBASE_PRIVATE_ATTR);
+
+        // here we will get a pending chats ref
+        final DatabaseReference refPendingChat = app
+                .getDatabasChat()
+                .child(FIREBASE_PENDING_CHAT_ATTR+"/"+uid+"/"+FIREBASE_PRIVATE_ATTR);
 
         refPendingChat.addChildEventListener(new ChildEventListenerModel() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                // get a chat id  from pending chat and set a ref on chat refreance in user_info
                 String chatId = dataSnapshot.child("chat_id").getValue().toString();
                 refAuthUserChats.child(FIREBASE_PRIVATE_ATTR).child(chatId).setValue(chatId);
+
+                // remove a ref from pending chat
                 refPendingChat.child(dataSnapshot.getKey()).removeValue();
+
             }
 
             @Override
@@ -86,24 +99,15 @@ public class CommunityCore extends Community implements FirebasePaths {
 
         refAuthUserChats.child(FIREBASE_PRIVATE_ATTR).addChildEventListener(new ChildEventListenerModel() {
             @Override
-            public void onChildAdded(final DataSnapshot privateChat, String s) {
+            public void onChildAdded(final DataSnapshot chatUpdated, String s) {
 
-                DatabaseReference refChat = app.getFirebaseDatabase().getReferenceFromUrl(FB_PRIVATE_CHAT_PATH+privateChat.getKey());
-                refChat.addListenerForSingleValueEvent(readUsersInformationOnChat(privateChat));
+                DatabaseReference refChat = app.getFirebaseDatabase().getReferenceFromUrl(FB_PRIVATE_CHAT_PATH + chatUpdated.getKey());
+                refChat.addListenerForSingleValueEvent(readUsersInformationOnChat());
 
-                refChat.child("_messages_").child("_last_message_").addValueEventListener(new ValueEventListener() {
+                refChat.child("_messages_"+"/"+"_last_message_").addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        for(CommunityChatModel chats : communityUserLists)
-                        {
-                              if(chats.getChatKey().equals(privateChat.getKey()))
-                                {
-                                    chats.setLastMsg(dataSnapshot.getValue().toString());
-                                    mAdapter.notifyDataSetChanged();
-                                break;
-                                }
-                        }
+                    public void onDataChange(DataSnapshot lastMessageValue) {
+                        updateLastMessage(chatUpdated.getKey(), lastMessageValue.getValue().toString().trim());
                     }
 
                     @Override
@@ -124,41 +128,67 @@ public class CommunityCore extends Community implements FirebasePaths {
 
     }
 
+    private void updateLastMessage(String chatUpdatedKey,String lastMessage) {
+        for(CommunityChatModel chats : communityUserLists)
+        {
+              if(chats.getChatKey().equals(chatUpdatedKey))
+                {
+                    chats.setLastMsg(lastMessage);
+                    mAdapter.notifyDataSetChanged();
+                break;
+                }
+        }
+    }
+
     @NonNull
-    private ValueEventListener readUsersInformationOnChat(final DataSnapshot dataSnapshot) {
+    private ValueEventListener readUsersInformationOnChat() {
         return new ValueEventListener() {
             @Override
-            public void onDataChange(final DataSnapshot chatInfo) {
+            public void onDataChange(final DataSnapshot currentChat) {
 
-                Iterator usersInChat = chatInfo.child(FIREBASE_DETAILS_ATTR).child("_users_").getChildren().iterator();
-
-                while (usersInChat.hasNext())
+                // path --> /_chat_ref/_private_/[CHAT_ID]/_info_/_users_
+                Iterable<DataSnapshot> usersInChat = currentChat.child(FIREBASE_DETAILS_ATTR).child("_users_").getChildren();
+                for(DataSnapshot user : usersInChat)
                 {
-                    DataSnapshot data = (DataSnapshot) usersInChat.next();
-                    if(!data.getKey().equals(app.getUserInformation().getUID()))
+                    userKey  = user.getKey();
+
+                    // here we will check if i'm not in users list xD (bug)
+                    if(!userKey.equals(app.getUserInformation().getUID()))
                     {
-                        String userKey = data.getKey();
+                        // path --> /_users_info/[UID]/_details_
+                        app.getDatabaseUsers().child(userKey)
+                                .child(FIREBASE_DETAILS_ATTR)
+                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        // hna fe b8
-                        app.getDatabaseUsers().child(userKey).child(FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot userInfo) {
+                                        // Set up a chat
 
-                                String  lastMessage= "none";
+                                        boolean isLastMsgExisted = currentChat.child("_messages_").hasChild("_last_message_");
+                                        String lastMessage = "none";
 
-                                if(chatInfo.child("_messages_").hasChild("_last_message_"))
-                                    lastMessage = chatInfo.child("_messages_").child("_last_message_").getValue().toString();
+                                        String username =  dataSnapshot.child("_username_").getValue().toString().trim();
+                                        String picUrl  =  dataSnapshot.child("_picUrl_").getValue().toString().trim();
+                                        String messageCounter =  currentChat.child("_messages_"+"/"+"_counter_").getValue().toString().trim();
 
-                                addUserChat(dataSnapshot.getKey(),userInfo.child("_username_").getValue().toString(),userInfo.child("_picUrl_").getValue().toString(),lastMessage);
-                            }
+                                          if(isLastMsgExisted)
+                                            lastMessage = currentChat.child("_messages_"+"/"+"_last_message_").getValue().toString();
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
+                                        addUserChatToList(userKey,username,picUrl,lastMessage,messageCounter);
 
-                            }
-                        });
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
                     }
                 }
+
+
 
 
             }
@@ -172,7 +202,7 @@ public class CommunityCore extends Community implements FirebasePaths {
 
 
 
-    private void addUserChat(String userKey, String username,String pictureURL,String lastMessage) {
+    private void addUserChatToList(String userKey, String username,String pictureURL,String lastMessage,String messageNumber) {
 
         CommunityChatModel communityUserList = new CommunityChatModel();
         communityUserList.setChatKey(userKey);
