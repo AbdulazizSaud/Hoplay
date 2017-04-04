@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.kay.hoplay.Authentication.LoginCore;
+import com.example.kay.hoplay.Cores.AuthenticationCore.LoginCore;
 import com.example.kay.hoplay.R;
 
 public class SplashScreen extends AppCompatActivity {

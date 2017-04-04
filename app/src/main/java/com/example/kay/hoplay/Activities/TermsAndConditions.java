@@ -13,7 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.kay.hoplay.Authentication.SignUpCore;
+import com.example.kay.hoplay.Cores.AuthenticationCore.SignUpCore;
 import com.example.kay.hoplay.R;
 
 public class TermsAndConditions extends AppCompatActivity {

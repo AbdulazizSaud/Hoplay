@@ -11,9 +11,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import emojicon.EmojiconTextView;
 
 
-/**
- * Created by azoz-pc on 11/30/2016.
- */
+
 
 public abstract class ViewHolders extends RecyclerView.ViewHolder {
 
@@ -57,7 +55,6 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
 
             chatNewMessagesCount =  (TextView) v.findViewById(R.id.chatNewMessagesCount);
             chatNewMessagesCount.setTypeface(sansation);
-
 
             chatLastMessage = (EmojiconTextView) v.findViewById(R.id.chatLastMessage);
             chatLastMessage.setTypeface(sansation);
