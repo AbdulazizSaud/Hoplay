@@ -28,7 +28,7 @@ public class UserProfileCore extends UserProfile implements FirebasePaths{
     {
 
         DatabaseReference myFavorGames = app.getDatabaseUsers().child(app.getUserInformation().getUID()+"/"+FIREBASE_FRIENDS_LIST_ATTR);
-        myFavorGames.addListenerForSingleValueEvent(new ValueEventListener() {
+        myFavorGames.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot friendsSnaps) {
 
@@ -48,7 +48,7 @@ public class UserProfileCore extends UserProfile implements FirebasePaths{
     {
 
         DatabaseReference myFavorGames = app.getDatabaseUsers().child(app.getUserInformation().getUID()+"/"+FIREBASE_FAVOR_GAMES_PATH);
-        myFavorGames.addListenerForSingleValueEvent(new ValueEventListener() {
+        myFavorGames.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot gamesShots) {
 
