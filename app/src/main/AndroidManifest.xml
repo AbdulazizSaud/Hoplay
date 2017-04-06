@@ -23,15 +23,15 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
         <activity
-            android:name=".Authentication.LoginCore"
+            android:name=".Cores.AuthenticationCore.LoginCore"
             android:screenOrientation="portrait"
             >
 
 
         </activity>
 
-        <activity android:name=".Authentication.SignUpCore" />
-        <activity android:name=".Activities.MainMenu.MainAppMenuCore" />
+        <activity android:name=".Cores.AuthenticationCore.SignUpCore" />
+        <activity android:name=".Cores.MainAppMenuCore" />
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -40,21 +40,15 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name=".UserProfileComponents.ProfileRequires.UserGames"
-            android:screenOrientation="portrait"/>
 
-        <activity
-            android:name=".UserProfileComponents.ProfileRequires.UserRatings"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.TermsAndConditions"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".Chat.ChatCore" />
-        <activity android:name=".Activities.ForgetPasswordActivity.ForgetPasswordCore" />
+        <activity android:name=".Cores.ChatCore.ChatCore" />
+        <activity android:name=".Cores.ForgetPasswordCore" />
         <activity android:name=".Activities.NoConnection" />
-        <activity android:name=".RequestComponents.RequestsRequires.NewRequestCore" />
+        <activity android:name=".Cores.RequestCore.NewRequestCore" />
 
 
         <activity android:name=".Activities.SplashScreen">
@@ -67,10 +61,10 @@
         </activity>
 
         <activity android:name=".Activities.SettingsActivity" />
-        <activity android:name=".CommunityComponents.UserListActivities.CreateChat" />
-        <activity android:name=".CommunityComponents.UserListActivities.ViewFriendProfile" />
-        <activity android:name=".RequestComponents.RequestsRequires.NoGamePopUp" />
-        <activity android:name=".UserProfileComponents.AddGameCore"/>
+        <activity android:name=".Cores.ChatCore.CreateChatCore" />
+        <activity android:name=".Cores.UserProfileCores.ViewFriendProfileCore" />
+        <activity android:name=".Activities.NoGamePopUp" />
+        <activity android:name=".Cores.UserProfileCores.AddGameCore"/>
     </application>
 
 </manifest>

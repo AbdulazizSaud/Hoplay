@@ -21,9 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -196,26 +198,12 @@ public class App extends Application implements FirebasePaths{
     }
 
 
-    public String getTimeStamp()
-    {
-        Calendar cc = Calendar.getInstance();
-        Date date = cc.getTime();
-        // SimpleDateFormat format1 = new SimpleDateFormat("dd MMM");
-        SimpleDateFormat format2 = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-        String timestamp = format2.format(date);
-        return timestamp;
-
+    public String convertFromTimeStampToDate(String timeStamp){
+        DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        Date netDate = (new Date(Long.parseLong(timeStamp)));
+        return sdf.format(netDate);
     }
 
-    public String convertFromTimeStampToDate(String time)
-    {
-
-        // SimpleDateFormat format1 = new SimpleDateFormat("dd MMM");
-        SimpleDateFormat format2 = new SimpleDateFormat("yyyy:MMdd:HHm:mss:SSS");
-        String date = format2.format(time);
-        return time;
-
-    }
     public void addGame(String gameID,String gameName,int maxPlayers, String gamePicURL,String[] ranks,boolean isCompetitive)
     {
         gameManager.addGame(gameID,gameName,maxPlayers,gamePicURL,ranks,isCompetitive);

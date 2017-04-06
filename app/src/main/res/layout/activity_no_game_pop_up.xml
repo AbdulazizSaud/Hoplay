@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/no_games_added_background"
-    tools:context="com.example.kay.hoplay.RequestComponents.RequestsRequires.NoGamePopUp">
+    tools:context="com.example.kay.hoplay.Activities.NoGamePopUp">
 
 
     <ImageView

@@ -4,11 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.kay.hoplay.CommunityComponents.CommunityCore;
-import com.example.kay.hoplay.RequestComponents.MakeRequestCore;
-import com.example.kay.hoplay.RequestComponents.SearchRequestCore;
-import com.example.kay.hoplay.UserProfileComponents.UserProfile;
-import com.example.kay.hoplay.UserProfileComponents.UserProfileCore;
+import com.example.kay.hoplay.Cores.CommunityCore;
+import com.example.kay.hoplay.Cores.RequestCore.MakeRequestCore;
+import com.example.kay.hoplay.Cores.RequestCore.SearchRequestCore;
+import com.example.kay.hoplay.Cores.UserProfileCores.UserProfileCore;
 
 /**
  * Created by Kay on 6/15/2016.
