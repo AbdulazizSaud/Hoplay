@@ -5,8 +5,8 @@
     <dimen name="item_size">192dp</dimen>
 
 
-
     <!-- Aman app dimens -->
     <dimen name="global_padding">16dp</dimen>
     <dimen name="global_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>
