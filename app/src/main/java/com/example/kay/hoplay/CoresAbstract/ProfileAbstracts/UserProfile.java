@@ -71,7 +71,7 @@ public abstract class UserProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_userProfile, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_profile, container, false);
 
         app = App.getInstance();
 
@@ -303,10 +303,13 @@ public abstract class UserProfile extends Fragment {
     protected void setGamesNumber(String number){
         gamesNumberTextView.setText(number);
     }
-
     protected void setFriendsNumber(String number){
         friendsNumberTextView.setText(number);
     }
+
+    protected void setNicknameTextView( String name) {nicknameTextView.setText(name);}
+    protected void setUsernameProfile(String name){usernameProfile.setText(name);}
+
 
     protected abstract void OnStartActitvty();
 

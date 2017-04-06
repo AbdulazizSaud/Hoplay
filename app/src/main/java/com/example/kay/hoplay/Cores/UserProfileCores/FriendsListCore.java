@@ -15,7 +15,9 @@ public class FriendsListCore extends UserListCore {
     protected void OnClickHolders(FriendCommonModel model)
     {
         Intent i = new Intent(this,ViewFriendProfileCore.class);
+        i.putExtra("user_key",model.getFriendKey());
         startActivity(i);
+
     }
 
     @Override

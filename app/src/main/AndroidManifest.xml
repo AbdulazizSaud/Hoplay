@@ -57,6 +57,7 @@
         <activity android:name=".Cores.UserProfileCores.FriendsListCore" />
 
 
+
     </application>
 
 </manifest>

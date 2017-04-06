@@ -9,7 +9,7 @@
     android:background="@color/app_background">
 
     <ImageView
-        android:id="@+id/userProfile_back_btn"
+        android:id="@+id/user_profile_back_btn"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@color/invisible_request_color"

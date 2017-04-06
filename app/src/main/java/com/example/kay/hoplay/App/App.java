@@ -177,21 +177,12 @@ public class App extends Application implements FirebasePaths{
         return databaseGames;
     }
 
-    public DatabaseReference getDatabaseAuthUserDataRef() {
-        return databaseAuthUserDataRef;
-    }
 
-    public void setDatabaseAuthUserDataRef(DatabaseReference databaseAuthUserDataRef) {
-        this.databaseAuthUserDataRef = databaseAuthUserDataRef;
-    }
 
     public UserInformation getUserInformation() {
         return userInformation;
     }
 
-    public FirebaseAuth.AuthStateListener getmAuthStateListener() {
-        return mAuthStateListener;
-    }
 
     public void setmAuthStateListener(FirebaseAuth.AuthStateListener mAuthStateListener) {
         this.mAuthStateListener = mAuthStateListener;
