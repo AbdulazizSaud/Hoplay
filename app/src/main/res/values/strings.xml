@@ -258,6 +258,7 @@
     <!--                                 New Chat                                     -->
 
     <string name="search_user_message">Search for user</string>
+    <string name="title_activity_view_profile">ViewProfile</string>
 
 
 </resources>

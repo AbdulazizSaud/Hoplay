@@ -24,8 +24,8 @@ import com.example.kay.hoplay.Activities.SettingsActivity;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
-import com.example.kay.hoplay.Cores.UserProfileCores.ViewFriendProfileCore;
 import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
+import com.example.kay.hoplay.Cores.UserProfileCores.FriendsListCore;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.RecentGameModel;
 
@@ -71,7 +71,7 @@ public abstract class UserProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_user, container, false);
+        View view = inflater.inflate(R.layout.fragment_userProfile, container, false);
 
         app = App.getInstance();
 
@@ -182,7 +182,7 @@ public abstract class UserProfile extends Fragment {
         toUserFriendsLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity().getApplicationContext() , ViewFriendProfileCore.class);
+                Intent i = new Intent(getActivity().getApplicationContext() , FriendsListCore.class);
                 startActivity(i);
 
             }

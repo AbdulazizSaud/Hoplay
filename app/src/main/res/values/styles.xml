@@ -10,7 +10,7 @@
 
         <!--THIS IS HOW TO MAKE THE STATUS  BAR TRANSCELENT -->
         <!--<item name="android:windowTranslucentStatus">true</item>-->
-        
+
 
     </style>
 
@@ -24,33 +24,29 @@
         <!--<item name="windowActionBar">false</item>-->
         <!--<item name="windowNoTitle">true</item>-->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item  name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item  name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
 
 
     </style>
 
 
-
-
-     <!-- Toolbar style -->
+    <!-- Toolbar style -->
     <style name="MyCustomToolbarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-    <!--<item name="textColorPrimary">#FFFFFF</item>-->
+        <!--<item name="textColorPrimary">#FFFFFF</item>-->
         <!--<item name="textColorSecondary">#FFFFFF</item>-->
         <!--<item name="android:windowNoTitle">true</item>-->
 
     </style>
 
     <style name="CustomTrans" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:windowCloseOnTouchOutside">true</item>      
+        <item name="android:windowCloseOnTouchOutside">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
 
     </style>
 
 
-
-    
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

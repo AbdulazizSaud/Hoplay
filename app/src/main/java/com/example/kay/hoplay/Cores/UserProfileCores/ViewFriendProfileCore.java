@@ -1,31 +1,13 @@
 package com.example.kay.hoplay.Cores.UserProfileCores;
 
-import android.widget.EditText;
-
-import com.example.kay.hoplay.Cores.ParentCore.UserListCore;
-import com.example.kay.hoplay.Models.FriendCommonModel;
+import com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.ViewFriendProfile;
 
 /**
- * Created by Kay on 3/19/2017.
+ * Created by azoz-pc on 4/5/2017.
  */
 
-public class ViewFriendProfileCore extends UserListCore {
+public class ViewFriendProfileCore extends ViewFriendProfile {
 
 
 
-    @Override
-    protected void OnClickHolders(FriendCommonModel model)
-    {
-
-    }
-
-    @Override
-    protected void onStartActivity() {
-
-
-        searchEditText.setVisibility(EditText.GONE);
-        searchEditText = null;
-
-        loadFriendList();
-    }
 }

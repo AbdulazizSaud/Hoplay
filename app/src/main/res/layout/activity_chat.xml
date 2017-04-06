@@ -7,9 +7,8 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/users_toolbar"
-        >
+        />
 
-    </include>
 
 
     <RelativeLayout

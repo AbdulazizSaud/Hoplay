@@ -24,12 +24,7 @@
         android:windowSoftInputMode="adjustPan">
         <activity
             android:name=".Cores.AuthenticationCore.LoginCore"
-            android:screenOrientation="portrait"
-            >
-
-
-        </activity>
-
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".Cores.AuthenticationCore.SignUpCore" />
         <activity android:name=".Cores.MainAppMenuCore" />
         <!--
@@ -40,31 +35,28 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-
         <activity
             android:name=".Activities.TermsAndConditions"
             android:screenOrientation="portrait" />
-
         <activity android:name=".Cores.ChatCore.ChatCore" />
         <activity android:name=".Cores.ForgetPasswordCore" />
         <activity android:name=".Activities.NoConnection" />
         <activity android:name=".Cores.RequestCore.NewRequestCore" />
-
-
         <activity android:name=".Activities.SplashScreen">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Activities.SettingsActivity" />
         <activity android:name=".Cores.ChatCore.CreateChatCore" />
-        <activity android:name=".Cores.UserProfileCores.ViewFriendProfileCore" />
         <activity android:name=".Activities.NoGamePopUp" />
-        <activity android:name=".Cores.UserProfileCores.AddGameCore"/>
+        <activity android:name=".Cores.UserProfileCores.AddGameCore" />
+        <activity android:name=".Cores.UserProfileCores.ViewFriendProfileCore" />
+        <activity android:name=".Cores.UserProfileCores.FriendsListCore" />
+
+
     </application>
 
 </manifest>
