@@ -89,7 +89,7 @@ public class CommunityCore extends Community implements FirebasePaths {
     private ValueEventListener retreiveUserInfoListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-
+//
             String userId =  dataSnapshot.getRef().getParent().getKey();
             if(!userId.equals(app.getUserInformation().getUID()))
             {
