@@ -58,6 +58,10 @@ public class CommunityCore extends Community implements FirebasePaths {
                                     refPrivateChat.child("_messages_/_last_message_").addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot lasMsgSnap) {
+
+                                            if(lasMsgSnap.child("_message_").getValue() == null )
+                                                return;
+
                                             addUserChatToList(
                                                     chatRef.getKey(),
                                                     "_private_",
@@ -125,6 +129,9 @@ public class CommunityCore extends Community implements FirebasePaths {
     private ValueEventListener lastMessageListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
+
+            if(dataSnapshot.child("_message_").getValue() == null )
+                return;
 
             String chatKey = dataSnapshot.getRef().getParent().getParent().getKey();
             String msg = dataSnapshot.child("_message_").getValue().toString().trim();
