@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
+import com.example.kay.hoplay.Cores.RequestCore.NewRequestCore;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.SavedRequestModel;
 import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
@@ -33,6 +34,7 @@ public abstract class MakeRequest extends Fragment {
     private TextView savedRequestsMessage ;
     private TextView addGameTextView;
     private Dialog  noGameDialog;
+
     private FloatingActionButton addGameFloationActionButton;
 
 
@@ -42,6 +44,9 @@ public abstract class MakeRequest extends Fragment {
 
     // specify an adapter (see also next example)
    private ArrayList<SavedRequestModel> savedRequestModels =new ArrayList<SavedRequestModel>();
+
+    protected   App app ;
+
 
 
 
@@ -53,6 +58,8 @@ public abstract class MakeRequest extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        app = App.getInstance();
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.activity_make_request_fragment, container, false);
@@ -71,9 +78,7 @@ public abstract class MakeRequest extends Fragment {
         newRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent i = new Intent(getContext(),NewRequestCore.class);
-//                startActivity(i);
-                createNoGameDialog();
+                checkUserGamesNumber();
             }
         });
 
@@ -113,10 +118,20 @@ public abstract class MakeRequest extends Fragment {
 
 
 
+        onStartActivity();
         return view;
 
     }
 
+    protected void canMakeRequest(boolean canMakeRequest) {
+        if (canMakeRequest)
+        {
+            Intent i = new Intent(getContext(),NewRequestCore.class);
+            startActivity(i);
+        }
+        else
+        createNoGameDialog();
+    }
 
 
     public SavedRequestModel saveRequest(String gameID, String gameName , String gamePhoto , String requestDescription , int numberOfPlayers)
@@ -200,4 +215,6 @@ public abstract class MakeRequest extends Fragment {
         window.setAttributes(lp);
     }
 
+    protected  abstract  void onStartActivity();
+    protected  abstract void checkUserGamesNumber();
 }

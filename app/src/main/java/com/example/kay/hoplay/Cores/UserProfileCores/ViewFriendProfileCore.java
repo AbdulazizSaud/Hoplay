@@ -2,6 +2,7 @@ package com.example.kay.hoplay.Cores.UserProfileCores;
 
 import android.content.Intent;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.ViewFriendProfile;
@@ -29,6 +30,8 @@ public class ViewFriendProfileCore extends ViewFriendProfile  implements Firebas
 
         loadFriendData(friendKey);
         loadRecentActivtiy(friendKey);
+
+
     }
 
     private void loadFriendData(String key)
@@ -103,8 +106,9 @@ public class ViewFriendProfileCore extends ViewFriendProfile  implements Firebas
                         public void onDataChange(DataSnapshot gameShot) {
                             String gameName = gameShot.child("name").getValue().toString().trim();
                             String gamePic = gameShot.child("photo").getValue().toString().trim();
+                            // Fetch recent games from database and bind it to the recyclerview
+                            addRecentGame(gameKey,gameName,gamePic,"","");
 
-                            // here we will add a games to reecelye view
                         }
 
                         @Override

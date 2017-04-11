@@ -1,5 +1,6 @@
 package com.example.kay.hoplay.CoresAbstract.ProfileAbstracts;
 
+import android.graphics.Typeface;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +28,7 @@ public abstract class AddGame extends AppCompatActivity {
 
 
     private RecyclerView mRecyclerView;
-    private TextInputEditText searchBar;
+    private EditText searchBar;
     private ArrayList<GameDetails> gamesList=new ArrayList<GameDetails>();
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -42,9 +43,11 @@ public abstract class AddGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_game);
 
+        final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
         app = App.getInstance();
         mRecyclerView = (RecyclerView)findViewById(R.id.rec_add_game);
-        searchBar = (TextInputEditText)findViewById(R.id.search_games_edititext_add_game) ;
+        searchBar = (EditText)findViewById(R.id.search_games_edititext_add_game) ;
+        searchBar.setTypeface(playbold);
         mAdapter = createAdapter();
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setAdapter(mAdapter);
@@ -64,7 +67,14 @@ public abstract class AddGame extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                String value = s.toString().trim();
+                // search icon changing animation
+                searchBar.setCompoundDrawablesWithIntrinsicBounds(0 , 0, R.drawable.ic_search_focused_32dp, 0);
+                if(s.length() == 0)
+                {
+                    searchBar.setCompoundDrawablesWithIntrinsicBounds(0 , 0, R.drawable.ic_search_unfocused_32dp, 0);
+                }
+
+                String value = s.toString().toLowerCase().trim();
 
                 if(isTextValidate(value))
                 {

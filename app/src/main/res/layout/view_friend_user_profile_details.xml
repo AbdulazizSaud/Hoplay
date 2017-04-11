@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/app_background">
+
+
+
+
+    <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/app_background"
+        android:layout_marginTop="20dp"
+        >
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_profile_details_nickname"
+            android:id="@+id/nickname_profile_textView"
+            android:textSize="20dp"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="@color/text_color"
+            />
+
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/app_background"
+        android:layout_marginTop="10dp"
+        >
+
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/app_background"
+            android:layout_weight="1.0"
+            android:layout_gravity="center"
+            >
+
+
+            <!-- Inculde user photo here -->
+
+            <include layout="@layout/user_profile_photo_with_border"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+            </include>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_profile_details_username"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:id="@+id/username_profile"
+                android:textColor="@color/text_color"
+                />
+
+        </LinearLayout>
+
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"/>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/user_games_friends_ratings_background"
+        android:layout_marginTop="15dp"
+        >
+
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1.0"
+            android:clickable="true"
+            android:id="@+id/games_user_profile_linearlayout"
+            android:background="@drawable/user_games_friends_ratings_background"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_profile_details_games"
+                android:textColor="@color/app_color"
+                android:textSize="15dp"
+                android:layout_margin="5dp"
+                android:layout_gravity="center"
+                android:id="@+id/games_profile_textview"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/games_number_profile_textview"
+                android:layout_gravity="center"
+                android:textSize="15dp"
+                android:layout_margin="5dp"
+                android:text="@string/user_profile_details_games_number" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1.0"
+            android:id="@+id/friends_user_profile_linearlayout"
+            android:background="@drawable/user_games_friends_ratings_background">
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/friends_profile_textview"
+                android:text="@string/user_profile_details_friends"
+                android:textSize="15dp"
+                android:textColor="@color/app_color"
+                android:layout_margin="5dp"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:id="@+id/friends_number_profile_textview"
+                android:textSize="15dp"
+                android:text="@string/user_profile_details_friends_number" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1.0"
+            android:id="@+id/ratings_user_profile_linearlayout"
+            android:background="@drawable/user_games_friends_ratings_background"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratings_profile_textview"
+                android:text="@string/user_profile_details_ratings"
+                android:layout_margin="5dp"
+                android:textSize="15dp"
+                android:textColor="@color/app_color"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratings_number_profile_textview"
+                android:layout_gravity="center"
+                android:textSize="15dp"
+                android:layout_margin="5dp"
+                android:text="ratings" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+

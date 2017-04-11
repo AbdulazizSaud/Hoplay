@@ -1,5 +1,6 @@
 package com.example.kay.hoplay.Cores.UserProfileCores;
 
+import android.util.Log;
 import android.view.View;
 
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
@@ -82,6 +83,7 @@ public class AddGameCore extends AddGame implements FirebasePaths {
 
                     for (DataSnapshot shot : iterable)
                     {
+//                        Log.i("------------>",gameType);
                         addGame(shot.getKey(),gameType,shot);
                     }
                 }
@@ -110,10 +112,14 @@ public class AddGameCore extends AddGame implements FirebasePaths {
 
         String gameId =  key;
         String gameName = dataSnapshot.child("name").getValue().toString().trim();
+        // Capitlizing the first letter of a game
+        String gameNameWithCapitalLetter = gameName.substring(0,1).toUpperCase() + gameName.substring(1);
+
+
         String gamPic = dataSnapshot.child("photo").getValue().toString().trim();
         String maxPlayerAsString =  dataSnapshot.child("max_player").getValue().toString().trim();
         int maxPlayer = Integer.parseInt(maxPlayerAsString);
-        addGame(gameId,gameName,gametype,maxPlayer,gamPic);
+        addGame(gameId,gameNameWithCapitalLetter,gametype,maxPlayer,gamPic);
 
     }
 

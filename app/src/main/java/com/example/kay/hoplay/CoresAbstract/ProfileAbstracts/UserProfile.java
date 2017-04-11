@@ -260,7 +260,7 @@ public abstract class UserProfile extends Fragment {
                 userPictureCircleImageView.setImageBitmap(imgBitmap);
 
             } else {
-                Toast.makeText(getContext(), "You haven't picked Image",
+                Toast.makeText(getContext(), "You haven't picked an Image",
                         Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {

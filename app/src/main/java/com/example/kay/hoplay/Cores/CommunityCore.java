@@ -190,14 +190,9 @@ public class CommunityCore extends Community implements FirebasePaths {
 
         // bug error on creation right here
         refAuthUserChats = app.getDatabaseUsers().child(app.getUserInformation().getUID()).child(FIREBASE_USER_CHAT_REFERENCES);
-        loadChats();
-
-    }
-
-
-    private void loadChats() {
         loadPrivatePendingChats();
         loadPrivateChat();
+
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.kay.hoplay.CoresAbstract.ProfileAbstracts;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.example.kay.hoplay.Adapters.CommonAdapter;
@@ -31,7 +33,7 @@ public abstract class UserList extends AppCompatActivity {
     protected RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    protected TextInputEditText searchEditText;
+    protected EditText searchEditText;
     protected RelativeLayout FriendsLayout;
 
     private ArrayList<FriendCommonModel> usersList = new ArrayList<FriendCommonModel>();
@@ -67,9 +69,11 @@ public abstract class UserList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_list_layout);
 
+        final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
         app = App.getInstance();
         mRecyclerView = (RecyclerView) findViewById(R.id.rec_new_chat);
-        searchEditText = (TextInputEditText)findViewById(R.id.search_new_friend_bar_textinputedittext);
+        searchEditText = (EditText)findViewById(R.id.search_new_friend_bar_edittext);
+        searchEditText.setTypeface(playbold);
         FriendsLayout = (RelativeLayout) findViewById(R.id.activity_new_chat);
 
         searchEditText.addTextChangedListener(new TextWatcher() {
@@ -85,6 +89,15 @@ public abstract class UserList extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+
+                // search icon changing animation
+                searchEditText.setCompoundDrawablesWithIntrinsicBounds(0 , 0, R.drawable.ic_search_focused_32dp, 0);
+                if(s.length() == 0)
+                {
+                    searchEditText.setCompoundDrawablesWithIntrinsicBounds(0 , 0, R.drawable.ic_search_unfocused_32dp, 0);
+                }
+
+
                 String value = s.toString().trim();
 
                 if(isTextVaild(value))

@@ -51,13 +51,14 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
     private TextView recentActivitiesTextView;
     private TextView nicknameTextView;
     protected CircleImageView userPictureCircleImageView;
-    private ImageView profileSettingsImageView;
+    protected ImageView profileSettingsImageView;
     private LinearLayout toUserGamesLinearLayout ;
     private LinearLayout toUserFriendsLinearLayout;
     private LinearLayout toUserRatingsLinearLayout;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    ArrayList<RecentGameModel> recentGameModels =new ArrayList<RecentGameModel>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +85,25 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
         toUserFriendsLinearLayout = (LinearLayout) findViewById(R.id.friends_user_profile_linearlayout);
         toUserRatingsLinearLayout = (LinearLayout) findViewById(R.id.ratings_user_profile_linearlayout);
 
+
+
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.recent_activities_recyclerview);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+
+
+        mAdapter = createAdapter();
+        mRecyclerView.setAdapter(mAdapter);
+
         
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +115,45 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
     }
 
 
+
+    // Recent Activity Recycler View Adapter :
+    private CommonAdapter<RecentGameModel> createAdapter(){
+        return new CommonAdapter<RecentGameModel>(recentGameModels,R.layout.new_user_activity) {
+            @Override
+            public ViewHolders OnCreateHolder(View v) {
+
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
+                return new ViewHolders.RecentGameHolder(v);
+            }
+
+            @Override
+            public void OnBindHolder(ViewHolders holder, RecentGameModel model)
+            {
+
+                app.loadingImage(getApplicationContext(),holder,model.getGamePhotoUrl());
+
+                holder.setTitle(model.getGameName());
+                holder.setSubtitle(model.getActivityDescription());
+                holder.setTime(model.getActivityDate());
+            }
+        };
+    }
+
+
+
+    public void addRecentGame(String gameID, String gameName , String gamePhoto , String activityDescription , String activityDate)
+    {
+
+        RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,activityDescription,activityDate);
+        recentGameModels.add(recentActivity);
+        mAdapter.notifyDataSetChanged();
+    }
 
 
     protected void setGamesNumber(String number){

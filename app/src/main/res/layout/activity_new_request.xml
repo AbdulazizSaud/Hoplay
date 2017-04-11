@@ -76,7 +76,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/inputs_relativelayout_new_request"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/white_card_background"
             android:layout_below="@id/consoles_radiogroup">
 
 

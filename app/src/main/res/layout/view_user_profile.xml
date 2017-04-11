@@ -10,10 +10,12 @@
 
     <ImageView
         android:id="@+id/user_profile_back_btn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@color/invisible_request_color"
-        app:srcCompat="@drawable/ic_arrow_back_24dp" />
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        app:srcCompat="@drawable/ic_close_24dp"
+     />
 
 
 
@@ -40,7 +42,7 @@
             android:id="@+id/recent_activities_textview" />
 
 
-        <include layout="@layout/user_profile_details"
+        <include layout="@layout/view_friend_user_profile_details"
                  android:layout_height="wrap_content"
                  android:layout_width="match_parent"
             android:id="@+id/user_games_friends_ratings_bar"

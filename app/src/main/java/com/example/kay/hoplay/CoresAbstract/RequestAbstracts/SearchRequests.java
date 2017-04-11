@@ -301,6 +301,11 @@ public abstract class SearchRequests extends Fragment {
             public void afterTextChanged(Editable s) {
 
                 countrySpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_location_focused_24dp , 0, 0, 0);
+                if(s.length()==0)
+                {
+                    countrySpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_location_unfocused_24dp , 0, 0, 0);
+
+                }
                 countrySpinner.setTextColor(ContextCompat.getColor(getContext(),R.color.text_color));
                 countrySpinner.setTypeface(playbold);
 
@@ -325,6 +330,11 @@ public abstract class SearchRequests extends Fragment {
             public void afterTextChanged(Editable s) {
 
                 numberOfPlayersSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_group_focused_24dp , 0, 0, 0);
+                if(s.length() == 0)
+                {
+                    numberOfPlayersSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_group_unfocused_24dp , 0, 0, 0);
+
+                }
                 numberOfPlayersSpinner.setTextColor(ContextCompat.getColor(getContext(),R.color.text_color));
                 numberOfPlayersSpinner.setTypeface(playbold);
 
@@ -347,6 +357,10 @@ public abstract class SearchRequests extends Fragment {
             public void afterTextChanged(Editable s) {
 
                 ranksSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_grade_focused_24dp , 0, 0, 0);
+                if(s.length()==0)
+                {
+                    ranksSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_grade_unfocused_24dp , 0, 0, 0);
+                }
                 ranksSpinner.setTextColor(ContextCompat.getColor(getContext(),R.color.text_color));
                 ranksSpinner.setTypeface(playbold);
 
