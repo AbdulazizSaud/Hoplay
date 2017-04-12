@@ -39,6 +39,10 @@ public class CreateChatCore extends UserListCore {
     }
 
 
+
+
+
+
     private String createPrivateChat(String UID ,String friendUID)
     {
         //app.getDatabasChat().child("_private_");
@@ -73,13 +77,16 @@ public class CreateChatCore extends UserListCore {
         messagesRef.child("_last_message_").setValue(messageMap);
 
 
-        // Set Referance
+        // Set Referance for users
 
         // path --> /_users_info_/[UID]/_chat_refs_/_private_
 
         String privateChatPath = FB_USERS_PATH+UID+"/"+FIREBASE_USER_PRIVATE_CHAT;
         DatabaseReference refUsePrivaterChats = app.getFirebaseDatabase().getReferenceFromUrl(privateChatPath);
-        refUsePrivaterChats.child(key).setValue(0);
+        refUsePrivaterChats.child(key).setValue("");
+        refUsePrivaterChats.child(key).child("_counter_").setValue(0);
+        refUsePrivaterChats.child(key).child("_opponent_ID_").setValue(friendUID);
+
 
 
         // Pending

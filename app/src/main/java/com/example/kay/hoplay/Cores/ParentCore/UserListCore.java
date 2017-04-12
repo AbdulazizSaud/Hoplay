@@ -65,8 +65,8 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
     }
 
 
-    private void getData(Query query) {
 
+    private void getData(Query query) {
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -74,8 +74,6 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
 
                 if(dataSnapshot.getValue() != null)
                 {
-
-
                     Iterable<DataSnapshot> iterable = dataSnapshot.getChildren();
 
                     for (DataSnapshot shot : iterable) {
