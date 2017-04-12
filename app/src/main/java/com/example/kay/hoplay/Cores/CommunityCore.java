@@ -157,7 +157,7 @@ public class CommunityCore extends Community implements FirebasePaths {
             final String currentChatCounterAsString = chatCounter.getValue().toString().trim();
 
 
-            refAuthUserChats.child(FIREBASE_PRIVATE_ATTR + "/" + chatKey).addListenerForSingleValueEvent(new ValueEventListener() {
+            refAuthUserChats.child(FIREBASE_PRIVATE_ATTR + "/" + chatKey+ "/"+FIREBASE_COUNTER_PATH ).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot userChatRef) {
 

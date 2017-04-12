@@ -50,7 +50,7 @@ public class ChatCore extends Chat implements FirebasePaths {
 
             final String UID = app.getUserInformation().getUID();
             lastMessageCounter = Long.valueOf(dataSnapshot.getValue().toString().trim());
-            app.getDatabaseUsers().child(UID).child(FIREBASE_USER_PRIVATE_CHAT).child(chatRoomKey).setValue(lastMessageCounter);
+            app.getDatabaseUsers().child(UID).child(FIREBASE_USER_PRIVATE_CHAT).child(chatRoomKey).child(FIREBASE_COUNTER_PATH).setValue(lastMessageCounter);
 
         }
 

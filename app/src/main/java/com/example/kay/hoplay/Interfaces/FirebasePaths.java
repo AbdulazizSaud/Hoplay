@@ -22,12 +22,16 @@ public interface FirebasePaths {
     public static final String FIREBASE_PENDING_CHAT_ATTR = "_pending_chat_";
     public static final String FIREBASE_CHAT_MESSAGES = "_messages_";
     public static final String FIREBASE_USER_PRIVATE_CHAT = FIREBASE_USER_CHAT_REFERENCES+"/"+FIREBASE_PRIVATE_ATTR;
+    public static final String FIREBASE_COUNTER_PATH = "_counter_";
+    public static final String FIREBASE_OPPONENT_ID_PATH = "_opponent_ID_";
+
 
     public static final String FB_ROOT = "https://hoplay-18a08.firebaseio.com/";
     public static final String FB_USERS_PATH = FB_ROOT+FIREBASE_USERS_INFO_ATTR+"/";
     public static final String FB_CHAT_PATH = FB_ROOT+FIREBASE_CHAT_ATTR+"/";
     public static final String FB_PRIVATE_CHAT_PATH = FB_CHAT_PATH+FIREBASE_PRIVATE_ATTR+"/";
     public static final String FB_PENDING_CHAT_PATH = FB_CHAT_PATH+FIREBASE_PENDING_CHAT_ATTR+"/";
+
 
 
     public static final String FIREBASE_USERNAME_ATTR = "_username_";
