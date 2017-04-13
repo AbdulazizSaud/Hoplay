@@ -61,6 +61,7 @@ public class AddGameCore extends AddGame implements FirebasePaths {
     @Override
     protected void searchForGame(String value)
     {
+        // Just to push
         DatabaseReference gamesRef = app.getDatabaseGames();
 
         Query query = gamesRef.child("_competitive_").orderByChild("name").startAt(value).endAt(value+"\uf8ff").limitToFirst(10);

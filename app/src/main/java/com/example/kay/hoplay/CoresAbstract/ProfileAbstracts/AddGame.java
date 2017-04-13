@@ -74,6 +74,7 @@ public abstract class AddGame extends AppCompatActivity {
                     searchBar.setCompoundDrawablesWithIntrinsicBounds(0 , 0, R.drawable.ic_search_unfocused_32dp, 0);
                 }
 
+                // Just to push
                 String value = s.toString().toLowerCase().trim();
 
                 if(isTextValidate(value))
