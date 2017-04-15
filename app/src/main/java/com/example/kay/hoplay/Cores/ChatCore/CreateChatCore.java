@@ -98,7 +98,6 @@ public class CreateChatCore extends UserListCore {
         DatabaseReference refPendingChat = app.getDatabasChat().child(FIREBASE_PENDING_CHAT_ATTR).child(friendUID).child(FIREBASE_PRIVATE_ATTR).child(UID);
         refPendingChat.child("chat_id").setValue(key);
         refPendingChat.child("access_key").setValue(accessKey);
-
         return key;
     }
 

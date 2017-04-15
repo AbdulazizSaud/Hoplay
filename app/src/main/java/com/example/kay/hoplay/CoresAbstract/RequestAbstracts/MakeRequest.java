@@ -136,7 +136,7 @@ public abstract class MakeRequest extends Fragment {
 
     public SavedRequestModel saveRequest(String gameID, String gameName , String gamePhoto , String requestDescription , int numberOfPlayers)
     {
-        return  new SavedRequestModel(gameID,gameName,numberOfPlayers,gamePhoto,requestDescription,"");
+        return  new SavedRequestModel(gameID,gameName,numberOfPlayers,gamePhoto,"",requestDescription,"");
 
     }
 
@@ -148,7 +148,7 @@ public abstract class MakeRequest extends Fragment {
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder, final SavedRequestModel model)
+            public void OnBindHolder(ViewHolders holder, final SavedRequestModel model , int position)
             {
                 //ImageLoader loader = App.getInstance().getImageLoader();
 

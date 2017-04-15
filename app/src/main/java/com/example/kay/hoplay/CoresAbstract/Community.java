@@ -127,7 +127,7 @@ public abstract class Community extends Fragment {
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder, final CommunityChatModel model) {
+            public void OnBindHolder(ViewHolders holder, final CommunityChatModel model , int position) {
                 // - get element from your dataset at this position
                 // - replace the contents of the view with that element
                 ViewHolders.CommunityHolder communityHolder = (ViewHolders.CommunityHolder)holder;

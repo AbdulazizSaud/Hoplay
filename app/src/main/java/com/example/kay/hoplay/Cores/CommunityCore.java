@@ -21,73 +21,52 @@ import com.google.firebase.database.ValueEventListener;
 public class CommunityCore extends Community implements FirebasePaths {
 
 
-    private DatabaseReference refAuthUserChats;
-    private DatabaseReference refPrivateChat;
-    private DatabaseReference refPrivateChatUsersInfo;
+    private DatabaseReference refAuthCurrentUserChats;
     private DatabaseReference refLastMessage;
     private DatabaseReference refUserInfo;
 
 
-    private ChildEventListener privateChatListener = new ChildEventListener() {
+    private ChildEventListener privateSingleChatListener = new ChildEventListener() {
         @Override
         public void onChildAdded(final DataSnapshot chatRef, String s) {
 
+            String opponentKey = (String)chatRef.child(FIREBASE_OPPONENT_ID_PATH).getValue();
+            if(opponentKey == null)
+                return;
+
             // on first time
-            refPrivateChat = app.getDatabasChat().child(FIREBASE_PRIVATE_ATTR).child(chatRef.getKey());
-            refPrivateChatUsersInfo = refPrivateChat.child(FIREBASE_DETAILS_ATTR).child(FIREBASE_USERS_LIST_ATTR);
+            final DatabaseReference refCurrentChat = app.getDatabasChat().child(FIREBASE_PRIVATE_ATTR).child(chatRef.getKey());
 
+            refUserInfo = app.getDatabaseUsers().child(opponentKey).child(FIREBASE_DETAILS_ATTR);
 
-            refPrivateChatUsersInfo.addListenerForSingleValueEvent(new ValueEventListener() {
+            refUserInfo.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot usersSnap) {
-                    Iterable<DataSnapshot> users = usersSnap.getChildren();
+                public void onDataChange(final DataSnapshot userInfo) {
 
-                    for (DataSnapshot user : users) {
-                        refUserInfo = app.getDatabaseUsers().child(user.getKey()).child(FIREBASE_DETAILS_ATTR);
-                        final String userKey = user.getKey();
+                    refCurrentChat.child("_messages_/_last_message_").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot lasMsgSnap) {
 
-                        if (isMe(userKey))
-                            continue;
+                            if(lasMsgSnap.child("_message_").getValue() == null )
+                                return;
 
-                        refUserInfo.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(final DataSnapshot userInfo) {
+                            addUserChatToList(
+                                    chatRef.getKey(),
+                                    "_private_",
+                                    userInfo.child("_username_").getValue().toString().trim(),
+                                    userInfo.child("_picUrl_").getValue().toString().trim(),
+                                    lasMsgSnap.child("_message_").getValue().toString().trim(),
+                                    lasMsgSnap.child("_time_stamp_").getValue().toString().trim(),
+                                    Long.parseLong(lasMsgSnap.child("_counter_").getValue().toString().trim())
+                            );
+                        }
 
-                                if (!isMe(userKey)) {
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                                    refPrivateChat.child("_messages_/_last_message_").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(DataSnapshot lasMsgSnap) {
+                        }
+                    });
 
-                                            if(lasMsgSnap.child("_message_").getValue() == null )
-                                                return;
-
-                                            addUserChatToList(
-                                                    chatRef.getKey(),
-                                                    "_private_",
-                                                    userInfo.child("_username_").getValue().toString().trim(),
-                                                    userInfo.child("_picUrl_").getValue().toString().trim(),
-                                                    lasMsgSnap.child("_message_").getValue().toString().trim(),
-                                                    lasMsgSnap.child("_time_stamp_").getValue().toString().trim(),
-                                                    Long.parseLong(lasMsgSnap.child("_counter_").getValue().toString().trim())
-                                            );
-                                        }
-
-                                        @Override
-                                        public void onCancelled(DatabaseError databaseError) {
-
-                                        }
-                                    });
-
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-                    }
 
                 }
 
@@ -97,11 +76,11 @@ public class CommunityCore extends Community implements FirebasePaths {
                 }
             });
 
-            refLastMessage = refPrivateChat.child("_messages_/_last_message_");
+
+
+
+            refLastMessage = refCurrentChat.child("_messages_/_last_message_");
             refLastMessage.addValueEventListener(lastMessageListener);
-            refLastMessage.child("_counter_").addValueEventListener(LastMessageCounterListener);
-
-
         }
 
         @Override
@@ -124,8 +103,6 @@ public class CommunityCore extends Community implements FirebasePaths {
 
         }
     };
-
-
     private ValueEventListener lastMessageListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -136,7 +113,12 @@ public class CommunityCore extends Community implements FirebasePaths {
             String chatKey = dataSnapshot.getRef().getParent().getParent().getKey();
             String msg = dataSnapshot.child("_message_").getValue().toString().trim();
             String timeStamp = dataSnapshot.child("_time_stamp_").getValue().toString().trim();
+
+            String currentChatCounterAsString = dataSnapshot.child("_counter_").getValue().toString().trim();
+
+
             updateLastMessage(chatKey, msg, timeStamp);
+            setCounter(chatKey, currentChatCounterAsString);
 
         }
 
@@ -145,51 +127,15 @@ public class CommunityCore extends Community implements FirebasePaths {
 
         }
     };
-    private ValueEventListener LastMessageCounterListener = new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot chatCounter) {
 
 
-            if (chatCounter.getValue() == null)
-                return;
-
-            final String chatKey = chatCounter.getRef().getParent().getParent().getParent().getKey().trim();
-            final String currentChatCounterAsString = chatCounter.getValue().toString().trim();
-
-
-            refAuthUserChats.child(FIREBASE_PRIVATE_ATTR + "/" + chatKey+ "/"+FIREBASE_COUNTER_PATH ).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot userChatRef) {
-
-                    if (userChatRef.getValue() == null)
-                        return;
-
-                    long currentCounter = Long.parseLong(currentChatCounterAsString);
-                    long value = Long.parseLong(userChatRef.getValue().toString().trim());
-                    long res = currentCounter - value;
-                    updateCounter(chatKey, String.valueOf(res));
-                }
-
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        }
-
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-
-        }
-    };
 
 
     @Override
     protected void OnStartActivity() {
 
         // bug error on creation right here
-        refAuthUserChats = app.getDatabaseUsers().child(app.getUserInformation().getUID()).child(FIREBASE_USER_CHAT_REFERENCES);
+        refAuthCurrentUserChats = app.getDatabaseUsers().child(app.getUserInformation().getUID()).child(FIREBASE_USER_CHAT_REFERENCES);
         loadPrivatePendingChats();
         loadPrivateChat();
 
@@ -209,22 +155,14 @@ public class CommunityCore extends Community implements FirebasePaths {
         refPendingChat.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                // get a chat id  from pending chat and set a ref on chat refreance in user_info
-                String chatId = dataSnapshot.child("chat_id").getValue().toString();
-                refAuthUserChats.child(FIREBASE_PRIVATE_ATTR).child(chatId).setValue(0);
+                setPendingChatToUserRef(dataSnapshot, refPendingChat);
 
-                // remove a ref from pending chat
-                refPendingChat.child(dataSnapshot.getKey()).removeValue();
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 // get a chat id  from pending chat and set a ref on chat refreance in user_info
-                String chatId = dataSnapshot.child("chat_id").getValue().toString();
-                refAuthUserChats.child(FIREBASE_PRIVATE_ATTR).child(chatId).setValue(0);
-
-                // remove a ref from pending chat
-                refPendingChat.child(dataSnapshot.getKey()).removeValue();
+                setPendingChatToUserRef(dataSnapshot, refPendingChat);
             }
 
             @Override
@@ -244,10 +182,23 @@ public class CommunityCore extends Community implements FirebasePaths {
         });
 
     }
+    private void setPendingChatToUserRef(DataSnapshot dataSnapshot, DatabaseReference refPendingChat) {
+        // get a chat id  from pending chat and set a ref on chat refreance in user_info
+        String chatKey = dataSnapshot.child("chat_id").getValue().toString();
+        String opponentId = dataSnapshot.getKey();
+
+        // path --> /_users_info_/[UID]/_chat_refs_/_private_/[chatKey]/
+        DatabaseReference currentChatRef = refAuthCurrentUserChats.child(FIREBASE_PRIVATE_ATTR).child(chatKey);
+        currentChatRef.child(FIREBASE_OPPONENT_ID_PATH).setValue(opponentId);
+        currentChatRef.child(FIREBASE_COUNTER_PATH).setValue(0);
+
+
+        // remove a ref from pending chat
+        refPendingChat.child(dataSnapshot.getKey()).removeValue();
+    }
 
     private void loadPrivateChat() {
-        refAuthUserChats.child(FIREBASE_PRIVATE_ATTR).addChildEventListener(privateChatListener);
-
+        refAuthCurrentUserChats.child(FIREBASE_PRIVATE_ATTR).addChildEventListener(privateSingleChatListener);
     }
 
 
@@ -263,8 +214,27 @@ public class CommunityCore extends Community implements FirebasePaths {
             }
         }
     }
+    private void setCounter(final String chatKey,final String currentChatCounterAsString){
+        refAuthCurrentUserChats.child(FIREBASE_PRIVATE_ATTR + "/" + chatKey+ "/"+FIREBASE_COUNTER_PATH ).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot userChatRef) {
+
+                if (userChatRef.getValue() == null)
+                    return;
+
+                long currentCounter = Long.parseLong(currentChatCounterAsString);
+                long value = Long.parseLong(userChatRef.getValue().toString().trim());
+                long res = currentCounter - value;
+                updateCounter(chatKey, String.valueOf(res));
+            }
 
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
     private void updateCounter(String chatKey, String counter) {
 
 

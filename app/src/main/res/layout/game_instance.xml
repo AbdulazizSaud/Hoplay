@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/game_instance_game_description"
                     android:id="@+id/game_available_platforms_textview"
-                    android:textColor="@color/text_color"
+                    android:textColor="@color/hint_color"
                     android:fontFamily="sans-serif-light"
                     android:textSize="14dp"
                     android:maxLines="1"
@@ -93,6 +93,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/game_instance_pc_available"
+                        android:textColor="@color/hint_color"
                         android:layout_weight="1"
                         android:id="@+id/pc_available_game_instance_textview"/>
 
@@ -101,6 +102,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/game_instance_ps_available"
                         android:layout_weight="1"
+                        android:textColor="@color/hint_color"
                         android:id="@+id/ps_available_game_instance_textview"/>
 
 
@@ -108,6 +110,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/game_instance_xbox_available"
+                        android:textColor="@color/hint_color"
                         android:layout_weight="1"
                         android:id="@+id/xbox_available_game_instance_textview"/>
                 </LinearLayout>

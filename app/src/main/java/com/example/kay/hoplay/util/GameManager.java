@@ -16,17 +16,17 @@ public class GameManager {
     public void addGame(String gameId , String gamename , int maxPlayers, String gamePicture, String[] ranks,boolean isCompetitive)
     {
 
-        GameDetails gameDetails = new GameDetails(gameId,gamename,maxPlayers,gamePicture);
-
-        for(String rank : ranks)
-        {
-            gameDetails.addRank(rank);
-        }
-
-        if(isCompetitive)
-        gamesCompList.add(gameDetails);
-        else
-            gamesCOOPList.add(gameDetails);
+//        GameDetails gameDetails = new GameDetails(gameId,gamename,maxPlayers,gamePicture);
+//
+//        for(String rank : ranks)
+//        {
+//            gameDetails.addRank(rank);
+//        }
+//
+//        if(isCompetitive)
+//        gamesCompList.add(gameDetails);
+//        else
+//            gamesCOOPList.add(gameDetails);
     }
 
 

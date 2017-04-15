@@ -24,8 +24,8 @@ public class FriendsListCore extends UserListCore {
     protected void onStartActivity() {
 
 
-        searchEditText.setVisibility(EditText.GONE);
-        searchEditText = null;
+//        searchEditText.setVisibility(EditText.GONE);
+//        searchEditText = null;
 
         loadFriendList();
     }

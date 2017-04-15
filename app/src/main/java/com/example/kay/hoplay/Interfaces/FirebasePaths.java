@@ -17,6 +17,7 @@ public interface FirebasePaths {
 
 
     public static final String FIREBASE_GAMES_REFERENCES = "_games_";
+    public static final String FIREBASE_GAME_PLATFORMS_ATTR = "platforms";
     public static final String FIREBASE_USER_CHAT_REFERENCES = "_chat_refs_";
     public static final String FIREBASE_CHAT_ATTR = "Chat";
     public static final String FIREBASE_PENDING_CHAT_ATTR = "_pending_chat_";

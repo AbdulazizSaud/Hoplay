@@ -35,7 +35,7 @@ public abstract class  CommonAdapter<T> extends RecyclerView.Adapter<ViewHolders
     @Override
     public void onBindViewHolder(ViewHolders holder, int position) {
         T commonModel = data.get(position);
-        OnBindHolder(holder,commonModel);
+        OnBindHolder(holder,commonModel,position);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -45,7 +45,7 @@ public abstract class  CommonAdapter<T> extends RecyclerView.Adapter<ViewHolders
     }
 
     public abstract ViewHolders OnCreateHolder(View v);
-    public abstract void OnBindHolder(ViewHolders holder,T model);
+    public abstract void OnBindHolder(ViewHolders holder,T model , int position);
 
 
 

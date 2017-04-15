@@ -133,7 +133,7 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder, RecentGameModel model)
+            public void OnBindHolder(ViewHolders holder, RecentGameModel model , int position)
             {
 
                 app.loadingImage(getApplicationContext(),holder,model.getGamePhotoUrl());
@@ -150,7 +150,7 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
     public void addRecentGame(String gameID, String gameName , String gamePhoto , String activityDescription , String activityDate)
     {
 
-        RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,activityDescription,activityDate);
+        RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,"",activityDescription,activityDate);
         recentGameModels.add(recentActivity);
         mAdapter.notifyDataSetChanged();
     }

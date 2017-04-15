@@ -239,7 +239,7 @@ public abstract class UserProfile extends Fragment {
     public void addRecentGame(String gameID, String gameName , String gamePhoto , String activityDescription , String activityDate)
     {
 
-        RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,activityDescription,activityDate);
+        RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,"",activityDescription,activityDate);
         recentGameModels.add(recentActivity);
         mAdapter.notifyDataSetChanged();
     }
@@ -288,7 +288,7 @@ public abstract class UserProfile extends Fragment {
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder, RecentGameModel model)
+            public void OnBindHolder(ViewHolders holder, RecentGameModel model,int position)
             {
 
                app.loadingImage(getContext(),holder,model.getGamePhotoUrl());

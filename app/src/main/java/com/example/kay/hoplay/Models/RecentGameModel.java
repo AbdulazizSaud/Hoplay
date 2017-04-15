@@ -11,8 +11,8 @@ public class RecentGameModel extends GameDetails{
     private String activityDate;
     private String activityDescription;
 
-    public RecentGameModel(String gameID, String gameName, String gamePhotoUrl , String activityDescription, String activityDate) {
-        super(gameID, gameName, 0, gamePhotoUrl);
+    public RecentGameModel(String gameID, String gameName, String gamePhotoUrl, String supportedPlatforms , String activityDescription, String activityDate) {
+        super(gameID, gameName, 0, gamePhotoUrl , supportedPlatforms);
         this.activityDate = activityDate;
         this.activityDescription = activityDescription;
     }

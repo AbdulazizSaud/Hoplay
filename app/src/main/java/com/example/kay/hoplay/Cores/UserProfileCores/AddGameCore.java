@@ -84,9 +84,13 @@ public class AddGameCore extends AddGame implements FirebasePaths {
 
                     for (DataSnapshot shot : iterable)
                     {
-//                        Log.i("------------>",gameType);
+
                         addGame(shot.getKey(),gameType,shot);
+
                     }
+
+
+
                 }
 
             }
@@ -108,7 +112,7 @@ public class AddGameCore extends AddGame implements FirebasePaths {
         gameAddedMessage(gameDetails.getGameName());
     }
 
-    private void addGame(String key ,String gametype, DataSnapshot dataSnapshot)
+    private void addGame(String key ,String gametype, DataSnapshot dataSnapshot )
     {
 
         String gameId =  key;
@@ -119,8 +123,9 @@ public class AddGameCore extends AddGame implements FirebasePaths {
 
         String gamPic = dataSnapshot.child("photo").getValue().toString().trim();
         String maxPlayerAsString =  dataSnapshot.child("max_player").getValue().toString().trim();
+        String supportedPlatformes = dataSnapshot.child(FIREBASE_GAME_PLATFORMS_ATTR).getValue().toString().trim();
         int maxPlayer = Integer.parseInt(maxPlayerAsString);
-        addGame(gameId,gameNameWithCapitalLetter,gametype,maxPlayer,gamPic);
+        addGame(gameId,gameNameWithCapitalLetter,gametype,maxPlayer,gamPic,supportedPlatformes);
 
     }
 

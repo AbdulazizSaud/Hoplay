@@ -11,14 +11,17 @@ public class GameDetails {
     protected String gameID;
     protected String gamePhotoUrl;
     protected String gameType;
+    protected String gamePlatforms;
+
 
 
     protected int maxPlayers;
     protected ArrayList<String> gameRanks;
 
-    public GameDetails(String gameID, String gameName, int maxPlayers, String gamePhotoUrl) {
+    public GameDetails(String gameID, String gameName, int maxPlayers, String gamePhotoUrl , String gamePlatforms) {
         this.gameName = gameName;
         this.gameID = gameID;
+        this.gamePlatforms = gamePlatforms;
         this.gamePhotoUrl = gamePhotoUrl;
         this.maxPlayers = maxPlayers;
 
@@ -76,5 +79,13 @@ public class GameDetails {
 
     public void setGameType(String gameType) {
         this.gameType = gameType;
+    }
+
+    public String getGamePlatforms() {
+        return gamePlatforms;
+    }
+
+    public void setGamePlatforms(String gamePlatforms) {
+        this.gamePlatforms = gamePlatforms;
     }
 }

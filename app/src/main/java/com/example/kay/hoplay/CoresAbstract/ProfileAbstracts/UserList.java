@@ -46,7 +46,7 @@ public abstract class UserList extends AppCompatActivity {
         }
 
         @Override
-        public void OnBindHolder(ViewHolders holder, final FriendCommonModel model) {
+        public void OnBindHolder(ViewHolders holder, final FriendCommonModel model , int position) {
 
 
 

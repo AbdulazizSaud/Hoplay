@@ -3,12 +3,14 @@ package com.example.kay.hoplay.CoresAbstract.ProfileAbstracts;
 import android.graphics.Typeface;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -33,6 +35,7 @@ public abstract class AddGame extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+
     protected App app;
 
 
@@ -52,6 +55,7 @@ public abstract class AddGame extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
 
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
@@ -81,6 +85,7 @@ public abstract class AddGame extends AppCompatActivity {
                 {
                     updateAdapter(true);
                     searchForGame(value);
+
                 } else
                 {
                     reloadGameList();
@@ -102,7 +107,8 @@ public abstract class AddGame extends AppCompatActivity {
                     gameDetails.getGameName(),
                     gameDetails.getGameType()
                     ,gameDetails.getMaxPlayers()
-                    ,gameDetails.getGamePhotoUrl());
+                    ,gameDetails.getGamePhotoUrl()
+                     , gameDetails.getGamePlatforms());
         }
     }
 
@@ -121,9 +127,9 @@ public abstract class AddGame extends AppCompatActivity {
     }
 
 
-    protected void addGame(String gameId,String gameName,String gameType,int maxPlayers,String gamePic)
+    protected void addGame(String gameId,String gameName,String gameType,int maxPlayers,String gamePic , String supportedPlatforms)
     {
-        GameDetails gameDetails = new GameDetails(gameId,gameName,maxPlayers,gamePic);
+        GameDetails gameDetails = new GameDetails(gameId,gameName,maxPlayers,gamePic,supportedPlatforms);
         gameDetails.setGameType(gameType);
 
         gamesList.add(gameDetails);
@@ -139,7 +145,7 @@ public abstract class AddGame extends AppCompatActivity {
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder, final GameDetails model) {
+            public void OnBindHolder(ViewHolders holder,final GameDetails model , int position ) {
                 // - get element from your dataset at this position
                 // - replace the contents of the view with that element
                 ViewHolders.UserGameHolder gameHolder = (ViewHolders.UserGameHolder)holder;
@@ -150,10 +156,41 @@ public abstract class AddGame extends AppCompatActivity {
                     }
                 });
 
+                final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
                 app.loadingImage(getApplication(),holder, model.getGamePhotoUrl());
-                holder.setTitle(model.getGameName());
+                gameHolder.setTitle(model.getGameName());
+                gameHolder.getTitleView().setTypeface(playbold);
+                gameHolder.getSubtitleView().setTypeface(playbold);
+                gameHolder.getPcTextView().setTypeface(playbold);
+                gameHolder.getPsTextView().setTypeface(playbold);
+                gameHolder.getXboxTextView().setTypeface(playbold);
+
+                GameDetails gameDetails =  getItem(position);
+                Log.i("--->" , gameDetails.getGameName().toString());
+
+
+
+                    String platforms = gameDetails.getGamePlatforms();
+
+                    if (platforms.contains("PC")) {gameHolder.getPcTextView().setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.pc_color));}
+                    if (!platforms.contains("PC")) {gameHolder.getPcTextView().setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.hint_color));}
+                    if (platforms.contains("PS")){ gameHolder.getPsTextView().setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.ps_color)); }
+                    if(!platforms.contains("PS")){ gameHolder.getPsTextView().setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.hint_color));}
+                    if (platforms.contains("XBOX")) { gameHolder.getXboxTextView().setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.xbox_color));}
+                    if (!platforms.contains("XBOX")) {gameHolder.getXboxTextView().setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.hint_color)); }
+
+
+
 
             }
+
+
+            public GameDetails getItem(int position)
+            {
+                return gamesList.get(position);
+            }
+
+
         };
     }
 
@@ -169,4 +206,9 @@ public abstract class AddGame extends AppCompatActivity {
     protected abstract void searchForGame(String value);
     protected abstract  void OnClickHolders(GameDetails gameDetails, View v);
     protected abstract void OnStartActivity();
+
+
+
+
+
 }
