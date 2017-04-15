@@ -91,11 +91,7 @@ public abstract class UserList extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
 
                 // search icon changing animation
-                searchEditText.setCompoundDrawablesWithIntrinsicBounds(0 , 0, R.drawable.ic_search_focused_32dp, 0);
-                if(s.length() == 0)
-                {
-                    searchEditText.setCompoundDrawablesWithIntrinsicBounds(0 , 0, R.drawable.ic_search_unfocused_32dp, 0);
-                }
+                searchAnimation(s);
 
 
                 String value = s.toString().trim();
@@ -117,6 +113,16 @@ public abstract class UserList extends AppCompatActivity {
         onStartActivity();
     }
 
+
+
+
+    private void searchAnimation(Editable s) {
+        // search icon changing animation
+        if (s.length() == 0) {
+            searchEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_search_unfocused_32dp, 0);
+        }
+        searchEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_search_focused_32dp, 0);
+    }
 
 
 

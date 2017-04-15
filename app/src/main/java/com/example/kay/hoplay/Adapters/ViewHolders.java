@@ -18,7 +18,7 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
 
 
     protected CircleImageView picture;
-    protected TextView title,subtitle,time , pc , ps , xbox;
+    protected TextView title,subtitle,time;
     protected View view;
 
 
@@ -118,6 +118,12 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
     }
     public static class UserGameHolder extends ViewHolders {
 
+        public enum Platform {
+            XBOX,PC,PS
+        }
+
+        TextView  pc , ps , xbox;
+
         public UserGameHolder(View v) {
             super(v);
 
@@ -129,9 +135,30 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
             xbox = (TextView) v.findViewById(R.id.xbox_available_game_instance_textview);
 
 
-
-
         }
+
+
+        public TextView getPlatformTextView(Platform platform){
+            TextView view = pc;
+            switch (platform)
+            {
+                case PC:view =pc;break;
+                case XBOX:view =xbox;break;
+                case PS:view =ps;break;
+
+            }
+            return view;
+        }
+
+        public TextView getPcTextView()
+        {return pc;}
+
+        public TextView getPsTextView()
+        {return ps;}
+        public TextView getXboxTextView()
+        {return xbox;}
+
+
     }
 
     public void setPicture(CircleImageView picture) {
@@ -161,16 +188,12 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
     public String getNumberOfPlayers() {
         return numberOfPlayers.getText().toString().trim();
     }
+
+
     public void setNumberOfPlayers(String numberOfPlayers) {
         this.numberOfPlayers.setText(numberOfPlayers);
     }
-    public TextView getPcTextView()
-    {return pc;}
 
-    public TextView getPsTextView()
-    {return ps;}
-    public TextView getXboxTextView()
-    {return xbox;}
     public void setTitle(String title){
         this.title.setText(title);
     }

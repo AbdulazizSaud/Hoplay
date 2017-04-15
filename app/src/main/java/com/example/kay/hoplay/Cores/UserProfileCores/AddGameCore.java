@@ -12,9 +12,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.LinkedList;
+
 
 public class AddGameCore extends AddGame implements FirebasePaths {
 
+
+
+    private LinkedList<ValueEventListener> searchForGameListeners =new LinkedList<>();
 
 
     protected void OnStartActivity()
@@ -70,38 +75,9 @@ public class AddGameCore extends AddGame implements FirebasePaths {
         getData(query,"_coop_");
     }
 
-    private void getData(Query query,final String gameType)
+    private void getData(Query query,String gameType)
     {
-
-        query.addListenerForSingleValueEvent( new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                if(dataSnapshot.getValue() != null)
-                {
-
-                    Iterable<DataSnapshot> iterable = dataSnapshot.getChildren();
-
-                    for (DataSnapshot shot : iterable)
-                    {
-
-                        addGame(shot.getKey(),gameType,shot);
-
-                    }
-
-
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-
-        });
-
+        query.addListenerForSingleValueEvent(createSearchForGameListener(gameType));
     }
 
     @Override
@@ -115,8 +91,10 @@ public class AddGameCore extends AddGame implements FirebasePaths {
     private void addGame(String key ,String gametype, DataSnapshot dataSnapshot )
     {
 
+
         String gameId =  key;
         String gameName = dataSnapshot.child("name").getValue().toString().trim();
+
         // Capitlizing the first letter of a game
         String gameNameWithCapitalLetter = gameName.substring(0,1).toUpperCase() + gameName.substring(1);
 
@@ -127,6 +105,41 @@ public class AddGameCore extends AddGame implements FirebasePaths {
         int maxPlayer = Integer.parseInt(maxPlayerAsString);
         addGame(gameId,gameNameWithCapitalLetter,gametype,maxPlayer,gamPic,supportedPlatformes);
 
+    }
+
+
+    public ValueEventListener createSearchForGameListener (final String gameType){
+
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.getValue() != null)
+                {
+
+                    Iterable<DataSnapshot> iterable = dataSnapshot.getChildren();
+
+                    for (DataSnapshot shot : iterable)
+                    {
+                        String gameName = shot.child("name").getValue().toString().trim();
+
+                        if(!checkIsInList(gameName))
+                        addGame(shot.getKey(),gameType,shot);
+                    }
+
+                }
+
+                showRecyclerView();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        };
+        searchForGameListeners.add(listener);
+        return listener;
     }
 
 
