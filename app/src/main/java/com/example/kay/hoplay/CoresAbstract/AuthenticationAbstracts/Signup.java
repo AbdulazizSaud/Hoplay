@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,14 +22,18 @@ import android.widget.TextView;
 import com.example.kay.hoplay.Cores.MainAppMenuCore;
 import com.example.kay.hoplay.Activities.TermsAndConditions;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Interfaces.Constants;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.util.Helper;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by azoz-pc on 2/6/2017.
  */
 
-public abstract class Signup extends AppCompatActivity {
+public abstract class Signup extends AppCompatActivity implements Constants {
 
 
     /***************************************/
@@ -36,7 +41,7 @@ public abstract class Signup extends AppCompatActivity {
     protected TextView createNewTextView;
     protected TextView accountTextView;
     protected ImageView goBackToMain;
-    protected EditText usernameSignUp;
+    protected TextInputEditText usernameSignUp;
     protected EditText passwordSignUp;
     protected EditText emailSignUp;
     protected EditText nickNameSignUp;
@@ -45,6 +50,11 @@ public abstract class Signup extends AppCompatActivity {
     protected Button signUpBtn;
     protected EditText confirmPasswordEdititext;
     protected App app =  App.getInstance();
+
+
+    protected Timer inputChecker = new Timer();
+    protected boolean checkingUsername=false;
+    protected int currenCheckingStatus;
 
 
     /***************************************/
@@ -104,14 +114,15 @@ public abstract class Signup extends AppCompatActivity {
 
         OnStartActivity();
         initControls();
-        changeIcon();
+        viewListener();
 
 
     }
 
 
     // Change icon on edittexts
-    private void changeIcon() {
+    private void viewListener() {
+
         // username  , email , password , confirm password  icon changing :
         usernameSignUp.addTextChangedListener(new TextWatcher() {
             @Override
@@ -132,6 +143,28 @@ public abstract class Signup extends AppCompatActivity {
                 {
                     usernameSignUp.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_person_outline_not_focuesed_32dp, 0);
                 }
+
+                if(!usernameValidation()) return;
+
+
+                final String username = s.toString().toLowerCase().trim();
+                currenCheckingStatus = USER_SEARCHING;
+
+                inputChecker.cancel();
+                inputChecker =new Timer();
+
+                inputChecker.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+
+                        if(!checkingUsername) {
+
+                            checkingUsername = true;
+                            checkUsername(username);
+                        }
+
+                    }
+                },1000);
 
             }
         });
@@ -221,7 +254,7 @@ public abstract class Signup extends AppCompatActivity {
         termsAndConditions = (TextView) findViewById(R.id.terms_and_conditions_textview);
         termsAndConditions.setTypeface(sansationbold);
         goBackToMain = (ImageView) findViewById(R.id.go_back_to_main_imageview);
-        usernameSignUp = (EditText) findViewById(R.id.username_sign_up_edittext);
+        usernameSignUp = (TextInputEditText) findViewById(R.id.username_sign_up_edittext);
         usernameSignUp.setTypeface(playregular);
         passwordSignUp = (EditText) findViewById(R.id.password_sign_up_edittext);
         passwordSignUp.setTypeface(playregular);
@@ -262,7 +295,6 @@ public abstract class Signup extends AppCompatActivity {
                 final String username  =usernameSignUp.getText().toString().trim();
                 final String password  = passwordSignUp.getText().toString().trim();
                 final String nickname = username;
-                final String confrimPassword = confirmPasswordEdititext.getText().toString().trim();
 
 //                if(!confrimPassword.equals(password))
 //                {
@@ -270,8 +302,11 @@ public abstract class Signup extends AppCompatActivity {
 //                    return;
 //                }
 
-                if(checkUsername() && checkEmail() && checkPassword())
-                signUp(email,username,password,nickname);
+                boolean userAvailable = !checkingUsername && currenCheckingStatus == USER_NOT_EXIST;
+                boolean validated = usernameValidation() && emailValidtion() && passwordValidation();
+
+                if(validated && userAvailable)
+                    signUp(email,username,password,nickname);
             }
         });
 
@@ -293,7 +328,7 @@ public abstract class Signup extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void afterTextChanged(Editable editable) {
-                checkUsername();
+                usernameValidation();
             }
         });
 
@@ -304,20 +339,10 @@ public abstract class Signup extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void afterTextChanged(Editable editable) {
-                checkPassword();
+                passwordValidation();
             }
         }));
 
-//        nickNameSignUp.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//                checkNickname();
-//            }
-//        });
 
         emailSignUp.addTextChangedListener(new TextWatcher() {
             @Override
@@ -326,13 +351,13 @@ public abstract class Signup extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void afterTextChanged(Editable editable) {
-                checkEmail();
+                emailValidtion();
             }
         });
     }
 
     // CHECK USERNAME :
-    protected Boolean checkUsername() {
+    protected Boolean usernameValidation() {
 
         String username = usernameSignUp.getText().toString().trim();
         Helper helper = new Helper();
@@ -363,32 +388,9 @@ public abstract class Signup extends AppCompatActivity {
         return  true;
     }
 
-    // CHECK NICKNAME
-//     protected Boolean checkNickname() {
-//
-//        String nickname = nickNameSignUp.getText().toString().trim();
-//
-//        if (nickname.length() == 0) {
-//
-//            nickNameSignUp.setError(getString(R.string.error_field_empty));
-//
-//            return false;
-//        }
-//
-//        if (nickname.length() < 2) {
-//
-//            nickNameSignUp.setError(getString(R.string.error_small_fullname));
-//
-//            return false;
-//        }
-//
-//        nickNameSignUp.setError(null);
-//
-//        return  true;
-//    }
 
     // CHECK PASSWORD
-    protected Boolean checkPassword() {
+    protected Boolean passwordValidation() {
 
         String password = passwordSignUp.getText().toString().trim();
 
@@ -421,7 +423,7 @@ public abstract class Signup extends AppCompatActivity {
     }
 
     // CHECK EMAIL
-    protected Boolean checkEmail() {
+    protected Boolean emailValidtion() {
 
         String email = emailSignUp.getText().toString().trim();
 
@@ -548,8 +550,15 @@ public abstract class Signup extends AppCompatActivity {
         startActivity(i);
     }
 
+
+    protected void checkUserCallBack(){
+        if(currenCheckingStatus == USER_EXIST)
+        usernameSignUp.setError(getString(R.string.error_login_taken));
+    }
+
     // abstract methods
     protected abstract void signUp(String email,String username,String password,String nickname);
     protected abstract void OnStartActivity();
+    protected abstract void checkUsername(String value);
 
 }

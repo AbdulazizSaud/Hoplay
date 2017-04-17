@@ -1,12 +1,12 @@
 package com.example.kay.hoplay.Cores;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.example.kay.hoplay.CoresAbstract.Community;
 import com.example.kay.hoplay.Cores.ChatCore.ChatCore;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
-import com.example.kay.hoplay.Models.ChildEventListenerModel;
 import com.example.kay.hoplay.Models.CommunityChatModel;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +24,8 @@ public class CommunityCore extends Community implements FirebasePaths {
     private DatabaseReference refAuthCurrentUserChats;
     private DatabaseReference refLastMessage;
     private DatabaseReference refUserInfo;
+    private DatabaseReference refPendingChat;
+    private static long numberOfUnseenMessages ;
 
 
     private ChildEventListener privateSingleChatListener = new ChildEventListener() {
@@ -37,7 +39,7 @@ public class CommunityCore extends Community implements FirebasePaths {
             // on first time
             final DatabaseReference refCurrentChat = app.getDatabasChat().child(FIREBASE_PRIVATE_ATTR).child(chatRef.getKey());
 
-            refUserInfo = app.getDatabaseUsers().child(opponentKey).child(FIREBASE_DETAILS_ATTR);
+            refUserInfo = app.getDatabaseUsersInfo().child(opponentKey).child(FIREBASE_DETAILS_ATTR);
 
             refUserInfo.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -76,9 +78,6 @@ public class CommunityCore extends Community implements FirebasePaths {
                 }
             });
 
-
-
-
             refLastMessage = refCurrentChat.child("_messages_/_last_message_");
             refLastMessage.addValueEventListener(lastMessageListener);
         }
@@ -103,11 +102,13 @@ public class CommunityCore extends Community implements FirebasePaths {
 
         }
     };
+    private ChildEventListener privatePendingChatListener;
     private ValueEventListener lastMessageListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
 
-            if(dataSnapshot.child("_message_").getValue() == null )
+
+            if(dataSnapshot.child("_message_").getValue() == null &&  dataSnapshot.child("_time_stamp_").getValue() == null)
                 return;
 
             String chatKey = dataSnapshot.getRef().getParent().getParent().getKey();
@@ -134,8 +135,9 @@ public class CommunityCore extends Community implements FirebasePaths {
     @Override
     protected void OnStartActivity() {
 
+
         // bug error on creation right here
-        refAuthCurrentUserChats = app.getDatabaseUsers().child(app.getUserInformation().getUID()).child(FIREBASE_USER_CHAT_REFERENCES);
+        refAuthCurrentUserChats = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_USER_CHAT_REFERENCES);
         loadPrivatePendingChats();
         loadPrivateChat();
 
@@ -148,11 +150,18 @@ public class CommunityCore extends Community implements FirebasePaths {
 
 
         // here we will get a pending chats ref
-        final DatabaseReference refPendingChat = app
+                 refPendingChat = app
                 .getDatabasChat()
                 .child(FIREBASE_PENDING_CHAT_ATTR + "/" + uid + "/" + FIREBASE_PRIVATE_ATTR);
 
-        refPendingChat.addChildEventListener(new ChildEventListener() {
+
+        refPendingChat.addChildEventListener(getPendingChatEventListener());
+
+    }
+
+    @NonNull
+    private ChildEventListener getPendingChatEventListener() {
+        return privatePendingChatListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 setPendingChatToUserRef(dataSnapshot, refPendingChat);
@@ -179,9 +188,9 @@ public class CommunityCore extends Community implements FirebasePaths {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
-
+        };
     }
+
     private void setPendingChatToUserRef(DataSnapshot dataSnapshot, DatabaseReference refPendingChat) {
         // get a chat id  from pending chat and set a ref on chat refreance in user_info
         String chatKey = dataSnapshot.child("chat_id").getValue().toString();
@@ -225,6 +234,10 @@ public class CommunityCore extends Community implements FirebasePaths {
                 long currentCounter = Long.parseLong(currentChatCounterAsString);
                 long value = Long.parseLong(userChatRef.getValue().toString().trim());
                 long res = currentCounter - value;
+
+
+
+
                 updateCounter(chatKey, String.valueOf(res));
             }
 
@@ -247,18 +260,6 @@ public class CommunityCore extends Community implements FirebasePaths {
         }
     }
 
-    private void addUserChatToList(String chatKey, String chatType, String chatName, String pictureURL, String lastMessage, String lastDate, long messageNumber) {
-
-        CommunityChatModel communityUserList = new CommunityChatModel();
-        communityUserList.setChatKey(chatKey);
-        communityUserList.setChatType(chatType);
-        communityUserList.setChatName(chatName);
-        communityUserList.setUserPictureURL(pictureURL);
-        communityUserList.setLastMsg(lastMessage);
-        communityUserList.setChatCounter(messageNumber);
-        communityUserList.setLastMsgDate(app.convertFromTimeStampToDate(lastDate));
-        addToList(communityUserList);
-    }
 
 
     @Override
@@ -277,4 +278,25 @@ public class CommunityCore extends Community implements FirebasePaths {
     }
 
 
+
+    private void addUserChatToList(String chatKey, String chatType, String chatName, String pictureURL, String lastMessage, String lastDate, long messageNumber) {
+
+        CommunityChatModel communityUserList = new CommunityChatModel();
+        communityUserList.setChatKey(chatKey);
+        communityUserList.setChatType(chatType);
+        communityUserList.setChatName(chatName);
+        communityUserList.setUserPictureURL(pictureURL);
+        communityUserList.setLastMsg(lastMessage);
+        communityUserList.setChatCounter(messageNumber);
+        communityUserList.setLastMsgDate(app.convertFromTimeStampToDate(lastDate));
+        addToList(communityUserList);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        refAuthCurrentUserChats.child(FIREBASE_PRIVATE_ATTR).removeEventListener(privateSingleChatListener);
+        refLastMessage.removeEventListener(lastMessageListener);
+     //   refPendingChat.removeEventListener(privatePendingChatListener);
+    }
 }

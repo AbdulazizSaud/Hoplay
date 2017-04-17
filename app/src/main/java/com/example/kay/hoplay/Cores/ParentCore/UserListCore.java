@@ -14,7 +14,6 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
 
 
 
-    private FriendCommonModel friendCommonModel;
 
     protected abstract void OnClickHolders(final FriendCommonModel model);
     protected abstract void onStartActivity();
@@ -26,7 +25,7 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
         final String UID =  app.getAuth().getCurrentUser().getUid();
 
 
-        final DatabaseReference usersData = app.getDatabaseUsers();
+        final DatabaseReference usersData = app.getDatabaseUsersInfo();
         DatabaseReference friendList = usersData.child(UID).child(FIREBASE_FRIENDS_LIST_ATTR);
 
         friendList.addChildEventListener(new ChildEventListenerModel() {
@@ -37,8 +36,6 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         addUser(rootSnapshots.getKey(),dataSnapshot);
-
-                        addToFriendUserList(friendCommonModel);
                     }
 
                     @Override
@@ -59,7 +56,7 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
     @Override
     protected void searchForUser(String value) {
 
-        DatabaseReference userRef = app.getDatabaseUsers();
+        DatabaseReference userRef = app.getDatabaseUsersInfo();
         Query query = userRef.orderByChild(FIREBASE_USERNAME_PATH).startAt(value).endAt(value+"\uf8ff").limitToFirst(10);
         getData(query);
     }
@@ -96,13 +93,9 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
         String username = dataSnapshot.child(FIREBASE_USERNAME_PATH).getValue().toString();
         String picUrl = dataSnapshot.child(FIREBASE_PICTURE_URL_PATH).getValue().toString();
 
-        if(!username.equals(app.getUserInformation().getUsername()))
+        if(!username.equals(app.getUserInformation().getUsername()) && !checkIsInList(username))
         {
-            friendCommonModel = new FriendCommonModel();
-            friendCommonModel.setFriendKey(key);
-            friendCommonModel.setFriendUsername(username);
-            friendCommonModel.setUserPictureURL(picUrl);
-            addToUserList(friendCommonModel);
+            addToUserList(key,username,picUrl,true);
         }
     }
 

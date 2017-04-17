@@ -28,6 +28,9 @@ import com.example.kay.hoplay.Cores.MainAppMenuCore;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 /*
 

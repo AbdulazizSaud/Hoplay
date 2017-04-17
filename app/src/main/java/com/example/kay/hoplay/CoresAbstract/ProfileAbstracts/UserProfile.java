@@ -76,59 +76,18 @@ public abstract class UserProfile extends Fragment {
         app = App.getInstance();
 
         initControls(view);
-
         setClickableControls();
         OnStartActitvty();
 
-//        profileSettings.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //Creating the instance of PopupMenu
-//                PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), profileSettings);
-//                //Inflating the Popup using xml file
-//                popup.getMenuInflater()
-//                        .inflate(R.menu.settings_in_profile, popup.getMenu());
-//
-//                //registering popup with OnMenuItemClickListener
-//                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                    public boolean onMenuItemClick(MenuItem item) {
-//                        Toast.makeText(
-//                                getActivity().getApplicationContext() ,
-//                                "You Clicked : " + item.getTitle(),
-//                                Toast.LENGTH_SHORT
-//                        ).show();
-//                        return true;
-//                    }
-//                });
-//
-//                popup.show(); //showing popup menu
-//            }
-//        }); //closing the setOnClickListener method
 
-
-
-
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recent_activities_recyclerview);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        // specify an adapter (see also next example)
-
-
-        mAdapter = createAdapter();
-        mRecyclerView.setAdapter(mAdapter);
+        setupRecyclerView(view);
 
 
         setUserProfileInformation();
 
         return view;
     }
+
 
     private void initControls(View view) {
         usernameProfile = (TextView) view.findViewById(R.id.username_profile);
@@ -161,6 +120,8 @@ public abstract class UserProfile extends Fragment {
         ratingsNumberTextView.setTypeface(playregular);
         recentActivitiesTextView.setTypeface(playregular);
         nicknameTextView.setTypeface(playregular);
+
+
 
 
         setGamesNumber("0");
@@ -224,9 +185,27 @@ public abstract class UserProfile extends Fragment {
             }
         });
     }
+    private void setupRecyclerView(View view) {
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recent_activities_recyclerview);
 
-    private void setUserProfileInformation() {
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+
+
+        mAdapter = createAdapter();
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private synchronized void setUserProfileInformation() {
          app = App.getInstance();
+
 
         app.loadingImage(userPictureCircleImageView,app.getUserInformation().getPictureURL());
         usernameProfile.setText("@"+app.getUserInformation().getUsername());

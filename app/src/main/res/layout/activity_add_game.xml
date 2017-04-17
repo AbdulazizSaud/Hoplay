@@ -41,4 +41,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <ProgressBar
+        android:id="@+id/load_games_progressbar_add_game"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:layout_below="@+id/search_games_edititext_add_game"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

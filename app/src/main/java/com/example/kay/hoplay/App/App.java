@@ -3,7 +3,6 @@ package com.example.kay.hoplay.App;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
@@ -23,9 +22,7 @@ import com.squareup.picasso.Picasso;
 import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,11 +33,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class App extends Application implements FirebasePaths{
 
-    private static App instance;
+    private  static App instance;
 
 
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseUsers;
+    private DatabaseReference databaseUserNames;
+    private DatabaseReference databaseUsersInfo;
     private DatabaseReference databaseChat;
     private DatabaseReference databaseGames;
     private DatabaseReference databaseAuthUserDataRef;
@@ -49,7 +47,7 @@ public class App extends Application implements FirebasePaths{
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private ImageLoader imageLoader; // Image loader from url
 
-    private UserInformation userInformation;
+    private  UserInformation userInformation;
     private GameManager gameManager;
 
 
@@ -61,7 +59,8 @@ public class App extends Application implements FirebasePaths{
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         getFirebaseDatabase().setPersistenceEnabled(true);
-        databaseUsers = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_USERS_INFO_ATTR);
+        databaseUserNames = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_USER_NAMES_ATTR);
+        databaseUsersInfo = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_USERS_INFO_ATTR);
         databaseChat = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_CHAT_ATTR);
         databaseGames = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_GAMES_REFERENCES);
         userInformation = new UserInformation();
@@ -93,6 +92,8 @@ public class App extends Application implements FirebasePaths{
     public void loadingImage(Context c, ViewHolders holder, String pictureURL) {
 
 
+        if(pictureURL == null || pictureURL.isEmpty() || pictureURL.equals("\\s++"))
+            return;
 
         Picasso.with(c)
                 .load(pictureURL)
@@ -167,8 +168,8 @@ public class App extends Application implements FirebasePaths{
     public FirebaseDatabase getFirebaseDatabase() {
         return firebaseDatabase;
     }
-    public DatabaseReference getDatabaseUsers() {
-        return databaseUsers;
+    public DatabaseReference getDatabaseUsersInfo() {
+        return databaseUsersInfo;
     }
     public DatabaseReference getDatabasChat() {
         return databaseChat;
@@ -176,10 +177,11 @@ public class App extends Application implements FirebasePaths{
     public DatabaseReference getDatabaseGames() {
         return databaseGames;
     }
+    public DatabaseReference getDatabaseUserNames() {
+        return databaseUserNames;
+    }
 
-
-
-    public UserInformation getUserInformation() {
+    public synchronized UserInformation getUserInformation() {
         return userInformation;
     }
 
@@ -199,6 +201,13 @@ public class App extends Application implements FirebasePaths{
     {
         gameManager.addGame(gameID,gameName,maxPlayers,gamePicURL,ranks,isCompetitive);
     }
+
+
+
+
+
+
+
 }
 
 

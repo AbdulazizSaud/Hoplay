@@ -3,15 +3,18 @@ package com.example.kay.hoplay.CoresAbstract;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.kay.hoplay.Adapters.MenuPagerAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.AuthenticationCore.LoginCore;
+import com.example.kay.hoplay.Cores.CommunityCore;
 import com.example.kay.hoplay.R;
 
 import com.roughike.bottombar.BottomBar;
@@ -50,7 +53,7 @@ public abstract class MainAppMenu extends AppCompatActivity  {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         instance = this;
 
         super.onCreate(savedInstanceState);
@@ -70,24 +73,49 @@ public abstract class MainAppMenu extends AppCompatActivity  {
 
     /***************************************/
 
-    private void initControl(Bundle savedInstanceState) {
+    private void initControl(final Bundle savedInstanceState) {
         viewPagerMenu = (ViewPager) findViewById(R.id.view_pager);
+
+        // Prevent destroyin old fragments
+        viewPagerMenu.setOffscreenPageLimit(4);
+
+
         bottomBar = (BottomBar) findViewById(R.id.bottomBar);
 
+        final Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
 
+                handler.post(this);
+                if (app.getUserInformation().getUsername() != null)
+                {
+                    activateMainAppMenu(savedInstanceState);
+                    handler.removeCallbacks(this);
+
+                }
+
+            }
+
+
+        };
+        handler.post(runnable);
+
+    }
+    private void activateMainAppMenu( Bundle savedInstanceState) {
         MenuPagerAdapter menuPagerAdapter = new MenuPagerAdapter(getSupportFragmentManager());
         viewPagerMenu.setAdapter(menuPagerAdapter);
-
-
         setupBottmBar(savedInstanceState);
     }
 
     private void setupBottmBar(Bundle savedInstanceState)
     {
 
-        bottomBar.selectTabAtPosition(1);
+        bottomBar.selectTabAtPosition(3);
         BottomBarTab unreadMessages = bottomBar.getTabAtPosition(1);
-        unreadMessages.setBadgeCount(4);
+
+
+        unreadMessages.setBadgeCount(5);
 
         viewPagerMenu.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -107,6 +135,10 @@ public abstract class MainAppMenu extends AppCompatActivity  {
 
             }
         });
+
+
+
+
 
 
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {

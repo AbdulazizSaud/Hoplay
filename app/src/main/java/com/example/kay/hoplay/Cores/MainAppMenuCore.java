@@ -65,7 +65,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
     private void setupUserInformation(FirebaseUser user) {
         app.getUserInformation().setUID(user.getUid());
-        app.getDatabaseUsers().child(app.getUserInformation().getUID()).addListenerForSingleValueEvent(new ValueEventListener() {
+        app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

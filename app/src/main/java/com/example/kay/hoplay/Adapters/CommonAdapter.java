@@ -50,4 +50,6 @@ public abstract class  CommonAdapter<T> extends RecyclerView.Adapter<ViewHolders
 
 
 
+
+
 }

@@ -1,8 +1,6 @@
 package com.example.kay.hoplay.Cores.ChatCore;
 
 import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.example.kay.hoplay.Cores.ParentCore.UserListCore;
 import com.example.kay.hoplay.Models.FriendCommonModel;
@@ -14,11 +12,6 @@ import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-import java.util.StringTokenizer;
-
-import static android.R.attr.key;
-import static android.R.attr.mode;
-import static android.R.attr.value;
 
 /**
  * Created by Kay on 3/19/2017.
@@ -87,7 +80,7 @@ public class CreateChatCore extends UserListCore {
         // path --> /_users_info_/[UID]/_chat_refs_/_private_
 
         String privateChatPath = UID + "/" + FIREBASE_USER_PRIVATE_CHAT;
-        DatabaseReference refUsePrivaterChats = app.getDatabaseUsers().child(privateChatPath);
+        DatabaseReference refUsePrivaterChats = app.getDatabaseUsersInfo().child(privateChatPath);
         refUsePrivaterChats.child(key).child(FIREBASE_COUNTER_PATH).setValue(0);
         refUsePrivaterChats.child(key).child(FIREBASE_OPPONENT_ID_PATH).setValue(friendUID);
 
@@ -106,7 +99,7 @@ public class CreateChatCore extends UserListCore {
         String opponentKey = model.getFriendKey();
         String privateChatPath = currentUserId + "/" + FIREBASE_USER_PRIVATE_CHAT;
 
-        DatabaseReference chatRef = app.getDatabaseUsers().child(privateChatPath);
+        DatabaseReference chatRef = app.getDatabaseUsersInfo().child(privateChatPath);
         final Query query = chatRef.orderByChild(FIREBASE_OPPONENT_ID_PATH).startAt(opponentKey).endAt(opponentKey + "\uf8ff").limitToFirst(1);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

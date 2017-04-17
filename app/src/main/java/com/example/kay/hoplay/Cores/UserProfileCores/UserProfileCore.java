@@ -27,7 +27,7 @@ public class UserProfileCore extends UserProfile implements FirebasePaths{
     private void setFriendCountGame()
     {
 
-        DatabaseReference myFavorGames = app.getDatabaseUsers().child(app.getUserInformation().getUID()+"/"+FIREBASE_FRIENDS_LIST_ATTR);
+        DatabaseReference myFavorGames = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()+"/"+FIREBASE_FRIENDS_LIST_ATTR);
         myFavorGames.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot friendsSnaps) {
@@ -47,7 +47,7 @@ public class UserProfileCore extends UserProfile implements FirebasePaths{
     private void setGameCount()
     {
 
-        DatabaseReference myFavorGames = app.getDatabaseUsers().child(app.getUserInformation().getUID()+"/"+FIREBASE_FAVOR_GAMES_PATH);
+        DatabaseReference myFavorGames = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()+"/"+FIREBASE_FAVOR_GAMES_PATH);
         myFavorGames.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot gamesShots) {
@@ -66,7 +66,7 @@ public class UserProfileCore extends UserProfile implements FirebasePaths{
 
     private void loadRecentActivtiy()
     {
-        DatabaseReference recentGameRef = app.getDatabaseUsers().child(app.getUserInformation().getUID()+"/"+FIREBASE_RECENT_GAMES_PATH);
+        DatabaseReference recentGameRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()+"/"+FIREBASE_RECENT_GAMES_PATH);
         recentGameRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -79,6 +79,7 @@ public class UserProfileCore extends UserProfile implements FirebasePaths{
                     app.getDatabaseGames().child(gameType+"/"+gameKey).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot gameShot) {
+
                             String gameName = gameShot.child("name").getValue().toString().trim();
                             String gamePic = gameShot.child("photo").getValue().toString().trim();
 

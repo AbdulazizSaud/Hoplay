@@ -8,13 +8,9 @@ public class  ChatMessage {
     private String id;
     private boolean isMe;
     private String message;
-    private Long userId;
+    private String userId;
     private String dateTime;
 
-    public ChatMessage()
-    {
-
-    }
     public String getId() {
         return id;
     }
@@ -23,12 +19,12 @@ public class  ChatMessage {
         this.id = id;
     }
 
-    public boolean getIsme() {
+    public boolean isMe() {
         return isMe;
     }
 
-    public void setMe(boolean isMe) {
-        this.isMe = isMe;
+    public void setMe(boolean me) {
+        isMe = me;
     }
 
     public String getMessage() {
@@ -39,19 +35,19 @@ public class  ChatMessage {
         this.message = message;
     }
 
-    public long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public String getDate() {
+    public String getDateTime() {
         return dateTime;
     }
 
-    public void setDate(String dateTime) {
+    public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 }

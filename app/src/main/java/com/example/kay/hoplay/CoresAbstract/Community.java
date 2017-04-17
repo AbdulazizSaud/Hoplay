@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ public abstract class Community extends Fragment {
 
     private RecyclerView mRecyclerView;
     private ImageView bgChatImageView;
+
     private RecyclerView.LayoutManager mLayoutManager;
     private  FloatingActionButton newPrivateChatFloatingActionButton;
 
@@ -68,11 +70,14 @@ public abstract class Community extends Fragment {
             }
         });
 
+
+
         //testList();
 
 
 
         OnStartActivity();
+
 
         return view;
     }
@@ -147,7 +152,12 @@ public abstract class Community extends Fragment {
                 communityHolder.setCommunitySubtitle(model.getLastMsg());
                 communityHolder.setCounter(String.valueOf(model.getChatCounter()));
                 holder.setTime(model.getLastMsgDate());
+//                Log.i("->",""+getAllUnseenMessages());
+
             }
+
+
+
         };
     }
 
@@ -157,5 +167,21 @@ public abstract class Community extends Fragment {
 
     protected abstract void OnClickHolders(CommunityChatModel model, View v);
     protected abstract void OnStartActivity();
+//    public long getAllUnseenMessages()
+//    {
+//        for (int i = 0  ; i < communityUserLists.size() ; i++)
+//        {
+//            numberOfUnseenMessages  += communityUserLists.get(i).getChatCounter();
+//        }
+//
+//        Log.i("->" , ""+numberOfUnseenMessages);
+//        return numberOfUnseenMessages;
+//    }
+@Override
+public void onDestroy() {
+    super.onDestroy();
 
+    Log.i("Destroy" , "BYEBYE ");
 }
+}
+

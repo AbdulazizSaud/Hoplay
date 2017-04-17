@@ -28,6 +28,7 @@ import com.example.kay.hoplay.Models.ChatMessage;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import emojicon.EmojiconEditText;
@@ -65,6 +66,7 @@ public abstract class Chat extends AppCompatActivity {
     // adapter impalement
     protected ChatAdapter adapter;
     protected ArrayList<ChatMessage> chatHistory = new ArrayList<ChatMessage>();
+    protected HashMap<String,ChatMessage> chatMessages = new HashMap<String,ChatMessage>();
 
     // .....
     protected String myUsername = null;
@@ -182,21 +184,24 @@ public abstract class Chat extends AppCompatActivity {
     }
 
     // this method for adding new message to adapter and display it
-    protected void addMessage(String id,String message, boolean me) {
+    protected void addMessage(String chatKey,String userId,String message, boolean me) {
 
         //check if this message is empty
-        if (isMessageEmpty(message)) {
+        if (isMessageEmpty(message) ||  chatMessages.containsKey(chatKey)) {
             return;
         }
 
+
         // set a message
         ChatMessage chatMessage = new ChatMessage();
-        chatMessage.setId(id);
+        chatMessage.setId(chatKey);
+        chatMessage.setUserId(userId);
         chatMessage.setMessage(message);
-        chatMessage.setDate(DateFormat.getDateTimeInstance().format(new Date()));
+        chatMessage.setDateTime(DateFormat.getDateTimeInstance().format(new Date()));
         chatMessage.setMe(me);
 
         // add to adapter and display it
+        chatMessages.put(chatKey,chatMessage);
         adapter.add(chatMessage);
         adapter.notifyDataSetChanged();
 

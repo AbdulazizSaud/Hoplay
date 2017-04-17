@@ -4,25 +4,23 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.CoresAbstract.AuthenticationAbstracts.Signup;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.Services.GetAPI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
-public class SignUpCore extends Signup {
+public class SignUpCore extends Signup implements FirebasePaths{
 
     // Get firebase authentication from App
     private FirebaseAuth appAuth;
@@ -34,6 +32,7 @@ public class SignUpCore extends Signup {
         appAuth = FirebaseAuth.getInstance();
 
     }
+
 
     // this method will do auth to crearte a new user
     // receive:  username , password, email
@@ -55,11 +54,9 @@ public class SignUpCore extends Signup {
 
                             insertInfoToDatabase(user.getUid(),email,username,nickname);
 
-                            // success message
-                            String strMeatMsg = String.format(getResources().getString(R.string.signup_successful_message), username);
-
-
-                            Toast.makeText(getApplicationContext(), strMeatMsg, Toast.LENGTH_LONG).show();
+//                            // success message
+//                            String strMeatMsg = String.format(getResources().getString(R.string.signup_successful_message), username);
+//                            Toast.makeText(getApplicationContext(), strMeatMsg, Toast.LENGTH_LONG).show();
                             // switch to main AppMenu
                             toMainMenuApp();
 
@@ -75,15 +72,42 @@ public class SignUpCore extends Signup {
     }
 
 
+    @Override
+    protected void checkUsername(String value) {
+
+        app.getDatabaseUserNames().child(value).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                currenCheckingStatus = (dataSnapshot.exists()) ? USER_EXIST : USER_NOT_EXIST;
+                checkingUsername=false;
+                checkUserCallBack();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
+
     private void insertInfoToDatabase(final String UID,final String email, final String username, final String nickname) {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference usersInfoRef = app.getDatabaseUsers().child(UID);
 
+        DatabaseReference usersInfoRef = app.getDatabaseUsersInfo().child(UID);
 
-        usersInfoRef.child(FirebasePaths.FIREBASE_USERNAME_PATH).setValue(username.toLowerCase());
-        usersInfoRef.child(FirebasePaths.FIREBASE_NICKNAME_PATH).setValue(nickname);
-        usersInfoRef.child(FirebasePaths.FIREBASE_EMAIL_PATH).setValue(email);
-        usersInfoRef.child(FirebasePaths.FIREBASE_PICTURE_URL_PATH).setValue("default");
+        HashMap<String,String> map = new HashMap<>();
+
+        map.put(FIREBASE_USERNAME_ATTR,username.toLowerCase());
+        map.put(FIREBASE_NICKNAME_ATTR,nickname);
+        map.put(FIREBASE_EMAIL_ATTR,email);
+        map.put(FIREBASE_PICTURE_URL_ATTR,"default");
+        usersInfoRef.child(FIREBASE_DETAILS_ATTR).setValue(map);
+
+        // user name list
+        app.getDatabaseUserNames().child(username).setValue(UID);
 
 
 

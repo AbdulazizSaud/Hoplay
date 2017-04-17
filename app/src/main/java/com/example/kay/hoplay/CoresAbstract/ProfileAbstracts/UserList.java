@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -15,12 +16,16 @@ import android.widget.RelativeLayout;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Interfaces.Constants;
+import com.example.kay.hoplay.Models.GameDetails;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.FriendCommonModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Kay on 2/19/2017.
@@ -38,6 +43,10 @@ public abstract class UserList extends AppCompatActivity {
 
     private ArrayList<FriendCommonModel> usersList = new ArrayList<FriendCommonModel>();
     private ArrayList<FriendCommonModel> friendsList = new ArrayList<FriendCommonModel>();
+
+    private Timer timer = new Timer();
+
+
 
     private CommonAdapter<FriendCommonModel> userdListAdapter = new CommonAdapter<FriendCommonModel>(usersList, R.layout.friend_instance_model) {
         @Override
@@ -75,6 +84,8 @@ public abstract class UserList extends AppCompatActivity {
         searchEditText = (EditText)findViewById(R.id.search_new_friend_bar_edittext);
         searchEditText.setTypeface(playbold);
         FriendsLayout = (RelativeLayout) findViewById(R.id.activity_new_chat);
+        setupRecyclerView();
+
 
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -90,41 +101,30 @@ public abstract class UserList extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
+                // Just to push
+                final String value = s.toString().toLowerCase().trim();
+               // showLoadingAnimation();
+
+                // chinging search icon when user search for a game
                 // search icon changing animation
-                searchAnimation(s);
+                if (s.length() == 0) {
+                    searchEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_search_unfocused_32dp, 0);
+                }
+                 searchEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_search_focused_32dp, 0);
 
 
-                String value = s.toString().trim();
+                if (isTextValidate(value)) {
+                    searchProcess(value);
 
-                if(isTextVaild(value))
-                {
-                    updateAdapter(true);
-                    searchForUser(value);
-                } else
-                {
-                    reloadFriendList();
+                } else {
                 }
 
             }
         });
 
-        setupRecyclerView();
         //testList();
         onStartActivity();
     }
-
-
-
-
-    private void searchAnimation(Editable s) {
-        // search icon changing animation
-        if (s.length() == 0) {
-            searchEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_search_unfocused_32dp, 0);
-        }
-        searchEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_search_focused_32dp, 0);
-    }
-
-
 
     private void setupRecyclerView() {
 
@@ -136,7 +136,7 @@ public abstract class UserList extends AppCompatActivity {
         mAdapter = userdListAdapter;
         mRecyclerView.setAdapter(mAdapter);
 
-       // mLayoutManager = new GridLayoutManager(getApplicationContext(),3);
+        // mLayoutManager = new GridLayoutManager(getApplicationContext(),3);
 
         mLayoutManager = new GridLayoutManager(getApplicationContext(),3);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -144,27 +144,62 @@ public abstract class UserList extends AppCompatActivity {
     }
 
 
+    private void searchProcess(final String value) {
+
+        timer.cancel();
+        timer = new Timer();
+
+        updateAdapter(value);
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                searchForUser(value);
+            }
+        }, Constants.COOL_DOWN_TIMER_MIllI_SECOND);
+    }
+
+
+
+
     
-    protected void addToUserList(FriendCommonModel friendCommonModel){
+    protected void addToUserList(String userKey , String username,String picture,boolean withNotifyChanges){
+        FriendCommonModel  friendCommonModel = new FriendCommonModel();
+        friendCommonModel.setFriendKey(userKey);
+        friendCommonModel.setFriendUsername(username);
+        friendCommonModel.setUserPictureURL(picture);
+
         usersList.add(friendCommonModel);
-        updateAdapter(false);
-    }
-
-    protected void addToFriendUserList(FriendCommonModel friendCommonModel){
         friendsList.add(friendCommonModel);
+
+        if(withNotifyChanges)
+        mAdapter.notifyDataSetChanged();
     }
 
-    protected void updateAdapter(boolean clearList)
-    {
-         if(clearList)
-             usersList.clear();
 
+    protected void updateAdapter(String value) {
+
+        ArrayList<FriendCommonModel> friendsModelList = new ArrayList<>();
+
+        // Capitlizing the first letter of a game
+
+
+        for (FriendCommonModel friendCommonModel : usersList)
+        {
+            if (!friendCommonModel.getFriendUsername().startsWith(value))
+            {
+                friendsModelList.add(friendCommonModel);
+            }
+        }
+
+
+        usersList.removeAll(friendsModelList);
         mAdapter.notifyDataSetChanged();
 
     }
 
-    private boolean isTextVaild(String value) {
-        return !value.equals("") && !value.equals("\\s+") && null != value;
+    private boolean isTextValidate(String value) {
+        return !value.equals("") && !value.equals("\\s+") && null != value || !value.isEmpty();
     }
 
     private void reloadFriendList() {
@@ -172,16 +207,26 @@ public abstract class UserList extends AppCompatActivity {
 
         for(FriendCommonModel commonModel : friendsList)
         {
-            addToUserList(commonModel);
+            addToUserList(commonModel.getFriendKey(),commonModel.getFriendUsername(),commonModel.getUserPictureURL(),false);
         }
+        mAdapter.notifyDataSetChanged();
+    }
+
+    protected boolean checkIsInList(String name) {
+
+
+        // Capitlizing the first letter of a game
+
+        for (FriendCommonModel friendCommonModel : usersList) {
+            if (friendCommonModel.getFriendUsername().startsWith(name))
+                return true;
+        }
+        return false;
     }
 
 
 
-    protected void setSearchEditTextVisibility(int v)
-    {
-        searchEditText.setVisibility(v);
-    }
+
 
     protected abstract void OnClickHolders(FriendCommonModel model);
 

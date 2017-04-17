@@ -186,6 +186,7 @@
     <string name="signup_signin_up">Signin Up...</string>
     <string name="signup_just_a_moment">Just a moment</string>
     <string name="signup_successful_message">Welcome %1$s ❤️</string>
+    <string name="signup_user_available_message">User name is Available</string>
 
 
     <!--                                Terms And Conditions Layout                                               -->

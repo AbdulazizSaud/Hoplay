@@ -1,10 +1,7 @@
 package com.example.kay.hoplay.Cores.UserProfileCores;
 
 import android.content.Intent;
-import android.util.Log;
-import android.widget.ImageView;
 
-import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.ViewFriendProfile;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +33,7 @@ public class ViewFriendProfileCore extends ViewFriendProfile  implements Firebas
 
     private void loadFriendData(String key)
     {
-       DatabaseReference userRef =  app.getDatabaseUsers().child(key);
+       DatabaseReference userRef =  app.getDatabaseUsersInfo().child(key);
         userRef.child(FIREBASE_FAVOR_GAMES_PATH).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -91,7 +88,7 @@ public class ViewFriendProfileCore extends ViewFriendProfile  implements Firebas
 
     private void loadRecentActivtiy(String friendKey)
     {
-        DatabaseReference recentGameRef = app.getDatabaseUsers().child(friendKey+"/"+FIREBASE_RECENT_GAMES_PATH);
+        DatabaseReference recentGameRef = app.getDatabaseUsersInfo().child(friendKey+"/"+FIREBASE_RECENT_GAMES_PATH);
         recentGameRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

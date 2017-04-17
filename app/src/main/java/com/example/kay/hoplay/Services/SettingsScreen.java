@@ -43,7 +43,6 @@ public class SettingsScreen extends PreferenceFragment {
             public boolean onPreferenceClick(Preference preference) {
                 //Do whatever you want here
                 App.getInstance().signOut();
-
                 Intent i = new Intent(context, LoginCore.class);
                 startActivity(i);
 

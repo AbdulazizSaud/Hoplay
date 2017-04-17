@@ -13,15 +13,19 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
-import com.example.kay.hoplay.Interfaces.CONSTANTS;
+import com.example.kay.hoplay.Interfaces.Constants;
 import com.example.kay.hoplay.Models.CommunityChatModel;
 import com.example.kay.hoplay.Models.FriendCommonModel;
 import com.example.kay.hoplay.Models.GameDetails;
@@ -40,10 +44,12 @@ public abstract class AddGame extends AppCompatActivity {
     private ArrayList<GameDetails> gamesList = new ArrayList<GameDetails>();
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private ProgressBar loadGamesProgressbar;
 
+
+    private int lastPosition = -1;
 
     protected App app;
-    private boolean isTyping;
     Timer timer = new Timer();
 
     @Override
@@ -55,6 +61,8 @@ public abstract class AddGame extends AppCompatActivity {
         app = App.getInstance();
         mRecyclerView = (RecyclerView) findViewById(R.id.rec_add_game);
         searchBar = (EditText) findViewById(R.id.search_games_edititext_add_game);
+        loadGamesProgressbar = (ProgressBar) findViewById(R.id.load_games_progressbar_add_game);
+        loadGamesProgressbar.setVisibility(View.GONE);
         searchBar.setTypeface(playbold);
         mAdapter = createAdapter();
         mLayoutManager = new LinearLayoutManager(this);
@@ -70,17 +78,21 @@ public abstract class AddGame extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                isTyping = true;
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
                 // Just to push
                 final String value = s.toString().toLowerCase().trim();
+                showLoadingAnimation();
 
-                searchAnimation(s);
+                // chinging search icon when user search for a game
+                // search icon changing animation
+                if (s.length() == 0) {
+                    searchBar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_search_unfocused_32dp, 0);
+                }
+                searchBar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_search_focused_32dp, 0);
+
 
                 if (isTextValidate(value)) {
                     searchProcess(value);
@@ -91,16 +103,6 @@ public abstract class AddGame extends AppCompatActivity {
             }
         });
         OnStartActivity();
-    }
-
-
-
-    private void searchAnimation(Editable s) {
-        // search icon changing animation
-        if (s.length() == 0) {
-            searchBar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_search_unfocused_32dp, 0);
-        }
-        searchBar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_search_focused_32dp, 0);
     }
 
 
@@ -116,12 +118,13 @@ public abstract class AddGame extends AppCompatActivity {
         timer = new Timer();
 
         updateAdapter(value);
+
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 searchForGame(value);
             }
-        }, CONSTANTS.COOL_DOWN_TIMER_MIllI_SECOND);
+        }, Constants.COOL_DOWN_TIMER_MIllI_SECOND);
     }
 
 
@@ -130,16 +133,15 @@ public abstract class AddGame extends AppCompatActivity {
         ArrayList<GameDetails> gameDetailsLinkedList = new ArrayList<>();
 
         // Capitlizing the first letter of a game
-        String gameNameWithCapitalLetter = value.substring(0,1).toUpperCase() + value.substring(1);
+        String gameNameWithCapitalLetter = value.substring(0, 1).toUpperCase() + value.substring(1);
 
 
-        for (GameDetails game : gamesList)
-        {
-            if (!game.getGameName().startsWith(gameNameWithCapitalLetter))
-            {
+        for (GameDetails game : gamesList) {
+            if (!game.getGameName().startsWith(gameNameWithCapitalLetter)) {
                 gameDetailsLinkedList.add(game);
             }
         }
+
 
         gamesList.removeAll(gameDetailsLinkedList);
         mAdapter.notifyDataSetChanged();
@@ -147,14 +149,13 @@ public abstract class AddGame extends AppCompatActivity {
     }
 
 
-    protected boolean checkIsInList(String name){
+    protected boolean checkIsInList(String name) {
 
 
         // Capitlizing the first letter of a game
-        String gameNameWithCapitalLetter = name.substring(0,1).toUpperCase() + name.substring(1);
+        String gameNameWithCapitalLetter = name.substring(0, 1).toUpperCase() + name.substring(1);
 
-        for (GameDetails game : gamesList)
-        {
+        for (GameDetails game : gamesList) {
             if (game.getGameName().startsWith(gameNameWithCapitalLetter))
                 return true;
         }
@@ -170,7 +171,6 @@ public abstract class AddGame extends AppCompatActivity {
     protected void addGame(String gameId, String gameName, String gameType, int maxPlayers, String gamePic, String supportedPlatforms) {
         GameDetails gameDetails = new GameDetails(gameId, gameName, maxPlayers, gamePic, supportedPlatforms);
         gameDetails.setGameType(gameType);
-
         gamesList.add(gameDetails);
         mAdapter.notifyDataSetChanged();
     }
@@ -200,6 +200,7 @@ public abstract class AddGame extends AppCompatActivity {
                     }
                 });
 
+
                 final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
                 app.loadingImage(getApplication(), holder, model.getGamePhotoUrl());
                 gameHolder.setTitle(model.getGameName());
@@ -209,6 +210,8 @@ public abstract class AddGame extends AppCompatActivity {
                 gameHolder.getPsTextView().setTypeface(playbold);
                 gameHolder.getXboxTextView().setTypeface(playbold);
 
+                // Animate holders
+                setAnimation(gameHolder.getTitleView(), gameHolder.getSubtitleView(), gameHolder.getPcTextView(), gameHolder.getPsTextView(), gameHolder.getXboxTextView(), gameHolder.getPicture(), position);
 
 
                 String platforms = model.getGamePlatforms();
@@ -229,11 +232,26 @@ public abstract class AddGame extends AppCompatActivity {
 
             }
 
+            // animate holders
+            public void setAnimation(View viewToAnimate1, View viewToAnimate2, View viewToAnimate3, View viewToAnimate4, View viewToAnimate5, View viewToAnimate6, int position) {
+                // If the bound view wasn't previously displayed on screen, it's animated
+                if (position > lastPosition) {
+                    Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
+                    viewToAnimate1.startAnimation(animation);
+                    viewToAnimate2.startAnimation(animation);
+                    viewToAnimate3.startAnimation(animation);
+                    viewToAnimate4.startAnimation(animation);
+                    viewToAnimate5.startAnimation(animation);
+                    viewToAnimate6.startAnimation(animation);
+                    lastPosition = position;
+                }
+            }
+
 
         };
     }
 
-    protected void gameAddedMessage(String gameName) {
+    protected void addedGameMessage(String gameName) {
         // success message
         // String Msg = String.format(getResources().getString(R.string.signup_successful_message), username);
 
@@ -242,6 +260,15 @@ public abstract class AddGame extends AppCompatActivity {
     }
 
 
+    protected void showLoadingAnimation() {
+        mRecyclerView.setVisibility(RecyclerView.INVISIBLE);
+        loadGamesProgressbar.setVisibility(View.VISIBLE);
+    }
+
+    protected void hideLoadingAnimation() {
+        mRecyclerView.setVisibility(RecyclerView.VISIBLE);
+        loadGamesProgressbar.setVisibility(View.INVISIBLE);
+    }
 
 
     protected abstract void searchForGame(String value);

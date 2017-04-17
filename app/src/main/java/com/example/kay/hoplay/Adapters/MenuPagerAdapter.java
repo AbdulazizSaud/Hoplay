@@ -15,6 +15,7 @@ import com.example.kay.hoplay.Cores.UserProfileCores.UserProfileCore;
 public class MenuPagerAdapter extends FragmentStatePagerAdapter {
 
 
+
         public MenuPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -26,7 +27,7 @@ public class MenuPagerAdapter extends FragmentStatePagerAdapter {
             {
                 case 0:
                     return new SearchRequestCore();
-                case 1  :
+                case 1 :
                     return new CommunityCore();
                 case 2 :
                     return new MakeRequestCore();
@@ -37,7 +38,7 @@ public class MenuPagerAdapter extends FragmentStatePagerAdapter {
             }
 
 
-            return null;
+            return new CommunityCore();
         }
 
         @Override

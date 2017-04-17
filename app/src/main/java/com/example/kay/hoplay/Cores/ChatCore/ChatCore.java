@@ -50,7 +50,7 @@ public class ChatCore extends Chat implements FirebasePaths {
 
             final String UID = app.getUserInformation().getUID();
             lastMessageCounter = Long.valueOf(dataSnapshot.getValue().toString().trim());
-            app.getDatabaseUsers().child(UID).child(FIREBASE_USER_PRIVATE_CHAT).child(chatRoomKey).child(FIREBASE_COUNTER_PATH).setValue(lastMessageCounter);
+            app.getDatabaseUsersInfo().child(UID).child(FIREBASE_USER_PRIVATE_CHAT).child(chatRoomKey).child(FIREBASE_COUNTER_PATH).setValue(lastMessageCounter);
 
         }
 
@@ -92,12 +92,12 @@ public class ChatCore extends Chat implements FirebasePaths {
             return;
 
 
-        String username = dataSnapshot.child("_username_").getValue().toString();
-        String message = dataSnapshot.child("_message_").getValue().toString();
-
+        String chatKey = dataSnapshot.child("_message_key_").getValue().toString().trim();
+        String username = dataSnapshot.child("_username_").getValue().toString().trim();
+        String message = dataSnapshot.child("_message_").getValue().toString().trim();
         boolean isYou = username.equals(app.getUserInformation().getUID());
 
-        addMessage(username, message, isYou);
+        addMessage(chatKey,username, message, isYou);
 
     }
 
@@ -109,10 +109,12 @@ public class ChatCore extends Chat implements FirebasePaths {
             String messageKey = refMessages.push().getKey();
 
             HashMap<String,Object> map = new HashMap<>();
+            map.put("_message_key_",messageKey);
             map.put("_message_",messageText);
             map.put("_username_",app.getUserInformation().getUID());
             map.put("_time_stamp_",ServerValue.TIMESTAMP);
             map.put("_counter_",++lastMessageCounter);
+
             DatabaseReference messageRef = refMessages.child("_packets_").child(messageKey);
             messageRef.setValue(map);
             DatabaseReference lastMessageRef = refMessages.child("_last_message_");
