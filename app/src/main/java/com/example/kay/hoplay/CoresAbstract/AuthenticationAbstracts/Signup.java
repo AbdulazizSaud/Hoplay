@@ -56,6 +56,8 @@ public abstract class Signup extends AppCompatActivity implements Constants {
     protected boolean checkingUsername=false;
     protected int currenCheckingStatus;
 
+    ProgressDialog loadingDialog;
+
 
     /***************************************/
 
@@ -98,6 +100,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 
         // Set the screen orientation to the portrait mode :
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
 
         // Get the current display info :
@@ -265,6 +268,12 @@ public abstract class Signup extends AppCompatActivity implements Constants {
         signUpBtn.setTypeface(sansationbold);
         confirmPasswordEdititext = (EditText) findViewById(R.id.confirm_password_edittext);
         confirmPasswordEdititext.setTypeface(playregular);
+
+
+        loadingDialog = new ProgressDialog(this);
+        loadingDialog.setTitle(R.string.signup_signin_up);
+        loadingDialog.setMessage(Signup.this.getString(R.string.signup_just_a_moment));
+
 
 
         // I've tried the onClick method  but  it  didn't work .
@@ -537,10 +546,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
     }
     public void toMainMenuApp(){
 
-        ProgressDialog loadingDialog = new ProgressDialog(this);
-        loadingDialog.setTitle(R.string.signup_signin_up);
-        loadingDialog.setMessage(Signup.this.getString(R.string.signup_just_a_moment));
-        loadingDialog.show();
+
         Intent i = new Intent(getApplicationContext(), MainAppMenuCore.class);
         startActivity(i);
 
@@ -554,6 +560,18 @@ public abstract class Signup extends AppCompatActivity implements Constants {
     protected void checkUserCallBack(){
         if(currenCheckingStatus == USER_EXIST)
         usernameSignUp.setError(getString(R.string.error_login_taken));
+    }
+
+
+    protected void loadingDialog(boolean show)
+    {
+
+        if (show)
+            loadingDialog.show();
+
+
+        else
+            loadingDialog.dismiss();
     }
 
     // abstract methods

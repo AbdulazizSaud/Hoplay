@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -183,6 +185,7 @@ public abstract class MakeRequest extends Fragment {
         noGameDialog.setContentView(R.layout.activity_no_game_pop_up);
         noGameDialog.show();
 
+
         noGameDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
@@ -214,6 +217,8 @@ public abstract class MakeRequest extends Fragment {
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(lp);
     }
+
+
 
     protected  abstract  void onStartActivity();
     protected  abstract void checkUserGamesNumber();

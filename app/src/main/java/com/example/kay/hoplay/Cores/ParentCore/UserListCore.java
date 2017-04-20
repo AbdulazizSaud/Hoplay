@@ -76,6 +76,7 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
                     for (DataSnapshot shot : iterable) {
                         addUser(shot.getKey(), shot);
                     }
+                    hideLoadingAnimation();
                 }
 
             }

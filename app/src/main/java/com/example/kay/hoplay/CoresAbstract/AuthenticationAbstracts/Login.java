@@ -15,6 +15,8 @@ import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,8 +53,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     protected RelativeLayout signInRelativeLayout;
     protected Toolbar toolbar;
     protected App app = App.getInstance();
-    ProgressDialog loadigDialog ;
-
+    ProgressDialog loadingDialog ;
 
 
 
@@ -83,9 +84,19 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
     @Override
     protected void onDestroy() {
-        loadigDialog.dismiss();
+        loadingDialog.dismiss();
         super.onDestroy();
     }
+
+
+    public void setAnimation(View viewToAnimate) {
+        // If the bound view wasn't previously displayed on screen, it's animated
+
+            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +125,9 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         OnStartActivity();
 
         initControls();
+
+
+
         changeIconListener();
 
 
@@ -137,6 +151,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
             @Override
             public void afterTextChanged(Editable s) {
                     usernameSignIn.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_person_outline_focuesed_32dp, 0);
+
                     if(s.length() == 0)
                     {
                         usernameSignIn.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_person_outline_not_focuesed_32dp, 0);
@@ -209,10 +224,13 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
 
 
+
+
+
         // Init progress dialog
-        loadigDialog = new ProgressDialog(this,R.style.AppCompatAlertDialogStyle);
-        loadigDialog.setTitle(R.string.login_signing_in);
-        loadigDialog.setMessage(Login.this.getString(R.string.login_just_a_moment));
+        loadingDialog = new ProgressDialog(this,R.style.AppCompatAlertDialogStyle);
+        loadingDialog.setTitle(R.string.login_signing_in);
+        loadingDialog.setMessage(Login.this.getString(R.string.login_just_a_moment));
 
 
         // it execute login method when click on button
@@ -271,11 +289,11 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     {
 
         if (show)
-            loadigDialog.show();
+            loadingDialog.show();
 
 
         else
-            loadigDialog.dismiss();
+            loadingDialog.dismiss();
     }
 }
 

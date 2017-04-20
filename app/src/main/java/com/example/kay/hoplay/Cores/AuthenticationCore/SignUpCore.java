@@ -42,6 +42,8 @@ public class SignUpCore extends Signup implements FirebasePaths{
     @Override
     protected void signUp(final String email, final String username, final String password, final String nickname) {
 
+
+        loadingDialog(true);
         appAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this
                 , new OnCompleteListener<AuthResult>() {
                     @Override
@@ -63,6 +65,7 @@ public class SignUpCore extends Signup implements FirebasePaths{
 
                         } else {
                             // failed message
+                            loadingDialog(false);
                             Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }

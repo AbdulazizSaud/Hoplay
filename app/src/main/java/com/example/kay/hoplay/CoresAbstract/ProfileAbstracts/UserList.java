@@ -10,7 +10,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.example.kay.hoplay.Adapters.CommonAdapter;
@@ -40,6 +43,8 @@ public abstract class UserList extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     protected EditText searchEditText;
     protected RelativeLayout FriendsLayout;
+    private ProgressBar loadUsersProgressBar;
+
 
     private ArrayList<FriendCommonModel> usersList = new ArrayList<FriendCommonModel>();
     private ArrayList<FriendCommonModel> friendsList = new ArrayList<FriendCommonModel>();
@@ -69,7 +74,25 @@ public abstract class UserList extends AppCompatActivity {
             holder.setTitle(model.getFriendUsername());
             app.loadingImage(getApplication(),holder, model.getUserPictureURL());
 
+            // animate holders
+            setAnimation(holder.getTitleView(),holder.getPicture(),position);
+
+
+
         }
+
+        // animate holders
+        public void setAnimation(View viewToAnimate1, View viewToAnimate2 ,  int position) {
+            // If the bound view wasn't previously displayed on screen, it's animated
+            if (position > -1) {
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
+                viewToAnimate1.startAnimation(animation);
+                viewToAnimate2.startAnimation(animation);
+//
+            }
+        }
+
+
     };
 
 
@@ -84,6 +107,7 @@ public abstract class UserList extends AppCompatActivity {
         searchEditText = (EditText)findViewById(R.id.search_new_friend_bar_edittext);
         searchEditText.setTypeface(playbold);
         FriendsLayout = (RelativeLayout) findViewById(R.id.activity_new_chat);
+        loadUsersProgressBar = (ProgressBar) findViewById(R.id.load_users_progressbar_user_list);
         setupRecyclerView();
 
 
@@ -103,7 +127,7 @@ public abstract class UserList extends AppCompatActivity {
 
                 // Just to push
                 final String value = s.toString().toLowerCase().trim();
-               // showLoadingAnimation();
+                showLoadingAnimation();
 
                 // chinging search icon when user search for a game
                 // search icon changing animation
@@ -222,6 +246,17 @@ public abstract class UserList extends AppCompatActivity {
                 return true;
         }
         return false;
+    }
+
+
+    protected void showLoadingAnimation() {
+        mRecyclerView.setVisibility(RecyclerView.INVISIBLE);
+        loadUsersProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    protected void hideLoadingAnimation() {
+        mRecyclerView.setVisibility(RecyclerView.VISIBLE);
+        loadUsersProgressBar.setVisibility(View.INVISIBLE);
     }
 
 

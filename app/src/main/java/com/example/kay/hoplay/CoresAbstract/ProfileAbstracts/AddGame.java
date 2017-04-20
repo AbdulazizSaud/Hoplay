@@ -47,7 +47,6 @@ public abstract class AddGame extends AppCompatActivity {
     private ProgressBar loadGamesProgressbar;
 
 
-    private int lastPosition = -1;
 
     protected App app;
     Timer timer = new Timer();
@@ -235,7 +234,7 @@ public abstract class AddGame extends AppCompatActivity {
             // animate holders
             public void setAnimation(View viewToAnimate1, View viewToAnimate2, View viewToAnimate3, View viewToAnimate4, View viewToAnimate5, View viewToAnimate6, int position) {
                 // If the bound view wasn't previously displayed on screen, it's animated
-                if (position > lastPosition) {
+                if (position > -1) {
                     Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
                     viewToAnimate1.startAnimation(animation);
                     viewToAnimate2.startAnimation(animation);
@@ -243,7 +242,7 @@ public abstract class AddGame extends AppCompatActivity {
                     viewToAnimate4.startAnimation(animation);
                     viewToAnimate5.startAnimation(animation);
                     viewToAnimate6.startAnimation(animation);
-                    lastPosition = position;
+
                 }
             }
 
