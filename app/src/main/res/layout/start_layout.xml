@@ -9,7 +9,7 @@
 
 
     <ImageView
-        android:layout_width="260dp"
+        android:layout_width="264dp"
         android:id="@+id/start_logo_imageview"
         android:layout_height="250dp"
         android:src="@drawable/hoplaylogo"
