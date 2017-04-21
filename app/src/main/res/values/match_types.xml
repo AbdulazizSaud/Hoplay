@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="match_types">
+
+        <item>Competitive</item>
+        <item>Quick Match</item>
+
+
+
+
+    </string-array>
+
+</resources>

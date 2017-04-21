@@ -11,6 +11,8 @@ import android.support.v7.widget.SearchView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -53,6 +55,7 @@ public abstract class NewRequest extends AppCompatActivity {
     private MaterialBetterSpinner countrySpinner;
     private MaterialBetterSpinner numberOfPlayersSpinner;
     private MaterialBetterSpinner playersRanksSpinner;
+    private MaterialBetterSpinner matchTypeSpinner ;
     private RadioButton pcRadiobutton;
     private RadioButton psRadiobutton;
     private RadioButton xboxRadiobutton;
@@ -66,6 +69,7 @@ public abstract class NewRequest extends AppCompatActivity {
     private EditText descriptionEdittext;
     private List<String> gamesList;
     private   ArrayAdapter<String> gamesAdapter;
+
     /***************************************/
 
     @Override
@@ -75,16 +79,7 @@ public abstract class NewRequest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_request);
         initControl();
-        changeInputsIcons();
-
-
-
-
-
-
-
-
-
+        fieldsListeners();
 
 
 
@@ -104,8 +99,12 @@ public abstract class NewRequest extends AppCompatActivity {
         makeRequestButton = (Button) findViewById(R.id.request_button_new_request);
         makeRequestButton.setTypeface(sansationbold);
         countrySpinner = (MaterialBetterSpinner) findViewById(R.id.country_spinner_new_request);
+        countrySpinner.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.text_color));
         numberOfPlayersSpinner = (MaterialBetterSpinner) findViewById(R.id.players_number_spinner_new_request);
         countrySpinner.setTypeface(playbold);
+        matchTypeSpinner = (MaterialBetterSpinner) findViewById(R.id.match_type_spinner_new_request);
+        matchTypeSpinner.setTypeface(playbold);
+        matchTypeSpinner.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.text_color));
         numberOfPlayersSpinner.setTypeface(playbold);
         playersRanksSpinner = (MaterialBetterSpinner) findViewById(R.id.players_rank_spinner_new_request);
         playersRanksSpinner.setTypeface(playbold);
@@ -136,6 +135,7 @@ public abstract class NewRequest extends AppCompatActivity {
 
         makeRequestMessage.requestFocus();
 
+
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(requestDescritopnEdittext, InputMethodManager.SHOW_IMPLICIT);
 
@@ -151,6 +151,10 @@ public abstract class NewRequest extends AppCompatActivity {
 //
         ArrayAdapter playersNumberAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
                 Arrays.asList(getResources().getStringArray(R.array.players_number)));
+
+        ArrayAdapter matchTypeAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
+                Arrays.asList(getResources().getStringArray(R.array.match_types)));
+
 //
 //
 //        ArrayAdapter gamesAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
@@ -161,16 +165,19 @@ public abstract class NewRequest extends AppCompatActivity {
         playersRanksAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         regionAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         playersNumberAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        matchTypeAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
 //
 //
         numberOfPlayersSpinner.setAdapter(playersNumberAdapter);
             countrySpinner.setAdapter(regionAdapter);
         playersRanksSpinner.setAdapter(playersRanksAdapter);
+        matchTypeSpinner.setAdapter(matchTypeAdapter);
+
     }
 
 
     // Change icon listener for autocomplete and spinners
-    private void changeInputsIcons()
+    private void fieldsListeners()
     {
         gamesAutoCompleteTextView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -191,6 +198,22 @@ public abstract class NewRequest extends AppCompatActivity {
                 {
                     gamesAutoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_games_unfocused_24dp , 0, 0, 0);
                 }
+                if (s.toString().equalsIgnoreCase("Overwatch"))
+                {
+                    matchTypeSpinner.setVisibility(View.VISIBLE);
+                    slideInFromLeft(matchTypeSpinner);
+
+                }
+                else
+                {
+                    if (matchTypeSpinner.isShown())
+                    slideOutToRight(matchTypeSpinner);
+
+                    matchTypeSpinner.setVisibility(View.GONE);
+
+                }
+
+
 
 
             }
@@ -215,7 +238,7 @@ public abstract class NewRequest extends AppCompatActivity {
                     countrySpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_location_unfocused_24dp , 0, 0, 0);
 
                 }
-                countrySpinner.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.text_color));
+
 
 
             }
@@ -270,9 +293,51 @@ public abstract class NewRequest extends AppCompatActivity {
             }
         });
 
+        matchTypeSpinner.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().equalsIgnoreCase("Competitive"))
+                {
+                    matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_competitive_24dp , 0, 0, 0);
+                }
+                if (s.toString().equalsIgnoreCase("Quick Match"))
+                {
+                    matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_quick_match_24dp , 0, 0, 0);
+                }
+                if (s.length() == 0 )
+                {
+                    matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp , 0, 0, 0);
+                }
+            }
+        });
+
 
     }
 
+
+    public void slideInFromLeft(View viewToAnimate) {
+        // If the bound view wasn't previously displayed on screen, it's animated
+
+            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
+            animation.setDuration(200);
+            viewToAnimate.startAnimation(animation);
+    }
+
+    public void slideOutToRight(View viewToAnimate)
+    {
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_out_right);
+        viewToAnimate.startAnimation(animation);
+    }
 
     public void goBackToMainAppMenu(View v)
     {finish();}

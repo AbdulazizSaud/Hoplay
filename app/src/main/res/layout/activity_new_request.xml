@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent" android:layout_height="match_parent"
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/app_background">
+
+
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,6 +19,18 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context=".CoresAbstract.RequestAbstracts.MakeRequest">
+
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/go_back_to_make_request_imageview"
+            app:srcCompat="@drawable/ic_close_24dp"
+            android:layout_marginRight="20dp"
+            android:padding="0dp"
+            android:onClick="goBackToMainAppMenu"
+            android:layout_alignParentTop="true"
+            />
 
 
 
@@ -98,22 +114,40 @@
 
                 />
 
+
             <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                android:id="@+id/country_spinner_new_request"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="5dp"
-                android:hint="@string/new_request_country"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-                android:paddingStart="3dp"
-                android:drawableStart="@drawable/ic_location_unfocused_24dp"
-                android:drawableLeft="@drawable/ic_location_unfocused_24dp"
-                android:gravity="center"
+                android:id="@+id/match_type_spinner_new_request"
                 android:layout_below="@+id/games_autocompletetextview_new_request"
+                android:hint="@string/new_request_match_type"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:layout_marginTop="5dp"
                 android:textColorHint="@color/hint_color"
-                android:layout_centerHorizontal="true"
+                android:textColor="@color/text_color"
+                android:visibility="gone"
+                android:drawableLeft="@drawable/ic_whatshot_unfocused_24dp"
+
                 />
+
+          <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+              android:layout_width="300dp"
+              android:layout_height="50dp"
+              android:hint="@string/new_request_country"
+              android:id="@+id/country_spinner_new_request"
+              android:layout_below="@+id/match_type_spinner_new_request"
+              android:layout_marginTop="5dp"
+              android:paddingLeft="3dp"
+              android:gravity="center"
+              android:textColorHint="@color/hint_color"
+              android:drawableLeft="@drawable/ic_location_unfocused_24dp"
+                android:layout_centerHorizontal="true"
+              />
+
+
+
+
 
 
             <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner

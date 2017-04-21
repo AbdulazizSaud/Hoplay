@@ -155,6 +155,9 @@
     <string name="new_request_description">Description</string>
     <string name="new_request_request_button">R e q u e s t</string>
     <string name="new_request_save_request_button">S a v e</string>
+    <string name="new_request_match_type">Match Type</string>
+    <string name="new_request_match_type_competitive">Competitive</string>
+    <string name="new_request_match_type_quick_match">Quick Match</string>
 
 
     <!--                               Game Instance                                                    -->
