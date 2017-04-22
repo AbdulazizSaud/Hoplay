@@ -8,6 +8,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.example.kay.hoplay.Adapters.ViewHolders;
+import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Services.LruBitmapCache;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
@@ -22,6 +23,7 @@ import com.squareup.picasso.Picasso;
 import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -35,20 +37,18 @@ public class App extends Application implements FirebasePaths{
 
     private  static App instance;
 
-
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseUserNames;
     private DatabaseReference databaseUsersInfo;
     private DatabaseReference databaseChat;
     private DatabaseReference databaseGames;
-    private DatabaseReference databaseAuthUserDataRef;
-
     private FirebaseAuth mAuth;  // firebase auth
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private ImageLoader imageLoader; // Image loader from url
 
     private  UserInformation userInformation;
     private GameManager gameManager;
+
 
 
     @Override
@@ -197,15 +197,10 @@ public class App extends Application implements FirebasePaths{
         return sdf.format(netDate);
     }
 
-    public void addGame(String gameID,String gameName,int maxPlayers, String gamePicURL,String[] ranks,boolean isCompetitive)
-    {
-        gameManager.addGame(gameID,gameName,maxPlayers,gamePicURL,ranks,isCompetitive);
+
+    public GameManager getGameManager(){
+    return gameManager;
     }
-
-
-
-
-
 
 
 }

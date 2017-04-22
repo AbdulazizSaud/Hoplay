@@ -2,8 +2,8 @@ package com.example.kay.hoplay.Cores.ParentCore;
 
 import com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.UserList;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
-import com.example.kay.hoplay.Models.ChildEventListenerModel;
 import com.example.kay.hoplay.Models.FriendCommonModel;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +28,7 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
         final DatabaseReference usersData = app.getDatabaseUsersInfo();
         DatabaseReference friendList = usersData.child(UID).child(FIREBASE_FRIENDS_LIST_ATTR);
 
-        friendList.addChildEventListener(new ChildEventListenerModel() {
+        friendList.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(final DataSnapshot rootSnapshots, String s) {
                 usersData.child(rootSnapshots.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -47,6 +47,21 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });

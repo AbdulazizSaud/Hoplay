@@ -168,7 +168,7 @@
     <string name="game_instance_xbox_available">Xbox</string>
 
 
-    <!--                               No GameDetails Added Popup Layout                                             -->
+    <!--                               No GameModel Added Popup Layout                                             -->
     <string name="no_game_popup_message">To create a request ,You need to add \n a game to your games library</string>
     <string name="no_game_popup_add_game_button">A D D &#160; G A M E</string>
 

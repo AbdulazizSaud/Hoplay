@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by khaledAlhindi on 3/19/2017 AD.
  */
 
-public class GameDetails {
+public class GameModel {
     protected String gameName ;
     protected String gameID;
     protected String gamePhotoUrl;
@@ -18,12 +18,14 @@ public class GameDetails {
     protected int maxPlayers;
     protected ArrayList<String> gameRanks;
 
-    public GameDetails(String gameID, String gameName, int maxPlayers, String gamePhotoUrl , String gamePlatforms) {
+    public GameModel(String gameID, String gameName, String gamePhotoUrl, String gamePlatforms, String gameType , int maxPlayers) {
         this.gameName = gameName;
         this.gameID = gameID;
         this.gamePlatforms = gamePlatforms;
         this.gamePhotoUrl = gamePhotoUrl;
         this.maxPlayers = maxPlayers;
+        gameRanks = new ArrayList<>();
+        this.gameType = gameType;
 
     }
 

@@ -15,6 +15,8 @@ public interface FirebasePaths {
     public static final String FIREBASE_FRIENDS_LIST_ATTR = "_friends_list_";
     public static final String FIREBASE_DETAILS_ATTR = "_info_";
     public static final String FIREBASE_USERS_LIST_ATTR = "_users_";
+    public static final String FIREBASE_GAME_COMPETITVE_ATTR = "_competitive_";
+    public static final String FIREBASE_GAME_COOP_ATTR = "_coop_";
 
 
     public static final String FIREBASE_GAMES_REFERENCES = "_games_";

@@ -1,9 +1,6 @@
 package com.example.kay.hoplay.CoresAbstract.ProfileAbstracts;
 
 import android.graphics.Typeface;
-import android.os.Handler;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,12 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,13 +20,10 @@ import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Interfaces.Constants;
-import com.example.kay.hoplay.Models.CommunityChatModel;
-import com.example.kay.hoplay.Models.FriendCommonModel;
-import com.example.kay.hoplay.Models.GameDetails;
+import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.R;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -41,7 +32,7 @@ public abstract class AddGame extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private EditText searchBar;
-    private ArrayList<GameDetails> gamesList = new ArrayList<GameDetails>();
+    private ArrayList<GameModel> gamesList = new ArrayList<GameModel>();
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ProgressBar loadGamesProgressbar;
@@ -129,20 +120,20 @@ public abstract class AddGame extends AppCompatActivity {
 
     protected void updateAdapter(String value) {
 
-        ArrayList<GameDetails> gameDetailsLinkedList = new ArrayList<>();
+        ArrayList<GameModel> gameModelLinkedList = new ArrayList<>();
 
         // Capitlizing the first letter of a game
         String gameNameWithCapitalLetter = value.substring(0, 1).toUpperCase() + value.substring(1);
 
 
-        for (GameDetails game : gamesList) {
+        for (GameModel game : gamesList) {
             if (!game.getGameName().startsWith(gameNameWithCapitalLetter)) {
-                gameDetailsLinkedList.add(game);
+                gameModelLinkedList.add(game);
             }
         }
 
 
-        gamesList.removeAll(gameDetailsLinkedList);
+        gamesList.removeAll(gameModelLinkedList);
         mAdapter.notifyDataSetChanged();
 
     }
@@ -154,7 +145,7 @@ public abstract class AddGame extends AppCompatActivity {
         // Capitlizing the first letter of a game
         String gameNameWithCapitalLetter = name.substring(0, 1).toUpperCase() + name.substring(1);
 
-        for (GameDetails game : gamesList) {
+        for (GameModel game : gamesList) {
             if (game.getGameName().startsWith(gameNameWithCapitalLetter))
                 return true;
         }
@@ -167,16 +158,14 @@ public abstract class AddGame extends AppCompatActivity {
     }
 
 
-    protected void addGame(String gameId, String gameName, String gameType, int maxPlayers, String gamePic, String supportedPlatforms) {
-        GameDetails gameDetails = new GameDetails(gameId, gameName, maxPlayers, gamePic, supportedPlatforms);
-        gameDetails.setGameType(gameType);
-        gamesList.add(gameDetails);
+    protected void addGame(GameModel gameModel) {
+        gamesList.add(gameModel);
         mAdapter.notifyDataSetChanged();
     }
 
-    private CommonAdapter<GameDetails> createAdapter() {
+    private CommonAdapter<GameModel> createAdapter() {
 
-        return new CommonAdapter<GameDetails>(gamesList, R.layout.game_instance) {
+        return new CommonAdapter<GameModel>(gamesList, R.layout.game_instance) {
 
 
             private ViewHolders.UserGameHolder gameHolder;
@@ -188,7 +177,7 @@ public abstract class AddGame extends AppCompatActivity {
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder, final GameDetails model, int position) {
+            public void OnBindHolder(ViewHolders holder, final GameModel model, int position) {
                 // - get element from your dataset at this position
                 // - replace the contents of the view with that element
                 gameHolder = (ViewHolders.UserGameHolder) holder;
@@ -272,7 +261,7 @@ public abstract class AddGame extends AppCompatActivity {
 
     protected abstract void searchForGame(String value);
 
-    protected abstract void OnClickHolders(GameDetails gameDetails, View v);
+    protected abstract void OnClickHolders(GameModel gameModel, View v);
 
     protected abstract void OnStartActivity();
 

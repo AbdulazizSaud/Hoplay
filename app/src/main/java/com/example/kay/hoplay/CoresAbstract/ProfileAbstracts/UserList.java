@@ -2,13 +2,11 @@ package com.example.kay.hoplay.CoresAbstract.ProfileAbstracts;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -20,13 +18,10 @@ import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Interfaces.Constants;
-import com.example.kay.hoplay.Models.GameDetails;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.FriendCommonModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Timer;
 import java.util.TimerTask;
 

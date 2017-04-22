@@ -4,7 +4,7 @@ package com.example.kay.hoplay.Models;
  * Created by khaledAlhindi on 11/22/2016 AD.
  */
 
-public class RecentGameModel extends GameDetails{
+public class RecentGameModel extends GameModel {
 
 
     // here it should be a behivors something like a opponent id , my id and so long.
@@ -12,7 +12,7 @@ public class RecentGameModel extends GameDetails{
     private String activityDescription;
 
     public RecentGameModel(String gameID, String gameName, String gamePhotoUrl, String supportedPlatforms , String activityDescription, String activityDate) {
-        super(gameID, gameName, 0, gamePhotoUrl , supportedPlatforms);
+        super(gameID, gameName, gamePhotoUrl, supportedPlatforms,"",-1);
         this.activityDate = activityDate;
         this.activityDescription = activityDescription;
     }

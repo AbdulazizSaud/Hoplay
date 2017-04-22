@@ -4,7 +4,7 @@ package com.example.kay.hoplay.Models;
  * Created by khaledAlhindi on 11/23/2016 AD.
  */
 
-public class SavedRequestModel extends GameDetails {
+public class SavedRequestModel extends GameModel {
 
     private String activityDate;
     private String activityDescription;
@@ -13,7 +13,7 @@ public class SavedRequestModel extends GameDetails {
     private String gameName, gamePhotoURL;
 
     public SavedRequestModel(String gameID, String gameName, int maxPlayers, String gamePhotoUrl , String supportedPlatforms, String activityDescription, String activityDate ) {
-        super(gameID, gameName, maxPlayers, gamePhotoUrl,supportedPlatforms);
+        super(gameID, gameName, gamePhotoUrl, supportedPlatforms,"",maxPlayers);
         this.activityDate = activityDate;
         this.activityDescription = activityDescription;
 

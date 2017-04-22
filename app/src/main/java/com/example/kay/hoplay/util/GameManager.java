@@ -1,39 +1,61 @@
 package com.example.kay.hoplay.util;
 
-import com.example.kay.hoplay.Models.GameDetails;
+import com.example.kay.hoplay.Interfaces.FirebasePaths;
+import com.example.kay.hoplay.Models.GameModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-/**
- * Created by Kay on 3/23/2017.
- */
 
-public class GameManager {
+public class GameManager implements FirebasePaths{
 
-    private ArrayList<GameDetails> gamesCompList;
-    private ArrayList<GameDetails> gamesCOOPList;
 
-    public void addGame(String gameId , String gamename , int maxPlayers, String gamePicture, String[] ranks,boolean isCompetitive)
+    private HashMap<String,GameModel>  allGames =  new HashMap<>();
+    private HashMap<String,GameModel> gamesCompList  = new HashMap<>();
+    private HashMap<String,GameModel> gamesCOOPList =  new HashMap<>();
+
+
+    public void addGame(GameModel gameModel, HashMap<String,String> ranks)
     {
 
-//        GameDetails gameDetails = new GameDetails(gameId,gamename,maxPlayers,gamePicture);
-//
-//        for(String rank : ranks)
-//        {
-//            gameDetails.addRank(rank);
-//        }
-//
-//        if(isCompetitive)
-//        gamesCompList.add(gameDetails);
-//        else
-//            gamesCOOPList.add(gameDetails);
+        allGames.put(gameModel.getGameID(),gameModel);
+
+        if(gameModel.getGameType().equals(FIREBASE_GAME_COMPETITVE_ATTR))
+        gamesCompList.put(gameModel.getGameID(),gameModel);
+        else
+            gamesCOOPList.put(gameModel.getGameID(),gameModel);
     }
 
 
-    private void Clear()
+    public GameModel getGame(String gameId){
+
+        if(gamesCompList.containsKey(gameId))
+            return gamesCompList.get(gameId);
+        else if(gamesCompList.containsKey(gameId))
+        return gamesCOOPList.get(gameId);
+
+
+        return null;
+    }
+
+    private void clear()
     {
         gamesCOOPList.clear();
         gamesCompList.clear();
+    }
+
+    public ArrayList<GameModel> getCompetitiveGames(){
+
+        return new ArrayList<GameModel>(gamesCompList.values());
+    }
+
+    public ArrayList<GameModel> getCoopGames(){
+
+        return new ArrayList<GameModel>(gamesCOOPList.values());
+    }
+
+    public ArrayList<GameModel> getAllGames(){
+        return new ArrayList<GameModel>(allGames.values());
     }
 
 

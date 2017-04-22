@@ -2,6 +2,7 @@ package com.example.kay.hoplay.Cores;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 
 import com.example.kay.hoplay.CoresAbstract.Community;
@@ -85,6 +86,8 @@ public class CommunityCore extends Community implements FirebasePaths {
         @Override
         public void onChildChanged(DataSnapshot dataSnapshot, String s) {
             // each time it's added a new thing
+            Log.i("new chat ----->",dataSnapshot.toString());
+
         }
 
         @Override

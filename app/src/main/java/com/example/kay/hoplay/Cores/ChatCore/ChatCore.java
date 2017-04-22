@@ -4,7 +4,7 @@ import android.content.Intent;
 
 import com.example.kay.hoplay.CoresAbstract.ChatAbstracts.Chat;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
-import com.example.kay.hoplay.Models.ChildEventListenerModel;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,21 +27,34 @@ public class ChatCore extends Chat implements FirebasePaths {
     private DatabaseReference refRoom, refMessages;
 
 
-    private ChildEventListenerModel messagesPacketsListener = new ChildEventListenerModel() {
+    private ChildEventListener messagesPacketsListener = new ChildEventListener() {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-            // only execute it on start to load a messages
             addMessage(dataSnapshot);
 
         }
 
         @Override
         public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-            // it execute over a time ( update event ) to add a new messaeg to list
             addMessage(dataSnapshot);
+
+        }
+
+        @Override
+        public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+        }
+
+        @Override
+        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
         }
     };
-
     private ValueEventListener counterListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {

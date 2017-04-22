@@ -3,7 +3,7 @@ package com.example.kay.hoplay.Cores.UserProfileCores;
 import android.view.View;
 
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
-import com.example.kay.hoplay.Models.GameDetails;
+import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.AddGame;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 
@@ -26,47 +27,30 @@ public class AddGameCore extends AddGame implements FirebasePaths {
 
 
     @Override
-    protected void OnClickHolders(GameDetails gameDetails, View v) {
+    protected void OnClickHolders(GameModel gameModel, View v) {
         DatabaseReference userFavorGameRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_FAVOR_GAMES_PATH);
-        userFavorGameRef.child(gameDetails.getGameID()).setValue(gameDetails.getGameType());
-        addedGameMessage(gameDetails.getGameName());
+        userFavorGameRef.child(gameModel.getGameID()).setValue(gameModel.getGameType());
+        addedGameMessage(gameModel.getGameName());
     }
 
 
     private void loadFavorGamesList() {
-        DatabaseReference myAuthGameRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID() + "/" + FIREBASE_FAVOR_GAMES_PATH);
 
-        myAuthGameRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> myFavorSnaps = dataSnapshot.getChildren();
 
-                for (DataSnapshot gameSnap : myFavorSnaps) {
-                    final String gameType = gameSnap.getValue().toString().trim();
-                    final String gameKey = gameSnap.getKey();
-                    app.getDatabaseGames().child(gameType + "/" + gameKey).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot gameShot) {
-                            addGame(gameKey, gameType, gameShot);
-                        }
+        ArrayList<GameModel> favorGames = app.getGameManager().getAllGames();
+        String name,gameNameWithCapitalLetter;
+        for(GameModel gameModel : favorGames) {
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+             name = gameModel.getGameName();
+             gameNameWithCapitalLetter = name.substring(0, 1).toUpperCase() + name.substring(1);
 
-                        }
-                    });
+            gameModel.setGameName(gameNameWithCapitalLetter);
 
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+            addGame(gameModel);
+        }
     }
 
-    @Override
+        @Override
     protected void searchForGame(String value) {
 
         // Just to push
@@ -131,7 +115,9 @@ public class AddGameCore extends AddGame implements FirebasePaths {
         String maxPlayerAsString = dataSnapshot.child("max_player").getValue().toString().trim();
         String supportedPlatformes = dataSnapshot.child(FIREBASE_GAME_PLATFORMS_ATTR).getValue().toString().trim();
         int maxPlayer = Integer.parseInt(maxPlayerAsString);
-        addGame(gameId, gameNameWithCapitalLetter, gametype, maxPlayer, gamPic, supportedPlatformes);
+
+        GameModel gameModel = new GameModel(gameId, gameNameWithCapitalLetter, gamPic, supportedPlatformes,gametype,maxPlayer);
+        addGame(gameModel);
 
     }
 
