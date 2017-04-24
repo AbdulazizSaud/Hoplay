@@ -26,11 +26,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kay.hoplay.App.App;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 import com.example.kay.hoplay.Adapters.SpinnerAdapter;
 import com.example.kay.hoplay.R;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -61,14 +63,15 @@ public abstract class NewRequest extends AppCompatActivity {
     private RadioButton xboxRadiobutton;
     private AutoCompleteTextView gamesAutoCompleteTextView;
     private EditText requestDescritopnEdittext;
-    private ImageView goBackToMainAppMenuImageview;
     private CheckedTextView dropDownSpinnerItem;
     private TextView spinnerItem;
     private  String[] gamesArray;
     private  int layoutItemId;
     private EditText descriptionEdittext;
-    private List<String> gamesList;
-    private   ArrayAdapter<String> gamesAdapter;
+    protected List<String> gamesList;
+    protected List<String> regionList;
+    protected App app;
+//    private   ArrayAdapter<String> gamesAdapter;
 
     /***************************************/
 
@@ -80,6 +83,7 @@ public abstract class NewRequest extends AppCompatActivity {
         setContentView(R.layout.activity_new_request);
         initControl();
         fieldsListeners();
+        loadstandards();
 
 
 
@@ -91,6 +95,7 @@ public abstract class NewRequest extends AppCompatActivity {
     }
 
     private void initControl() {
+        app = App.getInstance();
         final Typeface sansationbold = Typeface.createFromAsset(getResources().getAssets(), "sansationbold.ttf");
         final Typeface playregular = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
         final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
@@ -122,13 +127,29 @@ public abstract class NewRequest extends AppCompatActivity {
         descriptionEdittext = (EditText) findViewById(R.id.description_edittext_new_request);
         descriptionEdittext.setTypeface(playbold);
 
-        gamesArray = getResources().getStringArray(R.array.games_list);
-        layoutItemId = android.R.layout.simple_dropdown_item_1line;
-        gamesArray = getResources().getStringArray(R.array.games_list);
-        gamesList = Arrays.asList(gamesArray);
-        gamesAdapter = new ArrayAdapter<>(this, layoutItemId, gamesList);
-        gamesAutoCompleteTextView.setAdapter(gamesAdapter);
-//        goBackToMainAppMenuImageview = (ImageView) findViewById(R.id.go_back_toMainAppMenu_imageView);
+   //     gamesArray = getResources().getStringArray(R.array.games_list);
+    //    layoutItemId = android.R.layout.simple_dropdown_item_1line;
+       // gamesArray = getResources().getStringArray(R.array.games_list);
+//        gamesList = Arrays.asList(gamesArray);
+
+        gamesList = new ArrayList<String>();
+        regionList = new ArrayList<String>();
+//        gamesList.add("Item1");
+//        gamesList.add("Item2");
+//        gamesList.add("Item3");
+
+
+        ArrayAdapter<String> gameAdapter =new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line,gamesList);
+
+        ArrayAdapter regionAdapter = new SpinnerAdapter(getApplicationContext(),
+                R.layout.spinnner_item, regionList);
+
+
+
+//        gamesAdapter = new ArrayAdapter<>(this, layoutItemId, gamesList);
+
+
 
 
 //        requestDescritopnEdittext = (EditText) findViewById(R.id.request_descritption_edittext);
@@ -142,8 +163,9 @@ public abstract class NewRequest extends AppCompatActivity {
 
         // (this ,R.array.players_ranks,R.layout.spinnner_item);
 
-        ArrayAdapter regionAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
-                Arrays.asList(getResources().getStringArray(R.array.countries_array)));
+
+
+
 //
 //
         ArrayAdapter playersRanksAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
@@ -155,19 +177,20 @@ public abstract class NewRequest extends AppCompatActivity {
         ArrayAdapter matchTypeAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
                 Arrays.asList(getResources().getStringArray(R.array.match_types)));
 
-//
-//
-//        ArrayAdapter gamesAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
-//                Arrays.asList(getResources().getStringArray(R.array.games_array)));
-//
-//
-//        gamesAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+
+
+
+
+        gameAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         playersRanksAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         regionAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         playersNumberAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         matchTypeAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
 //
 //
+
+        gamesAutoCompleteTextView.setThreshold(1);
+        gamesAutoCompleteTextView.setAdapter(gameAdapter);
         numberOfPlayersSpinner.setAdapter(playersNumberAdapter);
             countrySpinner.setAdapter(regionAdapter);
         playersRanksSpinner.setAdapter(playersRanksAdapter);
@@ -341,4 +364,7 @@ public abstract class NewRequest extends AppCompatActivity {
 
     public void goBackToMainAppMenu(View v)
     {finish();}
+
+    protected abstract void OnStartActivity();
+    protected abstract void loadstandards();
 }

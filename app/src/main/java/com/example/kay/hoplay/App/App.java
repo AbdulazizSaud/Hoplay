@@ -42,6 +42,8 @@ public class App extends Application implements FirebasePaths{
     private DatabaseReference databaseUsersInfo;
     private DatabaseReference databaseChat;
     private DatabaseReference databaseGames;
+    private DatabaseReference databaseRequests;
+    private DatabaseReference databaseRegions ;
     private FirebaseAuth mAuth;  // firebase auth
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private ImageLoader imageLoader; // Image loader from url
@@ -61,8 +63,10 @@ public class App extends Application implements FirebasePaths{
         getFirebaseDatabase().setPersistenceEnabled(true);
         databaseUserNames = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_USER_NAMES_ATTR);
         databaseUsersInfo = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_USERS_INFO_ATTR);
+        databaseRequests = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FB_REQUESTS_REFERENCE);
         databaseChat = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_CHAT_ATTR);
         databaseGames = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_GAMES_REFERENCES);
+        databaseRegions = firebaseDatabase.getReferenceFromUrl("https://hoplay-18a08.firebaseio.com/_regions_");
         userInformation = new UserInformation();
         gameManager = new GameManager();
     }
@@ -180,10 +184,18 @@ public class App extends Application implements FirebasePaths{
     public DatabaseReference getDatabaseUserNames() {
         return databaseUserNames;
     }
+    public DatabaseReference getDatabaseRegions(){return databaseRegions ;}
+
+    public DatabaseReference getDatabaseRequests()
+    {
+        return databaseRequests;
+    }
 
     public synchronized UserInformation getUserInformation() {
         return userInformation;
     }
+
+
 
 
     public void setmAuthStateListener(FirebaseAuth.AuthStateListener mAuthStateListener) {

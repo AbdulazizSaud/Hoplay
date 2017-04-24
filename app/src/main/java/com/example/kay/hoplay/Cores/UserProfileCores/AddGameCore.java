@@ -1,5 +1,6 @@
 package com.example.kay.hoplay.Cores.UserProfileCores;
 
+import android.util.Log;
 import android.view.View;
 
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
@@ -55,7 +56,6 @@ public class AddGameCore extends AddGame implements FirebasePaths {
 
         // Just to push
         DatabaseReference gamesRef = app.getDatabaseGames();
-
         Query query = gamesRef.child("_competitive_").orderByChild("name").startAt(value).endAt(value + "\uf8ff").limitToFirst(10);
         getData(query, "_competitive_");
         query = gamesRef.child("_coop_").orderByChild("name").startAt(value).endAt(value + "\uf8ff").limitToFirst(10);

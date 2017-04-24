@@ -38,6 +38,15 @@ public interface FirebasePaths {
 
 
 
+    // Requests
+    public static final String FB_REQUESTS_REFERENCE = "_requests_";
+
+    // Regions
+    public static final String FB_REGIONS_REFERENCE = "_regions_" ;
+
+
+
+
     public static final String FIREBASE_USERNAME_ATTR = "_username_";
     public static final String FIREBASE_PICTURE_URL_ATTR =  "_picUrl_";
     public static final String FIREBASE_NICKNAME_ATTR =  "_nickname_";
@@ -55,6 +64,10 @@ public interface FirebasePaths {
     public static final String FIREBASE_EMAIL_PATH = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_EMAIL_ATTR;
     public static final String FIREBASE_FAVOR_GAMES_PATH =FIREBASE_GAMES_REFERENCES+"/"+FIREBASE_FAVOR_GAME_ATTR;
     public static final String FIREBASE_RECENT_GAMES_PATH =FIREBASE_GAMES_REFERENCES+"/"+FIREBASE_RECENT_GAME_ATTR;
+
+
+
+
 
 
 }
