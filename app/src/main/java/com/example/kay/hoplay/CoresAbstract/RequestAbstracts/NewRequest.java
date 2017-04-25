@@ -381,6 +381,7 @@ public abstract class NewRequest extends AppCompatActivity {
         String selectedRank = playersRanksSpinner.getText().toString().trim();
         String requestDescription = descriptionEdittext.getText().toString().trim();
 
+
         // Take the user input for the request
         requestInput(selectedPlatform,selectedGame,selectedMatchType , selectedRegion, selectedPlayersNumber , selectedRank , requestDescription);
 
@@ -410,5 +411,8 @@ public abstract class NewRequest extends AppCompatActivity {
         }
 
     }
+
+//    private boolean checkIsValid(AutoCompleteTextView selectedGame , Spinn)
+
     protected abstract void requestInput(String platform , String game, String matchType , String region , String numberOfPlayers , String rank , String description);
 }

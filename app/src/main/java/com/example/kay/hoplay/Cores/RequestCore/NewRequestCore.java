@@ -62,20 +62,29 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
     protected void requestInput(String platform, String game, String matchType, String region, String numberOfPlayers, String rank , String description) {
 
 
+        String gameId = "";
 
-        String gameNameWithCapitalLetter = game.substring(0, 1).toUpperCase() + game.substring(1);
+        ArrayList<GameModel> userGames = app.getGameManager().getAllGames();
+        for (GameModel gameModel : userGames)
+        {
+            if (gameModel.getGameName().equalsIgnoreCase(game))
+            {
+                gameId=gameModel.getGameID();
+            }
+        }
 
         // users_info_ -> user id  -> _requests_refs_
         DatabaseReference userRequestRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_USER_REQUESTS_REF);
         // _requests_ -> game name -> platform
-        DatabaseReference requestsRef = app.getDatabaseRequests().child(gameNameWithCapitalLetter).child(platform);
+        DatabaseReference requestsRef = app.getDatabaseRequests().child(gameId).child(platform.toUpperCase());
+
         String requestKey = requestsRef.push().getKey();
         String requestAdmin = app.getUserInformation().getUID();
 
         // _requests_ -> game name  -> platform -> request id
         DatabaseReference request = requestsRef.child(requestKey);
 
-        Log.i("here" , request.toString());
+
 
         // set req ref in the user tree
         userRequestRef.child(requestKey).setValue(requestKey);
