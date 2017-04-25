@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -27,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Models.RequestModel;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 import com.example.kay.hoplay.Adapters.SpinnerAdapter;
 import com.example.kay.hoplay.R;
@@ -36,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static android.R.attr.description;
 import static android.R.attr.scaleHeight;
 import static android.R.attr.scaleWidth;
 
@@ -61,6 +64,7 @@ public abstract class NewRequest extends AppCompatActivity {
     private RadioButton pcRadiobutton;
     private RadioButton psRadiobutton;
     private RadioButton xboxRadiobutton;
+    private String selectedPlatform;
     private AutoCompleteTextView gamesAutoCompleteTextView;
     private EditText requestDescritopnEdittext;
     private CheckedTextView dropDownSpinnerItem;
@@ -367,4 +371,44 @@ public abstract class NewRequest extends AppCompatActivity {
 
     protected abstract void OnStartActivity();
     protected abstract void loadstandards();
+    public void requestButtonListener(View view)
+    {
+        // the selected platform selected in another method  : onPlatformSelecting
+        String selectedGame = gamesAutoCompleteTextView.getText().toString().trim();
+        String selectedMatchType = matchTypeSpinner.getText().toString().trim();
+        String selectedRegion = countrySpinner.getText().toString().trim();
+        String selectedPlayersNumber = numberOfPlayersSpinner.getText().toString().trim();
+        String selectedRank = playersRanksSpinner.getText().toString().trim();
+        String requestDescription = descriptionEdittext.getText().toString().trim();
+
+        // Take the user input for the request
+        requestInput(selectedPlatform,selectedGame,selectedMatchType , selectedRegion, selectedPlayersNumber , selectedRank , requestDescription);
+
+    }
+    public   void  onPlatformSelecting(View view)
+    {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.pc_choice_radiobutton:
+                if (checked)
+                    selectedPlatform="PC";
+                    break;
+            case R.id.ps_choice_radiobutton:
+                if (checked)
+                    selectedPlatform="PS";
+                    break;
+            case R.id.xbox_choice_radiobutton:
+                if (checked)
+                   selectedPlatform="Xbox";
+                    break;
+            default:
+                selectedPlatform="Nothing";
+                break;
+        }
+
+    }
+    protected abstract void requestInput(String platform , String game, String matchType , String region , String numberOfPlayers , String rank , String description);
 }

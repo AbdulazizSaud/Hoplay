@@ -29,6 +29,8 @@ public class AddGameCore extends AddGame implements FirebasePaths {
 
     @Override
     protected void OnClickHolders(GameModel gameModel, View v) {
+
+        // Create game ref for users
         DatabaseReference userFavorGameRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_FAVOR_GAMES_PATH);
         userFavorGameRef.child(gameModel.getGameID()).setValue(gameModel.getGameType());
         addedGameMessage(gameModel.getGameName());

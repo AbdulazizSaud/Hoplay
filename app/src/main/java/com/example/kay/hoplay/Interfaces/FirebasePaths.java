@@ -53,6 +53,7 @@ public interface FirebasePaths {
     public static final String FIREBASE_EMAIL_ATTR = "_email_";
     public static final String FIREBASE_FAVOR_GAME_ATTR = "_favor_games_";
     public static final String FIREBASE_RECENT_GAME_ATTR = "_recent_played_";
+    public static final String FIREBASE_USER_REQUESTS_REF = "_requests_refs_";
 
 
 
