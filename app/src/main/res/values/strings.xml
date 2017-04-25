@@ -263,6 +263,14 @@
 
     <string name="search_user_message">Search for user</string>
     <string name="title_activity_view_profile">ViewProfile</string>
+    
+    
+    <!--                                Request Model Layout -->
+    <string name="request_model_game_name">Game Name</string>
+    <string name="request_model_number_of_players">1/4</string>
+    <string name="request_model_description">Description</string>
+    <string name="request_model_requester">By someone</string>
+    <string name="request_model_time_stamp">5 min ago</string>
 
 
 </resources>
