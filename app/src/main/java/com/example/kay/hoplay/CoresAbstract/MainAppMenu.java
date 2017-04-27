@@ -3,8 +3,11 @@ package com.example.kay.hoplay.CoresAbstract;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.IdRes;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +23,9 @@ import com.example.kay.hoplay.R;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
+
+import java.text.ParseException;
+import java.util.Date;
 
 
 /*
@@ -166,8 +172,7 @@ public abstract class MainAppMenu extends AppCompatActivity  {
     }
 
 
-    protected void welcomeMessage(String username)
-    {
+    protected void welcomeMessage(String username) {
         // success message
         String Msg = String.format(getResources().getString(R.string.signup_successful_message), username);
 

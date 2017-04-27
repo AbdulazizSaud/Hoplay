@@ -1,6 +1,5 @@
 package com.example.kay.hoplay.Cores.UserProfileCores;
 
-import android.util.Log;
 import android.view.View;
 
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
@@ -40,7 +39,7 @@ public class AddGameCore extends AddGame implements FirebasePaths {
     private void loadFavorGamesList() {
 
 
-        ArrayList<GameModel> favorGames = app.getGameManager().getAllGames();
+        ArrayList<GameModel> favorGames = app.getGameManager().getAllGamesArrayList();
         String name,gameNameWithCapitalLetter;
         for(GameModel gameModel : favorGames) {
 

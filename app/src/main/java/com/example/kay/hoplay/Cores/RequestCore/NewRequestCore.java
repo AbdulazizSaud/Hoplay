@@ -1,7 +1,6 @@
 package com.example.kay.hoplay.Cores.RequestCore;
 
 import android.util.Log;
-import android.util.LongSparseArray;
 
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.NewRequest;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
@@ -20,11 +19,11 @@ import java.util.HashMap;
 public class NewRequestCore extends NewRequest implements FirebasePaths{
 
 
+
     protected void OnStartActivity() {
 
     }
 
-    @Override
     protected void loadstandards()
     {
 
@@ -57,23 +56,18 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
         });
 
 
-
-
     } // End of load method
 
-
-
-
     @Override
-    protected void requestInput(String platform, String game, String matchType, String region, String numberOfPlayers, String rank , String description) {
+    protected void requestInput(String platform, String gameName, String gameType, String region, String numberOfPlayers, HashMap<String,String> rank , String description) {
 
 
         String gameId = "";
 
-        ArrayList<GameModel> userGames = app.getGameManager().getAllGames();
+        ArrayList<GameModel> userGames = app.getGameManager().getAllGamesArrayList();
         for (GameModel gameModel : userGames)
         {
-            if (gameModel.getGameName().equalsIgnoreCase(game))
+            if (gameModel.getGameName().equalsIgnoreCase(gameName))
             {
                 gameId=gameModel.getGameID();
             }
@@ -81,31 +75,36 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
 
         // users_info_ -> user id  -> _requests_refs_
         DatabaseReference userRequestRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_USER_REQUESTS_REF);
-        // _requests_ ->  platform -> gameId -> region
-        DatabaseReference requestsRef = app.getDatabaseRequests().child(platform.toUpperCase()).child(gameId).child(region);
+        // _requests_ -> game name -> platform
+        DatabaseReference requestsRef = app.getDatabaseRequests().child(gameId).child(platform.toUpperCase());
 
         String requestKey = requestsRef.push().getKey();
         String requestAdmin = app.getUserInformation().getUID();
 
-        // _requests_ ->  platform -> gameId -> region - > request ID
-        DatabaseReference request = requestsRef.child(requestKey);
+        // _requests_ -> game name  -> platform -> request id
+        DatabaseReference requestRef = requestsRef.child(requestKey);
+
+
 
         // set req ref in the user tree
         userRequestRef.child(requestKey).setValue(requestKey);
 
         // This request model should be added to the database as a hashmap
-        RequestModel requestModel = new RequestModel(requestKey,game,requestAdmin,description,region);
+        RequestModel requestModel = new RequestModel(requestKey,gameName,requestAdmin,description,region);
 
         // set the request info under the requests tree
 
+        HashMap<String,Object> data = new HashMap<>();
 
-        request.child("admin").setValue(app.getUserInformation().getUID());
-        request.child("request_title").setValue(game);
-        request.child("description").setValue(description);
-        request.child("region").setValue(region);
-        request.child("time_stamp").setValue(ServerValue.TIMESTAMP);
-        request.child("rank").setValue(rank);
+        data.put("admin",app.getUserInformation().getUID());
+        data.put("request_title",gameName);
+        data.put("description",description);
+        data.put("region",region);
+        data.put("time_stamp",ServerValue.TIMESTAMP);
+        data.put("rank",rank);
+        data.put("players_number",numberOfPlayers);
 
+        requestRef.setValue(data);
 
 
     }

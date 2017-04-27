@@ -7,24 +7,30 @@ import java.util.ArrayList;
  */
 
 public class GameModel {
-    protected String gameName ;
-    protected String gameID;
-    protected String gamePhotoUrl;
-    protected String gameType;
-    protected String gamePlatforms;
+    private String gameName ;
+    private String gameID;
+    private String gamePhotoUrl;
+    private String gameType;
+    private String gamePlatforms;
 
 
+    private int maxPlayers;
+    private Ranks gameRanks;
 
-    protected int maxPlayers;
-    protected ArrayList<String> gameRanks;
-
-    public GameModel(String gameID, String gameName, String gamePhotoUrl, String gamePlatforms, String gameType , int maxPlayers) {
+    public GameModel(String gameID, String gameName, String gamePhotoUrl, String gamePlatforms, String gameType , int maxPlayers,ArrayList<Rank> ranks) {
         this.gameName = gameName;
         this.gameID = gameID;
         this.gamePlatforms = gamePlatforms;
         this.gamePhotoUrl = gamePhotoUrl;
         this.maxPlayers = maxPlayers;
-        gameRanks = new ArrayList<>();
+
+        gameRanks = new Ranks();
+
+        for(Rank rank : ranks)
+        {
+            gameRanks.addRank(rank.getRankName(),rank.getRankUrl());
+        }
+
         this.gameType = gameType;
 
     }
@@ -33,46 +39,24 @@ public class GameModel {
         return gameName;
     }
 
-    public String getGameID() {
-        return gameID;
-    }
-
-    public String getGamePhotoUrl() {
-        return gamePhotoUrl;
-    }
-
     public void setGameName(String gameName) {
         this.gameName = gameName;
+    }
+
+    public String getGameID() {
+        return gameID;
     }
 
     public void setGameID(String gameID) {
         this.gameID = gameID;
     }
 
+    public String getGamePhotoUrl() {
+        return gamePhotoUrl;
+    }
+
     public void setGamePhotoUrl(String gamePhotoUrl) {
         this.gamePhotoUrl = gamePhotoUrl;
-    }
-
-    public void addRank(String rank)
-    {
-        gameRanks.add(rank);
-    }
-
-
-    public int getMaxPlayers() {
-        return maxPlayers;
-    }
-
-    public void setMaxPlayers(int maxPlayers) {
-        this.maxPlayers = maxPlayers;
-    }
-
-    public ArrayList<String> getGameRanks() {
-        return gameRanks;
-    }
-
-    public void setGameRanks(ArrayList<String> gameRanks) {
-        this.gameRanks = gameRanks;
     }
 
     public String getGameType() {
@@ -89,5 +73,21 @@ public class GameModel {
 
     public void setGamePlatforms(String gamePlatforms) {
         this.gamePlatforms = gamePlatforms;
+    }
+
+    public int getMaxPlayers() {
+        return maxPlayers;
+    }
+
+    public void setMaxPlayers(int maxPlayers) {
+        this.maxPlayers = maxPlayers;
+    }
+
+    public Ranks getGameRanks() {
+        return gameRanks;
+    }
+
+    public void setGameRanks(Ranks gameRanks) {
+        this.gameRanks = gameRanks;
     }
 }

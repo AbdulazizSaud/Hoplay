@@ -15,7 +15,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -123,10 +122,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
                 setGamesLoaderEvent(dataSnapshot);
-
-
             }
 
             @Override
@@ -158,14 +154,10 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                 String gameName=  gameShot.child("name").getValue(String.class);
                 String gamePhoto= gameShot.child("photo").getValue(String.class);
                 String platforms= gameShot.child("platforms").getValue(String.class);
-
-
                 //
                 HashMap<String,String> ranks=  new HashMap<String, String>();
                 int maxPlayers=  gameShot.child("max_player").getValue(Integer.class);
-                GameModel gameModel = new GameModel(gameKey,gameName,gamePhoto,platforms,gameType,maxPlayers);
-                // Load game ranks
-                gameModel.setGameRanks(loadRanks(gameKey , gameType));
+                GameModel gameModel = new GameModel(gameKey,gameName,gamePhoto,platforms,gameType,maxPlayers,);
 
                 app.getGameManager().addGame(gameModel,ranks);
 
@@ -178,28 +170,6 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
         });
     }
 
-
-    private ArrayList<String> loadRanks(String gameKey , String gameType)
-    {
-        final ArrayList<String> ranks = new ArrayList<String>();
-        app.getDatabaseGames().child(gameType + "/" + gameKey).child("ranks").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot != null) {
-                    for (DataSnapshot shot : dataSnapshot.getChildren()) {
-                        ranks.add(shot.getValue(String.class).trim());
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        return  ranks;
-    }
 
     private boolean isInfoValid(DataSnapshot dataSnapshot) {
         return dataSnapshot.hasChild(FIREBASE_USERNAME_PATH) && dataSnapshot.hasChild(FIREBASE_NICKNAME_PATH) && dataSnapshot.hasChild(FIREBASE_PICTURE_URL_PATH);

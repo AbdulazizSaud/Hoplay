@@ -1,8 +1,48 @@
 package com.example.kay.hoplay.Models;
 
-/**
- * Created by Kay on 4/21/2017.
- */
+import java.util.ArrayList;
+
 
 public class Ranks {
+
+    private ArrayList<Rank> ranksList;
+
+    public Ranks()
+    {
+        ranksList =  new ArrayList<Rank>();
+    }
+
+    public void addRank(String rankName , String rankUrl)
+    {
+        ranksList.add(new Rank(rankName,rankUrl));
+    }
+
+    public void removeRank(String rankName)
+    {
+       for(Rank rank : ranksList)
+       {
+           if(rank.getRankName().equals(rankName))
+           {
+               ranksList.remove(rank);
+               break;
+           }
+       }
+    }
+
+    public Rank getRank(String rankName)
+    {
+        for(Rank rank : ranksList)
+        {
+            if(rank.getRankName().equals(rankName))
+            {
+                return rank;
+            }
+        }
+        return null;
+    }
+
+
+    public ArrayList<Rank> getRanksList() {
+        return ranksList;
+    }
 }

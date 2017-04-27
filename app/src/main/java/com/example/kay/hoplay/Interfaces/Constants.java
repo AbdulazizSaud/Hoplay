@@ -11,4 +11,5 @@ public interface Constants {
     public static final int USER_NOT_EXIST = 0;
     public static final int USER_EXIST = 1;
 
+
 }
