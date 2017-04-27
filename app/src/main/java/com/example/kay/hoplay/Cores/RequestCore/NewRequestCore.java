@@ -90,9 +90,6 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
         // _requests_ ->  platform -> gameId -> region - > request ID
         DatabaseReference request = requestsRef.child(requestKey);
 
-
-        Log.i("here" , request.toString());
-
         // set req ref in the user tree
         userRequestRef.child(requestKey).setValue(requestKey);
 
@@ -107,6 +104,7 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
         request.child("description").setValue(description);
         request.child("region").setValue(region);
         request.child("time_stamp").setValue(ServerValue.TIMESTAMP);
+        request.child("rank").setValue(rank);
 
 
 

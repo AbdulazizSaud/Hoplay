@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ScaleDrawable;
 import android.os.Bundle;
+import android.support.annotation.IntegerRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -78,9 +79,11 @@ public abstract class NewRequest extends AppCompatActivity {
     private EditText descriptionEdittext;
     protected List<String> gamesList;
     protected List<String> regionList;
+    protected List<String> playerNumberList ;
+    protected List<String>  ranksList ;
     protected App app;
     protected ProgressDialog creatingRequestDialog;
-    private  int maxPlayer ;
+
 
 //    private   ArrayAdapter<String> gamesAdapter;
 
@@ -144,7 +147,7 @@ public abstract class NewRequest extends AppCompatActivity {
         creatingRequestDialog.setTitle(R.string.new_request_dialog_title);
         creatingRequestDialog.setMessage(NewRequest.this.getString(R.string.new_request_dialog_message));
 
-        maxPlayer = 0;
+
 
    //     gamesArray = getResources().getStringArray(R.array.games_list);
     //    layoutItemId = android.R.layout.simple_dropdown_item_1line;
@@ -153,6 +156,8 @@ public abstract class NewRequest extends AppCompatActivity {
 
         gamesList = new ArrayList<String>();
         regionList = new ArrayList<String>();
+        playerNumberList = new ArrayList<String>();
+        ranksList = new ArrayList<String>();
 //        gamesList.add("Item1");
 //        gamesList.add("Item2");
 //        gamesList.add("Item3");
@@ -163,6 +168,14 @@ public abstract class NewRequest extends AppCompatActivity {
 
         ArrayAdapter regionAdapter = new SpinnerAdapter(getApplicationContext(),
                 R.layout.spinnner_item, regionList);
+
+        ArrayAdapter playersNumberAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
+             playerNumberList);
+
+
+        ArrayAdapter playersRanksAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
+                ranksList);
+
 
 
 
@@ -187,11 +200,9 @@ public abstract class NewRequest extends AppCompatActivity {
 
 //
 //
-        ArrayAdapter playersRanksAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
-                Arrays.asList(getResources().getStringArray(R.array.players_ranks)));
+
 //
-        ArrayAdapter playersNumberAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
-                Arrays.asList(getResources().getStringArray(R.array.players_number)));
+
 
         ArrayAdapter matchTypeAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
                 Arrays.asList(getResources().getStringArray(R.array.match_types)));
@@ -257,6 +268,8 @@ public abstract class NewRequest extends AppCompatActivity {
 
                 }
 
+                // Load max players
+                loadMaxPlayers(s.toString());
 
 
 
@@ -402,13 +415,13 @@ public abstract class NewRequest extends AppCompatActivity {
 
 
 
-
         if (selectedRegion.length() == 0)
             selectedRegion="All";
         if (selectedRank.length() ==0)
             selectedRank="All";
         if (requestDescription.length()==0)
             requestDescription = R.string.new_request_default_description_message+selectedGame;
+
 
 
 
@@ -505,7 +518,6 @@ public abstract class NewRequest extends AppCompatActivity {
         for (GameModel gameModel : userGames)
             if (gameModel.getGameName().trim().equalsIgnoreCase(selectedGame))
             {
-                maxPlayer = gameModel.getMaxPlayers();
                 return true;
             }
 
@@ -546,4 +558,36 @@ public abstract class NewRequest extends AppCompatActivity {
     // This method  take the request input from the user and insert it  into the database
     // It should take request model and pass it to the core
     protected abstract void requestInput(String platform , String game, String matchType , String region , String numberOfPlayers , String rank , String description);
+
+    private void loadMaxPlayers(String selectedGame)
+    {
+        ArrayList<String> gameRanks  = new ArrayList<String>();
+        int maxPlayer = 0 ;
+        ArrayList<GameModel> userGames = app.getGameManager().getAllGames();
+        for (GameModel gameModel : userGames) {
+            if (gameModel.getGameName().equalsIgnoreCase(selectedGame))
+            {
+                maxPlayer = gameModel.getMaxPlayers();
+                gameRanks = gameModel.getGameRanks();
+            }
+
+
+        }
+
+
+        for (int i = 1 ; i <= maxPlayer ; i++)
+        {
+            playerNumberList.add(Integer.toString(i));
+        }
+
+        for (int i = 0 ; i < gameRanks.size() ; i++)
+        {
+            ranksList.add(gameRanks.get(i));
+
+        }
+
+
+
+
+    }
 }
