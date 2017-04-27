@@ -1,6 +1,8 @@
 package com.example.kay.hoplay.CoresAbstract.RequestAbstracts;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ScaleDrawable;
@@ -28,6 +30,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.CoresAbstract.AuthenticationAbstracts.Login;
+import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 import com.example.kay.hoplay.Adapters.SpinnerAdapter;
@@ -75,6 +79,9 @@ public abstract class NewRequest extends AppCompatActivity {
     protected List<String> gamesList;
     protected List<String> regionList;
     protected App app;
+    protected ProgressDialog creatingRequestDialog;
+    private  int maxPlayer ;
+
 //    private   ArrayAdapter<String> gamesAdapter;
 
     /***************************************/
@@ -100,6 +107,8 @@ public abstract class NewRequest extends AppCompatActivity {
 
     private void initControl() {
         app = App.getInstance();
+
+        selectedPlatform="Nothing";
         final Typeface sansationbold = Typeface.createFromAsset(getResources().getAssets(), "sansationbold.ttf");
         final Typeface playregular = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
         final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
@@ -130,6 +139,12 @@ public abstract class NewRequest extends AppCompatActivity {
 
         descriptionEdittext = (EditText) findViewById(R.id.description_edittext_new_request);
         descriptionEdittext.setTypeface(playbold);
+
+        creatingRequestDialog = new ProgressDialog(this,R.style.AppCompatAlertDialogStyle);
+        creatingRequestDialog.setTitle(R.string.new_request_dialog_title);
+        creatingRequestDialog.setMessage(NewRequest.this.getString(R.string.new_request_dialog_message));
+
+        maxPlayer = 0;
 
    //     gamesArray = getResources().getStringArray(R.array.games_list);
     //    layoutItemId = android.R.layout.simple_dropdown_item_1line;
@@ -200,6 +215,8 @@ public abstract class NewRequest extends AppCompatActivity {
         playersRanksSpinner.setAdapter(playersRanksAdapter);
         matchTypeSpinner.setAdapter(matchTypeAdapter);
 
+
+
     }
 
 
@@ -225,7 +242,7 @@ public abstract class NewRequest extends AppCompatActivity {
                 {
                     gamesAutoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_games_unfocused_24dp , 0, 0, 0);
                 }
-                if (s.toString().equalsIgnoreCase("Overwatch"))
+                if (checkIfCompetitive(s.toString()))
                 {
                     matchTypeSpinner.setVisibility(View.VISIBLE);
                     slideInFromLeft(matchTypeSpinner);
@@ -369,10 +386,12 @@ public abstract class NewRequest extends AppCompatActivity {
     public void goBackToMainAppMenu(View v)
     {finish();}
 
-    protected abstract void OnStartActivity();
-    protected abstract void loadstandards();
+
     public void requestButtonListener(View view)
     {
+
+
+
         // the selected platform selected in another method  : onPlatformSelecting
         String selectedGame = gamesAutoCompleteTextView.getText().toString().trim();
         String selectedMatchType = matchTypeSpinner.getText().toString().trim();
@@ -382,8 +401,26 @@ public abstract class NewRequest extends AppCompatActivity {
         String requestDescription = descriptionEdittext.getText().toString().trim();
 
 
-        // Take the user input for the request
-        requestInput(selectedPlatform,selectedGame,selectedMatchType , selectedRegion, selectedPlayersNumber , selectedRank , requestDescription);
+
+
+        if (selectedRegion.length() == 0)
+            selectedRegion="All";
+        if (selectedRank.length() ==0)
+            selectedRank="All";
+        if (requestDescription.length()==0)
+            requestDescription = R.string.new_request_default_description_message+selectedGame;
+
+
+
+
+        if (checkIsValidRequest())
+        {
+            // Start the loading dialog
+            creatingRequestDialog.show();
+            // Take the user input for the request
+            requestInput(selectedPlatform,selectedGame,selectedMatchType , selectedRegion, selectedPlayersNumber , selectedRank , requestDescription);
+            finishRequest();
+        }
 
     }
     public   void  onPlatformSelecting(View view)
@@ -412,7 +449,101 @@ public abstract class NewRequest extends AppCompatActivity {
 
     }
 
-//    private boolean checkIsValid(AutoCompleteTextView selectedGame , Spinn)
+    private boolean checkIsValidRequest()
+    {
 
+        // check the platform
+        if (selectedPlatform.equalsIgnoreCase("Nothing"))
+        {
+
+            Toast.makeText(getApplicationContext(),R.string.new_request_platform_error,Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        // check if the game field is empty
+        if (gamesAutoCompleteTextView.getText().toString().length() == 0 )
+        {
+            Toast.makeText(getApplicationContext(),R.string.new_request_no_game_selected_error , Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        // Check selected game is in the user games
+        if (!userHasTheGameThenLoadStandards(gamesAutoCompleteTextView.getText().toString().trim()))
+        {
+            Toast.makeText(getApplicationContext(),R.string.new_request_game_error,Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+
+
+        // check selected match type
+        if (matchTypeSpinner.getText().length() == 0)
+        {
+            Toast.makeText(getApplicationContext(),R.string.new_request_type_match_error, Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+
+
+        // check number of players
+        if (numberOfPlayersSpinner.getText().length() == 0)
+        {
+            Toast.makeText(getApplicationContext(),R.string.new_request_players_number_error, Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+
+
+        return true ;
+    }
+
+
+    // this method check if the user has the game if yes , load game properties
+    private boolean userHasTheGameThenLoadStandards(String selectedGame)
+    {
+        ArrayList<GameModel> userGames = app.getGameManager().getAllGames();
+        for (GameModel gameModel : userGames)
+            if (gameModel.getGameName().trim().equalsIgnoreCase(selectedGame))
+            {
+                maxPlayer = gameModel.getMaxPlayers();
+                return true;
+            }
+
+
+        return false;
+
+    }
+
+    private void finishRequest()
+    {
+        creatingRequestDialog.dismiss();
+        finish();
+        String msg = String.format(getResources().getString(R.string.new_request_finish_request_message), "");
+        Toast.makeText(getApplicationContext(), msg , Toast.LENGTH_LONG).show();
+    }
+
+    protected boolean checkIfCompetitive(String selectedGame)
+    {
+
+        ArrayList<GameModel> userCompetitiveGames = app.getGameManager().getCompetitiveGames();
+        for (GameModel gameModel : userCompetitiveGames)
+        {
+            if (gameModel.getGameName().trim().equalsIgnoreCase(selectedGame))
+                return true;
+        }
+
+       return false;
+    }
+
+
+    // This method  load number of  max players of the selected game
+
+    protected abstract void OnStartActivity();
+
+    // This  method  loads requests standards : user games , region
+    protected abstract void loadstandards();
+
+    // This method  take the request input from the user and insert it  into the database
+    // It should take request model and pass it to the core
     protected abstract void requestInput(String platform , String game, String matchType , String region , String numberOfPlayers , String rank , String description);
 }

@@ -1,6 +1,7 @@
 package com.example.kay.hoplay.Cores.RequestCore;
 
 import android.util.Log;
+import android.util.LongSparseArray;
 
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.NewRequest;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
@@ -19,11 +20,11 @@ import java.util.HashMap;
 public class NewRequestCore extends NewRequest implements FirebasePaths{
 
 
-
     protected void OnStartActivity() {
 
     }
 
+    @Override
     protected void loadstandards()
     {
 
@@ -56,7 +57,12 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
         });
 
 
+
+
     } // End of load method
+
+
+
 
     @Override
     protected void requestInput(String platform, String game, String matchType, String region, String numberOfPlayers, String rank , String description) {

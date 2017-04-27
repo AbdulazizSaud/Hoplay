@@ -273,4 +273,16 @@
     <string name="request_model_time_stamp">5 min ago</string>
 
 
+    <!--                                New Request Activity         -->
+    <string name="new_request_game_error">You do not have this game in your library. add the game then continue</string>
+    <string name="new_request_type_match_error">You have not specified the match type</string>
+    <string name="new_request_platform_error">You have not specified the platform</string>
+    <string name="new_request_players_number_error">You have not specified the players number</string>
+    <string name="new_request_no_game_selected_error">You have no specified any game</string>
+    <string name="new_request_default_description_message">Hey , I Play </string>
+    <string name="new_request_dialog_title">Creating Request</string>
+    <string name="new_request_dialog_message">Just one moment</string>
+    <string name="new_request_finish_request_message">Your request has been added successfully %1$s 😃 </string>
+
+
 </resources>
