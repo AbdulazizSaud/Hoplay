@@ -13,19 +13,11 @@ public class SavedRequestModel extends GameModel {
     private String gameName, gamePhotoURL;
 
     public SavedRequestModel(String gameID, String gameName, int maxPlayers, String gamePhotoUrl , String supportedPlatforms, String activityDescription, String activityDate ) {
-        super(gameID, gameName, gamePhotoUrl, supportedPlatforms,"",maxPlayers);
+        super(gameID, gameName, gamePhotoUrl, supportedPlatforms);
+        this.setMaxPlayers(maxPlayers);
         this.activityDate = activityDate;
         this.activityDescription = activityDescription;
 
-    }
-
-    public void setNumberOfPlayers(int numberOfPlayers) {
-        this.maxPlayers = numberOfPlayers;
-    }
-
-    public int getNumberOfPlayers()
-    {
-        return maxPlayers;
     }
 
     public String getActivityDescription() {

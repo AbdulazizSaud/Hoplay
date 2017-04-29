@@ -12,7 +12,7 @@ public class RecentGameModel extends GameModel {
     private String activityDescription;
 
     public RecentGameModel(String gameID, String gameName, String gamePhotoUrl, String supportedPlatforms , String activityDescription, String activityDate) {
-        super(gameID, gameName, gamePhotoUrl, supportedPlatforms,"",-1);
+        super(gameID, gameName, gamePhotoUrl, supportedPlatforms);
         this.activityDate = activityDate;
         this.activityDescription = activityDescription;
     }

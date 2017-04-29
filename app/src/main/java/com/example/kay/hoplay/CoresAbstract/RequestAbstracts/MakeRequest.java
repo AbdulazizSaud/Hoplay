@@ -169,7 +169,7 @@ public abstract class MakeRequest extends Fragment {
                // loadingImage(holder, model, loader);
                 holder.setTitle(model.getGameName());
                 holder.setSubtitle(model.getActivityDescription());
-                holder.setNumberOfPlayers(String.valueOf(model.getNumberOfPlayers()) + " Players");
+                holder.setNumberOfPlayers(String.valueOf(model.getMaxPlayers()) + " Players");
 
 
             }

@@ -180,6 +180,7 @@
                 android:layout_below="@+id/players_number_spinner_new_request"
                 android:textColorHint="@color/hint_color"
                 android:layout_centerHorizontal="true"
+                android:visibility="gone"
                 />
 
 

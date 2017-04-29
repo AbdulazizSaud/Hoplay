@@ -2,15 +2,10 @@ package com.example.kay.hoplay.CoresAbstract.RequestAbstracts;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ScaleDrawable;
 import android.os.Bundle;
-import android.support.annotation.IntegerRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -24,16 +19,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kay.hoplay.App.App;
-import com.example.kay.hoplay.CoresAbstract.AuthenticationAbstracts.Login;
 import com.example.kay.hoplay.Models.GameModel;
-import com.example.kay.hoplay.Models.RequestModel;
+import com.example.kay.hoplay.Models.Rank;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 import com.example.kay.hoplay.Adapters.SpinnerAdapter;
 import com.example.kay.hoplay.R;
@@ -42,10 +34,6 @@ import com.example.kay.hoplay.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static android.R.attr.description;
-import static android.R.attr.scaleHeight;
-import static android.R.attr.scaleWidth;
 
 /**
  * Created by Kay on 2/12/2017.
@@ -65,7 +53,7 @@ public abstract class NewRequest extends AppCompatActivity {
     private MaterialBetterSpinner countrySpinner;
     private MaterialBetterSpinner numberOfPlayersSpinner;
     private MaterialBetterSpinner playersRanksSpinner;
-    private MaterialBetterSpinner matchTypeSpinner ;
+    private MaterialBetterSpinner matchTypeSpinner;
     private RadioButton pcRadiobutton;
     private RadioButton psRadiobutton;
     private RadioButton xboxRadiobutton;
@@ -74,18 +62,21 @@ public abstract class NewRequest extends AppCompatActivity {
     private EditText requestDescritopnEdittext;
     private CheckedTextView dropDownSpinnerItem;
     private TextView spinnerItem;
-    private  String[] gamesArray;
-    private  int layoutItemId;
+    private int layoutItemId;
     private EditText descriptionEdittext;
-    protected List<String> gamesList;
-    protected List<String> regionList;
-    protected List<String> playerNumberList ;
-    protected List<String>  ranksList ;
+    protected ArrayList<String> gamesList;
+    protected ArrayList<String> regionList;
+    protected ArrayList<String> playerNumberList;
+    protected ArrayList<String> ranksList;
     protected App app;
     protected ProgressDialog creatingRequestDialog;
 
 
-//    private   ArrayAdapter<String> gamesAdapter;
+    protected ArrayAdapter<String> gameAdapter;
+    protected ArrayAdapter regionAdapter;
+    protected ArrayAdapter playersNumberAdapter;
+    protected ArrayAdapter playersRanksAdapter;
+
 
     /***************************************/
 
@@ -97,13 +88,14 @@ public abstract class NewRequest extends AppCompatActivity {
         setContentView(R.layout.activity_new_request);
         initControl();
         fieldsListeners();
-        loadstandards();
+        OnStartActivity();
 
-
-
-
-
-
+        // Load  user games
+        ArrayList<GameModel> games = app.getGameManager().getAllGamesArrayList();
+        for (GameModel gameModel : games)
+        {
+            gamesList.add(gameModel.getGameName());
+        }
 
 
     }
@@ -111,7 +103,7 @@ public abstract class NewRequest extends AppCompatActivity {
     private void initControl() {
         app = App.getInstance();
 
-        selectedPlatform="Nothing";
+        selectedPlatform = "Nothing";
         final Typeface sansationbold = Typeface.createFromAsset(getResources().getAssets(), "sansationbold.ttf");
         final Typeface playregular = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
         final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
@@ -120,12 +112,12 @@ public abstract class NewRequest extends AppCompatActivity {
         makeRequestButton = (Button) findViewById(R.id.request_button_new_request);
         makeRequestButton.setTypeface(sansationbold);
         countrySpinner = (MaterialBetterSpinner) findViewById(R.id.country_spinner_new_request);
-        countrySpinner.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.text_color));
+        countrySpinner.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.text_color));
         numberOfPlayersSpinner = (MaterialBetterSpinner) findViewById(R.id.players_number_spinner_new_request);
         countrySpinner.setTypeface(playbold);
         matchTypeSpinner = (MaterialBetterSpinner) findViewById(R.id.match_type_spinner_new_request);
         matchTypeSpinner.setTypeface(playbold);
-        matchTypeSpinner.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.text_color));
+        matchTypeSpinner.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.text_color));
         numberOfPlayersSpinner.setTypeface(playbold);
         playersRanksSpinner = (MaterialBetterSpinner) findViewById(R.id.players_rank_spinner_new_request);
         playersRanksSpinner.setTypeface(playbold);
@@ -143,51 +135,32 @@ public abstract class NewRequest extends AppCompatActivity {
         descriptionEdittext = (EditText) findViewById(R.id.description_edittext_new_request);
         descriptionEdittext.setTypeface(playbold);
 
-        creatingRequestDialog = new ProgressDialog(this,R.style.AppCompatAlertDialogStyle);
+        creatingRequestDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
         creatingRequestDialog.setTitle(R.string.new_request_dialog_title);
         creatingRequestDialog.setMessage(NewRequest.this.getString(R.string.new_request_dialog_message));
 
 
-
-   //     gamesArray = getResources().getStringArray(R.array.games_list);
-    //    layoutItemId = android.R.layout.simple_dropdown_item_1line;
-       // gamesArray = getResources().getStringArray(R.array.games_list);
-//        gamesList = Arrays.asList(gamesArray);
-
-        gamesList = new ArrayList<String>();
-        regionList = new ArrayList<String>();
-        playerNumberList = new ArrayList<String>();
-        ranksList = new ArrayList<String>();
-//        gamesList.add("Item1");
-//        gamesList.add("Item2");
-//        gamesList.add("Item3");
+        gamesList = new ArrayList<>();
+        regionList = new ArrayList<>();
+        playerNumberList = new ArrayList<>();
+        ranksList = new ArrayList<>();
 
 
-        ArrayAdapter<String> gameAdapter =new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line,gamesList);
+        gameAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, gamesList);
 
-        ArrayAdapter regionAdapter = new SpinnerAdapter(getApplicationContext(),
+        regionAdapter = new SpinnerAdapter(getApplicationContext(),
                 R.layout.spinnner_item, regionList);
 
-        ArrayAdapter playersNumberAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
-             playerNumberList);
+
+        playersNumberAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
+                playerNumberList);
 
 
-        ArrayAdapter playersRanksAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
+        playersRanksAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
                 ranksList);
 
-
-
-
-//        gamesAdapter = new ArrayAdapter<>(this, layoutItemId, gamesList);
-
-
-
-
-//        requestDescritopnEdittext = (EditText) findViewById(R.id.request_descritption_edittext);
-
         makeRequestMessage.requestFocus();
-
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(requestDescritopnEdittext, InputMethodManager.SHOW_IMPLICIT);
@@ -196,19 +169,8 @@ public abstract class NewRequest extends AppCompatActivity {
         // (this ,R.array.players_ranks,R.layout.spinnner_item);
 
 
-
-
-//
-//
-
-//
-
-
         ArrayAdapter matchTypeAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
                 Arrays.asList(getResources().getStringArray(R.array.match_types)));
-
-
-
 
 
         gameAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
@@ -222,18 +184,16 @@ public abstract class NewRequest extends AppCompatActivity {
         gamesAutoCompleteTextView.setThreshold(1);
         gamesAutoCompleteTextView.setAdapter(gameAdapter);
         numberOfPlayersSpinner.setAdapter(playersNumberAdapter);
-            countrySpinner.setAdapter(regionAdapter);
+        countrySpinner.setAdapter(regionAdapter);
         playersRanksSpinner.setAdapter(playersRanksAdapter);
         matchTypeSpinner.setAdapter(matchTypeAdapter);
-
 
 
     }
 
 
     // Change icon listener for autocomplete and spinners
-    private void fieldsListeners()
-    {
+    private void fieldsListeners() {
         gamesAutoCompleteTextView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -248,30 +208,38 @@ public abstract class NewRequest extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                gamesAutoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_games_focused_24dp , 0, 0, 0);
-                if(s.length() == 0)
-                {
-                    gamesAutoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_games_unfocused_24dp , 0, 0, 0);
+                gamesAutoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_games_focused_24dp, 0, 0, 0);
+                if (s.length() == 0) {
+                    gamesAutoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_games_unfocused_24dp, 0, 0, 0);
                 }
-                if (checkIfCompetitive(s.toString()))
-                {
-                    matchTypeSpinner.setVisibility(View.VISIBLE);
-                    slideInFromLeft(matchTypeSpinner);
+            }
+        });
 
-                }
-                else
-                {
-                    if (matchTypeSpinner.isShown())
-                    slideOutToRight(matchTypeSpinner);
+        gamesAutoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String name = parent.getItemAtPosition(position).toString();
 
-                    matchTypeSpinner.setVisibility(View.GONE);
-
-                }
 
                 // Load max players
-                loadMaxPlayers(s.toString());
+                String gameKey = loadGameInformation(name);
 
 
+                if (checkIfCompetitive(gameKey)) {
+                    matchTypeSpinner.setVisibility(View.VISIBLE);
+                    playersRanksSpinner.setVisibility(View.VISIBLE);
+                    slideInFromLeft(matchTypeSpinner);
+                    slideInFromLeft(playersRanksSpinner);
+
+                } else {
+                    if (matchTypeSpinner.isShown())
+                        slideOutToRight(matchTypeSpinner);
+                        slideOutToRight(playersRanksSpinner);
+
+                    matchTypeSpinner.setVisibility(View.GONE);
+                    playersRanksSpinner.setVisibility(View.GONE);
+
+                }
 
             }
         });
@@ -289,13 +257,11 @@ public abstract class NewRequest extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                countrySpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_location_focused_24dp , 0, 0, 0);
-                if(s.length() ==0 )
-                {
-                    countrySpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_location_unfocused_24dp , 0, 0, 0);
+                countrySpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_location_focused_24dp, 0, 0, 0);
+                if (s.length() == 0) {
+                    countrySpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_location_unfocused_24dp, 0, 0, 0);
 
                 }
-
 
 
             }
@@ -315,13 +281,12 @@ public abstract class NewRequest extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                numberOfPlayersSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_group_focused_24dp , 0, 0, 0);
-                if(s.length() == 0 )
-                {
-                    numberOfPlayersSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_group_unfocused_24dp , 0, 0, 0);
+                numberOfPlayersSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_group_focused_24dp, 0, 0, 0);
+                if (s.length() == 0) {
+                    numberOfPlayersSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_group_unfocused_24dp, 0, 0, 0);
 
                 }
-                numberOfPlayersSpinner.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.text_color));
+                numberOfPlayersSpinner.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.text_color));
 
 
             }
@@ -341,12 +306,11 @@ public abstract class NewRequest extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                playersRanksSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_grade_focused_24dp , 0, 0, 0);
-                if(s.length() ==0)
-                {
-                    playersRanksSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_grade_unfocused_24dp , 0, 0, 0);
+                playersRanksSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_grade_focused_24dp, 0, 0, 0);
+                if (s.length() == 0) {
+                    playersRanksSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_grade_unfocused_24dp, 0, 0, 0);
                 }
-                playersRanksSpinner.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.text_color));
+                playersRanksSpinner.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.text_color));
             }
         });
 
@@ -363,17 +327,14 @@ public abstract class NewRequest extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().equalsIgnoreCase("Competitive"))
-                {
-                    matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_competitive_24dp , 0, 0, 0);
+                if (s.toString().equalsIgnoreCase("Competitive")) {
+                    matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_competitive_24dp, 0, 0, 0);
                 }
-                if (s.toString().equalsIgnoreCase("Quick Match"))
-                {
-                    matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_quick_match_24dp , 0, 0, 0);
+                if (s.toString().equalsIgnoreCase("Quick Match")) {
+                    matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_quick_match_24dp, 0, 0, 0);
                 }
-                if (s.length() == 0 )
-                {
-                    matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp , 0, 0, 0);
+                if (s.length() == 0) {
+                    matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
                 }
             }
         });
@@ -385,24 +346,22 @@ public abstract class NewRequest extends AppCompatActivity {
     public void slideInFromLeft(View viewToAnimate) {
         // If the bound view wasn't previously displayed on screen, it's animated
 
-            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
-            animation.setDuration(200);
-            viewToAnimate.startAnimation(animation);
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
+        animation.setDuration(200);
+        viewToAnimate.startAnimation(animation);
     }
 
-    public void slideOutToRight(View viewToAnimate)
-    {
+    public void slideOutToRight(View viewToAnimate) {
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_out_right);
         viewToAnimate.startAnimation(animation);
     }
 
-    public void goBackToMainAppMenu(View v)
-    {finish();}
+    public void goBackToMainAppMenu(View v) {
+        finish();
+    }
 
 
-    public void requestButtonListener(View view)
-    {
-
+    public void requestButtonListener(View view) {
 
 
         // the selected platform selected in another method  : onPlatformSelecting
@@ -414,180 +373,133 @@ public abstract class NewRequest extends AppCompatActivity {
         String requestDescription = descriptionEdittext.getText().toString().trim();
 
 
-
         if (selectedRegion.length() == 0)
-            selectedRegion="All";
-        if (selectedRank.length() ==0)
-            selectedRank="All";
-        if (requestDescription.length()==0)
-            requestDescription = R.string.new_request_default_description_message+selectedGame;
+            selectedRegion = "All";
+        if (selectedRank.length() == 0)
+            selectedRank = "All";
+        if (requestDescription.length() == 0)
+            requestDescription = R.string.new_request_default_description_message + selectedGame;
 
 
-
-
-
-        if (checkIsValidRequest())
-        {
+        if (checkIsValidRequest()) {
             // Start the loading dialog
             creatingRequestDialog.show();
             // Take the user input for the request
-            requestInput(selectedPlatform,selectedGame,selectedMatchType , selectedRegion, selectedPlayersNumber , selectedRank , requestDescription);
+            requestInput(selectedPlatform, selectedGame, selectedMatchType, selectedRegion, selectedPlayersNumber, selectedRank, requestDescription);
             finishRequest();
         }
 
     }
-    public   void  onPlatformSelecting(View view)
-    {
+
+    public void onPlatformSelecting(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
 
         // Check which radio button was clicked
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.pc_choice_radiobutton:
                 if (checked)
-                    selectedPlatform="PC";
-                    break;
+                    selectedPlatform = "PC";
+                break;
             case R.id.ps_choice_radiobutton:
                 if (checked)
-                    selectedPlatform="PS";
-                    break;
+                    selectedPlatform = "PS";
+                break;
             case R.id.xbox_choice_radiobutton:
                 if (checked)
-                   selectedPlatform="Xbox";
-                    break;
+                    selectedPlatform = "Xbox";
+                break;
             default:
-                selectedPlatform="Nothing";
+                selectedPlatform = "Nothing";
                 break;
         }
 
     }
 
-    private boolean checkIsValidRequest()
-    {
+    private boolean checkIsValidRequest() {
 
         // check the platform
-        if (selectedPlatform.equalsIgnoreCase("Nothing"))
-        {
+        if (selectedPlatform.equalsIgnoreCase("Nothing")) {
 
-            Toast.makeText(getApplicationContext(),R.string.new_request_platform_error,Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.new_request_platform_error, Toast.LENGTH_LONG).show();
             return false;
         }
 
         // check if the game field is empty
-        if (gamesAutoCompleteTextView.getText().toString().length() == 0 )
-        {
-            Toast.makeText(getApplicationContext(),R.string.new_request_no_game_selected_error , Toast.LENGTH_LONG).show();
+        if (gamesAutoCompleteTextView.getText().toString().length() == 0) {
+            Toast.makeText(getApplicationContext(), R.string.new_request_no_game_selected_error, Toast.LENGTH_LONG).show();
             return false;
         }
 
         // Check selected game is in the user games
-        if (!userHasTheGameThenLoadStandards(gamesAutoCompleteTextView.getText().toString().trim()))
-        {
-            Toast.makeText(getApplicationContext(),R.string.new_request_game_error,Toast.LENGTH_LONG).show();
+        if (!userHasTheGameThenLoadStandards(gamesAutoCompleteTextView.getText().toString().trim())) {
+            Toast.makeText(getApplicationContext(), R.string.new_request_game_error, Toast.LENGTH_LONG).show();
             return false;
         }
-
 
 
         // check selected match type
-        if (matchTypeSpinner.getText().length() == 0)
-        {
-            Toast.makeText(getApplicationContext(),R.string.new_request_type_match_error, Toast.LENGTH_LONG).show();
+        if (matchTypeSpinner.getText().length() == 0) {
+            Toast.makeText(getApplicationContext(), R.string.new_request_type_match_error, Toast.LENGTH_LONG).show();
             return false;
         }
-
 
 
         // check number of players
-        if (numberOfPlayersSpinner.getText().length() == 0)
-        {
-            Toast.makeText(getApplicationContext(),R.string.new_request_players_number_error, Toast.LENGTH_LONG).show();
+        if (numberOfPlayersSpinner.getText().length() == 0) {
+            Toast.makeText(getApplicationContext(), R.string.new_request_players_number_error, Toast.LENGTH_LONG).show();
             return false;
         }
 
 
-
-        return true ;
+        return true;
     }
 
 
     // this method check if the user has the game if yes , load game properties
-    private boolean userHasTheGameThenLoadStandards(String selectedGame)
-    {
-        ArrayList<GameModel> userGames = app.getGameManager().getAllGames();
-        for (GameModel gameModel : userGames)
-            if (gameModel.getGameName().trim().equalsIgnoreCase(selectedGame))
-            {
-                return true;
-            }
-
-
-        return false;
-
+    private boolean userHasTheGameThenLoadStandards(String selectedGame) {
+        return app.getGameManager().getGameByName(selectedGame) !=null;
+    }
+    protected boolean checkIfCompetitive(String selectedGame) {
+        return app.getGameManager().isCompetitive(selectedGame);
     }
 
-    private void finishRequest()
-    {
+    private void finishRequest() {
         creatingRequestDialog.dismiss();
         finish();
         String msg = String.format(getResources().getString(R.string.new_request_finish_request_message), "");
-        Toast.makeText(getApplicationContext(), msg , Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 
-    protected boolean checkIfCompetitive(String selectedGame)
-    {
+    private String loadGameInformation(String selectedGame) {
 
-        ArrayList<GameModel> userCompetitiveGames = app.getGameManager().getCompetitiveGames();
-        for (GameModel gameModel : userCompetitiveGames)
-        {
-            if (gameModel.getGameName().trim().equalsIgnoreCase(selectedGame))
-                return true;
+
+        GameModel gameModel = app.getGameManager().getGameByName(selectedGame);
+
+
+
+        for (int i = 1; i <= gameModel.getMaxPlayers(); i++) {
+            playerNumberList.add(Integer.toString(i));
+
         }
 
-       return false;
+        for (Rank rank : gameModel.getGameRanks().getRanksList()) {
+            ranksList.add(rank.getRankName());
+        }
+
+
+
+        return gameModel.getGameID();
     }
+
 
 
     // This method  load number of  max players of the selected game
 
     protected abstract void OnStartActivity();
 
-    // This  method  loads requests standards : user games , region
-    protected abstract void loadstandards();
-
     // This method  take the request input from the user and insert it  into the database
     // It should take request model and pass it to the core
-    protected abstract void requestInput(String platform , String game, String matchType , String region , String numberOfPlayers , String rank , String description);
+    protected abstract void requestInput(String platform, String game, String matchType, String region, String numberOfPlayers, String rank, String description);
 
-    private void loadMaxPlayers(String selectedGame)
-    {
-        ArrayList<String> gameRanks  = new ArrayList<String>();
-        int maxPlayer = 0 ;
-        ArrayList<GameModel> userGames = app.getGameManager().getAllGames();
-        for (GameModel gameModel : userGames) {
-            if (gameModel.getGameName().equalsIgnoreCase(selectedGame))
-            {
-                maxPlayer = gameModel.getMaxPlayers();
-                gameRanks = gameModel.getGameRanks();
-            }
-
-
-        }
-
-
-        for (int i = 1 ; i <= maxPlayer ; i++)
-        {
-            playerNumberList.add(Integer.toString(i));
-        }
-
-        for (int i = 0 ; i < gameRanks.size() ; i++)
-        {
-            ranksList.add(gameRanks.get(i));
-
-        }
-
-
-
-
-    }
 }

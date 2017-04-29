@@ -12,7 +12,8 @@ import java.util.HashMap;
 public class GameManager implements FirebasePaths{
 
 
-    private HashMap<String,GameModel>  allGames =  new HashMap<>();
+    private HashMap<String,GameModel>  allGamesIds =  new HashMap<>();
+    private HashMap<String,GameModel>  allGamesName =  new HashMap<>();
     private HashMap<String,GameModel> gamesCompList  = new HashMap<>();
     private HashMap<String,GameModel> gamesCOOPList =  new HashMap<>();
 
@@ -20,8 +21,8 @@ public class GameManager implements FirebasePaths{
     public void addGame(GameModel gameModel)
     {
 
-        allGames.put(gameModel.getGameID(),gameModel);
-        allGames.put(gameModel.getGameName(),gameModel);
+        allGamesIds.put(gameModel.getGameID(),gameModel);
+        allGamesName.put(gameModel.getGameName(),gameModel);
 
         if(gameModel.getGameType().equals(FIREBASE_GAME_COMPETITVE_ATTR))
         gamesCompList.put(gameModel.getGameID(),gameModel);
@@ -33,7 +34,7 @@ public class GameManager implements FirebasePaths{
     public GameModel getGameByName(String name)
     {
         GameModel gameModel = null;
-        gameModel = allGames.get(name);
+        gameModel = allGamesName.get(name);
         return gameModel;
     }
 
@@ -48,19 +49,23 @@ public class GameManager implements FirebasePaths{
         return null;
     }
 
+    public boolean isCompetitive(String gameName)
+    {
+        return gamesCompList.containsKey(gameName);
+    }
 
     public ArrayList<GameModel> getCompetitiveGamesArrayList(){
 
-        return new ArrayList<GameModel>(gamesCompList.values());
+        return new ArrayList<>(gamesCompList.values());
     }
 
     public ArrayList<GameModel> getCoopGamesArrayList(){
 
-        return new ArrayList<GameModel>(gamesCOOPList.values());
+        return new ArrayList<>(gamesCOOPList.values());
     }
 
     public ArrayList<GameModel> getAllGamesArrayList(){
-        return new ArrayList<GameModel>(allGames.values());
+        return new ArrayList<>(allGamesIds.values());
     }
 
     private void clear()

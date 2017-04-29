@@ -26,6 +26,7 @@ public class GameModel {
 
         gameRanks = new Ranks();
 
+
         for(Rank rank : ranks)
         {
             gameRanks.addRank(rank.getRankName(),rank.getRankUrl());
@@ -34,6 +35,23 @@ public class GameModel {
         this.gameType = gameType;
 
     }
+
+    public GameModel(String gameID, String gameName, String gamePhotoUrl, String gamePlatforms) {
+        this.gameName = gameName;
+        this.gameID = gameID;
+        this.gamePlatforms = gamePlatforms;
+        this.gamePhotoUrl = gamePhotoUrl;
+    }
+    public GameModel(String gameID, String gameName, String gamePhotoUrl, String gamePlatforms, String gameType , int maxPlayers) {
+        this.gameName = gameName;
+        this.gameID = gameID;
+        this.gamePlatforms = gamePlatforms;
+        this.gamePhotoUrl = gamePhotoUrl;
+        this.maxPlayers = maxPlayers;
+        this.gameType = gameType;
+
+    }
+
 
     public String getGameName() {
         return gameName;

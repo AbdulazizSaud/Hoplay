@@ -22,22 +22,10 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
 
     protected void OnStartActivity() {
 
-    }
-
-    protected void loadstandards()
-    {
-
-        // Load  user games
-        ArrayList<GameModel> games = app.getGameManager().getAllGames();
-        for (GameModel gameModel : games)
-        {
-            gamesList.add(gameModel.getGameName());
-        }
-
 
         // Load regions
         DatabaseReference regionsRef = app.getDatabaseRegions();
-        regionsRef.addValueEventListener(new ValueEventListener() {
+        regionsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -55,28 +43,26 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
             }
         });
 
+    }
+
+    protected void loadStandards()
+    {
+
+
 
     } // End of load method
 
     @Override
-    protected void requestInput(String platform, String gameName, String gameType, String region, String numberOfPlayers, HashMap<String,String> rank , String description) {
+    protected void requestInput(String platform, String gameName, String matchType, String region, String numberOfPlayers, String rank, String description) {
 
 
-        String gameId = "";
+        GameModel gameModel = app.getGameManager().getGameByName(gameName);
 
-        ArrayList<GameModel> userGames = app.getGameManager().getAllGamesArrayList();
-        for (GameModel gameModel : userGames)
-        {
-            if (gameModel.getGameName().equalsIgnoreCase(gameName))
-            {
-                gameId=gameModel.getGameID();
-            }
-        }
 
         // users_info_ -> user id  -> _requests_refs_
         DatabaseReference userRequestRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_USER_REQUESTS_REF);
         // _requests_ -> game name -> platform
-        DatabaseReference requestsRef = app.getDatabaseRequests().child(gameId).child(platform.toUpperCase());
+        DatabaseReference requestsRef = app.getDatabaseRequests().child(gameModel.getGameID()).child(platform.toUpperCase());
 
         String requestKey = requestsRef.push().getKey();
         String requestAdmin = app.getUserInformation().getUID();
@@ -89,8 +75,6 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
         // set req ref in the user tree
         userRequestRef.child(requestKey).setValue(requestKey);
 
-        // This request model should be added to the database as a hashmap
-        RequestModel requestModel = new RequestModel(requestKey,gameName,requestAdmin,description,region);
 
         // set the request info under the requests tree
 
@@ -105,7 +89,6 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
         data.put("players_number",numberOfPlayers);
 
         requestRef.setValue(data);
-
 
     }
 

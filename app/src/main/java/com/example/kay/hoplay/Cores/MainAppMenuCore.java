@@ -7,6 +7,8 @@ import com.example.kay.hoplay.CoresAbstract.MainAppMenu;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
+import com.example.kay.hoplay.Models.Rank;
+import com.example.kay.hoplay.Models.Ranks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -15,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -143,6 +146,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
     }
 
+
     private void setGamesLoaderEvent(DataSnapshot dataSnapshot) {
         final String gameKey = dataSnapshot.getKey();
         final String gameType = dataSnapshot.getValue().toString().trim();
@@ -155,11 +159,17 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                 String gamePhoto= gameShot.child("photo").getValue(String.class);
                 String platforms= gameShot.child("platforms").getValue(String.class);
                 //
-                HashMap<String,String> ranks=  new HashMap<String, String>();
                 int maxPlayers=  gameShot.child("max_player").getValue(Integer.class);
-                GameModel gameModel = new GameModel(gameKey,gameName,gamePhoto,platforms,gameType,maxPlayers,);
 
-                app.getGameManager().addGame(gameModel,ranks);
+                ArrayList<Rank> ranks = new ArrayList<>();
+
+                for(DataSnapshot rank  : gameShot.child("ranks").getChildren())
+                {
+                    ranks.add(new Rank(rank.getKey(),rank.getValue(String.class)));
+                }
+                GameModel gameModel = new GameModel(gameKey,gameName,gamePhoto,platforms,gameType,maxPlayers,ranks);
+
+                app.getGameManager().addGame(gameModel);
 
             }
 
@@ -169,7 +179,6 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
             }
         });
     }
-
 
     private boolean isInfoValid(DataSnapshot dataSnapshot) {
         return dataSnapshot.hasChild(FIREBASE_USERNAME_PATH) && dataSnapshot.hasChild(FIREBASE_NICKNAME_PATH) && dataSnapshot.hasChild(FIREBASE_PICTURE_URL_PATH);
