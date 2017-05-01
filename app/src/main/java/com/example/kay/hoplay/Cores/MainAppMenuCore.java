@@ -158,7 +158,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                 String gameName=  gameShot.child("name").getValue(String.class);
                 String gamePhoto= gameShot.child("photo").getValue(String.class);
                 String platforms= gameShot.child("platforms").getValue(String.class);
-                //
+                String gameProvider = gameShot.child("pc_game_provider").getValue(String.class);
                 int maxPlayers=  gameShot.child("max_player").getValue(Integer.class);
 
                 ArrayList<Rank> ranks = new ArrayList<>();
@@ -167,7 +167,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                 {
                     ranks.add(new Rank(rank.getKey(),rank.getValue(String.class)));
                 }
-                GameModel gameModel = new GameModel(gameKey,gameName,gamePhoto,platforms,gameType,maxPlayers,ranks);
+                GameModel gameModel = new GameModel(gameKey,gameName,gamePhoto,platforms,gameType,maxPlayers,ranks,gameProvider);
 
                 app.getGameManager().addGame(gameModel);
 

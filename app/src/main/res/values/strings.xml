@@ -171,6 +171,14 @@
     <!--                               No GameModel Added Popup Layout                                             -->
     <string name="no_game_popup_message">To create a request ,You need to add \n a game to your games library</string>
     <string name="no_game_popup_add_game_button">A D D &#160; G A M E</string>
+    
+    <!--                                Provider Account pop up         -->
+    <string name="provider_account_message">Please provide your %1$s account 😀 </string>
+    <string name="provider_account_save_button">S a v e</string>
+    <string name="provider_account_game_provider_hint_edittext">Game provider account</string>
+    <string name="provider_account_PC_console">PC</string>
+    <string name="provider_account_PS_console">Playstation</string>
+    <string name="provider_account_XBOX_console">Xbox</string>
 
 
     <!--                                SignUp Layout                                                        -->
@@ -271,6 +279,9 @@
     <string name="request_model_description">Description</string>
     <string name="request_model_requester">By someone</string>
     <string name="request_model_time_stamp">5 min ago</string>
+    
+    
+    
 
 
     <!--                                New Request Activity         -->
@@ -282,7 +293,8 @@
     <string name="new_request_default_description_message">Hey , I Play </string>
     <string name="new_request_dialog_title">Creating Request</string>
     <string name="new_request_dialog_message">Just one moment</string>
-    <string name="new_request_finish_request_message">Your request has been added successfully %1$s 😃 </string>
+    <string name="new_request_finish_request_message">Your request has been added successfully %1$s &#160; &#160; 😃 </string>
+    
 
 
 </resources>

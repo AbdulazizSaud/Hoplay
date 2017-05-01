@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/no_games_added_background"
+    android:background="@drawable/pop_up_backgrounds"
     tools:context="com.example.kay.hoplay.Activities.NoGamePopUp">
 
 
@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/ic_error_outline_24dp"
+        app:srcCompat="@drawable/ic_error_outline_64dp"
         android:id="@+id/warning_symbol_imageview"
         />
 

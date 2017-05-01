@@ -1,6 +1,10 @@
 package com.example.kay.hoplay.CoresAbstract.ProfileAbstracts;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,16 +13,21 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
 import com.example.kay.hoplay.Interfaces.Constants;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.R;
@@ -36,6 +45,11 @@ public abstract class AddGame extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ProgressBar loadGamesProgressbar;
+
+
+
+
+
 
 
 
@@ -58,6 +72,10 @@ public abstract class AddGame extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+
+
+
 
 
         searchBar.addTextChangedListener(new TextWatcher() {
@@ -259,11 +277,17 @@ public abstract class AddGame extends AppCompatActivity {
     }
 
 
+
+
+
+
     protected abstract void searchForGame(String value);
 
     protected abstract void OnClickHolders(GameModel gameModel, View v);
 
     protected abstract void OnStartActivity();
+
+
 
 
 }

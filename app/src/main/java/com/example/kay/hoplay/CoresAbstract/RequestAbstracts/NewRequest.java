@@ -1,8 +1,11 @@
 package com.example.kay.hoplay.CoresAbstract.RequestAbstracts;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +13,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
@@ -76,6 +81,13 @@ public abstract class NewRequest extends AppCompatActivity {
     protected ArrayAdapter regionAdapter;
     protected ArrayAdapter playersNumberAdapter;
     protected ArrayAdapter playersRanksAdapter;
+
+
+
+
+    private Dialog gameProviderDialog;
+    private boolean userEnteredGameProviderAcc ;
+    private String pcGameProvider;
 
 
     /***************************************/
@@ -383,10 +395,12 @@ public abstract class NewRequest extends AppCompatActivity {
 
         if (checkIsValidRequest()) {
             // Start the loading dialog
-            creatingRequestDialog.show();
+          //  creatingRequestDialog.show();
             // Take the user input for the request
+            createGameProviderDialog();
             requestInput(selectedPlatform, selectedGame, selectedMatchType, selectedRegion, selectedPlayersNumber, selectedRank, requestDescription);
-            finishRequest();
+
+           // finishRequest();
         }
 
     }
@@ -439,7 +453,7 @@ public abstract class NewRequest extends AppCompatActivity {
 
 
         // check selected match type
-        if (matchTypeSpinner.getText().length() == 0) {
+        if (matchTypeSpinner.getText().length() == 0 && checkIfCompetitive(gamesAutoCompleteTextView.getText().toString().trim())) {
             Toast.makeText(getApplicationContext(), R.string.new_request_type_match_error, Toast.LENGTH_LONG).show();
             return false;
         }
@@ -494,9 +508,117 @@ public abstract class NewRequest extends AppCompatActivity {
 
 
 
+
+    public boolean createGameProviderDialog()
+    {
+
+        userEnteredGameProviderAcc = false;
+        pcGameProvider ="";
+        gameProviderDialog = new Dialog(this);
+        gameProviderDialog.setContentView(R.layout.provider_account_pop_up);
+        gameProviderDialog.show();
+
+
+        gameProviderDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView gameProviderMessage;
+        Button saveInfoButton;
+        String providerAccountType = "";   // Xbox ID , PSN , PC (STEAM , Battlenet..etc)
+        final EditText   gameProviderEdittext ;
+
+
+
+        gameProviderEdittext = (EditText) gameProviderDialog.findViewById(R.id.game_provider_account_edittext);
+        gameProviderMessage = (TextView) gameProviderDialog.findViewById(R.id.popup_message_textview_provide_account);
+        saveInfoButton = (Button) gameProviderDialog.findViewById(R.id.save_game_provider_button);
+
+
+        if (selectedPlatform.equalsIgnoreCase("PS"))
+        providerAccountType = String.format(getResources().getString(R.string.provider_account_message), "PSN");
+        else if (selectedPlatform.equalsIgnoreCase("XBOX"))
+            providerAccountType = String.format(getResources().getString(R.string.provider_account_message), "Xbox Live");
+        else if (selectedPlatform.equalsIgnoreCase("PC"))
+        {
+           String pcGameProvider =  app.getGameManager().getGameByName(gamesAutoCompleteTextView.getText().toString()).getPcGameProvider();
+            providerAccountType = String.format(getResources().getString(R.string.provider_account_message), pcGameProvider);
+        }
+
+
+        gameProviderMessage.setText(providerAccountType);
+
+        Typeface sansation = Typeface.createFromAsset(getAssets() ,"sansationbold.ttf");
+        saveInfoButton.setTypeface(sansation);
+
+        final Typeface playbold = Typeface.createFromAsset(getAssets(), "playbold.ttf");
+        final Typeface playReg = Typeface.createFromAsset(getAssets(), "playregular.ttf");
+        gameProviderMessage.setTypeface(playbold);
+        gameProviderMessage.setTypeface(playbold);
+        gameProviderEdittext.setTypeface(playReg);
+
+
+
+
+        // Changing edittext icon
+        gameProviderEdittext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                gameProviderEdittext.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_mood_focused_24dp, 0);
+                if (s.length() == 0) {
+                    gameProviderEdittext.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_mood_bad_not_focused_24dp, 0);
+                }
+            }
+        });
+
+
+
+        saveInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Check if the user entered the game provider id
+                if (gameProviderEdittext.length() > 0)
+                {
+                        saveGameProviderAccount(pcGameProvider,gameProviderEdittext.getText().toString().trim(),selectedPlatform);
+                       userEnteredGameProviderAcc = true;
+                }
+
+
+
+            }
+        });
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = gameProviderDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+
+
+        return userEnteredGameProviderAcc;
+    }
+
+
+
+
+
     // This method  load number of  max players of the selected game
 
     protected abstract void OnStartActivity();
+
+    protected abstract void saveGameProviderAccount(String gameProvider,String userGameProviderAcc , String platform );
+
 
     // This method  take the request input from the user and insert it  into the database
     // It should take request model and pass it to the core

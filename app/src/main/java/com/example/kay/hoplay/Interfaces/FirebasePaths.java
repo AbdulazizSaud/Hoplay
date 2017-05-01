@@ -20,10 +20,15 @@ public interface FirebasePaths {
     public static final String FIREBASE_REQUEST_REGION_ATTR = "region";
     public static final String FIREBASE_REQUEST_PLAYERS_NUMBER_ATTR = "players_number";
     public static final String FIREBASE_REQUEST_TIME_STAMP_ATTR = "time_stamp";
+    public static final String FIREBASE_PC_GAME_PROVIDER = "PC_game_providers";
+    public static final String FIREBASE_PS_GAME_PROVIDER = "PSN_account";
+    public static final String FIREBASE_XBOX_GAME_PROVIDER = "XBOX_live_account";
+
 
 
     public static final String FIREBASE_GAMES_REFERENCES = "_games_";
     public static final String FIREBASE_GAME_PLATFORMS_ATTR = "platforms";
+    public static final String FIREBASE_GAME_PC_GAME_PROVIDER = "pc_game_provider";
     public static final String FIREBASE_USER_CHAT_REFERENCES = "_chat_refs_";
     public static final String FIREBASE_GAME_MAX_PLAYER_ATTR = "max_player";
     public static final String FIREBASE_CHAT_ATTR = "Chat";

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/pop_up_backgrounds"
+    tools:context="com.example.kay.hoplay.CoresAbstract.RequestAbstracts.NewRequest">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/ic_sync_64dp"
+        android:id="@+id/sync_symbol_imageview"
+        />
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/provider_account_message"
+        android:gravity="center"
+        android:textSize="18dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/text_color"
+        android:id="@+id/popup_message_textview_provide_account"
+        android:layout_below="@+id/sync_symbol_imageview"
+        android:layout_centerHorizontal="true" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/game_provider_textinputlayout"
+        android:layout_below="@id/popup_message_textview_provide_account">
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:digits="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890-_."
+            style="@style/Base.TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+            android:maxLength="27"
+            android:drawableRight="@drawable/ic_mood_bad_not_focused_24dp"
+            android:textColorHint="@color/hint_color"
+            android:hint="@string/provider_account_game_provider_hint_edittext"
+            android:id="@+id/game_provider_account_edittext" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <Button
+        android:text="@string/provider_account_save_button"
+        android:textColor="@color/white"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_width="150dp"
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/game_provider_textinputlayout"
+        android:id="@+id/save_game_provider_button"
+        android:layout_centerHorizontal="true" />
+
+
+
+
+
+</RelativeLayout>

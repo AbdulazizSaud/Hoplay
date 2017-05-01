@@ -12,17 +12,19 @@ public class GameModel {
     private String gamePhotoUrl;
     private String gameType;
     private String gamePlatforms;
+    private String pcGameProvider;
 
 
     private int maxPlayers;
     private Ranks gameRanks;
 
-    public GameModel(String gameID, String gameName, String gamePhotoUrl, String gamePlatforms, String gameType , int maxPlayers,ArrayList<Rank> ranks) {
+    public GameModel(String gameID, String gameName, String gamePhotoUrl, String gamePlatforms, String gameType , int maxPlayers,ArrayList<Rank> ranks , String pcGameProvider) {
         this.gameName = gameName;
         this.gameID = gameID;
         this.gamePlatforms = gamePlatforms;
         this.gamePhotoUrl = gamePhotoUrl;
         this.maxPlayers = maxPlayers;
+        this.pcGameProvider = pcGameProvider;
 
         gameRanks = new Ranks();
 
@@ -42,13 +44,14 @@ public class GameModel {
         this.gamePlatforms = gamePlatforms;
         this.gamePhotoUrl = gamePhotoUrl;
     }
-    public GameModel(String gameID, String gameName, String gamePhotoUrl, String gamePlatforms, String gameType , int maxPlayers) {
+    public GameModel(String gameID, String gameName, String gamePhotoUrl, String gamePlatforms, String gameType , int maxPlayers , String pcGameProvider) {
         this.gameName = gameName;
         this.gameID = gameID;
         this.gamePlatforms = gamePlatforms;
         this.gamePhotoUrl = gamePhotoUrl;
         this.maxPlayers = maxPlayers;
         this.gameType = gameType;
+        this.pcGameProvider = pcGameProvider;
 
     }
 
@@ -107,5 +110,9 @@ public class GameModel {
 
     public void setGameRanks(Ranks gameRanks) {
         this.gameRanks = gameRanks;
+    }
+
+    public String getPcGameProvider() {
+        return pcGameProvider;
     }
 }

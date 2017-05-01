@@ -1,5 +1,6 @@
 package com.example.kay.hoplay.Cores.UserProfileCores;
 
+import android.util.Log;
 import android.view.View;
 
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
@@ -29,11 +30,15 @@ public class AddGameCore extends AddGame implements FirebasePaths {
     @Override
     protected void OnClickHolders(GameModel gameModel, View v) {
 
+
+
         // Create game ref for users
         DatabaseReference userFavorGameRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_FAVOR_GAMES_PATH);
         userFavorGameRef.child(gameModel.getGameID()).setValue(gameModel.getGameType());
         addedGameMessage(gameModel.getGameName());
     }
+
+
 
 
     private void loadFavorGamesList() {
@@ -52,7 +57,8 @@ public class AddGameCore extends AddGame implements FirebasePaths {
         }
     }
 
-        @Override
+
+    @Override
     protected void searchForGame(String value) {
 
         // Just to push
@@ -115,9 +121,12 @@ public class AddGameCore extends AddGame implements FirebasePaths {
         String gamPic = dataSnapshot.child("photo").getValue().toString().trim();
         String maxPlayerAsString = dataSnapshot.child("max_player").getValue().toString().trim();
         String supportedPlatformes = dataSnapshot.child(FIREBASE_GAME_PLATFORMS_ATTR).getValue().toString().trim();
+        String gameProvider= dataSnapshot.child(FIREBASE_GAME_PC_GAME_PROVIDER).getValue().toString().trim();
         int maxPlayer = Integer.parseInt(maxPlayerAsString);
 
-        GameModel gameModel = new GameModel(gameId, gameNameWithCapitalLetter, gamPic, supportedPlatformes,gametype,maxPlayer);
+        Log.i("here bitch", gameProvider);
+
+        GameModel gameModel = new GameModel(gameId, gameNameWithCapitalLetter, gamPic, supportedPlatformes,gametype,maxPlayer,gameProvider);
         addGame(gameModel);
 
     }
