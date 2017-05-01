@@ -397,13 +397,8 @@ public abstract class NewRequest extends AppCompatActivity {
             // Start the loading dialog
           //  creatingRequestDialog.show();
             // Take the user input for the request
-            if(createGameProviderDialog())
-            {
-                requestInput(selectedPlatform, selectedGame, selectedMatchType, selectedRegion, selectedPlayersNumber, selectedRank, requestDescription);
-            }
+            createGameProviderDialog(selectedPlatform, selectedGame, selectedMatchType, selectedRegion, selectedPlayersNumber, selectedRank, requestDescription);
 
-
-           // finishRequest();
         }
 
     }
@@ -509,10 +504,12 @@ public abstract class NewRequest extends AppCompatActivity {
         return gameModel.getGameID();
     }
 
+    private void requestInput(String platform , String game , String match , String region , String playersNumber , String rank , String description) {
+
+    }
 
 
-
-    public boolean createGameProviderDialog()
+    public void createGameProviderDialog(final String platform , final String game , final String match , final String region , final String playersNumber , final String rank ,final String description)
     {
 
         userEnteredGameProviderAcc = false;
@@ -594,7 +591,8 @@ public abstract class NewRequest extends AppCompatActivity {
                 {
                         saveGameProviderAccount(pcGameProvider,gameProviderEdittext.getText().toString().trim(),selectedPlatform);
                         gameProviderDialog.dismiss();
-                       userEnteredGameProviderAcc = true;
+                         request(platform,game,match,region,playersNumber,rank,description);
+                          finishRequest();
                 }
                 else
                 {
@@ -615,6 +613,7 @@ public abstract class NewRequest extends AppCompatActivity {
 
             }
         });
+
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         Window window = gameProviderDialog.getWindow();
         lp.copyFrom(window.getAttributes());
@@ -623,9 +622,6 @@ public abstract class NewRequest extends AppCompatActivity {
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(lp);
 
-
-
-        return userEnteredGameProviderAcc;
     }
 
 
@@ -641,6 +637,6 @@ public abstract class NewRequest extends AppCompatActivity {
 
     // This method  take the request input from the user and insert it  into the database
     // It should take request model and pass it to the core
-    protected abstract void requestInput(String platform, String game, String matchType, String region, String numberOfPlayers, String rank, String description);
+    protected abstract void request(String platform, String game, String matchType, String region, String numberOfPlayers, String rank, String description);
 
 }

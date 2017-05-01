@@ -72,7 +72,7 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
     } // End of load method
 
     @Override
-    protected void requestInput(String platform, String gameName, String matchType, String region, String numberOfPlayers, String rank, String description) {
+    protected void request(String platform, String gameName, String matchType, String region, String numberOfPlayers, String rank, String description) {
 
 
         GameModel gameModel = app.getGameManager().getGameByName(gameName);
