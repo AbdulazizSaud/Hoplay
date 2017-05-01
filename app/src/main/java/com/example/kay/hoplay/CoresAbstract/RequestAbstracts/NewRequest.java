@@ -397,8 +397,11 @@ public abstract class NewRequest extends AppCompatActivity {
             // Start the loading dialog
           //  creatingRequestDialog.show();
             // Take the user input for the request
-            createGameProviderDialog();
-            requestInput(selectedPlatform, selectedGame, selectedMatchType, selectedRegion, selectedPlayersNumber, selectedRank, requestDescription);
+            if(createGameProviderDialog())
+            {
+                requestInput(selectedPlatform, selectedGame, selectedMatchType, selectedRegion, selectedPlayersNumber, selectedRank, requestDescription);
+            }
+
 
            // finishRequest();
         }
@@ -515,6 +518,7 @@ public abstract class NewRequest extends AppCompatActivity {
         userEnteredGameProviderAcc = false;
         pcGameProvider ="";
         gameProviderDialog = new Dialog(this);
+        gameProviderDialog.setCancelable(false);
         gameProviderDialog.setContentView(R.layout.provider_account_pop_up);
         gameProviderDialog.show();
 
@@ -589,7 +593,22 @@ public abstract class NewRequest extends AppCompatActivity {
                 if (gameProviderEdittext.length() > 0)
                 {
                         saveGameProviderAccount(pcGameProvider,gameProviderEdittext.getText().toString().trim(),selectedPlatform);
+                        gameProviderDialog.dismiss();
                        userEnteredGameProviderAcc = true;
+                }
+                else
+                {
+                    String noGameProviderMsg ="";
+                    if (selectedPlatform.equalsIgnoreCase("PS"))
+                        noGameProviderMsg = String.format(getResources().getString(R.string.new_request_dialog_no_game_provider_error), "PSN");
+                    else if (selectedPlatform.equalsIgnoreCase("XBOX"))
+                        noGameProviderMsg = String.format(getResources().getString(R.string.new_request_dialog_no_game_provider_error), "Xbox Live");
+                    else if (selectedPlatform.equalsIgnoreCase("PC"))
+                    {
+                        String pcGameProvider =  app.getGameManager().getGameByName(gamesAutoCompleteTextView.getText().toString()).getPcGameProvider();
+                        noGameProviderMsg = String.format(getResources().getString(R.string.new_request_dialog_no_game_provider_error), pcGameProvider);
+                    }
+                    Toast.makeText(getApplicationContext(),noGameProviderMsg,Toast.LENGTH_LONG).show();
                 }
 
 

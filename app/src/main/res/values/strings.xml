@@ -293,6 +293,7 @@
     <string name="new_request_default_description_message">Hey , I Play </string>
     <string name="new_request_dialog_title">Creating Request</string>
     <string name="new_request_dialog_message">Just one moment</string>
+    <string name="new_request_dialog_no_game_provider_error">Please provide your %1$s account to continue</string>
     <string name="new_request_finish_request_message">Your request has been added successfully %1$s &#160; &#160; 😃 </string>
     
 
