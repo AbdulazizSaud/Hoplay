@@ -1,11 +1,14 @@
 package com.example.kay.hoplay.Models;
 
+import java.util.HashMap;
+
 /**
  * Created by Kay on 3/3/2017.
  */
 
 public class UserInformation {
-    private String username,pictureURL,UID,nickName;
+    private String username,pictureURL,UID,nickName , PSNAcc , XboxLiveAcc;
+    private HashMap<String,String>  pcGamesAcc ;
     //
     public String getUsername() {
         return username;
@@ -30,5 +33,29 @@ public class UserInformation {
     }
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getPSNAcc() {
+        return PSNAcc;
+    }
+
+    public String getXboxLiveAcc() {
+        return XboxLiveAcc;
+    }
+
+    public HashMap<String, String> getPcGamesAcc() {
+        return pcGamesAcc;
+    }
+
+    public void setPSNAcc(String PSNAcc) {
+        this.PSNAcc = PSNAcc;
+    }
+
+    public void setXboxLiveAcc(String xboxLiveAcc) {
+        XboxLiveAcc = xboxLiveAcc;
+    }
+
+    public void setPcGamesAcc(HashMap<String, String> pcGamesAcc) {
+        this.pcGamesAcc = pcGamesAcc;
     }
 }

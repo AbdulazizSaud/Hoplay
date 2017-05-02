@@ -384,6 +384,9 @@ public abstract class NewRequest extends AppCompatActivity {
         String selectedRank = playersRanksSpinner.getText().toString().trim();
         String requestDescription = descriptionEdittext.getText().toString().trim();
 
+        String pcGameProvider;
+        pcGameProvider =  app.getGameManager().getGameByName(selectedGame).getPcGameProvider();
+
 
         if (selectedRegion.length() == 0)
             selectedRegion = "All";
@@ -397,6 +400,21 @@ public abstract class NewRequest extends AppCompatActivity {
             // Start the loading dialog
           //  creatingRequestDialog.show();
             // Take the user input for the request
+            if (selectedPlatform.equalsIgnoreCase("PS") && !app.getUserInformation().getPSNAcc().equals("")){
+                request(selectedPlatform,selectedGame,selectedMatchType,selectedRegion,selectedPlayersNumber,selectedRank,requestDescription);
+                finishRequest();
+            }
+            else if (selectedPlatform.equalsIgnoreCase("XBOX") && !app.getUserInformation().getXboxLiveAcc().equals("")){
+                request(selectedPlatform,selectedGame,selectedMatchType,selectedRegion,selectedPlayersNumber,selectedRank,requestDescription);
+                finishRequest();
+            }
+            else if (selectedPlatform.equalsIgnoreCase("PC") && app.getUserInformation().getPcGamesAcc().get(pcGameProvider) !=null)
+            {
+                request(selectedPlatform,selectedGame,selectedMatchType,selectedRegion,selectedPlayersNumber,selectedRank,requestDescription);
+                finishRequest();
+            }
+
+            else
             createGameProviderDialog(selectedPlatform, selectedGame, selectedMatchType, selectedRegion, selectedPlayersNumber, selectedRank, requestDescription);
 
         }
@@ -504,9 +522,7 @@ public abstract class NewRequest extends AppCompatActivity {
         return gameModel.getGameID();
     }
 
-    private void requestInput(String platform , String game , String match , String region , String playersNumber , String rank , String description) {
 
-    }
 
 
     public void createGameProviderDialog(final String platform , final String game , final String match , final String region , final String playersNumber , final String rank ,final String description)
@@ -540,7 +556,7 @@ public abstract class NewRequest extends AppCompatActivity {
             providerAccountType = String.format(getResources().getString(R.string.provider_account_message), "Xbox Live");
         else if (selectedPlatform.equalsIgnoreCase("PC"))
         {
-           String pcGameProvider =  app.getGameManager().getGameByName(gamesAutoCompleteTextView.getText().toString()).getPcGameProvider();
+            pcGameProvider =  app.getGameManager().getGameByName(gamesAutoCompleteTextView.getText().toString()).getPcGameProvider();
             providerAccountType = String.format(getResources().getString(R.string.provider_account_message), pcGameProvider);
         }
 

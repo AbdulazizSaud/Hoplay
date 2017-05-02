@@ -1,5 +1,6 @@
 package com.example.kay.hoplay.Cores;
 
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -82,9 +83,31 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                 if(isInfoValid(dataSnapshot))
                 {
 
+                    String PSNAcc = "";
+                    String XboxLiveAcc = "";
+                    HashMap<String,String> pcGamesAccs = new HashMap<String, String>() ;
+
                     String username = dataSnapshot.child(FIREBASE_USERNAME_PATH).getValue().toString();
                     String nickname = dataSnapshot.child(FIREBASE_NICKNAME_PATH).getValue().toString();
                     String picUrl = dataSnapshot.child(FIREBASE_PICTURE_URL_PATH).getValue().toString();
+                    if (dataSnapshot.hasChild(FIREBASE_PS_GAME_PROVIDER))
+                     PSNAcc = dataSnapshot.child(FIREBASE_PS_GAME_PROVIDER).getValue(String.class);
+                    if (dataSnapshot.hasChild(FIREBASE_XBOX_GAME_PROVIDER))
+                        XboxLiveAcc = dataSnapshot.child(FIREBASE_XBOX_GAME_PROVIDER).getValue().toString();
+
+
+
+                    if (dataSnapshot.hasChild(FIREBASE_PC_GAME_PROVIDER))
+                    {
+                        for (DataSnapshot pcAcc : dataSnapshot.child(FIREBASE_PC_GAME_PROVIDER).getChildren())
+                        {
+                            pcGamesAccs.put(pcAcc.getKey(),pcAcc.getValue().toString());
+                        }
+
+                    }
+
+
+
 
                     welcomeMessage(username);
 
@@ -92,6 +115,9 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     app.getUserInformation().setUsername(username);
                     app.getUserInformation().setNickName(nickname);
                     app.getUserInformation().setPictureURL(picUrl);
+                    app.getUserInformation().setPSNAcc(PSNAcc);
+                    app.getUserInformation().setXboxLiveAcc(XboxLiveAcc);
+                    app.getUserInformation().setPcGamesAcc(pcGamesAccs);
 
                     // load games
                     loadFavorGamesList();
