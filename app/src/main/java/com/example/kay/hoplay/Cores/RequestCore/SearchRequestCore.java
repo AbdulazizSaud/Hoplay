@@ -18,6 +18,30 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths {
 
 
     @Override
+    protected void OnStartActivity() {
+        // Load regions
+        DatabaseReference regionsRef = app.getDatabaseRegions();
+        regionsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                if (dataSnapshot != null) {
+                    for (DataSnapshot region : dataSnapshot.getChildren()) {
+                        regionList.add(region.getValue(String.class).trim());
+                    }
+                }
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    @Override
     protected void searchForRequest(HashMap<String, String> data) {
 
         String gameName = data.get("name");

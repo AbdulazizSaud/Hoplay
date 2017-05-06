@@ -84,6 +84,7 @@
             android:layout_gravity="center"
             android:layout_below="@+id/platforms_images_container_linearlayout"
             android:layout_alignStart="@+id/platforms_images_container_linearlayout"
+            android:layout_alignLeft="@+id/platforms_images_container_linearlayout"
             android:gravity="center_horizontal">
 
             <!--<TextView-->
@@ -123,10 +124,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/inputs_relativelayout_search_request"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-
-        android:layout_below="@id/platforms_container_linearlayout">
+        android:layout_below="@+id/platforms_container_linearlayout"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/search_button_search_request"
+        android:layout_alignStart="@+id/search_button_search_request">
 
 
         <AutoCompleteTextView
@@ -148,19 +149,38 @@
 
             />
 
+
+
+        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:id="@+id/match_type_spinner_search_request"
+            android:layout_below="@+id/games_autocompletetextview_search_request"
+            android:hint="@string/search_request_match_type"
+            android:gravity="center"
+            android:paddingLeft="3dp"
+            android:layout_marginTop="5dp"
+            android:textColorHint="@color/hint_color"
+            android:textColor="@color/text_color"
+            android:visibility="gone"
+            android:drawableLeft="@drawable/ic_whatshot_unfocused_24dp"
+
+            />
+
+
         <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
             android:id="@+id/country_spinner_search_request"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
-            android:hint="@string/new_request_country"
+            android:hint="@string/search_request_regions"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
             android:paddingStart="3dp"
             android:drawableStart="@drawable/ic_location_unfocused_24dp"
             android:drawableLeft="@drawable/ic_location_unfocused_24dp"
             android:gravity="center"
-            android:layout_below="@+id/games_autocompletetextview_search_request"
+            android:layout_below="@+id/match_type_spinner_search_request"
             android:textColorHint="@color/hint_color"
             android:layout_centerHorizontal="true"
             />
@@ -171,7 +191,7 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
-            android:hint="@string/new_request_players_number"
+            android:hint="@string/search_request_players_number"
             android:paddingLeft="3dp"
             android:drawableLeft="@drawable/ic_group_unfocused_24dp"
             android:gravity="center"
@@ -186,7 +206,7 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
-            android:hint="@string/new_request_players_ranks"
+            android:hint="@string/search_request_rank"
             android:paddingLeft="3dp"
             android:drawableLeft="@drawable/ic_grade_unfocused_24dp"
             android:gravity="center"

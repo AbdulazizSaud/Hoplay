@@ -107,6 +107,7 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
         data.put("region",region);
         data.put("time_stamp",ServerValue.TIMESTAMP);
         data.put("rank",rank);
+        data.put("match_type",matchType);
         data.put("players_number",numberOfPlayers);
 
         requestRef.setValue(data);

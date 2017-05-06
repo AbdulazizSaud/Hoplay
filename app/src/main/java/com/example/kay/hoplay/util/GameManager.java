@@ -22,7 +22,7 @@ public class GameManager implements FirebasePaths{
     {
 
         allGamesIds.put(gameModel.getGameID(),gameModel);
-        allGamesName.put(gameModel.getGameName(),gameModel);
+        allGamesName.put(gameModel.getGameName().toLowerCase(),gameModel);
 
         if(gameModel.getGameType().equals(FIREBASE_GAME_COMPETITVE_ATTR))
         gamesCompList.put(gameModel.getGameID(),gameModel);
@@ -34,7 +34,7 @@ public class GameManager implements FirebasePaths{
     public GameModel getGameByName(String name)
     {
         GameModel gameModel = null;
-        gameModel = allGamesName.get(name);
+        gameModel = allGamesName.get(name.toLowerCase());
         return gameModel;
     }
 
@@ -49,9 +49,9 @@ public class GameManager implements FirebasePaths{
         return null;
     }
 
-    public boolean isCompetitive(String gameName)
+    public boolean isCompetitive(String gameId)
     {
-        return gamesCompList.containsKey(gameName);
+        return gamesCompList.containsKey(gameId);
     }
 
     public ArrayList<GameModel> getCompetitiveGamesArrayList(){

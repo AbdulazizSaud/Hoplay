@@ -4,6 +4,7 @@ package com.example.kay.hoplay.CoresAbstract.RequestAbstracts;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
@@ -12,6 +13,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -21,10 +25,13 @@ import android.widget.Toast;
 
 import com.example.kay.hoplay.Adapters.SpinnerAdapter;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Models.GameModel;
+import com.example.kay.hoplay.Models.Rank;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.util.BitmapOptimizer;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -45,15 +52,28 @@ public abstract class SearchRequests extends Fragment {
     protected TextView pcMessage;
     protected TextView psMessage;
     protected TextView xboxMessage;
-    protected AutoCompleteTextView searchGameTextView;
-    private String[] gamesArray;
+    protected AutoCompleteTextView searchGameAutoCompleteTextView;
+
     private int layoutItemId;
-    private List<String> gamesList;
-    private ArrayAdapter<String> gamesAdapter;
+
+
+
+
+    protected ArrayList<String> gamesList;
+    protected ArrayList<String> regionList;
+    protected ArrayList<String> playerNumberList;
+    protected ArrayList<String> ranksList;
+
+    protected ArrayAdapter<String> gameAdapter;
+    protected ArrayAdapter regionAdapter;
+    protected ArrayAdapter playersNumberAdapter;
+    protected ArrayAdapter playersRanksAdapter;
+
 
     protected MaterialBetterSpinner countrySpinner;
     protected MaterialBetterSpinner ranksSpinner;
     protected MaterialBetterSpinner numberOfPlayersSpinner;
+    private MaterialBetterSpinner matchTypeSpinner;
 
     protected Button searchRequestButton;
 
@@ -78,9 +98,41 @@ public abstract class SearchRequests extends Fragment {
         app = App.getInstance();
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_requests_search, container, false);
+
+
+
+
+        // Load  user games
+        new CountDownTimer(3000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            public void onFinish() {
+
+                ArrayList<GameModel> games = app.getGameManager().getAllGamesArrayList();
+                for (GameModel gameModel : games)
+                {
+                    gamesList.add(gameModel.getGameName());
+                    Log.i("done",gameModel.getGameName());
+
+                }
+            }
+        }.start();
+
+
+
+
         initControls(view);
         changePlatformColors();
-        changeInputsIcons();
+        firledsListeners();
+        OnStartActivity();
+
+
+
+
+
 
 
         return view;
@@ -96,6 +148,29 @@ public abstract class SearchRequests extends Fragment {
 
 
 
+    private String loadGameInformation(String selectedGame) {
+
+
+        GameModel gameModel = app.getGameManager().getGameByName(selectedGame);
+
+        for (int i = 1; i <= gameModel.getMaxPlayers(); i++) {
+            playerNumberList.add(Integer.toString(i));
+
+        }
+
+        for (Rank rank : gameModel.getGameRanks().getRanksList()) {
+            ranksList.add(rank.getRankName());
+        }
+
+
+
+        return gameModel.getGameID();
+    }
+
+
+
+
+
     // Init all controls
     private void initControls(View view) {
 
@@ -105,27 +180,27 @@ public abstract class SearchRequests extends Fragment {
         psChoice = (ImageView) view.findViewById(R.id.ps_choice_imageview);
         xboxChoice = (ImageView) view.findViewById(R.id.xbox_choice_imageview);
 
-        gamesArray = getResources().getStringArray(R.array.games_list);
+
         layoutItemId = android.R.layout.simple_dropdown_item_1line;
-        gamesArray = getResources().getStringArray(R.array.games_list);
-        gamesList = Arrays.asList(gamesArray);
-        gamesAdapter = new ArrayAdapter<String>(getContext(), layoutItemId, gamesList);
 //        pcMessage = (TextView) view.findViewById(R.id.pc_requests_message_textview);
 //        psMessage = (TextView) view.findViewById(R.id.ps_requests_message_textview);
 //        xboxMessage = (TextView) view.findViewById(R.id.xbox_requests_message_textview);
 
-        searchGameTextView = (AutoCompleteTextView) view.findViewById(R.id.games_autocompletetextview_search_request);
-        searchGameTextView.setAdapter(gamesAdapter);
+        searchGameAutoCompleteTextView = (AutoCompleteTextView) view.findViewById(R.id.games_autocompletetextview_search_request);
+
 
         searchGameMessage = (TextView) view.findViewById(R.id.search_game_message_textview);
         countrySpinner = (MaterialBetterSpinner) view.findViewById(R.id.country_spinner_search_request);
         ranksSpinner = (MaterialBetterSpinner) view.findViewById(R.id.players_rank_spinner_search_request);
         numberOfPlayersSpinner = (MaterialBetterSpinner) view.findViewById(R.id.players_number_spinner_search_request);
         searchRequestButton = (Button) view.findViewById(R.id.search_button_search_request);
-        searchGameTextView.setTypeface(playbold);
+        searchGameAutoCompleteTextView.setTypeface(playbold);
         ranksSpinner.setTypeface(playregular);
         numberOfPlayersSpinner.setTypeface(playregular);
         countrySpinner.setTypeface(playregular);
+        matchTypeSpinner = (MaterialBetterSpinner) view.findViewById(R.id.match_type_spinner_search_request);
+        matchTypeSpinner.setTypeface(playbold);
+        matchTypeSpinner.setTextColor(ContextCompat.getColor(getContext(), R.color.text_color));
 
 
         pcLogoUnPressed = bitmapOptimizer.decodeSampledBitmapFromResource(getResources(), R.drawable.pc_logo, 100, 100);
@@ -156,30 +231,51 @@ public abstract class SearchRequests extends Fragment {
         searchRequestButton.setTypeface(sansation);
 
 
-        ArrayAdapter regionAdapter = new SpinnerAdapter(getContext(), R.layout.spinnner_item,
-                Arrays.asList(getResources().getStringArray(R.array.countries_array)));
 
-        ArrayAdapter playersRanksAdapter = new SpinnerAdapter(getContext(), R.layout.spinnner_item,
-                Arrays.asList(getResources().getStringArray(R.array.players_ranks)));
+        gamesList = new ArrayList<>();
+        regionList = new ArrayList<>();
+        playerNumberList = new ArrayList<>();
+        ranksList = new ArrayList<>();
 
-        ArrayAdapter playersNumberAdapter = new SpinnerAdapter(getContext(), R.layout.spinnner_item,
-                Arrays.asList(getResources().getStringArray(R.array.players_number)));
+
+
+        gameAdapter = new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_dropdown_item_1line, gamesList);
+
+        regionAdapter = new SpinnerAdapter(getContext(),
+                R.layout.spinnner_item, regionList);
+
+
+        playersNumberAdapter = new SpinnerAdapter(getContext(), R.layout.spinnner_item,
+                playerNumberList);
+
+
+        playersRanksAdapter = new SpinnerAdapter(getContext(), R.layout.spinnner_item,
+                ranksList);
+
+        ArrayAdapter matchTypeAdapter = new SpinnerAdapter(getContext(), R.layout.spinnner_item,
+                Arrays.asList(getResources().getStringArray(R.array.match_types)));
+
 
 
         playersRanksAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         regionAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         playersNumberAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        matchTypeAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
 
 
         numberOfPlayersSpinner.setAdapter(playersNumberAdapter);
         ranksSpinner.setAdapter(playersRanksAdapter);
         countrySpinner.setAdapter(regionAdapter);
+        searchGameAutoCompleteTextView.setThreshold(1);
+        searchGameAutoCompleteTextView.setAdapter(gameAdapter);
+        matchTypeSpinner.setAdapter(matchTypeAdapter);
 
         searchRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String gameName = searchGameTextView.getText().toString().trim();
+                String gameName = searchGameAutoCompleteTextView.getText().toString().trim();
                 String region  = countrySpinner.getText().toString().trim();
                 String playersNumber = numberOfPlayersSpinner.getText().toString().trim();
                 String rank = ranksSpinner.getText().toString().trim();
@@ -282,10 +378,26 @@ public abstract class SearchRequests extends Fragment {
 
     }
 
-    private void changeInputsIcons() {
+
+    public void slideInFromLeft(View viewToAnimate) {
+        // If the bound view wasn't previously displayed on screen, it's animated
+
+        Animation animation = AnimationUtils.loadAnimation(getContext(), android.R.anim.slide_in_left);
+        animation.setDuration(200);
+        viewToAnimate.startAnimation(animation);
+    }
+
+    public void slideOutToRight(View viewToAnimate) {
+        Animation animation = AnimationUtils.loadAnimation(getContext(), android.R.anim.slide_out_right);
+        viewToAnimate.startAnimation(animation);
+    }
 
 
-        searchGameTextView.addTextChangedListener(new TextWatcher() {
+    private void firledsListeners() {
+
+
+
+        searchGameAutoCompleteTextView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -299,13 +411,46 @@ public abstract class SearchRequests extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
 
-                searchGameTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_games_focused_24dp, 0, 0, 0);
+                searchGameAutoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_games_focused_24dp, 0, 0, 0);
                 if (s.length() == 0) {
-                    searchGameTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_games_unfocused_24dp, 0, 0, 0);
+                    searchGameAutoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_games_unfocused_24dp, 0, 0, 0);
+                }
+            }
+        });
+
+
+
+        searchGameAutoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String name = parent.getItemAtPosition(position).toString();
+
+
+                // Load max players
+                String gameKey = loadGameInformation(name);
+
+
+                if (checkIfCompetitive(gameKey)) {
+                    matchTypeSpinner.setVisibility(View.VISIBLE);
+                    ranksSpinner.setVisibility(View.VISIBLE);
+                    slideInFromLeft(matchTypeSpinner);
+                    slideInFromLeft(ranksSpinner);
+
+                } else {
+                    if (matchTypeSpinner.isShown())
+                        slideOutToRight(matchTypeSpinner);
+                    slideOutToRight(ranksSpinner);
+
+                    matchTypeSpinner.setVisibility(View.GONE);
+                    ranksSpinner.setVisibility(View.GONE);
+
                 }
 
             }
         });
+
+
+
         countrySpinner.addTextChangedListener(new TextWatcher() {
 
             final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
@@ -388,8 +533,39 @@ public abstract class SearchRequests extends Fragment {
             }
         });
 
+        matchTypeSpinner.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().equalsIgnoreCase("Competitive")) {
+                    matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_competitive_24dp, 0, 0, 0);
+                }
+                if (s.toString().equalsIgnoreCase("Quick Match")) {
+                    matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_quick_match_24dp, 0, 0, 0);
+                }
+                if (s.length() == 0) {
+                    matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+                }
+            }
+        });
 
     }
+
+    protected boolean checkIfCompetitive(String gameKey) {
+        return app.getGameManager().isCompetitive(gameKey);
+    }
+
+
+    protected abstract void OnStartActivity();
 
     protected abstract void searchForRequest(HashMap<String,String> data);
 }

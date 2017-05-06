@@ -114,7 +114,6 @@ public abstract class NewRequest extends AppCompatActivity {
 
     private void initControl() {
         app = App.getInstance();
-
         selectedPlatform = "Nothing";
         final Typeface sansationbold = Typeface.createFromAsset(getResources().getAssets(), "sansationbold.ttf");
         final Typeface playregular = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
@@ -384,7 +383,8 @@ public abstract class NewRequest extends AppCompatActivity {
         String selectedRank = playersRanksSpinner.getText().toString().trim();
         String requestDescription = descriptionEdittext.getText().toString().trim();
 
-        String pcGameProvider;
+        String pcGameProvider="";
+        if (app.getGameManager().getGameByName(selectedGame) != null)
         pcGameProvider =  app.getGameManager().getGameByName(selectedGame).getPcGameProvider();
 
 
@@ -463,13 +463,15 @@ public abstract class NewRequest extends AppCompatActivity {
 
         // Check selected game is in the user games
         if (!userHasTheGameThenLoadStandards(gamesAutoCompleteTextView.getText().toString().trim())) {
+
             Toast.makeText(getApplicationContext(), R.string.new_request_game_error, Toast.LENGTH_LONG).show();
             return false;
         }
 
 
         // check selected match type
-        if (matchTypeSpinner.getText().length() == 0 && checkIfCompetitive(gamesAutoCompleteTextView.getText().toString().trim())) {
+        String gameKey = app.getGameManager().getGameByName(gamesAutoCompleteTextView.getText().toString().trim()).getGameID();
+        if (matchTypeSpinner.getText().length() == 0 && checkIfCompetitive(gameKey) ) {
             Toast.makeText(getApplicationContext(), R.string.new_request_type_match_error, Toast.LENGTH_LONG).show();
             return false;
         }
@@ -490,8 +492,8 @@ public abstract class NewRequest extends AppCompatActivity {
     private boolean userHasTheGameThenLoadStandards(String selectedGame) {
         return app.getGameManager().getGameByName(selectedGame) !=null;
     }
-    protected boolean checkIfCompetitive(String selectedGame) {
-        return app.getGameManager().isCompetitive(selectedGame);
+    protected boolean checkIfCompetitive(String gameKey) {
+        return app.getGameManager().isCompetitive(gameKey);
     }
 
     private void finishRequest() {
