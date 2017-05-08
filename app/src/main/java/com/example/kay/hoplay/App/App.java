@@ -204,7 +204,7 @@ public class App extends Application implements FirebasePaths{
 
 
     public String convertFromTimeStampToDate(String timeStamp){
-        DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         Date netDate = (new Date(Long.parseLong(timeStamp)));
         return sdf.format(netDate);
     }

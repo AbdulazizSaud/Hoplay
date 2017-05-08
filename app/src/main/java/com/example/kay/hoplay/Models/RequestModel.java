@@ -14,17 +14,18 @@ public class RequestModel {
     private String admin ;
     private String description ;
     private String region ;
+    private int playerNumber=0;
 
     private List<String> users;
 
 
-    public RequestModel(String requestId, String requestTitle, String admin, String description, String region) {
+    public RequestModel(String requestId, String requestTitle,int playersNumber, String admin, String description, String region) {
         this.requestId = requestId;
         this.requestTitle = requestTitle;
         this.admin = admin;
         this.description = description;
         this.region = region;
-
+        this.playerNumber = playersNumber;
     }
 
     public List<String> getUsers() {
@@ -55,9 +56,9 @@ public class RequestModel {
         return region;
     }
 
-
-
-
+    public int getPlayerNumber() {
+        return playerNumber;
+    }
 
     public void setRequestId(String requestId) {
         this.requestId = requestId;

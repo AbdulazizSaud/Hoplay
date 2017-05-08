@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -223,6 +224,8 @@ public abstract class NewRequest extends AppCompatActivity {
                 if (s.length() == 0) {
                     gamesAutoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_games_unfocused_24dp, 0, 0, 0);
                 }
+                matchTypeSpinner.setVisibility(View.GONE);
+                playersRanksSpinner.setVisibility(View.GONE);
             }
         });
 
@@ -233,6 +236,7 @@ public abstract class NewRequest extends AppCompatActivity {
 
 
                 // Load max players
+
                 String gameKey = loadGameInformation(name);
 
 
@@ -246,7 +250,6 @@ public abstract class NewRequest extends AppCompatActivity {
                     if (matchTypeSpinner.isShown())
                         slideOutToRight(matchTypeSpinner);
                         slideOutToRight(playersRanksSpinner);
-
                     matchTypeSpinner.setVisibility(View.GONE);
                     playersRanksSpinner.setVisibility(View.GONE);
 
@@ -506,18 +509,32 @@ public abstract class NewRequest extends AppCompatActivity {
     private String loadGameInformation(String selectedGame) {
 
 
-        GameModel gameModel = app.getGameManager().getGameByName(selectedGame);
+        final GameModel gameModel = app.getGameManager().getGameByName(selectedGame);
 
 
 
-        for (int i = 1; i <= gameModel.getMaxPlayers(); i++) {
-            playerNumberList.add(Integer.toString(i));
 
-        }
+        new UpdateList() {
+            @Override
+            public void doOnJob() {
+                playerNumberList.clear();
+                ranksList.clear();
 
-        for (Rank rank : gameModel.getGameRanks().getRanksList()) {
-            ranksList.add(rank.getRankName());
-        }
+                for (int i = 1; i <= gameModel.getMaxPlayers(); i++) {
+                    playerNumberList.add(Integer.toString(i));
+                }
+
+                for (Rank rank : gameModel.getGameRanks().getRanksList()) {
+                    ranksList.add(rank.getRankName());
+                }
+
+            }
+
+            @Override
+            public void doPostJob() {
+                updateAdapter();
+            }
+        }.execute();
 
 
 
@@ -526,6 +543,16 @@ public abstract class NewRequest extends AppCompatActivity {
 
 
 
+
+    private void updateAdapter(){
+
+        playersRanksSpinner.clearListSelection();
+        numberOfPlayersSpinner.clearListSelection();
+
+        playersNumberAdapter.notifyDataSetChanged();
+        playersRanksAdapter.notifyDataSetChanged();
+
+    }
 
     public void createGameProviderDialog(final String platform , final String game , final String match , final String region , final String playersNumber , final String rank ,final String description)
     {
@@ -647,9 +674,7 @@ public abstract class NewRequest extends AppCompatActivity {
 
 
     // This method  load number of  max players of the selected game
-
     protected abstract void OnStartActivity();
-
     protected abstract void saveGameProviderAccount(String gameProvider,String userGameProviderAcc , String platform );
 
 
@@ -658,3 +683,24 @@ public abstract class NewRequest extends AppCompatActivity {
     protected abstract void request(String platform, String game, String matchType, String region, String numberOfPlayers, String rank, String description);
 
 }
+
+
+abstract class UpdateList extends AsyncTask<String, Void, ArrayList<String>> {
+    private Exception exception;
+
+    @Override
+    protected ArrayList<String> doInBackground(String... data) {
+            doOnJob();
+            return null;
+    }
+
+    @Override
+    protected void onPostExecute(ArrayList<String> stringsArray) {
+
+        doPostJob();
+    }
+
+    public  abstract void doOnJob();
+    public abstract void doPostJob();
+}
+
