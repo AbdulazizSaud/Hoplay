@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.kay.hoplay.Cores.CommunityCore;
-import com.example.kay.hoplay.Cores.RequestCore.MakeRequestCore;
+import com.example.kay.hoplay.Cores.RequestCore.MakeRequestFragmentCore;
 import com.example.kay.hoplay.Cores.RequestCore.SearchRequestCore;
 import com.example.kay.hoplay.Cores.UserProfileCores.UserProfileCore;
 
@@ -30,7 +30,7 @@ public class MenuPagerAdapter extends FragmentStatePagerAdapter {
                 case 1 :
                     return new CommunityCore();
                 case 2 :
-                    return new MakeRequestCore();
+                    return new MakeRequestFragmentCore();
                 case 3 :
                     return new UserProfileCore();
 

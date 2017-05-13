@@ -30,7 +30,7 @@ import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
 
 import java.util.ArrayList;
 
-public abstract class MakeRequest extends Fragment {
+public abstract class MakeRequestFragment extends Fragment {
 
     private  Button newRequestButton;
     private TextView savedRequestsMessage ;
@@ -52,7 +52,7 @@ public abstract class MakeRequest extends Fragment {
 
 
 
-    public MakeRequest() {
+    public MakeRequestFragment() {
         // Required empty public constructor
     }
 

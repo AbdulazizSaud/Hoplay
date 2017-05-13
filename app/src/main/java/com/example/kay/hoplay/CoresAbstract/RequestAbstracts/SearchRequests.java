@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
@@ -27,8 +28,10 @@ import com.example.kay.hoplay.Adapters.SpinnerAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.Rank;
+import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.util.BitmapOptimizer;
+import com.google.firebase.database.ServerValue;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.ArrayList;
@@ -279,6 +282,8 @@ public abstract class SearchRequests extends Fragment {
                 String region  = countrySpinner.getText().toString().trim();
                 String playersNumber = numberOfPlayersSpinner.getText().toString().trim();
                 String rank = ranksSpinner.getText().toString().trim();
+                String matchtype=matchTypeSpinner.getText().toString().trim();
+
 
 
                 if(currentPlatform == null || gameName.isEmpty()  || region.isEmpty() ||  playersNumber.isEmpty() || rank.isEmpty()) {
@@ -294,8 +299,10 @@ public abstract class SearchRequests extends Fragment {
                 data.put("playersNumber",playersNumber);
                 data.put("rank",rank);
                 data.put("platform",currentPlatform);
-
-                searchForRequest(data);
+                data.put("match_type",matchtype);
+                data.put("time_stamp", ServerValue.TIMESTAMP.toString());
+                RequestModel requestModel =new RequestModel(currentPlatform,gameName,region,Integer.parseInt(playersNumber),matchtype,rank,ServerValue.TIMESTAMP);
+                searchForRequest(requestModel);
             }
         });
 
@@ -567,5 +574,5 @@ public abstract class SearchRequests extends Fragment {
 
     protected abstract void OnStartActivity();
 
-    protected abstract void searchForRequest(HashMap<String,String> data);
+    protected abstract void searchForRequest(RequestModel requestModel);
 }

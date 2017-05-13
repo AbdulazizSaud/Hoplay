@@ -1,19 +1,16 @@
 package com.example.kay.hoplay.Cores.RequestCore;
 
-import android.util.Log;
-
+import com.example.kay.hoplay.util.TimeStamp;
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.NewRequest;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.RequestModel;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class NewRequestCore extends NewRequest implements FirebasePaths{
@@ -87,7 +84,6 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
 
         String requestKey = requestsRef.push().getKey();
         String requestAdmin = app.getUserInformation().getUID();
-
         // _requests_ -> platform -> GameID -> Region -> request id
         DatabaseReference requestRef = requestsRef.child(requestKey);
 
@@ -100,17 +96,19 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
         // set the request info under the requests tree
 
         HashMap<String,Object> data = new HashMap<>();
+        TimeStamp timeStamp=new TimeStamp();
+        RequestModel requestModel=new RequestModel(
+                platform,
+                gameName,
+                app.getUserInformation().getUID(),
+                description,
+                region,
+                Integer.parseInt(numberOfPlayers),
+                matchType,
+                rank,ServerValue.TIMESTAMP);
 
-        data.put("admin",app.getUserInformation().getUID());
-        data.put("request_title",gameName);
-        data.put("description",description);
-        data.put("region",region);
-        data.put("time_stamp",ServerValue.TIMESTAMP);
-        data.put("rank",rank);
-        data.put("match_type",matchType);
-        data.put("players_number",numberOfPlayers);
 
-        requestRef.setValue(data);
+        requestRef.setValue(requestModel);
 
     }
 

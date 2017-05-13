@@ -4,7 +4,7 @@ import android.view.View;
 
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.SavedRequestModel;
-import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.MakeRequest;
+import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.MakeRequestFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -14,7 +14,7 @@ import com.google.firebase.database.ValueEventListener;
  * Created by Kay on 2/14/2017.
  */
 
-public class MakeRequestCore extends MakeRequest implements FirebasePaths{
+public class MakeRequestFragmentCore extends MakeRequestFragment implements FirebasePaths{
 
 
 

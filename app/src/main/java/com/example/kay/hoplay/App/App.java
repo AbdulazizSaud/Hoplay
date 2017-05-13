@@ -16,8 +16,11 @@ import com.example.kay.hoplay.Models.UserInformation;
 import com.example.kay.hoplay.util.BitmapOptimizer;
 import com.example.kay.hoplay.util.GameManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -214,6 +217,20 @@ public class App extends Application implements FirebasePaths{
     return gameManager;
     }
 
+//    public long currentFirebaseTimestamp(){
+//        ValueEventListener eventListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot snapshot) {
+//                Long timestamp = (Long) snapshot.getValue();
+//                System.out.println(timestamp);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        };
+//        return
 
 }
 
