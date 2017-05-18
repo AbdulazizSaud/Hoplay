@@ -15,6 +15,7 @@ import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.UserInformation;
 import com.example.kay.hoplay.util.BitmapOptimizer;
 import com.example.kay.hoplay.util.GameManager;
+import com.example.kay.hoplay.util.TimeStamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.security.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,15 +52,13 @@ public class App extends Application implements FirebasePaths{
     private FirebaseAuth mAuth;  // firebase auth
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private ImageLoader imageLoader; // Image loader from url
-
+private ArrayList resultList =new ArrayList();
     private  UserInformation userInformation;
     private GameManager gameManager;
-
-
+    private TimeStamp timeStamp;
 
     @Override
     public void onCreate() {
-
         super.onCreate();
         instance = this;
         mAuth = FirebaseAuth.getInstance();
@@ -72,6 +72,7 @@ public class App extends Application implements FirebasePaths{
         databaseRegions = firebaseDatabase.getReferenceFromUrl("https://hoplay-18a08.firebaseio.com/_regions_");
         userInformation = new UserInformation();
         gameManager = new GameManager();
+        timeStamp=new TimeStamp();
     }
 
 
@@ -217,20 +218,18 @@ public class App extends Application implements FirebasePaths{
     return gameManager;
     }
 
-//    public long currentFirebaseTimestamp(){
-//        ValueEventListener eventListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot snapshot) {
-//                Long timestamp = (Long) snapshot.getValue();
-//                System.out.println(timestamp);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        };
-//        return
+    public TimeStamp getTimeStamp(){
+        return timeStamp;
+    }
+
+
+    public void setSearchResult(ArrayList resultList){
+        this.resultList=resultList;
+    }
+    public ArrayList getResultList(){
+        return resultList;
+    }
+
 
 }
 

@@ -18,12 +18,15 @@ public class RequestModel {
     private int playerNumber=0;
     private String matchType;
     private String rank;
-    private Map<String, String> timeStamp;
+    private long timeStamp;
 
 
     private List<String> users;
 
-    public RequestModel(String platform,String requestTitle, String admin, String description, String region, int playerNumber, String matchType, String rank,Map<String, String> timeStamp) {
+    public RequestModel() {
+    }
+
+    public RequestModel(String platform, String requestTitle, String admin, String description, String region, int playerNumber, String matchType, String rank, long timeStamp) {
         this.platform=platform;
         this.admin = admin;
         this.description = description;
@@ -35,7 +38,7 @@ public class RequestModel {
         this.timeStamp=timeStamp;
     }
 
-    public RequestModel(String platform, String requestTitle, String region, int playerNumber, String matchType, String rank, Map<String, String> timeStamp) {
+    public RequestModel(String platform, String requestTitle, String region, int playerNumber, String matchType, String rank, long timeStamp) {
         this.platform = platform;
         this.requestTitle = requestTitle;
         this.region = region;
@@ -45,11 +48,24 @@ public class RequestModel {
         this.timeStamp = timeStamp;
     }
 
-    public Map<String, String> getTimeStamp() {
+
+
+    public RequestModel(String platform, String gameName, String admin, String description, String region, int playerNumber , String matchType, String rank) {
+        this.platform = platform;
+        this.requestTitle = requestTitle;
+        this.admin = admin;
+        this.region = region;
+        this.playerNumber = playerNumber;
+        this.matchType = matchType;
+        this.rank = rank;
+    }
+
+
+    public long getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(Map<String, String> timeStamp) {
+    public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
     }
 

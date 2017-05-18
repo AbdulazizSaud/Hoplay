@@ -20,6 +20,8 @@ import com.example.kay.hoplay.Cores.AuthenticationCore.LoginCore;
 import com.example.kay.hoplay.Cores.CommunityCore;
 import com.example.kay.hoplay.R;
 
+import com.example.kay.hoplay.Services.CallbackHandlerCondition;
+import com.example.kay.hoplay.Services.HandlerCondition;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -88,24 +90,19 @@ public abstract class MainAppMenu extends AppCompatActivity  {
 
         bottomBar = (BottomBar) findViewById(R.id.bottomBar);
 
-        final Handler handler = new Handler();
-        Runnable runnable = new Runnable() {
+
+
+        CallbackHandlerCondition callback = new CallbackHandlerCondition() {
             @Override
-            public void run() {
+            public boolean callBack() {
 
-                handler.post(this);
-                if (app.getUserInformation().getUsername() != null)
-                {
-                    activateMainAppMenu(savedInstanceState);
-                    handler.removeCallbacks(this);
-
-                }
-
+                boolean b = app.getUserInformation().getUsername() != null;
+                if (b) activateMainAppMenu(savedInstanceState);
+                return b;
             }
-
-
         };
-        handler.post(runnable);
+
+        new HandlerCondition(callback,0);
 
     }
     private void activateMainAppMenu( Bundle savedInstanceState) {

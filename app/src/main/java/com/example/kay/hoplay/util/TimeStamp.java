@@ -3,6 +3,7 @@ package com.example.kay.hoplay.util;
 import android.util.Log;
 
 
+import com.example.kay.hoplay.App.App;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,24 +19,26 @@ import com.google.firebase.database.ValueEventListener;
  */
 
 public class TimeStamp {
-    private String time ;
+    String useruid;
     private long finalCurrentTime;
-private boolean flag=false;
-    DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
-    public TimeStamp(){
-
-    }
 
 
-    public long getCreatedTimestampLong(){
 
-        firebaseDatabase.child("currentTimeStamp").setValue(ServerValue.TIMESTAMP);
-        firebaseDatabase.child("currentTimeStamp").addListenerForSingleValueEvent(new ValueEventListener() {
+public void setUseruid(String useruid){
+    this.useruid=useruid;
+}
+    public void setTimestampLong(){
+
+        DatabaseReference databaseReference=App.getInstance().getDatabaseUsersInfo().child(useruid+"/currentTimeStamp");
+
+        databaseReference.setValue(ServerValue.TIMESTAMP);
+        finalCurrentTime=-1;
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                long currentTime =  dataSnapshot.getValue(long.class);
                 String currentTimeStirng = String.valueOf(currentTime);
-                currentTimeStirng=currentTimeStirng.substring(0,currentTimeStirng.length()-3);
+                currentTimeStirng=currentTimeStirng.substring(0,currentTimeStirng.length());
                 finalCurrentTime=Long.parseLong(currentTimeStirng);
 
 
@@ -46,7 +49,9 @@ private boolean flag=false;
 
             }
         });
-        Log.e("ITS WORK", String.valueOf(finalCurrentTime));
-       return finalCurrentTime;
+    }
+
+    public long getTimestampLong (){
+        return finalCurrentTime;
     }
 }

@@ -1,5 +1,8 @@
 package com.example.kay.hoplay.Cores.RequestCore;
 
+import android.util.Log;
+
+import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.util.TimeStamp;
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.NewRequest;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
@@ -96,7 +99,8 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
         // set the request info under the requests tree
 
         HashMap<String,Object> data = new HashMap<>();
-        TimeStamp timeStamp=new TimeStamp();
+       // TimeStamp timeStamp=new TimeStamp();
+        Log.e("PLAYER",numberOfPlayers.toString());
         RequestModel requestModel=new RequestModel(
                 platform,
                 gameName,
@@ -105,10 +109,12 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
                 region,
                 Integer.parseInt(numberOfPlayers),
                 matchType,
-                rank,ServerValue.TIMESTAMP);
-
+                rank);
+        HashMap hashMap =new HashMap();
+        hashMap.put("timeStamp",ServerValue.TIMESTAMP);
 
         requestRef.setValue(requestModel);
+        requestRef.updateChildren(hashMap);
 
     }
 

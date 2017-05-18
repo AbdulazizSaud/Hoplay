@@ -71,8 +71,9 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
     }
 
-    private void setupUserInformation(FirebaseUser user) {
+    private void setupUserInformation(final FirebaseUser user) {
         app.getUserInformation().setUID(user.getUid());
+        app.getTimeStamp().setUseruid(user.getUid());
         app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -119,8 +120,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
                     // load games
                     loadFavorGamesList();
-TimeStamp timeStamp = new TimeStamp();
-                    timeStamp.getCreatedTimestampLong();
+
                 }
                 else
                 {

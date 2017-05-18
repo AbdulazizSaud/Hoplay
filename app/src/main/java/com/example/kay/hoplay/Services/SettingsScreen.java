@@ -34,7 +34,13 @@ public class SettingsScreen extends PreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings_screen);
 
-            // fk it
+
+
+
+        // Update user profile
+
+
+
 
 
         // Log out on click preference

@@ -185,9 +185,6 @@ public abstract class SearchRequests extends Fragment {
 
 
         layoutItemId = android.R.layout.simple_dropdown_item_1line;
-//        pcMessage = (TextView) view.findViewById(R.id.pc_requests_message_textview);
-//        psMessage = (TextView) view.findViewById(R.id.ps_requests_message_textview);
-//        xboxMessage = (TextView) view.findViewById(R.id.xbox_requests_message_textview);
 
         searchGameAutoCompleteTextView = (AutoCompleteTextView) view.findViewById(R.id.games_autocompletetextview_search_request);
 
@@ -291,17 +288,8 @@ public abstract class SearchRequests extends Fragment {
                     return;
                 }
 
-                HashMap<String,String> data = new HashMap<>();
 
-
-                data.put("name",gameName);
-                data.put("region",region);
-                data.put("playersNumber",playersNumber);
-                data.put("rank",rank);
-                data.put("platform",currentPlatform);
-                data.put("match_type",matchtype);
-                data.put("time_stamp", ServerValue.TIMESTAMP.toString());
-                RequestModel requestModel =new RequestModel(currentPlatform,gameName,region,Integer.parseInt(playersNumber),matchtype,rank,ServerValue.TIMESTAMP);
+                RequestModel requestModel =new RequestModel(currentPlatform,gameName,region,Integer.parseInt(playersNumber),matchtype,rank,-1);
                 searchForRequest(requestModel);
             }
         });

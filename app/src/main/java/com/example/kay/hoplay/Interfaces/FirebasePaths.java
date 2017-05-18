@@ -19,7 +19,7 @@ public interface FirebasePaths {
     public static final String FIREBASE_GAME_COOP_ATTR = "_coop_";
     public static final String FIREBASE_REQUEST_REGION_ATTR = "region";
     public static final String FIREBASE_REQUEST_PLAYERS_NUMBER_ATTR = "players_number";
-    public static final String FIREBASE_REQUEST_TIME_STAMP_ATTR = "time_stamp";
+    public static final String FIREBASE_REQUEST_TIME_STAMP_ATTR = "timeStamp";
     public static final String FIREBASE_PC_GAME_PROVIDER = "PC_game_providers";
     public static final String FIREBASE_PS_GAME_PROVIDER = "PSN_account";
     public static final String FIREBASE_XBOX_GAME_PROVIDER = "XBOX_live_account";

@@ -24,7 +24,7 @@
         android:windowSoftInputMode="adjustPan">
         <activity
             android:name=".Cores.AuthenticationCore.LoginCore"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity android:name=".Cores.AuthenticationCore.SignUpCore" />
         <activity android:name=".Cores.MainAppMenuCore" />
         <!--
@@ -55,9 +55,7 @@
         <activity android:name=".Cores.UserProfileCores.AddGameCore" />
         <activity android:name=".Cores.UserProfileCores.ViewFriendProfileCore" />
         <activity android:name=".Cores.UserProfileCores.FriendsListCore" />
-
-
-
+        <activity android:name=".CoresAbstract.RequestAbstracts.SearchResults"></activity>
     </application>
 
 </manifest>

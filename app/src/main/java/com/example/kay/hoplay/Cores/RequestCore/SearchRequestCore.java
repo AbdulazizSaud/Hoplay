@@ -1,11 +1,16 @@
 package com.example.kay.hoplay.Cores.RequestCore;
 
+import android.os.Handler;
 import android.util.Log;
 
+import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.SearchRequests;
+import com.example.kay.hoplay.Interfaces.Constants;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.RequestModel;
+import com.example.kay.hoplay.Services.CallbackHandlerCondition;
+import com.example.kay.hoplay.Services.HandlerCondition;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,14 +24,23 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SearchRequestCore extends SearchRequests implements FirebasePaths {
+public class SearchRequestCore extends SearchRequests implements FirebasePaths,Constants {
 
+    private ArrayList<RequestModel> requestModelArrayList = new ArrayList<>();
 
+    private String gameName;
+    private String region;
+    private String gamePlat;
+    private String matchType;
+    private int playersNumber;
+    private String rank;
+    DatabaseReference gameRef;
 
     @Override
     protected void OnStartActivity() {
         // Load regions
         DatabaseReference regionsRef = app.getDatabaseRegions();
+
         regionsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -39,6 +53,7 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths {
                 }
 
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -51,127 +66,83 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths {
     @Override
     protected void searchForRequest(RequestModel requestModel) {
 
-        String gameName =requestModel.getRequestTitle();
-        String region = requestModel.getRegion();
-        String gamePlat = requestModel.getPlatform();
-        final String matchType = requestModel.getMatchType();
-        final int playersNumber = requestModel.getPlayerNumber();
-        final String rank = requestModel.getRank();
-        final Map requrstTime=requestModel.getTimeStamp();
-        final Long longTIMEstamp=(Long)requrstTime.get(".sv");
 
+        gameName = requestModel.getRequestTitle();
+        region = requestModel.getRegion();
+        gamePlat = requestModel.getPlatform();
+        matchType = requestModel.getMatchType();
+        playersNumber = requestModel.getPlayerNumber();
+        rank = requestModel.getRank();
 
 
         GameModel model = app.getGameManager().getGameByName(gameName.toLowerCase());
-        if(model == null) {
-            Log.e("----->","NULL SearchRequestCore");
+        if (model == null)
             return;
-        }
+
         String gameId = model.getGameID();
+        gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(region);
 
-        DatabaseReference gameRef  = app.getDatabaseRequests().child(gamePlat).child(gameId).child(region);
-        final Query query = gameRef.orderByChild(FIREBASE_REQUEST_TIME_STAMP_ATTR);
-        final ArrayList<RequestModel> requestModelArrayList = new ArrayList<>();
 
-        final ChildEventListener childEventListenerSearchResults =new ChildEventListener() {
-            Boolean flag=true;
+        //------------------------
+        app.getTimeStamp().setTimestampLong();
+
+        CallbackHandlerCondition callback = new CallbackHandlerCondition() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                RequestModel requestModel = dataSnapshot.getValue(RequestModel.class);
-              if(ValidtimeRequest(longTIMEstamp))
-                   return;
+            public boolean callBack() {
+                   if(app.getTimeStamp().getTimestampLong() != -1)
+                       searchQuery();
 
-                if(requestModel.getPlayerNumber() != playersNumber)
-                    flag=false;
-                else if(!matchType.equals(requestModel.getMatchType()))
-                    flag=false;
-                else if(!rank.equals(requestModel.getRank()))
-                    flag=false;
-
-                if(flag) {
-                    requestModelArrayList.add(requestModel);
-                    Log.e("FOUND", requestModel.getAdmin());
-                }
-
-
-
-
-
-
-
-                }
-
-
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
+                return app.getTimeStamp().getTimestampLong() != -1;
             }
         };
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                query.addChildEventListener(childEventListenerSearchResults);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        new HandlerCondition(callback,0);
+        //------------------------
 
 
-//        query.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                if(dataSnapshot.getValue() !=null)
-//                {
-//                    Iterable<DataSnapshot> requestSnaps = dataSnapshot.getChildren();
-//                    RequestModel requestModel;
-//
-//                    int i=0;
-//                    for(DataSnapshot request : requestSnaps)
-//                    {
-//                        requestModel = new RequestModel(
-//                                request.getKey(),
-//                                request.child("request_title").getValue(String.class),
-//                                request.child("players_number").getValue(Integer.class),
-//                                request.child("admin").getValue(String.class),
-//                                request.child("description").getValue(String.class),
-//                                request.child("region").getValue(String.class)
-//                        );
-//                        requestModelArrayList.add(requestModel);
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
     }
 
-        protected boolean ValidtimeRequest(Long giventime){
-            long curenttime= Long.parseLong(ServerValue.TIMESTAMP.get(".sv"));
-            if(curenttime-giventime>172800)
-                return false;
 
-            return true;
-        }
+    private void searchQuery() {
+
+            long currenttime = app.getTimeStamp().getTimestampLong();
+            long last48 = currenttime - DUE_REQUEST_TIME_IN_VALUE_HOURS;
+
+            final Query query = gameRef.orderByChild(FIREBASE_REQUEST_TIME_STAMP_ATTR).startAt(last48).endAt(currenttime);
+            requestModelArrayList = new ArrayList<>();
+
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    if (dataSnapshot == null)
+                        return;
+
+                    Iterable<DataSnapshot> shots = dataSnapshot.getChildren();
+                    for (DataSnapshot shot : shots) {
+
+                        RequestModel requestModel = shot.getValue(RequestModel.class);
+
+                        boolean flag = requestModel.getPlayerNumber() == playersNumber
+                                && matchType.equals(requestModel.getMatchType())
+                                && rank.equals(requestModel.getRank());
+
+
+                        if (flag) {
+                            requestModel.setRequestId(shot.getKey());
+                            requestModelArrayList.add(requestModel);
+                            Log.e("FOUND", requestModel.getAdmin());
+                        }
+                    }
+                    app.setSearchResult(requestModelArrayList);
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {}
+            });
+    }
+
+
 }
