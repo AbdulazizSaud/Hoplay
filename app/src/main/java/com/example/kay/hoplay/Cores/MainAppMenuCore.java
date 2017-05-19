@@ -1,13 +1,15 @@
 package com.example.kay.hoplay.Cores;
 
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.kay.hoplay.CoresAbstract.MainAppMenu;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.Rank;
-import com.example.kay.hoplay.util.TimeStamp;
+import com.example.kay.hoplay.Models.Ranks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -71,9 +73,10 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
     }
 
-    private void setupUserInformation(final FirebaseUser user) {
+    private void setupUserInformation(FirebaseUser user) {
         app.getUserInformation().setUID(user.getUid());
-        app.getTimeStamp().setUseruid(user.getUid());
+        app.getUserInformation().setUserEmail(user.getEmail());
+
         app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
