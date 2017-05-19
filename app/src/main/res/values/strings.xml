@@ -305,5 +305,12 @@
     <string name="deactive_account_popup_yes">Y E S</string>
     <string name="deactive_account_popup_no">N O</string>
 
+    <!--                                Search Results Layout                     -->
+    <string name="search_results_priority">Order By Time</string>
+
+
+    <!--                                Search Results Activity             -->
+    <string name="search_results_time_priority">Order By Time</string>
+    <string name="search_results_player_number_priority">Order By Players Number</string>
 
 </resources>

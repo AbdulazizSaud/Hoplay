@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_background"
     tools:context="com.example.kay.hoplay.CoresAbstract.RequestAbstracts.SearchResults">
 
-</android.support.constraint.ConstraintLayout>
+
+    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+        android:id="@+id/search_priority_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingEnd="10dp"
+        android:paddingLeft="10dp"
+        android:hint="@string/search_results_priority"
+        android:gravity="center"
+        android:textColorHint="@color/hint_color"
+        android:layout_centerHorizontal="true"
+        />
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_results_recyclerview"
+        android:scrollbars="vertical"
+        android:layout_below="@id/search_priority_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true" />
+
+
+
+
+
+</RelativeLayout>
