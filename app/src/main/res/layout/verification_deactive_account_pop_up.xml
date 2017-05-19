@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/pop_up_backgrounds"
+    android:paddingBottom="20dp"
+    tools:context="com.example.kay.hoplay.Activities.NoGamePopUp">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/ic_sentiment_dissatisfied_64dp"
+        android:id="@+id/sad_face_deactive_account_popup_imageview"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/sad_face_deactive_account_popup_imageview"
+        android:text="@string/deactive_account_popup_message"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/deactive_account_message"
+        />
+
+
+    <Button
+        android:text="@string/deactive_account_popup_no"
+        android:textColor="@color/white"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/deactive_account_no_button"
+        android:layout_alignBaseline="@+id/deactive_account_yes_button"
+        android:layout_alignBottom="@+id/deactive_account_yes_button"
+        android:layout_toRightOf="@+id/sad_face_deactive_account_popup_imageview"
+        android:layout_toEndOf="@+id/sad_face_deactive_account_popup_imageview" />
+
+    <Button
+        android:text="@string/deactive_account_popup_yes"
+        android:textColor="@color/white"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/deactive_account_yes_button"
+        android:layout_alignTop="@+id/deactive_account_message"
+        android:layout_toLeftOf="@+id/sad_face_deactive_account_popup_imageview"
+        android:layout_toStartOf="@+id/sad_face_deactive_account_popup_imageview"
+        android:layout_marginTop="46dp" />
+
+
+
+
+</RelativeLayout>

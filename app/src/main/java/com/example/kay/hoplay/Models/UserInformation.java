@@ -7,7 +7,7 @@ import java.util.HashMap;
  */
 
 public class UserInformation {
-    private String username,pictureURL,UID,nickName , PSNAcc , XboxLiveAcc;
+    private String username,pictureURL,UID,nickName , PSNAcc , XboxLiveAcc , userEmail;
     private HashMap<String,String>  pcGamesAcc ;
     //
     public String getUsername() {
@@ -49,6 +49,14 @@ public class UserInformation {
 
     public void setPSNAcc(String PSNAcc) {
         this.PSNAcc = PSNAcc;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public void setXboxLiveAcc(String xboxLiveAcc) {
