@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kay.hoplay.Cores.AuthenticationCore.SignUpCore;
 import com.example.kay.hoplay.Cores.ForgetPasswordCore;
@@ -183,6 +184,10 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         });
     }
 
+
+
+
+
 //---------------------
 
     // this method will init layout contents
@@ -281,6 +286,16 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     }
 
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        // Kill the application
+        int pid = android.os.Process.myPid();
+        android.os.Process.killProcess(pid);
+
+    }
+
     // abstract methods, Note : I made some comment descripe these methods on Login Activity
     protected abstract void login(String username, String password);
     protected abstract void OnStartActivity();
@@ -295,5 +310,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         else
             loadingDialog.dismiss();
     }
+
+
 }
 

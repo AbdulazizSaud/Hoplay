@@ -17,9 +17,6 @@
             android:summary="@string/settings_allow_messages_summary">
         </CheckBoxPreference>
 
-        <Preference
-            android:key="settings_push_notifications"
-            android:title="@string/settings_notifications" />
 
         <Preference
             android:key="settings_change_password"

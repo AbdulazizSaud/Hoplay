@@ -78,6 +78,7 @@
     <string name="settings_logout">Log out</string>
     <string name="settings_notifications">Push notifications</string>
     <string name="settings_change_password">Change password</string>
+    <string name="settings_change_password_message">Reset password link has been sent to your email : %1$s , Please check your inbox</string>
     <string name="settings_deactivate_account">Deactivate account</string>
     <string name="settings_view_blocked_list">View blocked list</string>
     <string name="settings_services">Services</string>
@@ -116,7 +117,7 @@
     <string name="login_password">Password</string>
     <string name="login_signin">S I G N &#160; I N</string>
     <string name="login_forget_password">F o r g o t   P a s s w o r d  ?</string>
-    <string name="login_do_not_have_account">D o n\'t   h a v e   a n   a c c o u n t  ?</string>
+    <string name="login_do_not_have_account">D o n\'t &#160; &#160; h a v e &#160; &#160;a n &#160; &#160;a c c o u n t  ?</string>
     <string name="login_signup">S I G N &#160; U P</string>
 
 
@@ -124,6 +125,7 @@
     <string name="login_signing_in">Signing in ...</string>
     <string name="login_just_a_moment">Just one moment</string>
     <string name="login_successful_message">Welcome %1$s ❤️</string>
+
 
 
     <!--                                Login Activity                                                 -->
@@ -296,6 +298,12 @@
     <string name="new_request_dialog_message">Just one moment</string>
     <string name="new_request_dialog_no_game_provider_error">Please provide your %1$s account to continue</string>
     <string name="new_request_finish_request_message">Your request has been added successfully %1$s &#160; &#160; 😃 </string>
+
+
+    <!--                                Deactive Account PopUp verification                     -->
+    <string name="deactive_account_popup_message">You are about to deactive your account 😢, you sure you want to continue ?</string>
+    <string name="deactive_account_popup_yes">Y E S</string>
+    <string name="deactive_account_popup_no">N O</string>
 
 
 </resources>
