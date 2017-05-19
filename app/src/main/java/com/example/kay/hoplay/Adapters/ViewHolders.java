@@ -3,6 +3,7 @@ package com.example.kay.hoplay.Adapters;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kay.hoplay.R;
@@ -18,8 +19,9 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
 
 
     protected CircleImageView picture;
-    protected TextView title,subtitle,time;
+    protected TextView title,subtitle,time , subtitle2 ;
     protected View view;
+    protected ImageView subtitleImageview;
 
 
     TextView numberOfPlayers;
@@ -116,6 +118,9 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
             title  = (TextView)v.findViewById(R.id.friend_nickname_friends_list_textview);
         }
     }
+
+
+
     public static class UserGameHolder extends ViewHolders {
 
         public enum Platform {
@@ -136,6 +141,7 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
 
 
         }
+
 
 
         public TextView getPlatformTextView(Platform platform){
@@ -159,6 +165,73 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
         {return xbox;}
 
 
+    }
+
+    public static class SearchResultsHolder extends  ViewHolders {
+
+        public SearchResultsHolder(View v) {
+            super(v);
+
+            title =  (TextView) v.findViewById(R.id.game_name_request_model);
+            picture = (CircleImageView) v.findViewById(R.id.game_photo_request_model);
+            subtitle = (TextView) v.findViewById(R.id.description_request_model);
+            numberOfPlayers = (TextView) v.findViewById(R.id.number_of_players_request_model);
+            subtitleImageview = (ImageView) v.findViewById(R.id.match_type_request_model);
+            subtitle2 = (TextView) v.findViewById(R.id.requester_request_model);
+            time = (TextView) v.findViewById(R.id.time_stamp_request_model);
+
+        }
+
+
+    }
+
+
+    public TextView getTitle() {
+        return title;
+    }
+
+    public TextView getSubtitle() {
+        return subtitle;
+    }
+
+    public TextView getTime() {
+        return time;
+    }
+
+    public TextView getSubtitle2() {
+        return subtitle2;
+    }
+
+    public ImageView getSubtitleImageview() {
+        return subtitleImageview;
+    }
+
+    public void setTitle(TextView title) {
+        this.title = title;
+    }
+
+    public void setSubtitle(TextView subtitle) {
+        this.subtitle = subtitle;
+    }
+
+    public void setTime(TextView time) {
+        this.time = time;
+    }
+
+    public void setSubtitle2(TextView subtitle2) {
+        this.subtitle2 = subtitle2;
+    }
+
+    public void setView(View view) {
+        this.view = view;
+    }
+
+    public void setSubtitleImageview(ImageView subtitleImageview) {
+        this.subtitleImageview = subtitleImageview;
+    }
+
+    public void setNumberOfPlayers(TextView numberOfPlayers) {
+        this.numberOfPlayers = numberOfPlayers;
     }
 
     public void setPicture(CircleImageView picture) {
