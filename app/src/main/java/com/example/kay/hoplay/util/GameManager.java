@@ -21,6 +21,7 @@ public class GameManager implements FirebasePaths{
     public void addGame(GameModel gameModel)
     {
 
+
         allGamesIds.put(gameModel.getGameID(),gameModel);
         allGamesName.put(gameModel.getGameName().toLowerCase(),gameModel);
 
@@ -40,13 +41,7 @@ public class GameManager implements FirebasePaths{
 
     public GameModel getGameById(String gameId){
 
-        if(gamesCompList.containsKey(gameId))
-            return gamesCompList.get(gameId);
-        else if(gamesCompList.containsKey(gameId))
-        return gamesCOOPList.get(gameId);
-
-
-        return null;
+            return allGamesIds.get(gameId);
     }
 
     public boolean isCompetitive(String gameId)

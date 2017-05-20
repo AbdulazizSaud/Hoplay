@@ -77,8 +77,6 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
 
         GameModel gameModel = app.getGameManager().getGameByName(gameName);
 
-
-
         // users_info_ -> user id  -> _requests_refs_
         DatabaseReference userRequestRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_USER_REQUESTS_REF);
         // _requests_ ->  platform -> GameID -> Region
@@ -100,7 +98,7 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
 
         HashMap<String,Object> data = new HashMap<>();
        // TimeStamp timeStamp=new TimeStamp();
-        Log.e("PLAYER",numberOfPlayers.toString());
+
         RequestModel requestModel=new RequestModel(
                 platform,
                 gameName,
@@ -110,6 +108,9 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
                 Integer.parseInt(numberOfPlayers),
                 matchType,
                 rank);
+
+        requestModel.setAdminName(app.getUserInformation().getUsername());
+        requestModel.setGameId(gameModel.getGameID());
         HashMap hashMap =new HashMap();
         hashMap.put("timeStamp",ServerValue.TIMESTAMP);
 

@@ -21,7 +21,10 @@ public class RequestModel {
     private long timeStamp;
 
 
+    private String adminName;
+    private String requestPicture;
     private List<String> users;
+    private String gameId;
 
     public RequestModel() {
     }
@@ -52,12 +55,13 @@ public class RequestModel {
 
     public RequestModel(String platform, String gameName, String admin, String description, String region, int playerNumber , String matchType, String rank) {
         this.platform = platform;
-        this.requestTitle = requestTitle;
+        this.requestTitle = gameName;
         this.admin = admin;
         this.region = region;
         this.playerNumber = playerNumber;
         this.matchType = matchType;
         this.rank = rank;
+        this.description = description;
     }
 
 
@@ -148,4 +152,29 @@ public class RequestModel {
     public void setRequestTitle(String requestTitle) {
         this.requestTitle = requestTitle;
     }
+
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
+    }
+
+    public String getRequestPicture() {
+        return requestPicture;
+    }
+
+    public void setRequestPicture(String requestPicture) {
+        this.requestPicture = requestPicture;
+    }
+
+    public String getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
+    }
 }
+

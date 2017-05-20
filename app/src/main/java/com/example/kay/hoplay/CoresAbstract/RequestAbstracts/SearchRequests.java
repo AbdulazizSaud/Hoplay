@@ -27,8 +27,7 @@ import android.widget.Toast;
 
 import com.example.kay.hoplay.Adapters.SpinnerAdapter;
 import com.example.kay.hoplay.App.App;
-import com.example.kay.hoplay.Cores.AuthenticationCore.SignUpCore;
-import com.example.kay.hoplay.Cores.RequestCore.NewRequestCore;
+import com.example.kay.hoplay.Cores.RequestCore.SearchResultsCore;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.Rank;
 import com.example.kay.hoplay.Models.RequestModel;
@@ -294,10 +293,6 @@ public abstract class SearchRequests extends Fragment {
 
                 RequestModel requestModel =new RequestModel(currentPlatform,gameName,region,Integer.parseInt(playersNumber),matchtype,rank,-1);
                 searchForRequest(requestModel);
-
-                Intent i = new Intent(getContext(),SearchResults.class);
-                startActivity(i);
-
             }
         });
 
@@ -566,6 +561,11 @@ public abstract class SearchRequests extends Fragment {
         return app.getGameManager().isCompetitive(gameKey);
     }
 
+    protected  void goToResultLayout()
+    {
+        Intent i = new Intent(getContext(),SearchResultsCore.class);
+        startActivity(i);
+    }
 
     protected abstract void OnStartActivity();
 

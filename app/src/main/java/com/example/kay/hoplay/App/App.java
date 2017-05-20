@@ -3,12 +3,13 @@ package com.example.kay.hoplay.App;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.example.kay.hoplay.Adapters.ViewHolders;
-import com.example.kay.hoplay.Models.GameModel;
+import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Services.LruBitmapCache;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
@@ -17,15 +18,11 @@ import com.example.kay.hoplay.util.BitmapOptimizer;
 import com.example.kay.hoplay.util.GameManager;
 import com.example.kay.hoplay.util.TimeStamp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
-import java.security.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -52,10 +49,12 @@ public class App extends Application implements FirebasePaths{
     private FirebaseAuth mAuth;  // firebase auth
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private ImageLoader imageLoader; // Image loader from url
-private ArrayList resultList =new ArrayList();
+
+
     private  UserInformation userInformation;
     private GameManager gameManager;
     private TimeStamp timeStamp;
+    private ArrayList<RequestModel> requestResultList =new ArrayList<>();
 
     @Override
     public void onCreate() {
@@ -208,8 +207,9 @@ private ArrayList resultList =new ArrayList();
 
 
     public String convertFromTimeStampToDate(String timeStamp){
-        DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        DateFormat sdf = new SimpleDateFormat("MM/dd/yy");
         Date netDate = (new Date(Long.parseLong(timeStamp)));
+
         return sdf.format(netDate);
     }
 
@@ -223,11 +223,12 @@ private ArrayList resultList =new ArrayList();
     }
 
 
-    public void setSearchResult(ArrayList resultList){
-        this.resultList=resultList;
+    public void setSearchRequestResult(ArrayList<RequestModel> resultList){
+        this.requestResultList = resultList;
     }
-    public ArrayList getResultList(){
-        return resultList;
+
+    public ArrayList<RequestModel> getSearchRequestResult(){
+        return requestResultList;
     }
 
 

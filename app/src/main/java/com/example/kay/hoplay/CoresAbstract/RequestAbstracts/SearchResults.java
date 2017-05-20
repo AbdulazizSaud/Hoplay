@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.SpinnerAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
+import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Models.RecentGameModel;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;
@@ -18,28 +19,29 @@ import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.ArrayList;
 
-public class SearchResults extends AppCompatActivity {
+public abstract class SearchResults extends AppCompatActivity {
 
-    MaterialBetterSpinner searchPrioritySpinner;
-    protected ArrayList<String> searchPriorityList;
-    protected ArrayAdapter searchPriorityAdapter;
+
+
+    private MaterialBetterSpinner searchPrioritySpinner;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    ArrayList<RequestModel> requestModels ;
+    private ArrayList<RequestModel> requestModels;
+    private ArrayList<String> searchPriorityList;
+    private ArrayAdapter searchPriorityAdapter;
 
-
+    protected App app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
-
+        app = App.getInstance();
         initControls();
         setupRecyclerView();
-        addResult("PC","Overwatch","Kdesu","yo whaststststs","saudi arabia",6,"competitve","Dimond",1000);
 
-
+        OnStartActivity();
     }
 
     private void initControls()
@@ -93,6 +95,11 @@ public class SearchResults extends AppCompatActivity {
     }
 
 
+    public void addResult(RequestModel requestModel)
+    {
+        requestModels.add(requestModel);
+        mAdapter.notifyDataSetChanged();
+    }
 
     private CommonAdapter<RequestModel> createAdapter(){
         return new CommonAdapter<RequestModel>(requestModels,R.layout.request_model) {
@@ -114,17 +121,17 @@ public class SearchResults extends AppCompatActivity {
 
 
 
+                app.loadingImage(getApplication(), holder, model.getRequestPicture());
                 holder.setTitle(model.getRequestTitle());
                 holder.setSubtitle(model.getDescription());
-                holder.setTime(String.valueOf(model.getTimeStamp()));
+                holder.setTime(app.convertFromTimeStampToDate(String.valueOf(model.getTimeStamp())));
                 holder.setNumberOfPlayers(String.valueOf(model.getPlayerNumber()));
-                holder.setSubtitle2(model.getAdmin());
+                holder.setSubtitle2(model.getAdminName());
 
             }
 
         };
     }
-
-
+    protected abstract void OnStartActivity();
 
 }

@@ -1,9 +1,7 @@
 package com.example.kay.hoplay.Cores.RequestCore;
 
-import android.os.Handler;
 import android.util.Log;
 
-import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.SearchRequests;
 import com.example.kay.hoplay.Interfaces.Constants;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
@@ -11,18 +9,13 @@ import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.Services.CallbackHandlerCondition;
 import com.example.kay.hoplay.Services.HandlerCondition;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class SearchRequestCore extends SearchRequests implements FirebasePaths,Constants {
 
@@ -135,8 +128,8 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths,C
                             Log.e("FOUND", requestModel.getAdmin());
                         }
                     }
-                    app.setSearchResult(requestModelArrayList);
-
+                    app.setSearchRequestResult(requestModelArrayList);
+                    goToResultLayout();
                 }
 
                 @Override
