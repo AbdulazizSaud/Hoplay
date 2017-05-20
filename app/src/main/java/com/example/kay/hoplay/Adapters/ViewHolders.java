@@ -109,6 +109,7 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
             time.setTypeface(sansation);
         }
     }
+
     public static class FriendListHolder extends ViewHolders {
 
         public FriendListHolder(View v) {
@@ -214,12 +215,10 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
         this.subtitle = subtitle;
     }
 
-    public void setTime(TextView time) {
-        this.time = time;
-    }
 
-    public void setSubtitle2(TextView subtitle2) {
-        this.subtitle2 = subtitle2;
+
+    public void setSubtitle2(String subtitle2) {
+        this.subtitle2.setText(subtitle2);
     }
 
     public void setView(View view) {
