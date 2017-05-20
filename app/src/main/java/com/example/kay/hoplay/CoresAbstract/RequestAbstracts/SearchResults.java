@@ -3,9 +3,16 @@ package com.example.kay.hoplay.CoresAbstract.RequestAbstracts;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ArrayAdapter;
 
+import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.SpinnerAdapter;
+import com.example.kay.hoplay.Adapters.ViewHolders;
+import com.example.kay.hoplay.Models.RecentGameModel;
+import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
@@ -16,12 +23,22 @@ public class SearchResults extends AppCompatActivity {
     MaterialBetterSpinner searchPrioritySpinner;
     protected ArrayList<String> searchPriorityList;
     protected ArrayAdapter searchPriorityAdapter;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    ArrayList<RequestModel> requestModels ;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
+
+        initControls();
+        setupRecyclerView();
+        addResult("PC","Overwatch","Kdesu","yo whaststststs","saudi arabia",6,"competitve","Dimond",1000);
+
 
     }
 
@@ -30,6 +47,7 @@ public class SearchResults extends AppCompatActivity {
         searchPrioritySpinner = (MaterialBetterSpinner) findViewById(R.id.search_priority_spinner);
         final Typeface playregular = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
         searchPrioritySpinner.setTypeface(playregular);
+        requestModels = new ArrayList<RequestModel>();
 
 
         // Spinner stuffs
@@ -46,6 +64,67 @@ public class SearchResults extends AppCompatActivity {
 
 
     }
+
+
+    private void setupRecyclerView() {
+        mRecyclerView = (RecyclerView) findViewById(R.id.search_results_recyclerview);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+
+
+        mAdapter = createAdapter();
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    public void addResult(String platform, String requestTitle, String admin, String description, String region, int playerNumber, String matchType, String rank, long timeStamp)
+    {
+
+        RequestModel requestModel = new RequestModel(platform, requestTitle, admin, description, region, playerNumber, matchType, rank, timeStamp);
+        requestModels.add(requestModel);
+        mAdapter.notifyDataSetChanged();
+    }
+
+
+
+    private CommonAdapter<RequestModel> createAdapter(){
+        return new CommonAdapter<RequestModel>(requestModels,R.layout.request_model) {
+            @Override
+            public ViewHolders OnCreateHolder(View v) {
+
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
+                return new ViewHolders.SearchResultsHolder(v);
+            }
+
+            @Override
+            public void OnBindHolder(ViewHolders holder, RequestModel model, int position) {
+
+
+
+                holder.setTitle(model.getRequestTitle());
+                holder.setSubtitle(model.getDescription());
+                holder.setTime(String.valueOf(model.getTimeStamp()));
+                holder.setNumberOfPlayers(String.valueOf(model.getPlayerNumber()));
+                holder.setSubtitle2(model.getAdmin());
+
+            }
+
+        };
+    }
+
 
 
 }
