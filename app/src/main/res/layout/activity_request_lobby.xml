@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    tools:context="com.example.kay.hoplay.CoresAbstract.RequestAbstracts.RequestLobby">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/hoplaylogo"
+        android:layout_gravity="center"
+        app:civ_border_color="@color/app_color"
+        app:civ_border_width="3dp"
+        android:id="@+id/game_photo_request_lobby"
+        android:clickable="false"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/game_photo_request_lobby"
+        android:id="@+id/match_type_request_lobby_textview"
+        android:layout_centerHorizontal="true"
+        android:textSize="10pt"
+        android:textColor="@color/text_color_darker"
+        android:text="@string/request_lobby_math_type_text"
+        android:layout_marginTop="10dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/match_type_request_lobby_imageview"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/match_type_request_lobby_textview"
+        app:srcCompat="@drawable/ic_whatshot_quick_match_24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/match_type_request_lobby_imageview"
+        android:id="@+id/room_admin_request_lobby_textview"
+        android:layout_centerHorizontal="true"
+        android:textSize="10pt"
+        android:textColor="@color/text_color_darker"
+        android:text="@string/request_lobby_room_admin"
+        android:layout_marginTop="10dp"/>
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/profile_default_photo"
+        android:layout_gravity="center"
+        android:layout_below="@+id/room_admin_request_lobby_textview"
+        app:civ_border_color="@color/app_color"
+        app:civ_border_width="3dp"
+        android:id="@+id/room_admin_photo_circleimageview"
+        android:clickable="false"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:id="@+id/admin_username_request_lobby"
+        android:textColor="@color/hint_color"
+        android:layout_below="@+id/room_admin_photo_circleimageview"
+        android:text="@string/request_lobby_room_admin_username"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:textSize="10pt"
+        android:id="@+id/players_request_lobby_textview"
+        android:textColor="@color/text_color_darker"
+        android:layout_below="@+id/admin_username_request_lobby"
+        android:text="@string/request_lobby_players_text"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/players_request_lobby_recyclerview"
+        android:scrollbars="vertical"
+        android:layout_below="@id/players_request_lobby_textview"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:id="@+id/rank_and_region_text_linearlayout"
+        android:layout_below="@+id/players_request_lobby_recyclerview">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10pt"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@+id/rank_request_lobby"
+            android:textColor="@color/text_color_darker"
+            android:text="@string/request_lobby_rank_text"
+            />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10pt"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@+id/region_request_lobby"
+            android:textColor="@color/text_color_darker"
+            android:text="@string/request_lobby_region_text"
+             />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:id="@+id/rank_and_region_value_linearlayout"
+        android:layout_below="@+id/rank_and_region_text_linearlayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10pt"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@+id/rank_value_request_lobby"
+            android:textColor="@color/hint_color"
+            android:text="@string/request_lobby_rank_value"
+            />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10pt"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@+id/region_value_request_lobby"
+            android:textColor="@color/hint_color"
+            android:text="@string/request_lobby_region_value"
+            />
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:text="@string/request_lobby_join_button"
+        android:textColor="@color/white"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_width="150dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rank_and_region_value_linearlayout"
+        android:id="@+id/join_request_lobby_button"
+        android:layout_centerHorizontal="true" />
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#880E4F</color>  <!-- This is the actionBar color -->
+    <color name="colorPrimary">#7A0C47</color>  <!-- This is the actionBar color -->
     <color name="colorPrimaryDark">#67083A</color>
-    <color name="colorAccent">#880E4F</color>
+    <color name="colorAccent">#7A0C47</color>
 
     <color name="invisible_request_color">#BDBDBD</color>
     <color name="xbox_color">#107C0F</color>
@@ -13,7 +13,8 @@
 
         <color name="hint_color">#989899</color>
         <color name="text_color">#616161</color>
-        <color name="app_color">#880E4F</color>
+        <color name="text_color_darker">#4a4a4a</color>
+        <color name="app_color">#7A0C47</color>
         <color name="icons_color">#4A4A4A</color>
 
 

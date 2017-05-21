@@ -55,7 +55,8 @@
         <activity android:name=".Cores.UserProfileCores.AddGameCore" />
         <activity android:name=".Cores.UserProfileCores.ViewFriendProfileCore" />
         <activity android:name=".Cores.UserProfileCores.FriendsListCore" />
-        <activity android:name=".Cores.RequestCore.SearchResultsCore"></activity>
+        <activity android:name=".Cores.RequestCore.SearchResultsCore" />
+        <activity android:name=".CoresAbstract.RequestAbstracts.RequestLobby"></activity>
     </application>
 
 </manifest>

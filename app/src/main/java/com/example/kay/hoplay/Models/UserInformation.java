@@ -9,6 +9,15 @@ import java.util.HashMap;
 public class UserInformation {
     private String username,pictureURL,UID,nickName , PSNAcc , XboxLiveAcc , userEmail;
     private HashMap<String,String>  pcGamesAcc ;
+
+
+    public UserInformation(String username)
+    {
+        this.username = username;
+    }
+
+    public UserInformation(){}
+
     //
     public String getUsername() {
         return username;

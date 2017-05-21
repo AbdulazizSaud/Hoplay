@@ -1,5 +1,6 @@
 package com.example.kay.hoplay.CoresAbstract.RequestAbstracts;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -109,7 +110,8 @@ public abstract class SearchResults extends AppCompatActivity {
                 v.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        Intent i = new Intent(getApplicationContext(),RequestLobby.class);
+                        startActivity(i);
                     }
                 });
 
@@ -132,6 +134,9 @@ public abstract class SearchResults extends AppCompatActivity {
 
         };
     }
+
+
+
     protected abstract void OnStartActivity();
 
 }

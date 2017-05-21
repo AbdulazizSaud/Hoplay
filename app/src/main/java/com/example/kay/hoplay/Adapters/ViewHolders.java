@@ -120,6 +120,16 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
         }
     }
 
+    public static class PlayerHolder extends ViewHolders {
+
+        public PlayerHolder(View v) {
+            super(v);
+
+            picture = (CircleImageView)v.findViewById(R.id.player_instance_circleimageview);
+            title  = (TextView)v.findViewById(R.id.player_instance_username_textview);
+        }
+    }
+
 
 
     public static class UserGameHolder extends ViewHolders {

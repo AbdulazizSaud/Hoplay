@@ -127,7 +127,6 @@
     <string name="login_successful_message">Welcome %1$s ❤️</string>
 
 
-
     <!--                                Login Activity                                                 -->
     <string name="login_auth_welcome">Welcome , </string>
     <string name="login_please_check_email_or_password">Please check your email or password</string>
@@ -173,7 +172,7 @@
     <!--                               No GameModel Added Popup Layout                                             -->
     <string name="no_game_popup_message">To create a request ,You need to add \n a game to your games library</string>
     <string name="no_game_popup_add_game_button">A D D &#160; G A M E</string>
-    
+
     <!--                                Provider Account pop up         -->
     <string name="provider_account_message">Please provide your %1$s account 😀 </string>
     <string name="provider_account_save_button">S a v e</string>
@@ -277,17 +276,14 @@
 
     <string name="search_user_message">Search for user</string>
     <string name="title_activity_view_profile">ViewProfile</string>
-    
-    
+
+
     <!--                                Request Model Layout -->
     <string name="request_model_game_name">Game Name</string>
     <string name="request_model_number_of_players">1/4</string>
     <string name="request_model_description">Description</string>
     <string name="request_model_requester">By someone</string>
     <string name="request_model_time_stamp">5 min ago</string>
-    
-    
-    
 
 
     <!--                                New Request Activity         -->
@@ -316,4 +312,18 @@
     <string name="search_results_time_priority">Order By Time</string>
     <string name="search_results_player_number_priority">Order By Players Number</string>
 
+    
+    <!--                                Request Lobby Layout            -->
+    <string name="request_lobby_math_type_text">Match Type</string>
+    <string name="request_lobby_room_admin">Room Admin</string>
+    <string name="request_lobby_room_admin_username">AdminUsername</string>
+    <string name="request_lobby_players_text">Players</string>
+    <string name="request_lobby_rank_text">Rank</string>
+    <string name="request_lobby_rank_value">RankValue</string>
+    <string name="request_lobby_region_text">Region</string>
+    <string name="request_lobby_region_value">RegionValue</string>
+    <string name="request_lobby_join_button">J O I N</string>
+    
+    
+    
 </resources>
