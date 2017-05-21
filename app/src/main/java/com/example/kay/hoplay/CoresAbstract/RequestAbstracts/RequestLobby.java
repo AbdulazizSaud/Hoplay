@@ -60,6 +60,8 @@ public class RequestLobby extends AppCompatActivity {
         addPlayer("Deathjin");
         addPlayer("MyAss");
 
+
+
     }
 
     private void initControls()
