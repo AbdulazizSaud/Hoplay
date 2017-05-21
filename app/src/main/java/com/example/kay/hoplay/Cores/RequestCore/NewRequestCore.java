@@ -3,6 +3,7 @@ package com.example.kay.hoplay.Cores.RequestCore;
 import android.util.Log;
 
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.util.TimeStamp;
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.NewRequest;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
@@ -14,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class NewRequestCore extends NewRequest implements FirebasePaths{
@@ -109,8 +111,17 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
                 matchType,
                 rank);
 
+        ArrayList<PlayerModel> playerModels = new ArrayList<PlayerModel>();
+        playerModels.add(new PlayerModel(
+                app.getUserInformation().getUID(),
+                app.getUserInformation().getUsername()
+        ));
+
+        requestModel.setPlayerModelArrayList(playerModels);
+
         requestModel.setAdminName(app.getUserInformation().getUsername());
         requestModel.setGameId(gameModel.getGameID());
+
         HashMap hashMap =new HashMap();
         hashMap.put("timeStamp",ServerValue.TIMESTAMP);
 

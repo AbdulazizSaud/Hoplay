@@ -1,13 +1,16 @@
 package com.example.kay.hoplay.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Kay on 4/25/2017.
- */
 
-public class RequestModel {
+
+public class RequestModel  {
 
     private String platform;
     private String requestId ;
@@ -25,6 +28,7 @@ public class RequestModel {
     private String requestPicture;
     private List<String> users;
     private String gameId;
+    private ArrayList<PlayerModel> playerOn;
 
     public RequestModel() {
     }
@@ -176,5 +180,14 @@ public class RequestModel {
     public void setGameId(String gameId) {
         this.gameId = gameId;
     }
+
+    public ArrayList<PlayerModel> getPlayerModelArrayList() {
+        return playerOn;
+    }
+
+    public void setPlayerModelArrayList(ArrayList<PlayerModel> playerModelArrayList) {
+        this.playerOn = playerModelArrayList;
+    }
+
 }
 

@@ -98,7 +98,6 @@ public abstract class SearchRequests extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-
                              Bundle savedInstanceState) {
         app = App.getInstance();
         // Inflate the layout for this fragment
@@ -152,7 +151,6 @@ public abstract class SearchRequests extends Fragment {
     }
 
 
-
     private String loadGameInformation(String selectedGame) {
 
 
@@ -171,9 +169,6 @@ public abstract class SearchRequests extends Fragment {
 
         return gameModel.getGameID();
     }
-
-
-
 
 
     // Init all controls

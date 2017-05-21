@@ -1,7 +1,11 @@
 package com.example.kay.hoplay.Cores.RequestCore;
 
+import android.content.Intent;
+import android.os.Parcelable;
 import android.util.Log;
+import android.view.View;
 
+import com.example.kay.hoplay.Cores.ChatCore.ChatCore;
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.SearchResults;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.RequestModel;
@@ -45,10 +49,16 @@ public class SearchResultsCore extends SearchResults {
         }
     }
 
+    @Override
+    protected void OnClickHolders(RequestModel model, View v) {
+        Intent i = new Intent(v.getContext(), RequestLobbyCore.class);
 
+        // here we will retreive the data;
 
-    private ValueEventListener getGameInfo(final RequestModel request)
-    {
+        v.getContext().startActivity(i);
+    }
+
+    private ValueEventListener getGameInfo(final RequestModel request) {
 
         return new ValueEventListener() {
             @Override

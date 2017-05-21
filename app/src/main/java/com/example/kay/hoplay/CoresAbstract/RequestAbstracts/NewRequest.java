@@ -513,30 +513,16 @@ public abstract class NewRequest extends AppCompatActivity {
 
 
 
+        playerNumberList.clear();
+        ranksList.clear();
 
-        new UpdateList() {
-            @Override
-            public void doOnJob() {
-                playerNumberList.clear();
-                ranksList.clear();
+        for (int i = 1; i <= gameModel.getMaxPlayers(); i++) {
+            playerNumberList.add(Integer.toString(i));
+        }
 
-                for (int i = 1; i <= gameModel.getMaxPlayers(); i++) {
-                    playerNumberList.add(Integer.toString(i));
-                }
-
-                for (Rank rank : gameModel.getGameRanks().getRanksList()) {
-                    ranksList.add(rank.getRankName());
-                }
-
-            }
-
-            @Override
-            public void doPostJob() {
-                updateAdapter();
-            }
-        }.execute();
-
-
+        for (Rank rank : gameModel.getGameRanks().getRanksList()) {
+            ranksList.add(rank.getRankName());
+        }
 
         return gameModel.getGameID();
     }
@@ -684,23 +670,4 @@ public abstract class NewRequest extends AppCompatActivity {
 
 }
 
-
-abstract class UpdateList extends AsyncTask<String, Void, ArrayList<String>> {
-    private Exception exception;
-
-    @Override
-    protected ArrayList<String> doInBackground(String... data) {
-            doOnJob();
-            return null;
-    }
-
-    @Override
-    protected void onPostExecute(ArrayList<String> stringsArray) {
-
-        doPostJob();
-    }
-
-    public  abstract void doOnJob();
-    public abstract void doPostJob();
-}
 

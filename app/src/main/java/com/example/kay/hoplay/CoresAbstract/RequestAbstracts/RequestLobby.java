@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
+import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.Models.UserInformation;
 import com.example.kay.hoplay.R;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class RequestLobby extends AppCompatActivity {
+public abstract class RequestLobby extends AppCompatActivity {
 
 
     private CircleImageView gamePhoto;
@@ -41,9 +42,8 @@ public class RequestLobby extends AppCompatActivity {
     private TextView regionTextview;
     private TextView regionValueTextview;
     private Button joinButton;
-    private ArrayList<UserInformation> userModel;
+    private ArrayList<PlayerModel> playerModels;
     private RecyclerView.Adapter mAdapter;
-//    private RecyclerView.LayoutManager mLayoutManager;
     private LinearLayoutManager linearLayoutManager;
 
 
@@ -53,19 +53,10 @@ public class RequestLobby extends AppCompatActivity {
         setContentView(R.layout.activity_request_lobby);
         initControls();
         setupRecyclerView();
-        addPlayer("AB");
-        addPlayer("Raktacular");
-        addPlayer("Khaledesu");
-        addPlayer("Azizs");
-        addPlayer("Deathjin");
-        addPlayer("MyAss");
-
-
-
+        OnStartActivity();
     }
 
-    private void initControls()
-    {
+    private void initControls() {
 
 
         final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
@@ -73,28 +64,25 @@ public class RequestLobby extends AppCompatActivity {
         gamePhoto = (CircleImageView) findViewById(R.id.game_photo_request_lobby);
         matchTypeTextview = (TextView) findViewById(R.id.match_type_request_lobby_textview);
         matchTypeTextview.setTypeface(playbold);
-          matchTypeImageView = (ImageView) findViewById(R.id.match_type_request_lobby_imageview);
-      adminTextView = (TextView) findViewById(R.id.room_admin_request_lobby_textview);
+        matchTypeImageView = (ImageView) findViewById(R.id.match_type_request_lobby_imageview);
+        adminTextView = (TextView) findViewById(R.id.room_admin_request_lobby_textview);
         adminTextView.setTypeface(playbold);
-              adminPhoto = (CircleImageView) findViewById(R.id.room_admin_photo_circleimageview);
+        adminPhoto = (CircleImageView) findViewById(R.id.room_admin_photo_circleimageview);
         adminUsername = (TextView) findViewById(R.id.admin_username_request_lobby);
         adminUsername.setTypeface(playregular);
-       playersTextview = (TextView)findViewById(R.id.players_request_lobby_textview);
+        playersTextview = (TextView) findViewById(R.id.players_request_lobby_textview);
         playersTextview.setTypeface(playbold);
-         rankTextView = (TextView) findViewById(R.id.rank_request_lobby);
+        rankTextView = (TextView) findViewById(R.id.rank_request_lobby);
         rankTextView.setTypeface(playbold);
         rankValueTextview = (TextView) findViewById(R.id.rank_value_request_lobby);
         rankValueTextview.setTypeface(playregular);
-     regionTextview = (TextView) findViewById(R.id.region_request_lobby);
+        regionTextview = (TextView) findViewById(R.id.region_request_lobby);
         regionTextview.setTypeface(playbold);
         regionValueTextview = (TextView) findViewById(R.id.region_value_request_lobby);
         regionValueTextview.setTypeface(playregular);
         joinButton = (Button) findViewById(R.id.join_request_lobby_button);
         joinButton.setTypeface(playbold);
-        userModel = new ArrayList<UserInformation>();
-
-
-
+        playerModels = new ArrayList<PlayerModel>();
 
 
     }
@@ -120,18 +108,16 @@ public class RequestLobby extends AppCompatActivity {
     }
 
 
+    public void addPlayer(String playerUid , String playerUsername) {
 
-    public void addPlayer(String playerUsername)
-    {
-
-        UserInformation player = new UserInformation(playerUsername);
-        userModel.add(player);
+        PlayerModel player = new PlayerModel(playerUid,playerUsername);
+        playerModels.add(player);
         mAdapter.notifyDataSetChanged();
     }
 
 
-    private CommonAdapter<UserInformation> createAdapter(){
-        return new CommonAdapter<UserInformation>(userModel,R.layout.player_instance) {
+    private CommonAdapter<PlayerModel> createAdapter() {
+        return new CommonAdapter<PlayerModel>(playerModels, R.layout.player_instance) {
 
 
             @Override
@@ -148,7 +134,7 @@ public class RequestLobby extends AppCompatActivity {
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder, UserInformation model, int position) {
+            public void OnBindHolder(ViewHolders holder, PlayerModel model, int position) {
 
                 holder.setTitle(model.getUsername());
             }
@@ -156,5 +142,6 @@ public class RequestLobby extends AppCompatActivity {
     }
 
 
+    protected abstract void OnStartActivity();
 
 }

@@ -7,8 +7,8 @@ import java.util.HashMap;
  */
 
 public class UserInformation {
-    private String username,pictureURL,UID,nickName , PSNAcc , XboxLiveAcc , userEmail;
-    private HashMap<String,String>  pcGamesAcc ;
+    protected String username,pictureURL,UID,nickName , PSNAcc , XboxLiveAcc , userEmail;
+    protected HashMap<String,String>  pcGamesAcc ;
 
 
     public UserInformation(String username)

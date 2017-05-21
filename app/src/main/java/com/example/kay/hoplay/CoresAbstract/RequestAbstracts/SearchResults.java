@@ -13,6 +13,8 @@ import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.SpinnerAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Cores.RequestCore.RequestLobbyCore;
+import com.example.kay.hoplay.Models.CommunityChatModel;
 import com.example.kay.hoplay.Models.RecentGameModel;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;
@@ -107,36 +109,37 @@ public abstract class SearchResults extends AppCompatActivity {
             @Override
             public ViewHolders OnCreateHolder(View v) {
 
-                v.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(),RequestLobby.class);
-                        startActivity(i);
-                    }
-                });
-
                 return new ViewHolders.SearchResultsHolder(v);
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder, RequestModel model, int position) {
-
-
+            public void OnBindHolder(ViewHolders holder, final RequestModel model, int position) {
 
                 app.loadingImage(getApplication(), holder, model.getRequestPicture());
                 holder.setTitle(model.getRequestTitle());
                 holder.setSubtitle(model.getDescription());
                 holder.setTime(app.convertFromTimeStampToDate(String.valueOf(model.getTimeStamp())));
-                holder.setNumberOfPlayers(String.valueOf(model.getPlayerNumber()));
+                holder.setNumberOfPlayers(model.getPlayerModelArrayList().size()+"/"+String.valueOf(model.getPlayerNumber()));
                 holder.setSubtitle2(model.getAdminName());
 
+                holder.getView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        OnClickHolders(model,v);
+                    }
+                });
             }
 
         };
     }
 
+    private void goToLobby() {
+        Intent i = new Intent(getApplicationContext(),RequestLobbyCore.class);
+        startActivity(i);
+    }
 
 
     protected abstract void OnStartActivity();
+    protected abstract void OnClickHolders(RequestModel model, View v);
 
 }
