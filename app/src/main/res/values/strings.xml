@@ -323,7 +323,10 @@
     <string name="request_lobby_region_text">Region</string>
     <string name="request_lobby_region_value">RegionValue</string>
     <string name="request_lobby_join_button">J O I N</string>
-    
+
+
+    <!--                                Game Provider Model                     -->
+    <string name="game_provider_model_text">%1$s joined room \n %2$s ID: %3$s </string>
     
     
 </resources>

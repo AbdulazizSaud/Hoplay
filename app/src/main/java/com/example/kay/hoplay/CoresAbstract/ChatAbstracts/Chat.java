@@ -142,7 +142,7 @@ public abstract class Chat extends AppCompatActivity {
         adapter = new ChatAdapter(this, new ArrayList<ChatMessage>());
         messagesContainer.setAdapter(adapter);
 
-        roomNameTextView = (TextView)findViewById(R.id.user_name_in_toolbar_textview);
+        roomNameTextView = (TextView)findViewById(R.id.title_users_toolbar);
         roomPictureImageView = (CircleImageView)findViewById(R.id.user_in_toolbar_imageview);
 
         // set up emojis

@@ -18,6 +18,14 @@
         <color name="icons_color">#4A4A4A</color>
 
 
+        <color name="player1_color">#4990E2</color>
+        <color name="player2_color">#E3920c</color>
+        <color name="player3_color">#417505</color>
+        <color name="player4_color">#8b572a</color>
+        <color name="player5_color">#9012fe</color>
+        <color name="player6_color">#00798c</color>
+
+
         <color name="app_background">#E0E0E0</color>
 
 

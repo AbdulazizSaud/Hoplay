@@ -2,6 +2,7 @@ package com.example.kay.hoplay.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 
 import com.example.kay.hoplay.Models.ChatMessage;
 import com.example.kay.hoplay.R;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -87,8 +90,10 @@ public class ChatAdapter extends BaseAdapter {
     private void setAlignment(ViewHolder holder, boolean isMe) {
         if (!isMe) {
             holder.contentWithBG.setBackgroundResource(R.drawable.out_message_bg);
+            holder.senderUsername.setVisibility(View.VISIBLE);
 
             holder.txtMessage.setTextColor(context.getResources().getColor(R.color.text_color));
+            holder.txtMessage.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
 
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) holder.contentWithBG.getLayoutParams();
             layoutParams.gravity = Gravity.LEFT;
@@ -107,10 +112,12 @@ public class ChatAdapter extends BaseAdapter {
             holder.txtInfo.setLayoutParams(layoutParams);
         } else {
             holder.contentWithBG.setBackgroundResource(R.drawable.in_message_bg);
+            holder.senderUsername.setVisibility(View.GONE);
             // posioning fucking X and y for the text message -_-
             // holder.txtMessage.setX((holder.contentWithBG.getX())/2);
             //  holder.txtMessage.setY((holder.contentWithBG.getY())/2);
             holder.txtMessage.setTextColor(context.getResources().getColor(R.color.white));
+            holder.txtMessage.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_check_16dp,0);
 
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) holder.contentWithBG.getLayoutParams();
             layoutParams.gravity = Gravity.RIGHT;
@@ -133,8 +140,11 @@ public class ChatAdapter extends BaseAdapter {
 
     private ViewHolder createViewHolder(View v) {
         ViewHolder holder = new ViewHolder();
+        Typeface playbold = Typeface.createFromAsset(context.getAssets(), "playbold.ttf");
         holder.txtMessage = (TextView) v.findViewById(R.id.txtMessage);
         holder.content = (LinearLayout) v.findViewById(R.id.content);
+        holder.senderUsername = (TextView) v.findViewById(R.id.sender_username_chat_bubble);
+        holder.senderUsername.setTypeface(playbold);
         holder.contentWithBG = (LinearLayout) v.findViewById(R.id.contentWithBackground);
         holder.txtInfo = (TextView) v.findViewById(R.id.txtInfo);
         return holder;
@@ -146,5 +156,6 @@ public class ChatAdapter extends BaseAdapter {
         public TextView txtInfo;
         public LinearLayout content;
         public LinearLayout contentWithBG;
+        public TextView senderUsername;
     }
 }

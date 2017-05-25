@@ -26,11 +26,28 @@
             android:background="@drawable/in_message_bg"
             android:orientation="vertical">
 
+
+            <TextView
+                android:id="@+id/sender_username_chat_bubble"
+                android:text="Someone"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/player1_color"
+                android:maxWidth="240dp" />
+
+
             <TextView
                 android:id="@+id/txtMessage"
                 android:text=""
-                android:textSize="15dp"
-                android:layout_margin="10dp"
+                android:drawableRight="@drawable/ic_check_16dp"
+                android:textSize="17sp"
+                android:drawablePadding="5dp"
+                android:padding="2dp"
+                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"

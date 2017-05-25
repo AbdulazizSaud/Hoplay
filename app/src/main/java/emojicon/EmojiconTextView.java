@@ -18,6 +18,8 @@ package emojicon;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.v7.widget.AppCompatAutoCompleteTextView;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.SpannableStringBuilder;
 import android.util.AttributeSet;
 import android.widget.TextView;
@@ -27,7 +29,7 @@ import com.example.kay.hoplay.R;
 /**
  * @author Hieu Rocker (rockerhieu@gmail.com).
  */
-public class EmojiconTextView extends TextView {
+public class EmojiconTextView extends AppCompatTextView {
     private int mEmojiconSize;
     private int mTextStart = 0;
     private int mTextLength = -1;
