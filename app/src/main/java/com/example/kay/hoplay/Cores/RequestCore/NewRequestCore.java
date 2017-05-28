@@ -1,10 +1,7 @@
 package com.example.kay.hoplay.Cores.RequestCore;
 
-import android.util.Log;
-
-import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Cores.ChatCore.CreateChat;
 import com.example.kay.hoplay.Models.PlayerModel;
-import com.example.kay.hoplay.util.TimeStamp;
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.NewRequest;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
@@ -117,18 +114,19 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
                 app.getUserInformation().getUsername()
         ));
 
-        requestModel.setPlayerModelArrayList(playerModels);
-
+        requestModel.setPlayers(playerModels);
         requestModel.setAdminName(app.getUserInformation().getUsername());
         requestModel.setGameId(gameModel.getGameID());
+        requestModel.setRequestId(requestKey);
 
         HashMap hashMap =new HashMap();
         hashMap.put("timeStamp",ServerValue.TIMESTAMP);
 
         requestRef.setValue(requestModel);
         requestRef.updateChildren(hashMap);
-
+        new CreateChat().createPublicFirebaseChat(requestModel);
     }
+
 
 
 }

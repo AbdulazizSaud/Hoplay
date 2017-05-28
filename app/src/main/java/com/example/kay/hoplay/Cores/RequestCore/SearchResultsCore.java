@@ -53,8 +53,8 @@ public class SearchResultsCore extends SearchResults {
     protected void OnClickHolders(RequestModel model, View v) {
         Intent i = new Intent(v.getContext(), RequestLobbyCore.class);
 
-        // here we will retreive the data;
-
+        // here we will send the data;
+        i.putExtra("requestId",model.getRequestId());
         v.getContext().startActivity(i);
     }
 

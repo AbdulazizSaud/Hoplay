@@ -231,6 +231,17 @@ public class App extends Application implements FirebasePaths{
         return requestResultList;
     }
 
+    public RequestModel getRequestModelResult(String key)
+    {
+        for(RequestModel requestModel :requestResultList )
+        {
+            if(requestModel.getRequestId().equals(key))
+            {
+                return requestModel;
+            }
+        }
+        return null;
+    }
 
 }
 

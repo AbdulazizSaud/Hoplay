@@ -50,7 +50,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.SettingsActivity" />
-        <activity android:name=".Cores.ChatCore.CreateChatCore" />
+        <activity android:name=".Cores.ChatCore.FindUserCore" />
         <activity android:name=".Activities.NoGamePopUp" />
         <activity android:name=".Cores.UserProfileCores.AddGameCore" />
         <activity android:name=".Cores.UserProfileCores.ViewFriendProfileCore" />

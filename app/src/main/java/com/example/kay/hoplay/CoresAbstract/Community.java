@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
-import com.example.kay.hoplay.Cores.ChatCore.CreateChatCore;
+import com.example.kay.hoplay.Cores.ChatCore.FindUserCore;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.CommunityChatModel;
 
@@ -65,7 +65,7 @@ public abstract class Community extends Fragment {
         newPrivateChatFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(),CreateChatCore.class);
+                Intent i = new Intent(getContext(),FindUserCore.class);
                 startActivity(i);
             }
         });

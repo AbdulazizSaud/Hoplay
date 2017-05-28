@@ -14,10 +14,13 @@ import android.widget.TextView;
 
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
+import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.Models.UserInformation;
 import com.example.kay.hoplay.R;
+import com.example.kay.hoplay.Services.CallbackHandlerCondition;
+import com.example.kay.hoplay.Services.HandlerCondition;
 
 
 import org.w3c.dom.Text;
@@ -46,11 +49,13 @@ public abstract class RequestLobby extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager linearLayoutManager;
 
+    protected App app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_lobby);
+        app = App.getInstance();
         initControls();
         setupRecyclerView();
         OnStartActivity();
@@ -142,6 +147,22 @@ public abstract class RequestLobby extends AppCompatActivity {
     }
 
 
-    protected abstract void OnStartActivity();
+    protected void setLobbyInfo(String pictureURL,String type,
+                                String adminName,String adminPicture, ArrayList<PlayerModel> players
+                                  ,String rank,String region)
+    {
+        app.loadingImage(gamePhoto,pictureURL);
+        app.loadingImage(adminPhoto,adminPicture);
+        matchTypeTextview.setText(type);
+        adminUsername.setText(adminName);
+        for(PlayerModel playerModel : players) {
+            playerModels.add(playerModel);
+        }
+        mAdapter.notifyDataSetChanged();
 
+        regionValueTextview.setText(region);
+        rankValueTextview.setText(rank);
+
+    }
+    protected abstract void OnStartActivity();
 }

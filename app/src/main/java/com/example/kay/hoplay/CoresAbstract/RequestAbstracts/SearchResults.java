@@ -14,8 +14,6 @@ import com.example.kay.hoplay.Adapters.SpinnerAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.RequestCore.RequestLobbyCore;
-import com.example.kay.hoplay.Models.CommunityChatModel;
-import com.example.kay.hoplay.Models.RecentGameModel;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
@@ -119,7 +117,7 @@ public abstract class SearchResults extends AppCompatActivity {
                 holder.setTitle(model.getRequestTitle());
                 holder.setSubtitle(model.getDescription());
                 holder.setTime(app.convertFromTimeStampToDate(String.valueOf(model.getTimeStamp())));
-                holder.setNumberOfPlayers(model.getPlayerModelArrayList().size()+"/"+String.valueOf(model.getPlayerNumber()));
+                holder.setNumberOfPlayers(model.getPlayers().size()+"/"+String.valueOf(model.getPlayerNumber()));
                 holder.setSubtitle2(model.getAdminName());
 
                 holder.getView().setOnClickListener(new View.OnClickListener() {

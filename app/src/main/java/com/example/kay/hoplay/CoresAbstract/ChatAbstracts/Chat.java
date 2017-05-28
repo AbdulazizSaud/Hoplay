@@ -37,9 +37,7 @@ import emojicon.EmojiconsPopup;
 import emojicon.emoji.Emojicon;
 import emojicon.emoji.Objects;
 
-/**
- * Created by azoz-pc on 2/4/2017.
- */
+
 
 public abstract class Chat extends AppCompatActivity {
 
@@ -190,8 +188,6 @@ public abstract class Chat extends AppCompatActivity {
         if (isMessageEmpty(message) ||  chatMessages.containsKey(chatKey)) {
             return;
         }
-
-
         // set a message
         ChatMessage chatMessage = new ChatMessage();
         chatMessage.setId(chatKey);

@@ -63,7 +63,10 @@ public class ChatCore extends Chat implements FirebasePaths {
 
             final String UID = app.getUserInformation().getUID();
             lastMessageCounter = Long.valueOf(dataSnapshot.getValue().toString().trim());
-            app.getDatabaseUsersInfo().child(UID).child(FIREBASE_USER_PRIVATE_CHAT).child(chatRoomKey).child(FIREBASE_COUNTER_PATH).setValue(lastMessageCounter);
+            String userTypeChat = (chatRoomType.equals(FIREBASE_PRIVATE_ATTR))
+                    ? FIREBASE_USER_PRIVATE_CHAT : FIREBASE_USER_PUBLIC_CHAT;
+
+            app.getDatabaseUsersInfo().child(UID).child(userTypeChat).child(chatRoomKey).child(FIREBASE_COUNTER_PATH).setValue(lastMessageCounter);
 
         }
 
@@ -84,7 +87,10 @@ public class ChatCore extends Chat implements FirebasePaths {
         chatRoomType = i.getStringExtra("room_type");
         friendUsername = i.getStringExtra("friend_username");
         friendPictureURL = i.getStringExtra("friend_picture");
-        refRoom = app.getFirebaseDatabase().getReferenceFromUrl(FB_PRIVATE_CHAT_PATH + chatRoomKey);
+
+        String pathChatRoomType = (chatRoomType.equals(FIREBASE_PRIVATE_ATTR)) ? FB_PRIVATE_CHAT_PATH:FB_PUBLIC_CHAT_PATH;
+
+        refRoom = app.getFirebaseDatabase().getReferenceFromUrl(pathChatRoomType + chatRoomKey);
         refMessages = refRoom.child("_messages_");
         setRoomDetails(friendUsername, friendPictureURL);
         loadMessages();

@@ -28,7 +28,7 @@ public class RequestModel  {
     private String requestPicture;
     private List<String> users;
     private String gameId;
-    private ArrayList<PlayerModel> playerOn;
+    private ArrayList<PlayerModel> players;
 
     public RequestModel() {
     }
@@ -181,12 +181,12 @@ public class RequestModel  {
         this.gameId = gameId;
     }
 
-    public ArrayList<PlayerModel> getPlayerModelArrayList() {
-        return playerOn;
+    public ArrayList<PlayerModel> getPlayers() {
+        return players;
     }
 
-    public void setPlayerModelArrayList(ArrayList<PlayerModel> playerModelArrayList) {
-        this.playerOn = playerModelArrayList;
+    public void setPlayers(ArrayList<PlayerModel> players) {
+        this.players = players;
     }
 
 }
