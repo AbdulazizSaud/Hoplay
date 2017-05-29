@@ -5,16 +5,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.kay.hoplay.Cores.CommunityCore;
-import com.example.kay.hoplay.Cores.RequestCore.MakeRequestFragmentCore;
 import com.example.kay.hoplay.Cores.RequestCore.SearchRequestCore;
 import com.example.kay.hoplay.Cores.UserProfileCores.UserProfileCore;
+import com.example.kay.hoplay.Fragments.NewRequestFragment;
+import com.example.kay.hoplay.Fragments.NoGameFragment;
+import com.example.kay.hoplay.Fragments.ParentRequestFragments;
 
-/**
- * Created by Kay on 6/15/2016.
- */
+
 public class MenuPagerAdapter extends FragmentStatePagerAdapter {
 
 
+        private ParentRequestFragments parentRequestFragments;
 
         public MenuPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -30,7 +31,7 @@ public class MenuPagerAdapter extends FragmentStatePagerAdapter {
                 case 1 :
                     return new CommunityCore();
                 case 2 :
-                    return new MakeRequestFragmentCore();
+                    return parentRequestFragments;
                 case 3 :
                     return new UserProfileCore();
 
@@ -40,6 +41,12 @@ public class MenuPagerAdapter extends FragmentStatePagerAdapter {
 
             return new CommunityCore();
         }
+
+        public void setParentRequestFragments(ParentRequestFragments fragments)
+        {
+            this.parentRequestFragments = fragments;
+        }
+
 
         @Override
         public int getCount()

@@ -14,7 +14,7 @@ import emojicon.EmojiconTextView;
 
 
 
-public abstract class ViewHolders extends RecyclerView.ViewHolder {
+public abstract class ViewHolders extends RecyclerView.ViewHolder  implements View.OnClickListener, View.OnLongClickListener {
 
 
 
@@ -70,6 +70,15 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
             this.chatNewMessagesCount.setText(counter);
         }
 
+        @Override
+        public void onClick(View v) {
+
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            return false;
+        }
     }
 
     public static class SavedRequestHolder extends ViewHolders {
@@ -92,6 +101,16 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
             numberOfPlayers = (TextView) v.findViewById(R.id.number_of_players_saved_requests_textview);
             numberOfPlayers.setTypeface(sansation);
         }
+
+        @Override
+        public void onClick(View v) {
+
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            return false;
+        }
     }
     public static class RecentGameHolder extends ViewHolders {
 
@@ -108,6 +127,16 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
             time = (TextView) v.findViewById(R.id.activity_date_textview);
             time.setTypeface(sansation);
         }
+
+        @Override
+        public void onClick(View v) {
+
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            return false;
+        }
     }
 
     public static class FriendListHolder extends ViewHolders {
@@ -117,6 +146,16 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
 
             picture = (CircleImageView)v.findViewById(R.id.friend_profile_photo_circleimageview);
             title  = (TextView)v.findViewById(R.id.friend_nickname_friends_list_textview);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            return false;
         }
     }
 
@@ -128,11 +167,31 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
             picture = (CircleImageView)v.findViewById(R.id.player_instance_circleimageview);
             title  = (TextView)v.findViewById(R.id.player_instance_username_textview);
         }
+
+        @Override
+        public void onClick(View v) {
+
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            return false;
+        }
     }
 
 
 
     public static class UserGameHolder extends ViewHolders {
+
+        @Override
+        public void onClick(View v) {
+
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            return false;
+        }
 
         public enum Platform {
             XBOX,PC,PS
@@ -194,6 +253,15 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder {
         }
 
 
+        @Override
+        public void onClick(View v) {
+
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            return false;
+        }
     }
 
 

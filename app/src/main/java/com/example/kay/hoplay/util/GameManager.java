@@ -69,5 +69,11 @@ public class GameManager implements FirebasePaths{
         gamesCompList.clear();
     }
 
+    public int getUserGamesNumber(){
+
+        return  allGamesIds.size();
+    }
+
+
 
 }

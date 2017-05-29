@@ -124,8 +124,6 @@ public class AddGameCore extends AddGame implements FirebasePaths {
         String gameProvider= dataSnapshot.child(FIREBASE_GAME_PC_GAME_PROVIDER).getValue().toString().trim();
         int maxPlayer = Integer.parseInt(maxPlayerAsString);
 
-        Log.i("here bitch", gameProvider);
-
         GameModel gameModel = new GameModel(gameId, gameNameWithCapitalLetter, gamPic, supportedPlatformes,gametype,maxPlayer,gameProvider);
         addGame(gameModel);
 

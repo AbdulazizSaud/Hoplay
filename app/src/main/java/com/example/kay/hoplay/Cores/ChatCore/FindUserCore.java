@@ -72,4 +72,9 @@ public class FindUserCore extends UserListCore {
         createChat = new CreateChat();
         loadFriendList();
     }
+
+    @Override
+    protected void deleteFriend() {
+
+    }
 }

@@ -1,69 +1,61 @@
-package com.example.kay.hoplay.CoresAbstract.RequestAbstracts;
+package com.example.kay.hoplay.Fragments;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.kay.hoplay.Adapters.CommonAdapter;
-import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
+import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.RequestCore.NewRequestCore;
-import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.Models.SavedRequestModel;
 import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
+import com.example.kay.hoplay.Models.SavedRequestModel;
+import com.example.kay.hoplay.R;
 
 import java.util.ArrayList;
 
-public abstract class MakeRequestFragment extends Fragment {
-
-    private  Button newRequestButton;
-    private TextView savedRequestsMessage ;
-    private TextView addGameTextView;
-    private Dialog  noGameDialog;
-
-    private FloatingActionButton addGameFloationActionButton;
 
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-
-    // specify an adapter (see also next example)
-   private ArrayList<SavedRequestModel> savedRequestModels =new ArrayList<SavedRequestModel>();
-
-    protected   App app ;
+public class NewRequestFragment extends ParentRequestFragments {
 
 
 
+    // saced reqs models
+    ArrayList<SavedRequestModel> savedRequestModels ;
 
-    public MakeRequestFragment() {
-        // Required empty public constructor
+
+    public NewRequestFragment() {
+        super();
     }
 
-
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        app = App.getInstance();
+        super.onCreateView(inflater,container,savedInstanceState);
 
-        // Inflate the layout for this fragment
+        RecyclerView mRecyclerView;
+        RecyclerView.Adapter mAdapter;
+        RecyclerView.LayoutManager mLayoutManager;
+
+        Button newRequestButton;
+        TextView savedRequestsMessage ;
+        TextView addGameTextView;
+
+        FloatingActionButton addGameFloationActionButton;
+
+
+
         View view = inflater.inflate(R.layout.activity_make_request_fragment, container, false);
         newRequestButton = (Button) view.findViewById(R.id.new_request_button);
         addGameFloationActionButton = (FloatingActionButton) view.findViewById(R.id.add_new_game_floatinactionbutton);
@@ -80,7 +72,8 @@ public abstract class MakeRequestFragment extends Fragment {
         newRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkUserGamesNumber();
+                Intent i = new Intent(getActivity().getApplicationContext(),NewRequestCore.class);
+                startActivity(i);
             }
         });
 
@@ -97,7 +90,7 @@ public abstract class MakeRequestFragment extends Fragment {
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
-         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getContext());
@@ -105,6 +98,7 @@ public abstract class MakeRequestFragment extends Fragment {
 
 
 
+        savedRequestModels =new ArrayList<SavedRequestModel>();
 
         savedRequestModels.add(saveRequest("","Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Doubles ranked ?",2));
         savedRequestModels.add(saveRequest("","Overwatch","https://overwatch-a.akamaihd.net/img/logos/overwatch-share-3d5a268515283007bdf3452e877adac466d579f4b44abbd05aa0a98aba582eeaebc4541f1154e57ec5a43693345bebda953381a7b75b58adbd29d3f3eb439ad2.jpg","Need healing -_- ",6));
@@ -118,29 +112,16 @@ public abstract class MakeRequestFragment extends Fragment {
         mAdapter = createAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
-
-
-        onStartActivity();
         return view;
-
     }
 
-    protected void canMakeRequest(boolean canMakeRequest) {
-        if (canMakeRequest)
-        {
-            Intent i = new Intent(getContext(),NewRequestCore.class);
-            startActivity(i);
-        }
-        else
-        createNoGameDialog();
+    @Nullable
+    @Override
+    public View getView() {
+        return super.getView();
     }
 
 
-    public SavedRequestModel saveRequest(String gameID, String gameName , String gamePhoto , String requestDescription , int numberOfPlayers)
-    {
-        return  new SavedRequestModel(gameID,gameName,numberOfPlayers,gamePhoto,"",requestDescription,"");
-
-    }
 
     private CommonAdapter<SavedRequestModel> createAdapter(){
         return new CommonAdapter<SavedRequestModel>(savedRequestModels,R.layout.saved_request_instance) {
@@ -166,7 +147,7 @@ public abstract class MakeRequestFragment extends Fragment {
 
                 App.getInstance().loadingImage(getContext(),holder,model.getGamePhotoUrl());
 
-               // loadingImage(holder, model, loader);
+                // loadingImage(holder, model, loader);
                 holder.setTitle(model.getGameName());
                 holder.setSubtitle(model.getActivityDescription());
                 holder.setNumberOfPlayers(String.valueOf(model.getMaxPlayers()) + " Players");
@@ -177,49 +158,15 @@ public abstract class MakeRequestFragment extends Fragment {
     }
 
 
-    protected abstract void OnClickHolders(SavedRequestModel model, View v);
 
-    public void createNoGameDialog()
+    public SavedRequestModel saveRequest(String gameID, String gameName , String gamePhoto , String requestDescription , int numberOfPlayers)
     {
-        noGameDialog = new Dialog(getContext());
-        noGameDialog.setContentView(R.layout.activity_no_game_pop_up);
-        noGameDialog.show();
+        return  new SavedRequestModel(gameID,gameName,numberOfPlayers,gamePhoto,"",requestDescription,"");
 
-
-        noGameDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-
-        TextView noGameMessage;
-        Button addGameButton;
-
-        noGameMessage = (TextView) noGameDialog.findViewById(R.id.popup_message_textview);
-        addGameButton = ( Button) noGameDialog.findViewById(R.id.add_game_button_no_game_popup);
-
-        Typeface sansation = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
-        addGameButton.setTypeface(sansation);
-
-        final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
-        noGameMessage.setTypeface(playbold);
-
-
-        addGameButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity().getApplicationContext(), AddGameCore.class);
-                startActivity(i);
-            }
-        });
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        Window window = noGameDialog.getWindow();
-        lp.copyFrom(window.getAttributes());
-//This makes the dialog take up the full width
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        window.setAttributes(lp);
     }
 
-
-
-    protected  abstract  void onStartActivity();
-    protected  abstract void checkUserGamesNumber();
+    protected  void OnClickHolders(SavedRequestModel model, View v)
+    {
+        ///.....
+    }
 }

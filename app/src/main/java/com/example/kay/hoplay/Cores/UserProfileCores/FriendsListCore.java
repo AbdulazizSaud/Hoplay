@@ -17,12 +17,10 @@ public class FriendsListCore extends UserListCore {
         Intent i = new Intent(this,ViewFriendProfileCore.class);
         i.putExtra("user_key",model.getFriendKey());
         startActivity(i);
-
     }
 
     @Override
     protected void onStartActivity() {
-
 
 //        searchEditText.setVisibility(EditText.GONE);
 //        searchEditText = null;
@@ -30,5 +28,7 @@ public class FriendsListCore extends UserListCore {
         loadFriendList();
     }
 
+    @Override
+    protected void deleteFriend() {}
 
 }

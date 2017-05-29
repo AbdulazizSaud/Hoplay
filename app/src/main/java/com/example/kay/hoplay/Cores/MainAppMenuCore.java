@@ -1,9 +1,13 @@
 package com.example.kay.hoplay.Cores;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.example.kay.hoplay.Cores.RequestCore.LobbyFragmentCore;
 import com.example.kay.hoplay.CoresAbstract.MainAppMenu;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Fragments.NewRequestFragment;
+import com.example.kay.hoplay.Fragments.NoGameFragment;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.Rank;
@@ -121,7 +125,10 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     app.getUserInformation().setPcGamesAcc(pcGamesAccs);
 
                     // load games
+
                     loadFavorGamesList();
+                    // check request
+                    checkRequest();
 
                 }
                 else
@@ -206,6 +213,38 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
             }
         });
     }
+
+
+    protected void checkRequest() {
+
+        String userID = app.getUserInformation().getUID();
+        final DatabaseReference userReqsRef = app.getDatabaseUsersInfo().child(userID+"/"+FIREBASE_USER_REQUESTS_REF);
+
+        userReqsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                long numberOfReqs = dataSnapshot.getChildrenCount();
+                if(numberOfReqs > 0)
+                menuPagerAdapter.setParentRequestFragments(new LobbyFragmentCore());
+                else if(app.getGameManager().getUserGamesNumber() >= 1)
+                    menuPagerAdapter.setParentRequestFragments(new NewRequestFragment());
+                else
+                    menuPagerAdapter.setParentRequestFragments(new NewRequestFragment());
+
+                isDone=true;
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+
 
     private boolean isInfoValid(DataSnapshot dataSnapshot) {
         return dataSnapshot.hasChild(FIREBASE_USERNAME_PATH) && dataSnapshot.hasChild(FIREBASE_NICKNAME_PATH) && dataSnapshot.hasChild(FIREBASE_PICTURE_URL_PATH);

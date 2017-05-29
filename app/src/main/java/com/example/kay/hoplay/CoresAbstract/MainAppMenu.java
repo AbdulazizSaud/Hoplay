@@ -18,6 +18,9 @@ import com.example.kay.hoplay.Adapters.MenuPagerAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.AuthenticationCore.LoginCore;
 import com.example.kay.hoplay.Cores.CommunityCore;
+import com.example.kay.hoplay.Cores.RequestCore.LobbyFragmentCore;
+import com.example.kay.hoplay.Fragments.LobbyFragment;
+import com.example.kay.hoplay.Fragments.NoGameFragment;
 import com.example.kay.hoplay.R;
 
 import com.example.kay.hoplay.Services.CallbackHandlerCondition;
@@ -41,6 +44,9 @@ public abstract class MainAppMenu extends AppCompatActivity  {
     private boolean changeBar = true;
     private BottomBar bottomBar;
     protected App app;
+    public static MenuPagerAdapter menuPagerAdapter;
+
+    protected boolean isDone=false;
 
     /***************************************/
 
@@ -90,15 +96,14 @@ public abstract class MainAppMenu extends AppCompatActivity  {
 
         bottomBar = (BottomBar) findViewById(R.id.bottomBar);
 
-
+        menuPagerAdapter = new MenuPagerAdapter(getSupportFragmentManager());
 
         CallbackHandlerCondition callback = new CallbackHandlerCondition() {
             @Override
             public boolean callBack() {
 
-                boolean b = app.getUserInformation().getUsername() != null;
-                if (b) activateMainAppMenu(savedInstanceState);
-                return b;
+                if (isDone) activateMainAppMenu(savedInstanceState);
+                return isDone;
             }
         };
 
@@ -106,7 +111,7 @@ public abstract class MainAppMenu extends AppCompatActivity  {
 
     }
     private void activateMainAppMenu( Bundle savedInstanceState) {
-        MenuPagerAdapter menuPagerAdapter = new MenuPagerAdapter(getSupportFragmentManager());
+
         viewPagerMenu.setAdapter(menuPagerAdapter);
         setupBottmBar(savedInstanceState);
     }

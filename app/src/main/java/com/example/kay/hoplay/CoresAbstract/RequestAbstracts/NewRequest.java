@@ -30,6 +30,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Cores.RequestCore.LobbyFragmentCore;
+import com.example.kay.hoplay.CoresAbstract.MainAppMenu;
+import com.example.kay.hoplay.Fragments.NewRequestFragment;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.Rank;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
