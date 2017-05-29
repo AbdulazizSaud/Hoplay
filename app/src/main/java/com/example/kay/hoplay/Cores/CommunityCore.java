@@ -350,8 +350,8 @@ public class CommunityCore extends Community implements FirebasePaths {
         Intent i = new Intent(v.getContext(), ChatCore.class);
         i.putExtra("room_key", model.getChatKey());
         i.putExtra("room_type", model.getChatType());
-        i.putExtra("chat_name", model.getChatName());
-        i.putExtra("chat_picture", model.getUserPictureURL());
+        i.putExtra("room_name", model.getChatName());
+        i.putExtra("room_picture", model.getUserPictureURL());
 
         v.getContext().startActivity(i);
     }
