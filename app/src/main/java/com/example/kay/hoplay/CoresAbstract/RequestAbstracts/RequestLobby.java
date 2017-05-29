@@ -48,6 +48,8 @@ public abstract class RequestLobby extends AppCompatActivity {
     private ArrayList<PlayerModel> playerModels;
     private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager linearLayoutManager;
+    private ImageView closeRequestButton;
+
 
     protected App app;
 
@@ -87,6 +89,21 @@ public abstract class RequestLobby extends AppCompatActivity {
         regionValueTextview.setTypeface(playregular);
         joinButton = (Button) findViewById(R.id.join_request_lobby_button);
         joinButton.setTypeface(playbold);
+
+        joinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                joinToRequest();
+            }
+        });
+        closeRequestButton = (ImageView) findViewById(R.id.close_request_lobby_imageview);
+        closeRequestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         playerModels = new ArrayList<PlayerModel>();
 
 
@@ -113,14 +130,31 @@ public abstract class RequestLobby extends AppCompatActivity {
     }
 
 
-    public void addPlayer(String playerUid , String playerUsername) {
+    protected void addPlayer(String playerUid , String playerUsername) {
 
-        PlayerModel player = new PlayerModel(playerUid,playerUsername);
-        playerModels.add(player);
-        mAdapter.notifyDataSetChanged();
+
+
+        if(isExsist(playerUid))
+            return;
+
+            PlayerModel player = new PlayerModel(playerUid, playerUsername);
+            playerModels.add(player);
+            mAdapter.notifyDataSetChanged();
+
+
     }
 
 
+    protected boolean isExsist(String uid )
+    {
+        for(PlayerModel playerModel : playerModels)
+        {
+            if(uid.equals(playerModel.getUID()))
+                return true;
+        }
+
+        return false;
+    }
     private CommonAdapter<PlayerModel> createAdapter() {
         return new CommonAdapter<PlayerModel>(playerModels, R.layout.player_instance) {
 
@@ -165,4 +199,6 @@ public abstract class RequestLobby extends AppCompatActivity {
 
     }
     protected abstract void OnStartActivity();
+    protected abstract void joinToRequest();
+    protected abstract void jumpToLobbyChat(RequestModel model);
 }

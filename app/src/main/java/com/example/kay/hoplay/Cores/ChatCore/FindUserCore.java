@@ -28,10 +28,12 @@ public class FindUserCore extends UserListCore {
     private void jumpToPrivateChat(FriendCommonModel model, String roomKey) {
         Intent chatActivity = new Intent(getApplicationContext(), ChatCore.class);
         chatActivity.putExtra("room_key", roomKey);
-        chatActivity.putExtra("room_type", "_private_");
+        chatActivity.putExtra("room_type", FIREBASE_PRIVATE_ATTR);
+        chatActivity.putExtra("room_name", model.getFriendUsername());
+        chatActivity.putExtra("room_picture", model.getUserPictureURL());
+
         chatActivity.putExtra("friend_key", model.getFriendKey());
-        chatActivity.putExtra("friend_username", model.getFriendUsername());
-        chatActivity.putExtra("friend_picture", model.getUserPictureURL());
+
         finish();
         startActivity(chatActivity);
     }

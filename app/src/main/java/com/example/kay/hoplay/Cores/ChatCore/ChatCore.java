@@ -85,8 +85,8 @@ public class ChatCore extends Chat implements FirebasePaths {
         Intent i = getIntent();
         chatRoomKey = i.getStringExtra("room_key");
         chatRoomType = i.getStringExtra("room_type");
-        friendUsername = i.getStringExtra("friend_username");
-        friendPictureURL = i.getStringExtra("friend_picture");
+        friendUsername = i.getStringExtra("room_name");
+        friendPictureURL = i.getStringExtra("room_picture");
 
         String pathChatRoomType = (chatRoomType.equals(FIREBASE_PRIVATE_ATTR)) ? FB_PRIVATE_CHAT_PATH:FB_PUBLIC_CHAT_PATH;
 

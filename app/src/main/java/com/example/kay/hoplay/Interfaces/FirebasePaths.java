@@ -38,6 +38,8 @@ public interface FirebasePaths {
     public static final String FIREBASE_CHAT_MESSAGES = "_messages_";
     public static final String FIREBASE_USER_PRIVATE_CHAT = FIREBASE_USER_CHAT_REFERENCES+"/"+FIREBASE_PRIVATE_ATTR;
     public static final String FIREBASE_USER_PUBLIC_CHAT = FIREBASE_USER_CHAT_REFERENCES+"/"+FIREBASE_PUBLIC_ATTR;
+    public static final String FIREBASE_CHAT_USERS_LIST_PATH = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_USERS_LIST_ATTR;
+
 
     public static final String FIREBASE_COUNTER_PATH = "_counter_";
     public static final String FIREBASE_OPPONENT_ID_PATH = "_opponent_ID_";

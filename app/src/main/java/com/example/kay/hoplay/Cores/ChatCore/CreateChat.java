@@ -1,5 +1,7 @@
 package com.example.kay.hoplay.Cores.ChatCore;
 
+import android.os.Build;
+
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.RequestModel;
@@ -90,7 +92,6 @@ public class CreateChat implements FirebasePaths {
 
         // path --> /Chat/_public_/[KEY]/_info_/_users_
         DatabaseReference roomUsers = roomInfo.child(FIREBASE_USERS_LIST_ATTR);
-
         roomUsers.child(UID).setValue(UID);
 
         String accessKey = roomInfo.push().getKey();
@@ -112,14 +113,24 @@ public class CreateChat implements FirebasePaths {
         // Set Referance for users
 
         // path --> /_users_info_/[UID]/_chat_refs_/_public_
-
-        String publicChatPath = UID + "/" + FIREBASE_USER_PUBLIC_CHAT;
-        DatabaseReference refUserPublicChats = app.getDatabaseUsersInfo().child(publicChatPath);
-        refUserPublicChats.child(key).child(FIREBASE_COUNTER_PATH).setValue(0);
-        refUserPublicChats.child(key).child(FIREBASE_OPPONENT_ID_PATH).setValue(key);
-
+        setValueUserRef(UID,key);
         return key;
     }
 
+
+    public void setValueUserRef(String uid ,String roomKey)
+    {
+        String publicChatPath = uid + "/" + FIREBASE_USER_PUBLIC_CHAT;
+        DatabaseReference refUserPublicChats = app.getDatabaseUsersInfo().child(publicChatPath);
+        refUserPublicChats.child(roomKey).child(FIREBASE_COUNTER_PATH).setValue(0);
+        refUserPublicChats.child(roomKey).child(FIREBASE_OPPONENT_ID_PATH).setValue(roomKey);
+    }
+
+    public void setValueUsersChat(String type,String roomId,String userId)
+    {
+        DatabaseReference refChatRoom = app.getDatabasChat().child(type).child(roomId);
+        DatabaseReference roomUsers = refChatRoom.child(FIREBASE_CHAT_USERS_LIST_PATH);
+        roomUsers.child(userId).setValue(userId);
+    }
 
 }
