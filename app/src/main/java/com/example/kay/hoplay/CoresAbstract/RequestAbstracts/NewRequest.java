@@ -94,6 +94,11 @@ public abstract class NewRequest extends AppCompatActivity {
     private String pcGameProvider;
 
 
+
+
+
+
+
     /***************************************/
 
     @Override
@@ -117,6 +122,9 @@ public abstract class NewRequest extends AppCompatActivity {
     }
 
     private void initControl() {
+
+
+
         app = App.getInstance();
         selectedPlatform = "Nothing";
         final Typeface sansationbold = Typeface.createFromAsset(getResources().getAssets(), "sansationbold.ttf");
@@ -149,6 +157,8 @@ public abstract class NewRequest extends AppCompatActivity {
 
         descriptionEdittext = (EditText) findViewById(R.id.description_edittext_new_request);
         descriptionEdittext.setTypeface(playbold);
+
+
 
         creatingRequestDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
         creatingRequestDialog.setTitle(R.string.new_request_dialog_title);

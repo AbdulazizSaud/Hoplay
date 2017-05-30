@@ -47,7 +47,12 @@ public abstract class UserList extends AppCompatActivity {
     protected EditText searchEditText;
     protected RelativeLayout FriendsLayout;
     private ProgressBar loadUsersProgressBar;
-    protected Dialog friendLongClickDialog;
+
+
+
+    protected boolean removeFriend;
+
+
 
 
     private ArrayList<FriendCommonModel> usersList = new ArrayList<FriendCommonModel>();
@@ -80,7 +85,7 @@ public abstract class UserList extends AppCompatActivity {
                 @Override
                 public boolean onLongClick(View v) {
 
-                   showFriendPopup(model);
+                    showFriendpopup(model);
                     return true;
                 }
             });
@@ -91,7 +96,7 @@ public abstract class UserList extends AppCompatActivity {
 
             // animate holders
             setAnimation(holder.getTitleView(),holder.getPicture(),position);
-
+            removeFriendAnimation(holder.getTitleView(),holder.getPicture(),position);
 
 
         }
@@ -276,62 +281,6 @@ public abstract class UserList extends AppCompatActivity {
 
 
 
-    public void showFriendPopup(final FriendCommonModel friendCommonModel)
-    {
-        friendLongClickDialog = new Dialog(UserList.this);
-        friendLongClickDialog.setContentView(R.layout.pop_up_on_long_click_friend);
-        friendLongClickDialog.show();
-
-
-        friendLongClickDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        Button chatButton , viewProfileButton , deleteFriendButtton ;
-
-        chatButton = ( Button) friendLongClickDialog.findViewById(R.id.chat_friend_pop_up_button);
-        viewProfileButton = ( Button) friendLongClickDialog.findViewById(R.id.view_profile_friend_pop_up_button);
-        deleteFriendButtton = ( Button) friendLongClickDialog.findViewById(R.id.delete_friend_pop_up_button);
-
-        Typeface sansation = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
-        chatButton.setTypeface(sansation);
-        viewProfileButton.setTypeface(sansation);
-        deleteFriendButtton.setTypeface(sansation);
-
-
-         // Open chat activity
-        chatButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
-
-
-        // view friend profile
-        viewProfileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-//
-//
-//        // delete friend
-        deleteFriendButtton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        Window window = friendLongClickDialog.getWindow();
-        lp.copyFrom(window.getAttributes());
-        //This makes the dialog take up the full width
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        window.setAttributes(lp);
-    }
 
 
 
@@ -340,6 +289,8 @@ public abstract class UserList extends AppCompatActivity {
 
     protected abstract void onStartActivity();
     protected abstract void loadFriendList();
-    protected abstract void deleteFriend();
+    protected abstract void showFriendpopup(FriendCommonModel friendCommonModel);
     protected abstract void searchForUser(String value);
+
+    protected abstract void removeFriendAnimation(View viewToAnimate1, View viewToAnimate2 ,  int position);
 }

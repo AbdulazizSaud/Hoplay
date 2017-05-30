@@ -1,6 +1,8 @@
 package com.example.kay.hoplay.Cores.ChatCore;
 
 import android.content.Intent;
+import android.util.Log;
+import android.view.View;
 
 import com.example.kay.hoplay.Cores.ParentCore.UserListCore;
 import com.example.kay.hoplay.Models.FriendCommonModel;
@@ -23,6 +25,12 @@ public class FindUserCore extends UserListCore {
     protected void OnClickHolders(final FriendCommonModel model) {
         String currentUserId = app.getAuth().getCurrentUser().getUid();
         checkChatExist(model, currentUserId);
+        // users_info -> user key -> _firends_list_
+        final DatabaseReference userFriendsListRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_FRIENDS_LIST_ATTR);
+
+        // If you want to add directly without friend request : uncomment this codes
+//        userFriendsListRef.child(model.getFriendKey());
+//        Log.i("shithappens",userFriendsListRef+"");
     }
 
     private void jumpToPrivateChat(FriendCommonModel model, String roomKey) {
@@ -40,8 +48,11 @@ public class FindUserCore extends UserListCore {
 
 
     private void checkChatExist(final FriendCommonModel model, final String currentUserId) {
-        String opponentKey = model.getFriendKey();
+        final String opponentKey = model.getFriendKey();
         String privateChatPath = currentUserId + "/" + FIREBASE_USER_PRIVATE_CHAT;
+
+
+
 
         DatabaseReference chatRef = app.getDatabaseUsersInfo().child(privateChatPath);
         final Query query = chatRef.orderByChild(FIREBASE_OPPONENT_ID_PATH).startAt(opponentKey).endAt(opponentKey + "\uf8ff").limitToFirst(1);
@@ -51,6 +62,7 @@ public class FindUserCore extends UserListCore {
                 String roomKey;
                 if (dataSnapshot.getValue() == null) {
                     roomKey = createChat.createPrivateFirebaseChat(currentUserId, model.getFriendKey());
+
                     jumpToPrivateChat(model, roomKey);
                 } else {
                     Iterable<DataSnapshot> chatRoom = dataSnapshot.getChildren();
@@ -76,7 +88,14 @@ public class FindUserCore extends UserListCore {
     }
 
     @Override
-    protected void deleteFriend() {
+    protected void showFriendpopup(FriendCommonModel friendCommonModel) {
 
     }
+
+    @Override
+    protected void removeFriendAnimation(View viewToAnimate1, View viewToAnimate2, int position) {
+
+    }
+
+
 }

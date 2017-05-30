@@ -224,11 +224,11 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 long numberOfReqs = dataSnapshot.getChildrenCount();
-                if(numberOfReqs > 0)
-                menuPagerAdapter.setParentRequestFragments(new LobbyFragmentCore());
-                else if(app.getGameManager().getUserGamesNumber() >= 1)
-                    menuPagerAdapter.setParentRequestFragments(new NewRequestFragment());
-                else
+//                if(numberOfReqs > 0)
+//                menuPagerAdapter.setParentRequestFragments(new LobbyFragmentCore());
+//                else if(app.getGameManager().getUserGamesNumber() >= 1)
+//                    menuPagerAdapter.setParentRequestFragments(new NewRequestFragment());
+//                else
                     menuPagerAdapter.setParentRequestFragments(new NewRequestFragment());
 
                 isDone=true;
