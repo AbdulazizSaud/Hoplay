@@ -21,7 +21,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
-    private RequestModel requestModel;
     private String adminPicture,adminUser;
     private boolean isDone=false;
     private  DatabaseReference requestRef;
@@ -31,11 +30,11 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
             try {
 
-
                 addPlayer(
                         dataSnapshot.child("uid").getValue(String.class),
                         dataSnapshot.child("username").getValue(String.class)
                 );
+
             }catch (NullPointerException e)
             {
                 return;
@@ -51,7 +50,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
         @Override
         public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+            removePlayer(dataSnapshot.child("uid").getValue(String.class));
         }
 
         @Override
@@ -92,10 +91,8 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
                 +requestModel.getRequestId();
 
         requestRef = app.getDatabaseRequests().child(path);
-        requestRef.child("players").addChildEventListener(onAddPlayerEvent);
 
-        //requestRef.child("gg").setValue("oo");
-        //Log.i("--->",app.getDatabaseRequests().child(path).toString());
+
 
         if (requestModel == null)
             return;
@@ -107,7 +104,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         CallbackHandlerCondition callback = new CallbackHandlerCondition() {
             @Override
             public boolean callBack() {
-                if(isDone)
+                if(isDone) {
                     setLobbyInfo(
                             requestModel.getRequestPicture(),
                             requestModel.getMatchType(),
@@ -117,11 +114,25 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
                             requestModel.getRank(),
                             requestModel.getRegion()
                     );
+
+
+
+                    new HandlerCondition(new CallbackHandlerCondition() {
+                        @Override
+                        public boolean callBack() {
+                            requestRef.child("players").addChildEventListener(onAddPlayerEvent);
+                            return true;
+                        }
+                    },1000);
+
+                }
                 return isDone;
             }
         };
 
         new HandlerCondition(callback, 0);
+
+
 
 
     }
@@ -168,5 +179,15 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         startActivity(chatActivity);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        requestRef.child("players").removeEventListener(onAddPlayerEvent);
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        requestRef.child("players").removeEventListener(onAddPlayerEvent);
+    }
 }

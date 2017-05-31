@@ -118,6 +118,7 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths,C
                         RequestModel requestModel = shot.getValue(RequestModel.class);
 
                         boolean flag = requestModel.getPlayerNumber() == playersNumber
+                                && requestModel.getPlayers().size() < playersNumber
                                 && matchType.equals(requestModel.getMatchType())
                                 && rank.equals(requestModel.getRank());
 

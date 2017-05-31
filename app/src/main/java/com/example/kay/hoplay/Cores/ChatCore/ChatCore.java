@@ -18,10 +18,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 
-/**
- * Created by Kay on 10/30/2016.
- * this class implemetns a chat activity
- */
 
 public class ChatCore extends Chat implements FirebasePaths {
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Models.CommunityChatModel;
 import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.Models.UserInformation;
@@ -26,6 +28,7 @@ import com.example.kay.hoplay.Services.HandlerCondition;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -46,6 +49,12 @@ public abstract class RequestLobby extends AppCompatActivity {
     private TextView regionValueTextview;
     private Button joinButton;
     private ArrayList<PlayerModel> playerModels;
+    private HashMap<String, PlayerModel> playerModelsHashMap;
+    private boolean isPlayerInRequest=false;
+
+    protected RequestModel requestModel;
+
+
     private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager linearLayoutManager;
     private ImageView closeRequestButton;
@@ -105,6 +114,7 @@ public abstract class RequestLobby extends AppCompatActivity {
         });
 
         playerModels = new ArrayList<PlayerModel>();
+        playerModelsHashMap = new HashMap<>();
 
 
     }
@@ -127,34 +137,85 @@ public abstract class RequestLobby extends AppCompatActivity {
 
         mAdapter = createAdapter();
         playersRecyclerview.setAdapter(mAdapter);
+
     }
 
 
-    protected void addPlayer(String playerUid , String playerUsername) {
+    protected void addPlayer(String playerUid, String playerUsername) {
 
-
-
-        if(isExsist(playerUid))
+        if (isExsist(playerUid)) {
             return;
-
-            PlayerModel player = new PlayerModel(playerUid, playerUsername);
-            playerModels.add(player);
-            mAdapter.notifyDataSetChanged();
-
-
-    }
-
-
-    protected boolean isExsist(String uid )
-    {
-        for(PlayerModel playerModel : playerModels)
-        {
-            if(uid.equals(playerModel.getUID()))
-                return true;
         }
 
-        return false;
+        PlayerModel player = new PlayerModel(playerUid, playerUsername);
+        playerModels.add(player);
+        playerModelsHashMap.put(playerUid,player);
+        requestModel.getPlayers().add(player);
+        mAdapter.notifyDataSetChanged();
+
+        if (!isaRequestAvailableToJoin())
+            joinButton.setVisibility(View.INVISIBLE);
     }
+
+
+    protected void addPlayers(ArrayList<PlayerModel> players) {
+
+        for (PlayerModel playerModel : players) {
+            playerModels.add(playerModel);
+            playerModelsHashMap.put(playerModel.getUID(), playerModel);
+        }
+        mAdapter.notifyDataSetChanged();
+
+        if(isExsist(app.getUserInformation().getUID()))
+            isPlayerInRequest = true;
+
+        if (!isaRequestAvailableToJoin())
+            joinButton.setVisibility(View.INVISIBLE);
+    }
+
+
+    protected void removePlayer(String playerUID) {
+
+        for (PlayerModel playerModel : playerModels) {
+            if (playerModel.getUID().equals(playerUID)) {
+                playerModels.remove(playerModel);
+                requestModel.getPlayers().remove(playerModel);
+                playerModelsHashMap.remove(playerModel);
+                mAdapter.notifyDataSetChanged();
+                break;
+            }
+        }
+
+        if (isaRequestAvailableToJoin())
+            joinButton.setVisibility(View.VISIBLE);
+
+    }
+
+    protected boolean isExsist(String uid) {
+        return playerModelsHashMap.containsKey(uid);
+    }
+    private boolean isaRequestAvailableToJoin() {
+        return playerModels.size() < requestModel.getPlayerNumber() && !isPlayerInRequest;
+    }
+
+
+    protected void setLobbyInfo(
+            String pictureURL, String type,
+            String adminName, String adminPicture, ArrayList<PlayerModel> players,
+            String rank, String region) {
+
+        app.loadingImage(gamePhoto, pictureURL);
+        app.loadingImage(adminPhoto, adminPicture);
+        matchTypeTextview.setText(type);
+        adminUsername.setText(adminName);
+        addPlayers(players);
+        mAdapter.notifyDataSetChanged();
+
+        regionValueTextview.setText(region);
+        rankValueTextview.setText(rank);
+
+    }
+
     private CommonAdapter<PlayerModel> createAdapter() {
         return new CommonAdapter<PlayerModel>(playerModels, R.layout.player_instance) {
 
@@ -180,25 +241,10 @@ public abstract class RequestLobby extends AppCompatActivity {
         };
     }
 
-
-    protected void setLobbyInfo(String pictureURL,String type,
-                                String adminName,String adminPicture, ArrayList<PlayerModel> players
-                                  ,String rank,String region)
-    {
-        app.loadingImage(gamePhoto,pictureURL);
-        app.loadingImage(adminPhoto,adminPicture);
-        matchTypeTextview.setText(type);
-        adminUsername.setText(adminName);
-        for(PlayerModel playerModel : players) {
-            playerModels.add(playerModel);
-        }
-        mAdapter.notifyDataSetChanged();
-
-        regionValueTextview.setText(region);
-        rankValueTextview.setText(rank);
-
-    }
     protected abstract void OnStartActivity();
+
     protected abstract void joinToRequest();
+
     protected abstract void jumpToLobbyChat(RequestModel model);
+
 }
