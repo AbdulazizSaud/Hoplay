@@ -1,9 +1,13 @@
 package com.example.kay.hoplay.Cores.ChatCore;
 
 import android.content.Intent;
+import android.util.Log;
 
 import com.example.kay.hoplay.CoresAbstract.ChatAbstracts.Chat;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
+import com.example.kay.hoplay.Models.PlayerModel;
+import com.example.kay.hoplay.Services.CallbackHandlerCondition;
+import com.example.kay.hoplay.Services.HandlerCondition;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,11 +26,10 @@ import java.util.HashMap;
 public class ChatCore extends Chat implements FirebasePaths {
 
     private String chatRoomKey = null;
-    private String friendUsername = null, friendPictureURL = null, chatRoomType = null;
+    private String roomName = null, roomPictureUrl = null, chatRoomType = null;
     private long lastMessageCounter;
+    private boolean usersLoaded =false;
     private DatabaseReference refRoom, refMessages;
-
-
     private ChildEventListener messagesPacketsListener = new ChildEventListener() {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -76,7 +79,6 @@ public class ChatCore extends Chat implements FirebasePaths {
         }
     };
 
-
     // set up chat app
     @Override
     public void setupChat()
@@ -85,15 +87,60 @@ public class ChatCore extends Chat implements FirebasePaths {
         Intent i = getIntent();
         chatRoomKey = i.getStringExtra("room_key");
         chatRoomType = i.getStringExtra("room_type");
-        friendUsername = i.getStringExtra("room_name");
-        friendPictureURL = i.getStringExtra("room_picture");
+        roomName = i.getStringExtra("room_name");
+        roomPictureUrl = i.getStringExtra("room_picture");
 
         String pathChatRoomType = (chatRoomType.equals(FIREBASE_PRIVATE_ATTR)) ? FB_PRIVATE_CHAT_PATH:FB_PUBLIC_CHAT_PATH;
 
         refRoom = app.getFirebaseDatabase().getReferenceFromUrl(pathChatRoomType + chatRoomKey);
         refMessages = refRoom.child("_messages_");
-        setRoomDetails(friendUsername, friendPictureURL);
-        loadMessages();
+
+        // load username
+        refRoom.child(FIREBASE_CHAT_USERS_LIST_PATH).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for(final DataSnapshot users :dataSnapshot.getChildren())
+                {
+                    app.getDatabaseUsersInfo().child(users.getKey()+"/"+FIREBASE_USERNAME_PATH)
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    playerOnChat.put(users.getKey(),new PlayerModel(
+                                            users.getKey(),
+                                            dataSnapshot.getValue(String.class)
+                                    ));
+                                    addUserToSubtitle(dataSnapshot.getValue(String.class));
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+                }
+                usersLoaded = true;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        // make delay till the users is loaded
+        CallbackHandlerCondition callbackHandlerCondition = new CallbackHandlerCondition() {
+            @Override
+            public boolean callBack() {
+                if(usersLoaded) {
+                    setRoomDetails(roomName, roomPictureUrl);
+                    loadMessages();
+                }
+                return usersLoaded;
+            }
+        };
+        new HandlerCondition(callbackHandlerCondition,0);
+
     }
 
 
@@ -112,11 +159,17 @@ public class ChatCore extends Chat implements FirebasePaths {
 
 
         String chatKey = dataSnapshot.child("_message_key_").getValue().toString().trim();
-        String username = dataSnapshot.child("_username_").getValue().toString().trim();
+        String senderId = dataSnapshot.child("_username_").getValue().toString().trim();
         String message = dataSnapshot.child("_message_").getValue().toString().trim();
-        boolean isYou = username.equals(app.getUserInformation().getUID());
+        String senderUsername = "Someone";
+        boolean isYou = senderId.equals(app.getUserInformation().getUID());
 
-        addMessage(chatKey,username, message, isYou);
+        PlayerModel playerModel = playerOnChat.get(senderId);
+
+        if(playerModel != null)
+            senderUsername = playerModel.getUsername();
+
+        addMessage(chatKey,senderId,senderUsername, message, isYou);
 
     }
 

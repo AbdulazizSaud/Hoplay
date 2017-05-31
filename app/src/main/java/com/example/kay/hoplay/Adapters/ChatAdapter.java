@@ -74,7 +74,7 @@ public class ChatAdapter extends BaseAdapter {
         setAlignment(holder, myMsg);
         holder.txtMessage.setText(chatMessage.getMessage());
         holder.txtInfo.setText(chatMessage.getDateTime());
-
+        holder.senderUsername.setText(chatMessage.getUsername());
 
         return convertView;
     }

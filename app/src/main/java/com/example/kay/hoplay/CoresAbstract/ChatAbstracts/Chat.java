@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 
 import com.example.kay.hoplay.Adapters.ChatAdapter;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.ChatMessage;
 
@@ -29,6 +31,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import emojicon.EmojiconEditText;
@@ -60,16 +63,15 @@ public abstract class Chat extends AppCompatActivity {
 
     protected CircleImageView roomPictureImageView;
     protected TextView roomNameTextView;
+    protected TextView roomSubtitleTextView;
 
     // adapter impalement
     protected ChatAdapter adapter;
     protected ArrayList<ChatMessage> chatHistory = new ArrayList<ChatMessage>();
     protected HashMap<String,ChatMessage> chatMessages = new HashMap<String,ChatMessage>();
 
-    // .....
-    protected String myUsername = null;
-    protected String receiverUsername = null;
 
+    protected HashMap<String,PlayerModel> playerOnChat = new HashMap<>();
 
     /***************************************/
 
@@ -141,6 +143,8 @@ public abstract class Chat extends AppCompatActivity {
         messagesContainer.setAdapter(adapter);
 
         roomNameTextView = (TextView)findViewById(R.id.title_users_toolbar);
+        roomSubtitleTextView = (TextView)findViewById(R.id.subtitle_users_toolbar);
+        roomSubtitleTextView.setText("");
         roomPictureImageView = (CircleImageView)findViewById(R.id.user_in_toolbar_imageview);
 
         // set up emojis
@@ -182,7 +186,7 @@ public abstract class Chat extends AppCompatActivity {
     }
 
     // this method for adding new message to adapter and display it
-    protected void addMessage(String chatKey,String userId,String message, boolean me) {
+    protected void addMessage(String chatKey,String userId,String username,String message, boolean me) {
 
         //check if this message is empty
         if (isMessageEmpty(message) ||  chatMessages.containsKey(chatKey)) {
@@ -192,6 +196,7 @@ public abstract class Chat extends AppCompatActivity {
         ChatMessage chatMessage = new ChatMessage();
         chatMessage.setId(chatKey);
         chatMessage.setUserId(userId);
+        chatMessage.setUsername(username);
         chatMessage.setMessage(message);
         chatMessage.setDateTime(DateFormat.getDateTimeInstance().format(new Date()));
         chatMessage.setMe(me);
@@ -324,9 +329,21 @@ public abstract class Chat extends AppCompatActivity {
     protected void setRoomDetails(String roomName,String roomPicture) {
 
         roomNameTextView.setText(roomName);
+
         roomPictureImageView.setImageResource(R.drawable.profile_default_photo);
         app.loadingImage(roomPictureImageView,roomPicture);
 
+    }
+
+    public void addUserToSubtitle(String username)
+    {
+        String currentSub = roomSubtitleTextView.getText().toString().trim();
+        if(!currentSub.isEmpty())
+        currentSub+=" , "+username;
+        else
+            currentSub+=username;
+
+        roomSubtitleTextView.setText(currentSub);
     }
 
     // this method to switch the current to community frag

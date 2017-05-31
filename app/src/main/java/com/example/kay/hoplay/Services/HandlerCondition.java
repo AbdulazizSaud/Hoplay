@@ -31,7 +31,7 @@ public class HandlerCondition {
             }
         };
 
-        handler.post(runnable);
+        handler.postDelayed(runnable,repatedDelayTimer);
 
     }
 

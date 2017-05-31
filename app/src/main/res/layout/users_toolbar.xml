@@ -47,9 +47,11 @@
                 android:src="@drawable/test_user"
                 app:civ_border_width="1dp"
                 app:civ_border_overlay="true"
-                android:layout_centerVertical="true"
                 android:id="@+id/user_in_toolbar_imageview"
-                />
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="20dp" />
 
 
             <TextView
@@ -66,20 +68,18 @@
                 />
 
 
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="22dp"
-                android:layout_marginBottom="10dp"
-                android:textColor="#d8d8d8"
-                android:text="Subtitle"
-                android:visibility="gone"
-                android:textSize="18dp"
+                android:textColor="@color/white"
+                android:text="User1, User2 ,User3 ,User4 ,User5"
+                android:textSize="12dp"
                 android:id="@+id/subtitle_users_toolbar"
                 android:layout_below="@+id/title_users_toolbar"
-                android:layout_toRightOf="@+id/user_in_toolbar_imageview"
-                />
+                android:layout_alignLeft="@+id/title_users_toolbar"
+                android:layout_alignStart="@+id/title_users_toolbar"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
 
 
