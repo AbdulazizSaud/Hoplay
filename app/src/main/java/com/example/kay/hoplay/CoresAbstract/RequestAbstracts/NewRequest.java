@@ -684,6 +684,7 @@ public abstract class NewRequest extends AppCompatActivity {
         String selectedRank = playersRanksSpinner.getText().toString().trim();
         String requestDescription = descriptionEdittext.getText().toString().trim();
 
+        //
         if (checkIsValidRequest())
         {
             RequestModel requestModel = new RequestModel(selectedPlatform,selectedGame,app.getUserInformation().getUsername(),requestDescription,selectedRegion,Integer.parseInt(selectedPlayersNumber),selectedMatchType,selectedRank);
