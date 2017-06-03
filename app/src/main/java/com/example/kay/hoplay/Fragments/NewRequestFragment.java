@@ -5,7 +5,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,7 +18,7 @@ import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.RequestCore.NewRequestCore;
 import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
-import com.example.kay.hoplay.Models.SavedRequestModel;
+import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;
 
 import java.util.ArrayList;
@@ -30,8 +29,6 @@ public class NewRequestFragment extends ParentRequestFragments {
 
 
 
-    // saced reqs models
-    ArrayList<SavedRequestModel> savedRequestModels ;
 
 
     public NewRequestFragment() {
@@ -98,15 +95,6 @@ public class NewRequestFragment extends ParentRequestFragments {
 
 
 
-        savedRequestModels =new ArrayList<SavedRequestModel>();
-
-        savedRequestModels.add(saveRequest("","Rocket League","http://www.mobygames.com/images/covers/l/307552-rocket-league-playstation-4-front-cover.jpg","Doubles ranked ?",2));
-        savedRequestModels.add(saveRequest("","Overwatch","https://overwatch-a.akamaihd.net/img/logos/overwatch-share-3d5a268515283007bdf3452e877adac466d579f4b44abbd05aa0a98aba582eeaebc4541f1154e57ec5a43693345bebda953381a7b75b58adbd29d3f3eb439ad2.jpg","Need healing -_- ",6));
-        savedRequestModels.add(saveRequest("","League of Legends","https://s-media-cache-ak0.pinimg.com/originals/30/0e/58/300e58c8416a68dcfcf1761501348243.jpg","I have the best team !",4));
-        savedRequestModels.add(saveRequest("","World of Warcraft","https://s-media-cache-ak0.pinimg.com/236x/18/f2/c2/18f2c237688c6a4395e0f6a702743a7c.jpg","I'm bored",6));
-
-        savedRequestModels.add(saveRequest("","Dying Light","https://upload.wikimedia.org/wikipedia/en/c/c0/Dying_Light_cover.jpg","Lets kill some zombies",3));
-
 
 
         mAdapter = createAdapter();
@@ -123,15 +111,15 @@ public class NewRequestFragment extends ParentRequestFragments {
 
 
 
-    private CommonAdapter<SavedRequestModel> createAdapter(){
-        return new CommonAdapter<SavedRequestModel>(savedRequestModels,R.layout.saved_request_instance) {
+    private CommonAdapter<RequestModel> createAdapter(){
+        return new CommonAdapter<RequestModel>(app.getSavedRequests(),R.layout.saved_request_instance) {
             @Override
             public ViewHolders OnCreateHolder(View v) {
                 return new ViewHolders.SavedRequestHolder(v);
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder, final SavedRequestModel model , int position)
+            public void OnBindHolder(ViewHolders holder, final RequestModel model , int position)
             {
                 //ImageLoader loader = App.getInstance().getImageLoader();
 
@@ -145,12 +133,12 @@ public class NewRequestFragment extends ParentRequestFragments {
 
 
 
-                App.getInstance().loadingImage(getContext(),holder,model.getGamePhotoUrl());
+                App.getInstance().loadingImage(getContext(),holder,model.getRequestPicture());
 
                 // loadingImage(holder, model, loader);
-                holder.setTitle(model.getGameName());
-                holder.setSubtitle(model.getActivityDescription());
-                holder.setNumberOfPlayers(String.valueOf(model.getMaxPlayers()) + " Players");
+                holder.setTitle(model.getRequestTitle());
+                holder.setSubtitle(model.getDescription());
+                holder.setNumberOfPlayers(String.valueOf(model.getPlayerNumber()) + " Players");
 
 
             }
@@ -158,14 +146,14 @@ public class NewRequestFragment extends ParentRequestFragments {
     }
 
 
+//
+//    public RequestModel saveRequest(String gameID, String gameName , String gamePhoto , String requestDescription , int numberOfPlayers)
+//    {
+//        return  new RequestModel(gameID,gameName,numberOfPlayers,gamePhoto,"",requestDescription,"");
+//
+//    }
 
-    public SavedRequestModel saveRequest(String gameID, String gameName , String gamePhoto , String requestDescription , int numberOfPlayers)
-    {
-        return  new SavedRequestModel(gameID,gameName,numberOfPlayers,gamePhoto,"",requestDescription,"");
-
-    }
-
-    protected  void OnClickHolders(SavedRequestModel model, View v)
+    protected  void OnClickHolders(RequestModel model, View v)
     {
         ///.....
     }

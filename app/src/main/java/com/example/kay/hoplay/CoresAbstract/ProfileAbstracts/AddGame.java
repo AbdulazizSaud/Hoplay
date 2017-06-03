@@ -40,15 +40,11 @@ public abstract class AddGame extends AppCompatActivity {
 
 
     private RecyclerView mRecyclerView;
-    private EditText searchBar;
+    protected EditText searchBar;
     private ArrayList<GameModel> gamesList = new ArrayList<GameModel>();
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ProgressBar loadGamesProgressbar;
-
-
-
-
 
 
 
@@ -195,7 +191,7 @@ public abstract class AddGame extends AppCompatActivity {
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder, final GameModel model, int position) {
+            public void OnBindHolder(final ViewHolders holder, final GameModel model, final int position) {
                 // - get element from your dataset at this position
                 // - replace the contents of the view with that element
                 gameHolder = (ViewHolders.UserGameHolder) holder;
@@ -203,6 +199,19 @@ public abstract class AddGame extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         OnClickHolders(model, v);
+                    }
+                });
+
+                holder.getView().setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+
+                        if (app.getGameManager().checkIfHasGameByName(holder.getTitle().getText().toString().trim()))
+                        {
+                            showOnLongClickDialog(model);
+                            removeGameAnimation(v, position);
+                        }
+                        return true;
                     }
                 });
 
@@ -257,6 +266,7 @@ public abstract class AddGame extends AppCompatActivity {
         };
     }
 
+
     protected void addedGameMessage(String gameName) {
         // success message
         // String Msg = String.format(getResources().getString(R.string.signup_successful_message), username);
@@ -287,7 +297,8 @@ public abstract class AddGame extends AppCompatActivity {
 
     protected abstract void OnStartActivity();
 
+    protected abstract void showOnLongClickDialog(GameModel gameModel);
 
-
+    protected abstract void removeGameAnimation(View holderView,int position);
 
 }

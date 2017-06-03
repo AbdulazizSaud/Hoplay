@@ -69,7 +69,7 @@ public abstract class UserList extends AppCompatActivity {
         }
 
         @Override
-        public void OnBindHolder(final ViewHolders holder, final FriendCommonModel model , int position) {
+        public void OnBindHolder(final ViewHolders holder, final FriendCommonModel model , final int position) {
 
 
 
@@ -86,6 +86,7 @@ public abstract class UserList extends AppCompatActivity {
                 public boolean onLongClick(View v) {
 
                     showFriendpopup(model);
+                    removeFriend(v,position);
                     return true;
                 }
             });
@@ -96,7 +97,7 @@ public abstract class UserList extends AppCompatActivity {
 
             // animate holders
             setAnimation(holder.getTitleView(),holder.getPicture(),position);
-            removeFriendAnimation(holder.getTitleView(),holder.getPicture(),position);
+
 
 
         }
@@ -292,5 +293,5 @@ public abstract class UserList extends AppCompatActivity {
     protected abstract void showFriendpopup(FriendCommonModel friendCommonModel);
     protected abstract void searchForUser(String value);
 
-    protected abstract void removeFriendAnimation(View viewToAnimate1, View viewToAnimate2 ,  int position);
+    protected abstract void removeFriend(View holderView ,  int position);
 }

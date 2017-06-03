@@ -53,15 +53,22 @@ public class CommunityCore extends Community implements FirebasePaths {
                             if (lasMsgSnap.child("_message_").getValue() == null)
                                 return;
 
-                            addUserChatToList(
-                                    chatRef.getKey(),
-                                    FIREBASE_PRIVATE_ATTR,
-                                    userInfo.child("_username_").getValue().toString().trim(),
-                                    userInfo.child("_picUrl_").getValue().toString().trim(),
-                                    lasMsgSnap.child("_message_").getValue().toString().trim(),
-                                    lasMsgSnap.child("_time_stamp_").getValue().toString().trim(),
-                                    Long.parseLong(lasMsgSnap.child("_counter_").getValue().toString().trim())
-                            );
+                            try {
+
+                                addUserChatToList(
+                                        chatRef.getKey(),
+                                        FIREBASE_PRIVATE_ATTR,
+                                        userInfo.child("_username_").getValue(String.class),
+                                        userInfo.child("_picUrl_").getValue().toString().trim(),
+                                        lasMsgSnap.child("_message_").getValue().toString().trim(),
+                                        lasMsgSnap.child("_time_stamp_").getValue().toString().trim(),
+                                        Long.parseLong(lasMsgSnap.child("_counter_").getValue().toString().trim())
+                                );
+                            }catch (NullPointerException e)
+                            {
+
+                            }
+
                         }
 
                         @Override
@@ -378,7 +385,7 @@ public class CommunityCore extends Community implements FirebasePaths {
     public void onDestroy() {
         super.onDestroy();
         refAuthCurrentUserChats.child(FIREBASE_PRIVATE_ATTR).removeEventListener(privateSingleChatListener);
-        refLastMessage.removeEventListener(lastMessageListener);
-        refPendingChat.removeEventListener(privatePendingChatListener);
+//        refLastMessage.removeEventListener(lastMessageListener);
+//        refPendingChat.removeEventListener(privatePendingChatListener);
     }
 }

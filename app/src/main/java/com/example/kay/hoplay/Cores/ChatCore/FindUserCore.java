@@ -28,9 +28,9 @@ public class FindUserCore extends UserListCore {
         // users_info -> user key -> _firends_list_
         final DatabaseReference userFriendsListRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_FRIENDS_LIST_ATTR);
 
-        // If you want to add directly without friend request : uncomment this codes
-//        userFriendsListRef.child(model.getFriendKey());
-//        Log.i("shithappens",userFriendsListRef+"");
+//       Add friend to the friend list
+        userFriendsListRef.child(model.getFriendKey()).setValue(model.getFriendKey());
+
     }
 
     private void jumpToPrivateChat(FriendCommonModel model, String roomKey) {
@@ -93,7 +93,7 @@ public class FindUserCore extends UserListCore {
     }
 
     @Override
-    protected void removeFriendAnimation(View viewToAnimate1, View viewToAnimate2, int position) {
+    protected void removeFriend(View holderView, int position) {
 
     }
 

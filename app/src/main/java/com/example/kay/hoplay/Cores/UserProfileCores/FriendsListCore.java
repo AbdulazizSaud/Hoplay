@@ -23,8 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 public class FriendsListCore extends UserListCore {
 
 
-    View view1, view2 ;
-
+    View holderView;
     @Override
     protected void OnClickHolders(FriendCommonModel model)
     {
@@ -36,8 +35,8 @@ public class FriendsListCore extends UserListCore {
     @Override
     protected void onStartActivity() {
 
-//        searchEditText.setVisibility(EditText.GONE);
-//        searchEditText = null;
+        searchEditText.setVisibility(EditText.GONE);
+        searchEditText = null;
 
         loadFriendList();
     }
@@ -71,7 +70,6 @@ public class FriendsListCore extends UserListCore {
             @Override
             public void onClick(View v) {
 
-
             }
         });
 
@@ -89,7 +87,7 @@ public class FriendsListCore extends UserListCore {
             @Override
             public void onClick(View v) {
                 deleteFriend(friendCommonModel.getFriendKey().trim());
-                slideRightAnimate(getView1(),getView2());
+                slideRightAnimate(getHolderView());
                 friendLongClickDialog.dismiss();
 
 
@@ -108,44 +106,30 @@ public class FriendsListCore extends UserListCore {
     }
 
     @Override
-    protected void removeFriendAnimation(View viewToAnimate1, View viewToAnimate2, int position) {
-
-
-            if (position > -1) {
-                setViews(viewToAnimate1,viewToAnimate2);
-            }
-
+    protected void removeFriend(View holderView, int position) {
+        if (position > -1) {
+            setHolderView(holderView);
+        }
 
     }
+
 
     // Animation Deosn't work yet  !
-    private void slideRightAnimate(View viewToAnimate1, View viewToAnimate2)
+    private void slideRightAnimate(View holderView)
     {
             Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_out_right);
-            viewToAnimate1.startAnimation(animation);
-            viewToAnimate2.startAnimation(animation);
-            viewToAnimate1.setVisibility(View.GONE);
-            viewToAnimate2.setVisibility(View.GONE);
+            holderView.startAnimation(animation);
+            holderView.setVisibility(View.GONE);
 
     }
 
-
-    private void setViews(View view1 , View view2)
-    {
-        this.view1 = view1;
-        this.view2 = view2;
+    public View getHolderView() {
+        return holderView;
     }
 
-    private View getView1()
-    {
-        return  view1;
+    public void setHolderView(View holderView) {
+        this.holderView = holderView;
     }
-
-    private View getView2()
-    {
-        return view2;
-    }
-
 
     private void deleteFriend(String friendKey)
     {

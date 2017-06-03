@@ -32,6 +32,22 @@ public class GameManager implements FirebasePaths{
     }
 
 
+    public void deleteGame(String gameId,String gameName)
+    {
+        if (isCompetitive(gameId))
+        {
+            gamesCompList.remove(gameId);
+            allGamesIds.remove(gameId);
+            allGamesName.remove(gameName);
+        }
+        else {
+            gamesCOOPList.remove(gameId);
+            allGamesIds.remove(gameId);
+            allGamesName.remove(gameName);
+        }
+    }
+
+
     public GameModel getGameByName(String name)
     {
         GameModel gameModel = null;
@@ -72,6 +88,17 @@ public class GameManager implements FirebasePaths{
     public int getUserGamesNumber(){
 
         return  allGamesIds.size();
+    }
+
+    public boolean checkIfHasGameByName(String gameName)
+    {
+        GameModel gameModel = null ;
+        gameModel =  getGameByName(gameName);
+
+        if (gameModel != null)
+            return true;
+
+        return false;
     }
 
 

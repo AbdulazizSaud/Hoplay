@@ -33,6 +33,8 @@ public class RequestModel  {
     public RequestModel() {
     }
 
+
+
     public RequestModel(String platform, String requestTitle, String admin, String description, String region, int playerNumber, String matchType, String rank, long timeStamp) {
         this.platform=platform;
         this.admin = admin;
@@ -54,6 +56,7 @@ public class RequestModel  {
         this.rank = rank;
         this.timeStamp = timeStamp;
     }
+
 
 
 

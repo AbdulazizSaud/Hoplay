@@ -56,6 +56,8 @@ public class App extends Application implements FirebasePaths{
     private TimeStamp timeStamp;
     private ArrayList<RequestModel> requestResultList =new ArrayList<>();
 
+    private ArrayList<RequestModel> savedRequests =new ArrayList<>();
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -225,6 +227,14 @@ public class App extends Application implements FirebasePaths{
 
     public void setSearchRequestResult(ArrayList<RequestModel> resultList){
         this.requestResultList = resultList;
+    }
+
+    public ArrayList<RequestModel> getSavedRequests() {
+        return savedRequests;
+    }
+
+    public void setSavedRequests(ArrayList<RequestModel> savedRequests) {
+        this.savedRequests = savedRequests;
     }
 
     public ArrayList<RequestModel> getSearchRequestResult(){

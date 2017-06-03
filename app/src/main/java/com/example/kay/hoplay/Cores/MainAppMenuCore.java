@@ -11,6 +11,7 @@ import com.example.kay.hoplay.Fragments.NoGameFragment;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.Rank;
+import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.util.TimeStamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -127,6 +128,13 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     // load games
 
                     loadFavorGamesList();
+
+
+                    app.setSavedRequests(new ArrayList<RequestModel>());
+                    // load saved reqs
+                    loadSavedRequests(user.getUid());
+
+
                     // check request
                     checkRequest();
 
@@ -180,6 +188,34 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
     }
 
+    private void loadSavedRequests(String currentUID)
+    {
+
+        app.getDatabaseUsersInfo().child(currentUID).child(FIREBASE_SAVED_REQS_PATH).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() == null)
+                    return;
+
+
+                ArrayList<RequestModel> arrayList = new ArrayList<RequestModel>();
+                Iterable<DataSnapshot> shots = dataSnapshot.getChildren();
+
+                for (DataSnapshot shot : shots) {
+
+                    RequestModel requestModel = shot.getValue(RequestModel.class);
+                    arrayList.add(requestModel);
+                }
+                app.setSavedRequests(arrayList);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     private void setGamesLoaderEvent(DataSnapshot dataSnapshot) {
         final String gameKey = dataSnapshot.getKey();
@@ -224,11 +260,11 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 long numberOfReqs = dataSnapshot.getChildrenCount();
-//                if(numberOfReqs > 0)
-//                menuPagerAdapter.setParentRequestFragments(new LobbyFragmentCore());
-//                else if(app.getGameManager().getUserGamesNumber() >= 1)
-//                    menuPagerAdapter.setParentRequestFragments(new NewRequestFragment());
-//                else
+                if(numberOfReqs > 0)
+                menuPagerAdapter.setParentRequestFragments(new LobbyFragmentCore());
+                else if(app.getGameManager().getUserGamesNumber() >= 1)
+                    menuPagerAdapter.setParentRequestFragments(new NewRequestFragment());
+                else
                     menuPagerAdapter.setParentRequestFragments(new NewRequestFragment());
 
                 isDone=true;

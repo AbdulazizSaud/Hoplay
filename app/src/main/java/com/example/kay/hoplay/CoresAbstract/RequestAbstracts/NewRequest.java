@@ -35,6 +35,7 @@ import com.example.kay.hoplay.CoresAbstract.MainAppMenu;
 import com.example.kay.hoplay.Fragments.NewRequestFragment;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.Rank;
+import com.example.kay.hoplay.Models.RequestModel;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 import com.example.kay.hoplay.Adapters.SpinnerAdapter;
 import com.example.kay.hoplay.R;
@@ -529,7 +530,7 @@ public abstract class NewRequest extends AppCompatActivity {
         playerNumberList.clear();
         ranksList.clear();
 
-        for (int i = 1; i <= gameModel.getMaxPlayers(); i++) {
+        for (int i = 2; i <= gameModel.getMaxPlayers(); i++) {
             playerNumberList.add(Integer.toString(i));
         }
 
@@ -670,12 +671,47 @@ public abstract class NewRequest extends AppCompatActivity {
 
 
 
+    public void saveRequestListener(View view)
+    {
 
 
-    // This method  load number of  max players of the selected game
+
+
+        String selectedGame = gamesAutoCompleteTextView.getText().toString().trim();
+        String selectedMatchType = matchTypeSpinner.getText().toString().trim();
+        String selectedRegion = countrySpinner.getText().toString().trim();
+        String selectedPlayersNumber = numberOfPlayersSpinner.getText().toString().trim();
+        String selectedRank = playersRanksSpinner.getText().toString().trim();
+        String requestDescription = descriptionEdittext.getText().toString().trim();
+
+        if (checkIsValidRequest())
+        {
+            RequestModel requestModel = new RequestModel(selectedPlatform,selectedGame,app.getUserInformation().getUsername(),requestDescription,selectedRegion,Integer.parseInt(selectedPlayersNumber),selectedMatchType,selectedRank);
+
+            GameModel gameModel = app.getGameManager().getGameByName(selectedGame);
+
+            requestModel.setGameId(gameModel.getGameID());
+            requestModel.setRequestPicture(gameModel.getGamePhotoUrl());
+
+            app.getSavedRequests().add(requestModel);
+            saveRequest();
+            finish();
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
     protected abstract void OnStartActivity();
     protected abstract void saveGameProviderAccount(String gameProvider,String userGameProviderAcc , String platform );
-
+    protected abstract void saveRequest();
 
     // This method  take the request input from the user and insert it  into the database
     // It should take request model and pass it to the core

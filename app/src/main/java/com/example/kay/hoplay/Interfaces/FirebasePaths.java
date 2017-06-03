@@ -34,11 +34,14 @@ public interface FirebasePaths {
     public static final String FIREBASE_USER_CHAT_REFERENCES = "_chat_refs_";
     public static final String FIREBASE_GAME_MAX_PLAYER_ATTR = "max_player";
     public static final String FIREBASE_CHAT_ATTR = "Chat";
+    public static final String FIREBASE_SAVED_REQS_ATTR = "_saved_requests_";
+
     public static final String FIREBASE_PENDING_CHAT_ATTR = "_pending_chat_";
     public static final String FIREBASE_CHAT_MESSAGES = "_messages_";
     public static final String FIREBASE_USER_PRIVATE_CHAT = FIREBASE_USER_CHAT_REFERENCES+"/"+FIREBASE_PRIVATE_ATTR;
     public static final String FIREBASE_USER_PUBLIC_CHAT = FIREBASE_USER_CHAT_REFERENCES+"/"+FIREBASE_PUBLIC_ATTR;
     public static final String FIREBASE_CHAT_USERS_LIST_PATH = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_USERS_LIST_ATTR;
+    public static final String FIREBASE_SAVED_REQS_PATH = FIREBASE_GAMES_REFERENCES+"/"+FIREBASE_SAVED_REQS_ATTR;
 
 
     public static final String FIREBASE_COUNTER_PATH = "_counter_";

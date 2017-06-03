@@ -17,6 +17,10 @@
             android:summary="@string/settings_allow_messages_summary">
         </CheckBoxPreference>
 
+        <Preference
+            android:key="settings_edit_profile"
+            android:title="@string/settings_edit_profile"
+            />
 
         <Preference
             android:key="settings_change_password"
@@ -34,12 +38,7 @@
             android:key="settings_blocked_list"
             android:title="@string/settings_view_blocked_list" />
 
-        <Preference
-            android:key="settings_services"
-            android:title="@string/settings_services"
 
-            android:summary="@string/settings_services_summary"
-            android:id="@+id/preference" />
 
     </PreferenceCategory>
 

@@ -1,5 +1,7 @@
 package com.example.kay.hoplay.Cores.RequestCore;
 
+import android.provider.ContactsContract;
+
 import com.example.kay.hoplay.Cores.ChatCore.CreateChat;
 import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.NewRequest;
@@ -60,6 +62,12 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
             // users_info_ -> user id - > PC_game_provider_accopunt STWAM , BATTLENET .. etc
             userRef.child(FIREBASE_PC_GAME_PROVIDER).child(gameProvider).setValue(userGameProviderAcc);
         }
+
+    }
+
+    @Override
+    protected void saveRequest() {
+        app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_SAVED_REQS_PATH).setValue(app.getSavedRequests());
 
     }
 

@@ -93,7 +93,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     public void setAnimation(View viewToAnimate) {
         // If the bound view wasn't previously displayed on screen, it's animated
 
-            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
+            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
             viewToAnimate.startAnimation(animation);
 
     }
@@ -126,7 +126,6 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         OnStartActivity();
 
         initControls();
-
 
 
         changeIconListener();

@@ -77,7 +77,8 @@
     <string name="settings_contact_us">Contact us</string>
     <string name="settings_logout">Log out</string>
     <string name="settings_notifications">Push notifications</string>
-    <string name="settings_change_password">Change password</string>
+    <string name="settings_change_password">Change Password</string>
+    <string name="settings_edit_profile">Edit Profile</string>
     <string name="settings_change_password_message">Reset password link has been sent to your email : %1$s , Please check your inbox</string>
     <string name="settings_deactivate_account">Deactivate account</string>
     <string name="settings_view_blocked_list">View blocked list</string>
@@ -296,7 +297,7 @@
     <string name="new_request_dialog_title">Creating Request</string>
     <string name="new_request_dialog_message">Just one moment</string>
     <string name="new_request_dialog_no_game_provider_error">Please provide your %1$s account to continue</string>
-    <string name="new_request_finish_request_message">Your request has been added successfully %1$s &#160; &#160; 😃 </string>
+    <string name="new_request_finish_request_message">Your request has been added successfully %1$s &#160; 😃 </string>
 
 
     <!--                                Deactive Account PopUp verification                     -->
@@ -312,7 +313,7 @@
     <string name="search_results_time_priority">Order By Time</string>
     <string name="search_results_player_number_priority">Order By Players Number</string>
 
-    
+
     <!--                                Request Lobby Layout            -->
     <string name="request_lobby_math_type_text">Match Type</string>
     <string name="request_lobby_room_admin">Room Admin</string>
@@ -333,5 +334,17 @@
     <string name="friend_pop_up_menu_chat_button">Chat</string>
     <string name="friend_pop_up_menu_view_profile_button">View Profile</string>
     <string name="friend_pop_up_menu_delete_friend_button">Delete</string>
-    
+
+    <!--                                Game On Long Click  Popup                           -->
+    <string name="game_long_click_pop_up_delete_text">Are you sure you want to delete this game?</string>
+    <string name="game_long_click_pop_up_delete_yes">Yes</string>
+    <string name="game_long_click_pop_up_delete_no">no</string>
+
+
+    <!--                                Change  password Layout             -->
+    <string name="change_password_current_password">Current Password</string>
+    <string name="change_password_new_password">New Password</string>
+    <string name="change_password_confirm_password">Confirm New Password</string>
+    <string name="change_password_update_password_button">U P D A T E</string>
+
 </resources>
