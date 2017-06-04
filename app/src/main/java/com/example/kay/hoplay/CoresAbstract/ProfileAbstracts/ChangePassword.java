@@ -30,7 +30,9 @@ public abstract class ChangePassword extends AppCompatActivity {
     private Button updateButton;
     protected RelativeLayout changePasswordRelativeLayout;
     protected boolean isCorrectPassword;
+    private boolean isCorrectNewPassword ;
     protected App app = App.getInstance();
+    protected ProgressDialog loadingDialog ;
 
 
 
@@ -53,6 +55,7 @@ public abstract class ChangePassword extends AppCompatActivity {
     {
 
         isCorrectPassword = false;
+        isCorrectNewPassword = false;
         currrentPassword = (EditText) findViewById(R.id.current_password_change_password_edittext);
         newPassword = (EditText) findViewById(R.id.new_password_change_password_edittext);
         confirmNewPassword = (EditText) findViewById(R.id.confirm_new_password_change_password_edittext);
@@ -69,6 +72,13 @@ public abstract class ChangePassword extends AppCompatActivity {
         confirmNewPassword.setTypeface(playReg);
 
         updateButton.setTypeface(sansation);
+
+
+        // Init progress dialog
+        loadingDialog = new ProgressDialog(this,R.style.AppCompatAlertDialogStyle);
+        loadingDialog.setTitle(R.string.change_password_dialog_title);
+        loadingDialog.setMessage(ChangePassword.this.getString(R.string.change_password_dialog_body_message));
+
 
 
 
@@ -123,6 +133,14 @@ public abstract class ChangePassword extends AppCompatActivity {
                 {
                     newPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_lock_open_not_focused_32dp, 0);
                 }
+                if (s.length()<6)
+                {
+                    newPassword.setError(getText(R.string.error_small_password));
+                    isCorrectNewPassword = false;
+                }
+                else {
+                    isCorrectNewPassword= true;
+                }
 
 
 
@@ -150,6 +168,7 @@ public abstract class ChangePassword extends AppCompatActivity {
                 {
                     confirmNewPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_lock_open_not_focused_32dp, 0);
                 }
+
 
 
 
@@ -182,7 +201,7 @@ public abstract class ChangePassword extends AppCompatActivity {
         if (currrentPassword.getText().toString().trim().isEmpty())
         {
             Snackbar snackbar = Snackbar
-                    .make(changePasswordRelativeLayout, "Old Password Is Empty", Snackbar.LENGTH_LONG);
+                    .make(changePasswordRelativeLayout, R.string.change_password_old_password_empty_error, Snackbar.LENGTH_LONG);
 
             snackbar.show();
             return;
@@ -192,23 +211,23 @@ public abstract class ChangePassword extends AppCompatActivity {
         if (newPassword.getText().toString().trim().isEmpty())
         {
             Snackbar snackbar = Snackbar
-                    .make(changePasswordRelativeLayout, "New Password Is Empty", Snackbar.LENGTH_LONG);
+                    .make(changePasswordRelativeLayout, R.string.change_password_new_password_empty_error, Snackbar.LENGTH_LONG);
 
             snackbar.show();
             return;
         }
 
 
-        if (!validateNewPasswords())
+        if (!validateNewPasswords() && isCorrectNewPassword)
         {
             Snackbar snackbar = Snackbar
-                    .make(changePasswordRelativeLayout, "New Passwords Do Not Match", Snackbar.LENGTH_LONG);
+                    .make(changePasswordRelativeLayout, R.string.change_password_new_password_match_error, Snackbar.LENGTH_LONG);
 
             snackbar.show();
             return;
         }
 
-
+        loadingDialog.show();
         validateOldPassword(currrentPassword.getText().toString().trim());
 
 

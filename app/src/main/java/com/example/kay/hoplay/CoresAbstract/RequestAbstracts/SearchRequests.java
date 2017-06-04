@@ -156,14 +156,23 @@ public abstract class SearchRequests extends Fragment {
 
         GameModel gameModel = app.getGameManager().getGameByName(selectedGame);
 
+        playersNumberAdapter.clear();
+
+        playersNumberAdapter.add("All Numbers");
         for (int i = 1; i <= gameModel.getMaxPlayers(); i++) {
-            playerNumberList.add(Integer.toString(i));
-
+            playersNumberAdapter.add(Integer.toString(i));
         }
 
+            playersNumberAdapter.notifyDataSetChanged();
+
+
+        playersRanksAdapter.clear();
+        playersRanksAdapter.add("All Ranks");
         for (Rank rank : gameModel.getGameRanks().getRanksList()) {
-            ranksList.add(rank.getRankName());
+            playersRanksAdapter.add(rank.getRankName());
         }
+
+        playersRanksAdapter.notifyDataSetChanged();
 
 
 
@@ -219,6 +228,7 @@ public abstract class SearchRequests extends Fragment {
         psIsChosen = false;
         pcIsChosen = false;
         xboxIsChosen = false;
+        currentPlatform="Nothing";
 
         Typeface sansation = Typeface.createFromAsset(getActivity().getAssets(), "sansationbold.ttf");
         searchGameMessage.setTypeface(sansation);
@@ -272,22 +282,26 @@ public abstract class SearchRequests extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String gameName = searchGameAutoCompleteTextView.getText().toString().trim();
-                String region  = countrySpinner.getText().toString().trim();
-                String playersNumber = numberOfPlayersSpinner.getText().toString().trim();
-                String rank = ranksSpinner.getText().toString().trim();
-                String matchtype=matchTypeSpinner.getText().toString().trim();
+                String gameName = "";
+                String region="";
+                int playersNumber=0;
+                String rank="";
+                String matchType="";
 
+                 gameName = searchGameAutoCompleteTextView.getText().toString().trim();
+                region= countrySpinner.getText().toString().trim();
+                if (!numberOfPlayersSpinner.getText().toString().trim().equals(""))
+                    playersNumber = Integer.parseInt(numberOfPlayersSpinner.getText().toString().trim());
 
+                 rank = ranksSpinner.getText().toString().trim();
+                 matchType =matchTypeSpinner.getText().toString().trim();
+                RequestModel requestModel;
 
-                if(currentPlatform == null || gameName.isEmpty()  || region.isEmpty() ||  playersNumber.isEmpty() || rank.isEmpty()) {
-                    Toast.makeText(getContext(),"Check Fields",Toast.LENGTH_LONG).show();
-                    return;
+                if(checkIsValidSearch()){
+                    requestModel=new RequestModel(currentPlatform,gameName,region,playersNumber,matchType,rank,-1);
+                    searchForRequest(requestModel);
                 }
 
-
-                RequestModel requestModel =new RequestModel(currentPlatform,gameName,region,Integer.parseInt(playersNumber),matchtype,rank,-1);
-                searchForRequest(requestModel);
             }
         });
 
@@ -407,6 +421,9 @@ public abstract class SearchRequests extends Fragment {
                 if (s.length() == 0) {
                     searchGameAutoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_games_unfocused_24dp, 0, 0, 0);
                 }
+
+                numberOfPlayersSpinner.setText("");
+                ranksSpinner.setText("");
             }
         });
 
@@ -416,6 +433,7 @@ public abstract class SearchRequests extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String name = parent.getItemAtPosition(position).toString();
+
 
 
                 // Load max players
@@ -552,8 +570,42 @@ public abstract class SearchRequests extends Fragment {
 
     }
 
+
+
+    private boolean checkIsValidSearch() {
+
+        // check the platform
+        if (currentPlatform.equalsIgnoreCase("Nothing")) {
+
+            Toast.makeText(getContext(), R.string.search_request_fragment_platform_error, Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        // check if the game field is empty
+        if (searchGameAutoCompleteTextView.getText().toString().length() == 0) {
+            Toast.makeText(getContext(), R.string.search_request_fragment_select_game_error, Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        // Check selected game is in the user games
+        if (!userHasTheGame(searchGameAutoCompleteTextView.getText().toString().trim())) {
+
+            Toast.makeText(getContext(), R.string.search_request_fragment_no_game_error, Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        return true;
+    }
+
+
+
     protected boolean checkIfCompetitive(String gameKey) {
         return app.getGameManager().isCompetitive(gameKey);
+    }
+
+    // this method check if the user has the game if yes , load game properties
+    private boolean userHasTheGame(String selectedGame) {
+        return app.getGameManager().getGameByName(selectedGame) !=null;
     }
 
     protected  void goToResultLayout()

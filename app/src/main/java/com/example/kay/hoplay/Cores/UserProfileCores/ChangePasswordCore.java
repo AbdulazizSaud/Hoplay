@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar;
 import android.widget.Toast;
 
 import com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.ChangePassword;
+import com.example.kay.hoplay.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -41,9 +42,11 @@ public class ChangePasswordCore  extends ChangePassword {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                         updateUserPassword(newPassword.getText().toString().trim());
+                        loadingDialog.dismiss();
                 } else {
+                    loadingDialog.dismiss();
                     Snackbar snackbar = Snackbar
-                            .make(changePasswordRelativeLayout, "Old Password is incorrect", Snackbar.LENGTH_LONG);
+                            .make(changePasswordRelativeLayout, R.string.change_password_old_password_incorrect_error, Snackbar.LENGTH_LONG);
 
                     snackbar.show();
                 }
@@ -59,7 +62,7 @@ public class ChangePasswordCore  extends ChangePassword {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(),"Your Password is updated successfully",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),R.string.change_password_success_update_message,Toast.LENGTH_LONG).show();
                     finish();
                 }
             }

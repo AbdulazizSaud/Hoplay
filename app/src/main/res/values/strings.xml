@@ -207,6 +207,12 @@
     <string name="terms_and_conditions_message">Terms and conditions</string>
 
 
+    <!--                                    Search Request Fragment                                             -->
+    <string name="search_request_fragment_platform_error">You have not specified the platform</string>
+    <string name="search_request_fragment_select_game_error">You have not specified the game</string>
+    <string name="search_request_fragment_no_game_error">You do not have this game in your library. add the game then continue</string>
+
+
     <!--                                Search Request Fragment Layout                                           -->
     <string name="search_request_search_message">Search For a Team</string>
     <string name="search_request_all_games">All games</string>
@@ -298,6 +304,7 @@
     <string name="new_request_dialog_message">Just one moment</string>
     <string name="new_request_dialog_no_game_provider_error">Please provide your %1$s account to continue</string>
     <string name="new_request_finish_request_message">Your request has been added successfully %1$s &#160; 😃 </string>
+    <string name="new_request_finish_save_request_message">Your request has been saved successfully %1$s &#160; 😃 </string>
 
 
     <!--                                Deactive Account PopUp verification                     -->
@@ -346,5 +353,19 @@
     <string name="change_password_new_password">New Password</string>
     <string name="change_password_confirm_password">Confirm New Password</string>
     <string name="change_password_update_password_button">U P D A T E</string>
+
+
+
+    <!--                                Change  Password Activity           -->
+    <string name="change_password_old_password_empty_error">Old Password is incorrect</string>
+    <string name="change_password_old_password_incorrect_error">Old Password Is Empty</string>
+    <string name="change_password_new_password_empty_error">New Password Is Empty</string>
+    <string name="change_password_new_password_match_error">New Passwords Do Not Match</string>
+    <string name="change_password_success_update_message">Your Password is updated successfully</string>
+    <string name="change_password_dialog_title">Updating Password</string>
+    <string name="change_password_dialog_body_message">Checking password info..</string>
+
+
+
 
 </resources>

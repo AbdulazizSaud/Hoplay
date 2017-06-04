@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="players_ranks">
-        <item>All ranks</item>
-    <item>Hopy</item>
-        <item>Hopro</item>
-        <item>Hovet</item>
-        <item>Hocha</item>
-        <item>Hot</item>
-
-
+        <item>All Ranks</item>
 
     </string-array>
 

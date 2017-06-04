@@ -57,6 +57,7 @@ public abstract class NewRequest extends AppCompatActivity {
     // NOTE : Deal with spinners  here as Edittexts because it's not created natively by android studio it's a Dependency/Library.
 
 
+    private boolean isRequest , isSaveRequest;
     private TextView makeRequestMessage;
     private Button makeRequestButton;
     private Button saveRequestButton;
@@ -160,6 +161,9 @@ public abstract class NewRequest extends AppCompatActivity {
         descriptionEdittext.setTypeface(playbold);
 
 
+        isRequest = false ;
+        isSaveRequest = false ;
+
 
         creatingRequestDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
         creatingRequestDialog.setTitle(R.string.new_request_dialog_title);
@@ -181,10 +185,13 @@ public abstract class NewRequest extends AppCompatActivity {
 
         playersNumberAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
                 playerNumberList);
+        playersNumberAdapter.add("All Numbers");
 
 
         playersRanksAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
                 ranksList);
+        playersRanksAdapter.add("All Ranks");
+
 
         makeRequestMessage.requestFocus();
 
@@ -240,19 +247,29 @@ public abstract class NewRequest extends AppCompatActivity {
                 }
                 matchTypeSpinner.setVisibility(View.GONE);
                 playersRanksSpinner.setVisibility(View.GONE);
+
+
+                // To clear previous selections
+                numberOfPlayersSpinner.setText("");
+                playersRanksSpinner.setText("");
+
             }
         });
 
         gamesAutoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                numberOfPlayersSpinner.setVisibility(View.VISIBLE);
+
                 String name = parent.getItemAtPosition(position).toString();
+
+                Toast.makeText(getApplicationContext(),name,Toast.LENGTH_LONG).show();
 
 
                 // Load max players
-
                 String gameKey = loadGameInformation(name);
-
 
                 if (checkIfCompetitive(gameKey)) {
                     matchTypeSpinner.setVisibility(View.VISIBLE);
@@ -392,6 +409,8 @@ public abstract class NewRequest extends AppCompatActivity {
     public void requestButtonListener(View view) {
 
 
+        isRequest = true;
+
         // the selected platform selected in another method  : onPlatformSelecting
         String selectedGame = gamesAutoCompleteTextView.getText().toString().trim();
         String selectedMatchType = matchTypeSpinner.getText().toString().trim();
@@ -479,7 +498,7 @@ public abstract class NewRequest extends AppCompatActivity {
         }
 
         // Check selected game is in the user games
-        if (!userHasTheGameThenLoadStandards(gamesAutoCompleteTextView.getText().toString().trim())) {
+        if (!userHasTheGame(gamesAutoCompleteTextView.getText().toString().trim())) {
 
             Toast.makeText(getApplicationContext(), R.string.new_request_game_error, Toast.LENGTH_LONG).show();
             return false;
@@ -506,7 +525,7 @@ public abstract class NewRequest extends AppCompatActivity {
 
 
     // this method check if the user has the game if yes , load game properties
-    private boolean userHasTheGameThenLoadStandards(String selectedGame) {
+    private boolean userHasTheGame(String selectedGame) {
         return app.getGameManager().getGameByName(selectedGame) !=null;
     }
     protected boolean checkIfCompetitive(String gameKey) {
@@ -518,6 +537,7 @@ public abstract class NewRequest extends AppCompatActivity {
         finish();
         String msg = String.format(getResources().getString(R.string.new_request_finish_request_message), "");
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+        isRequest = false;
     }
 
     private String loadGameInformation(String selectedGame) {
@@ -525,18 +545,27 @@ public abstract class NewRequest extends AppCompatActivity {
 
         final GameModel gameModel = app.getGameManager().getGameByName(selectedGame);
 
+        playersNumberAdapter.clear();
 
 
-        playerNumberList.clear();
-        ranksList.clear();
-
+        playersNumberAdapter.add("All Numbers");
         for (int i = 2; i <= gameModel.getMaxPlayers(); i++) {
-            playerNumberList.add(Integer.toString(i));
+            playersNumberAdapter.add(Integer.toString(i));
         }
 
+        playersNumberAdapter.notifyDataSetChanged();
+
+
+
+        playersRanksAdapter.clear();
+
+        playersRanksAdapter.add("All Ranks");
         for (Rank rank : gameModel.getGameRanks().getRanksList()) {
-            ranksList.add(rank.getRankName());
+            playersRanksAdapter.add(rank.getRankName());
         }
+
+        playersRanksAdapter.notifyDataSetChanged();
+
 
         return gameModel.getGameID();
     }
@@ -544,15 +573,24 @@ public abstract class NewRequest extends AppCompatActivity {
 
 
 
-    private void updateAdapter(){
-
-        playersRanksSpinner.clearListSelection();
-        numberOfPlayersSpinner.clearListSelection();
-
-        playersNumberAdapter.notifyDataSetChanged();
-        playersRanksAdapter.notifyDataSetChanged();
-
-    }
+//
+//    private void updateAdapter(){
+//
+//
+//        playerNumberList.clear();
+//        ranksList.clear();
+//
+//
+//        playersRanksSpinner.clearListSelection();
+//        numberOfPlayersSpinner.clearListSelection();
+//
+//        playersNumberAdapter.clear();
+//        playersRanksAdapter.clear();
+//
+//        playersNumberAdapter.notifyDataSetChanged();
+//        playersRanksAdapter.notifyDataSetChanged();
+//
+//    }
 
     public void createGameProviderDialog(final String platform , final String game , final String match , final String region , final String playersNumber , final String rank ,final String description)
     {
@@ -632,12 +670,20 @@ public abstract class NewRequest extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Check if the user entered the game provider id
-                if (gameProviderEdittext.length() > 0)
+                if (gameProviderEdittext.length() > 0 && isRequest)
                 {
-                        saveGameProviderAccount(pcGameProvider,gameProviderEdittext.getText().toString().trim(),selectedPlatform);
-                        gameProviderDialog.dismiss();
-                         request(platform,game,match,region,playersNumber,rank,description);
-                          finishRequest();
+                    saveGameProviderAccount(pcGameProvider,gameProviderEdittext.getText().toString().trim(),selectedPlatform);
+                    gameProviderDialog.dismiss();
+                    request(platform,game,match,region,playersNumber,rank,description);
+                    finishRequest();
+                }
+
+                else if (gameProviderEdittext.length() > 0 && isSaveRequest)
+                {
+
+                    saveGameProviderAccount(pcGameProvider,gameProviderEdittext.getText().toString().trim(),selectedPlatform);
+                    gameProviderDialog.dismiss();
+                    prepareSaveReq(game,match,region,playersNumber,rank,description);
                 }
                 else
                 {
@@ -671,11 +717,27 @@ public abstract class NewRequest extends AppCompatActivity {
 
 
 
+    private void prepareSaveReq(String selectedGame , String selectedMatchType , String selectedRegion , String selectedPlayersNumber , String selectedRank , String requestDescription)
+    {
+        RequestModel requestModel = new RequestModel(selectedPlatform,selectedGame,app.getUserInformation().getUsername(),requestDescription,selectedRegion,Integer.parseInt(selectedPlayersNumber),selectedMatchType,selectedRank);
+
+        GameModel gameModel = app.getGameManager().getGameByName(selectedGame);
+
+        requestModel.setGameId(gameModel.getGameID());
+        requestModel.setRequestPicture(gameModel.getGamePhotoUrl());
+
+        app.getSavedRequests().add(requestModel);
+        saveRequest();
+        String msg = String.format(getResources().getString(R.string.new_request_finish_save_request_message), "");
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+        finish();
+        isSaveRequest = false;
+    }
+
     public void saveRequestListener(View view)
     {
 
-
-
+        isSaveRequest = true ;
 
         String selectedGame = gamesAutoCompleteTextView.getText().toString().trim();
         String selectedMatchType = matchTypeSpinner.getText().toString().trim();
@@ -687,21 +749,27 @@ public abstract class NewRequest extends AppCompatActivity {
         //
         if (checkIsValidRequest())
         {
-            RequestModel requestModel = new RequestModel(selectedPlatform,selectedGame,app.getUserInformation().getUsername(),requestDescription,selectedRegion,Integer.parseInt(selectedPlayersNumber),selectedMatchType,selectedRank);
 
-            GameModel gameModel = app.getGameManager().getGameByName(selectedGame);
+            if (selectedPlatform.equalsIgnoreCase("PS") && !app.getUserInformation().getPSNAcc().equals("")){
+               prepareSaveReq( selectedGame ,  selectedMatchType ,  selectedRegion ,  selectedPlayersNumber ,  selectedRank , requestDescription);
+            }
+            else if (selectedPlatform.equalsIgnoreCase("XBOX") && !app.getUserInformation().getXboxLiveAcc().equals("")){
+                prepareSaveReq( selectedGame ,  selectedMatchType ,  selectedRegion ,  selectedPlayersNumber ,  selectedRank , requestDescription);
+            }
+            else if (selectedPlatform.equalsIgnoreCase("PC") && app.getUserInformation().getPcGamesAcc().get(pcGameProvider) !=null)
+            {
+                prepareSaveReq( selectedGame ,  selectedMatchType ,  selectedRegion ,  selectedPlayersNumber ,  selectedRank , requestDescription);
+            }
 
-            requestModel.setGameId(gameModel.getGameID());
-            requestModel.setRequestPicture(gameModel.getGamePhotoUrl());
+            else
+                createGameProviderDialog(selectedPlatform, selectedGame, selectedMatchType, selectedRegion, selectedPlayersNumber, selectedRank, requestDescription);
 
-            app.getSavedRequests().add(requestModel);
-            saveRequest();
-            finish();
         }
 
 
 
     }
+
 
 
 
