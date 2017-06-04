@@ -58,7 +58,12 @@ public class ChatCore extends Chat implements FirebasePaths {
 
         }
     };
+
+    private boolean cutLoob=false;
+
     private ValueEventListener counterListener = new ValueEventListener() {
+
+
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
             if (dataSnapshot.getValue() == null)
@@ -83,6 +88,7 @@ public class ChatCore extends Chat implements FirebasePaths {
     @Override
     public void setupChat()
     {
+
         //load message
         Intent i = getIntent();
         chatRoomKey = i.getStringExtra("room_key");
@@ -90,27 +96,48 @@ public class ChatCore extends Chat implements FirebasePaths {
         roomName = i.getStringExtra("room_name");
         roomPictureUrl = i.getStringExtra("room_picture");
 
-        String pathChatRoomType = (chatRoomType.equals(FIREBASE_PRIVATE_ATTR)) ? FB_PRIVATE_CHAT_PATH:FB_PUBLIC_CHAT_PATH;
+        final boolean isPrivate = chatRoomType.equals(FIREBASE_PRIVATE_ATTR);
+        final String currentUID = app.getUserInformation().getUID();
+
+        String pathChatRoomType = (isPrivate) ? FB_PRIVATE_CHAT_PATH:FB_PUBLIC_CHAT_PATH;
 
         refRoom = app.getFirebaseDatabase().getReferenceFromUrl(pathChatRoomType + chatRoomKey);
         refMessages = refRoom.child("_messages_");
 
-        // load username
+
+        // here will be to procedure  in two condition : private, public
+        // in case private : it will check the type than it will escape the current user till it find a bio of oppsite user and added to bio of the chat
+        // in case public : it will check the type than it will add all user in chat in bio of the chat
         refRoom.child(FIREBASE_CHAT_USERS_LIST_PATH).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+
                 for(final DataSnapshot users :dataSnapshot.getChildren())
                 {
-                    app.getDatabaseUsersInfo().child(users.getKey()+"/"+FIREBASE_USERNAME_PATH)
+
+                    if(isPrivate && currentUID.equals(users.getKey()))
+                        continue;
+                    if(isPrivate && cutLoob)
+                        break;
+
+                    app.getDatabaseUsersInfo().child(users.getKey()+"/"+FIREBASE_DETAILS_ATTR)
                             .addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    playerOnChat.put(users.getKey(),new PlayerModel(
-                                            users.getKey(),
-                                            dataSnapshot.getValue(String.class)
-                                    ));
-                                    addUserToSubtitle(dataSnapshot.getValue(String.class));
+
+                                    String username =  dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
+
+                                    playerOnChat.put(users.getKey(),new PlayerModel(users.getKey(),username));
+
+                                    if(!isPrivate) {
+                                        addUserToSubtitle(username);
+                                    }
+                                    else{
+                                        String bio = dataSnapshot.child(FIREBASE_BIO_ATTR).getValue(String.class);
+                                        addUserToSubtitle(bio);
+                                        cutLoob = true;
+                                    }
                                 }
 
                                 @Override
@@ -118,6 +145,8 @@ public class ChatCore extends Chat implements FirebasePaths {
 
                                 }
                             });
+
+
                 }
                 usersLoaded = true;
             }

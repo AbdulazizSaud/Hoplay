@@ -15,11 +15,9 @@ public class ParentRequestFragments extends Fragment {
     protected boolean hasReq;
 
 
-
-
-
     public ParentRequestFragments() {
         // Required empty public constructor
+        app = App.getInstance();
     }
 
 
@@ -27,8 +25,6 @@ public class ParentRequestFragments extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-        app = App.getInstance();
 
         View view = getView();
 

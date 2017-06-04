@@ -1,18 +1,16 @@
 package com.example.kay.hoplay.Cores;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.example.kay.hoplay.Cores.RequestCore.LobbyFragmentCore;
+import com.example.kay.hoplay.Cores.RequestCore.NewRequestFragmentCore;
 import com.example.kay.hoplay.CoresAbstract.MainAppMenu;
 import com.example.kay.hoplay.App.App;
-import com.example.kay.hoplay.Fragments.NewRequestFragment;
-import com.example.kay.hoplay.Fragments.NoGameFragment;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.Rank;
 import com.example.kay.hoplay.Models.RequestModel;
-import com.example.kay.hoplay.util.TimeStamp;
+import com.example.kay.hoplay.Models.RequestModelRefrance;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -24,9 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Kay on 2/10/2017.
- */
+
 
 public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
@@ -57,6 +53,8 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
         // init a firebase auth states to check if the user is already signued
         // if no , move the user to loginActivity to sign in again.
 
+
+        app.setMainAppMenuCore(this);
 
         mAuth = App.getInstance().getAuth();
         authStateListener = new FirebaseAuth.AuthStateListener() {
@@ -99,7 +97,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     if (dataSnapshot.hasChild(FIREBASE_PS_GAME_PROVIDER))
                      PSNAcc = dataSnapshot.child(FIREBASE_PS_GAME_PROVIDER).getValue(String.class);
                     if (dataSnapshot.hasChild(FIREBASE_XBOX_GAME_PROVIDER))
-                        XboxLiveAcc = dataSnapshot.child(FIREBASE_XBOX_GAME_PROVIDER).getValue().toString();
+                        XboxLiveAcc = dataSnapshot.child(FIREBASE_XBOX_GAME_PROVIDER).getValue(String.class);
 
 
 
@@ -111,9 +109,6 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                         }
 
                     }
-
-
-
 
                     welcomeMessage(username);
 
@@ -238,7 +233,6 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     ranks.add(new Rank(rank.getKey(),rank.getValue(String.class)));
                 }
                 GameModel gameModel = new GameModel(gameKey,gameName,gamePhoto,platforms,gameType,maxPlayers,ranks,gameProvider);
-
                 app.getGameManager().addGame(gameModel);
 
             }
@@ -254,18 +248,20 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
     protected void checkRequest() {
 
         String userID = app.getUserInformation().getUID();
-        final DatabaseReference userReqsRef = app.getDatabaseUsersInfo().child(userID+"/"+FIREBASE_USER_REQUESTS_REF);
+        final DatabaseReference userReqsRef = app.getDatabaseUsersInfo().child(userID+"/"+ FIREBASE_USER_REQUESTS_ATTR);
 
         userReqsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 long numberOfReqs = dataSnapshot.getChildrenCount();
-                if(numberOfReqs > 0)
-                menuPagerAdapter.setParentRequestFragments(new LobbyFragmentCore());
-                else if(app.getGameManager().getUserGamesNumber() >= 1)
-                    menuPagerAdapter.setParentRequestFragments(new NewRequestFragment());
+
+
+                RequestModelRefrance requestModelRefrance = dataSnapshot.getValue(RequestModelRefrance.class);
+
+                if(dataSnapshot.getValue() !=null)
+                menuPagerAdapter.setParentRequestFragments(new LobbyFragmentCore(requestModelRefrance));
                 else
-                    menuPagerAdapter.setParentRequestFragments(new NewRequestFragment());
+                    menuPagerAdapter.setParentRequestFragments(new NewRequestFragmentCore());
 
                 isDone=true;
 
@@ -285,6 +281,8 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
     private boolean isInfoValid(DataSnapshot dataSnapshot) {
         return dataSnapshot.hasChild(FIREBASE_USERNAME_PATH) && dataSnapshot.hasChild(FIREBASE_NICKNAME_PATH) && dataSnapshot.hasChild(FIREBASE_PICTURE_URL_PATH);
     }
+
+
 
 
 }

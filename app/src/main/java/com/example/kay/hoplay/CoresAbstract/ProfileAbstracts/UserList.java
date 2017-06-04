@@ -1,6 +1,7 @@
 package com.example.kay.hoplay.CoresAbstract.ProfileAbstracts;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -13,18 +14,18 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.accessibility.AccessibilityManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Cores.UserProfileCores.FriendsListCore;
+import com.example.kay.hoplay.CoresAbstract.MainAppMenu;
 import com.example.kay.hoplay.Interfaces.Constants;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.FriendCommonModel;
@@ -33,9 +34,6 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Created by Kay on 2/19/2017.
- */
 
 public abstract class UserList extends AppCompatActivity {
 
@@ -47,7 +45,7 @@ public abstract class UserList extends AppCompatActivity {
     protected EditText searchEditText;
     protected RelativeLayout FriendsLayout;
     private ProgressBar loadUsersProgressBar;
-
+    private     View holderView;
 
 
     protected boolean removeFriend;
@@ -85,8 +83,8 @@ public abstract class UserList extends AppCompatActivity {
                 @Override
                 public boolean onLongClick(View v) {
 
-                    showFriendpopup(model);
-                    removeFriend(v,position);
+                    showFriendpopup(model,getApplication());
+                    removeFriendButtonViewHolder(v,position);
                     return true;
                 }
             });
@@ -258,8 +256,6 @@ public abstract class UserList extends AppCompatActivity {
     }
 
     protected boolean checkIsInList(String name) {
-
-
         // Capitlizing the first letter of a game
 
         for (FriendCommonModel friendCommonModel : usersList) {
@@ -281,7 +277,95 @@ public abstract class UserList extends AppCompatActivity {
     }
 
 
+    // Animation Deosn't work yet  !
+    protected void slideRightAnimate(View holderView)
+    {
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_out_right);
+        holderView.startAnimation(animation);
+        holderView.setVisibility(View.GONE);
 
+    }
+
+
+
+    protected void showFriendpopup(final FriendCommonModel friendCommonModel,Context c) {
+
+
+        final Dialog friendLongClickDialog;
+        friendLongClickDialog = new Dialog(UserList.this);
+        friendLongClickDialog.setContentView(R.layout.pop_up_on_long_click_friend);
+        friendLongClickDialog.show();
+
+
+        friendLongClickDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        Button chatButton , viewProfileButton , deleteFriendButtton ;
+
+        chatButton = ( Button) friendLongClickDialog.findViewById(R.id.chat_friend_pop_up_button);
+        viewProfileButton = ( Button) friendLongClickDialog.findViewById(R.id.view_profile_friend_pop_up_button);
+        deleteFriendButtton = ( Button) friendLongClickDialog.findViewById(R.id.delete_friend_pop_up_button);
+
+        Typeface sansation = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
+        chatButton.setTypeface(sansation);
+        viewProfileButton.setTypeface(sansation);
+        deleteFriendButtton.setTypeface(sansation);
+
+
+        // Open chat activity
+        chatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        // view friend profile
+        viewProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+//
+//
+//        // delete friend
+        deleteFriendButtton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeFriend(friendCommonModel.getFriendKey().trim());
+                slideRightAnimate(getHolderView());
+                friendLongClickDialog.dismiss();
+
+
+            }
+        });
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = friendLongClickDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+    }
+
+    protected void removeFriendButtonViewHolder(View holderView, int position) {
+        if (position > -1) {
+            setHolderView(holderView);
+        }
+
+    }
+
+
+    public View getHolderView() {
+        return holderView;
+    }
+
+    public void setHolderView(View holderView) {
+        this.holderView = holderView;
+    }
 
 
 
@@ -290,8 +374,6 @@ public abstract class UserList extends AppCompatActivity {
 
     protected abstract void onStartActivity();
     protected abstract void loadFriendList();
-    protected abstract void showFriendpopup(FriendCommonModel friendCommonModel);
     protected abstract void searchForUser(String value);
-
-    protected abstract void removeFriend(View holderView ,  int position);
+    protected abstract void removeFriend(String friendKey);
 }

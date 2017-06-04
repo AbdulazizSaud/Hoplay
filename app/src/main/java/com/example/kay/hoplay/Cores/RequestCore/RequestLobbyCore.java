@@ -1,13 +1,13 @@
 package com.example.kay.hoplay.Cores.RequestCore;
 
 import android.content.Intent;
-import android.util.Log;
+import android.view.View;
 
 import com.example.kay.hoplay.Cores.ChatCore.ChatCore;
 import com.example.kay.hoplay.Cores.ChatCore.CreateChat;
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.RequestLobby;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
-import com.example.kay.hoplay.Models.FriendCommonModel;
+import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.Services.CallbackHandlerCondition;
@@ -21,6 +21,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
+
+    private GameModel gameModel;
     private RequestModel requestModel;
     private String adminPicture,adminUser;
     private boolean isDone=false;
@@ -31,11 +33,14 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
             try {
 
+                PlayerModel player = new PlayerModel(dataSnapshot.child("uid").getValue(String.class),  dataSnapshot.child("username").getValue(String.class));
 
-                addPlayer(
-                        dataSnapshot.child("uid").getValue(String.class),
-                        dataSnapshot.child("username").getValue(String.class)
-                );
+                if(player.getUID().equals(app.getUserInformation().getUID()))
+                    lobby.getJoinButton().setVisibility(View.INVISIBLE);
+
+                lobby.addPlayer(player);
+                requestModel.getPlayers().add(player);
+
             }catch (NullPointerException e)
             {
                 return;
@@ -52,6 +57,10 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         @Override
         public void onChildRemoved(DataSnapshot dataSnapshot) {
 
+            PlayerModel player = new PlayerModel(dataSnapshot.child("uid").getValue(String.class),  dataSnapshot.child("username").getValue(String.class));
+
+            if(player.getUID().equals(app.getUserInformation().getUID()))
+                lobby.getJoinButton().setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -87,6 +96,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
         // here we will retreive the data;
         requestModel = app.getRequestModelResult(requstId);
+        gameModel =  app.getGameManager().getGameById(requestModel.getGameId());
 
         String path = requestModel.getPlatform()+"/"+requestModel.getGameId()+"/"+requestModel.getRegion()+"/"
                 +requestModel.getRequestId();
@@ -94,12 +104,8 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         requestRef = app.getDatabaseRequests().child(path);
         requestRef.child("players").addChildEventListener(onAddPlayerEvent);
 
-        //requestRef.child("gg").setValue("oo");
-        //Log.i("--->",app.getDatabaseRequests().child(path).toString());
-
         if (requestModel == null)
             return;
-
 
         app.getDatabaseUsersInfo().child(requestModel.getAdmin()).child(FIREBASE_DETAILS_ATTR)
                 .addListenerForSingleValueEvent(getAdminInfo);
@@ -108,8 +114,8 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
             @Override
             public boolean callBack() {
                 if(isDone)
-                    setLobbyInfo(
-                            requestModel.getRequestPicture(),
+                    lobby.setLobbyInfo(
+                            gameModel.getGamePhotoUrl(),
                             requestModel.getMatchType(),
                             adminUser,
                             adminPicture,
@@ -129,7 +135,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
     @Override
     protected void joinToRequest() {
 
-        if(isExsist(app.getUserInformation().getUID()))
+        if(lobby.isExsist(app.getUserInformation().getUID()))
             return;
 
         String uid =  app.getUserInformation().getUID();
@@ -145,7 +151,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
        app.getDatabaseUsersInfo()
                .child(app.getUserInformation().getUID())
-               .child(FIREBASE_USER_REQUESTS_REF)
+               .child(FIREBASE_USER_REQUESTS_ATTR)
                .child(reqId).setValue(reqId);
 
         CreateChat createChat = new CreateChat();

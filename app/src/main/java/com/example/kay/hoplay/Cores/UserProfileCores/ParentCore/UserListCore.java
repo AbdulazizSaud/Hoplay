@@ -1,18 +1,8 @@
-package com.example.kay.hoplay.Cores.ParentCore;
-
-import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
+package com.example.kay.hoplay.Cores.UserProfileCores.ParentCore;
 
 import com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.UserList;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.FriendCommonModel;
-import com.example.kay.hoplay.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

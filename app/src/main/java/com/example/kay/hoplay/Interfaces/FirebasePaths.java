@@ -45,7 +45,7 @@ public interface FirebasePaths {
 
 
     public static final String FIREBASE_COUNTER_PATH = "_counter_";
-    public static final String FIREBASE_OPPONENT_ID_PATH = "_opponent_ID_";
+    public static final String FIREBASE_OPPONENT_ID_ATTR = "_opponent_ID_";
 
 
     public static final String FB_ROOT = "https://hoplay-18a08.firebaseio.com/";
@@ -67,12 +67,13 @@ public interface FirebasePaths {
 
 
     public static final String FIREBASE_USERNAME_ATTR = "_username_";
+    public static final String FIREBASE_BIO_ATTR = "_bio_";
     public static final String FIREBASE_PICTURE_URL_ATTR =  "_picUrl_";
     public static final String FIREBASE_NICKNAME_ATTR =  "_nickname_";
     public static final String FIREBASE_EMAIL_ATTR = "_email_";
     public static final String FIREBASE_FAVOR_GAME_ATTR = "_favor_games_";
     public static final String FIREBASE_RECENT_GAME_ATTR = "_recent_played_";
-    public static final String FIREBASE_USER_REQUESTS_REF = "_requests_refs_";
+    public static final String FIREBASE_USER_REQUESTS_ATTR = "_requests_refs_";
 
 
 

@@ -8,50 +8,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.kay.hoplay.CoresAbstract.MainAppMenu;
 import com.example.kay.hoplay.R;
 
 import java.net.HttpURLConnection;
 
-/**
- * Created by Kay on 10/27/2016.
- */
 
-public class ErrorHandler{
+public class ErrorHandler implements java.lang.Thread.UncaughtExceptionHandler {
+    private  Activity context;
 
-    public static final String ERROR_CONNECTION = "ERROR_CONNECTION";
-    public static final String ERROR_PATH = "ERROR_PATH";
-    public static final String ERROR_DATA_MISS_MATCH = "ERROR_DATA_MISS_MATCH";
-    public static final String ERROR_IO_EXP = "IO_EXP";
-    public static final String CLEAR = "CLEAR";
 
-    public static boolean isError(String e,Context context){
+    private final Activity myContext;
+    private final String LINE_SEPARATOR = "\n";
 
-        switch (e){
-            case ERROR_CONNECTION:
-                showConnectionErrorLayout(context);
-            case ERROR_PATH:
-            case ERROR_DATA_MISS_MATCH:
-            case  ERROR_IO_EXP:
-                return true;
-        }
-
-        if(e == null)
-            return true;
-
-        return false;
+    public ErrorHandler(Activity context) {
+        myContext = context;
     }
 
-    private static void showConnectionErrorLayout(Context c){
+    public void uncaughtException(Thread thread, Throwable exception) {
 
-        LayoutInflater inflater =  LayoutInflater.from(c);
-        View layout = inflater.inflate(R.layout.no_connection
-                ,null);
-
-        Toast toast = new Toast(c);
-        toast.setGravity(Gravity.FILL, 0, 0);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(layout);
-        toast.show();
     }
+
 
 }

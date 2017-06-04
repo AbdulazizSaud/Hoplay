@@ -1,19 +1,15 @@
 package com.example.kay.hoplay.Cores.ChatCore;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 
-import com.example.kay.hoplay.Cores.ParentCore.UserListCore;
+import com.example.kay.hoplay.Cores.UserProfileCores.ParentCore.UserListCore;
 import com.example.kay.hoplay.Models.FriendCommonModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
 
 
 public class FindUserCore extends UserListCore {
@@ -55,7 +51,7 @@ public class FindUserCore extends UserListCore {
 
 
         DatabaseReference chatRef = app.getDatabaseUsersInfo().child(privateChatPath);
-        final Query query = chatRef.orderByChild(FIREBASE_OPPONENT_ID_PATH).startAt(opponentKey).endAt(opponentKey + "\uf8ff").limitToFirst(1);
+        final Query query = chatRef.orderByChild(FIREBASE_OPPONENT_ID_ATTR).startAt(opponentKey).endAt(opponentKey + "\uf8ff").limitToFirst(1);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -88,12 +84,7 @@ public class FindUserCore extends UserListCore {
     }
 
     @Override
-    protected void showFriendpopup(FriendCommonModel friendCommonModel) {
-
-    }
-
-    @Override
-    protected void removeFriend(View holderView, int position) {
+    protected void removeFriend(String friendKey) {
 
     }
 

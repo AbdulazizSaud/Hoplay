@@ -1,7 +1,5 @@
 package com.example.kay.hoplay.Cores.ChatCore;
 
-import android.os.Build;
-
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.RequestModel;
@@ -63,7 +61,7 @@ public class CreateChat implements FirebasePaths {
         String privateChatPath = UID + "/" + FIREBASE_USER_PRIVATE_CHAT;
         DatabaseReference refUsePrivaterChats = app.getDatabaseUsersInfo().child(privateChatPath);
         refUsePrivaterChats.child(key).child(FIREBASE_COUNTER_PATH).setValue(0);
-        refUsePrivaterChats.child(key).child(FIREBASE_OPPONENT_ID_PATH).setValue(friendUID);
+        refUsePrivaterChats.child(key).child(FIREBASE_OPPONENT_ID_ATTR).setValue(friendUID);
 
 
         // Pending
@@ -123,7 +121,7 @@ public class CreateChat implements FirebasePaths {
         String publicChatPath = uid + "/" + FIREBASE_USER_PUBLIC_CHAT;
         DatabaseReference refUserPublicChats = app.getDatabaseUsersInfo().child(publicChatPath);
         refUserPublicChats.child(roomKey).child(FIREBASE_COUNTER_PATH).setValue(0);
-        refUserPublicChats.child(roomKey).child(FIREBASE_OPPONENT_ID_PATH).setValue(roomKey);
+        refUserPublicChats.child(roomKey).child(FIREBASE_OPPONENT_ID_ATTR).setValue(roomKey);
     }
 
     public void setValueUsersChat(String type,String roomId,String userId)

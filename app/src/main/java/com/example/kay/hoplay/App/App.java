@@ -9,6 +9,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.example.kay.hoplay.Adapters.ViewHolders;
+import com.example.kay.hoplay.Cores.MainAppMenuCore;
+import com.example.kay.hoplay.Cores.RequestCore.NewRequestFragmentCore;
+import com.example.kay.hoplay.CoresAbstract.MainAppMenu;
+import com.example.kay.hoplay.Fragments.ParentRequestFragments;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Services.LruBitmapCache;
@@ -57,6 +61,8 @@ public class App extends Application implements FirebasePaths{
     private ArrayList<RequestModel> requestResultList =new ArrayList<>();
 
     private ArrayList<RequestModel> savedRequests =new ArrayList<>();
+
+    private MainAppMenuCore mainAppMenuCore;
 
     @Override
     public void onCreate() {
@@ -253,6 +259,14 @@ public class App extends Application implements FirebasePaths{
         return null;
     }
 
+    public void setMainAppMenuCore(MainAppMenuCore mainAppMenuCore) {
+        this.mainAppMenuCore = mainAppMenuCore;
+    }
+
+    public void switchMainAppMenuFragment(ParentRequestFragments fragments)
+    {
+        mainAppMenuCore.switchFragment(fragments);
+    }
 }
 
 

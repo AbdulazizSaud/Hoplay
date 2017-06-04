@@ -19,17 +19,21 @@ import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.AuthenticationCore.LoginCore;
 import com.example.kay.hoplay.Cores.CommunityCore;
 import com.example.kay.hoplay.Cores.RequestCore.LobbyFragmentCore;
+import com.example.kay.hoplay.Cores.RequestCore.NewRequestFragmentCore;
 import com.example.kay.hoplay.Fragments.LobbyFragment;
 import com.example.kay.hoplay.Fragments.NoGameFragment;
+import com.example.kay.hoplay.Fragments.ParentRequestFragments;
 import com.example.kay.hoplay.R;
 
 import com.example.kay.hoplay.Services.CallbackHandlerCondition;
+import com.example.kay.hoplay.Services.ErrorHandler;
 import com.example.kay.hoplay.Services.HandlerCondition;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -40,11 +44,11 @@ import java.util.Date;
 public abstract class MainAppMenu extends AppCompatActivity  {
 
     private static MainAppMenu instance;
-    private ViewPager viewPagerMenu;
+    protected ViewPager viewPagerMenu;
     private boolean changeBar = true;
-    private BottomBar bottomBar;
+    protected BottomBar bottomBar;
     protected App app;
-    public static MenuPagerAdapter menuPagerAdapter;
+    protected  MenuPagerAdapter menuPagerAdapter;
 
     protected boolean isDone=false;
 
@@ -63,12 +67,15 @@ public abstract class MainAppMenu extends AppCompatActivity  {
 
     @Override
     protected void onDestroy() {
+
         super.onDestroy();
+        Log.i("-->","it destroy");
     }
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         instance = this;
+        //Thread.setDefaultUncaughtExceptionHandler(new ErrorHandler(this));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_app);
@@ -95,6 +102,7 @@ public abstract class MainAppMenu extends AppCompatActivity  {
 
 
         bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+
 
         menuPagerAdapter = new MenuPagerAdapter(getSupportFragmentManager());
 
@@ -194,6 +202,15 @@ public abstract class MainAppMenu extends AppCompatActivity  {
         startActivity(i);
 
     }
+
+
+    public void switchFragment(ParentRequestFragments fragments)
+    {
+        menuPagerAdapter.setParentRequestFragments(fragments);
+        viewPagerMenu.setAdapter(menuPagerAdapter);
+        viewPagerMenu.setCurrentItem(2);
+    }
+
     public abstract void OnStartActivity();
 
 }

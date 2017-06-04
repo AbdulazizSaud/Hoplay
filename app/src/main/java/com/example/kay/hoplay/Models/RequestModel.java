@@ -22,7 +22,7 @@ public class RequestModel  {
     private String matchType;
     private String rank;
     private long timeStamp;
-
+    private float gameVersion;
 
     private String adminName;
     private String requestPicture;

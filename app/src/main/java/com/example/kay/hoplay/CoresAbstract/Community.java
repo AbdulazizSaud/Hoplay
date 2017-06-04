@@ -21,6 +21,7 @@ import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.CommunityChatModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -36,6 +37,8 @@ public abstract class Community extends Fragment {
 
     private RecyclerView.LayoutManager mLayoutManager;
     private  FloatingActionButton newPrivateChatFloatingActionButton;
+
+    protected HashMap<String,CommunityChatModel> communityChatModelHashMap=new HashMap<>();
 
     protected ArrayList<CommunityChatModel> communityUserLists=new ArrayList<CommunityChatModel>();
     protected RecyclerView.Adapter mAdapter;
@@ -100,7 +103,12 @@ public abstract class Community extends Fragment {
 
 
     public void addToList(CommunityChatModel communityUserList){
+
+        if(communityChatModelHashMap.containsKey(communityUserList.getChatKey()))
+            return;
+
         communityUserLists.add(communityUserList);
+        communityChatModelHashMap.put(communityUserList.getChatKey(),communityUserList);
         mAdapter.notifyDataSetChanged();
 
         if(communityUserLists.size() > 0)
@@ -155,8 +163,6 @@ public abstract class Community extends Fragment {
 //                Log.i("->",""+getAllUnseenMessages());
 
             }
-
-
 
         };
     }

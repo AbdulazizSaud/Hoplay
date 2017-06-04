@@ -290,9 +290,10 @@ public abstract class SearchRequests extends Fragment {
 
                  gameName = searchGameAutoCompleteTextView.getText().toString().trim();
                 region= countrySpinner.getText().toString().trim();
-                if (!numberOfPlayersSpinner.getText().toString().trim().equals(""))
-                    playersNumber = Integer.parseInt(numberOfPlayersSpinner.getText().toString().trim());
-
+                if (!numberOfPlayersSpinner.getText().toString().trim().isEmpty()) {
+                    int number = numberOfPlayersSpinner.getText().toString().trim().equals("All Numbers") ? 0:Integer.parseInt(numberOfPlayersSpinner.getText().toString().trim());
+                    playersNumber = number ;
+                }
                  rank = ranksSpinner.getText().toString().trim();
                  matchType =matchTypeSpinner.getText().toString().trim();
                 RequestModel requestModel;

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.CoresAbstract.Lobby.Lobby;
 import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.Models.UserInformation;
@@ -32,172 +33,36 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public abstract class RequestLobby extends AppCompatActivity {
 
 
-    private CircleImageView gamePhoto;
-    private TextView matchTypeTextview;
-    private ImageView matchTypeImageView;
-    private TextView adminTextView;
-    private CircleImageView adminPhoto;
-    private TextView adminUsername;
-    private TextView playersTextview;
-    private RecyclerView playersRecyclerview;
-    private TextView rankTextView;
-    private TextView rankValueTextview;
-    private TextView regionTextview;
-    private TextView regionValueTextview;
-    private Button joinButton;
-    private ArrayList<PlayerModel> playerModels;
-    private RecyclerView.Adapter mAdapter;
-    private LinearLayoutManager linearLayoutManager;
-    private ImageView closeRequestButton;
-
-
+    protected Lobby lobby;
     protected App app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        app = App.getInstance();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_lobby);
-        app = App.getInstance();
-        initControls();
-        setupRecyclerView();
-        OnStartActivity();
-    }
 
-    private void initControls() {
+        lobby = new Lobby(getApplication(), getWindow().getDecorView());
 
-
-        final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
-        final Typeface playregular = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
-        gamePhoto = (CircleImageView) findViewById(R.id.game_photo_request_lobby);
-        matchTypeTextview = (TextView) findViewById(R.id.match_type_request_lobby_textview);
-        matchTypeTextview.setTypeface(playbold);
-        matchTypeImageView = (ImageView) findViewById(R.id.match_type_request_lobby_imageview);
-        adminTextView = (TextView) findViewById(R.id.room_admin_request_lobby_textview);
-        adminTextView.setTypeface(playbold);
-        adminPhoto = (CircleImageView) findViewById(R.id.room_admin_photo_circleimageview);
-        adminUsername = (TextView) findViewById(R.id.admin_username_request_lobby);
-        adminUsername.setTypeface(playregular);
-        playersTextview = (TextView) findViewById(R.id.players_request_lobby_textview);
-        playersTextview.setTypeface(playbold);
-        rankTextView = (TextView) findViewById(R.id.rank_request_lobby);
-        rankTextView.setTypeface(playbold);
-        rankValueTextview = (TextView) findViewById(R.id.rank_value_request_lobby);
-        rankValueTextview.setTypeface(playregular);
-        regionTextview = (TextView) findViewById(R.id.region_request_lobby);
-        regionTextview.setTypeface(playbold);
-        regionValueTextview = (TextView) findViewById(R.id.region_value_request_lobby);
-        regionValueTextview.setTypeface(playregular);
-        joinButton = (Button) findViewById(R.id.join_request_lobby_button);
-        joinButton.setTypeface(playbold);
-
-        joinButton.setOnClickListener(new View.OnClickListener() {
+        lobby.getJoinButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 joinToRequest();
             }
         });
-        closeRequestButton = (ImageView) findViewById(R.id.close_request_lobby_imageview);
-        closeRequestButton.setOnClickListener(new View.OnClickListener() {
+
+        lobby.getCloseRequestButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+            finish();
             }
         });
 
-        playerModels = new ArrayList<PlayerModel>();
-
-
+        OnStartActivity();
     }
 
 
-    private void setupRecyclerView() {
-        playersRecyclerview = (RecyclerView) findViewById(R.id.players_request_lobby_recyclerview);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        playersRecyclerview.setHasFixedSize(true);
-
-        // use a linear layout manager
-        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        linearLayoutManager.setOrientation(LinearLayout.HORIZONTAL);
-        playersRecyclerview.setLayoutManager(linearLayoutManager);
-
-        // specify an adapter (see also next example)
-
-
-        mAdapter = createAdapter();
-        playersRecyclerview.setAdapter(mAdapter);
-    }
-
-
-    protected void addPlayer(String playerUid , String playerUsername) {
-
-
-
-        if(isExsist(playerUid))
-            return;
-
-            PlayerModel player = new PlayerModel(playerUid, playerUsername);
-            playerModels.add(player);
-            mAdapter.notifyDataSetChanged();
-
-
-    }
-
-
-    protected boolean isExsist(String uid )
-    {
-        for(PlayerModel playerModel : playerModels)
-        {
-            if(uid.equals(playerModel.getUID()))
-                return true;
-        }
-
-        return false;
-    }
-    private CommonAdapter<PlayerModel> createAdapter() {
-        return new CommonAdapter<PlayerModel>(playerModels, R.layout.player_instance) {
-
-
-            @Override
-            public ViewHolders OnCreateHolder(View v) {
-
-                v.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                });
-
-                return new ViewHolders.PlayerHolder(v);
-            }
-
-            @Override
-            public void OnBindHolder(ViewHolders holder, PlayerModel model, int position) {
-
-                holder.setTitle(model.getUsername());
-            }
-        };
-    }
-
-
-    protected void setLobbyInfo(String pictureURL,String type,
-                                String adminName,String adminPicture, ArrayList<PlayerModel> players
-                                  ,String rank,String region)
-    {
-        app.loadingImage(gamePhoto,pictureURL);
-        app.loadingImage(adminPhoto,adminPicture);
-        matchTypeTextview.setText(type);
-        adminUsername.setText(adminName);
-        for(PlayerModel playerModel : players) {
-            playerModels.add(playerModel);
-        }
-        mAdapter.notifyDataSetChanged();
-
-        regionValueTextview.setText(region);
-        rankValueTextview.setText(rank);
-
-    }
     protected abstract void OnStartActivity();
     protected abstract void joinToRequest();
     protected abstract void jumpToLobbyChat(RequestModel model);

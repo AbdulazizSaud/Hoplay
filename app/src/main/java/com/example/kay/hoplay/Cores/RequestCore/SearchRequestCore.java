@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class SearchRequestCore extends SearchRequests implements FirebasePaths,Constants {
+public class SearchRequestCore extends SearchRequests implements FirebasePaths, Constants {
 
     private ArrayList<RequestModel> requestModelArrayList = new ArrayList<>();
 
@@ -82,14 +82,14 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths,C
         CallbackHandlerCondition callback = new CallbackHandlerCondition() {
             @Override
             public boolean callBack() {
-                   if(app.getTimeStamp().getTimestampLong() != -1)
-                       searchQuery();
+                if (app.getTimeStamp().getTimestampLong() != -1)
+                    searchQuery();
 
                 return app.getTimeStamp().getTimestampLong() != -1;
             }
         };
 
-        new HandlerCondition(callback,0);
+        new HandlerCondition(callback, 0);
         //------------------------
 
 
@@ -98,43 +98,48 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths,C
 
     private void searchQuery() {
 
-            long currenttime = app.getTimeStamp().getTimestampLong();
-            long last48 = currenttime - DUE_REQUEST_TIME_IN_VALUE_HOURS;
+        long currenttime = app.getTimeStamp().getTimestampLong();
+        long last48 = currenttime - DUE_REQUEST_TIME_IN_VALUE_HOURS;
 
-            final Query query = gameRef.orderByChild(FIREBASE_REQUEST_TIME_STAMP_ATTR).startAt(last48).endAt(currenttime);
-            requestModelArrayList = new ArrayList<>();
+        final Query query = gameRef.orderByChild(FIREBASE_REQUEST_TIME_STAMP_ATTR).startAt(last48).endAt(currenttime);
+        requestModelArrayList = new ArrayList<>();
 
-            query.addListenerForSingleValueEvent(new ValueEventListener() {
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
 
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    if (dataSnapshot == null)
-                        return;
+                if (dataSnapshot == null)
+                    return;
 
-                    Iterable<DataSnapshot> shots = dataSnapshot.getChildren();
-                    for (DataSnapshot shot : shots) {
+                Iterable<DataSnapshot> shots = dataSnapshot.getChildren();
+                for (DataSnapshot shot : shots) {
 
-                        RequestModel requestModel = shot.getValue(RequestModel.class);
+                    RequestModel receivedRequestModel = shot.getValue(RequestModel.class);
 
-                        boolean flag = requestModel.getPlayerNumber() == playersNumber
-                                && matchType.equals(requestModel.getMatchType())
-                                && rank.equals(requestModel.getRank());
+                    if (playersNumber != 0)
+                        if (receivedRequestModel.getPlayerNumber() != playersNumber)
+                            continue;
 
+                    if (!rank.equals("All Ranks"))
+                        if (!receivedRequestModel.getRank().equals(rank))
+                            continue;
 
-                        if (flag) {
-                            requestModel.setRequestId(shot.getKey());
-                            requestModelArrayList.add(requestModel);
-                            Log.e("FOUND", requestModel.getAdmin());
-                        }
-                    }
-                    app.setSearchRequestResult(requestModelArrayList);
-                    goToResultLayout();
+                    if (!matchType.equals(receivedRequestModel.getMatchType()))
+                        continue;
+
+                    receivedRequestModel.setRequestId(shot.getKey());
+                    requestModelArrayList.add(receivedRequestModel);
+
                 }
+                app.setSearchRequestResult(requestModelArrayList);
+                goToResultLayout();
+            }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {}
-            });
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 
 

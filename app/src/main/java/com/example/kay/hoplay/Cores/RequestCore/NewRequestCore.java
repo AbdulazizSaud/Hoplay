@@ -1,13 +1,12 @@
 package com.example.kay.hoplay.Cores.RequestCore;
 
-import android.provider.ContactsContract;
-
 import com.example.kay.hoplay.Cores.ChatCore.CreateChat;
 import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.NewRequest;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.RequestModel;
+import com.example.kay.hoplay.Models.RequestModelRefrance;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -67,6 +66,7 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
 
     @Override
     protected void saveRequest() {
+
         app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_SAVED_REQS_PATH).setValue(app.getSavedRequests());
 
     }
@@ -85,7 +85,7 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
         GameModel gameModel = app.getGameManager().getGameByName(gameName);
 
         // users_info_ -> user id  -> _requests_refs_
-        DatabaseReference userRequestRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_USER_REQUESTS_REF);
+        DatabaseReference userRequestRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_USER_REQUESTS_ATTR);
         // _requests_ ->  platform -> GameID -> Region
         DatabaseReference requestsRef = app.getDatabaseRequests().child(platform.toUpperCase()).child(gameModel.getGameID()).child(region);
 
@@ -96,23 +96,19 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
         DatabaseReference requestRef = requestsRef.child(requestKey);
 
 
-
-        // set req ref in the user tree
-        userRequestRef.child(requestKey).setValue(requestKey);
-
-
         // set the request info under the requests tree
 
         HashMap<String,Object> data = new HashMap<>();
        // TimeStamp timeStamp=new TimeStamp();
 
+        int numberPlayers = numberOfPlayers.equals("All Numbers") ? gameModel.getMaxPlayers():Integer.parseInt(numberOfPlayers);
         RequestModel requestModel=new RequestModel(
                 platform,
                 gameName,
-                app.getUserInformation().getUID(),
+                requestAdmin,
                 description,
                 region,
-                Integer.parseInt(numberOfPlayers),
+                numberPlayers,
                 matchType,
                 rank);
 
@@ -130,9 +126,19 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
         HashMap hashMap =new HashMap();
         hashMap.put("timeStamp",ServerValue.TIMESTAMP);
 
+
+        RequestModelRefrance requestModelRefrance = new RequestModelRefrance(requestKey,gameModel.getGameID(),platform,region);
+        // set req ref in the user_info
+        userRequestRef.setValue(requestModelRefrance);
+
+
         requestRef.setValue(requestModel);
         requestRef.updateChildren(hashMap);
+
         new CreateChat().createPublicFirebaseChat(requestModel);
+
+        app.switchMainAppMenuFragment(new LobbyFragmentCore(requestModelRefrance));
+
     }
 
 

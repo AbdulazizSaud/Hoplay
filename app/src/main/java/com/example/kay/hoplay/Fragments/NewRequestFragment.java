@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,33 +25,34 @@ import com.example.kay.hoplay.R;
 import java.util.ArrayList;
 
 
-
-public class NewRequestFragment extends ParentRequestFragments {
-
+public abstract class NewRequestFragment extends ParentRequestFragments {
 
 
+    protected App app;
+
+    RecyclerView mRecyclerView;
+    RecyclerView.Adapter mAdapter;
+    RecyclerView.LayoutManager mLayoutManager;
+
+    Button newRequestButton;
+    TextView savedRequestsMessage;
+    TextView addGameTextView;
+
+    FloatingActionButton addGameFloationActionButton;
+    protected ArrayList<RequestModel> arrayList = new ArrayList<RequestModel>();
 
 
     public NewRequestFragment() {
         super();
+
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        super.onCreateView(inflater,container,savedInstanceState);
-
-        RecyclerView mRecyclerView;
-        RecyclerView.Adapter mAdapter;
-        RecyclerView.LayoutManager mLayoutManager;
-
-        Button newRequestButton;
-        TextView savedRequestsMessage ;
-        TextView addGameTextView;
-
-        FloatingActionButton addGameFloationActionButton;
-
+        super.onCreateView(inflater, container, savedInstanceState);
+        app = App.getInstance();
 
 
         View view = inflater.inflate(R.layout.activity_make_request_fragment, container, false);
@@ -69,18 +71,16 @@ public class NewRequestFragment extends ParentRequestFragments {
         newRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity().getApplicationContext(),NewRequestCore.class);
+                Intent i = new Intent(getActivity().getApplicationContext(), NewRequestCore.class);
                 startActivity(i);
             }
         });
 
 
-
-        Typeface sansation = Typeface.createFromAsset(getActivity().getAssets() ,"sansationbold.ttf");
+        Typeface sansation = Typeface.createFromAsset(getActivity().getAssets(), "sansationbold.ttf");
         newRequestButton.setTypeface(sansation);
         savedRequestsMessage.setTypeface(sansation);
         addGameTextView.setTypeface(sansation);
-
 
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.saved_requests_recyclerview);
@@ -94,12 +94,11 @@ public class NewRequestFragment extends ParentRequestFragments {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
-
-
-
         mAdapter = createAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
+
+        OnStartActivity();
         return view;
     }
 
@@ -110,30 +109,27 @@ public class NewRequestFragment extends ParentRequestFragments {
     }
 
 
-
-    private CommonAdapter<RequestModel> createAdapter(){
-        return new CommonAdapter<RequestModel>(app.getSavedRequests(),R.layout.saved_request_instance) {
+    private CommonAdapter<RequestModel> createAdapter() {
+        return new CommonAdapter<RequestModel>(arrayList, R.layout.saved_request_instance) {
             @Override
             public ViewHolders OnCreateHolder(View v) {
                 return new ViewHolders.SavedRequestHolder(v);
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder, final RequestModel model , int position)
-            {
+            public void OnBindHolder(ViewHolders holder, final RequestModel model, int position) {
                 //ImageLoader loader = App.getInstance().getImageLoader();
 
 
                 holder.getView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        OnClickHolders(model,v);
+                        OnClickHolders(model, v);
                     }
                 });
 
 
-
-                App.getInstance().loadingImage(getContext(),holder,model.getRequestPicture());
+                App.getInstance().loadingImage(getContext(), holder, model.getRequestPicture());
 
                 // loadingImage(holder, model, loader);
                 holder.setTitle(model.getRequestTitle());
@@ -146,15 +142,25 @@ public class NewRequestFragment extends ParentRequestFragments {
     }
 
 
-//
-//    public RequestModel saveRequest(String gameID, String gameName , String gamePhoto , String requestDescription , int numberOfPlayers)
-//    {
-//        return  new RequestModel(gameID,gameName,numberOfPlayers,gamePhoto,"",requestDescription,"");
-//
-//    }
 
-    protected  void OnClickHolders(RequestModel model, View v)
+    protected void addToSaveRequest(RequestModel model)
     {
-        ///.....
+        arrayList.add(model);
+        mAdapter.notifyDataSetChanged();
     }
+
+    protected void removeFromSaveRequest(RequestModel model)
+    {
+
+        boolean b = arrayList.remove(model);
+        Log.i("--->",b +" ");
+        app.getSavedRequests().remove(model);
+        mAdapter.notifyDataSetChanged();
+    }
+
+
+
+    protected abstract void OnClickHolders(RequestModel model, View v);
+
+    protected abstract void OnStartActivity();
 }
