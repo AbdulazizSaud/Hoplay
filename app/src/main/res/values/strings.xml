@@ -355,7 +355,6 @@
     <string name="change_password_update_password_button">U P D A T E</string>
 
 
-
     <!--                                Change  Password Activity           -->
     <string name="change_password_old_password_empty_error">Old Password is incorrect</string>
     <string name="change_password_old_password_incorrect_error">Old Password Is Empty</string>
@@ -366,6 +365,11 @@
     <string name="change_password_dialog_body_message">Checking password info..</string>
 
 
-
+    <!--                                Edit Profile Layout                -->
+    <string name="edit_profile_layout_title_text">Edit Profile</string>
+    <string name="edit_profile_change_profile_photo_text">Change Profile Photo</string>
+    <string name="edit_profile_game_providers_spinner_hint">Games Providers</string>
+    <string name="edit_profile_bio_hint">Bio</string>
+    <string name="edit_peofile_game_providers_edittext_hint">Game Provider</string>
 
 </resources>

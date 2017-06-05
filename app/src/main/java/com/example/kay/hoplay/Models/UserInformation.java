@@ -10,7 +10,6 @@ public class UserInformation {
     protected String username,pictureURL,UID,nickName , PSNAcc , XboxLiveAcc , userEmail;
     protected HashMap<String,String>  pcGamesAcc ;
 
-
     public UserInformation(String username)
     {
         this.username = username;

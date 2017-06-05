@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.example.kay.hoplay.Cores.AuthenticationCore.LoginCore;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.UserProfileCores.ChangePasswordCore;
+import com.example.kay.hoplay.Cores.UserProfileCores.EditProfileCore;
 import com.example.kay.hoplay.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -58,6 +59,24 @@ public class SettingsScreen extends PreferenceFragment {
                 return true;
             }
         });
+
+
+
+
+        // go to edit profile activity
+        Preference editProfilePref = (Preference) findPreference("settings_edit_profile");
+        editProfilePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                Intent i = new Intent(context, EditProfileCore.class);
+                startActivity(i);
+                return true;
+            }
+        });
+
+
+
 
         // Change password preference
         Preference changePasswordPref = (Preference) findPreference("settings_change_password");

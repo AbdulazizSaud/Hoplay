@@ -77,11 +77,11 @@
             
           <!-- Inculde user photo here -->
 
-            <include layout="@layout/user_profile_photo_with_border"
-                android:layout_gravity="center"
+            <include
+                layout="@layout/user_profile_photo_with_border"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content">
-            </include>
+                android:layout_gravity="center"></include>
 
 
             <TextView

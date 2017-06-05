@@ -2,6 +2,7 @@ package com.example.kay.hoplay.Cores;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 
 import com.example.kay.hoplay.CoresAbstract.Community;
@@ -223,6 +224,8 @@ public class CommunityCore extends Community implements FirebasePaths {
     @Override
     protected void OnStartActivity() {
 
+
+        Log.i("-->","yo");
 
         // bug error on creation right here
         refAuthCurrentUserChats = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_USER_CHAT_REFERENCES);

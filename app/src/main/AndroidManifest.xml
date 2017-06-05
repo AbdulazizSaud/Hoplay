@@ -57,7 +57,8 @@
         <activity android:name=".Cores.UserProfileCores.FriendsListCore" />
         <activity android:name=".Cores.RequestCore.SearchResultsCore" />
         <activity android:name=".Cores.RequestCore.RequestLobbyCore" />
-        <activity android:name=".Cores.UserProfileCores.ChangePasswordCore"></activity>
+        <activity android:name=".Cores.UserProfileCores.ChangePasswordCore" />
+        <activity android:name=".Cores.UserProfileCores.EditProfileCore"></activity>
     </application>
 
 </manifest>
