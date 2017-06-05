@@ -342,10 +342,10 @@
     <string name="friend_pop_up_menu_view_profile_button">View Profile</string>
     <string name="friend_pop_up_menu_delete_friend_button">Delete</string>
 
-    <!--                                Game On Long Click  Popup                           -->
+    <!--                                Game On Long Click  Popup Layout                          -->
     <string name="game_long_click_pop_up_delete_text">Are you sure you want to delete this game?</string>
-    <string name="game_long_click_pop_up_delete_yes">Yes</string>
-    <string name="game_long_click_pop_up_delete_no">no</string>
+    <string name="game_long_click_pop_up_delete_yes">Y E S</string>
+    <string name="game_long_click_pop_up_delete_no">N O</string>
 
 
     <!--                                Change  password Layout             -->
@@ -371,5 +371,13 @@
     <string name="edit_profile_game_providers_spinner_hint">Games Providers</string>
     <string name="edit_profile_bio_hint">Bio</string>
     <string name="edit_peofile_game_providers_edittext_hint">Game Provider</string>
+    <string name="edit_profile_update_button">U P D A T E</string>
+    
+    
+    <!--                                Saved Request On Long Click Pop up Layout             -->
+    <string name="saved_request_long_click_update_button">U P D A T E</string>
+    <string name="saved_request_long_click_delete_button">D E L E T E</string>
+
+    
 
 </resources>

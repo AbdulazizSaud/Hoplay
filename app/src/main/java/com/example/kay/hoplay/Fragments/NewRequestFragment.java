@@ -1,5 +1,6 @@
 package com.example.kay.hoplay.Fragments;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -37,6 +38,8 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
     Button newRequestButton;
     TextView savedRequestsMessage;
     TextView addGameTextView;
+
+    private Dialog savedRequestPopup;
 
     FloatingActionButton addGameFloationActionButton;
     protected ArrayList<RequestModel> arrayList = new ArrayList<RequestModel>();
