@@ -24,6 +24,9 @@ import com.example.kay.hoplay.util.TimeStamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -51,6 +54,7 @@ public class App extends Application implements FirebasePaths{
     private DatabaseReference databaseRequests;
     private DatabaseReference databaseRegions ;
     private FirebaseAuth mAuth;  // firebase auth
+    private FirebaseStorage storage;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private ImageLoader imageLoader; // Image loader from url
 
@@ -69,6 +73,7 @@ public class App extends Application implements FirebasePaths{
         super.onCreate();
         instance = this;
         mAuth = FirebaseAuth.getInstance();
+        storage = FirebaseStorage.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         getFirebaseDatabase().setPersistenceEnabled(true);
         databaseUserNames = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_USER_NAMES_ATTR);
@@ -110,29 +115,12 @@ public class App extends Application implements FirebasePaths{
         if(pictureURL == null || pictureURL.isEmpty() || pictureURL.equals("\\s++"))
             return;
 
+
         Picasso.with(c)
                 .load(pictureURL)
                 .error(R.drawable.profile_default_photo)
                 .into(holder.getPicture());
 
-
-//        CircleImageView picture = holder.getPicture();
-//
-//        if(pictureURL.startsWith("default"))
-//            picture.setImageResource(R.drawable.profile_default_photo);
-//         else if (pictureURL.startsWith("game"))
-//            picture.setImageResource(R.drawable.hoplaylogo);
-//
-//
-//
-//        Bitmap bitmap = loadPicture(pictureURL, holder.getPicture());
-//        picture.setImageResource(R.drawable.profile_default_photo);
-//
-//        holder.setPicture(picture);
-
-
-//        if(bitmap !=null)
-//        resizeBitmap(holder.getPicture(), bitmap);
 
     }
 
@@ -143,8 +131,6 @@ public class App extends Application implements FirebasePaths{
         pictureView.setImageResource(R.drawable.profile_default_photo);
         Bitmap bitmap = loadPicture(pictureURL,pictureView);
 
-//        if(bitmap !=null)
-//        resizeBitmap(pictureView, bitmap);
 
         return bitmap;
     }
@@ -172,6 +158,29 @@ public class App extends Application implements FirebasePaths{
             }
         }
         return null;
+    }
+
+    public Bitmap getBitmapFromUrl (String pictureUrl)
+    {
+        return getImageLoader().get(pictureUrl,null).getBitmap();
+    }
+
+    public UploadTask uploadPicture(CircleImageView circleImageView,String uid)
+    {
+
+        circleImageView.setDrawingCacheEnabled(true);
+        circleImageView.buildDrawingCache();
+        Bitmap bitmap = circleImageView.getDrawingCache();
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
+        byte[] picData = byteArrayOutputStream.toByteArray();
+
+        StorageReference storageReference = storage.getReference();
+        StorageReference picRef = storageReference.child(uid+"/profile_picture.png");
+
+        UploadTask uploadTask = picRef.putBytes(picData);
+        return uploadTask;
     }
 
 
@@ -267,6 +276,11 @@ public class App extends Application implements FirebasePaths{
     {
         mainAppMenuCore.switchFragment(fragments);
     }
+
+    public FirebaseStorage getFirebaseStorage() {
+        return storage;
+    }
+
 }
 
 

@@ -74,7 +74,7 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
         ref.getParent().child("count").setValue(app.getSavedRequests().size(), new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                if(databaseError == null)
+                if(databaseError != null)
                 {
 
                 }else {

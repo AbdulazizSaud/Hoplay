@@ -1,5 +1,7 @@
 package com.example.kay.hoplay.Models;
 
+import android.graphics.Bitmap;
+
 import java.util.HashMap;
 
 /**
@@ -11,6 +13,8 @@ public class UserInformation {
     private boolean isPremium=false;
     private String PSNAcc , XboxLiveAcc;
     private HashMap<String,String>  pcGamesAcc ;
+
+    private Bitmap pictureBitMap;
 
     public UserInformation(String username)
     {
@@ -91,5 +95,13 @@ public class UserInformation {
 
     public void setPremium(boolean premium) {
         isPremium = premium;
+    }
+
+    public Bitmap getPictureBitMap() {
+        return pictureBitMap;
+    }
+
+    public void setPictureBitMap(Bitmap pictureBitMap) {
+        this.pictureBitMap = pictureBitMap;
     }
 }

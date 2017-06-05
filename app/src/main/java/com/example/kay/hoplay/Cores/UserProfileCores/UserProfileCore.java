@@ -1,7 +1,10 @@
 package com.example.kay.hoplay.Cores.UserProfileCores;
 
+import android.util.Log;
+
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.UserProfile;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -14,12 +17,58 @@ public class UserProfileCore extends UserProfile implements FirebasePaths{
     long gameCount = 0;
     long friendCount = 0;
 
+    private DatabaseReference userInformationRef;
+
+    private ChildEventListener userInformationEventListener = new ChildEventListener() {
+        @Override
+        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            if(dataSnapshot.getKey().equals(FIREBASE_BIO_ATTR) && dataSnapshot.getValue() !=null)
+            {
+                String value =dataSnapshot.getValue(String.class);
+                app.getUserInformation().setBio(value);
+                setNicknameTextView(value);
+            }
+
+            if(dataSnapshot.getKey().equals(FIREBASE_PICTURE_URL_ATTR) && dataSnapshot.getValue() !=null)
+            {
+                String value =dataSnapshot.getValue(String.class);
+                app.getUserInformation().setPictureURL(value);
+                loadPicture();
+
+            }
+
+        }
+
+        @Override
+        public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+        }
+
+        @Override
+        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
+
 
     @Override
     protected void OnStartActitvty() {
         setFriendCountGame();
         setGameCount();
         loadRecentActivtiy();
+
+        app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()+"/"+FIREBASE_DETAILS_ATTR).addChildEventListener(userInformationEventListener);
     }
 
 
@@ -102,6 +151,9 @@ public class UserProfileCore extends UserProfile implements FirebasePaths{
         });
     }
 
-
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //userInformationRef.removeEventListener(userInformationEventListener);
+    }
 }

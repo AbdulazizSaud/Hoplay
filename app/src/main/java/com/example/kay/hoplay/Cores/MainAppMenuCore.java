@@ -131,8 +131,13 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     app.getUserInformation().setXboxLiveAcc(XboxLiveAcc);
                     app.getUserInformation().setPcGamesAcc(pcGamesAccs);
 
-                    // load games
 
+//                    app.getUserInformation().setPictureBitMap(app.getBitmapFromUrl(picUrl));
+//
+//                    Log.i("-------->",)
+
+
+                    // load games
                     loadFavorGamesList();
 
 

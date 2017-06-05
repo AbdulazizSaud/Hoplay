@@ -164,27 +164,11 @@ public abstract class UserProfile extends Fragment {
         });
 
 
-        userPictureCircleImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(v.getContext())
-                        .setTitle("Change Profile Picture")
-                        .setPositiveButton("Change Picture", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
 
-                                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                                // Start the Intent
-                                startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
-                            }
-                        }).setNegativeButton("Change Cover",null)
-                        .show();
-
-
-            }
-        });
     }
+
+
+
     private void setupRecyclerView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recent_activities_recyclerview);
 
@@ -215,6 +199,11 @@ public abstract class UserProfile extends Fragment {
 
 
 
+    protected void loadPicture()
+    {
+        app.loadingImage(userPictureCircleImageView,app.getUserInformation().getPictureURL());
+
+    }
     public void addRecentGame(String gameID, String gameName , String gamePhoto , String activityDescription , String activityDate)
     {
 

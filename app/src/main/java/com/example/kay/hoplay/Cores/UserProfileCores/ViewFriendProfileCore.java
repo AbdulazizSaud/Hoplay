@@ -59,6 +59,7 @@ public class ViewFriendProfileCore extends ViewFriendProfile  implements Firebas
 
             }
         });
+
         userRef.child(FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -67,10 +68,9 @@ public class ViewFriendProfileCore extends ViewFriendProfile  implements Firebas
                 if(dataSnapshot.getValue() == null)
                     return;
 
-                String username = dataSnapshot.child("_username_").getValue().toString().trim();
-                String nickname = dataSnapshot.child("_nickname_").getValue().toString().trim();
-                String pictureUrl =  dataSnapshot.child("_picUrl_").getValue().toString().trim();
-
+                String username = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue().toString().trim();
+                String nickname = dataSnapshot.child(FIREBASE_BIO_ATTR).getValue().toString().trim();
+                String pictureUrl =  dataSnapshot.child(FIREBASE_PICTURE_URL_PATH).getValue().toString().trim();
 
                 app.loadingImage(userPictureCircleImageView,pictureUrl);
                 setUsernameProfile("@"+username);
