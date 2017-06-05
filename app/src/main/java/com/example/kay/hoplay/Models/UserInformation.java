@@ -7,8 +7,10 @@ import java.util.HashMap;
  */
 
 public class UserInformation {
-    protected String username,pictureURL,UID,nickName , PSNAcc , XboxLiveAcc , userEmail;
-    protected HashMap<String,String>  pcGamesAcc ;
+    private String username,pictureURL,UID,nickName , userEmail,bio;
+    private boolean isPremium=false;
+    private String PSNAcc , XboxLiveAcc;
+    private HashMap<String,String>  pcGamesAcc ;
 
     public UserInformation(String username)
     {
@@ -73,5 +75,21 @@ public class UserInformation {
 
     public void setPcGamesAcc(HashMap<String, String> pcGamesAcc) {
         this.pcGamesAcc = pcGamesAcc;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public boolean isPremium() {
+        return isPremium;
+    }
+
+    public void setPremium(boolean premium) {
+        isPremium = premium;
     }
 }

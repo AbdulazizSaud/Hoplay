@@ -5,6 +5,10 @@ package com.example.kay.hoplay.Interfaces;
  */
 
 public interface Constants {
+
+    public static final int MAX_SAVED_REQUEST_PREMIUM=10;
+    public static final int MAX_SAVED_REQUEST_REGULAR=5;
+
     public static final int COOL_DOWN_TIMER_MIllI_SECOND = 1000;
     public static final long DUE_REQUEST_TIME_IN_VALUE_HOURS = 172800000;
 

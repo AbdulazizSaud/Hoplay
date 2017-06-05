@@ -1,6 +1,8 @@
 package com.example.kay.hoplay.Cores;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.kay.hoplay.Cores.RequestCore.LobbyFragmentCore;
 import com.example.kay.hoplay.Cores.RequestCore.NewRequestFragmentCore;
@@ -65,6 +67,10 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                 if (user == null) {
                     // User is sign out
                     toLogin();
+                } else if(!user.isEmailVerified()){
+                    Toast.makeText(getApplicationContext(),"You need to verify your account",Toast.LENGTH_SHORT).show();
+                    mAuth.signOut();
+                    toLogin();
                 } else {
                     app.setmAuthStateListener(authStateListener);
                     setupUserInformation(user);
@@ -91,9 +97,11 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     String XboxLiveAcc = "";
                     HashMap<String,String> pcGamesAccs = new HashMap<String, String>() ;
 
-                    String username = dataSnapshot.child(FIREBASE_USERNAME_PATH).getValue().toString();
-                    String nickname = dataSnapshot.child(FIREBASE_NICKNAME_PATH).getValue().toString();
-                    String picUrl = dataSnapshot.child(FIREBASE_PICTURE_URL_PATH).getValue().toString();
+                    String username = dataSnapshot.child(FIREBASE_USERNAME_PATH).getValue(String.class);
+                    String bio = dataSnapshot.child(FIREBASE_BIO_PATH).getValue(String.class);
+                    String accountType = dataSnapshot.child(FIREBASE_ACCOUNT_TYPE_PATH).getValue(String.class);
+                    String picUrl = dataSnapshot.child(FIREBASE_PICTURE_URL_PATH).getValue(String.class);
+
                     if (dataSnapshot.hasChild(FIREBASE_PS_GAME_PROVIDER))
                      PSNAcc = dataSnapshot.child(FIREBASE_PS_GAME_PROVIDER).getValue(String.class);
                     if (dataSnapshot.hasChild(FIREBASE_XBOX_GAME_PROVIDER))
@@ -103,7 +111,8 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
                     if (dataSnapshot.hasChild(FIREBASE_PC_GAME_PROVIDER))
                     {
-                        for (DataSnapshot pcAcc : dataSnapshot.child(FIREBASE_PC_GAME_PROVIDER).getChildren())
+                        Iterable<DataSnapshot> snapshots = dataSnapshot.child(FIREBASE_PC_GAME_PROVIDER).getChildren();
+                        for (DataSnapshot pcAcc : snapshots)
                         {
                             pcGamesAccs.put(pcAcc.getKey(),pcAcc.getValue().toString());
                         }
@@ -114,7 +123,9 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
                     // set current user information
                     app.getUserInformation().setUsername(username);
-                    app.getUserInformation().setNickName(nickname);
+                    app.getUserInformation().setBio(bio);
+                    app.getUserInformation().setPremium(false);
+                    app.getUserInformation().setNickName("no nick any more");
                     app.getUserInformation().setPictureURL(picUrl);
                     app.getUserInformation().setPSNAcc(PSNAcc);
                     app.getUserInformation().setXboxLiveAcc(XboxLiveAcc);
@@ -130,7 +141,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     loadSavedRequests(user.getUid());
 
 
-                    // check request
+                    // check addRequestToFirebase
                     checkRequest();
 
                 }
@@ -279,7 +290,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
 
     private boolean isInfoValid(DataSnapshot dataSnapshot) {
-        return dataSnapshot.hasChild(FIREBASE_USERNAME_PATH) && dataSnapshot.hasChild(FIREBASE_NICKNAME_PATH) && dataSnapshot.hasChild(FIREBASE_PICTURE_URL_PATH);
+        return dataSnapshot.hasChild(FIREBASE_USERNAME_PATH) && dataSnapshot.hasChild(FIREBASE_ACCOUNT_TYPE_ATTR) && dataSnapshot.hasChild(FIREBASE_PICTURE_URL_PATH);
     }
 
 

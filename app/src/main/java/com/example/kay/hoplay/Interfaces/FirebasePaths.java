@@ -22,9 +22,9 @@ public interface FirebasePaths {
     public static final String FIREBASE_REQUEST_REGION_ATTR = "region";
     public static final String FIREBASE_REQUEST_PLAYERS_NUMBER_ATTR = "players_number";
     public static final String FIREBASE_REQUEST_TIME_STAMP_ATTR = "timeStamp";
-    public static final String FIREBASE_PC_GAME_PROVIDER = "PC_game_providers";
-    public static final String FIREBASE_PS_GAME_PROVIDER = "PSN_account";
-    public static final String FIREBASE_XBOX_GAME_PROVIDER = "XBOX_live_account";
+    public static final String FIREBASE_PC_GAME_PROVIDER = FIREBASE_DETAILS_ATTR+"/PC_game_providers";
+    public static final String FIREBASE_PS_GAME_PROVIDER = FIREBASE_DETAILS_ATTR+"/PSN_account";
+    public static final String FIREBASE_XBOX_GAME_PROVIDER = FIREBASE_DETAILS_ATTR+"/XBOX_live_account";
 
 
 
@@ -41,7 +41,7 @@ public interface FirebasePaths {
     public static final String FIREBASE_USER_PRIVATE_CHAT = FIREBASE_USER_CHAT_REFERENCES+"/"+FIREBASE_PRIVATE_ATTR;
     public static final String FIREBASE_USER_PUBLIC_CHAT = FIREBASE_USER_CHAT_REFERENCES+"/"+FIREBASE_PUBLIC_ATTR;
     public static final String FIREBASE_CHAT_USERS_LIST_PATH = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_USERS_LIST_ATTR;
-    public static final String FIREBASE_SAVED_REQS_PATH = FIREBASE_GAMES_REFERENCES+"/"+FIREBASE_SAVED_REQS_ATTR;
+    public static final String FIREBASE_SAVED_REQS_PATH = FIREBASE_GAMES_REFERENCES+"/"+FIREBASE_SAVED_REQS_ATTR+"/Requests";
 
 
     public static final String FIREBASE_COUNTER_PATH = "_counter_";
@@ -68,6 +68,7 @@ public interface FirebasePaths {
 
     public static final String FIREBASE_USERNAME_ATTR = "_username_";
     public static final String FIREBASE_BIO_ATTR = "_bio_";
+    public static final String FIREBASE_ACCOUNT_TYPE_ATTR = "acc_type";
     public static final String FIREBASE_PICTURE_URL_ATTR =  "_picUrl_";
     public static final String FIREBASE_NICKNAME_ATTR =  "_nickname_";
     public static final String FIREBASE_EMAIL_ATTR = "_email_";
@@ -80,6 +81,10 @@ public interface FirebasePaths {
 
     // USER INFO
     public static final String FIREBASE_USERNAME_PATH = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_USERNAME_ATTR;
+
+    public static final String FIREBASE_BIO_PATH = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_BIO_ATTR;
+    public static final String FIREBASE_ACCOUNT_TYPE_PATH = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_ACCOUNT_TYPE_ATTR;
+
     public static final String FIREBASE_PICTURE_URL_PATH =  FIREBASE_DETAILS_ATTR+"/"+FIREBASE_PICTURE_URL_ATTR;
     public static final String FIREBASE_NICKNAME_PATH = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_NICKNAME_ATTR;
     public static final String FIREBASE_EMAIL_PATH = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_EMAIL_ATTR;

@@ -1,5 +1,7 @@
 package com.example.kay.hoplay.Cores.RequestCore;
 
+import android.widget.Toast;
+
 import com.example.kay.hoplay.Cores.ChatCore.CreateChat;
 import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.NewRequest;
@@ -7,6 +9,7 @@ import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.Models.RequestModelRefrance;
+import com.example.kay.hoplay.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -65,21 +68,30 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
     }
 
     @Override
-    protected void saveRequest() {
+    protected void addSaveRequestToFirebase() {
 
-        app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_SAVED_REQS_PATH).setValue(app.getSavedRequests());
+        DatabaseReference ref = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_SAVED_REQS_PATH);
+        ref.getParent().child("count").setValue(app.getSavedRequests().size(), new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if(databaseError == null)
+                {
 
+                }else {
+                    //
+                    String msg = String.format(getResources().getString(R.string.new_request_finish_save_request_message), "");
+                    Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            }
+        });
+
+        ref.setValue(app.getSavedRequests());
     }
 
-    protected void loadStandards()
-    {
-
-
-
-    } // End of load method
 
     @Override
-    protected void request(String platform, String gameName, String matchType, String region, String numberOfPlayers, String rank, String description) {
+    protected void addRequestToFirebase(String platform, String gameName, String matchType, String region, String numberOfPlayers, String rank, String description) {
 
 
         GameModel gameModel = app.getGameManager().getGameByName(gameName);
@@ -92,11 +104,11 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
 
         String requestKey = requestsRef.push().getKey();
         String requestAdmin = app.getUserInformation().getUID();
-        // _requests_ -> platform -> GameID -> Region -> request id
+        // _requests_ -> platform -> GameID -> Region -> addRequestToFirebase id
         DatabaseReference requestRef = requestsRef.child(requestKey);
 
 
-        // set the request info under the requests tree
+        // set the addRequestToFirebase info under the requests tree
 
         HashMap<String,Object> data = new HashMap<>();
        // TimeStamp timeStamp=new TimeStamp();

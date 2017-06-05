@@ -33,6 +33,7 @@ import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.RequestCore.LobbyFragmentCore;
 import com.example.kay.hoplay.CoresAbstract.MainAppMenu;
 import com.example.kay.hoplay.Fragments.NewRequestFragment;
+import com.example.kay.hoplay.Interfaces.Constants;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.Rank;
 import com.example.kay.hoplay.Models.RequestModel;
@@ -49,7 +50,7 @@ import java.util.List;
  * Created by Kay on 2/12/2017.
  */
 
-public abstract class NewRequest extends AppCompatActivity {
+public abstract class NewRequest extends AppCompatActivity implements Constants{
 
 
     /***************************************/
@@ -437,16 +438,16 @@ public abstract class NewRequest extends AppCompatActivity {
           //  creatingRequestDialog.show();
             // Take the user input for the request
             if (selectedPlatform.equalsIgnoreCase("PS") && !app.getUserInformation().getPSNAcc().equals("")){
-                request(selectedPlatform,selectedGame,selectedMatchType,selectedRegion,selectedPlayersNumber,selectedRank,requestDescription);
+                addRequestToFirebase(selectedPlatform,selectedGame,selectedMatchType,selectedRegion,selectedPlayersNumber,selectedRank,requestDescription);
                 finishRequest();
             }
             else if (selectedPlatform.equalsIgnoreCase("XBOX") && !app.getUserInformation().getXboxLiveAcc().equals("")){
-                request(selectedPlatform,selectedGame,selectedMatchType,selectedRegion,selectedPlayersNumber,selectedRank,requestDescription);
+                addRequestToFirebase(selectedPlatform,selectedGame,selectedMatchType,selectedRegion,selectedPlayersNumber,selectedRank,requestDescription);
                 finishRequest();
             }
             else if (selectedPlatform.equalsIgnoreCase("PC") && app.getUserInformation().getPcGamesAcc().get(pcGameProvider) !=null)
             {
-                request(selectedPlatform,selectedGame,selectedMatchType,selectedRegion,selectedPlayersNumber,selectedRank,requestDescription);
+                addRequestToFirebase(selectedPlatform,selectedGame,selectedMatchType,selectedRegion,selectedPlayersNumber,selectedRank,requestDescription);
                 finishRequest();
             }
 
@@ -674,7 +675,7 @@ public abstract class NewRequest extends AppCompatActivity {
                 {
                     saveGameProviderAccount(pcGameProvider,gameProviderEdittext.getText().toString().trim(),selectedPlatform);
                     gameProviderDialog.dismiss();
-                    request(platform,game,match,region,playersNumber,rank,description);
+                    addRequestToFirebase(platform,game,match,region,playersNumber,rank,description);
                     finishRequest();
                 }
 
@@ -719,18 +720,26 @@ public abstract class NewRequest extends AppCompatActivity {
 
     private void prepareSaveReq(String selectedGame , String selectedMatchType , String selectedRegion , String selectedPlayersNumber , String selectedRank , String requestDescription)
     {
-        RequestModel requestModel = new RequestModel(selectedPlatform,selectedGame,app.getUserInformation().getUsername(),requestDescription,selectedRegion,Integer.parseInt(selectedPlayersNumber),selectedMatchType,selectedRank);
+
+
+        int max = app.getUserInformation().isPremium() ? MAX_SAVED_REQUEST_PREMIUM : MAX_SAVED_REQUEST_REGULAR;
+
+        if(app.getSavedRequests().size() >= max)
+        {
+            Toast.makeText(getApplicationContext(),"You corss the limit of request",Toast.LENGTH_LONG).show();
+            return;
+        }
 
         GameModel gameModel = app.getGameManager().getGameByName(selectedGame);
+
+        int numberPlayers = selectedPlayersNumber.equals("All Numbers") ? gameModel.getMaxPlayers():Integer.parseInt(selectedPlayersNumber);
+        RequestModel requestModel = new RequestModel(selectedPlatform,selectedGame,app.getUserInformation().getUsername(),requestDescription,selectedRegion,numberPlayers,selectedMatchType,selectedRank);
 
         requestModel.setGameId(gameModel.getGameID());
         requestModel.setRequestPicture(gameModel.getGamePhotoUrl());
 
         app.getSavedRequests().add(requestModel);
-        saveRequest();
-        String msg = String.format(getResources().getString(R.string.new_request_finish_save_request_message), "");
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-        finish();
+        addSaveRequestToFirebase();
         isSaveRequest = false;
     }
 
@@ -780,11 +789,11 @@ public abstract class NewRequest extends AppCompatActivity {
 
     protected abstract void OnStartActivity();
     protected abstract void saveGameProviderAccount(String gameProvider,String userGameProviderAcc , String platform );
-    protected abstract void saveRequest();
+    protected abstract void addSaveRequestToFirebase();
 
     // This method  take the request input from the user and insert it  into the database
     // It should take request model and pass it to the core
-    protected abstract void request(String platform, String game, String matchType, String region, String numberOfPlayers, String rank, String description);
+    protected abstract void addRequestToFirebase(String platform, String game, String matchType, String region, String numberOfPlayers, String rank, String description);
 
 }
 

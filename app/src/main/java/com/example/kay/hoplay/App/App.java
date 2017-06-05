@@ -96,7 +96,7 @@ public class App extends Application implements FirebasePaths{
 
     // thi method return a imageloader
     private ImageLoader getImageLoader(){
-        // create a new request queue for picture
+        // create a new addRequestToFirebase queue for picture
         RequestQueue requestQueue  = Volley.newRequestQueue(getApplicationContext());
         if(imageLoader == null)
             imageLoader = new ImageLoader(requestQueue,new LruBitmapCache());

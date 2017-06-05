@@ -54,12 +54,21 @@ public class SignUpCore extends Signup implements FirebasePaths{
 
                             FirebaseUser user = appAuth.getCurrentUser();
 
-                            insertInfoToDatabase(user.getUid(),email,username,nickname);
+                            insertInfoToDatabase(user.getUid(),email,username);
 
 //                            // success message
 //                            String strMeatMsg = String.format(getResources().getString(R.string.signup_successful_message), username);
 //                            Toast.makeText(getApplicationContext(), strMeatMsg, Toast.LENGTH_LONG).show();
                             // switch to main AppMenu
+                            user.sendEmailVerification()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                               Toast.makeText(getApplicationContext(),"Verificetion sent to your email",Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    });
                             toMainMenuApp();
 
 
@@ -97,14 +106,15 @@ public class SignUpCore extends Signup implements FirebasePaths{
 
 
 
-    private void insertInfoToDatabase(final String UID,final String email, final String username, final String nickname) {
+    private void insertInfoToDatabase(final String UID,final String email, final String username) {
 
         DatabaseReference usersInfoRef = app.getDatabaseUsersInfo().child(UID);
 
         HashMap<String,String> map = new HashMap<>();
 
         map.put(FIREBASE_USERNAME_ATTR,username.toLowerCase());
-        map.put(FIREBASE_NICKNAME_ATTR,nickname);
+        map.put(FIREBASE_BIO_ATTR,"i'm a noob");
+        map.put(FIREBASE_ACCOUNT_TYPE_ATTR,"REGULAR");
         map.put(FIREBASE_EMAIL_ATTR,email);
         map.put(FIREBASE_PICTURE_URL_ATTR,"default");
         usersInfoRef.child(FIREBASE_DETAILS_ATTR).setValue(map);
