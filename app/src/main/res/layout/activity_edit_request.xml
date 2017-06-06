@@ -10,7 +10,7 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/new_request_relative_layout"
+        android:id="@+id/edit_request_relativelayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/activity_vertical_margin"
@@ -18,17 +18,17 @@
         android:background="@color/app_background"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context=".Fragments.ParentRequestFragments">
+        tools:context=".CoresAbstract.RequestAbstracts.EditRequest">
 
 
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:id="@+id/go_back_to_make_request_imageview"
+            android:id="@+id/go_back_to_new_request_fragment"
             app:srcCompat="@drawable/ic_close_24dp"
             android:layout_marginRight="20dp"
             android:padding="0dp"
-            android:onClick="goBackToMainAppMenu"
+            android:onClick="goBackToNewRequestFragment"
             android:layout_alignParentTop="true"
             />
 
@@ -37,13 +37,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/new_request_create_new_request"
+            android:text="@string/edit_request_request_title"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:paddingTop="20dp"
-            android:id="@+id/make_request_message_textview"
-            android:textSize="25dp"
             android:textColor="@color/app_color"
+            android:id="@+id/edit_request_title_textview"
+            android:textSize="25dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
@@ -53,16 +53,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_below="@+id/make_request_message_textview"
+            android:layout_below="@+id/edit_request_title_textview"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:id="@+id/consoles_radiogroup">
+            android:id="@+id/edit_request_consoles_radiogroup">
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
                 android:textSize="20dp"
-                android:onClick="onPlatformSelecting"
-                android:id="@+id/pc_choice_radiobutton"
+                android:onClick="onPlatformSelectingEditReq"
+                android:id="@+id/edit_request_pc_choice_radiobutton"
                 android:text="@string/new_request_pc"
                 android:layout_marginRight="20dp"
 
@@ -70,20 +70,20 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
-                android:id="@+id/ps_choice_radiobutton"
+                android:id="@+id/edit_request_ps_choice_radiobutton"
                 android:text="@string/new_request_playstation"
                 android:textSize="20dp"
-                android:onClick="onPlatformSelecting"
+                android:onClick="onPlatformSelectingEditReq"
                 android:textColor="@color/ps_color"/>
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
-                android:id="@+id/xbox_choice_radiobutton"
+                android:id="@+id/edit_request_xbox_choice_radiobutton"
                 android:textSize="20dp"
                 android:textColor="@color/xbox_color"
                 android:text="@string/new_request_Xbox"
-                android:onClick="onPlatformSelecting"
+                android:onClick="onPlatformSelectingEditReq"
                 android:layout_marginLeft="20dp"
                 />
 
@@ -94,17 +94,17 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/inputs_relativelayout_new_request"
+            android:id="@+id/inputs_relativelayout_edit_request"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/consoles_radiogroup">
+            android:layout_below="@id/edit_request_consoles_radiogroup">
 
 
             <AutoCompleteTextView
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_centerHorizontal="true"
-                android:id="@+id/games_autocompletetextview_new_request"
-                android:hint="@string/new_request_what_do_you_want_to_play"
+                android:id="@+id/games_autocompletetextview_edit_request"
+                android:hint="@string/edit_request_what_do_you_want_to_play"
                 android:textColorHint="@color/hint_color"
                 android:gravity="center"
                 android:inputType="textAutoComplete"
@@ -122,8 +122,8 @@
             <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:id="@+id/match_type_spinner_new_request"
-                android:layout_below="@+id/games_autocompletetextview_new_request"
+                android:id="@+id/match_type_spinner_edit_request"
+                android:layout_below="@+id/games_autocompletetextview_edit_request"
                 android:hint="@string/new_request_match_type"
                 android:gravity="center"
                 android:paddingLeft="3dp"
@@ -135,19 +135,19 @@
 
                 />
 
-          <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-              android:layout_width="300dp"
-              android:layout_height="50dp"
-              android:hint="@string/new_request_country"
-              android:id="@+id/country_spinner_new_request"
-              android:layout_below="@+id/match_type_spinner_new_request"
-              android:layout_marginTop="5dp"
-              android:paddingLeft="3dp"
-              android:gravity="center"
-              android:textColorHint="@color/hint_color"
-              android:drawableLeft="@drawable/ic_location_unfocused_24dp"
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:hint="@string/edit_request_country"
+                android:id="@+id/country_spinner_edit_request"
+                android:layout_below="@+id/match_type_spinner_edit_request"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="3dp"
+                android:gravity="center"
+                android:textColorHint="@color/hint_color"
+                android:drawableLeft="@drawable/ic_location_unfocused_24dp"
                 android:layout_centerHorizontal="true"
-              />
+                />
 
 
 
@@ -155,30 +155,30 @@
 
 
             <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                android:id="@+id/players_number_spinner_new_request"
+                android:id="@+id/players_number_spinner_edit_request"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5dp"
-                android:hint="@string/new_request_players_number"
+                android:hint="@string/edit_request_players_number"
                 android:paddingLeft="3dp"
                 android:drawableLeft="@drawable/ic_group_unfocused_24dp"
                 android:gravity="center"
-                android:layout_below="@+id/country_spinner_new_request"
+                android:layout_below="@+id/country_spinner_edit_request"
                 android:textColorHint="@color/hint_color"
                 android:layout_centerHorizontal="true"
                 />
 
 
             <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                android:id="@+id/players_rank_spinner_new_request"
+                android:id="@+id/players_rank_spinner_edit_request"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5dp"
-                android:hint="@string/new_request_players_ranks"
+                android:hint="@string/edit_request_players_ranks"
                 android:paddingLeft="3dp"
                 android:drawableLeft="@drawable/ic_grade_unfocused_24dp"
                 android:gravity="center"
-                android:layout_below="@+id/players_number_spinner_new_request"
+                android:layout_below="@+id/players_number_spinner_edit_request"
                 android:textColorHint="@color/hint_color"
                 android:layout_centerHorizontal="true"
                 android:visibility="gone"
@@ -189,7 +189,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/players_rank_spinner_new_request"
+                android:layout_below="@id/players_rank_spinner_edit_request"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp">
 
@@ -198,7 +198,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:ems="3"
-                    android:id="@+id/description_edittext_new_request"
+                    android:id="@+id/description_edittext_edit_request"
                     android:textColorHint="@color/hint_color"
                     android:inputType="textMultiLine"
                     android:maxLength="200"
@@ -206,7 +206,7 @@
                     android:scrollbarAlwaysDrawVerticalTrack="true"
                     android:textColor="@color/text_color"
                     style="@style/Base.TextAppearance.AppCompat.Small"
-                    android:hint="@string/new_request_description"
+                    android:hint="@string/edit_request_description"
                     />
             </android.support.design.widget.TextInputLayout>
 
@@ -215,32 +215,19 @@
         </RelativeLayout>
 
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/request_button_new_request"
-            style="@style/Base.Widget.AppCompat.Button.Colored"
-            android:layout_width="130dp"
-            android:layout_height="50dp"
-            android:textStyle="bold"
-            android:layout_marginTop="5dp"
-            android:layout_below="@+id/inputs_relativelayout_new_request"
-            android:text="@string/new_request_request_button"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@id/inputs_relativelayout_new_request"
-            android:layout_alignLeft="@id/inputs_relativelayout_new_request"
-            android:onClick="requestButtonListener"
-             />
+
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/save_request_button_new_request"
+            android:id="@+id/update_edit_request_button"
             style="@style/Base.Widget.AppCompat.Button.Colored"
-            android:layout_width="130dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             android:textStyle="bold"
-            android:text="@string/new_request_save_request_button"
-            android:onClick="saveRequestListener"
-            android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/inputs_relativelayout_new_request"
-            android:layout_alignEnd="@+id/inputs_relativelayout_new_request" />
+            android:text="@string/edit_request_update_button"
+            android:onClick="updateRequestListener"
+            android:layout_below="@+id/inputs_relativelayout_edit_request"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp" />
 
 
 

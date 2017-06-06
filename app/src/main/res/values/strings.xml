@@ -372,12 +372,40 @@
     <string name="edit_profile_bio_hint">Bio</string>
     <string name="edit_peofile_game_providers_edittext_hint">Game Provider</string>
     <string name="edit_profile_update_button">U P D A T E</string>
-    
-    
-    <!--                                Saved Request On Long Click Pop up Layout             -->
-    <string name="saved_request_long_click_update_button">U P D A T E</string>
-    <string name="saved_request_long_click_delete_button">D E L E T E</string>
 
-    
+
+    <!--                                Saved Request On Click Pop up Layout             -->
+    <string name="saved_request_on_click_request_button">R E Q U E S T</string>
+    <string name="saved_request_on_click_update_button">U P D A T E</string>
+    <string name="saved_request_on_click_delete_button">D E L E T E</string>
+
+
+
+    <!--                                Edit Request Layout                             -->
+    <string name="edit_request_update_button">U P D A T E</string>
+    <string name="edit_request_pc">PC</string>
+    <string name="edit_request_playstation">Playstation</string>
+    <string name="edit_request_Xbox">Xbox</string>
+    <string name="edit_request_what_do_you_want_to_play">What do you want to play ?</string>
+    <string name="edit_request_your_description">You description here -_-</string>
+    <string name="edit_request_request_title">Edit Request</string>
+    <string name="edit_request_request">Request</string>
+    <string name="edit_request_save_request">Save</string>
+    <string name="edit_request_country">All Countries</string>
+    <string name="edit_request_players_number">Players Number</string>
+    <string name="edit_request_players_ranks">Players Rank</string>
+    <string name="edit_request_description">Description</string>
+    <string name="edit_request_request_button">R e q u e s t</string>
+    <string name="edit_request_save_request_button">S a v e</string>
+    <string name="edit_request_match_type">Match Type</string>
+    <string name="edit_request_match_type_competitive">Competitive</string>
+    <string name="edit_request_match_type_quick_match">Quick Match</string>
+
+
+    <!--                            Edit Request Activity                           -->
+    <string name="edit_request_dialog_title">Updating Request</string>
+    <string name="edit_request_dialog_message">Checking Request Info..</string>
+
+
 
 </resources>

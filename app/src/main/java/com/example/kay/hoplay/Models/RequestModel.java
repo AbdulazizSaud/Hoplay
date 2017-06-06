@@ -10,7 +10,7 @@ import java.util.Map;
 
 
 
-public class RequestModel  {
+public class RequestModel implements Parcelable {
 
     private String platform;
     private String requestId ;
@@ -24,6 +24,8 @@ public class RequestModel  {
     private long timeStamp;
     private float gameVersion;
 
+    private int savedRequestIndex;
+
     private String adminName;
     private String requestPicture;
     private List<String> users;
@@ -33,7 +35,47 @@ public class RequestModel  {
     public RequestModel() {
     }
 
+    protected RequestModel(Parcel in) {
+        platform = in.readString();
+        requestId = in.readString();
+        requestTitle = in.readString();
+        admin = in.readString();
+        description = in.readString();
+        region = in.readString();
+        playerNumber = in.readInt();
+        matchType = in.readString();
+        rank = in.readString();
+        timeStamp = in.readLong();
+        gameVersion = in.readFloat();
+        savedRequestIndex = in.readInt();
+        adminName = in.readString();
+        requestPicture = in.readString();
+        users = in.createStringArrayList();
+        gameId = in.readString();
+    }
 
+
+
+    // just for passing request model object from one activity to another
+    public static final Creator<RequestModel> CREATOR = new Creator<RequestModel>() {
+        @Override
+        public RequestModel createFromParcel(Parcel in) {
+            return new RequestModel(in);
+        }
+
+        @Override
+        public RequestModel[] newArray(int size) {
+            return new RequestModel[size];
+        }
+    };
+
+    public void setSavedRequestIndex(int savedRequestIndex) {
+        this.savedRequestIndex = savedRequestIndex;
+    }
+
+    public int getSavedRequestIndex() {
+        return savedRequestIndex;
+    }
 
     public RequestModel(String platform, String requestTitle, String admin, String description, String region, int playerNumber, String matchType, String rank, long timeStamp) {
         this.platform=platform;
@@ -192,5 +234,29 @@ public class RequestModel  {
         this.players = players;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(platform);
+        dest.writeString(requestId);
+        dest.writeString(requestTitle);
+        dest.writeString(admin);
+        dest.writeString(description);
+        dest.writeString(region);
+        dest.writeInt(playerNumber);
+        dest.writeString(matchType);
+        dest.writeString(rank);
+        dest.writeLong(timeStamp);
+        dest.writeFloat(gameVersion);
+        dest.writeInt(savedRequestIndex);
+        dest.writeString(adminName);
+        dest.writeString(requestPicture);
+        dest.writeStringList(users);
+        dest.writeString(gameId);
+    }
 }
 

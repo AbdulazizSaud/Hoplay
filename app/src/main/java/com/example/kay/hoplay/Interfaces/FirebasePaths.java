@@ -27,6 +27,7 @@ public interface FirebasePaths {
     public static final String FIREBASE_XBOX_GAME_PROVIDER = FIREBASE_DETAILS_ATTR+"/XBOX_live_account";
 
 
+    public static final String FIREBASE_SAVED_REQUESTS_REQUESTS_ATTR="Requests";
 
     public static final String FIREBASE_GAMES_REFERENCES = "_games_";
     public static final String FIREBASE_GAME_PLATFORMS_ATTR = "platforms";

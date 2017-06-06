@@ -147,9 +147,6 @@ public class AddGameCore extends AddGame implements FirebasePaths {
         // now delete the game from the GameManager
         app.getGameManager().deleteGame(gameKey,gameName);
 
-
-
-
     }
 
     private void loadFavorGamesList() {

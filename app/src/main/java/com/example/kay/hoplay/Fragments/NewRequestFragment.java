@@ -39,8 +39,6 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
     TextView savedRequestsMessage;
     TextView addGameTextView;
 
-    private Dialog savedRequestPopup;
-
     FloatingActionButton addGameFloationActionButton;
     protected ArrayList<RequestModel> arrayList = new ArrayList<RequestModel>();
 
@@ -146,17 +144,19 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
 
 
 
-    protected void addToSaveRequest(RequestModel model)
+    protected void addToSaveRequest(RequestModel model , String savedReqIndex)
     {
+        model.setSavedRequestIndex(Integer.parseInt(savedReqIndex));
         arrayList.add(model);
         mAdapter.notifyDataSetChanged();
     }
 
+
+    // Not used
     protected void removeFromSaveRequest(RequestModel model)
     {
 
         boolean b = arrayList.remove(model);
-        Log.i("--->",b +" ");
         app.getSavedRequests().remove(model);
         mAdapter.notifyDataSetChanged();
     }

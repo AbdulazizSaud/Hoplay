@@ -72,9 +72,8 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
     private String selectedPlatform;
     private AutoCompleteTextView gamesAutoCompleteTextView;
     private EditText requestDescritopnEdittext;
-    private CheckedTextView dropDownSpinnerItem;
-    private TextView spinnerItem;
-    private int layoutItemId;
+
+
     private EditText descriptionEdittext;
     protected ArrayList<String> gamesList;
     protected ArrayList<String> regionList;
@@ -254,6 +253,32 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
                 numberOfPlayersSpinner.setText("");
                 playersRanksSpinner.setText("");
 
+
+
+                // load game standards
+                numberOfPlayersSpinner.setVisibility(View.VISIBLE);
+
+                // Load max players
+                String gameKey = loadGameInformation(s.toString());
+
+                if (checkIfCompetitive(gameKey)) {
+                    matchTypeSpinner.setVisibility(View.VISIBLE);
+                    playersRanksSpinner.setVisibility(View.VISIBLE);
+                    slideInFromLeft(matchTypeSpinner);
+                    slideInFromLeft(playersRanksSpinner);
+
+                } else {
+                    if (matchTypeSpinner.isShown())
+                        slideOutToRight(matchTypeSpinner);
+                    slideOutToRight(playersRanksSpinner);
+                    matchTypeSpinner.setVisibility(View.GONE);
+                    playersRanksSpinner.setVisibility(View.GONE);
+
+                }
+
+
+
+
             }
         });
 
@@ -266,25 +291,24 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
                 String name = parent.getItemAtPosition(position).toString();
 
-                Toast.makeText(getApplicationContext(),name,Toast.LENGTH_LONG).show();
-
-
                 // Load max players
                 String gameKey = loadGameInformation(name);
 
-                if (checkIfCompetitive(gameKey)) {
-                    matchTypeSpinner.setVisibility(View.VISIBLE);
-                    playersRanksSpinner.setVisibility(View.VISIBLE);
-                    slideInFromLeft(matchTypeSpinner);
-                    slideInFromLeft(playersRanksSpinner);
+                if (!gameKey.equals("")) {
+                    if (checkIfCompetitive(gameKey)) {
+                        matchTypeSpinner.setVisibility(View.VISIBLE);
+                        playersRanksSpinner.setVisibility(View.VISIBLE);
+                        slideInFromLeft(matchTypeSpinner);
+                        slideInFromLeft(playersRanksSpinner);
 
-                } else {
-                    if (matchTypeSpinner.isShown())
-                        slideOutToRight(matchTypeSpinner);
+                    } else {
+                        if (matchTypeSpinner.isShown())
+                            slideOutToRight(matchTypeSpinner);
                         slideOutToRight(playersRanksSpinner);
-                    matchTypeSpinner.setVisibility(View.GONE);
-                    playersRanksSpinner.setVisibility(View.GONE);
+                        matchTypeSpinner.setVisibility(View.GONE);
+                        playersRanksSpinner.setVisibility(View.GONE);
 
+                    }
                 }
 
             }
@@ -433,6 +457,7 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
             requestDescription = R.string.new_request_default_description_message + selectedGame;
 
 
+
         if (checkIsValidRequest()) {
             // Start the loading dialog
           //  creatingRequestDialog.show();
@@ -525,7 +550,6 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
     }
 
 
-    // this method check if the user has the game if yes , load game properties
     private boolean userHasTheGame(String selectedGame) {
         return app.getGameManager().getGameByName(selectedGame) !=null;
     }
@@ -546,27 +570,33 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
         final GameModel gameModel = app.getGameManager().getGameByName(selectedGame);
 
+
+
         playersNumberAdapter.clear();
-
-
-        playersNumberAdapter.add("All Numbers");
-        for (int i = 2; i <= gameModel.getMaxPlayers(); i++) {
-            playersNumberAdapter.add(Integer.toString(i));
-        }
-
-        playersNumberAdapter.notifyDataSetChanged();
-
-
-
         playersRanksAdapter.clear();
 
-        playersRanksAdapter.add("All Ranks");
-        for (Rank rank : gameModel.getGameRanks().getRanksList()) {
-            playersRanksAdapter.add(rank.getRankName());
+        if (gameModel!=null) {
+            playersNumberAdapter.add("All Numbers");
+            for (int i = 2; i <= gameModel.getMaxPlayers(); i++) {
+                playersNumberAdapter.add(Integer.toString(i));
+            }
+
+            playersNumberAdapter.notifyDataSetChanged();
+
+
+
+
+
+            playersRanksAdapter.add("All Ranks");
+            for (Rank rank : gameModel.getGameRanks().getRanksList()) {
+                playersRanksAdapter.add(rank.getRankName());
+            }
+
+            playersRanksAdapter.notifyDataSetChanged();
         }
 
-        playersRanksAdapter.notifyDataSetChanged();
-
+        if (gameModel==null)
+            return "";
 
         return gameModel.getGameID();
     }
@@ -741,6 +771,7 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
         app.getSavedRequests().add(requestModel);
         addSaveRequestToFirebase();
         isSaveRequest = false;
+        finish();
     }
 
     public void saveRequestListener(View view)
@@ -754,6 +785,12 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
         String selectedPlayersNumber = numberOfPlayersSpinner.getText().toString().trim();
         String selectedRank = playersRanksSpinner.getText().toString().trim();
         String requestDescription = descriptionEdittext.getText().toString().trim();
+
+        String pcGameProvider="";
+        if (app.getGameManager().getGameByName(selectedGame) != null)
+            pcGameProvider =  app.getGameManager().getGameByName(selectedGame).getPcGameProvider();
+
+
 
         //
         if (checkIsValidRequest())
@@ -778,6 +815,10 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
 
     }
+
+
+
+
 
 
 
