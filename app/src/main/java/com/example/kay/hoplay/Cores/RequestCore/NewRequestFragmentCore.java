@@ -20,6 +20,7 @@ import com.example.kay.hoplay.Fragments.NewRequestFragment;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;
+import com.example.kay.hoplay.util.Request;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -82,6 +83,13 @@ public class NewRequestFragmentCore extends NewRequestFragment implements Fireba
 
     }
 
+
+    @Override
+    protected void addRequestToFirebase(String platform, String gameName, String matchType, String region, String numberOfPlayers, String rank, String description) {
+
+        Request request = new Request(platform,gameName,matchType,region,numberOfPlayers,rank,description);
+        app.switchMainAppMenuFragment(new LobbyFragmentCore(request.getRequestModelRefrance()));
+    }
 
     @Override
     protected void deleteSavedRequest(RequestModel model) {

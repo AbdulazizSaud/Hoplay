@@ -125,7 +125,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     app.getUserInformation().setUsername(username);
                     app.getUserInformation().setBio(bio);
                     app.getUserInformation().setPremium(false);
-                    app.getUserInformation().setNickName("no nick any more");
+                    app.getUserInformation().setNickName(bio);
                     app.getUserInformation().setPictureURL(picUrl);
                     app.getUserInformation().setPSNAcc(PSNAcc);
                     app.getUserInformation().setXboxLiveAcc(XboxLiveAcc);

@@ -613,7 +613,12 @@ public abstract class  EditRequest extends AppCompatActivity {
             UpdatedRequest.setGameId(app.getGameManager().getGameByName(selectedGame.trim()).getGameID());
             UpdatedRequest.setMatchType(selectedMatchType);
             UpdatedRequest.setRegion(selectedRegion);
-            UpdatedRequest.setPlayerNumber(Integer.parseInt(selectedPlayersNumber));
+
+
+            GameModel gameModel = app.getGameManager().getGameByName(selectedGame);
+            int numberPlayers = selectedPlayersNumber.equals("All Numbers") ? gameModel.getMaxPlayers():Integer.parseInt(selectedPlayersNumber);
+
+            UpdatedRequest.setPlayerNumber(numberPlayers);
             UpdatedRequest.setRank(selectedRank);
             UpdatedRequest.setDescription(requestDescription);
             updateRequest(UpdatedRequest);

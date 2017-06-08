@@ -41,6 +41,9 @@ public class SearchResultsCore extends SearchResults {
                         .addListenerForSingleValueEvent(getGameInfo(request));
             } else {
 
+                if(request.getPlayers() == null)
+                    continue;
+
                 request.setRequestPicture(gameModel.getGamePhotoUrl());
                 addResult(request);
             }

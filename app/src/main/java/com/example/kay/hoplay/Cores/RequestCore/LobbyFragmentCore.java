@@ -94,7 +94,6 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths {
                     requestModel.getMatchType(),
                     adminUser,
                     adminPicture,
-                    requestModel.getPlayers(),
                     requestModel.getRank(),
                     requestModel.getRegion()
             );

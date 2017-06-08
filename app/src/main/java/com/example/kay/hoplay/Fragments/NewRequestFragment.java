@@ -206,6 +206,15 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
             @Override
             public void onClick(View v) {
 
+                addRequestToFirebase(
+                     requestModel.getPlatform(),
+                        requestModel.getRequestTitle(),
+                        requestModel.getMatchType(),
+                        requestModel.getRegion(),
+                        String.valueOf(requestModel.getPlayerNumber()),
+                        requestModel.getRank(),
+                        requestModel.getDescription());
+                savedRequestPopupDialog.cancel();
             }
         });
 
@@ -246,8 +255,9 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
     }
 
 
+    protected abstract void addRequestToFirebase(String platform, String gameName, String matchType, String region, String numberOfPlayers, String rank, String description);
 
-    protected void updateSavedRequest(int index,RequestModel requestModel)
+        protected void updateSavedRequest(int index,RequestModel requestModel)
     {
         arrayList.set(index,requestModel);
         app.getSavedRequests().set(index,requestModel);

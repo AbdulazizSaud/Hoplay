@@ -1,11 +1,10 @@
-package com.example.kay.hoplay.Cores.RequestCore;
+package com.example.kay.hoplay.Cores.Lobby;
 
-import android.content.Intent;
+
 import android.view.View;
 
-import com.example.kay.hoplay.Cores.ChatCore.ChatCore;
+import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.ChatCore.CreateChat;
-import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.RequestLobby;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.PlayerModel;
@@ -18,31 +17,34 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+public class LobbyCore implements FirebasePaths {
 
-public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
-
+    private App app;
     private GameModel gameModel;
     private RequestModel requestModel;
-    private String adminPicture,adminUser;
-    private boolean isDone=false;
-    private  DatabaseReference requestRef;
+    private String adminPicture, adminUser;
+    private boolean isDone = false;
+    private DatabaseReference requestRef;
+    private Lobby lobby;
 
-    private ChildEventListener onAddPlayerEvent = new ChildEventListener() {
+    private DatabaseReference playersRef;
+
+
+    private ChildEventListener onAddPlayerEventListener = new ChildEventListener() {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
             try {
 
-                PlayerModel player = new PlayerModel(dataSnapshot.child("uid").getValue(String.class),  dataSnapshot.child("username").getValue(String.class));
+                PlayerModel player = new PlayerModel(dataSnapshot.child("uid").getValue(String.class), dataSnapshot.child("username").getValue(String.class));
 
-                if(player.getUID().equals(app.getUserInformation().getUID()))
+                if (player.getUID().equals(app.getUserInformation().getUID()) || adminUser.equals(player.getUsername()))
                     lobby.getJoinButton().setVisibility(View.INVISIBLE);
 
                 lobby.addPlayer(player);
                 requestModel.getPlayers().add(player);
 
-            }catch (NullPointerException e)
-            {
+            } catch (NullPointerException e) {
                 return;
             }
 
@@ -57,9 +59,9 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         @Override
         public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-            PlayerModel player = new PlayerModel(dataSnapshot.child("uid").getValue(String.class),  dataSnapshot.child("username").getValue(String.class));
+            PlayerModel player = new PlayerModel(dataSnapshot.child("uid").getValue(String.class), dataSnapshot.child("username").getValue(String.class));
 
-            if(player.getUID().equals(app.getUserInformation().getUID()))
+            if (player.getUID().equals(app.getUserInformation().getUID()))
                 lobby.getJoinButton().setVisibility(View.VISIBLE);
         }
 
@@ -77,9 +79,9 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
     private ValueEventListener getAdminInfo = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-             adminPicture = dataSnapshot.child(FIREBASE_PICTURE_URL_ATTR).getValue(String.class);
-             adminUser  = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
-             isDone = true;
+            adminPicture = dataSnapshot.child(FIREBASE_PICTURE_URL_ATTR).getValue(String.class);
+            adminUser = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
+            isDone = true;
         }
 
         @Override
@@ -88,32 +90,42 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         }
     };
 
-    @Override
-    protected void OnStartActivity() {
-        Intent i = getIntent();
-        String requstId = (String) i.getStringExtra("requestId");
 
 
-        // here we will retreive the data;
-        requestModel = app.getRequestModelResult(requstId);
-        gameModel =  app.getGameManager().getGameById(requestModel.getGameId());
+    public LobbyCore(RequestModel model, Lobby lobby) {
 
-        String path = requestModel.getPlatform()+"/"+requestModel.getGameId()+"/"+requestModel.getRegion()+"/"
-                +requestModel.getRequestId();
+        requestModel = model;
+        gameModel = app.getGameManager().getGameById(requestModel.getGameId());
 
+        String path = requestModel.getPlatform() + "/"
+                + requestModel.getGameId() + "/"
+                + requestModel.getRegion() + "/"
+                + requestModel.getRequestId();
+
+        app = App.getInstance();
         requestRef = app.getDatabaseRequests().child(path);
-        requestRef.child("players").addChildEventListener(onAddPlayerEvent);
+        this.lobby = lobby;
 
-        if (requestModel == null)
-            return;
+        OnStartActivity();
+    }
 
+
+    public void OnStartActivity() {
+
+
+        playersRef =  requestRef.child("players");
+        playersRef.addChildEventListener(onAddPlayerEventListener);
+
+        if(!requestModel.getAdmin().equals(app.getUserInformation().getUID()))
         app.getDatabaseUsersInfo().child(requestModel.getAdmin()).child(FIREBASE_DETAILS_ATTR)
                 .addListenerForSingleValueEvent(getAdminInfo);
+        else
+            isDone=true;
 
         CallbackHandlerCondition callback = new CallbackHandlerCondition() {
             @Override
             public boolean callBack() {
-                if(isDone)
+                if (isDone)
                     lobby.setLobbyInfo(
                             gameModel.getGamePhotoUrl(),
                             requestModel.getMatchType(),
@@ -128,39 +140,39 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
         new HandlerCondition(callback, 0);
 
-
     }
 
-    @Override
-    protected void joinToRequest() {
 
-        if(lobby.isExsist(app.getUserInformation().getUID()))
+    public void joinToRequest() {
+
+        if (lobby.isExsist(app.getUserInformation().getUID()))
             return;
 
-        String uid =  app.getUserInformation().getUID();
+        String uid = app.getUserInformation().getUID();
         String reqId = requestModel.getRequestId();
 
-        requestModel.getPlayers().add(new PlayerModel(
-                uid,
-                app.getUserInformation().getUsername()
-        ));
-
+        requestModel.getPlayers().add(new PlayerModel(uid, app.getUserInformation().getUsername()));
 
         requestRef.child("players").setValue(requestModel.getPlayers());
 
-       app.getDatabaseUsersInfo()
-               .child(app.getUserInformation().getUID())
-               .child(FIREBASE_USER_REQUESTS_ATTR)
-               .child(reqId).setValue(reqId);
+        app.getDatabaseUsersInfo()
+                .child(app.getUserInformation().getUID())
+                .child(FIREBASE_USER_REQUESTS_ATTR)
+                .child(reqId).setValue(reqId);
 
         CreateChat createChat = new CreateChat();
-        createChat.setValueUserRef(uid,requestModel.getRequestId());
-        createChat.setValueUsersChat(FIREBASE_PUBLIC_ATTR,reqId,uid);
+        createChat.setValueUserRef(uid, requestModel.getRequestId());
+        createChat.setValueUsersChat(FIREBASE_PUBLIC_ATTR, reqId, uid);
 
-        jumpToLobbyChat(requestModel,FIREBASE_PUBLIC_ATTR);
+    }
+
+    public DatabaseReference getRequestReference() {
+        return requestRef;
     }
 
 
-
-
+    public void removeListener()
+    {
+        playersRef.removeEventListener(onAddPlayerEventListener);
+    }
 }

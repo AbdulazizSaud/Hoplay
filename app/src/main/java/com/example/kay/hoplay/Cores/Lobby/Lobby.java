@@ -1,7 +1,8 @@
-package com.example.kay.hoplay.CoresAbstract.Lobby;
+package com.example.kay.hoplay.Cores.Lobby;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,8 +15,8 @@ import android.widget.TextView;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Cores.ChatCore.ChatCore;
 import com.example.kay.hoplay.Models.PlayerModel;
-import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;
 
 import java.util.ArrayList;
@@ -187,14 +188,13 @@ public class Lobby {
 
     public void setLobbyInfo(
             String pictureURL, String type,
-            String adminName, String adminPicture, ArrayList<PlayerModel> players,
+            String adminName, String adminPicture,
             String rank, String region) {
 
         app.loadingImage(gamePhoto, pictureURL);
         app.loadingImage(adminPhoto, adminPicture);
         matchTypeTextview.setText(type);
         adminUsername.setText(adminName);
-        addPlayers(players);
         mAdapter.notifyDataSetChanged();
 
         regionValueTextview.setText(region);

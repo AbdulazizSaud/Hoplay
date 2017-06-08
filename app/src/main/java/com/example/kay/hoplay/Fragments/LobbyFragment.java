@@ -6,9 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.kay.hoplay.App.App;
-import com.example.kay.hoplay.CoresAbstract.Lobby.Lobby;
-import com.example.kay.hoplay.Models.RequestModel;
+import com.example.kay.hoplay.Cores.Lobby.Lobby;
 import com.example.kay.hoplay.R;
 
 
