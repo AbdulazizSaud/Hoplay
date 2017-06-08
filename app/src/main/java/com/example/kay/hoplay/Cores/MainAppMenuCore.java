@@ -141,7 +141,6 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     loadFavorGamesList();
 
 
-                    app.setSavedRequests(new ArrayList<RequestModel>());
                     // load saved reqs
                     loadSavedRequests(user.getUid());
 

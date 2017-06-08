@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.example.kay.hoplay.Adapters.SpinnerAdapter;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Fragments.NewRequestFragment;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.Rank;
 import com.example.kay.hoplay.Models.RequestModel;
@@ -75,6 +76,8 @@ public abstract class  EditRequest extends AppCompatActivity {
     protected ArrayAdapter playersRanksAdapter;
 
 
+    private RequestModel UpdatedRequest;
+    protected int requestModelIndex;
 
 
 
@@ -87,12 +90,19 @@ public abstract class  EditRequest extends AppCompatActivity {
         fieldsListeners();
         OnStartActivity();
 
+
+        Intent intent = getIntent();
+
+
         // Receiving saved request info
-        RequestModel receivedSavedReq = new RequestModel();
-        Bundle bundle = this.getIntent().getExtras();
-        if (bundle!=null)
+        UpdatedRequest = new RequestModel();
+        Bundle bundle = intent.getExtras();
+
+
+        if (bundle !=null)
         {
-            receivedSavedReq = bundle.getParcelable("savedReq");
+            UpdatedRequest = (RequestModel) bundle.getParcelable("savedReq");
+            Log.e("===>",UpdatedRequest.getGameId());
         }
 
 
@@ -104,7 +114,7 @@ public abstract class  EditRequest extends AppCompatActivity {
         }
 
         // Load received saved req and fill the fields
-        fillFieldsWithSavedReq(receivedSavedReq);
+        fillFieldsWithSavedReq(UpdatedRequest);
 
 
 
@@ -579,21 +589,10 @@ public abstract class  EditRequest extends AppCompatActivity {
     }
 
 
-    private void updateRequest(String selectedGame , String selectedMatchType , String selectedRegion , String selectedPlayersNumber , String selectedRank , String requestDescription)
+    private void updateRequest(RequestModel requestModel)
     {
-
-//        GameModel gameModel = app.getGameManager().getGameByName(selectedGame);
-//
-//        int numberPlayers = selectedPlayersNumber.equals("All Numbers") ? gameModel.getMaxPlayers():Integer.parseInt(selectedPlayersNumber);
-//        RequestModel requestModel = new RequestModel(selectedPlatform,selectedGame,app.getUserInformation().getUsername(),requestDescription,selectedRegion,numberPlayers,selectedMatchType,selectedRank);
-//
-//        requestModel.setGameId(gameModel.getGameID());
-//        requestModel.setRequestPicture(gameModel.getGamePhotoUrl());
-//
-//        app.getSavedRequests().add(requestModel);
-//        addSaveRequestToFirebase();
-//        isSaveRequest = false;
-//        finish();
+        updateReqFirebase(requestModel);
+        finish();
     }
 
 
@@ -608,9 +607,16 @@ public abstract class  EditRequest extends AppCompatActivity {
         String selectedRank = playersRanksSpinner.getText().toString().trim();
         String requestDescription = descriptionEdittext.getText().toString().trim();
 
+
         if (checkIsValidRequest())
         {
-
+            UpdatedRequest.setGameId(app.getGameManager().getGameByName(selectedGame.trim()).getGameID());
+            UpdatedRequest.setMatchType(selectedMatchType);
+            UpdatedRequest.setRegion(selectedRegion);
+            UpdatedRequest.setPlayerNumber(Integer.parseInt(selectedPlayersNumber));
+            UpdatedRequest.setRank(selectedRank);
+            UpdatedRequest.setDescription(requestDescription);
+            updateRequest(UpdatedRequest);
         }
 
     }
@@ -618,6 +624,6 @@ public abstract class  EditRequest extends AppCompatActivity {
 
     // Abstract Methods :
     protected abstract void OnStartActivity();
-
+    protected abstract void updateReqFirebase(RequestModel requestModel);
 
 }

@@ -1,16 +1,17 @@
 package com.example.kay.hoplay.Models;
 
+
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 
 
-public class RequestModel implements Parcelable {
+public class RequestModel implements Parcelable{
 
     private String platform;
     private String requestId ;
@@ -24,16 +25,17 @@ public class RequestModel implements Parcelable {
     private long timeStamp;
     private float gameVersion;
 
-    private int savedRequestIndex;
-
     private String adminName;
     private String requestPicture;
     private List<String> users;
     private String gameId;
     private ArrayList<PlayerModel> players;
 
-    public RequestModel() {
-    }
+
+    private String savedReqUniqueID;
+
+
+
 
     protected RequestModel(Parcel in) {
         platform = in.readString();
@@ -47,16 +49,13 @@ public class RequestModel implements Parcelable {
         rank = in.readString();
         timeStamp = in.readLong();
         gameVersion = in.readFloat();
-        savedRequestIndex = in.readInt();
         adminName = in.readString();
         requestPicture = in.readString();
         users = in.createStringArrayList();
         gameId = in.readString();
+        savedReqUniqueID = in.readString();
     }
 
-
-
-    // just for passing request model object from one activity to another
     public static final Creator<RequestModel> CREATOR = new Creator<RequestModel>() {
         @Override
         public RequestModel createFromParcel(Parcel in) {
@@ -69,13 +68,18 @@ public class RequestModel implements Parcelable {
         }
     };
 
-    public void setSavedRequestIndex(int savedRequestIndex) {
-        this.savedRequestIndex = savedRequestIndex;
+    public String getSavedReqUniqueID() {
+        return savedReqUniqueID;
     }
 
-    public int getSavedRequestIndex() {
-        return savedRequestIndex;
+    public void setSavedReqUniqueID(String savedReqUniqueID) {
+        this.savedReqUniqueID = savedReqUniqueID;
     }
+
+    public RequestModel() {
+    }
+
+
 
     public RequestModel(String platform, String requestTitle, String admin, String description, String region, int playerNumber, String matchType, String rank, long timeStamp) {
         this.platform=platform;
@@ -234,6 +238,7 @@ public class RequestModel implements Parcelable {
         this.players = players;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -252,11 +257,11 @@ public class RequestModel implements Parcelable {
         dest.writeString(rank);
         dest.writeLong(timeStamp);
         dest.writeFloat(gameVersion);
-        dest.writeInt(savedRequestIndex);
         dest.writeString(adminName);
         dest.writeString(requestPicture);
         dest.writeStringList(users);
         dest.writeString(gameId);
+        dest.writeString(savedReqUniqueID);
     }
 }
 

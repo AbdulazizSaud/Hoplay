@@ -2,7 +2,9 @@ package com.example.kay.hoplay.Fragments;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -12,12 +14,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Cores.RequestCore.EditRequestCore;
 import com.example.kay.hoplay.Cores.RequestCore.NewRequestCore;
 import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
 import com.example.kay.hoplay.Models.RequestModel;
@@ -41,9 +46,13 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
 
     FloatingActionButton addGameFloationActionButton;
     protected ArrayList<RequestModel> arrayList = new ArrayList<RequestModel>();
+    private Dialog savedRequestPopupDialog;
+
+
 
 
     public NewRequestFragment() {
+
         super();
 
     }
@@ -103,6 +112,8 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
         return view;
     }
 
+
+
     @Nullable
     @Override
     public View getView() {
@@ -118,14 +129,14 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder, final RequestModel model, int position) {
+            public void OnBindHolder(ViewHolders holder, final RequestModel model, final int position) {
                 //ImageLoader loader = App.getInstance().getImageLoader();
 
 
                 holder.getView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        OnClickHolders(model, v);
+                        OnClickHolders(model, v,position);
                     }
                 });
 
@@ -146,7 +157,6 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
 
     protected void addToSaveRequest(RequestModel model , String savedReqIndex)
     {
-        model.setSavedRequestIndex(Integer.parseInt(savedReqIndex));
         arrayList.add(model);
         mAdapter.notifyDataSetChanged();
     }
@@ -156,14 +166,97 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
     protected void removeFromSaveRequest(RequestModel model)
     {
 
-        boolean b = arrayList.remove(model);
-        app.getSavedRequests().remove(model);
+        arrayList.remove(model);
+
+        app.setSavedRequests(arrayList);
+
         mAdapter.notifyDataSetChanged();
     }
 
 
 
-    protected abstract void OnClickHolders(RequestModel model, View v);
+
+    protected void showSavedRequestDialog(final RequestModel requestModel , View view,final int index)
+    {
+
+
+        savedRequestPopupDialog = new Dialog(this.getContext());
+        savedRequestPopupDialog.setContentView(R.layout.saved_request_on_click_pop_up);
+        savedRequestPopupDialog.show();
+
+
+        savedRequestPopupDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
+        Button requestButton , updateButton , deleteButton;
+
+        requestButton = ( Button) savedRequestPopupDialog.findViewById(R.id.request_saved_request_button);
+        updateButton = ( Button) savedRequestPopupDialog.findViewById(R.id.update_saved_request_button);
+        deleteButton = ( Button) savedRequestPopupDialog.findViewById(R.id.delete_saved_request_button);
+
+        Typeface sansation = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
+        requestButton.setTypeface(sansation);
+        updateButton.setTypeface(sansation);
+        deleteButton.setTypeface(sansation);
+
+
+
+        // New request
+        requestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        // Delete Game
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteSavedRequest(requestModel);
+                savedRequestPopupDialog.dismiss();
+            }
+        });
+
+
+        // Update request
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity().getApplicationContext(),EditRequestCore.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("savedReq",requestModel);
+                i.putExtras(bundle);
+                startActivity(i);
+                savedRequestPopupDialog.dismiss();
+            }
+        });
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = savedRequestPopupDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+    }
+
+
+
+    protected void updateSavedRequest(int index,RequestModel requestModel)
+    {
+        arrayList.set(index,requestModel);
+        app.getSavedRequests().set(index,requestModel);
+        mAdapter.notifyDataSetChanged();
+
+    }
+
+    protected abstract void deleteSavedRequest(RequestModel model);
+    protected abstract void OnClickHolders(RequestModel model, View v,int position);
 
     protected abstract void OnStartActivity();
 }

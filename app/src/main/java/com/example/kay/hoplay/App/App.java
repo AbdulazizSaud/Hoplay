@@ -64,7 +64,7 @@ public class App extends Application implements FirebasePaths{
     private TimeStamp timeStamp;
     private ArrayList<RequestModel> requestResultList =new ArrayList<>();
 
-    private ArrayList<RequestModel> savedRequests =new ArrayList<>();
+    private ArrayList<RequestModel> savedRequests;
 
     private MainAppMenuCore mainAppMenuCore;
 
@@ -85,6 +85,7 @@ public class App extends Application implements FirebasePaths{
         userInformation = new UserInformation();
         gameManager = new GameManager();
         timeStamp=new TimeStamp();
+        savedRequests = new ArrayList<RequestModel>();
     }
 
 

@@ -76,7 +76,7 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if(databaseError != null)
                 {
-
+                     // <<
                 }else {
                     //
                     String msg = String.format(getResources().getString(R.string.new_request_finish_save_request_message), "");

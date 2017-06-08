@@ -225,13 +225,12 @@ public class CommunityCore extends Community implements FirebasePaths {
     protected void OnStartActivity() {
 
 
-        Log.i("-->","yo");
-
         // bug error on creation right here
         refAuthCurrentUserChats = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_USER_CHAT_REFERENCES);
         loadPrivatePendingChats();
         loadPrivateChat();
         loadPublicChat();
+
 
     }
 

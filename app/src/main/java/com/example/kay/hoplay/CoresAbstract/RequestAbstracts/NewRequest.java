@@ -45,6 +45,7 @@ import com.example.kay.hoplay.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Kay on 2/12/2017.
@@ -768,6 +769,9 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
         requestModel.setGameId(gameModel.getGameID());
         requestModel.setRequestPicture(gameModel.getGamePhotoUrl());
 
+        // Generate random unique id for saved request
+        requestModel.setSavedReqUniqueID(UUID.randomUUID().toString());
+        
         app.getSavedRequests().add(requestModel);
         addSaveRequestToFirebase();
         isSaveRequest = false;
