@@ -24,6 +24,10 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder  implements Vi
     protected ImageView subtitleImageview;
 
 
+
+
+
+
     TextView numberOfPlayers;
 
     public ViewHolders(View v) {
@@ -97,6 +101,7 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder  implements Vi
             subtitle.setTypeface(sansation);
 
             picture = (CircleImageView) v.findViewById(R.id.game_photo_saved_request_circularimageview);
+
 
             numberOfPlayers = (TextView) v.findViewById(R.id.number_of_players_saved_requests_textview);
             numberOfPlayers.setTypeface(sansation);

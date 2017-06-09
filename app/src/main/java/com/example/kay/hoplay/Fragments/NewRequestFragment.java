@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -141,10 +142,30 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
                 });
 
 
+                Typeface playbold = Typeface.createFromAsset(getActivity().getAssets(), "playbold.ttf");
+                Typeface playregular = Typeface.createFromAsset(getActivity().getAssets(), "playregular.ttf");
+
                 App.getInstance().loadingImage(getContext(), holder, model.getRequestPicture());
+
+
 
                 // loadingImage(holder, model, loader);
                 holder.setTitle(model.getRequestTitle());
+                holder.getTitleView().setTypeface(playbold);
+
+
+                holder.getPicture().setBorderWidth(8);
+                // Changing title color depending on the platform
+                if (model.getPlatform().equalsIgnoreCase("PC"))
+                {holder.getTitleView().setTextColor(ContextCompat.getColor(getContext(), R.color.pc_color));
+                holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.pc_color));}
+                else if (model.getPlatform().equalsIgnoreCase("PS"))
+                {holder.getTitleView().setTextColor(ContextCompat.getColor(getContext(), R.color.ps_color));
+                    holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.ps_color));}
+                else
+                {holder.getTitleView().setTextColor(ContextCompat.getColor(getContext(), R.color.xbox_color));
+                    holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.xbox_color));}
+
                 holder.setSubtitle(model.getDescription());
                 holder.setNumberOfPlayers(String.valueOf(model.getPlayerNumber()) + " Players");
 

@@ -31,7 +31,7 @@ public class EditRequestCore extends EditRequest implements FirebasePaths {
 
                 if (dataSnapshot != null) {
                     for (DataSnapshot region : dataSnapshot.getChildren()) {
-                        regionList.add(region.getValue(String.class).trim());
+                        regionAdapter.add(region.getValue(String.class).trim());
                     }
                 }
 
@@ -51,16 +51,14 @@ public class EditRequestCore extends EditRequest implements FirebasePaths {
         DatabaseReference savedReqRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_SAVED_REQS_PATH);
 
 
-        Log.e("uniqid1",requestModel.getSavedReqUniqueID());
 
 
         for (RequestModel savedReq : app.getSavedRequests())
         {
-            Log.e("uniqidxxxxxx",savedReq.getSavedReqUniqueID());
+
             if (savedReq.getSavedReqUniqueID().equals(requestModel.getSavedReqUniqueID()))
             {
 
-                Log.e("shimatta","shimatta");
                 int index = app.getSavedRequests().indexOf(savedReq);
                 app.getSavedRequests().set(index,requestModel);
             }

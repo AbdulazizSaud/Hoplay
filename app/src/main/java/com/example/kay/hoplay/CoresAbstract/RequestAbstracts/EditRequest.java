@@ -613,6 +613,8 @@ public abstract class  EditRequest extends AppCompatActivity {
             UpdatedRequest.setGameId(app.getGameManager().getGameByName(selectedGame.trim()).getGameID());
             UpdatedRequest.setMatchType(selectedMatchType);
             UpdatedRequest.setRegion(selectedRegion);
+            UpdatedRequest.setRequestTitle(selectedGame);
+            UpdatedRequest.setRequestPicture(app.getGameManager().getGameByName(selectedGame.trim()).getGamePhotoUrl());
 
 
             GameModel gameModel = app.getGameManager().getGameByName(selectedGame);
