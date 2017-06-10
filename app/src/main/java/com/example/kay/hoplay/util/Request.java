@@ -59,13 +59,13 @@ public class Request implements FirebasePaths {
                 matchType,
                 rank);
 
-        ArrayList<PlayerModel> playerModels = new ArrayList<PlayerModel>();
-        playerModels.add(new PlayerModel(
+
+        requestModel.addPlayer(new PlayerModel(
                 app.getUserInformation().getUID(),
                 app.getUserInformation().getUsername()
         ));
 
-        requestModel.setPlayers(playerModels);
+
         requestModel.setAdminName(app.getUserInformation().getUsername());
         requestModel.setGameId(gameModel.getGameID());
         requestModel.setRequestId(requestKey);

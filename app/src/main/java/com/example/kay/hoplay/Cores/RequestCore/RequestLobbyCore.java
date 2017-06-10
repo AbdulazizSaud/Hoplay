@@ -142,7 +142,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
         GameModel gameModel = app.getGameManager().getGameById(requestModel.getGameId());
 
-        requestModel.getPlayers().add(new PlayerModel(
+        requestModel.addPlayer(new PlayerModel(
                 uid,
                 app.getUserInformation().getUsername()
         ));
@@ -150,7 +150,8 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
         requestRef.child("players").setValue(requestModel.getPlayers());
 
-        new Request().setUserReference(
+        Request request = new Request();
+        request.setUserReference(
                 app.getDatabaseUsersInfo().child(uid),
                 reqId,
                 gameModel.getGameID(),
@@ -158,6 +159,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
                 requestModel.getPlatform(),
                 requestModel.getRegion());
 
+        app.switchMainAppMenuFragment(new LobbyFragmentCore(request.getRequestModelRefrance()));
 
         jumpToLobbyChat(requestModel,FIREBASE_PUBLIC_ATTR);
     }

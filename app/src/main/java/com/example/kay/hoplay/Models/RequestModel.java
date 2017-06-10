@@ -54,6 +54,7 @@ public class RequestModel implements Parcelable{
         users = in.createStringArrayList();
         gameId = in.readString();
         savedReqUniqueID = in.readString();
+        players = new ArrayList<>();
     }
 
     public static final Creator<RequestModel> CREATOR = new Creator<RequestModel>() {
@@ -91,6 +92,8 @@ public class RequestModel implements Parcelable{
         this.rank = rank;
         this.requestTitle = requestTitle;
         this.timeStamp=timeStamp;
+        players = new ArrayList<>();
+
     }
 
     public RequestModel(String platform, String requestTitle, String region, int playerNumber, String matchType, String rank, long timeStamp) {
@@ -101,6 +104,8 @@ public class RequestModel implements Parcelable{
         this.matchType = matchType;
         this.rank = rank;
         this.timeStamp = timeStamp;
+        players = new ArrayList<>();
+
     }
 
 
@@ -115,6 +120,8 @@ public class RequestModel implements Parcelable{
         this.matchType = matchType;
         this.rank = rank;
         this.description = description;
+        players = new ArrayList<>();
+
     }
 
 
@@ -262,6 +269,18 @@ public class RequestModel implements Parcelable{
         dest.writeStringList(users);
         dest.writeString(gameId);
         dest.writeString(savedReqUniqueID);
+    }
+
+    public void addPlayer(PlayerModel playerModel)
+    {
+
+        for (PlayerModel player : players)
+        {
+            if(player.getUID().equals(playerModel.getUID()))
+                return;
+        }
+
+        players.add(playerModel);
     }
 }
 
