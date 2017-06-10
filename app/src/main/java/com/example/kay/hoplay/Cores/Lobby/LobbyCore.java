@@ -4,7 +4,7 @@ package com.example.kay.hoplay.Cores.Lobby;
 import android.view.View;
 
 import com.example.kay.hoplay.App.App;
-import com.example.kay.hoplay.Cores.ChatCore.CreateChat;
+import com.example.kay.hoplay.util.CreateChat;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.PlayerModel;

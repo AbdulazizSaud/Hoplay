@@ -1,10 +1,10 @@
 package com.example.kay.hoplay.Cores.ChatCore;
 
 import android.content.Intent;
-import android.view.View;
 
 import com.example.kay.hoplay.Cores.UserProfileCores.ParentCore.UserListCore;
 import com.example.kay.hoplay.Models.FriendCommonModel;
+import com.example.kay.hoplay.util.CreateChat;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

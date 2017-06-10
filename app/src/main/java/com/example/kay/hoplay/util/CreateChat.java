@@ -1,4 +1,4 @@
-package com.example.kay.hoplay.Cores.ChatCore;
+package com.example.kay.hoplay.util;
 
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
@@ -11,7 +11,6 @@ import java.util.HashMap;
 
 
 public class CreateChat implements FirebasePaths {
-
 
 
     private App app;

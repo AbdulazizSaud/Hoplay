@@ -3,8 +3,7 @@ package com.example.kay.hoplay.Cores.RequestCore;
 import android.content.Intent;
 import android.view.View;
 
-import com.example.kay.hoplay.Cores.ChatCore.ChatCore;
-import com.example.kay.hoplay.Cores.ChatCore.CreateChat;
+import com.example.kay.hoplay.util.CreateChat;
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.RequestLobby;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
@@ -12,6 +11,7 @@ import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.Services.CallbackHandlerCondition;
 import com.example.kay.hoplay.Services.HandlerCondition;
+import com.example.kay.hoplay.util.Request;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -140,6 +140,8 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         String uid =  app.getUserInformation().getUID();
         String reqId = requestModel.getRequestId();
 
+        GameModel gameModel = app.getGameManager().getGameById(requestModel.getGameId());
+
         requestModel.getPlayers().add(new PlayerModel(
                 uid,
                 app.getUserInformation().getUsername()
@@ -148,14 +150,14 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
         requestRef.child("players").setValue(requestModel.getPlayers());
 
-       app.getDatabaseUsersInfo()
-               .child(app.getUserInformation().getUID())
-               .child(FIREBASE_USER_REQUESTS_ATTR)
-               .child(reqId).setValue(reqId);
+        new Request().setUserReference(
+                app.getDatabaseUsersInfo().child(uid),
+                reqId,
+                gameModel.getGameID(),
+                gameModel.getGameType(),
+                requestModel.getPlatform(),
+                requestModel.getRegion());
 
-        CreateChat createChat = new CreateChat();
-        createChat.setValueUserRef(uid,requestModel.getRequestId());
-        createChat.setValueUsersChat(FIREBASE_PUBLIC_ATTR,reqId,uid);
 
         jumpToLobbyChat(requestModel,FIREBASE_PUBLIC_ATTR);
     }

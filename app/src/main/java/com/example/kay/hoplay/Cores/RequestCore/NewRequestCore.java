@@ -2,23 +2,14 @@ package com.example.kay.hoplay.Cores.RequestCore;
 
 import android.widget.Toast;
 
-import com.example.kay.hoplay.Cores.ChatCore.CreateChat;
-import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.NewRequest;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
-import com.example.kay.hoplay.Models.GameModel;
-import com.example.kay.hoplay.Models.RequestModel;
-import com.example.kay.hoplay.Models.RequestModelRefrance;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.util.Request;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class NewRequestCore extends NewRequest implements FirebasePaths{
 

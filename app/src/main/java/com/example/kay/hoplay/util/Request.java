@@ -1,8 +1,6 @@
 package com.example.kay.hoplay.util;
 
 import com.example.kay.hoplay.App.App;
-import com.example.kay.hoplay.Cores.ChatCore.CreateChat;
-import com.example.kay.hoplay.Cores.RequestCore.LobbyFragmentCore;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.PlayerModel;
@@ -17,19 +15,24 @@ import java.util.HashMap;
 
 public class Request implements FirebasePaths {
 
-
     RequestModelRefrance requestModelRefrance;
+    App app;
+
+
+    public Request()
+    {
+        app =  App.getInstance();
+    }
 
     public Request(String platform, String gameName, String matchType, String region, String numberOfPlayers, String rank, String description) {
 
-        App app = App.getInstance();
+        app =  App.getInstance();
 
         GameModel gameModel = app.getGameManager().getGameByName(gameName);
 
-        // users_info_ -> user id  -> _requests_refs_
-        DatabaseReference userRequestRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_USER_REQUESTS_ATTR);
-        // users_info_ -> user id  -> _recent_played_
-        DatabaseReference userRecentPlayedRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_RECENT_GAMES_PATH);
+        // users_info_ -> user id
+        DatabaseReference userRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID());
+
         // _requests_ ->  platform -> GameID -> Region
         DatabaseReference requestsRef = app.getDatabaseRequests().child(platform.toUpperCase()).child(gameModel.getGameID()).child(region);
 
@@ -67,29 +70,51 @@ public class Request implements FirebasePaths {
         requestModel.setGameId(gameModel.getGameID());
         requestModel.setRequestId(requestKey);
 
+
+        //-------------------------------------------
+        setUserReference(userRef, requestKey, gameModel.getGameID(), gameModel.getGameType(), platform, region);
+        //-------------------------------------------
+
         HashMap hashMap = new HashMap();
         hashMap.put(FIREBASE_REQUEST_TIME_STAMP_ATTR, ServerValue.TIMESTAMP);
 
+        requestRef.setValue(requestModel);
+        requestRef.updateChildren(hashMap);
+        createChat(requestModel);
+    }
 
-        requestModelRefrance = new RequestModelRefrance(requestKey, gameModel.getGameID(), platform, region);
-        // set req ref in the user_info
-        userRequestRef.setValue(requestModelRefrance);
 
+    public void setUserReference(DatabaseReference userRef, String requestId, String gameId, String gameType, String platform, String region) {
 
-        //-------------------------------------------
+        String currentUid = app.getUserInformation().getUID();
+
+        DatabaseReference requestRef = userRef.child(FIREBASE_USER_REQUESTS_ATTR);
+        // users_info_ -> user id  -> _games_->_recent_played_
+        DatabaseReference userRecentPlayedRef = userRef.child(FIREBASE_RECENT_GAMES_PATH);
+
+        requestModelRefrance = new RequestModelRefrance(requestId, gameId, platform, region);
+
         String recentPlayedKey = userRecentPlayedRef.push().getKey();
         DatabaseReference recentGameRef = userRecentPlayedRef.child(recentPlayedKey);
         HashMap<String, Object> recentData = new HashMap<>();
 
-        recentData.put("game_id", gameModel.getGameID());
-        recentData.put("game_type", gameModel.getGameType());
+        recentData.put("game_id", gameId);
+        recentData.put("game_type", gameType);
         recentData.put(FIREBASE_REQUEST_TIME_STAMP_ATTR, ServerValue.TIMESTAMP);
-        recentGameRef.setValue(recentData);
-        //-------------------------------------------
-        requestRef.setValue(requestModel);
-        requestRef.updateChildren(hashMap);
 
+        recentGameRef.setValue(recentData);
+        requestRef.setValue(requestModelRefrance);
+
+        CreateChat createChat = new CreateChat();
+        createChat.setValueUserRef(currentUid,requestId);
+        createChat.setValueUsersChat(FIREBASE_PUBLIC_ATTR,requestId,currentUid);
+
+
+    }
+
+    public void createChat(RequestModel requestModel) {
         new CreateChat().createPublicFirebaseChat(requestModel);
+
     }
 
     public RequestModelRefrance getRequestModelRefrance() {
