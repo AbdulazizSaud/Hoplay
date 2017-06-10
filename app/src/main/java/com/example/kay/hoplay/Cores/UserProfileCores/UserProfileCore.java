@@ -11,8 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 
-
-public class UserProfileCore extends UserProfile implements FirebasePaths{
+public class UserProfileCore extends UserProfile implements FirebasePaths {
 
     long gameCount = 0;
     long friendCount = 0;
@@ -28,16 +27,14 @@ public class UserProfileCore extends UserProfile implements FirebasePaths{
         @Override
         public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-            if(dataSnapshot.getKey().equals(FIREBASE_BIO_ATTR) && dataSnapshot.getValue() !=null)
-            {
-                String value =dataSnapshot.getValue(String.class);
+            if (dataSnapshot.getKey().equals(FIREBASE_BIO_ATTR) && dataSnapshot.getValue() != null) {
+                String value = dataSnapshot.getValue(String.class);
                 app.getUserInformation().setBio(value);
                 setNicknameTextView(value);
             }
 
-            if(dataSnapshot.getKey().equals(FIREBASE_PICTURE_URL_ATTR) && dataSnapshot.getValue() !=null)
-            {
-                String value =dataSnapshot.getValue(String.class);
+            if (dataSnapshot.getKey().equals(FIREBASE_PICTURE_URL_ATTR) && dataSnapshot.getValue() != null) {
+                String value = dataSnapshot.getValue(String.class);
                 app.getUserInformation().setPictureURL(value);
                 loadPicture();
 
@@ -68,21 +65,19 @@ public class UserProfileCore extends UserProfile implements FirebasePaths{
         setGameCount();
         loadRecentActivtiy();
 
-        app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()+"/"+FIREBASE_DETAILS_ATTR).addChildEventListener(userInformationEventListener);
+        app.getDatabaseUsersInfo().child(app.getUserInformation().getUID() + "/" + FIREBASE_DETAILS_ATTR).addChildEventListener(userInformationEventListener);
     }
 
 
+    private void setFriendCountGame() {
 
-    private void setFriendCountGame()
-    {
-
-        DatabaseReference myFavorGames = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()+"/"+FIREBASE_FRIENDS_LIST_ATTR);
+        DatabaseReference myFavorGames = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID() + "/" + FIREBASE_FRIENDS_LIST_ATTR);
         myFavorGames.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot friendsSnaps) {
 
                 friendCount = friendsSnaps.getChildrenCount();
-                setFriendsNumber(friendCount+"");
+                setFriendsNumber(friendCount + "");
             }
 
             @Override
@@ -93,16 +88,15 @@ public class UserProfileCore extends UserProfile implements FirebasePaths{
 
     }
 
-    private void setGameCount()
-    {
+    private void setGameCount() {
 
-        DatabaseReference myFavorGames = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()+"/"+FIREBASE_FAVOR_GAMES_PATH);
+        DatabaseReference myFavorGames = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID() + "/" + FIREBASE_FAVOR_GAMES_PATH);
         myFavorGames.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot gamesShots) {
 
                 gameCount = gamesShots.getChildrenCount();
-                setGamesNumber(gameCount+"");
+                setGamesNumber(gameCount + "");
             }
 
             @Override
@@ -113,35 +107,48 @@ public class UserProfileCore extends UserProfile implements FirebasePaths{
 
     }
 
-    private void loadRecentActivtiy()
-    {
-        DatabaseReference recentGameRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()+"/"+FIREBASE_RECENT_GAMES_PATH);
-        recentGameRef.addValueEventListener(new ValueEventListener() {
+    private void loadRecentActivtiy() {
+        DatabaseReference recentGameRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID() + "/" + FIREBASE_RECENT_GAMES_PATH);
+
+        recentGameRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> myFavorSnaps = dataSnapshot.getChildren();
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                final String gameType = dataSnapshot.child("game_type").getValue(String.class);
+                final String gameKey = dataSnapshot.child("game_id").getValue(String.class);
+                final String timeStmap = String.valueOf(dataSnapshot.child(FIREBASE_REQUEST_TIME_STAMP_ATTR).getValue(Long.class));
 
-                for (DataSnapshot gameSnap : myFavorSnaps)
-                {
-                    final String gameType = gameSnap.getValue().toString().trim();
-                    final String gameKey =  gameSnap.getKey();
-                    app.getDatabaseGames().child(gameType+"/"+gameKey).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot gameShot) {
 
-                            String gameName = gameShot.child("name").getValue().toString().trim();
-                            String gamePic = gameShot.child("photo").getValue().toString().trim();
+                app.getDatabaseGames().child(gameType + "/" + gameKey).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot gameShot) {
 
-                           addRecentGame(gameKey,gameName,gamePic,"here description","time ago");
-                        }
+                        String gameName = gameShot.child(FIREBASE_GAMES_NAME_ATTR_REFERENCES).getValue(String.class);
+                        String gamePic = gameShot.child(FIREBASE_GAMES_PHOTO_ATTR_REFERENCES).getValue(String.class);
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                        addRecentGame(gameKey, gameName, gamePic, gameType, app.convertFromTimeStampToDate(timeStmap));
 
-                        }
-                    });
+                    }
 
-                }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
@@ -149,6 +156,7 @@ public class UserProfileCore extends UserProfile implements FirebasePaths{
 
             }
         });
+
     }
 
     @Override

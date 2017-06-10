@@ -1,15 +1,10 @@
 package com.example.kay.hoplay.Cores.UserProfileCores;
 
 import android.net.Uri;
-import android.util.Log;
 
 import com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.EditProfile;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.UploadTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -46,14 +41,14 @@ public class EditProfileCore extends EditProfile implements FirebasePaths {
             {
                 oldValue= app.getUserInformation().getPSNAcc();
                 if(!newValue.equals(oldValue)) {
-                    app.getDatabaseUsersInfo().child(app.getUserInformation().getUID() + "/" + FIREBASE_PS_GAME_PROVIDER).setValue(newValue);
+                    app.getDatabaseUsersInfo().child(app.getUserInformation().getUID() + "/" + FIREBASE_USER_PS_GAME_PROVIDER).setValue(newValue);
                     app.getUserInformation().setPSNAcc(newValue);
                 }
             }else if(providor.equals(PROVIDOR_XBOX)){
 
                 oldValue= app.getUserInformation().getXboxLiveAcc();
                 if(!newValue.equals(oldValue)) {
-                    app.getDatabaseUsersInfo().child(app.getUserInformation().getUID() + "/" + FIREBASE_XBOX_GAME_PROVIDER).setValue(newValue);
+                    app.getDatabaseUsersInfo().child(app.getUserInformation().getUID() + "/" + FIREBASE_USER_XBOX_GAME_PROVIDER).setValue(newValue);
                     app.getUserInformation().setXboxLiveAcc(newValue);
                 }
             }else if(providor.startsWith(PROVIDOR_PC))
@@ -61,7 +56,7 @@ public class EditProfileCore extends EditProfile implements FirebasePaths {
                 String prov = providor.replace(PROVIDOR_PC,"");
                 oldValue = app.getUserInformation().getPcGamesAcc().get(prov);
                 if(!newValue.equals(oldValue)) {
-                    app.getDatabaseUsersInfo().child(app.getUserInformation().getUID() + "/" + FIREBASE_PC_GAME_PROVIDER + "/" + prov).setValue(newValue);
+                    app.getDatabaseUsersInfo().child(app.getUserInformation().getUID() + "/" + FIREBASE_USER_PC_GAME_PROVIDER + "/" + prov).setValue(newValue);
                     app.getUserInformation().getPcGamesAcc().put(prov,newValue);
                 }
             }

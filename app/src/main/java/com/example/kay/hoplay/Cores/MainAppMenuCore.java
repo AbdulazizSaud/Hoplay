@@ -1,7 +1,6 @@
 package com.example.kay.hoplay.Cores;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.kay.hoplay.Cores.RequestCore.LobbyFragmentCore;
@@ -102,16 +101,16 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     String accountType = dataSnapshot.child(FIREBASE_ACCOUNT_TYPE_PATH).getValue(String.class);
                     String picUrl = dataSnapshot.child(FIREBASE_PICTURE_URL_PATH).getValue(String.class);
 
-                    if (dataSnapshot.hasChild(FIREBASE_PS_GAME_PROVIDER))
-                     PSNAcc = dataSnapshot.child(FIREBASE_PS_GAME_PROVIDER).getValue(String.class);
-                    if (dataSnapshot.hasChild(FIREBASE_XBOX_GAME_PROVIDER))
-                        XboxLiveAcc = dataSnapshot.child(FIREBASE_XBOX_GAME_PROVIDER).getValue(String.class);
+                    if (dataSnapshot.hasChild(FIREBASE_USER_PS_GAME_PROVIDER))
+                     PSNAcc = dataSnapshot.child(FIREBASE_USER_PS_GAME_PROVIDER).getValue(String.class);
+                    if (dataSnapshot.hasChild(FIREBASE_USER_XBOX_GAME_PROVIDER))
+                        XboxLiveAcc = dataSnapshot.child(FIREBASE_USER_XBOX_GAME_PROVIDER).getValue(String.class);
 
 
 
-                    if (dataSnapshot.hasChild(FIREBASE_PC_GAME_PROVIDER))
+                    if (dataSnapshot.hasChild(FIREBASE_USER_PC_GAME_PROVIDER))
                     {
-                        Iterable<DataSnapshot> snapshots = dataSnapshot.child(FIREBASE_PC_GAME_PROVIDER).getChildren();
+                        Iterable<DataSnapshot> snapshots = dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER).getChildren();
                         for (DataSnapshot pcAcc : snapshots)
                         {
                             pcGamesAccs.put(pcAcc.getKey(),pcAcc.getValue().toString());

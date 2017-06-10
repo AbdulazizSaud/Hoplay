@@ -56,14 +56,14 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
         DatabaseReference userRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID());
         if (platform.equalsIgnoreCase("PS"))
             // users_info_ -> user id - > PSN_account
-            userRef.child(FIREBASE_PS_GAME_PROVIDER).setValue(userGameProviderAcc);
+                userRef.child(FIREBASE_USER_PS_GAME_PROVIDER).setValue(userGameProviderAcc);
         else if (platform.equalsIgnoreCase("XBOX"))
             // users_info_ -> user id - > XBOX_life_account
-            userRef.child(FIREBASE_XBOX_GAME_PROVIDER).setValue(userGameProviderAcc);
+            userRef.child(FIREBASE_USER_XBOX_GAME_PROVIDER).setValue(userGameProviderAcc);
         else if (platform.equalsIgnoreCase("PC"))
         {
             // users_info_ -> user id - > PC_game_provider_accopunt STWAM , BATTLENET .. etc
-            userRef.child(FIREBASE_PC_GAME_PROVIDER).child(gameProvider).setValue(userGameProviderAcc);
+            userRef.child(FIREBASE_USER_PC_GAME_PROVIDER).child(gameProvider).setValue(userGameProviderAcc);
         }
 
     }

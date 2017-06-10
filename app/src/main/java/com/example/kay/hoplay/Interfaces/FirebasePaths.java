@@ -12,24 +12,25 @@ public interface FirebasePaths {
     public static final String FIREBASE_PRIVATE_ATTR = "_private_";
     public static final String FIREBASE_PUBLIC_ATTR = "_public_";
 
-    public static final String FIREBASE_USERS_INFO_ATTR = "_users_info_";
-    public static final String FIREBASE_USER_NAMES_ATTR = "_user_names_";
+
     public static final String FIREBASE_FRIENDS_LIST_ATTR = "_friends_list_";
     public static final String FIREBASE_DETAILS_ATTR = "_info_";
+    public static final String FIREBASE_USER_NAMES_ATTR = "_user_names_";
+    public static final String FIREBASE_USERS_INFO_ATTR = "_users_info_";
     public static final String FIREBASE_USERS_LIST_ATTR = "_users_";
     public static final String FIREBASE_GAME_COMPETITVE_ATTR = "_competitive_";
     public static final String FIREBASE_GAME_COOP_ATTR = "_coop_";
     public static final String FIREBASE_REQUEST_REGION_ATTR = "region";
     public static final String FIREBASE_REQUEST_PLAYERS_NUMBER_ATTR = "players_number";
     public static final String FIREBASE_REQUEST_TIME_STAMP_ATTR = "timeStamp";
-    public static final String FIREBASE_PC_GAME_PROVIDER = FIREBASE_DETAILS_ATTR+"/PC_game_providers";
-    public static final String FIREBASE_PS_GAME_PROVIDER = FIREBASE_DETAILS_ATTR+"/PSN_account";
-    public static final String FIREBASE_XBOX_GAME_PROVIDER = FIREBASE_DETAILS_ATTR+"/XBOX_live_account";
 
 
     public static final String FIREBASE_SAVED_REQUESTS_REQUESTS_ATTR="Requests";
 
     public static final String FIREBASE_GAMES_REFERENCES = "_games_";
+    public static final String FIREBASE_GAMES_NAME_ATTR_REFERENCES = "name";
+    public static final String FIREBASE_GAMES_PHOTO_ATTR_REFERENCES = "photo";
+
     public static final String FIREBASE_GAME_PLATFORMS_ATTR = "platforms";
     public static final String FIREBASE_GAME_PC_GAME_PROVIDER = "pc_game_provider";
     public static final String FIREBASE_USER_CHAT_REFERENCES = "_chat_refs_";
@@ -49,6 +50,8 @@ public interface FirebasePaths {
     public static final String FIREBASE_OPPONENT_ID_ATTR = "_opponent_ID_";
 
 
+    // ROOT PATH
+
     public static final String FB_ROOT = "https://hoplay-18a08.firebaseio.com/";
     public static final String FB_USERS_PATH = FB_ROOT+FIREBASE_USERS_INFO_ATTR+"/";
     public static final String FB_CHAT_PATH = FB_ROOT+FIREBASE_CHAT_ATTR+"/";
@@ -67,6 +70,9 @@ public interface FirebasePaths {
 
 
 
+    // USER INFO
+
+
     public static final String FIREBASE_USERNAME_ATTR = "_username_";
     public static final String FIREBASE_BIO_ATTR = "_bio_";
     public static final String FIREBASE_ACCOUNT_TYPE_ATTR = "acc_type";
@@ -77,10 +83,11 @@ public interface FirebasePaths {
     public static final String FIREBASE_RECENT_GAME_ATTR = "_recent_played_";
     public static final String FIREBASE_USER_REQUESTS_ATTR = "_requests_refs_";
 
+    public static final String FIREBASE_USER_PC_GAME_PROVIDER = FIREBASE_DETAILS_ATTR+"/PC_game_providers";
+    public static final String FIREBASE_USER_PS_GAME_PROVIDER = FIREBASE_DETAILS_ATTR+"/PSN_account";
+    public static final String FIREBASE_USER_XBOX_GAME_PROVIDER = FIREBASE_DETAILS_ATTR+"/XBOX_live_account";
 
 
-
-    // USER INFO
     public static final String FIREBASE_USERNAME_PATH = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_USERNAME_ATTR;
 
     public static final String FIREBASE_BIO_PATH = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_BIO_ATTR;

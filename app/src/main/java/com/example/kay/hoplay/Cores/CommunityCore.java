@@ -91,8 +91,7 @@ public class CommunityCore extends Community implements FirebasePaths {
                                     lasMsgSnap.child("_time_stamp_").getValue().toString().trim(),
                                     Long.parseLong(lasMsgSnap.child("_counter_").getValue().toString().trim())
                             );
-                        }catch (NullPointerException e)
-                        {
+                        } catch (NullPointerException e) {
 
                         }
 
@@ -165,7 +164,7 @@ public class CommunityCore extends Community implements FirebasePaths {
                 String chatPicture = "Unknown";
 
 
-                if(values != null) {
+                if (values != null) {
                     GameModel gameModel = app.getGameManager().getGameById(values);
                     if (gameModel != null) {
                         chatName = gameModel.getGameName();
@@ -203,10 +202,9 @@ public class CommunityCore extends Community implements FirebasePaths {
                 return;
 
             String chatKey = dataSnapshot.getRef().getParent().getParent().getKey();
-            String msg = dataSnapshot.child("_message_").getValue().toString().trim();
-            String timeStamp = dataSnapshot.child("_time_stamp_").getValue().toString().trim();
-
-            String currentChatCounterAsString = dataSnapshot.child("_counter_").getValue().toString().trim();
+            String msg = dataSnapshot.child("_message_").getValue(String.class);
+            String timeStamp = String.valueOf(dataSnapshot.child("_time_stamp_").getValue(Long.class));
+            String currentChatCounterAsString = String.valueOf(dataSnapshot.child("_counter_").getValue(Long.class));
 
 
             updateLastMessage(chatKey, msg, timeStamp);

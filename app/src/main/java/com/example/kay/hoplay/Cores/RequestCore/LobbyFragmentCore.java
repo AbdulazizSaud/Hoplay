@@ -80,6 +80,8 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
             requestModel = dataSnapshot.getValue(RequestModel.class);
+
+
             gameModel =  app.getGameManager().getGameById(requestModel.getGameId());
 
 

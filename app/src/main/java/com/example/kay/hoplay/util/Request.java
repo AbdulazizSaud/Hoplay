@@ -15,13 +15,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-
 public class Request implements FirebasePaths {
 
 
     RequestModelRefrance requestModelRefrance;
 
-    public Request(String platform, String gameName, String matchType, String region, String numberOfPlayers, String rank, String description){
+    public Request(String platform, String gameName, String matchType, String region, String numberOfPlayers, String rank, String description) {
 
         App app = App.getInstance();
 
@@ -29,6 +28,8 @@ public class Request implements FirebasePaths {
 
         // users_info_ -> user id  -> _requests_refs_
         DatabaseReference userRequestRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_USER_REQUESTS_ATTR);
+        // users_info_ -> user id  -> _recent_played_
+        DatabaseReference userRecentPlayedRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_RECENT_GAMES_PATH);
         // _requests_ ->  platform -> GameID -> Region
         DatabaseReference requestsRef = app.getDatabaseRequests().child(platform.toUpperCase()).child(gameModel.getGameID()).child(region);
 
@@ -41,11 +42,11 @@ public class Request implements FirebasePaths {
 
         // set the addRequestToFirebase info under the requests tree
 
-        HashMap<String,Object> data = new HashMap<>();
+        HashMap<String, Object> data = new HashMap<>();
         // TimeStamp timeStamp=new TimeStamp();
 
-        int numberPlayers = numberOfPlayers.equals("All Numbers") ? gameModel.getMaxPlayers():Integer.parseInt(numberOfPlayers);
-        RequestModel requestModel=new RequestModel(
+        int numberPlayers = numberOfPlayers.equals("All Numbers") ? gameModel.getMaxPlayers() : Integer.parseInt(numberOfPlayers);
+        RequestModel requestModel = new RequestModel(
                 platform,
                 gameName,
                 requestAdmin,
@@ -66,15 +67,25 @@ public class Request implements FirebasePaths {
         requestModel.setGameId(gameModel.getGameID());
         requestModel.setRequestId(requestKey);
 
-        HashMap hashMap =new HashMap();
-        hashMap.put("timeStamp", ServerValue.TIMESTAMP);
+        HashMap hashMap = new HashMap();
+        hashMap.put(FIREBASE_REQUEST_TIME_STAMP_ATTR, ServerValue.TIMESTAMP);
 
 
-        requestModelRefrance = new RequestModelRefrance(requestKey,gameModel.getGameID(),platform,region);
+        requestModelRefrance = new RequestModelRefrance(requestKey, gameModel.getGameID(), platform, region);
         // set req ref in the user_info
         userRequestRef.setValue(requestModelRefrance);
 
 
+        //-------------------------------------------
+        String recentPlayedKey = userRecentPlayedRef.push().getKey();
+        DatabaseReference recentGameRef = userRecentPlayedRef.child(recentPlayedKey);
+        HashMap<String, Object> recentData = new HashMap<>();
+
+        recentData.put("game_id", gameModel.getGameID());
+        recentData.put("game_type", gameModel.getGameType());
+        recentData.put(FIREBASE_REQUEST_TIME_STAMP_ATTR, ServerValue.TIMESTAMP);
+        recentGameRef.setValue(recentData);
+        //-------------------------------------------
         requestRef.setValue(requestModel);
         requestRef.updateChildren(hashMap);
 
