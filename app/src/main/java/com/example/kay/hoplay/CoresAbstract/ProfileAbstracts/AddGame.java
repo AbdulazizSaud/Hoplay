@@ -218,6 +218,9 @@ public abstract class AddGame extends AppCompatActivity {
 
                 final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
                 app.loadingImage(getApplication(), holder, model.getGamePhotoUrl());
+
+                gameHolder.getPicture().setBorderWidth(8);
+                gameHolder.getPicture().setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.app_color));
                 gameHolder.setTitle(model.getGameName());
                 gameHolder.getTitleView().setTypeface(playbold);
                 gameHolder.getSubtitleView().setTypeface(playbold);

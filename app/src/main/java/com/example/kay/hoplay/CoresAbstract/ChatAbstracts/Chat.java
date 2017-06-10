@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -22,8 +25,12 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.kay.hoplay.Adapters.ChatAdapter;
+import com.example.kay.hoplay.Adapters.CommonAdapter;
+import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Models.GameProvider;
 import com.example.kay.hoplay.Models.PlayerModel;
+import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.ChatMessage;
 
@@ -72,6 +79,14 @@ public abstract class Chat extends AppCompatActivity {
 
 
     protected HashMap<String,PlayerModel> playerOnChat = new HashMap<>();
+
+
+//    // Game providers recyclerview components
+//    private RecyclerView gameProviderRecyclerView;
+//    RecyclerView.LayoutManager mLayoutManager;
+//    RecyclerView.Adapter mAdapter;
+//    protected ArrayList<GameProvider> providersList = new ArrayList<GameProvider>();
+
 
     /***************************************/
 
@@ -124,6 +139,50 @@ public abstract class Chat extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+
+//    private void setUpGamesProvidersRecyclerView()
+//    {
+//        gameProviderRecyclerView = (RecyclerView)  findViewById(R.id.game_providers_recyclerview_chat);
+//
+//        // use this setting to improve performance if you know that changes
+//        // in content do not change the layout size of the RecyclerView
+//        gameProviderRecyclerView.setHasFixedSize(true);
+//
+//        // use a linear layout manager
+//        mLayoutManager = new LinearLayoutManager(getApplicationContext());
+//        gameProviderRecyclerView.setLayoutManager(mLayoutManager);
+//
+//
+//        mAdapter = createAdapter();
+//        gameProviderRecyclerView.setAdapter(mAdapter);
+//    }
+//
+//
+//    private CommonAdapter<GameProvider> createAdapter() {
+//        return new CommonAdapter<GameProvider>(providersList, R.layout.game_provider_model) {
+//
+//            @Override
+//            public ViewHolders OnCreateHolder(View v) {
+//                return null;
+//            }
+//
+//            @Override
+//            public void OnBindHolder(ViewHolders holder, GameProvider model, int position) {
+//
+//            holder.setTitle(model.getGameProviderAcc());
+//
+//            }
+//
+//
+//        };
+//    }
+//
+//
+//
 
 
     // this method to set up a chat layout containts
@@ -182,6 +241,10 @@ public abstract class Chat extends AppCompatActivity {
                 sendBtn.setImageResource(R.drawable.ic_send_focused_32dp);
             }
         });
+
+        // set up game providers recyclerview
+//        setUpGamesProvidersRecyclerView();
+
 
     }
 

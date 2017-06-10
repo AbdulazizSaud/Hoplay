@@ -228,8 +228,14 @@
 
 
     <!--                                Friend Instance Model                                                   -->
-    <string name="friend_instance_model_nickname">nickname</string>
+    <string name="friend_instance_model_username">Username</string>
+    <string name="friend_instance_model_nickname">Nickname</string>
 
+
+    <!--                                Player Instance Model                                                   -->
+    <string name="player_instance_model_username">Username</string>
+    <string name="player_instance_model_game_provider">Game Provider</string>
+    <string name="player_instance_model_game_provider_account">Account</string>
 
     <!--                                Request Instance                                                        -->
     <string name="new_request_instance_game_name">Game Name</string>
@@ -265,7 +271,8 @@
 
 
     <!--                                User Profile Details - inside user fragment                             -->
-    <string name="user_profile_details_nickname">Nickname</string>
+    <string name="user_profile_details_bio">Bio</string>
+    <string name="user_profile_details_nickname"></string>
     <string name="user_profile_details_username">Username</string>
     <string name="user_profile_details_games">Games</string>
     <string name="user_profile_details_friends">Friends</string>

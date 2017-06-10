@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -152,7 +153,8 @@ public abstract class Community extends Fragment {
                 });
 
 
-
+                holder.getPicture().setBorderWidth(8);
+                holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.app_color));
 
                 app.loadingImage(getContext(),holder, model.getUserPictureURL());
 

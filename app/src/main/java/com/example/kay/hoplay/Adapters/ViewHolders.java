@@ -85,6 +85,28 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder  implements Vi
         }
     }
 
+
+    public static class GameProviderHolder extends  ViewHolders{
+        public GameProviderHolder(View v){
+            super(v);
+            title = (TextView) v.findViewById(R.id.game_provider_holder_text);
+            Typeface playregular = Typeface.createFromAsset(title.getContext().getAssets() ,"playregular.ttf");
+            title.setTypeface(playregular);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            return false;
+        }
+    }
+
+
+
     public static class SavedRequestHolder extends ViewHolders {
         public SavedRequestHolder(View v) {
             super(v);
@@ -117,6 +139,10 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder  implements Vi
             return false;
         }
     }
+
+
+
+
     public static class RecentGameHolder extends ViewHolders {
 
         public RecentGameHolder(View v) {

@@ -52,7 +52,7 @@ public abstract class UserProfile extends Fragment {
     private TextView ratingsNumberTextView ;
     private TextView friendsNumberTextView;
     private TextView recentActivitiesTextView;
-    private TextView nicknameTextView;
+    private TextView bioTextView;
     private CircleImageView userPictureCircleImageView;
     private ImageView profileSettingsImageView;
     private LinearLayout toUserGamesLinearLayout ;
@@ -101,7 +101,7 @@ public abstract class UserProfile extends Fragment {
         gamesNumberTextView = (TextView) view.findViewById(R.id.games_number_profile_textview);
         ratingsNumberTextView = (TextView) view.findViewById(R.id.ratings_number_profile_textview);
         recentActivitiesTextView = (TextView) view.findViewById(R.id.recent_activities_textview);
-        nicknameTextView = (TextView) view.findViewById(R.id.nickname_profile_textView);
+        bioTextView = (TextView) view.findViewById(R.id.bio_profile_textView);
         userPictureCircleImageView = (CircleImageView) view.findViewById(R.id.user_profile_photo_circleimageview);
         profileSettingsImageView = (ImageView) view.findViewById(R.id.user_profile_settings_imageview);
         toUserGamesLinearLayout = (LinearLayout) view.findViewById(R.id.games_user_profile_linearlayout);
@@ -110,8 +110,9 @@ public abstract class UserProfile extends Fragment {
 
 
         Typeface playregular = Typeface.createFromAsset(getActivity().getAssets() ,"playregular.ttf");
+        Typeface playbold = Typeface.createFromAsset(getActivity().getAssets() ,"playbold.ttf");
 
-        usernameProfile.setTypeface(playregular);
+        usernameProfile.setTypeface(playbold);
         friendsNumberTextView.setTypeface(playregular);
         userFriendsTextView.setTypeface(playregular);
         userGamesTextView.setTypeface(playregular);
@@ -119,7 +120,7 @@ public abstract class UserProfile extends Fragment {
         gamesNumberTextView.setTypeface(playregular);
         ratingsNumberTextView.setTypeface(playregular);
         recentActivitiesTextView.setTypeface(playregular);
-        nicknameTextView.setTypeface(playregular);
+        bioTextView.setTypeface(playregular);
 
 
 
@@ -193,7 +194,7 @@ public abstract class UserProfile extends Fragment {
 
         app.loadingImage(userPictureCircleImageView,app.getUserInformation().getPictureURL());
         usernameProfile.setText("@"+app.getUserInformation().getUsername());
-        nicknameTextView.setText(app.getUserInformation().getNickName());
+        bioTextView.setText(app.getUserInformation().getNickName());
     }
 
 
@@ -275,7 +276,7 @@ public abstract class UserProfile extends Fragment {
         friendsNumberTextView.setText(number);
     }
 
-    protected void setNicknameTextView( String name) {nicknameTextView.setText(name);}
+    protected void setNicknameTextView( String name) {bioTextView.setText(name);}
     protected void setUsernameProfile(String name){usernameProfile.setText(name);}
 
 

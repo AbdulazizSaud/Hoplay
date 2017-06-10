@@ -43,7 +43,7 @@
             <TextView
                 android:id="@+id/txtMessage"
                 android:text=""
-                android:drawableRight="@drawable/ic_check_16dp"
+                android:drawableRight="@drawable/ic_done_all_delivered_16dp"
                 android:textSize="17sp"
                 android:drawablePadding="5dp"
                 android:padding="2dp"

@@ -1,30 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:padding="5dp"
     android:background="@color/app_background">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/player_instance_circleimageview"
         android:layout_width="68dp"
         android:layout_height="68dp"
-        app:civ_border_width="3dp"
-        app:civ_border_color="@color/app_color"
-        android:src="@drawable/profile_default_photo"
-        android:id="@+id/player_instance_circleimageview"
         android:layout_margin="5dp"
-        />
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/profile_default_photo"
+        app:civ_border_color="@color/app_color"
+        app:civ_border_width="3dp" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/friend_instance_model_nickname"
+        android:text="@string/player_instance_model_username"
         android:layout_margin="5dp"
+        android:layout_centerHorizontal="true"
         android:gravity="center"
+        android:layout_below="@+id/player_instance_circleimageview"
         android:textColor="@color/text_color"
         android:id="@+id/player_instance_username_textview"
-        android:textSize="15dp"/>
+        android:textSize="14sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/player_instance_model_game_provider"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/hint_color"
+        android:id="@+id/player_game_provider_textview"
+        android:layout_below="@+id/player_instance_username_textview"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/player_instance_model_game_provider_account"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/player_game_provider_textview"
+        android:textColor="@color/hint_color"
+        android:id="@+id/player_game_provider_account_textview"
+        android:textSize="12sp"/>
 
 
-</LinearLayout>
+
+
+
+
+
+
+
+</RelativeLayout>

@@ -14,6 +14,8 @@ public class UserInformation {
     private String PSNAcc , XboxLiveAcc;
     private HashMap<String,String>  pcGamesAcc ;
 
+
+
     private Bitmap pictureBitMap;
 
     public UserInformation(String username)

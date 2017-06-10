@@ -3,6 +3,8 @@ package com.example.kay.hoplay.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,10 +30,15 @@ public class ChatAdapter extends BaseAdapter {
     private final List<ChatMessage> chatMessages;
     private Activity context;
 
-    public ChatAdapter(Activity context, List<ChatMessage> chatMessages) {
-        this.context = context;
+
+
+    public ChatAdapter(Activity context, List<ChatMessage> chatMessages)
+    {
+        this.context=context;
         this.chatMessages = chatMessages;
+
     }
+
 
     @Override
     public int getCount() {
@@ -117,7 +124,7 @@ public class ChatAdapter extends BaseAdapter {
             // holder.txtMessage.setX((holder.contentWithBG.getX())/2);
             //  holder.txtMessage.setY((holder.contentWithBG.getY())/2);
             holder.txtMessage.setTextColor(context.getResources().getColor(R.color.white));
-            holder.txtMessage.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_check_16dp,0);
+            holder.txtMessage.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_done_all_delivered_16dp,0);
 
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) holder.contentWithBG.getLayoutParams();
             layoutParams.gravity = Gravity.RIGHT;
