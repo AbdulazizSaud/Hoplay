@@ -1,5 +1,7 @@
 package com.example.kay.hoplay.util;
 
+import android.util.Log;
+
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
@@ -72,7 +74,7 @@ public class Request implements FirebasePaths {
 
 
         //-------------------------------------------
-        setUserReference(userRef, requestKey, gameModel.getGameID(), gameModel.getGameType(), platform, region);
+        setUserReference(userRef, requestKey,requestModel.getMatchType(), gameModel.getGameID(), gameModel.getGameType(), platform, region);
         //-------------------------------------------
 
         HashMap hashMap = new HashMap();
@@ -84,7 +86,7 @@ public class Request implements FirebasePaths {
     }
 
 
-    public void setUserReference(DatabaseReference userRef, String requestId, String gameId, String gameType, String platform, String region) {
+    public void setUserReference(DatabaseReference userRef, String requestId,String requestType, String gameId, String gameType, String platform, String region) {
 
         String currentUid = app.getUserInformation().getUID();
 
@@ -98,8 +100,11 @@ public class Request implements FirebasePaths {
         DatabaseReference recentGameRef = userRecentPlayedRef.child(recentPlayedKey);
         HashMap<String, Object> recentData = new HashMap<>();
 
+
         recentData.put("game_id", gameId);
         recentData.put("game_type", gameType);
+        recentData.put("request_platform", platform);
+        recentData.put("match_type", requestType);
         recentData.put(FIREBASE_REQUEST_TIME_STAMP_ATTR, ServerValue.TIMESTAMP);
 
         recentGameRef.setValue(recentData);

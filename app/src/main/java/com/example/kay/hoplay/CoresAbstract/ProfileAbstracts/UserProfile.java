@@ -205,7 +205,7 @@ public abstract class UserProfile extends Fragment {
         app.loadingImage(userPictureCircleImageView,app.getUserInformation().getPictureURL());
 
     }
-    public void addRecentGame(String gameID, String gameName , String gamePhoto , String activityDescription , String activityDate)
+    public void addRecentGame(String gameID, String gameName , String gamePhoto ,String platform, String activityDescription , String activityDate)
     {
 
         RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,"",activityDescription,activityDate);

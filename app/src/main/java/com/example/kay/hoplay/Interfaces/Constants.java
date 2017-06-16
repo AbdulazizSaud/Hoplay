@@ -6,6 +6,11 @@ package com.example.kay.hoplay.Interfaces;
 
 public interface Constants {
 
+
+    public static final String GAME_TYPE_COMPETITVE="Competitive";
+    public static final String GAME_TYPE_QUICK_MATCH="Quick Match";
+    public static final String GAME_TYPE_COOP="Co-op";
+
     public static final int MAX_SAVED_REQUEST_PREMIUM=10;
     public static final int MAX_SAVED_REQUEST_REGULAR=5;
 

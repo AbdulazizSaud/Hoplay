@@ -154,6 +154,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         request.setUserReference(
                 app.getDatabaseUsersInfo().child(uid),
                 reqId,
+                requestModel.getMatchType(),
                 gameModel.getGameID(),
                 gameModel.getGameType(),
                 requestModel.getPlatform(),

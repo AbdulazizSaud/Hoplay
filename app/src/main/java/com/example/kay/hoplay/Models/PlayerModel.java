@@ -1,8 +1,5 @@
 package com.example.kay.hoplay.Models;
 
-/**
- * Created by BOXTECH on 5/21/2017.
- */
 
 public class PlayerModel{
 

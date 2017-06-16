@@ -2,6 +2,7 @@ package com.example.kay.hoplay.util;
 
 import android.util.Log;
 
+import com.example.kay.hoplay.Interfaces.Constants;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class GameManager implements FirebasePaths{
+public class GameManager implements FirebasePaths,Constants{
 
 
     private HashMap<String,GameModel>  allGamesIds =  new HashMap<>();
@@ -101,6 +102,20 @@ public class GameManager implements FirebasePaths{
         return false;
     }
 
+
+    public  String getGameType(String gameType){
+
+        String value = GAME_TYPE_QUICK_MATCH;
+
+        switch (gameType)
+        {
+            case FIREBASE_GAME_COMPETITVE_ATTR: return GAME_TYPE_COMPETITVE;
+            case FIREBASE_GAME_QUICK_ATTR: return GAME_TYPE_QUICK_MATCH;
+            case FIREBASE_GAME_COOP_ATTR: return GAME_TYPE_COOP;
+
+        }
+        return value;
+    }
 
 
 }

@@ -114,6 +114,8 @@ public class UserProfileCore extends UserProfile implements FirebasePaths {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 final String gameType = dataSnapshot.child("game_type").getValue(String.class);
+                final String matchType = dataSnapshot.child("match_type").getValue(String.class);
+                final String platform = dataSnapshot.child("request_platform").getValue(String.class);
                 final String gameKey = dataSnapshot.child("game_id").getValue(String.class);
                 final String timeStmap = String.valueOf(dataSnapshot.child(FIREBASE_REQUEST_TIME_STAMP_ATTR).getValue(Long.class));
 
@@ -125,7 +127,7 @@ public class UserProfileCore extends UserProfile implements FirebasePaths {
                         String gameName = gameShot.child(FIREBASE_GAMES_NAME_ATTR_REFERENCES).getValue(String.class);
                         String gamePic = gameShot.child(FIREBASE_GAMES_PHOTO_ATTR_REFERENCES).getValue(String.class);
 
-                        addRecentGame(gameKey, gameName, gamePic, gameType, app.convertFromTimeStampToDate(timeStmap));
+                        addRecentGame(gameKey, gameName, gamePic,platform, matchType, app.convertFromTimeStampToDate(timeStmap));
 
                     }
 
