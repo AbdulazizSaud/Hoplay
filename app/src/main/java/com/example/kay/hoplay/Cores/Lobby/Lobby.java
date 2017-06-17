@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -120,9 +121,8 @@ public class Lobby {
             return;
         }
 
-        PlayerModel player = new PlayerModel(playerModel.getUID(), playerModel.getUsername());
-        playerModels.add(player);
-        playerModelsHashMap.put(playerModel.getUID(), player);
+        playerModels.add(playerModel);
+        playerModelsHashMap.put(playerModel.getUID(), playerModel);
         mAdapter.notifyDataSetChanged();
 
     }
@@ -171,6 +171,8 @@ public class Lobby {
             public void OnBindHolder(ViewHolders holder, PlayerModel model, int position) {
 
                 holder.setTitle(model.getUsername());
+                holder.setSubtitle(model.getGamePovider());
+                holder.setSubtitle2(model.getGameProviderAcc());
             }
         };
     }

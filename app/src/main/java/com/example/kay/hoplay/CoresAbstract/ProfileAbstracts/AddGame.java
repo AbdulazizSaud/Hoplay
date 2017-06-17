@@ -17,6 +17,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -70,8 +71,8 @@ public abstract class AddGame extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
-
-
+        // remove the keyboard when start activity
+        mRecyclerView.requestFocus();
 
 
         searchBar.addTextChangedListener(new TextWatcher() {
@@ -219,9 +220,30 @@ public abstract class AddGame extends AppCompatActivity {
                 final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
                 app.loadingImage(getApplication(), holder, model.getGamePhotoUrl());
 
-                gameHolder.getPicture().setBorderWidth(8);
+                gameHolder.getPicture().setBorderWidth(6);
                 gameHolder.getPicture().setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.app_color));
-                gameHolder.setTitle(model.getGameName());
+
+                // Capitalize game name letters
+                String gameName = model.getGameName();
+                String capitlizedGameName = gameName.substring(0,1).toUpperCase() +  gameName.substring(1);
+                if (gameName.contains(" "))
+                {
+                    // Capitalize game title letters
+                    String cpWord= "";
+                    for (int  i = 0 ; i < capitlizedGameName.length(); i++)
+                    {
+                        if (capitlizedGameName.charAt(i) == 32 && capitlizedGameName.charAt(i+1) != 32)
+                        {
+                            cpWord= capitlizedGameName.substring(i+1,i+2).toUpperCase() + capitlizedGameName.substring(i+2);
+                            capitlizedGameName = capitlizedGameName.replace(capitlizedGameName.charAt(i+1),cpWord.charAt(0));
+                        }
+                    }
+                    gameHolder.setTitle(capitlizedGameName);
+                }else {
+                    gameHolder.setTitle(capitlizedGameName);
+                }
+
+
                 gameHolder.getTitleView().setTypeface(playbold);
                 gameHolder.getSubtitleView().setTypeface(playbold);
                 gameHolder.getPcTextView().setTypeface(playbold);

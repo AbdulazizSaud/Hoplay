@@ -1,6 +1,7 @@
 package com.example.kay.hoplay.Cores.RequestCore;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 
 import com.example.kay.hoplay.util.CreateChat;
@@ -142,11 +143,8 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
         GameModel gameModel = app.getGameManager().getGameById(requestModel.getGameId());
 
-        requestModel.addPlayer(new PlayerModel(
-                uid,
-                app.getUserInformation().getUsername()
-        ));
-
+        PlayerModel player = new PlayerModel(uid, app.getUserInformation().getUsername());
+        requestModel.addPlayer(player);
 
         requestRef.child("players").setValue(requestModel.getPlayers());
 

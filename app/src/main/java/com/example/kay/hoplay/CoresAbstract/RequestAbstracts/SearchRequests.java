@@ -433,6 +433,29 @@ public abstract class SearchRequests extends Fragment {
         searchGameAutoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                // Capitalize game name letters
+                String gameName = searchGameAutoCompleteTextView.getText().toString();
+                String capitlizedGameName = gameName.substring(0,1).toUpperCase() +  gameName.substring(1);
+                if (gameName.contains(" "))
+                {
+                    // Capitalize game title letters
+                    String cpWord= "";
+                    for (int  i = 0 ; i < capitlizedGameName.length(); i++)
+                    {
+                        if (capitlizedGameName.charAt(i) == 32 && capitlizedGameName.charAt(i+1) != 32)
+                        {
+                            cpWord= capitlizedGameName.substring(i+1,i+2).toUpperCase() + capitlizedGameName.substring(i+2);
+                            capitlizedGameName = capitlizedGameName.replace(capitlizedGameName.charAt(i+1),cpWord.charAt(0));
+                        }
+                    }
+                    searchGameAutoCompleteTextView.setText(capitlizedGameName);
+                }else {
+                    searchGameAutoCompleteTextView.setText(capitlizedGameName);
+                }
+
+
+
                 String name = parent.getItemAtPosition(position).toString();
 
 

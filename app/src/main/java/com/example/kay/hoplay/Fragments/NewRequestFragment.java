@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,6 +76,7 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
             public void onClick(View v) {
                 Intent i = new Intent(getActivity().getApplicationContext(), AddGameCore.class);
                 startActivity(i);
+                getActivity().overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up);
             }
         });
         savedRequestsMessage = (TextView) view.findViewById(R.id.saved_activity_message_textview);
@@ -84,6 +86,7 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
             public void onClick(View view) {
                 Intent i = new Intent(getActivity().getApplicationContext(), NewRequestCore.class);
                 startActivity(i);
+                getActivity().overridePendingTransition( R.anim.slide_in_down, R.anim.slide_out_down);
             }
         });
 
@@ -150,11 +153,34 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
 
 
                 // loadingImage(holder, model, loader);
-                holder.setTitle(model.getRequestTitle());
+
+
+                // Capitalize Request Title letters
+                String requestTitle = model.getRequestTitle();
+                String capitlizedReqtitle = requestTitle.substring(0,1).toUpperCase() +  requestTitle.substring(1);
+                if (requestTitle.contains(" "))
+                {
+                    // Capitalize game title letters
+                    String cpWord= "";
+                    for (int  i = 0 ; i < capitlizedReqtitle.length(); i++)
+                    {
+                        if (capitlizedReqtitle.charAt(i) == 32 && capitlizedReqtitle.charAt(i+1) != 32)
+                        {
+                            cpWord= capitlizedReqtitle.substring(i+1,i+2).toUpperCase() + capitlizedReqtitle.substring(i+2);
+                            capitlizedReqtitle = capitlizedReqtitle.replace(capitlizedReqtitle.charAt(i+1),cpWord.charAt(0));
+                        }
+                    }
+                    holder.setTitle(capitlizedReqtitle);
+                }else {
+                    holder.setTitle(capitlizedReqtitle);
+                }
+
+
                 holder.getTitleView().setTypeface(playbold);
 
 
-                holder.getPicture().setBorderWidth(8);
+
+                holder.getPicture().setBorderWidth(6);
                 // Changing title color depending on the platform
                 if (model.getPlatform().equalsIgnoreCase("PC"))
                 {holder.getTitleView().setTextColor(ContextCompat.getColor(getContext(), R.color.pc_color));
@@ -168,6 +194,7 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
 
                 holder.setSubtitle(model.getDescription());
                 holder.setNumberOfPlayers(String.valueOf(model.getPlayerNumber()) + " Players");
+
 
 
             }
@@ -260,6 +287,7 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
                 bundle.putParcelable("savedReq",requestModel);
                 i.putExtras(bundle);
                 startActivity(i);
+                getActivity().overridePendingTransition( R.anim.slide_in_down, R.anim.slide_out_down);
                 savedRequestPopupDialog.dismiss();
             }
         });

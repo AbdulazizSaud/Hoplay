@@ -2,6 +2,7 @@ package com.example.kay.hoplay.CoresAbstract;
 
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -71,6 +72,9 @@ public abstract class Community extends Fragment {
             public void onClick(View view) {
                 Intent i = new Intent(getContext(),FindUserCore.class);
                 startActivity(i);
+                getActivity().overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up);
+
+
             }
         });
 
@@ -153,13 +157,35 @@ public abstract class Community extends Fragment {
                 });
 
 
-                holder.getPicture().setBorderWidth(8);
+                holder.getPicture().setBorderWidth(6);
                 holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.app_color));
 
                 app.loadingImage(getContext(),holder, model.getUserPictureURL());
 
-                holder.setTitle(model.getChatName());
+
+                // Capitalize Title letters
+                String requestTitle = model.getChatName();
+                String capitlizedChatTitle = requestTitle.substring(0,1).toUpperCase() +  requestTitle.substring(1);
+                if (requestTitle.contains(" "))
+                {
+                    // Capitalize game title letters
+                    String cpWord= "";
+                    for (int  i = 0 ; i < capitlizedChatTitle.length(); i++)
+                    {
+                        if (capitlizedChatTitle.charAt(i) == 32 && capitlizedChatTitle.charAt(i+1) != 32)
+                        {
+                            cpWord= capitlizedChatTitle.substring(i+1,i+2).toUpperCase() + capitlizedChatTitle.substring(i+2);
+                            capitlizedChatTitle = capitlizedChatTitle.replace(capitlizedChatTitle.charAt(i+1),cpWord.charAt(0));
+                        }
+                    }
+                    holder.setTitle(capitlizedChatTitle);
+                }else {
+                    holder.setTitle(capitlizedChatTitle);
+                }
+
+
                 communityHolder.setCommunitySubtitle(model.getLastMsg());
+
                 communityHolder.setCounter(String.valueOf(model.getChatCounter()));
                 holder.setTime(model.getLastMsgDate());
 //                Log.i("->",""+getAllUnseenMessages());

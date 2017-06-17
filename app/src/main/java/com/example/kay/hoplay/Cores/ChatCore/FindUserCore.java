@@ -88,5 +88,10 @@ public class FindUserCore extends UserListCore {
 
     }
 
+    @Override
+    protected boolean OnLongClickHolders(FriendCommonModel model) {
+        return false;
+    }
+
 
 }

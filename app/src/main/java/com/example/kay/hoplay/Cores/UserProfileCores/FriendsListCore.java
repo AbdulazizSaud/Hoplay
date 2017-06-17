@@ -63,5 +63,10 @@ public class FriendsListCore extends UserListCore {
 
     }
 
+    @Override
+    protected boolean OnLongClickHolders(FriendCommonModel model) {
+        return true;
+    }
+
 
 }

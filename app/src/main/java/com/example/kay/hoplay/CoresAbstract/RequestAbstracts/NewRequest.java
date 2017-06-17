@@ -288,6 +288,28 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
+                // Capitalize game name letters
+                String gameName = gamesAutoCompleteTextView.getText().toString();
+                String capitlizedGameName = gameName.substring(0,1).toUpperCase() +  gameName.substring(1);
+                if (gameName.contains(" "))
+                {
+                    // Capitalize game title letters
+                    String cpWord= "";
+                    for (int  i = 0 ; i < capitlizedGameName.length(); i++)
+                    {
+                        if (capitlizedGameName.charAt(i) == 32 && capitlizedGameName.charAt(i+1) != 32)
+                        {
+                            cpWord= capitlizedGameName.substring(i+1,i+2).toUpperCase() + capitlizedGameName.substring(i+2);
+                            capitlizedGameName = capitlizedGameName.replace(capitlizedGameName.charAt(i+1),cpWord.charAt(0));
+                        }
+                    }
+                    gamesAutoCompleteTextView.setText(capitlizedGameName);
+                }else {
+                    gamesAutoCompleteTextView.setText(capitlizedGameName);
+                }
+
+
+
                 numberOfPlayersSpinner.setVisibility(View.VISIBLE);
 
                 String name = parent.getItemAtPosition(position).toString();

@@ -51,19 +51,22 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder  implements Vi
 
 
             title =  (TextView) v.findViewById(R.id.chatOpponentFullname);
-            Typeface sansation = Typeface.createFromAsset(title.getContext().getAssets() ,"sansationbold.ttf");
-            Typeface opensans = Typeface.createFromAsset(title.getContext().getAssets() ,"opensans.ttf");
-            title.setTypeface(opensans);
+
+            Typeface playbold = Typeface.createFromAsset(title.getContext().getAssets(), "playbold.ttf");
+            Typeface playregular = Typeface.createFromAsset(title.getContext().getAssets(), "playregular.ttf");
+
+
+            title.setTypeface(playbold);
 
 
             time =  (TextView) v.findViewById(R.id.chatLastMessageAgo);
-            time.setTypeface(sansation);
+            time.setTypeface(playregular);
 
             chatNewMessagesCount =  (TextView) v.findViewById(R.id.chatNewMessagesCount);
-            chatNewMessagesCount.setTypeface(sansation);
+            chatNewMessagesCount.setTypeface(playbold);
 
             chatLastMessage = (EmojiconTextView) v.findViewById(R.id.chatLastMessage);
-            chatLastMessage.setTypeface(sansation);
+            chatLastMessage.setTypeface(playregular);
 
         }
         public void setCommunitySubtitle(String subtitle){
@@ -197,6 +200,8 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder  implements Vi
 
             picture = (CircleImageView)v.findViewById(R.id.player_instance_circleimageview);
             title  = (TextView)v.findViewById(R.id.player_instance_username_textview);
+            subtitle = (TextView) v.findViewById(R.id.player_game_provider_textview);
+            subtitle2 = (TextView) v.findViewById(R.id.player_game_provider_account_textview);
         }
 
         @Override

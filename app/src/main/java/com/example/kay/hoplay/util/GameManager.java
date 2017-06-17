@@ -19,6 +19,17 @@ public class GameManager implements FirebasePaths,Constants{
     private HashMap<String,GameModel> gamesCOOPList =  new HashMap<>();
 
 
+    // first string represnt the game id , second one represnt the pc game provider
+    private HashMap<String,String>  pcGamesWithProviders = new HashMap<String,String>();
+
+    public HashMap<String, String> getPcGamesWithProviders() {
+        return pcGamesWithProviders;
+    }
+
+    public void setPcGamesWithProviders(HashMap<String, String> pcGamesWithProviders) {
+        this.pcGamesWithProviders = pcGamesWithProviders;
+    }
+
     public void addGame(GameModel gameModel)
     {
 

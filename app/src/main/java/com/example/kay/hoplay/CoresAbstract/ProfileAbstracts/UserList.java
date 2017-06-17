@@ -83,8 +83,10 @@ public abstract class UserList extends AppCompatActivity {
                 @Override
                 public boolean onLongClick(View v) {
 
-                    showFriendpopup(model,getApplication());
-                    removeFriendButtonViewHolder(v,position);
+                    if(OnLongClickHolders(model)) {
+                        showFriendpopup(model, getApplication());
+                        removeFriendButtonViewHolder(v, position);
+                    }
                     return true;
                 }
             });
@@ -302,12 +304,10 @@ public abstract class UserList extends AppCompatActivity {
         Button chatButton , viewProfileButton , deleteFriendButtton ;
 
         chatButton = ( Button) friendLongClickDialog.findViewById(R.id.chat_friend_pop_up_button);
-        viewProfileButton = ( Button) friendLongClickDialog.findViewById(R.id.view_profile_friend_pop_up_button);
         deleteFriendButtton = ( Button) friendLongClickDialog.findViewById(R.id.delete_friend_pop_up_button);
 
         Typeface sansation = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
         chatButton.setTypeface(sansation);
-        viewProfileButton.setTypeface(sansation);
         deleteFriendButtton.setTypeface(sansation);
 
 
@@ -319,16 +319,7 @@ public abstract class UserList extends AppCompatActivity {
             }
         });
 
-
-        // view friend profile
-        viewProfileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-//
-//
-//        // delete friend
+        // delete friend
         deleteFriendButtton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -376,4 +367,5 @@ public abstract class UserList extends AppCompatActivity {
     protected abstract void loadFriendList();
     protected abstract void searchForUser(String value);
     protected abstract void removeFriend(String friendKey);
+    protected abstract boolean OnLongClickHolders(FriendCommonModel model);
 }

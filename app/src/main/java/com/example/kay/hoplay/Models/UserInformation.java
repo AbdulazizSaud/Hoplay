@@ -12,9 +12,22 @@ public class UserInformation {
     private String username,pictureURL,UID,nickName , userEmail,bio;
     private boolean isPremium=false;
     private String PSNAcc , XboxLiveAcc;
+
+    // first string for the game provder , second one for the account
     private HashMap<String,String>  pcGamesAcc ;
 
+    // first string for the game , second one for the provider
+    private HashMap<String,String>  pcGamesWithProviders;
 
+
+
+    public HashMap<String, String> getPcGamesWithProviders() {
+        return pcGamesWithProviders;
+    }
+
+    public void setPcGamesWithProviders(HashMap<String, String> pcGamesWithProviders) {
+        this.pcGamesWithProviders = pcGamesWithProviders;
+    }
 
     private Bitmap pictureBitMap;
 

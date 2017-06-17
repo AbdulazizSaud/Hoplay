@@ -23,16 +23,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.kay.hoplay.Cores.AuthenticationCore.SignUpCore;
 import com.example.kay.hoplay.Cores.ForgetPasswordCore;
 import com.example.kay.hoplay.Cores.MainAppMenuCore;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 /*
@@ -267,6 +263,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     protected void toSignUp() {
         Intent i = new Intent(this, SignUpCore.class);
         startActivity(i);
+        overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up);
 
     }
     protected void toMainMenu() {
@@ -274,6 +271,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
         Intent i = new Intent(getApplicationContext(), MainAppMenuCore.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        overridePendingTransition( R.anim.slide_in_right, R.anim.slide_out_right);
         startActivity(i);
 
     }
@@ -282,6 +280,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     public void goToForgetPassword(View view) {
         Intent i = new Intent(this, ForgetPasswordCore.class);
         startActivity(i);
+        overridePendingTransition( R.anim.slide_in_down, R.anim.slide_out_down);
     }
 
 

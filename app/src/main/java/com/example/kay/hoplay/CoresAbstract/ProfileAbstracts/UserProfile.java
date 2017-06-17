@@ -9,9 +9,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +33,8 @@ import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.RecentGameModel;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -138,6 +143,7 @@ public abstract class UserProfile extends Fragment {
             public void onClick(View v) {
                 Intent i = new Intent(getActivity().getApplicationContext(),AddGameCore.class);
                 startActivity(i);
+                getActivity().overridePendingTransition( R.anim.slide_in_down, R.anim.slide_out_down);
             }
         });
 
@@ -146,6 +152,7 @@ public abstract class UserProfile extends Fragment {
             public void onClick(View v) {
                 Intent i = new Intent(getActivity().getApplicationContext() , FriendsListCore.class);
                 startActivity(i);
+                getActivity().overridePendingTransition( R.anim.slide_in_down, R.anim.slide_out_down);
 
             }
         });
@@ -160,6 +167,8 @@ public abstract class UserProfile extends Fragment {
 
                 Intent i = new Intent(getActivity().getApplicationContext(), SettingsActivity.class);
                 startActivity(i);
+                getActivity().overridePendingTransition( R.anim.slide_in_right, R.anim.slide_out_right);
+
 
             }
         });
@@ -209,6 +218,7 @@ public abstract class UserProfile extends Fragment {
     {
 
         RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,"",activityDescription,activityDate);
+        recentActivity.setReqPlatform(platform);
         recentGameModels.add(recentActivity);
         mAdapter.notifyDataSetChanged();
     }
@@ -262,9 +272,56 @@ public abstract class UserProfile extends Fragment {
 
                app.loadingImage(getContext(),holder,model.getGamePhotoUrl());
 
-                holder.setTitle(model.getGameName());
+                Typeface playbold = Typeface.createFromAsset(getActivity().getAssets(), "playbold.ttf");
+                Typeface playregular = Typeface.createFromAsset(getActivity().getAssets(), "playregular.ttf");
+
+
+
+
+                // Capitalize game name letters
+                String gameName = model.getGameName();
+                String capitlizedGameName = gameName.substring(0,1).toUpperCase() +  gameName.substring(1);
+                if (gameName.contains(" "))
+                {
+                    // Capitalize game title letters
+                    String cpWord= "";
+                    for (int  i = 0 ; i < capitlizedGameName.length(); i++)
+                    {
+                        if (capitlizedGameName.charAt(i) == 32 && capitlizedGameName.charAt(i+1) != 32)
+                        {
+                            cpWord= capitlizedGameName.substring(i+1,i+2).toUpperCase() + capitlizedGameName.substring(i+2);
+                             capitlizedGameName = capitlizedGameName.replace(capitlizedGameName.charAt(i+1),cpWord.charAt(0));
+                        }
+                    }
+                    holder.setTitle(capitlizedGameName);
+                }else {
+                    holder.setTitle(capitlizedGameName);
+                }
+
+
+
+                holder.getTitleView().setTypeface(playbold);
                 holder.setSubtitle(model.getActivityDescription());
+                holder.getSubtitleView().setTypeface(playregular);
                 holder.setTime(model.getActivityDate());
+                holder.getTimeView().setTypeface(playregular);
+
+
+                holder.getPicture().setBorderWidth(6);
+                // Changing title color depending on the platform
+                if (model.getReqPlatform().equalsIgnoreCase("PC"))
+                {holder.getTitleView().setTextColor(ContextCompat.getColor(getContext(), R.color.pc_color));
+                    holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.pc_color));}
+                else if (model.getReqPlatform().equalsIgnoreCase("PS"))
+                {holder.getTitleView().setTextColor(ContextCompat.getColor(getContext(), R.color.ps_color));
+                    holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.ps_color));}
+                else
+                {holder.getTitleView().setTextColor(ContextCompat.getColor(getContext(), R.color.xbox_color));
+                    holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.xbox_color));}
+
+
+
+
             }
         };
     }

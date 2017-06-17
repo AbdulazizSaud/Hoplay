@@ -42,10 +42,31 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths {
                 if (player.getUID().equals(app.getUserInformation().getUID()))
                     lobby.getJoinButton().setVisibility(View.INVISIBLE);
 
+
+                if (requestModel.getPlatform().equalsIgnoreCase("PS"))
+                {
+
+                    player.setGamePovider("PSN Account");
+                    player.setGameProviderAcc(app.getUserInformation().getPSNAcc());
+                }
+                else if (requestModel.getPlatform().equalsIgnoreCase("XBOX"))
+                {
+                    player.setGamePovider("XBOX Account");
+                    player.setGameProviderAcc(app.getUserInformation().getXboxLiveAcc());
+                }
+                else{
+                    String pcGameProvider = app.getGameManager().getPcGamesWithProviders().get(requestModel.getGameId().trim());
+
+                    player.setGamePovider(pcGameProvider);
+                    player.setGameProviderAcc(app.getUserInformation().getPcGamesAcc().get(pcGameProvider));
+                }
+
+
                 lobby.addPlayer(player);
                 requestModel.getPlayers().add(player);
 
             } catch (NullPointerException e) {
+                Log.i("---->",e.getMessage());
                 return;
             }
 

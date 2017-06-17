@@ -1,6 +1,7 @@
 package com.example.kay.hoplay.Cores;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.kay.hoplay.Cores.RequestCore.LobbyFragmentCore;
@@ -12,6 +13,7 @@ import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.Rank;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.Models.RequestModelRefrance;
+import com.example.kay.hoplay.Models.UserInformation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -22,7 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.Iterator;
+import java.util.Map;
 
 
 public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
@@ -230,6 +233,8 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
         final String gameKey = dataSnapshot.getKey();
         final String gameType = dataSnapshot.getValue().toString().trim();
 
+
+
         app.getDatabaseGames().child(gameType + "/" + gameKey).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot gameShot) {
@@ -238,6 +243,8 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                 String gamePhoto= gameShot.child("photo").getValue(String.class);
                 String platforms= gameShot.child("platforms").getValue(String.class);
                 String gameProvider = gameShot.child("pc_game_provider").getValue(String.class);
+
+
                 int maxPlayers=  gameShot.child("max_player").getValue(Integer.class);
 
                 ArrayList<Rank> ranks = new ArrayList<>();
@@ -249,6 +256,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                 GameModel gameModel = new GameModel(gameKey,gameName,gamePhoto,platforms,gameType,maxPlayers,ranks,gameProvider);
                 app.getGameManager().addGame(gameModel);
 
+                app.getGameManager().getPcGamesWithProviders().put(gameKey,gameProvider);
             }
 
             @Override

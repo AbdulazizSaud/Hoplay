@@ -345,9 +345,9 @@
 
 
     <!--                                Friend pop up menu                                  -->
-    <string name="friend_pop_up_menu_chat_button">Chat</string>
+    <string name="friend_pop_up_menu_chat_button">C h a t</string>
     <string name="friend_pop_up_menu_view_profile_button">View Profile</string>
-    <string name="friend_pop_up_menu_delete_friend_button">Delete</string>
+    <string name="friend_pop_up_menu_delete_friend_button">D e l e t e</string>
 
     <!--                                Game On Long Click  Popup Layout                          -->
     <string name="game_long_click_pop_up_delete_text">Are you sure you want to delete this game?</string>
@@ -383,7 +383,7 @@
 
     <!--                                Saved Request On Click Pop up Layout             -->
     <string name="saved_request_on_click_request_button">R E Q U E S T</string>
-    <string name="saved_request_on_click_update_button">U P D A T E</string>
+    <string name="saved_request_on_click_update_button">E D I T</string>
     <string name="saved_request_on_click_delete_button">D E L E T E</string>
 
 

@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/player_instance_model_username"
-        android:layout_margin="5dp"
+        android:layout_margin="0dp"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:layout_below="@+id/player_instance_circleimageview"
@@ -35,6 +35,7 @@
         android:layout_height="wrap_content"
         android:text="@string/player_instance_model_game_provider"
         android:gravity="center"
+        android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:textColor="@color/hint_color"
         android:id="@+id/player_game_provider_textview"
@@ -51,13 +52,5 @@
         android:textColor="@color/hint_color"
         android:id="@+id/player_game_provider_account_textview"
         android:textSize="12sp"/>
-
-
-
-
-
-
-
-
 
 </RelativeLayout>
