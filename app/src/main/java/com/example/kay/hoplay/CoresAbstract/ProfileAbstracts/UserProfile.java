@@ -1,7 +1,6 @@
 package com.example.kay.hoplay.CoresAbstract.ProfileAbstracts;
 
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
@@ -10,11 +9,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +29,6 @@ import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.RecentGameModel;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -143,7 +137,7 @@ public abstract class UserProfile extends Fragment {
             public void onClick(View v) {
                 Intent i = new Intent(getActivity().getApplicationContext(),AddGameCore.class);
                 startActivity(i);
-                getActivity().overridePendingTransition( R.anim.slide_in_down, R.anim.slide_out_down);
+                getActivity().overridePendingTransition( R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
             }
         });
 
@@ -152,7 +146,7 @@ public abstract class UserProfile extends Fragment {
             public void onClick(View v) {
                 Intent i = new Intent(getActivity().getApplicationContext() , FriendsListCore.class);
                 startActivity(i);
-                getActivity().overridePendingTransition( R.anim.slide_in_down, R.anim.slide_out_down);
+                getActivity().overridePendingTransition( R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
 
             }
         });
@@ -167,7 +161,7 @@ public abstract class UserProfile extends Fragment {
 
                 Intent i = new Intent(getActivity().getApplicationContext(), SettingsActivity.class);
                 startActivity(i);
-                getActivity().overridePendingTransition( R.anim.slide_in_right, R.anim.slide_out_right);
+                getActivity().overridePendingTransition( R.anim.slide_in_right_layouts, R.anim.slide_out_right_layouts);
 
 
             }

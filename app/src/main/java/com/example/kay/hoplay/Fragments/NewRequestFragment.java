@@ -11,8 +11,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,7 +74,7 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
             public void onClick(View v) {
                 Intent i = new Intent(getActivity().getApplicationContext(), AddGameCore.class);
                 startActivity(i);
-                getActivity().overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up);
+                getActivity().overridePendingTransition( R.anim.slide_in_up_layouts, R.anim.slide_out_up_layouts);
             }
         });
         savedRequestsMessage = (TextView) view.findViewById(R.id.saved_activity_message_textview);
@@ -86,7 +84,7 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
             public void onClick(View view) {
                 Intent i = new Intent(getActivity().getApplicationContext(), NewRequestCore.class);
                 startActivity(i);
-                getActivity().overridePendingTransition( R.anim.slide_in_down, R.anim.slide_out_down);
+                getActivity().overridePendingTransition( R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
             }
         });
 
@@ -287,7 +285,7 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
                 bundle.putParcelable("savedReq",requestModel);
                 i.putExtras(bundle);
                 startActivity(i);
-                getActivity().overridePendingTransition( R.anim.slide_in_down, R.anim.slide_out_down);
+                getActivity().overridePendingTransition( R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
                 savedRequestPopupDialog.dismiss();
             }
         });

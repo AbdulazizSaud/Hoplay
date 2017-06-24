@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputType;
@@ -21,6 +23,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -51,6 +54,8 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     protected Toolbar toolbar;
     protected App app = App.getInstance();
     ProgressDialog loadingDialog ;
+    private LinearLayoutCompat signinBlock;
+
 
 
 
@@ -86,13 +91,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     }
 
 
-    public void setAnimation(View viewToAnimate) {
-        // If the bound view wasn't previously displayed on screen, it's animated
 
-            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
-            viewToAnimate.startAnimation(animation);
-
-    }
 
 
     @Override
@@ -118,15 +117,45 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         }
 
 
+
+
+
         //this abstract method will do some init things
         OnStartActivity();
 
         initControls();
-
-
+        animateViews();
         changeIconListener();
 
 
+    }
+
+    private void animateViews() {
+        // Animate Views
+        logo.setVisibility(View.INVISIBLE);
+        Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down_view);
+        logo.startAnimation(slideDown);
+        logo.setVisibility(View.VISIBLE);
+
+        signinBlock.setVisibility(View.INVISIBLE);
+        Animation slideLeft = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_left_view);
+        signinBlock.startAnimation(slideLeft);
+        signinBlock.setVisibility(View.VISIBLE);
+
+        forgotPassword.setVisibility(View.INVISIBLE);
+        Animation slideRight = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_right_view);
+        forgotPassword.startAnimation(slideRight);
+        forgotPassword.setVisibility(View.VISIBLE);
+
+        signupQuestion.setVisibility(View.INVISIBLE);
+        Animation slideUp = AnimationUtils.loadAnimation(getApplicationContext() , R.anim.slide_up_view);
+        signupQuestion.startAnimation(slideUp);
+        signupQuestion.setVisibility(View.VISIBLE);
+
+
+        signInButton.setVisibility(View.INVISIBLE);
+        signInButton.startAnimation(slideUp);
+        signInButton.setVisibility(View.VISIBLE);
     }
 
 
@@ -220,6 +249,9 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         usernameSignIn.setTypeface(playregular);
 
 
+        signinBlock = (LinearLayoutCompat) findViewById(R.id.signin_blcok_linearlayout);
+
+
 
 
 
@@ -263,7 +295,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     protected void toSignUp() {
         Intent i = new Intent(this, SignUpCore.class);
         startActivity(i);
-        overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up);
+        overridePendingTransition( R.anim.slide_in_up_layouts, R.anim.slide_out_up_layouts);
 
     }
     protected void toMainMenu() {
@@ -271,8 +303,8 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
         Intent i = new Intent(getApplicationContext(), MainAppMenuCore.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        overridePendingTransition( R.anim.slide_in_right, R.anim.slide_out_right);
         startActivity(i);
+        overridePendingTransition( R.anim.slide_in_right_layouts, R.anim.slide_out_right_layouts);
 
     }
 
@@ -280,7 +312,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     public void goToForgetPassword(View view) {
         Intent i = new Intent(this, ForgetPasswordCore.class);
         startActivity(i);
-        overridePendingTransition( R.anim.slide_in_down, R.anim.slide_out_down);
+        overridePendingTransition( R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
     }
 
 

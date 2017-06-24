@@ -2,7 +2,6 @@ package com.example.kay.hoplay.CoresAbstract;
 
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -70,7 +69,7 @@ public abstract class Community extends Fragment {
             public void onClick(View view) {
                 Intent i = new Intent(getContext(),FindUserCore.class);
                 startActivity(i);
-                getActivity().overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up);
+                getActivity().overridePendingTransition( R.anim.slide_in_up_layouts, R.anim.slide_out_up_layouts);
 
 
             }

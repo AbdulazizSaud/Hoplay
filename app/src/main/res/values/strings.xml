@@ -117,7 +117,7 @@
     <string name="login_username">Username</string>
     <string name="login_password">Password</string>
     <string name="login_signin">S I G N &#160; I N</string>
-    <string name="login_forget_password">F o r g o t   P a s s w o r d  ?</string>
+    <string name="login_forget_password">F o r g o t &#160; P a s s w o r d  ?</string>
     <string name="login_do_not_have_account">D o n\'t &#160; &#160; h a v e &#160; &#160;a n &#160; &#160;a c c o u n t  ?</string>
     <string name="login_signup">S I G N &#160; U P</string>
 
