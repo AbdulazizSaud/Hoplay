@@ -81,6 +81,9 @@ public abstract class Chat extends AppCompatActivity {
     protected HashMap<String,PlayerModel> playerOnChat = new HashMap<>();
 
 
+    private int menuTrigger = 0;
+
+
 //    // Game providers recyclerview components
 //    private RecyclerView gameProviderRecyclerView;
 //    RecyclerView.LayoutManager mLayoutManager;
@@ -121,7 +124,13 @@ public abstract class Chat extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+
+        if (menuTrigger == 0 )
         getMenuInflater().inflate(R.menu.menu_chat, menu);
+
+        else
+        getMenuInflater().inflate(R.menu.menu_request_chat,menu);
+
         return true;
     }
 
@@ -132,8 +141,14 @@ public abstract class Chat extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+
+        // view profile action
+        if (id == R.id.view_profile_menu_action) {
+            return true;
+        }
+
+        // view lobby action
+        if (id == R.id.view_lobby_menu_action) {
             return true;
         }
 
