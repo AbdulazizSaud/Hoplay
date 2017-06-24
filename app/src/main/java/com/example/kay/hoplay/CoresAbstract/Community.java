@@ -26,9 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public abstract class Community extends Fragment {
 
 //    ListView communityListview ;
@@ -80,9 +78,6 @@ public abstract class Community extends Fragment {
 
 
 
-        //testList();
-
-
 
         OnStartActivity();
 
@@ -121,6 +116,7 @@ public abstract class Community extends Fragment {
     }
 
 
+
     public void removeFromList(String key){
 
         for(CommunityChatModel communityChatModel : communityUserLists) {
@@ -153,6 +149,14 @@ public abstract class Community extends Fragment {
                     @Override
                     public void onClick(View v) {
                         OnClickHolders(model,v);
+                    }
+                });
+
+                holder.getView().setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        removeChatFromlist(model);
+                        return false;
                     }
                 });
 
@@ -197,7 +201,7 @@ public abstract class Community extends Fragment {
 
 
 
-
+    protected abstract void removeChatFromlist(CommunityChatModel model);
 
     protected abstract void OnClickHolders(CommunityChatModel model, View v);
     protected abstract void OnStartActivity();

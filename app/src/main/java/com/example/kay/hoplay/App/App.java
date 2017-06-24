@@ -42,9 +42,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
     it's impelmented as singleton stratgey
  */
 
-public class App extends Application implements FirebasePaths{
+public class App extends Application implements FirebasePaths {
 
-    private  static App instance;
+    private static App instance;
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseUserNames;
@@ -52,17 +52,17 @@ public class App extends Application implements FirebasePaths{
     private DatabaseReference databaseChat;
     private DatabaseReference databaseGames;
     private DatabaseReference databaseRequests;
-    private DatabaseReference databaseRegions ;
+    private DatabaseReference databaseRegions;
     private FirebaseAuth mAuth;  // firebase auth
     private FirebaseStorage storage;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private ImageLoader imageLoader; // Image loader from url
 
 
-    private  UserInformation userInformation;
+    private UserInformation userInformation;
     private GameManager gameManager;
     private TimeStamp timeStamp;
-    private ArrayList<RequestModel> requestResultList =new ArrayList<>();
+    private ArrayList<RequestModel> requestResultList = new ArrayList<>();
 
     private ArrayList<RequestModel> savedRequests;
 
@@ -84,28 +84,28 @@ public class App extends Application implements FirebasePaths{
         databaseRegions = firebaseDatabase.getReferenceFromUrl("https://hoplay-18a08.firebaseio.com/_regions_");
         userInformation = new UserInformation();
         gameManager = new GameManager();
-        timeStamp=new TimeStamp();
+        timeStamp = new TimeStamp();
         savedRequests = new ArrayList<RequestModel>();
     }
 
 
-
     // this method return a instance of this app class
-    public static synchronized App getInstance(){
+    public static synchronized App getInstance() {
         return instance;
     }
+
     // this method return a socket io
     // this method return firebase auth
-    public FirebaseAuth getAuth(){
+    public FirebaseAuth getAuth() {
         return mAuth;
     }
 
     // thi method return a imageloader
-    private ImageLoader getImageLoader(){
+    private ImageLoader getImageLoader() {
         // create a new addRequestToFirebase queue for picture
-        RequestQueue requestQueue  = Volley.newRequestQueue(getApplicationContext());
-        if(imageLoader == null)
-            imageLoader = new ImageLoader(requestQueue,new LruBitmapCache());
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        if (imageLoader == null)
+            imageLoader = new ImageLoader(requestQueue, new LruBitmapCache());
         return imageLoader;
     }
 
@@ -113,7 +113,7 @@ public class App extends Application implements FirebasePaths{
     public void loadingImage(Context c, ViewHolders holder, String pictureURL) {
 
 
-        if(pictureURL == null || pictureURL.isEmpty() || pictureURL.equals("\\s++"))
+        if (pictureURL == null || pictureURL.isEmpty() || pictureURL.equals("\\s++"))
             return;
 
 
@@ -126,11 +126,10 @@ public class App extends Application implements FirebasePaths{
     }
 
 
-
-    public Bitmap loadingImage(CircleImageView pictureView ,String pictureURL) {
+    public Bitmap loadingImage(CircleImageView pictureView, String pictureURL) {
 
         pictureView.setImageResource(R.drawable.profile_default_photo);
-        Bitmap bitmap = loadPicture(pictureURL,pictureView);
+        Bitmap bitmap = loadPicture(pictureURL, pictureView);
 
 
         return bitmap;
@@ -147,11 +146,11 @@ public class App extends Application implements FirebasePaths{
     }
 
 
-    private Bitmap loadPicture(String pictureURL,CircleImageView circleImageView) {
-        if(pictureURL != null) {
-            if (pictureURL.length() > 5 && !pictureURL.startsWith("default") && !pictureURL.startsWith("game") ) {
+    private Bitmap loadPicture(String pictureURL, CircleImageView circleImageView) {
+        if (pictureURL != null) {
+            if (pictureURL.length() > 5 && !pictureURL.startsWith("default") && !pictureURL.startsWith("game")) {
 
-               return getImageLoader().get(pictureURL,
+                return getImageLoader().get(pictureURL,
                         ImageLoader.getImageListener(
                                 circleImageView
                                 , R.drawable.profile_default_photo
@@ -161,54 +160,57 @@ public class App extends Application implements FirebasePaths{
         return null;
     }
 
-    public Bitmap getBitmapFromUrl (String pictureUrl)
-    {
-        return getImageLoader().get(pictureUrl,null).getBitmap();
+    public Bitmap getBitmapFromUrl(String pictureUrl) {
+        return getImageLoader().get(pictureUrl, null).getBitmap();
     }
 
-    public UploadTask uploadPicture(CircleImageView circleImageView,String uid)
-    {
+    public UploadTask uploadPicture(CircleImageView circleImageView, String uid) {
 
         circleImageView.setDrawingCacheEnabled(true);
         circleImageView.buildDrawingCache();
         Bitmap bitmap = circleImageView.getDrawingCache();
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
         byte[] picData = byteArrayOutputStream.toByteArray();
 
         StorageReference storageReference = storage.getReference();
-        StorageReference picRef = storageReference.child(uid+"/profile_picture.png");
+        StorageReference picRef = storageReference.child(uid + "/profile_picture.png");
 
         UploadTask uploadTask = picRef.putBytes(picData);
         return uploadTask;
     }
 
 
-    public void signOut()
-    {
+    public void signOut() {
         mAuth.signOut();
     }
 
     public FirebaseDatabase getFirebaseDatabase() {
         return firebaseDatabase;
     }
+
     public DatabaseReference getDatabaseUsersInfo() {
         return databaseUsersInfo;
     }
+
     public DatabaseReference getDatabasChat() {
         return databaseChat;
     }
+
     public DatabaseReference getDatabaseGames() {
         return databaseGames;
     }
+
     public DatabaseReference getDatabaseUserNames() {
         return databaseUserNames;
     }
-    public DatabaseReference getDatabaseRegions(){return databaseRegions ;}
 
-    public DatabaseReference getDatabaseRequests()
-    {
+    public DatabaseReference getDatabaseRegions() {
+        return databaseRegions;
+    }
+
+    public DatabaseReference getDatabaseRequests() {
         return databaseRequests;
     }
 
@@ -217,31 +219,32 @@ public class App extends Application implements FirebasePaths{
     }
 
 
-
-
     public void setmAuthStateListener(FirebaseAuth.AuthStateListener mAuthStateListener) {
         this.mAuthStateListener = mAuthStateListener;
     }
 
 
-    public String convertFromTimeStampToDate(String timeStamp){
-        DateFormat sdf = new SimpleDateFormat("MM/dd/yy");
-        Date netDate = (new Date(Long.parseLong(timeStamp)));
-
-        return sdf.format(netDate);
+    public String convertFromTimeStampToDate(String timeStamp) {
+        try {
+            DateFormat sdf = new SimpleDateFormat("MM/dd/yy");
+            Date netDate = (new Date(Long.parseLong(timeStamp)));
+            return sdf.format(netDate);
+        } catch (Exception e) {
+            return "null";
+        }
     }
 
 
-    public GameManager getGameManager(){
-    return gameManager;
+    public GameManager getGameManager() {
+        return gameManager;
     }
 
-    public TimeStamp getTimeStamp(){
+    public TimeStamp getTimeStamp() {
         return timeStamp;
     }
 
 
-    public void setSearchRequestResult(ArrayList<RequestModel> resultList){
+    public void setSearchRequestResult(ArrayList<RequestModel> resultList) {
         this.requestResultList = resultList;
     }
 
@@ -253,16 +256,13 @@ public class App extends Application implements FirebasePaths{
         this.savedRequests = savedRequests;
     }
 
-    public ArrayList<RequestModel> getSearchRequestResult(){
+    public ArrayList<RequestModel> getSearchRequestResult() {
         return requestResultList;
     }
 
-    public RequestModel getRequestModelResult(String key)
-    {
-        for(RequestModel requestModel :requestResultList )
-        {
-            if(requestModel.getRequestId().equals(key))
-            {
+    public RequestModel getRequestModelResult(String key) {
+        for (RequestModel requestModel : requestResultList) {
+            if (requestModel.getRequestId().equals(key)) {
                 return requestModel;
             }
         }
@@ -273,8 +273,7 @@ public class App extends Application implements FirebasePaths{
         this.mainAppMenuCore = mainAppMenuCore;
     }
 
-    public void switchMainAppMenuFragment(ParentRequestFragments fragments)
-    {
+    public void switchMainAppMenuFragment(ParentRequestFragments fragments) {
         mainAppMenuCore.switchFragment(fragments);
     }
 

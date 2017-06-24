@@ -95,7 +95,6 @@ public class CreateChat implements FirebasePaths {
         roomInfo.child("access_key").setValue(accessKey);
         roomInfo.child("room_info/gameId").setValue(requestModel.getGameId());
 
-
         // path --> /Chat/_public_/[KEY]/_messages_
         DatabaseReference messagesRef = chatRoom.child(FIREBASE_CHAT_MESSAGES);
         HashMap<String, Object> messageMap = new HashMap<>();

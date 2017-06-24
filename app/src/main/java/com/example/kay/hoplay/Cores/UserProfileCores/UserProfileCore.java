@@ -16,7 +16,6 @@ public class UserProfileCore extends UserProfile implements FirebasePaths {
     long gameCount = 0;
     long friendCount = 0;
 
-    private DatabaseReference userInformationRef;
 
     private ChildEventListener userInformationEventListener = new ChildEventListener() {
         @Override

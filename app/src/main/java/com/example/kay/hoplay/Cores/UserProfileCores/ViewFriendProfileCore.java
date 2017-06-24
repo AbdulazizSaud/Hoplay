@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.ViewFriendProfile;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -68,10 +69,15 @@ public class ViewFriendProfileCore extends ViewFriendProfile  implements Firebas
                 if(dataSnapshot.getValue() == null)
                     return;
 
-                String username = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue().toString().trim();
-                String nickname = dataSnapshot.child(FIREBASE_BIO_ATTR).getValue().toString().trim();
-                String pictureUrl =  dataSnapshot.child(FIREBASE_PICTURE_URL_PATH).getValue().toString().trim();
-
+                String username="",nickname="",pictureUrl="";
+                try {
+                     username = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
+                     nickname = dataSnapshot.child(FIREBASE_BIO_ATTR).getValue(String.class);
+                     pictureUrl = dataSnapshot.child(FIREBASE_PICTURE_URL_ATTR).getValue(String.class);
+                }catch (NullPointerException e)
+                {
+                    nickname = "null";
+                }
                 app.loadingImage(userPictureCircleImageView,pictureUrl);
                 setUsernameProfile("@"+username);
                 setNicknameTextView(nickname);
@@ -86,35 +92,51 @@ public class ViewFriendProfileCore extends ViewFriendProfile  implements Firebas
     }
 
 
-    private void loadRecentActivtiy(String friendKey)
-    {
-        DatabaseReference recentGameRef = app.getDatabaseUsersInfo().child(friendKey+"/"+FIREBASE_RECENT_GAMES_PATH);
-        recentGameRef.addValueEventListener(new ValueEventListener() {
+
+    private void loadRecentActivtiy(String friendKey) {
+        DatabaseReference recentGameRef = app.getDatabaseUsersInfo().child(friendKey + "/" + FIREBASE_RECENT_GAMES_PATH);
+
+        recentGameRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> myFavorSnaps = dataSnapshot.getChildren();
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                final String gameType = dataSnapshot.child("game_type").getValue(String.class);
+                final String matchType = dataSnapshot.child("match_type").getValue(String.class);
+                final String platform = dataSnapshot.child("request_platform").getValue(String.class);
+                final String gameKey = dataSnapshot.child("game_id").getValue(String.class);
+                final String timeStmap = String.valueOf(dataSnapshot.child(FIREBASE_REQUEST_TIME_STAMP_ATTR).getValue(Long.class));
 
-                for (DataSnapshot gameSnap : myFavorSnaps)
-                {
-                    final String gameType = gameSnap.getValue().toString().trim();
-                    final String gameKey =  gameSnap.getKey();
-                    app.getDatabaseGames().child(gameType+"/"+gameKey).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot gameShot) {
-                            String gameName = gameShot.child("name").getValue().toString().trim();
-                            String gamePic = gameShot.child("photo").getValue().toString().trim();
-                            // Fetch recent games from database and bind it to the recyclerview
-                            addRecentGame(gameKey,gameName,gamePic,"","");
 
-                        }
+                app.getDatabaseGames().child(gameType + "/" + gameKey).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot gameShot) {
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                        String gameName = gameShot.child(FIREBASE_GAMES_NAME_ATTR_REFERENCES).getValue(String.class);
+                        String gamePic = gameShot.child(FIREBASE_GAMES_PHOTO_ATTR_REFERENCES).getValue(String.class);
 
-                        }
-                    });
+                        addRecentGame(gameKey, gameName, gamePic,platform, matchType, app.convertFromTimeStampToDate(timeStmap));
 
-                }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
@@ -122,6 +144,8 @@ public class ViewFriendProfileCore extends ViewFriendProfile  implements Firebas
 
             }
         });
+
     }
+
 
 }

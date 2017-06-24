@@ -48,8 +48,6 @@ public class FindUserCore extends UserListCore {
         String privateChatPath = currentUserId + "/" + FIREBASE_USER_PRIVATE_CHAT;
 
 
-
-
         DatabaseReference chatRef = app.getDatabaseUsersInfo().child(privateChatPath);
         final Query query = chatRef.orderByChild(FIREBASE_OPPONENT_ID_ATTR).startAt(opponentKey).endAt(opponentKey + "\uf8ff").limitToFirst(1);
         query.addListenerForSingleValueEvent(new ValueEventListener() {

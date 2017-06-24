@@ -40,7 +40,7 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
 
     protected App app;
     private ImageView backBtn;
-    
+
     private TextView usernameProfile;
     private TextView userGamesTextView;
     private TextView userRatingsTextView;
@@ -68,9 +68,9 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
         app = App.getInstance();
 
         backBtn = (ImageView)findViewById(R.id.user_profile_back_btn);
-        
+
         usernameProfile = (TextView) findViewById(R.id.username_profile);
-        
+
         userFriendsTextView = (TextView) findViewById(R.id.friends_profile_textview);
         friendsNumberTextView = (TextView) findViewById(R.id.friends_number_profile_textview);
         userGamesTextView = (TextView) findViewById(R.id.games_profile_textview);
@@ -104,7 +104,7 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
         mAdapter = createAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
-        
+
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,10 +147,10 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
 
 
 
-    public void addRecentGame(String gameID, String gameName , String gamePhoto , String activityDescription , String activityDate)
+    public void addRecentGame(String gameID, String gameName , String gamePhoto ,String platform, String activityDescription , String activityDate)
     {
 
-        RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,"",activityDescription,activityDate);
+        RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,platform,activityDescription,activityDate);
         recentGameModels.add(recentActivity);
         mAdapter.notifyDataSetChanged();
     }

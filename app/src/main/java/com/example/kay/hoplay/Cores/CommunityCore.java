@@ -158,6 +158,7 @@ public class CommunityCore extends Community implements FirebasePaths {
                 DataSnapshot lastMessageSnapshots = chatSnapShot.child("_messages_/_last_message_");
 
                 String gameIdPath = FIREBASE_DETAILS_ATTR + "/room_info/gameId";
+
                 String values = chatSnapShot.child(gameIdPath).getValue(String.class);
 
                 String chatName = "Unknown";
@@ -353,6 +354,16 @@ public class CommunityCore extends Community implements FirebasePaths {
         }
     }
 
+
+    @Override
+    protected void removeChatFromlist(CommunityChatModel model) {
+
+        DatabaseReference chatRef = refAuthCurrentUserChats.child(model.getChatType()).child(model.getChatKey());
+        if(chatRef!=null)
+        {
+            chatRef.removeValue();
+        }
+    }
 
     @Override
     protected void OnClickHolders(CommunityChatModel model, View v) {
