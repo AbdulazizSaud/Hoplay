@@ -25,8 +25,6 @@ public class SearchResultsCore extends SearchResults {
     protected void OnStartActivity() {
         ArrayList<RequestModel> requestsModel = app.getSearchRequestResult();
 
-
-
         for(RequestModel request : requestsModel)
         {
 

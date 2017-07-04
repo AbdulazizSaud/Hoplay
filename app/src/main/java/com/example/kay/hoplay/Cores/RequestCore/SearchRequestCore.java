@@ -83,7 +83,7 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
             @Override
             public boolean callBack() {
                 if (app.getTimeStamp().getTimestampLong() != -1)
-                    searchQuery();
+                    searchQuery(app.getTimeStamp().getTimestampLong());
 
                 return app.getTimeStamp().getTimestampLong() != -1;
             }
@@ -96,12 +96,11 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
     }
 
 
-    private void searchQuery() {
+    private void searchQuery(long currentTimestamp) {
 
-        long currenttime = app.getTimeStamp().getTimestampLong();
-        long last48 = currenttime - DUE_REQUEST_TIME_IN_VALUE_HOURS;
+        long last48 = currentTimestamp - DUE_REQUEST_TIME_IN_VALUE_HOURS;
 
-        final Query query = gameRef.orderByChild(FIREBASE_REQUEST_TIME_STAMP_ATTR).startAt(last48).endAt(currenttime);
+        final Query query = gameRef.orderByChild(FIREBASE_REQUEST_TIME_STAMP_ATTR).startAt(last48).endAt(currentTimestamp);
         requestModelArrayList = new ArrayList<>();
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {

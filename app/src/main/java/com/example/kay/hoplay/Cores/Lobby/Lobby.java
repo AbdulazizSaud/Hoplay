@@ -170,6 +170,9 @@ public class Lobby {
             @Override
             public void OnBindHolder(ViewHolders holder, PlayerModel model, int position) {
 
+
+                app.loadingImage(context,holder, model.getProfilePicture());
+
                 holder.setTitle(model.getUsername());
                 holder.setSubtitle(model.getGamePovider());
                 holder.setSubtitle2(model.getGameProviderAcc());

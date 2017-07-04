@@ -3,7 +3,7 @@ package com.example.kay.hoplay.Models;
 
 public class PlayerModel{
 
-    private String username,UID , gamePovider , gameProviderAcc;
+    private String username,UID , gamePovider , gameProviderAcc,profilePicture;
 
     public PlayerModel(){}
     public PlayerModel(String playerUid,String playerName)
@@ -51,4 +51,11 @@ public class PlayerModel{
         this.UID = UID;
     }
 
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 }

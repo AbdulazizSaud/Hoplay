@@ -223,6 +223,16 @@ public class ChatCore extends Chat implements FirebasePaths {
         }
     }
 
+    @Override
+    protected void viewPorfileProccess() {
+
+    }
+
+    @Override
+    protected void viewLobbyProccess() {
+
+    }
+
 
     private boolean isEmpty(DataSnapshot dataSnapshot) {
         return dataSnapshot.child("_username_").getValue() == null || dataSnapshot.child("_message_").getValue() == null;

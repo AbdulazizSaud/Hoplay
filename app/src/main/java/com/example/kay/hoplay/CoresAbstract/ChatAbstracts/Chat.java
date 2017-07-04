@@ -1,6 +1,7 @@
 package com.example.kay.hoplay.CoresAbstract.ChatAbstracts;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -51,6 +52,10 @@ import emojicon.emoji.Objects;
 
 public abstract class Chat extends AppCompatActivity {
 
+    protected enum TYPE {
+        PUBLIC,PRIVATE
+    };
+
     /***************************************/
 
     // App
@@ -78,10 +83,14 @@ public abstract class Chat extends AppCompatActivity {
     protected HashMap<String,ChatMessage> chatMessages = new HashMap<String,ChatMessage>();
 
 
+    protected TYPE chatType;
+
     protected HashMap<String,PlayerModel> playerOnChat = new HashMap<>();
 
+    protected String chatRoomKey,roomName = null, roomPictureUrl = null, chatRoomType = null;
+    protected String opponentId;
 
-    private int menuTrigger = 0;
+
 
 
 //    // Game providers recyclerview components
@@ -114,6 +123,15 @@ public abstract class Chat extends AppCompatActivity {
 
         initControls();
 
+
+        //load message
+        Intent i = getIntent();
+        chatRoomKey = i.getStringExtra("room_key");
+        chatRoomType = i.getStringExtra("room_type");
+        roomName = i.getStringExtra("room_name");
+        roomPictureUrl = i.getStringExtra("room_picture");
+        opponentId = i.getStringExtra("friend_key");
+
         // set up chat app mechanisms
         setupChat();
 
@@ -125,7 +143,7 @@ public abstract class Chat extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
 
-        if (menuTrigger == 0 )
+        if (chatType == TYPE.PRIVATE )
         getMenuInflater().inflate(R.menu.menu_chat, menu);
 
         else
@@ -144,18 +162,18 @@ public abstract class Chat extends AppCompatActivity {
 
         // view profile action
         if (id == R.id.view_profile_menu_action) {
+            viewPorfileProccess();
             return true;
         }
 
         // view lobby action
         if (id == R.id.view_lobby_menu_action) {
+            viewLobbyProccess();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-
-
 
 
 
@@ -432,5 +450,7 @@ public abstract class Chat extends AppCompatActivity {
     // this abstract method is for implements the chat mechinsim
     protected abstract void setupChat();
     protected abstract void sendMessageToFirebase(String message);
+    protected abstract void viewPorfileProccess();
+    protected abstract void viewLobbyProccess();
 
 }

@@ -2,9 +2,11 @@ package com.example.kay.hoplay.Cores.RequestCore;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Fragments.LobbyFragment;
+import com.example.kay.hoplay.Interfaces.Constants;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.PlayerModel;
@@ -22,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths {
+public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Constants {
 
 
     private RequestModel requestModel;
@@ -32,6 +34,7 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths {
     private DatabaseReference requestRef;
     private RequestModelRefrance requestModelRefrance;
 
+
     private ChildEventListener onAddPlayerEvent = new ChildEventListener() {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -39,37 +42,28 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths {
 
                 PlayerModel player = new PlayerModel(dataSnapshot.child("uid").getValue(String.class), dataSnapshot.child("username").getValue(String.class));
 
-                if (player.getUID().equals(app.getUserInformation().getUID()))
-                    lobby.getJoinButton().setVisibility(View.INVISIBLE);
+                final String uid = dataSnapshot.child("uid").getValue(String.class);
+                final String username = dataSnapshot.child("username").getValue(String.class);
 
 
-                if (requestModel.getPlatform().equalsIgnoreCase("PS"))
-                {
+                app.getDatabaseUsersInfo().child(uid+"/"+FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String picture = dataSnapshot.child(FIREBASE_PICTURE_URL_ATTR).getValue(String.class);
 
-                    player.setGamePovider("PSN Account");
-                    player.setGameProviderAcc(app.getUserInformation().getPSNAcc());
-                }
-                else if (requestModel.getPlatform().equalsIgnoreCase("XBOX"))
-                {
-                    player.setGamePovider("XBOX Account");
-                    player.setGameProviderAcc(app.getUserInformation().getXboxLiveAcc());
-                }
-                else{
-                    String pcGameProvider = app.getGameManager().getPcGamesWithProviders().get(requestModel.getGameId().trim());
+                        addPlayerToList(uid,username,picture);
+                    }
 
-                    player.setGamePovider(pcGameProvider);
-                    player.setGameProviderAcc(app.getUserInformation().getPcGamesAcc().get(pcGameProvider));
-                }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-
-                lobby.addPlayer(player);
-                requestModel.getPlayers().add(player);
+                    }
+                });
 
             } catch (NullPointerException e) {
                 Log.i("---->",e.getMessage());
                 return;
             }
-
 
         }
 
@@ -155,37 +149,73 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths {
         requestRef.addListenerForSingleValueEvent(onLoadLobbyInformation);
         requestRef.child("players").addChildEventListener(onAddPlayerEvent);
 
+
+        app.getTimeStamp().setTimestampLong();
+        CallbackHandlerCondition callbackHandlerCondition = new CallbackHandlerCondition() {
+            @Override
+            public boolean callBack() {
+
+                long currentTimestamp= app.getTimeStamp().getTimestampLong();
+                long last48 = requestModel.getTimeStamp()+ DUE_REQUEST_TIME_IN_VALUE_HOURS;
+
+                if(currentTimestamp !=-1)
+                {
+                    if(currentTimestamp >=last48) {
+                        cancelRequest();
+                        //Toast.makeText(getContext(),"Your request has been expired",Toast.LENGTH_LONG).show();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        };
+
+        HandlerCondition condition = new HandlerCondition(callbackHandlerCondition,1000);
     }
+
+
+
+
+    private void addPlayerToList(String playerUID , String playerUsername ,String picture)
+    {
+        PlayerModel player = new PlayerModel(playerUID,playerUsername);
+
+        player.setProfilePicture(picture);
+
+
+        if (player.getUID().equals(app.getUserInformation().getUID()))
+            lobby.getJoinButton().setVisibility(View.INVISIBLE);
+
+
+        if (requestModel.getPlatform().equalsIgnoreCase("PS"))
+        {
+
+            player.setGamePovider("PSN Account");
+            player.setGameProviderAcc(app.getUserInformation().getPSNAcc());
+        }
+        else if (requestModel.getPlatform().equalsIgnoreCase("XBOX"))
+        {
+            player.setGamePovider("XBOX Account");
+            player.setGameProviderAcc(app.getUserInformation().getXboxLiveAcc());
+        }
+        else{
+            String pcGameProvider = app.getGameManager().getPcGamesWithProviders().get(requestModel.getGameId().trim());
+
+            player.setGamePovider(pcGameProvider);
+            player.setGameProviderAcc(app.getUserInformation().getPcGamesAcc().get(pcGameProvider));
+        }
+
+        lobby.addPlayer(player);
+        requestModel.getPlayers().add(player);
+
+    }
+
 
     @Override
     protected void cancelRequest(){
-        final String uid = app.getUserInformation().getUID();
 
-        requestRef.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                Iterable<DataSnapshot> shots = dataSnapshot.getChildren();
-
-                for(DataSnapshot snapshot : shots)
-                {
-                    if(snapshot.child("uid").getValue(String.class).equals(uid)){
-                        snapshot.getRef().setValue(null);
-                        break;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        app.getDatabaseUsersInfo().child(uid+"/"+FIREBASE_USER_REQUESTS_ATTR).removeValue();
-        app.getDatabaseUsersInfo().child(uid+"/"+FIREBASE_USER_PUBLIC_CHAT+"/"+requestModel.getRequestId()).removeValue();
-        app.switchMainAppMenuFragment(new NewRequestFragmentCore());
+        app.cancelRequest();
         removeListener();
-
 
     }
 

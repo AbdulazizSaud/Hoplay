@@ -280,8 +280,10 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
                 RequestModelRefrance requestModelRefrance = dataSnapshot.getValue(RequestModelRefrance.class);
 
-                if(dataSnapshot.getValue() !=null)
-                menuPagerAdapter.setParentRequestFragments(new LobbyFragmentCore(requestModelRefrance));
+                if(dataSnapshot.getValue() !=null) {
+                    app.setRequestModel(requestModelRefrance);
+                    menuPagerAdapter.setParentRequestFragments(new LobbyFragmentCore(requestModelRefrance));
+                }
                 else
                     menuPagerAdapter.setParentRequestFragments(new NewRequestFragmentCore());
 

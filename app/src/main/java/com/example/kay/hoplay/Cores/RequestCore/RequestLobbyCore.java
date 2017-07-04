@@ -34,16 +34,28 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
             try {
 
-                PlayerModel player = new PlayerModel(dataSnapshot.child("uid").getValue(String.class),  dataSnapshot.child("username").getValue(String.class));
+                PlayerModel player = new PlayerModel(dataSnapshot.child("uid").getValue(String.class), dataSnapshot.child("username").getValue(String.class));
 
-                if(player.getUID().equals(app.getUserInformation().getUID()))
-                    lobby.getJoinButton().setVisibility(View.INVISIBLE);
+                final String uid = dataSnapshot.child("uid").getValue(String.class);
+                final String username = dataSnapshot.child("username").getValue(String.class);
 
-                lobby.addPlayer(player);
-                requestModel.getPlayers().add(player);
 
-            }catch (NullPointerException e)
-            {
+                app.getDatabaseUsersInfo().child(uid+"/"+FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                       String picture = dataSnapshot.child(FIREBASE_PICTURE_URL_ATTR).getValue(String.class);
+
+                        addPlayerToList(uid,username,picture);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+            } catch (NullPointerException e) {
+                Log.i("---->",e.getMessage());
                 return;
             }
 
@@ -74,6 +86,42 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
         }
     };
+
+
+
+    private void addPlayerToList(String playerUID , String playerUsername ,String picture)
+    {
+        PlayerModel player = new PlayerModel(playerUID,playerUsername);
+
+        player.setProfilePicture(picture);
+
+
+        if (player.getUID().equals(app.getUserInformation().getUID()))
+            lobby.getJoinButton().setVisibility(View.INVISIBLE);
+
+
+        if (requestModel.getPlatform().equalsIgnoreCase("PS"))
+        {
+
+            player.setGamePovider("PSN Account");
+            player.setGameProviderAcc(app.getUserInformation().getPSNAcc());
+        }
+        else if (requestModel.getPlatform().equalsIgnoreCase("XBOX"))
+        {
+            player.setGamePovider("XBOX Account");
+            player.setGameProviderAcc(app.getUserInformation().getXboxLiveAcc());
+        }
+        else{
+            String pcGameProvider = app.getGameManager().getPcGamesWithProviders().get(requestModel.getGameId().trim());
+
+            player.setGamePovider(pcGameProvider);
+            player.setGameProviderAcc(app.getUserInformation().getPcGamesAcc().get(pcGameProvider));
+        }
+
+        lobby.addPlayer(player);
+        requestModel.getPlayers().add(player);
+
+    }
 
     private ValueEventListener getAdminInfo = new ValueEventListener() {
         @Override
@@ -134,6 +182,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
     @Override
     protected void joinToRequest() {
+        app.cancelRequest();
 
         if(lobby.isExsist(app.getUserInformation().getUID()))
             return;
@@ -159,6 +208,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
                 requestModel.getRegion());
 
         app.switchMainAppMenuFragment(new LobbyFragmentCore(request.getRequestModelRefrance()));
+        app.setRequestModel(request.getRequestModelRefrance());
 
         jumpToLobbyChat(requestModel,FIREBASE_PUBLIC_ATTR);
     }
