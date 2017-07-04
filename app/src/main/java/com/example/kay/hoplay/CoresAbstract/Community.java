@@ -1,7 +1,11 @@
 package com.example.kay.hoplay.CoresAbstract;
 
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -12,12 +16,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.Cores.ChatCore.FindUserCore;
+import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
+import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.CommunityChatModel;
 
@@ -154,7 +164,7 @@ public abstract class Community extends Fragment {
                 holder.getView().setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
-                        removeChatFromlist(model);
+                        showOnLongClickDialog(model);
                         return false;
                     }
                 });
@@ -220,5 +230,59 @@ public void onDestroy() {
 
     Log.i("Destroy" , "BYEBYE ");
 }
+
+
+    protected void showOnLongClickDialog(final CommunityChatModel communityChatModel) {
+
+        final Dialog onLongClickGameDialog;
+        onLongClickGameDialog = new Dialog(getContext());
+        onLongClickGameDialog.setContentView(R.layout.chat_long_click_pop_up);
+        onLongClickGameDialog.show();
+
+
+        onLongClickGameDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView verificationDeleteText;
+        Button deleteYesButton , deleteNoButton;
+
+        deleteYesButton = ( Button) onLongClickGameDialog.findViewById(R.id.delete_chat_yes_button);
+        deleteNoButton = ( Button) onLongClickGameDialog.findViewById(R.id.delete_chat_no_button);
+
+        Typeface sansation = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
+        deleteYesButton.setTypeface(sansation);
+        deleteNoButton.setTypeface(sansation);
+
+
+
+        // Delete chat
+        deleteYesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeChatFromlist(communityChatModel);
+                onLongClickGameDialog.dismiss();
+            }
+        });
+
+
+        // Remove Dialog
+        deleteNoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onLongClickGameDialog.dismiss();
+            }
+        });
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = onLongClickGameDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+    }
+
+
 }
 

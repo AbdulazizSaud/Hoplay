@@ -222,7 +222,7 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
 
 
 
-    protected void showSavedRequestDialog(final RequestModel requestModel , View view,final int index)
+       protected void showSavedRequestDialog(final RequestModel requestModel , View view,final int index)
     {
 
 
@@ -253,7 +253,7 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
             public void onClick(View v) {
 
                 addRequestToFirebase(
-                     requestModel.getPlatform(),
+                        requestModel.getPlatform(),
                         requestModel.getRequestTitle(),
                         requestModel.getMatchType(),
                         requestModel.getRegion(),

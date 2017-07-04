@@ -312,7 +312,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 //                }
 
                 boolean userAvailable = !checkingUsername && currenCheckingStatus == USER_NOT_EXIST;
-                boolean validated = usernameValidation() && emailValidtion() && passwordValidation();
+                boolean validated = usernameValidation() && emailValidtion() && passwordValidation() && confirmPasswordvalidation();
 
                 if(validated && userAvailable)
                     signUp(email,username,password,nickname);
@@ -352,6 +352,22 @@ public abstract class Signup extends AppCompatActivity implements Constants {
             }
         }));
 
+        confirmPasswordEdititext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                confirmPasswordvalidation();
+            }
+        });
 
         emailSignUp.addTextChangedListener(new TextWatcher() {
             @Override
@@ -430,6 +446,21 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 
         return true;
     }
+
+    //CHECK CONFIRM PASSWORD
+    protected  Boolean confirmPasswordvalidation(){
+
+        String confirmPassword = confirmPasswordEdititext.getText().toString().trim();
+        if (!confirmPassword.equals(passwordSignUp.getText().toString().trim()))
+        {
+            confirmPasswordEdititext.setError(getString(R.string.error_confirm_password));
+            return false;
+        }
+
+
+        return true;
+    }
+
 
     // CHECK EMAIL
     protected Boolean emailValidtion() {
