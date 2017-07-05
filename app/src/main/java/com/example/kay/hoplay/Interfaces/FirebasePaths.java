@@ -84,9 +84,16 @@ public interface FirebasePaths {
     public static final String FIREBASE_RECENT_GAME_ATTR = "_recent_played_";
     public static final String FIREBASE_USER_REQUESTS_ATTR = "_requests_refs_";
 
-    public static final String FIREBASE_USER_PC_GAME_PROVIDER = FIREBASE_DETAILS_ATTR+"/PC_game_providers";
-    public static final String FIREBASE_USER_PS_GAME_PROVIDER = FIREBASE_DETAILS_ATTR+"/PSN_account";
-    public static final String FIREBASE_USER_XBOX_GAME_PROVIDER = FIREBASE_DETAILS_ATTR+"/XBOX_live_account";
+
+
+
+    public static final String FIREBASE_USER_PC_GAME_PROVIDER_ATTR = "PC_game_providers";
+    public static final String FIREBASE_USER_PS_GAME_PROVIDER_ATTR = "PSN_account";
+    public static final String FIREBASE_USER_XBOX_GAME_PROVIDER_ATTR ="XBOX_live_account";
+
+    public static final String FIREBASE_USER_PC_GAME_PROVIDER = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_USER_PC_GAME_PROVIDER_ATTR;
+    public static final String FIREBASE_USER_PS_GAME_PROVIDER = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_USER_PS_GAME_PROVIDER_ATTR;
+    public static final String FIREBASE_USER_XBOX_GAME_PROVIDER = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_USER_XBOX_GAME_PROVIDER_ATTR;
 
 
     public static final String FIREBASE_USERNAME_PATH = FIREBASE_DETAILS_ATTR+"/"+FIREBASE_USERNAME_ATTR;

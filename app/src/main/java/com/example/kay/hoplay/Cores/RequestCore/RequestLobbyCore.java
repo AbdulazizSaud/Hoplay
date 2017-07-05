@@ -147,7 +147,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         requestModel = app.getRequestModelResult(requstId);
         gameModel =  app.getGameManager().getGameById(requestModel.getGameId());
 
-        String path = requestModel.getPlatform()+"/"+requestModel.getGameId()+"/"+requestModel.getRegion()+"/"
+        String path = requestModel.getPlatform().toUpperCase()+"/"+requestModel.getGameId()+"/"+requestModel.getRegion()+"/"
                 +requestModel.getRequestId();
 
         requestRef = app.getDatabaseRequests().child(path);

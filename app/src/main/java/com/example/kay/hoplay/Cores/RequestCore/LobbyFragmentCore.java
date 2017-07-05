@@ -51,7 +51,37 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         String picture = dataSnapshot.child(FIREBASE_PICTURE_URL_ATTR).getValue(String.class);
 
-                        addPlayerToList(uid,username,picture);
+                        PlayerModel player = new PlayerModel(uid,username);
+
+                        player.setProfilePicture(picture);
+
+
+                        if (player.getUID().equals(app.getUserInformation().getUID()))
+                            lobby.getJoinButton().setVisibility(View.INVISIBLE);
+
+
+                        if (requestModelRefrance.getPlatform().equalsIgnoreCase("PS"))
+                        {
+
+                            player.setGamePovider("PSN Account");
+                            player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PS_GAME_PROVIDER_ATTR).getValue(String.class));
+                        }
+                        else if (requestModelRefrance.getPlatform().equalsIgnoreCase("XBOX"))
+                        {
+                            player.setGamePovider("XBOX Account");
+                            player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_XBOX_GAME_PROVIDER_ATTR).getValue(String.class));
+                        }
+                        else{
+                            String pcGameProvider = app.getGameManager().getPcGamesWithProviders().get(requestModelRefrance.getGameId().trim());
+
+                            player.setGamePovider(pcGameProvider);
+                            if(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR+"/"+pcGameProvider).getValue() !=null)
+                            player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR+"/"+pcGameProvider).getValue(String.class));
+                        }
+
+                        lobby.addPlayer(player);
+                        requestModel.getPlayers().add(player);
+
                     }
 
                     @Override
@@ -178,40 +208,6 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
 
 
 
-
-    private void addPlayerToList(String playerUID , String playerUsername ,String picture)
-    {
-        PlayerModel player = new PlayerModel(playerUID,playerUsername);
-
-        player.setProfilePicture(picture);
-
-
-        if (player.getUID().equals(app.getUserInformation().getUID()))
-            lobby.getJoinButton().setVisibility(View.INVISIBLE);
-
-
-        if (requestModel.getPlatform().equalsIgnoreCase("PS"))
-        {
-
-            player.setGamePovider("PSN Account");
-            player.setGameProviderAcc(app.getUserInformation().getPSNAcc());
-        }
-        else if (requestModel.getPlatform().equalsIgnoreCase("XBOX"))
-        {
-            player.setGamePovider("XBOX Account");
-            player.setGameProviderAcc(app.getUserInformation().getXboxLiveAcc());
-        }
-        else{
-            String pcGameProvider = app.getGameManager().getPcGamesWithProviders().get(requestModel.getGameId().trim());
-
-            player.setGamePovider(pcGameProvider);
-            player.setGameProviderAcc(app.getUserInformation().getPcGamesAcc().get(pcGameProvider));
-        }
-
-        lobby.addPlayer(player);
-        requestModel.getPlayers().add(player);
-
-    }
 
 
     @Override
