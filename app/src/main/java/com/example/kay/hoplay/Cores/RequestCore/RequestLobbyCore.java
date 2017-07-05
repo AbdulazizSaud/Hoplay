@@ -182,7 +182,6 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
     @Override
     protected void joinToRequest() {
-        app.cancelRequest();
 
         if(lobby.isExsist(app.getUserInformation().getUID()))
             return;

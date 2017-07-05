@@ -303,7 +303,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
 
     private boolean isInfoValid(DataSnapshot dataSnapshot) {
-        return dataSnapshot.hasChild(FIREBASE_USERNAME_PATH) && dataSnapshot.hasChild(FIREBASE_ACCOUNT_TYPE_PATH) && dataSnapshot.hasChild(FIREBASE_PICTURE_URL_PATH);
+        return dataSnapshot.hasChild(FIREBASE_USERNAME_PATH) &&  dataSnapshot.hasChild(FIREBASE_PICTURE_URL_PATH);
     }
 
 

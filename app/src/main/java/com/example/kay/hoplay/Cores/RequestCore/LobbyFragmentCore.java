@@ -91,11 +91,14 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
 
         }
     };
+
+
     private ValueEventListener onLoadLobbyInformation = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-            requestModel = dataSnapshot.getValue(RequestModel.class);
 
+
+            requestModel = dataSnapshot.getValue(RequestModel.class);
 
             gameModel =  app.getGameManager().getGameById(requestModel.getGameId());
 
@@ -140,7 +143,7 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
         if (requestModelRefrance == null)
             return;
 
-        String path = requestModelRefrance.getPlatform() + "/"
+        String path = requestModelRefrance.getPlatform().toUpperCase() + "/"
                 + requestModelRefrance.getGameId() + "/"
                 + requestModelRefrance.getRegion() + "/"
                 + requestModelRefrance.getRequestId();
