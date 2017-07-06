@@ -11,13 +11,17 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
@@ -82,9 +86,16 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
         newRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity().getApplicationContext(), NewRequestCore.class);
-                startActivity(i);
-                getActivity().overridePendingTransition( R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
+
+                // check if the user has any game
+                if(app.getGameManager().getUserGamesNumber()<1){
+                    showNoGameDialog();
+                }else{
+                    Intent i = new Intent(getActivity().getApplicationContext(), NewRequestCore.class);
+                    startActivity(i);
+                    getActivity().overridePendingTransition( R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
+                }
+
             }
         });
 
@@ -314,6 +325,56 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
 
     protected abstract void deleteSavedRequest(RequestModel model);
     protected abstract void OnClickHolders(RequestModel model, View v,int position);
+
+
+    private void showNoGameDialog(){
+
+
+      Dialog   noGameDialog = new Dialog(getContext());
+        noGameDialog.setContentView(R.layout.activity_no_game_pop_up);
+        noGameDialog.show();
+
+
+        noGameDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView noGameText;
+        Button addGameButton;
+
+
+
+
+        noGameText = (TextView) noGameDialog.findViewById(R.id.popup_message_textview);
+        addGameButton = (Button) noGameDialog.findViewById(R.id.add_game_button_no_game_popup);
+
+
+
+
+        Typeface sansation = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
+        addGameButton.setTypeface(sansation);
+
+        final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
+        final Typeface playReg = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
+
+        noGameText.setTypeface(playReg);
+
+        addGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity().getApplicationContext(), AddGameCore.class);
+                startActivity(i);
+                getActivity().overridePendingTransition( R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
+            }
+        });
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = noGameDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+    }
 
     protected abstract void OnStartActivity();
 }

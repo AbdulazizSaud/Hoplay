@@ -248,30 +248,37 @@ public abstract class  EditRequest extends AppCompatActivity {
             xboxRadiobutton.setChecked(true);
         }
 
-        // fill Game field
-        gamesAutoCompleteTextView.setText(app.getGameManager().getGameById(requestModel.getGameId()).getGameName());
-
-        // fill match type spinner
-        if (requestModel.getMatchType().equalsIgnoreCase("Competitive"))
-        {
-            matchTypeSpinner.setText("Competitive");
-        }
-        else {
-            matchTypeSpinner.setText("Quick Match");
-        }
-
-        // fill country
-        countrySpinner.setText(requestModel.getRegion());
 
 
-        // fil players number
-        numberOfPlayersSpinner.setText(String.valueOf(requestModel.getPlayerNumber()));
+       try{
+           // fill Game field
+           gamesAutoCompleteTextView.setText(app.getGameManager().getGameById(requestModel.getGameId()).getGameName());
 
-        // fill rank
-        playersRanksSpinner.setText(requestModel.getRank());
+           // fill match type spinner
+           if (requestModel.getMatchType().equalsIgnoreCase("Competitive"))
+           {
+               matchTypeSpinner.setText("Competitive");
+           }
+           else {
+               matchTypeSpinner.setText("Quick Match");
+           }
 
-        //fill description
-        descriptionEdittext.setText(requestModel.getDescription());
+           // fill country
+           countrySpinner.setText(requestModel.getRegion());
+
+
+           // fil players number
+           numberOfPlayersSpinner.setText(String.valueOf(requestModel.getPlayerNumber()));
+
+           // fill rank
+           playersRanksSpinner.setText(requestModel.getRank());
+
+           //fill description
+           descriptionEdittext.setText(requestModel.getDescription());
+       }catch (Exception e){
+
+       }
+
 
     }
 
@@ -647,6 +654,12 @@ public abstract class  EditRequest extends AppCompatActivity {
             updateRequest(UpdatedRequest);
         }
 
+    }
+
+
+
+    public void goBackToNewRequestFragment(View v){
+        finish();
     }
 
 

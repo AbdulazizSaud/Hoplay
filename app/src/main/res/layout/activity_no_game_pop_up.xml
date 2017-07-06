@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/app_background"
-    tools:context="com.example.kay.hoplay.Activities.NoGamePopUp">
+    android:background="@drawable/pop_up_backgrounds"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp">
+
 
 
     <ImageView
@@ -13,19 +14,21 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_error_outline_64dp"
         android:id="@+id/warning_symbol_imageview"
-        android:layout_marginBottom="20dp"
-        android:layout_above="@+id/popup_message_textview"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+    />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_game_popup_message"
         android:gravity="center"
-        android:layout_marginBottom="20dp"
         android:id="@+id/popup_message_textview"
-        android:layout_above="@+id/add_game_button_no_game_popup"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@id/warning_symbol_imageview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        />
+
 
 
     <Button
@@ -34,9 +37,13 @@
         style="@style/Base.Widget.AppCompat.Button.Colored"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/popup_message_textview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:id="@+id/add_game_button_no_game_popup"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        />
+
+
 
 
 

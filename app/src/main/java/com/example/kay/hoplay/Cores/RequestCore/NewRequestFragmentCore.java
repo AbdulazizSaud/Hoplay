@@ -78,7 +78,6 @@ public class NewRequestFragmentCore extends NewRequestFragment implements Fireba
     @Override
     protected void OnClickHolders(RequestModel model, View v,int position) {
 
-        Toast.makeText(getContext(),model.getGameId()+"",Toast.LENGTH_LONG).show();
         showSavedRequestDialog(model, v,position);
 
     }

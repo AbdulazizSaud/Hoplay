@@ -155,6 +155,9 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
         psRadiobutton.setTypeface(sansationbold);
         xboxRadiobutton = (RadioButton) findViewById(R.id.xbox_choice_radiobutton);
         xboxRadiobutton.setTypeface(sansationbold);
+        pcRadiobutton.setEnabled(true);
+        psRadiobutton.setEnabled(true);
+        xboxRadiobutton.setEnabled(true);
         gamesAutoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.games_autocompletetextview_new_request);
         gamesAutoCompleteTextView.setTypeface(playbold);
 
@@ -223,6 +226,7 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
         matchTypeSpinner.setAdapter(matchTypeAdapter);
 
 
+
     }
 
 
@@ -279,6 +283,47 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
 
 
+                // Disable not supported platforms
+                String gameName = gamesAutoCompleteTextView.getText().toString();
+                String  supportedPlatforms = "";
+                try {
+                supportedPlatforms = app.getGameManager().getGameByName(gameName).getGamePlatforms();
+                if (!supportedPlatforms.contains("PS") && !supportedPlatforms.contains("XBOX"))
+                {
+                    psRadiobutton.setEnabled(false);
+                    xboxRadiobutton.setEnabled(false);
+                    selectedPlatform = "Nothing";
+                }
+                else if(!supportedPlatforms.contains("PS") && !supportedPlatforms.contains("PC")){
+                    pcRadiobutton.setEnabled(false);
+                    psRadiobutton.setEnabled(false);
+                    selectedPlatform = "Nothing";
+                }
+                else if(!supportedPlatforms.contains("PC") && !supportedPlatforms.contains("XBOX")){
+                    pcRadiobutton.setEnabled(false);
+                    xboxRadiobutton.setEnabled(false);
+                    selectedPlatform = "Nothing";
+                }
+                else if (!supportedPlatforms.contains("PS")){
+                    psRadiobutton.setEnabled(false);
+                    selectedPlatform = "Nothing";
+                }
+                else if(!supportedPlatforms.contains("PC"))
+                {
+                    pcRadiobutton.setEnabled(false);
+                    selectedPlatform = "Nothing";
+                }
+                else if (!supportedPlatforms.contains("XBOX")){
+                    xboxRadiobutton.setEnabled(false);
+                    selectedPlatform = "Nothing";
+                }
+
+                }catch (Exception e) {
+
+                }
+
+
+
 
             }
         });
@@ -288,8 +333,41 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-                // Capitalize game name letters
+                // Disable not supported platforms
                 String gameName = gamesAutoCompleteTextView.getText().toString();
+                String  supportedPlatforms = app.getGameManager().getGameByName(gameName).getGamePlatforms();
+                if (!supportedPlatforms.contains("PS") && !supportedPlatforms.contains("XBOX"))
+                {
+                    psRadiobutton.setEnabled(false);
+                    xboxRadiobutton.setEnabled(false);
+                    selectedPlatform = "Nothing";
+                }
+                else if(!supportedPlatforms.contains("PS") && !supportedPlatforms.contains("PC")){
+                    pcRadiobutton.setEnabled(false);
+                    psRadiobutton.setEnabled(false);
+                    selectedPlatform = "Nothing";
+                }
+                else if(!supportedPlatforms.contains("PC") && !supportedPlatforms.contains("XBOX")){
+                    pcRadiobutton.setEnabled(false);
+                    xboxRadiobutton.setEnabled(false);
+                    selectedPlatform = "Nothing";
+                }
+                else if (!supportedPlatforms.contains("PS")){
+                    psRadiobutton.setEnabled(false);
+                    selectedPlatform = "Nothing";
+                }
+                else if(!supportedPlatforms.contains("PC"))
+                {
+                    pcRadiobutton.setEnabled(false);
+                    selectedPlatform = "Nothing";
+                }
+                else if (!supportedPlatforms.contains("XBOX")){
+                    xboxRadiobutton.setEnabled(false);
+                    selectedPlatform = "Nothing";
+                }
+
+
+                // Capitalize game name letters
                 String capitlizedGameName = gameName.substring(0,1).toUpperCase() +  gameName.substring(1);
                 if (gameName.contains(" "))
                 {
@@ -422,9 +500,16 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
             public void afterTextChanged(Editable s) {
                 if (s.toString().equalsIgnoreCase("Competitive")) {
                     matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_competitive_24dp, 0, 0, 0);
+
+                        slideInFromLeft(playersRanksSpinner);
+                        playersRanksSpinner.setVisibility(View.VISIBLE);
+
                 }
                 if (s.toString().equalsIgnoreCase("Quick Match")) {
                     matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_quick_match_24dp, 0, 0, 0);
+                    slideOutToRight(playersRanksSpinner);
+                    playersRanksSpinner.setVisibility(View.GONE);
+
                 }
                 if (s.length() == 0) {
                     matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
