@@ -634,6 +634,7 @@ public abstract class  EditRequest extends AppCompatActivity {
         String selectedPlayersNumber = numberOfPlayersSpinner.getText().toString().trim();
         String selectedRank = playersRanksSpinner.getText().toString().trim();
         String requestDescription = descriptionEdittext.getText().toString().trim();
+        String chosenPlatform = selectedPlatform;
 
 
         if (checkIsValidRequest())
@@ -642,6 +643,7 @@ public abstract class  EditRequest extends AppCompatActivity {
             UpdatedRequest.setMatchType(selectedMatchType);
             UpdatedRequest.setRegion(selectedRegion);
             UpdatedRequest.setRequestTitle(selectedGame);
+            UpdatedRequest.setPlatform(chosenPlatform);
             UpdatedRequest.setRequestPicture(app.getGameManager().getGameByName(selectedGame.trim()).getGamePhotoUrl());
 
 

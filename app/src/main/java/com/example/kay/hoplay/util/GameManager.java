@@ -113,6 +113,17 @@ public class GameManager implements FirebasePaths,Constants{
         return false;
     }
 
+    public  boolean checkIfHasGameById(String gameId){
+
+        GameModel gameModel = null ;
+        gameModel =  getGameById(gameId);
+
+        if (gameModel != null)
+            return true;
+
+        return false;
+    }
+
 
     public  String getGameType(String gameType){
 

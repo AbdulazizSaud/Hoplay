@@ -118,9 +118,7 @@ public abstract class SearchRequests extends Fragment {
                 ArrayList<GameModel> games = app.getGameManager().getAllGamesArrayList();
                 for (GameModel gameModel : games)
                 {
-                    gamesList.add(gameModel.getGameName());
-                    Log.i("done",gameModel.getGameName());
-
+                    gameAdapter.add(gameModel.getGameName());
                 }
             }
         }.start();

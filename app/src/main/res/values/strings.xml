@@ -138,6 +138,7 @@
     <string name="make_request_fragment_new_request">N e w &#160; &#160; R e q u e s t</string>
     <string name="make_request_fragment_saved_request">Saved Requests</string>
     <string name="make_request_fragment_add_game">Add Game</string>
+    <string name="make_request_fragment_do_not_have_game">You do not have this game. Please add it to your library to continue</string>
 
 
     <!--                                Add Game Layout                                                            -->

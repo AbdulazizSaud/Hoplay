@@ -136,7 +136,7 @@ public class AddGameCore extends AddGame implements FirebasePaths {
     }
 
 
-    private void deleteGame(String gameKey, String gameName)
+    private void deleteGame(final String gameKey, String gameName)
     {
         // users_info_ -> user id  -> _games_ -> _favor_games_
         DatabaseReference userGameRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_GAMES_REFERENCES).child(FIREBASE_FAVOR_GAME_ATTR);

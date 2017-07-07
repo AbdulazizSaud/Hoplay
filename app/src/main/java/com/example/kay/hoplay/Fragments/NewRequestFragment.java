@@ -263,15 +263,24 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
             @Override
             public void onClick(View v) {
 
-                addRequestToFirebase(
-                        requestModel.getPlatform(),
-                        requestModel.getRequestTitle(),
-                        requestModel.getMatchType(),
-                        requestModel.getRegion(),
-                        String.valueOf(requestModel.getPlayerNumber()),
-                        requestModel.getRank(),
-                        requestModel.getDescription());
-                savedRequestPopupDialog.cancel();
+                // Check if the user still have the game
+                if (app.getGameManager().checkIfHasGameById(requestModel.getGameId().trim())){
+                    addRequestToFirebase(
+                            requestModel.getPlatform(),
+                            requestModel.getRequestTitle(),
+                            requestModel.getMatchType(),
+                            requestModel.getRegion(),
+                            String.valueOf(requestModel.getPlayerNumber()),
+                            requestModel.getRank(),
+                            requestModel.getDescription());
+                    savedRequestPopupDialog.cancel();
+                }
+                // if not then show a message , to add that game  to game library
+                else
+                {
+                    Toast.makeText(getContext(),getString(R.string.make_request_fragment_do_not_have_game),Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
