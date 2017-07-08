@@ -1,13 +1,24 @@
 package com.example.kay.hoplay.CoresAbstract.RequestAbstracts;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.SpinnerAdapter;
@@ -33,6 +44,13 @@ public abstract class SearchResults extends AppCompatActivity {
     private ArrayAdapter searchPriorityAdapter;
 
     protected App app;
+
+
+
+    // Provider Accounht stuff
+    private String pcGameProvider ="";
+   private  Dialog  gameProviderDialog;
+    private   String selectedPlatform = "" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +141,18 @@ public abstract class SearchResults extends AppCompatActivity {
                 holder.getView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        OnClickHolders(model,v);
+
+                        if (model.getPlatform().equalsIgnoreCase("PS") && !app.getUserInformation().getPSNAcc().equals("")){
+                            OnClickHolders(model,v);
+                        }else if(model.getPlatform().equalsIgnoreCase("XBOX") && !app.getUserInformation().getPSNAcc().equals("")){
+                            OnClickHolders(model,v);
+                        }else if(model.getPlatform().equalsIgnoreCase("PC") && app.getUserInformation().getPcGamesAcc().get(pcGameProvider) !=null){
+                            OnClickHolders(model,v);
+                        }else {
+                            createGameProviderDialog(model);
+                        }
+
+
                     }
                 });
             }
@@ -137,6 +166,129 @@ public abstract class SearchResults extends AppCompatActivity {
     }
 
 
+
+    public void createGameProviderDialog(final RequestModel requestModel)
+    {
+
+       boolean userEnteredGameProviderAcc = false;
+       pcGameProvider ="";
+   gameProviderDialog = new Dialog(this);
+        gameProviderDialog.setCancelable(false);
+        gameProviderDialog.setContentView(R.layout.provider_account_pop_up);
+        gameProviderDialog.show();
+
+
+        gameProviderDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView gameProviderMessage;
+        Button saveInfoButton;
+        String providerAccountType = "";   // Xbox ID , PSN , PC (STEAM , Battlenet..etc)
+        final EditText gameProviderEdittext ;
+
+
+
+        gameProviderEdittext = (EditText) gameProviderDialog.findViewById(R.id.game_provider_account_edittext);
+        gameProviderMessage = (TextView) gameProviderDialog.findViewById(R.id.popup_message_textview_provide_account);
+        saveInfoButton = (Button) gameProviderDialog.findViewById(R.id.save_game_provider_button);
+
+            // get the request platform
+            selectedPlatform = requestModel.getPlatform().trim();
+
+        if (selectedPlatform.equalsIgnoreCase("PS"))
+            providerAccountType = String.format(getResources().getString(R.string.provider_account_message), "PSN");
+        else if (selectedPlatform.equalsIgnoreCase("XBOX"))
+            providerAccountType = String.format(getResources().getString(R.string.provider_account_message), "Xbox Live");
+        else if (selectedPlatform.equalsIgnoreCase("PC"))
+        {
+            pcGameProvider =  app.getGameManager().getGameById(requestModel.getGameId().trim()).getPcGameProvider();
+            providerAccountType = String.format(getResources().getString(R.string.provider_account_message), pcGameProvider);
+        }
+
+
+        gameProviderMessage.setText(providerAccountType);
+
+        Typeface sansation = Typeface.createFromAsset(getAssets() ,"sansationbold.ttf");
+        saveInfoButton.setTypeface(sansation);
+
+        final Typeface playbold = Typeface.createFromAsset(getAssets(), "playbold.ttf");
+        final Typeface playReg = Typeface.createFromAsset(getAssets(), "playregular.ttf");
+        gameProviderMessage.setTypeface(playbold);
+        gameProviderMessage.setTypeface(playbold);
+        gameProviderEdittext.setTypeface(playReg);
+
+
+
+
+        // Changing edittext icon
+        gameProviderEdittext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                gameProviderEdittext.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_mood_focused_24dp, 0);
+                if (s.length() == 0) {
+                    gameProviderEdittext.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_mood_bad_not_focused_24dp, 0);
+                }
+            }
+        });
+
+
+
+        saveInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Check if the user entered the game provider id
+                if (gameProviderEdittext.length() > 0)
+                {
+                    saveGameProviderAccount(pcGameProvider,gameProviderEdittext.getText().toString().trim(),selectedPlatform);
+                    OnClickHolders(requestModel,v);
+                    gameProviderDialog.dismiss();
+
+                }
+                else
+                {
+                    String noGameProviderMsg ="";
+                    if (selectedPlatform.equalsIgnoreCase("PS"))
+                        noGameProviderMsg = String.format(getResources().getString(R.string.new_request_dialog_no_game_provider_error), "PSN");
+                    else if (selectedPlatform.equalsIgnoreCase("XBOX"))
+                        noGameProviderMsg = String.format(getResources().getString(R.string.new_request_dialog_no_game_provider_error), "Xbox Live");
+                    else if (selectedPlatform.equalsIgnoreCase("PC"))
+                    {
+                        String pcGameProvider =  app.getGameManager().getGameById(requestModel.getGameId()).getPcGameProvider();
+                        noGameProviderMsg = String.format(getResources().getString(R.string.new_request_dialog_no_game_provider_error), pcGameProvider);
+                    }
+                    Toast.makeText(getApplicationContext(),noGameProviderMsg, Toast.LENGTH_LONG).show();
+                }
+
+
+
+            }
+        });
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = gameProviderDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+    }
+
+
+
+
+
+    protected abstract void saveGameProviderAccount(String gameProvider,String userGameProviderAcc , String platform );
     protected abstract void OnStartActivity();
     protected abstract void OnClickHolders(RequestModel model, View v);
 

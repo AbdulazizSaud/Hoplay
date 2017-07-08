@@ -349,6 +349,7 @@ public abstract class SearchRequests extends Fragment {
             }
         });
 
+        xboxChoice.setClickable(false);
         xboxChoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -396,7 +397,6 @@ public abstract class SearchRequests extends Fragment {
         Animation animation = AnimationUtils.loadAnimation(getContext(), android.R.anim.slide_out_right);
         viewToAnimate.startAnimation(animation);
     }
-
 
     private void firledsListeners() {
 
@@ -580,9 +580,15 @@ public abstract class SearchRequests extends Fragment {
             public void afterTextChanged(Editable s) {
                 if (s.toString().equalsIgnoreCase("Competitive")) {
                     matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_competitive_24dp, 0, 0, 0);
+
+                    slideInFromLeft(ranksSpinner);
+                    ranksSpinner.setVisibility(View.VISIBLE);
                 }
                 if (s.toString().equalsIgnoreCase("Quick Match")) {
                     matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_quick_match_24dp, 0, 0, 0);
+
+                    slideOutToRight(ranksSpinner);
+                    ranksSpinner.setVisibility(View.GONE);
                 }
                 if (s.length() == 0) {
                     matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
