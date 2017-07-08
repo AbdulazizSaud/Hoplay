@@ -109,6 +109,7 @@ public class UserProfileCore extends UserProfile implements FirebasePaths {
     private void loadRecentActivtiy() {
         DatabaseReference recentGameRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID() + "/" + FIREBASE_RECENT_GAMES_PATH);
 
+
         recentGameRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {

@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,6 +43,7 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
     private ImageView backBtn;
 
     private TextView usernameProfile;
+    private TextView userBioTextView;
     private TextView userGamesTextView;
     private TextView userRatingsTextView;
     private TextView userFriendsTextView;
@@ -49,7 +51,6 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
     private TextView ratingsNumberTextView ;
     private TextView friendsNumberTextView;
     private TextView recentActivitiesTextView;
-    private TextView nicknameTextView;
     protected CircleImageView userPictureCircleImageView;
     protected ImageView profileSettingsImageView;
     private LinearLayout toUserGamesLinearLayout ;
@@ -78,14 +79,27 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
         gamesNumberTextView = (TextView) findViewById(R.id.games_number_profile_textview);
         ratingsNumberTextView = (TextView) findViewById(R.id.ratings_number_profile_textview);
         recentActivitiesTextView = (TextView) findViewById(R.id.recent_activities_textview);
-        nicknameTextView = (TextView) findViewById(R.id.nickname_profile_textView);
         userPictureCircleImageView = (CircleImageView) findViewById(R.id.user_profile_photo_circleimageview);
         profileSettingsImageView = (ImageView) findViewById(R.id.user_profile_settings_imageview);
         toUserGamesLinearLayout = (LinearLayout) findViewById(R.id.games_user_profile_linearlayout);
         toUserFriendsLinearLayout = (LinearLayout) findViewById(R.id.friends_user_profile_linearlayout);
         toUserRatingsLinearLayout = (LinearLayout) findViewById(R.id.ratings_user_profile_linearlayout);
+        userBioTextView = (TextView)  findViewById(R.id.view_user_profile_bio_textView);
 
 
+
+        Typeface playregular = Typeface.createFromAsset(getAssets() ,"playregular.ttf");
+        Typeface playbold = Typeface.createFromAsset(getAssets() ,"playbold.ttf");
+
+        usernameProfile.setTypeface(playbold);
+        friendsNumberTextView.setTypeface(playregular);
+        userFriendsTextView.setTypeface(playregular);
+        userGamesTextView.setTypeface(playregular);
+        userRatingsTextView.setTypeface(playregular);
+        gamesNumberTextView.setTypeface(playregular);
+        ratingsNumberTextView.setTypeface(playregular);
+        recentActivitiesTextView.setTypeface(playregular);
+        userBioTextView.setTypeface(playregular);
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recent_activities_recyclerview);
@@ -136,15 +150,68 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
             public void OnBindHolder(ViewHolders holder, RecentGameModel model , int position)
             {
 
+
+
+
+                Typeface playbold = Typeface.createFromAsset(getAssets(), "playbold.ttf");
+                Typeface playregular = Typeface.createFromAsset(getAssets(), "playregular.ttf");
+
+
+
+
+                // Capitalize game name letters
+                String gameName = model.getGameName();
+                String capitlizedGameName = gameName.substring(0,1).toUpperCase() +  gameName.substring(1);
+                if (gameName.contains(" "))
+                {
+                    // Capitalize game title letters
+                    String cpWord= "";
+                    for (int  i = 0 ; i < capitlizedGameName.length(); i++)
+                    {
+                        if (capitlizedGameName.charAt(i) == 32 && capitlizedGameName.charAt(i+1) != 32)
+                        {
+                            cpWord= capitlizedGameName.substring(i+1,i+2).toUpperCase() + capitlizedGameName.substring(i+2);
+                            capitlizedGameName = capitlizedGameName.replace(capitlizedGameName.charAt(i+1),cpWord.charAt(0));
+                        }
+                    }
+                    holder.setTitle(capitlizedGameName);
+                }else {
+                    holder.setTitle(capitlizedGameName);
+                }
+
                 app.loadingImage(getApplicationContext(),holder,model.getGamePhotoUrl());
 
-                holder.setTitle(model.getGameName());
+
                 holder.setSubtitle(model.getActivityDescription());
                 holder.setTime(model.getActivityDate());
+
+
+                holder.getTitleView().setTypeface(playbold);
+                holder.getSubtitleView().setTypeface(playregular);
+
+
+
+                holder.getPicture().setBorderWidth(6);
+//                 Changing title color depending on the platform
+//                if (model.getReqPlatform().equalsIgnoreCase("PC"))
+//                {holder.getTitleView().setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.pc_color));
+//                    holder.getPicture().setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.pc_color));}
+//                else if (model.getReqPlatform().equalsIgnoreCase("PS"))
+//                {holder.getTitleView().setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.ps_color));
+//                    holder.getPicture().setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.ps_color));}
+//                else
+//                {holder.getTitleView().setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.xbox_color));
+//                    holder.getPicture().setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.xbox_color));}
+
+
             }
         };
     }
 
+
+    protected void setBio(String bio){
+        this.userBioTextView.setText(bio);
+    }
 
 
     public void addRecentGame(String gameID, String gameName , String gamePhoto ,String platform, String activityDescription , String activityDate)
@@ -164,7 +231,7 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
         friendsNumberTextView.setText(number);
     }
 
-    protected void setNicknameTextView( String name) {nicknameTextView.setText(name);}
+
     protected void setUsernameProfile(String name){usernameProfile.setText(name);}
 
 

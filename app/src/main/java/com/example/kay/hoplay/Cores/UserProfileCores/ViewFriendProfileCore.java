@@ -1,6 +1,7 @@
 package com.example.kay.hoplay.Cores.UserProfileCores;
 
 import android.content.Intent;
+import android.util.Log;
 
 import com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.ViewFriendProfile;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
@@ -23,7 +24,7 @@ public class ViewFriendProfileCore extends ViewFriendProfile  implements Firebas
         friendUsername = i.getStringExtra("user_name");
         friendPicture = i.getStringExtra("user_picture");
 
-        setNicknameTextView(friendUsername);
+
         setUsernameProfile(friendUsername);
 
         loadFriendData(friendKey);
@@ -80,7 +81,7 @@ public class ViewFriendProfileCore extends ViewFriendProfile  implements Firebas
                 }
                 app.loadingImage(userPictureCircleImageView,pictureUrl);
                 setUsernameProfile("@"+username);
-                setNicknameTextView(nickname);
+
             }
 
             @Override
@@ -95,8 +96,10 @@ public class ViewFriendProfileCore extends ViewFriendProfile  implements Firebas
 
     private void loadRecentActivtiy(String friendKey) {
         DatabaseReference recentGameRef = app.getDatabaseUsersInfo().child(friendKey + "/" + FIREBASE_RECENT_GAMES_PATH);
+        DatabaseReference bioRef =  app.getDatabaseUsersInfo().child(friendKey).child(FIREBASE_DETAILS_ATTR).child(FIREBASE_BIO_ATTR);
 
-        recentGameRef.addChildEventListener(new ChildEventListener() {
+
+                recentGameRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 final String gameType = dataSnapshot.child("game_type").getValue(String.class);
@@ -136,6 +139,22 @@ public class ViewFriendProfileCore extends ViewFriendProfile  implements Firebas
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        bioRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                   String bio =  dataSnapshot.getValue(String.class);
+                if (bio!=null)
+                    setBio(bio);
 
             }
 

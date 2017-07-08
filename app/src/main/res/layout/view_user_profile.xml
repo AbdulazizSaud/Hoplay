@@ -23,7 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".CoresAbstract.ProfileAbstracts.UserProfile"
-        android:background="@color/app_background">
+        android:background="@color/app_background"
+
+        >
 
         <!-- TODO: Update blank fragment layout -->
 
@@ -45,6 +47,7 @@
         <include layout="@layout/view_friend_user_profile_details"
                  android:layout_height="wrap_content"
                  android:layout_width="match_parent"
+
             android:id="@+id/user_games_friends_ratings_bar"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -68,6 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/include"
+
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"/>
