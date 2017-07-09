@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 
-import com.example.kay.hoplay.util.CreateChat;
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.RequestLobby;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
@@ -34,7 +33,6 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
             try {
 
-                PlayerModel player = new PlayerModel(dataSnapshot.child("uid").getValue(String.class), dataSnapshot.child("username").getValue(String.class));
 
                 final String uid = dataSnapshot.child("uid").getValue(String.class);
                 final String username = dataSnapshot.child("username").getValue(String.class);
@@ -43,9 +41,39 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
                 app.getDatabaseUsersInfo().child(uid+"/"+FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                       String picture = dataSnapshot.child(FIREBASE_PICTURE_URL_ATTR).getValue(String.class);
+                        String picture = dataSnapshot.child(FIREBASE_PICTURE_URL_ATTR).getValue(String.class);
 
-                        addPlayerToList(uid,username,picture);
+                        PlayerModel player = new PlayerModel(uid,username);
+
+                        player.setProfilePicture(picture);
+
+
+                        if (player.getUID().equals(app.getUserInformation().getUID()))
+                            lobby.getJoinButton().setVisibility(View.INVISIBLE);
+
+
+                        if (requestModel.getPlatform().equalsIgnoreCase("PS"))
+                        {
+
+                            player.setGamePovider("PSN Account");
+                            player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PS_GAME_PROVIDER_ATTR).getValue(String.class));
+                        }
+                        else if (requestModel.getPlatform().equalsIgnoreCase("XBOX"))
+                        {
+                            player.setGamePovider("XBOX Account");
+                            player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_XBOX_GAME_PROVIDER_ATTR).getValue(String.class));
+                        }
+                        else{
+                            String pcGameProvider = app.getGameManager().getPcGamesWithProviders().get(requestModel.getGameId().trim());
+
+                            player.setGamePovider(pcGameProvider);
+                            if(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR+"/"+pcGameProvider).getValue() !=null)
+                                player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR+"/"+pcGameProvider).getValue(String.class));
+                        }
+
+                        lobby.addPlayer(player);
+                        requestModel.addPlayer(player);
+
                     }
 
                     @Override
@@ -59,7 +87,6 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
                 return;
             }
 
-
         }
 
         @Override
@@ -70,9 +97,9 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         @Override
         public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-            PlayerModel player = new PlayerModel(dataSnapshot.child("uid").getValue(String.class),  dataSnapshot.child("username").getValue(String.class));
+            PlayerModel player = new PlayerModel(dataSnapshot.child("uid").getValue(String.class), dataSnapshot.child("username").getValue(String.class));
 
-            if(player.getUID().equals(app.getUserInformation().getUID()))
+            if (player.getUID().equals(app.getUserInformation().getUID()))
                 lobby.getJoinButton().setVisibility(View.VISIBLE);
         }
 
@@ -88,40 +115,6 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
     };
 
 
-
-    private void addPlayerToList(String playerUID , String playerUsername ,String picture)
-    {
-        PlayerModel player = new PlayerModel(playerUID,playerUsername);
-
-        player.setProfilePicture(picture);
-
-
-        if (player.getUID().equals(app.getUserInformation().getUID()))
-            lobby.getJoinButton().setVisibility(View.INVISIBLE);
-
-
-        if (requestModel.getPlatform().equalsIgnoreCase("PS"))
-        {
-
-            player.setGamePovider("PSN Account");
-            player.setGameProviderAcc(app.getUserInformation().getPSNAcc());
-        }
-        else if (requestModel.getPlatform().equalsIgnoreCase("XBOX"))
-        {
-            player.setGamePovider("XBOX Account");
-            player.setGameProviderAcc(app.getUserInformation().getXboxLiveAcc());
-        }
-        else{
-            String pcGameProvider = app.getGameManager().getPcGamesWithProviders().get(requestModel.getGameId().trim());
-
-            player.setGamePovider(pcGameProvider);
-            player.setGameProviderAcc(app.getUserInformation().getPcGamesAcc().get(pcGameProvider));
-        }
-
-        lobby.addPlayer(player);
-        requestModel.getPlayers().add(player);
-
-    }
 
     private ValueEventListener getAdminInfo = new ValueEventListener() {
         @Override
@@ -186,30 +179,47 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         if(lobby.isExsist(app.getUserInformation().getUID()))
             return;
 
-        String uid =  app.getUserInformation().getUID();
-        String reqId = requestModel.getRequestId();
 
-        GameModel gameModel = app.getGameManager().getGameById(requestModel.getGameId());
 
-        PlayerModel player = new PlayerModel(uid, app.getUserInformation().getUsername());
-        requestModel.addPlayer(player);
+        if(app.getMainAppMenuCore().getRequestModelRef() !=null)
+            app.getMainAppMenuCore().cancelRequest();
 
-        requestRef.child("players").setValue(requestModel.getPlayers());
+        CallbackHandlerCondition callbackHandlerCondition = new CallbackHandlerCondition() {
+            @Override
+            public boolean callBack() {
 
-        Request request = new Request();
-        request.setUserReference(
-                app.getDatabaseUsersInfo().child(uid),
-                reqId,
-                requestModel.getMatchType(),
-                gameModel.getGameID(),
-                gameModel.getGameType(),
-                requestModel.getPlatform(),
-                requestModel.getRegion());
 
-        app.switchMainAppMenuFragment(new LobbyFragmentCore(request.getRequestModelRefrance()));
-        app.setRequestModel(request.getRequestModelRefrance());
+                String uid =  app.getUserInformation().getUID();
+                String reqId = requestModel.getRequestId();
 
-        jumpToLobbyChat(requestModel,FIREBASE_PUBLIC_ATTR);
+                GameModel gameModel = app.getGameManager().getGameById(requestModel.getGameId());
+
+                PlayerModel player = new PlayerModel(uid, app.getUserInformation().getUsername());
+                requestModel.addPlayer(player);
+
+                requestRef.child("players").setValue(requestModel.getPlayers());
+
+                Request request = new Request();
+                request.setUserReference(
+                        app.getDatabaseUsersInfo().child(uid),
+                        reqId,
+                        requestModel.getMatchType(),
+                        gameModel.getGameID(),
+                        gameModel.getGameType(),
+                        requestModel.getPlatform(),
+                        requestModel.getRegion());
+
+
+                app.switchMainAppMenuFragment(new LobbyFragmentCore(request.getRequestModelReference()));
+                jumpToLobbyChat(requestModel,FIREBASE_PUBLIC_ATTR);
+
+                return true;
+            }
+        };
+
+        HandlerCondition handlerCondition = new HandlerCondition(callbackHandlerCondition,1000);
+
+
     }
 
 

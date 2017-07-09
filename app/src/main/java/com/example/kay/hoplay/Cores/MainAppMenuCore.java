@@ -12,8 +12,7 @@ import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.Rank;
 import com.example.kay.hoplay.Models.RequestModel;
-import com.example.kay.hoplay.Models.RequestModelRefrance;
-import com.example.kay.hoplay.Models.UserInformation;
+import com.example.kay.hoplay.Models.RequestModelReference;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -24,8 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 
 public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
@@ -33,6 +30,8 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
 
+
+    private RequestModelReference requestModelRef;
 
 
     @Override
@@ -278,11 +277,13 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                 long numberOfReqs = dataSnapshot.getChildrenCount();
 
 
-                RequestModelRefrance requestModelRefrance = dataSnapshot.getValue(RequestModelRefrance.class);
+
+                if(dataSnapshot.getValue() !=null)
+                setRequestModelRef(dataSnapshot.getValue(RequestModelReference.class));
 
                 if(dataSnapshot.getValue() !=null) {
-                    app.setRequestModel(requestModelRefrance);
-                    menuPagerAdapter.setParentRequestFragments(new LobbyFragmentCore(requestModelRefrance));
+
+                    menuPagerAdapter.setParentRequestFragments(new LobbyFragmentCore(requestModelRef));
                 }
                 else
                     menuPagerAdapter.setParentRequestFragments(new NewRequestFragmentCore());
@@ -308,5 +309,48 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
 
 
+    public void cancelRequest() {
+        final String uid = app.getUserInformation().getUID();
 
+
+        String path = requestModelRef.getPlatform() + "/"
+                + requestModelRef.getGameId() + "/"
+                + requestModelRef.getRegion() + "/"
+                + requestModelRef.getRequestId();
+
+        DatabaseReference requestRef = app.getDatabaseRequests().child(path);
+
+        requestRef.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Iterable<DataSnapshot> shots = dataSnapshot.getChildren();
+
+                for (DataSnapshot snapshot : shots) {
+                    if (snapshot.child("uid").getValue(String.class).equals(uid)) {
+                        snapshot.getRef().setValue(null);
+                        setRequestModelRef(requestModelRef);
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        app.getDatabaseUsersInfo().child(uid + "/" + FIREBASE_USER_REQUESTS_ATTR).removeValue();
+        app.getDatabaseUsersInfo().child(uid + "/" + FIREBASE_USER_PUBLIC_CHAT + "/" + requestModelRef.getRequestId()).removeValue();
+        app.switchMainAppMenuFragment(new NewRequestFragmentCore());
+    }
+
+
+    public RequestModelReference getRequestModelRef() {
+        return requestModelRef;
+    }
+
+    public void setRequestModelRef(RequestModelReference requestModelRef) {
+        this.requestModelRef = requestModelRef;
+    }
 }

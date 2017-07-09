@@ -128,26 +128,23 @@ public class Lobby {
     }
 
 
-    public void addPlayers(ArrayList<PlayerModel> players) {
+    public void removePlayer(PlayerModel playerModel) {
 
-        for (PlayerModel playerModel : players) {
-            if (!isExsist(playerModel.getUID())) {
-                playerModels.add(playerModel);
-                playerModelsHashMap.put(playerModel.getUID(), playerModel);
-            }
+        if (!isExsist(playerModel.getUID())) {
+            return;
         }
+
+        playerModels.remove(playerModel);
+        playerModelsHashMap.remove(playerModel);
         mAdapter.notifyDataSetChanged();
 
     }
 
 
-    public boolean isExsist(String uid) {
-        for (PlayerModel playerModel : playerModels) {
-            if (uid.equals(playerModel.getUID()))
-                return true;
-        }
 
-        return false;
+
+    public boolean isExsist(String uid) {
+        return playerModelsHashMap.containsKey(uid);
     }
 
     private CommonAdapter<PlayerModel> createAdapter() {

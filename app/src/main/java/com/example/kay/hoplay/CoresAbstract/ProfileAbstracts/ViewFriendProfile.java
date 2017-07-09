@@ -14,6 +14,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -193,15 +194,15 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
 
                 holder.getPicture().setBorderWidth(6);
 //                 Changing title color depending on the platform
-//                if (model.getReqPlatform().equalsIgnoreCase("PC"))
-//                {holder.getTitleView().setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.pc_color));
-//                    holder.getPicture().setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.pc_color));}
-//                else if (model.getReqPlatform().equalsIgnoreCase("PS"))
-//                {holder.getTitleView().setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.ps_color));
-//                    holder.getPicture().setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.ps_color));}
-//                else
-//                {holder.getTitleView().setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.xbox_color));
-//                    holder.getPicture().setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.xbox_color));}
+                if (model.getGamePlatforms().equalsIgnoreCase("PC"))
+                {holder.getTitleView().setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.pc_color));
+                    holder.getPicture().setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.pc_color));}
+                else if (model.getGamePlatforms().equalsIgnoreCase("PS"))
+                {holder.getTitleView().setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.ps_color));
+                    holder.getPicture().setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.ps_color));}
+                else
+                {holder.getTitleView().setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.xbox_color));
+                    holder.getPicture().setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.xbox_color));}
 
 
             }

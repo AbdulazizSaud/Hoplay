@@ -1,34 +1,15 @@
 package com.example.kay.hoplay.Cores.RequestCore;
 
-import android.app.Dialog;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
 import com.example.kay.hoplay.Fragments.NewRequestFragment;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.RequestModel;
-import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.util.Request;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
-
-import java.io.Serializable;
-import java.util.ArrayList;
 
 
 public class NewRequestFragmentCore extends NewRequestFragment implements FirebasePaths {
@@ -87,7 +68,7 @@ public class NewRequestFragmentCore extends NewRequestFragment implements Fireba
     protected void addRequestToFirebase(String platform, String gameName, String matchType, String region, String numberOfPlayers, String rank, String description) {
 
         Request request = new Request(platform,gameName,matchType,region,numberOfPlayers,rank,description);
-        app.switchMainAppMenuFragment(new LobbyFragmentCore(request.getRequestModelRefrance()));
+        app.switchMainAppMenuFragment(new LobbyFragmentCore(request.getRequestModelReference()));
     }
 
     @Override

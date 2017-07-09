@@ -2,26 +2,21 @@ package com.example.kay.hoplay.Cores.RequestCore;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Fragments.LobbyFragment;
 import com.example.kay.hoplay.Interfaces.Constants;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.Models.RequestModel;
-import com.example.kay.hoplay.Models.RequestModelRefrance;
+import com.example.kay.hoplay.Models.RequestModelReference;
 import com.example.kay.hoplay.Services.CallbackHandlerCondition;
 import com.example.kay.hoplay.Services.HandlerCondition;
-import com.example.kay.hoplay.util.GameManager;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 
 public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Constants {
@@ -32,15 +27,13 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
     private String adminPicture, adminUser;
     private boolean isDone = false;
     private DatabaseReference requestRef;
-    private RequestModelRefrance requestModelRefrance;
+    private RequestModelReference requestModelRefrance;
 
 
     private ChildEventListener onAddPlayerEvent = new ChildEventListener() {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
             try {
-
-                PlayerModel player = new PlayerModel(dataSnapshot.child("uid").getValue(String.class), dataSnapshot.child("username").getValue(String.class));
 
                 final String uid = dataSnapshot.child("uid").getValue(String.class);
                 final String username = dataSnapshot.child("username").getValue(String.class);
@@ -62,7 +55,6 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
 
                         if (requestModelRefrance.getPlatform().equalsIgnoreCase("PS"))
                         {
-
                             player.setGamePovider("PSN Account");
                             player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PS_GAME_PROVIDER_ATTR).getValue(String.class));
                         }
@@ -80,7 +72,7 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
                         }
 
                         lobby.addPlayer(player);
-                        requestModel.getPlayers().add(player);
+                        requestModel.addPlayer(player);
 
                     }
 
@@ -106,9 +98,8 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
         public void onChildRemoved(DataSnapshot dataSnapshot) {
 
             PlayerModel player = new PlayerModel(dataSnapshot.child("uid").getValue(String.class), dataSnapshot.child("username").getValue(String.class));
-
-            if (player.getUID().equals(app.getUserInformation().getUID()))
-                lobby.getJoinButton().setVisibility(View.VISIBLE);
+            requestModel.removePlayer(player);
+            lobby.removePlayer(player);
         }
 
         @Override
@@ -130,14 +121,12 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
 
             requestModel = dataSnapshot.getValue(RequestModel.class);
 
+
+
             gameModel =  app.getGameManager().getGameById(requestModel.getGameId());
 
-
-            boolean b = (app.getUserInformation().getUsername()).equals(requestModel.getAdminName());
-
-
-            adminUser = app.getUserInformation().getUsername();
-            adminPicture = app.getUserInformation().getPictureURL();
+            adminUser = requestModel.getAdminName();
+            adminPicture = requestModel.getAdminProfielPictureUrl();
 
             lobby.setLobbyInfo(
                     gameModel.getGamePhotoUrl(),
@@ -156,13 +145,14 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
         }
     };
 
-    public LobbyFragmentCore(RequestModelRefrance requestModelRefrance) {
+    public LobbyFragmentCore(RequestModelReference requestModelRef) {
         super();
 
-        if (requestModelRefrance == null)
-            return;
-        this.requestModelRefrance = requestModelRefrance;
 
+        Log.i("----->",requestModelRef.toString());
+
+        this.requestModelRefrance = requestModelRef;
+        app.getMainAppMenuCore().setRequestModelRef(requestModelRef);
 
     }
 
@@ -180,7 +170,14 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
 
         requestRef = app.getDatabaseRequests().child(path);
         requestRef.addListenerForSingleValueEvent(onLoadLobbyInformation);
-        requestRef.child("players").addChildEventListener(onAddPlayerEvent);
+
+        new HandlerCondition(new CallbackHandlerCondition() {
+            @Override
+            public boolean callBack() {
+                requestRef.child("players").addChildEventListener(onAddPlayerEvent);
+                return true;
+            }
+        },1000);
 
 
         app.getTimeStamp().setTimestampLong();
@@ -213,7 +210,7 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
     @Override
     protected void cancelRequest(){
 
-        app.cancelRequest();
+        app.getMainAppMenuCore().cancelRequest();
         removeListener();
 
     }

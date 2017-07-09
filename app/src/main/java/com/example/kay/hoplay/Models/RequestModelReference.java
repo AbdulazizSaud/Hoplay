@@ -1,6 +1,6 @@
 package com.example.kay.hoplay.Models;
 
-public class RequestModelRefrance {
+public class RequestModelReference {
 
 
     private String requestId ;
@@ -8,11 +8,11 @@ public class RequestModelRefrance {
     private String gameId;
     private String region ;
 
-    public RequestModelRefrance()
+    public RequestModelReference()
     {
 
     }
-    public RequestModelRefrance(String requestId,String gameId, String platform, String region) {
+    public RequestModelReference(String requestId, String gameId, String platform, String region) {
         this.requestId = requestId;
         this.platform = platform;
         this.region = region;

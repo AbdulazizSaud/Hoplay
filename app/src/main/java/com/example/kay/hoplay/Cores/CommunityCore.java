@@ -311,7 +311,7 @@ public class CommunityCore extends Community implements FirebasePaths {
             if (communityChatModel.getChatKey().equals(chatKey)) {
 
                 communityChatModel.setLastMsg(message);
-                communityChatModel.setLastMsgDate(app.convertFromTimeStampToDate(time));
+                communityChatModel.setTimeStamp(time);
                 mAdapter.notifyDataSetChanged();
                 break;
             }
@@ -381,7 +381,7 @@ public class CommunityCore extends Community implements FirebasePaths {
     }
 
 
-    private void addUserChatToList(String chatKey, String chatType, String chatName, String pictureURL, String lastMessage, String lastDate, long messageNumber) {
+    private void addUserChatToList(String chatKey, String chatType, String chatName, String pictureURL, String lastMessage, String timeStamp, long messageNumber) {
 
         CommunityChatModel communityUserList = new CommunityChatModel();
         communityUserList.setChatKey(chatKey);
@@ -390,7 +390,7 @@ public class CommunityCore extends Community implements FirebasePaths {
         communityUserList.setUserPictureURL(pictureURL);
         communityUserList.setLastMsg(lastMessage);
         communityUserList.setChatCounter(messageNumber);
-        communityUserList.setLastMsgDate(app.convertFromTimeStampToDate(lastDate));
+        communityUserList.setTimeStamp(timeStamp);
         addToList(communityUserList);
     }
 

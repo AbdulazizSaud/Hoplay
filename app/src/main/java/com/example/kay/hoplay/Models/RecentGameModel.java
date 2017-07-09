@@ -1,5 +1,7 @@
 package com.example.kay.hoplay.Models;
 
+import android.util.Log;
+
 /**
  * Created by khaledAlhindi on 11/22/2016 AD.
  */
@@ -10,17 +12,10 @@ public class RecentGameModel extends GameModel {
     // here it should be a behivors something like a opponent id , my id and so long.
     private String activityDate;
     private String activityDescription;
-    private String reqPlatform;
 
-    public String getReqPlatform() {
-        return reqPlatform;
-    }
-
-    public void setReqPlatform(String reqPlatform) {
-        this.reqPlatform = reqPlatform;
-    }
 
     public RecentGameModel(String gameID, String gameName, String gamePhotoUrl, String supportedPlatforms , String activityDescription, String activityDate) {
+
         super(gameID, gameName, gamePhotoUrl, supportedPlatforms);
         this.activityDate = activityDate;
         this.activityDescription = activityDescription;

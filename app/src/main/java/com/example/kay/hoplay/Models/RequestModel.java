@@ -6,6 +6,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,9 +28,8 @@ public class RequestModel implements Parcelable{
 
     private String adminName;
     private String requestPicture;
-    private List<String> users;
     private String gameId;
-    private ArrayList<PlayerModel> players;
+    private HashMap<String,PlayerModel> players;
 
 
     private String savedReqUniqueID;
@@ -51,10 +51,9 @@ public class RequestModel implements Parcelable{
         gameVersion = in.readFloat();
         adminName = in.readString();
         requestPicture = in.readString();
-        users = in.createStringArrayList();
         gameId = in.readString();
         savedReqUniqueID = in.readString();
-        players = new ArrayList<>();
+        players = new HashMap<>();
     }
 
     public static final Creator<RequestModel> CREATOR = new Creator<RequestModel>() {
@@ -92,7 +91,7 @@ public class RequestModel implements Parcelable{
         this.rank = rank;
         this.requestTitle = requestTitle;
         this.timeStamp=timeStamp;
-        players = new ArrayList<>();
+        players = new HashMap<>();
 
     }
 
@@ -104,7 +103,7 @@ public class RequestModel implements Parcelable{
         this.matchType = matchType;
         this.rank = rank;
         this.timeStamp = timeStamp;
-        players = new ArrayList<>();
+        players = new HashMap<>();
 
     }
 
@@ -120,7 +119,7 @@ public class RequestModel implements Parcelable{
         this.matchType = matchType;
         this.rank = rank;
         this.description = description;
-        players = new ArrayList<>();
+        players = new HashMap<>();
 
     }
 
@@ -133,14 +132,6 @@ public class RequestModel implements Parcelable{
         this.timeStamp = timeStamp;
     }
 
-    public List<String> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<String> users) {
-        this.users = users;
-    }
-
     public String getRequestId() {
         return requestId;
     }
@@ -151,6 +142,10 @@ public class RequestModel implements Parcelable{
 
     public String getAdmin() {
         return admin;
+    }
+    public String getAdminProfielPictureUrl()
+    {
+        return players.get(admin).getProfilePicture();
     }
 
     public String getDescription() {
@@ -237,11 +232,11 @@ public class RequestModel implements Parcelable{
         this.gameId = gameId;
     }
 
-    public ArrayList<PlayerModel> getPlayers() {
+    public HashMap<String,PlayerModel> getPlayers() {
         return players;
     }
 
-    public void setPlayers(ArrayList<PlayerModel> players) {
+    public void setPlayers( HashMap<String,PlayerModel> players) {
         this.players = players;
     }
 
@@ -266,21 +261,20 @@ public class RequestModel implements Parcelable{
         dest.writeFloat(gameVersion);
         dest.writeString(adminName);
         dest.writeString(requestPicture);
-        dest.writeStringList(users);
         dest.writeString(gameId);
         dest.writeString(savedReqUniqueID);
     }
 
     public void addPlayer(PlayerModel playerModel)
     {
+        if(!players.containsKey(playerModel.getUID()))
+            players.put(playerModel.getUID(),playerModel);
+    }
 
-        for (PlayerModel player : players)
-        {
-            if(player.getUID().equals(playerModel.getUID()))
-                return;
-        }
-
-        players.add(playerModel);
+    public void removePlayer(PlayerModel playerModel)
+    {
+        if(players.containsKey(playerModel.getUID()))
+            players.remove(playerModel.getUID());
     }
 }
 

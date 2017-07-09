@@ -1,23 +1,20 @@
 package com.example.kay.hoplay.util;
 
-import android.util.Log;
-
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.Models.RequestModel;
-import com.example.kay.hoplay.Models.RequestModelRefrance;
+import com.example.kay.hoplay.Models.RequestModelReference;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ServerValue;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class Request implements FirebasePaths {
 
-    RequestModelRefrance requestModelRefrance;
+    RequestModelReference requestModelReference;
     App app;
 
 
@@ -94,7 +91,7 @@ public class Request implements FirebasePaths {
         // users_info_ -> user id  -> _games_->_recent_played_
         DatabaseReference userRecentPlayedRef = userRef.child(FIREBASE_RECENT_GAMES_PATH);
 
-        requestModelRefrance = new RequestModelRefrance(requestId, gameId, platform, region);
+        requestModelReference = new RequestModelReference(requestId, gameId, platform, region);
 
         String recentPlayedKey = userRecentPlayedRef.push().getKey();
         DatabaseReference recentGameRef = userRecentPlayedRef.child(recentPlayedKey);
@@ -108,7 +105,7 @@ public class Request implements FirebasePaths {
         recentData.put(FIREBASE_REQUEST_TIME_STAMP_ATTR, ServerValue.TIMESTAMP);
 
         recentGameRef.setValue(recentData);
-        requestRef.setValue(requestModelRefrance);
+        requestRef.setValue(requestModelReference);
 
         CreateChat createChat = new CreateChat();
         createChat.setValueUserRef(currentUid,requestId);
@@ -122,8 +119,8 @@ public class Request implements FirebasePaths {
 
     }
 
-    public RequestModelRefrance getRequestModelRefrance() {
-        return requestModelRefrance;
+    public RequestModelReference getRequestModelReference() {
+        return requestModelReference;
     }
 
 

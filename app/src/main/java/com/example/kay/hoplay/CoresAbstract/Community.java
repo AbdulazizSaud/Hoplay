@@ -30,6 +30,8 @@ import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.CommunityChatModel;
+import com.example.kay.hoplay.Services.CallbackHandlerCondition;
+import com.example.kay.hoplay.Services.HandlerCondition;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -150,7 +152,7 @@ public abstract class Community extends Fragment {
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder, final CommunityChatModel model , int position) {
+            public void OnBindHolder(final ViewHolders holder, final CommunityChatModel model , int position) {
                 // - get element from your dataset at this position
                 // - replace the contents of the view with that element
                 ViewHolders.CommunityHolder communityHolder = (ViewHolders.CommunityHolder)holder;
@@ -200,7 +202,14 @@ public abstract class Community extends Fragment {
                 communityHolder.setCommunitySubtitle(model.getLastMsg());
 
                 communityHolder.setCounter(String.valueOf(model.getChatCounter()));
-                holder.setTime(model.getLastMsgDate());
+
+                new HandlerCondition(new CallbackHandlerCondition() {
+                    @Override
+                    public boolean callBack() {
+                        holder.setTime(app.convertFromTimeStampToDate(model.getTimeStamp()));
+                        return false;
+                    }
+                },1000);
 //                Log.i("->",""+getAllUnseenMessages());
 
             }

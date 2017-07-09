@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
 
 
 /**
@@ -145,6 +146,7 @@ public abstract class UserProfile extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity().getApplicationContext() , FriendsListCore.class);
+                i.setFlags(FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
                 getActivity().overridePendingTransition( R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
 
@@ -182,6 +184,7 @@ public abstract class UserProfile extends Fragment {
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getContext());
+
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
@@ -211,8 +214,7 @@ public abstract class UserProfile extends Fragment {
     public void addRecentGame(String gameID, String gameName , String gamePhoto ,String platform, String activityDescription , String activityDate)
     {
 
-        RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,"",activityDescription,activityDate);
-        recentActivity.setReqPlatform(platform);
+        RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,platform,activityDescription,activityDate);
         recentGameModels.add(recentActivity);
         mAdapter.notifyDataSetChanged();
     }
@@ -297,16 +299,18 @@ public abstract class UserProfile extends Fragment {
                 holder.getTitleView().setTypeface(playbold);
                 holder.setSubtitle(model.getActivityDescription());
                 holder.getSubtitleView().setTypeface(playregular);
+
+
                 holder.setTime(model.getActivityDate());
                 holder.getTimeView().setTypeface(playregular);
 
 
                 holder.getPicture().setBorderWidth(6);
                 // Changing title color depending on the platform
-                if (model.getReqPlatform().equalsIgnoreCase("PC"))
+                if (model.getGamePlatforms().equalsIgnoreCase("PC"))
                 {holder.getTitleView().setTextColor(ContextCompat.getColor(getContext(), R.color.pc_color));
                     holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.pc_color));}
-                else if (model.getReqPlatform().equalsIgnoreCase("PS"))
+                else if (model.getGamePlatforms().equalsIgnoreCase("PS"))
                 {holder.getTitleView().setTextColor(ContextCompat.getColor(getContext(), R.color.ps_color));
                     holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.ps_color));}
                 else
