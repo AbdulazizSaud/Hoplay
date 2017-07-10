@@ -202,14 +202,16 @@ public abstract class Community extends Fragment {
                 communityHolder.setCommunitySubtitle(model.getLastMsg());
 
                 communityHolder.setCounter(String.valueOf(model.getChatCounter()));
+                holder.setTime(app.convertFromTimeStampToDate(model.getTimeStamp()));
 
                 new HandlerCondition(new CallbackHandlerCondition() {
                     @Override
                     public boolean callBack() {
+
                         holder.setTime(app.convertFromTimeStampToDate(model.getTimeStamp()));
                         return false;
                     }
-                },1000);
+                },10000);
 //                Log.i("->",""+getAllUnseenMessages());
 
             }

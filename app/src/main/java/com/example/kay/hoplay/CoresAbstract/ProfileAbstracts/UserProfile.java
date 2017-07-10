@@ -27,6 +27,8 @@ import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
 import com.example.kay.hoplay.Cores.UserProfileCores.FriendsListCore;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.RecentGameModel;
+import com.example.kay.hoplay.Services.CallbackHandlerCondition;
+import com.example.kay.hoplay.Services.HandlerCondition;
 
 import java.util.ArrayList;
 
@@ -211,10 +213,10 @@ public abstract class UserProfile extends Fragment {
         app.loadingImage(userPictureCircleImageView,app.getUserInformation().getPictureURL());
 
     }
-    public void addRecentGame(String gameID, String gameName , String gamePhoto ,String platform, String activityDescription , String activityDate)
+    public void addRecentGame(String gameID, String gameName , String gamePhoto ,String platform, String activityDescription , long timestmap)
     {
 
-        RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,platform,activityDescription,activityDate);
+        RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,platform,activityDescription,timestmap);
         recentGameModels.add(recentActivity);
         mAdapter.notifyDataSetChanged();
     }
@@ -263,7 +265,7 @@ public abstract class UserProfile extends Fragment {
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder, RecentGameModel model,int position)
+            public void OnBindHolder(final ViewHolders holder, final RecentGameModel model,int position)
             {
 
                app.loadingImage(getContext(),holder,model.getGamePhotoUrl());
@@ -301,7 +303,18 @@ public abstract class UserProfile extends Fragment {
                 holder.getSubtitleView().setTypeface(playregular);
 
 
-                holder.setTime(model.getActivityDate());
+
+                holder.setTime(app.convertFromTimeStampToDate(model.getTimeStamp()));
+
+                new HandlerCondition(new CallbackHandlerCondition() {
+                    @Override
+                    public boolean callBack() {
+                        holder.setTime(app.convertFromTimeStampToDate(model.getTimeStamp()));
+                        return false;
+                    }
+                },10000);
+
+
                 holder.getTimeView().setTypeface(playregular);
 
 
@@ -323,6 +336,7 @@ public abstract class UserProfile extends Fragment {
             }
         };
     }
+
 
     protected void setGamesNumber(String number){
         gamesNumberTextView.setText(number);

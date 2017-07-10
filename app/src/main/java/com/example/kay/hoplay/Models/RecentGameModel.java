@@ -10,25 +10,25 @@ public class RecentGameModel extends GameModel {
 
 
     // here it should be a behivors something like a opponent id , my id and so long.
-    private String activityDate;
     private String activityDescription;
+    private long timeStamp;
 
 
-    public RecentGameModel(String gameID, String gameName, String gamePhotoUrl, String supportedPlatforms , String activityDescription, String activityDate) {
+    public RecentGameModel(String gameID, String gameName, String gamePhotoUrl, String supportedPlatforms , String activityDescription, long timeStamp) {
 
         super(gameID, gameName, gamePhotoUrl, supportedPlatforms);
-        this.activityDate = activityDate;
+        this.timeStamp = timeStamp;
         this.activityDescription = activityDescription;
     }
 
-
-    public String getActivityDate() {
-        return activityDate;
+    public long getTimeStamp() {
+        return timeStamp;
     }
 
-    public void setActivityDate(String activityDate) {
-        this.activityDate = activityDate;
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
     }
+
 
     public String getActivityDescription() {
         return activityDescription;

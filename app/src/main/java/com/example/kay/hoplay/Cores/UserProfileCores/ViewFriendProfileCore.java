@@ -106,7 +106,7 @@ public class ViewFriendProfileCore extends ViewFriendProfile  implements Firebas
                 final String matchType = dataSnapshot.child("match_type").getValue(String.class);
                 final String platform = dataSnapshot.child("request_platform").getValue(String.class);
                 final String gameKey = dataSnapshot.child("game_id").getValue(String.class);
-                final String timeStmap = String.valueOf(dataSnapshot.child(FIREBASE_REQUEST_TIME_STAMP_ATTR).getValue(Long.class));
+                final long timeStmap = dataSnapshot.child(FIREBASE_REQUEST_TIME_STAMP_ATTR).getValue(Long.class);
 
 
                 app.getDatabaseGames().child(gameType + "/" + gameKey).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -116,7 +116,7 @@ public class ViewFriendProfileCore extends ViewFriendProfile  implements Firebas
                         String gameName = gameShot.child(FIREBASE_GAMES_NAME_ATTR_REFERENCES).getValue(String.class);
                         String gamePic = gameShot.child(FIREBASE_GAMES_PHOTO_ATTR_REFERENCES).getValue(String.class);
 
-                        addRecentGame(gameKey, gameName, gamePic,platform, matchType, app.convertFromTimeStampToDate(timeStmap));
+                        addRecentGame(gameKey, gameName, gamePic,platform, matchType, timeStmap);
 
                     }
 

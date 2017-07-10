@@ -222,9 +222,9 @@ public class App extends Application implements FirebasePaths {
     }
 
 
-    public String convertFromTimeStampToDate(String timeStamp) {
+    public String convertFromTimeStampToDate(long timeStamp) {
 
-        return getTimeAgo(Long.parseLong(timeStamp));
+        return getTimeAgo(timeStamp);
 //
 //        try {
 //

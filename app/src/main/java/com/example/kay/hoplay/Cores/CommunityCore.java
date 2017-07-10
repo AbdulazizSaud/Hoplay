@@ -82,15 +82,16 @@ public class CommunityCore extends Community implements FirebasePaths {
 
                         try {
 
-                            addUserChatToList(
-                                    chatRef.getKey(),
+
+                            addUserChatToList(chatRef.getKey(),
                                     FIREBASE_PRIVATE_ATTR,
                                     userInfo.child("_username_").getValue(String.class),
-                                    userInfo.child("_picUrl_").getValue().toString().trim(),
-                                    lasMsgSnap.child("_message_").getValue().toString().trim(),
-                                    lasMsgSnap.child("_time_stamp_").getValue().toString().trim(),
-                                    Long.parseLong(lasMsgSnap.child("_counter_").getValue().toString().trim())
+                                    userInfo.child("_picUrl_").getValue(String.class),
+                                    lasMsgSnap.child("_message_").getValue(String.class),
+                                    lasMsgSnap.child("_time_stamp_").getValue(Long.class),
+                                    lasMsgSnap.child("_counter_").getValue(Long.class)
                             );
+
                         } catch (NullPointerException e) {
 
                         }
@@ -178,9 +179,9 @@ public class CommunityCore extends Community implements FirebasePaths {
                         FIREBASE_PUBLIC_ATTR,
                         chatName,
                         chatPicture,
-                        lastMessageSnapshots.child("_message_").getValue().toString().trim(),
-                        lastMessageSnapshots.child("_time_stamp_").getValue().toString().trim(),
-                        Long.parseLong(lastMessageSnapshots.child("_counter_").getValue().toString().trim())
+                        lastMessageSnapshots.child("_message_").getValue(String.class),
+                        lastMessageSnapshots.child("_time_stamp_").getValue(Long.class),
+                        lastMessageSnapshots.child("_counter_").getValue(Long.class)
                 );
             }
 
@@ -204,7 +205,7 @@ public class CommunityCore extends Community implements FirebasePaths {
 
             String chatKey = dataSnapshot.getRef().getParent().getParent().getKey();
             String msg = dataSnapshot.child("_message_").getValue(String.class);
-            String timeStamp = String.valueOf(dataSnapshot.child("_time_stamp_").getValue(Long.class));
+            long timeStamp = dataSnapshot.child("_time_stamp_").getValue(Long.class);
             String currentChatCounterAsString = String.valueOf(dataSnapshot.child("_counter_").getValue(Long.class));
 
 
@@ -305,7 +306,7 @@ public class CommunityCore extends Community implements FirebasePaths {
     }
 
 
-    private void updateLastMessage(String chatKey, String message, String time) {
+    private void updateLastMessage(String chatKey, String message, long time) {
 
         for (CommunityChatModel communityChatModel : communityUserLists) {
             if (communityChatModel.getChatKey().equals(chatKey)) {
@@ -355,15 +356,6 @@ public class CommunityCore extends Community implements FirebasePaths {
     }
 
 
-    @Override
-    protected void removeChatFromlist(CommunityChatModel model) {
-
-        DatabaseReference chatRef = refAuthCurrentUserChats.child(model.getChatType()).child(model.getChatKey());
-        if(chatRef!=null)
-        {
-            chatRef.removeValue();
-        }
-    }
 
     @Override
     protected void OnClickHolders(CommunityChatModel model, View v) {
@@ -381,7 +373,7 @@ public class CommunityCore extends Community implements FirebasePaths {
     }
 
 
-    private void addUserChatToList(String chatKey, String chatType, String chatName, String pictureURL, String lastMessage, String timeStamp, long messageNumber) {
+    private void addUserChatToList(String chatKey, String chatType, String chatName, String pictureURL, String lastMessage, long timeStamp, long messageNumber) {
 
         CommunityChatModel communityUserList = new CommunityChatModel();
         communityUserList.setChatKey(chatKey);
@@ -392,6 +384,18 @@ public class CommunityCore extends Community implements FirebasePaths {
         communityUserList.setChatCounter(messageNumber);
         communityUserList.setTimeStamp(timeStamp);
         addToList(communityUserList);
+    }
+
+
+
+    @Override
+    protected void removeChatFromlist(CommunityChatModel model) {
+
+        DatabaseReference chatRef = refAuthCurrentUserChats.child(model.getChatType()).child(model.getChatKey());
+        if(chatRef!=null)
+        {
+            chatRef.removeValue();
+        }
     }
 
     @Override
