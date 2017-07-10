@@ -30,6 +30,7 @@ public class FriendsListCore extends UserListCore {
 
         searchEditText.setVisibility(EditText.GONE);
         searchEditText = null;
+        hideLoadingAnimation();
 
         loadFriendList();
     }

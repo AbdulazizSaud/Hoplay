@@ -97,7 +97,7 @@ public abstract class UserList extends AppCompatActivity {
 
             // animate holders
             setAnimation(holder.getTitleView(),holder.getPicture(),position);
-
+            holder.getPicture().setBorderWidth(6);
 
 
         }

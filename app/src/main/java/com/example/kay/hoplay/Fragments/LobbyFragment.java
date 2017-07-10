@@ -26,6 +26,7 @@ public abstract class LobbyFragment extends ParentRequestFragments {
 
         lobby = new Lobby(getContext(),view);
 
+
         lobby.getCloseRequestButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

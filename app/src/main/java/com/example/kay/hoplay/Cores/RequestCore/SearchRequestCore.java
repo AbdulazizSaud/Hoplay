@@ -41,7 +41,7 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
 
                 if (dataSnapshot != null) {
                     for (DataSnapshot region : dataSnapshot.getChildren()) {
-                        regionList.add(region.getValue(String.class).trim());
+                        regionAdapter.add(region.getValue(String.class).trim());
                     }
                 }
 

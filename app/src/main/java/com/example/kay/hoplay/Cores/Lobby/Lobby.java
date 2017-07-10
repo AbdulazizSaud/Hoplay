@@ -138,6 +138,7 @@ public class Lobby {
         playerModelsHashMap.remove(playerModel);
         mAdapter.notifyDataSetChanged();
 
+
     }
 
 
@@ -173,6 +174,7 @@ public class Lobby {
                 holder.setTitle(model.getUsername());
                 holder.setSubtitle(model.getGamePovider());
                 holder.setSubtitle2(model.getGameProviderAcc());
+
             }
         };
     }
@@ -203,5 +205,16 @@ public class Lobby {
         rankValueTextview.setText(rank);
 
     }
+
+    public void setGameBorderColor(int color){
+        gamePhoto.setBorderColor(color);
+    }
+    public void setGameBorderWidth(int width){
+        gamePhoto.setBorderWidth(width);
+    }
+    public void setMatchImage(int resource){
+        matchTypeImageView.setImageResource(resource);
+    }
+
 
 }

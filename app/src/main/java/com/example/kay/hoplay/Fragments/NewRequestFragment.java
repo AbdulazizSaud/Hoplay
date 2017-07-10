@@ -186,6 +186,7 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
 
 
                 holder.getTitleView().setTypeface(playbold);
+                holder.getSubtitleView().setTypeface(playregular);
 
 
 

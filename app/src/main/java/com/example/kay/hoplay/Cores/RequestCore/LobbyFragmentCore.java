@@ -1,5 +1,6 @@
 package com.example.kay.hoplay.Cores.RequestCore;
 
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 
@@ -10,6 +11,7 @@ import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.Models.RequestModelReference;
+import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Services.CallbackHandlerCondition;
 import com.example.kay.hoplay.Services.HandlerCondition;
 import com.google.firebase.database.ChildEventListener;
@@ -52,16 +54,23 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
                         if (player.getUID().equals(app.getUserInformation().getUID()))
                             lobby.getJoinButton().setVisibility(View.INVISIBLE);
 
+                        // set the lobby border width
+                        lobby.setGameBorderWidth(6);
 
                         if (requestModelRefrance.getPlatform().equalsIgnoreCase("PS"))
                         {
                             player.setGamePovider("PSN Account");
                             player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PS_GAME_PROVIDER_ATTR).getValue(String.class));
+                            lobby.setGameBorderColor(ContextCompat.getColor(getContext(), R.color.ps_color));
+
+
                         }
                         else if (requestModelRefrance.getPlatform().equalsIgnoreCase("XBOX"))
                         {
                             player.setGamePovider("XBOX Account");
                             player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_XBOX_GAME_PROVIDER_ATTR).getValue(String.class));
+                            lobby.setGameBorderColor(ContextCompat.getColor(getContext(), R.color.xbox_color));
+
                         }
                         else{
                             String pcGameProvider = app.getGameManager().getPcGamesWithProviders().get(requestModelRefrance.getGameId().trim());
@@ -69,6 +78,8 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
                             player.setGamePovider(pcGameProvider);
                             if(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR+"/"+pcGameProvider).getValue() !=null)
                             player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR+"/"+pcGameProvider).getValue(String.class));
+                            lobby.setGameBorderColor(ContextCompat.getColor(getContext(), R.color.pc_color));
+
                         }
 
                         lobby.addPlayer(player);

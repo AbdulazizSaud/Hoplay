@@ -38,9 +38,9 @@
             <include
                 layout="@layout/user_profile_photo_with_border"
                 android:layout_width="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"></include>
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"></include>
 
 
             <TextView
