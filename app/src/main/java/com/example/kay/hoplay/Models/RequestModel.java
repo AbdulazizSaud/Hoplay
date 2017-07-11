@@ -143,10 +143,7 @@ public class RequestModel implements Parcelable{
     public String getAdmin() {
         return admin;
     }
-    public String getAdminProfielPictureUrl()
-    {
-        return players.get(admin).getProfilePicture();
-    }
+
 
     public String getDescription() {
         return description;

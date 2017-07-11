@@ -872,7 +872,8 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
         int numberPlayers = selectedPlayersNumber.equals("All Numbers") ? gameModel.getMaxPlayers():Integer.parseInt(selectedPlayersNumber);
         RequestModel requestModel = new RequestModel(selectedPlatform,selectedGame,app.getUserInformation().getUsername(),requestDescription,selectedRegion,numberPlayers,selectedMatchType,selectedRank);
-
+        requestModel.setAdminName(app.getUserInformation().getUsername());
+        requestModel.setAdmin(app.getUserInformation().getUID());
         requestModel.setGameId(gameModel.getGameID());
         requestModel.setRequestPicture(gameModel.getGamePhotoUrl());
 
