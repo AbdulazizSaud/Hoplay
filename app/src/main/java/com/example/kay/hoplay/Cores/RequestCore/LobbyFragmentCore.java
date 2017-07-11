@@ -155,7 +155,7 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
 
         }
     };
-
+//
     public LobbyFragmentCore(RequestModelReference requestModelRef) {
         super();
 
