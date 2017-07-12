@@ -84,7 +84,13 @@ public abstract class UserList extends AppCompatActivity {
                 public boolean onLongClick(View v) {
 
                     if(OnLongClickHolders(model)) {
-                        showFriendpopup(model, getApplication());
+
+                        // for beta
+//                        showFriendpopup(model, getApplication());
+//
+                        // for pre-alpha current version
+                        showDeleteDialog(model,getApplication());
+
                         removeFriendButtonViewHolder(v, position);
                     }
                     return true;
@@ -289,7 +295,7 @@ public abstract class UserList extends AppCompatActivity {
     }
 
 
-
+    // for beta
     protected void showFriendpopup(final FriendCommonModel friendCommonModel,Context c) {
 
 
@@ -341,6 +347,59 @@ public abstract class UserList extends AppCompatActivity {
         window.setAttributes(lp);
 
     }
+
+    // for pre-Alpha - current version
+    protected void showDeleteDialog(final FriendCommonModel friendCommonModel,Context c){
+
+        final Dialog friendLongClickDialog;
+        friendLongClickDialog = new Dialog(UserList.this);
+        friendLongClickDialog.setContentView(R.layout.friend_list_on_long_click_dialog);
+        friendLongClickDialog.show();
+
+
+        friendLongClickDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        Button yesButton , noButton ;
+
+        yesButton = ( Button) friendLongClickDialog.findViewById(R.id.delete_friend_yes_button_dialog);
+        noButton = ( Button) friendLongClickDialog.findViewById(R.id.delete_friend_no_button_dialog);
+
+        Typeface sansation = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
+        yesButton.setTypeface(sansation);
+        noButton.setTypeface(sansation);
+
+
+        // dismiss dialog
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                friendLongClickDialog.dismiss();
+            }
+        });
+
+        // delete friend
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeFriend(friendCommonModel.getFriendKey().trim());
+                slideRightAnimate(getHolderView());
+                friendLongClickDialog.dismiss();
+
+
+            }
+        });
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = friendLongClickDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+    }
+
+
 
     protected void removeFriendButtonViewHolder(View holderView, int position) {
         if (position > -1) {

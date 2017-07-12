@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/pop_up_backgrounds"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/ic_delete_64dp"
+        android:id="@+id/delete_game_imageview"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/friend_on_long_click_message"
+        android:textSize="20sp"
+        android:id="@+id/delete_friend_verification_text_dialog"
+        android:layout_below="@+id/delete_game_imageview"
+        android:gravity="center"
+        android:padding="20dp"/>
+
+    <Button
+        android:id="@+id/delete_friend_yes_button_dialog"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:textStyle="bold"
+        android:text="@string/friend_on_long_click_yes"
+        android:layout_below="@+id/delete_friend_verification_text_dialog"
+        android:layout_toLeftOf="@+id/delete_game_imageview"
+        android:layout_toStartOf="@+id/delete_game_imageview" />
+
+    <Button
+        android:id="@+id/delete_friend_no_button_dialog"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:textStyle="bold"
+        android:text="@string/friend_on_long_click_no"
+        android:layout_below="@+id/delete_friend_verification_text_dialog"
+        android:layout_toRightOf="@+id/delete_game_imageview"
+        android:layout_toEndOf="@+id/delete_game_imageview" />
+
+
+
+
+
+</RelativeLayout>
