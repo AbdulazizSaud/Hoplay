@@ -88,6 +88,7 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
     protected ArrayAdapter regionAdapter;
     protected ArrayAdapter playersNumberAdapter;
     protected ArrayAdapter playersRanksAdapter;
+    private ArrayAdapter matchTypeAdapter;
 
 
 
@@ -129,7 +130,7 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
 
         app = App.getInstance();
-        selectedPlatform = "Nothing";
+
         final Typeface sansationbold = Typeface.createFromAsset(getResources().getAssets(), "sansationbold.ttf");
         final Typeface playregular = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
         final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
@@ -164,6 +165,8 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
         descriptionEdittext = (EditText) findViewById(R.id.description_edittext_new_request);
         descriptionEdittext.setTypeface(playbold);
 
+        // Set the default values
+        selectedPlatform = "Nothing";
 
         isRequest = false ;
         isSaveRequest = false ;
@@ -206,9 +209,8 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
         // (this ,R.array.players_ranks,R.layout.spinnner_item);
 
 
-        ArrayAdapter matchTypeAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
+        matchTypeAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
                 Arrays.asList(getResources().getStringArray(R.array.match_types)));
-
 
         gameAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         playersRanksAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
@@ -268,9 +270,37 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
                 if (checkIfCompetitive(gameKey)) {
                     matchTypeSpinner.setVisibility(View.VISIBLE);
-                    playersRanksSpinner.setVisibility(View.VISIBLE);
                     slideInFromLeft(matchTypeSpinner);
-                    slideInFromLeft(playersRanksSpinner);
+
+                    // In case the user already selected a match type and he change the game
+                    if (matchTypeSpinner.getText().toString().equalsIgnoreCase("Competitive")) {
+                        matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_competitive_24dp, 0, 0, 0);
+
+                        if (playersRanksSpinner.getVisibility() != View.VISIBLE)
+                            slideInFromLeft(playersRanksSpinner);
+
+                        playersRanksSpinner.setVisibility(View.VISIBLE);
+                    }
+                    else if (matchTypeSpinner.getText().toString().equalsIgnoreCase("Quick Match")) {
+                        matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_quick_match_24dp, 0, 0, 0);
+
+                        if (playersRanksSpinner.getVisibility() == View.VISIBLE)
+                            slideOutToRight(playersRanksSpinner);
+
+                        playersRanksSpinner.setVisibility(View.GONE);
+
+                    }
+                    else if (matchTypeSpinner.getText().toString().equalsIgnoreCase("All Matches")){
+                        matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+
+                        if (playersRanksSpinner.getVisibility() == View.VISIBLE)
+                            slideOutToRight(playersRanksSpinner);
+
+                        playersRanksSpinner.setVisibility(View.GONE);
+                    }
+                    if (matchTypeSpinner.length() == 0) {
+                        matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+                    }
 
                 } else {
                     if (matchTypeSpinner.isShown())
@@ -284,39 +314,48 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
 
                 // Disable not supported platforms
-                String gameName = gamesAutoCompleteTextView.getText().toString();
+                String gameName = s.toString();
                 String  supportedPlatforms = "";
                 try {
-                supportedPlatforms = app.getGameManager().getGameByName(gameName).getGamePlatforms();
-                if (!supportedPlatforms.contains("PS") && !supportedPlatforms.contains("XBOX"))
-                {
-                    psRadiobutton.setEnabled(false);
-                    xboxRadiobutton.setEnabled(false);
-                    selectedPlatform = "Nothing";
-                }
-                else if(!supportedPlatforms.contains("PS") && !supportedPlatforms.contains("PC")){
-                    pcRadiobutton.setEnabled(false);
-                    psRadiobutton.setEnabled(false);
-                    selectedPlatform = "Nothing";
-                }
-                else if(!supportedPlatforms.contains("PC") && !supportedPlatforms.contains("XBOX")){
-                    pcRadiobutton.setEnabled(false);
-                    xboxRadiobutton.setEnabled(false);
-                    selectedPlatform = "Nothing";
-                }
-                else if (!supportedPlatforms.contains("PS")){
-                    psRadiobutton.setEnabled(false);
-                    selectedPlatform = "Nothing";
-                }
-                else if(!supportedPlatforms.contains("PC"))
-                {
-                    pcRadiobutton.setEnabled(false);
-                    selectedPlatform = "Nothing";
-                }
-                else if (!supportedPlatforms.contains("XBOX")){
-                    xboxRadiobutton.setEnabled(false);
-                    selectedPlatform = "Nothing";
-                }
+                    supportedPlatforms = app.getGameManager().getGameByName(gameName).getGamePlatforms();
+                    if (!supportedPlatforms.contains("PS") && !supportedPlatforms.contains("XBOX"))
+                    {
+                        psRadiobutton.setEnabled(false);
+                        xboxRadiobutton.setEnabled(false);
+                        pcRadiobutton.setChecked(true);
+                        selectedPlatform = "PC";
+                    }
+                    else if(!supportedPlatforms.contains("PS") && !supportedPlatforms.contains("PC")){
+                        pcRadiobutton.setEnabled(false);
+                        psRadiobutton.setEnabled(false);
+                        xboxRadiobutton.setChecked(true);
+                        selectedPlatform = "XBOX";
+                    }
+                    else if(!supportedPlatforms.contains("PC") && !supportedPlatforms.contains("XBOX")){
+                        pcRadiobutton.setEnabled(false);
+                        xboxRadiobutton.setEnabled(false);
+                        psRadiobutton.setChecked(true);
+                        selectedPlatform = "PS";
+                    }
+                    else if (!supportedPlatforms.contains("PS")){
+                        psRadiobutton.setEnabled(false);
+                        if (selectedPlatform.equalsIgnoreCase("PS")){
+                            selectedPlatform="Nothing";
+                        }
+                    }
+                    else if(!supportedPlatforms.contains("PC"))
+                    {
+                        pcRadiobutton.setEnabled(false);
+                        if (selectedPlatform.equalsIgnoreCase("PC")){
+                            selectedPlatform="Nothing";
+                        }
+                    }
+                    else if (!supportedPlatforms.contains("XBOX")){
+                        xboxRadiobutton.setEnabled(false);
+                        if (selectedPlatform.equalsIgnoreCase("XBOX")){
+                            selectedPlatform="Nothing";
+                        }
+                    }
 
                 }catch (Exception e) {
 
@@ -335,36 +374,48 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
                 // Disable not supported platforms
                 String gameName = gamesAutoCompleteTextView.getText().toString();
-                String  supportedPlatforms = app.getGameManager().getGameByName(gameName).getGamePlatforms();
+                String  supportedPlatforms = "";
+
+                supportedPlatforms = app.getGameManager().getGameByName(gameName).getGamePlatforms();
                 if (!supportedPlatforms.contains("PS") && !supportedPlatforms.contains("XBOX"))
                 {
                     psRadiobutton.setEnabled(false);
                     xboxRadiobutton.setEnabled(false);
-                    selectedPlatform = "Nothing";
+                    pcRadiobutton.setChecked(true);
+                    selectedPlatform = "PC";
                 }
                 else if(!supportedPlatforms.contains("PS") && !supportedPlatforms.contains("PC")){
                     pcRadiobutton.setEnabled(false);
                     psRadiobutton.setEnabled(false);
-                    selectedPlatform = "Nothing";
+                    xboxRadiobutton.setChecked(true);
+                    selectedPlatform = "XBOX";
                 }
                 else if(!supportedPlatforms.contains("PC") && !supportedPlatforms.contains("XBOX")){
                     pcRadiobutton.setEnabled(false);
                     xboxRadiobutton.setEnabled(false);
-                    selectedPlatform = "Nothing";
+                    psRadiobutton.setChecked(true);
+                    selectedPlatform = "PS";
                 }
                 else if (!supportedPlatforms.contains("PS")){
                     psRadiobutton.setEnabled(false);
-                    selectedPlatform = "Nothing";
+                    if (selectedPlatform.equalsIgnoreCase("PS")){
+                        selectedPlatform="Nothing";
+                    }
                 }
                 else if(!supportedPlatforms.contains("PC"))
                 {
                     pcRadiobutton.setEnabled(false);
-                    selectedPlatform = "Nothing";
+                    if (selectedPlatform.equalsIgnoreCase("PC")){
+                        selectedPlatform="Nothing";
+                    }
                 }
                 else if (!supportedPlatforms.contains("XBOX")){
                     xboxRadiobutton.setEnabled(false);
-                    selectedPlatform = "Nothing";
+                    if (selectedPlatform.equalsIgnoreCase("XBOX")){
+                        selectedPlatform="Nothing";
+                    }
                 }
+
 
 
                 // Capitalize game name letters
@@ -398,9 +449,37 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
                 if (!gameKey.equals("")) {
                     if (checkIfCompetitive(gameKey)) {
                         matchTypeSpinner.setVisibility(View.VISIBLE);
-                        playersRanksSpinner.setVisibility(View.VISIBLE);
                         slideInFromLeft(matchTypeSpinner);
-                        slideInFromLeft(playersRanksSpinner);
+
+                        // In case the user already selected a match type and he change the game
+                        if (matchTypeSpinner.getText().toString().equalsIgnoreCase("Competitive")) {
+                            matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_competitive_24dp, 0, 0, 0);
+
+                            if (playersRanksSpinner.getVisibility() != View.VISIBLE)
+                                slideInFromLeft(playersRanksSpinner);
+
+                            playersRanksSpinner.setVisibility(View.VISIBLE);
+                        }
+                        else if (matchTypeSpinner.getText().toString().equalsIgnoreCase("Quick Match")) {
+                            matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_quick_match_24dp, 0, 0, 0);
+
+                            if (playersRanksSpinner.getVisibility() == View.VISIBLE)
+                                slideOutToRight(playersRanksSpinner);
+
+                            playersRanksSpinner.setVisibility(View.GONE);
+
+                        }
+                        else if (matchTypeSpinner.getText().toString().equalsIgnoreCase("All Matches")){
+                            matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+
+                            if (playersRanksSpinner.getVisibility() == View.VISIBLE)
+                                slideOutToRight(playersRanksSpinner);
+
+                            playersRanksSpinner.setVisibility(View.GONE);
+                        }
+                        if (matchTypeSpinner.length() == 0) {
+                            matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+                        }
 
                     } else {
                         if (matchTypeSpinner.isShown())
@@ -501,15 +580,27 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
                 if (s.toString().equalsIgnoreCase("Competitive")) {
                     matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_competitive_24dp, 0, 0, 0);
 
+                    if (playersRanksSpinner.getVisibility() != View.VISIBLE)
                         slideInFromLeft(playersRanksSpinner);
-                        playersRanksSpinner.setVisibility(View.VISIBLE);
 
+                    playersRanksSpinner.setVisibility(View.VISIBLE);
                 }
                 if (s.toString().equalsIgnoreCase("Quick Match")) {
                     matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_quick_match_24dp, 0, 0, 0);
-                    slideOutToRight(playersRanksSpinner);
+
+                    if (playersRanksSpinner.getVisibility() == View.VISIBLE)
+                        slideOutToRight(playersRanksSpinner);
+
                     playersRanksSpinner.setVisibility(View.GONE);
 
+                }
+                if (s.toString().equalsIgnoreCase("All Matches")){
+                    matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+
+                    if (playersRanksSpinner.getVisibility() == View.VISIBLE)
+                        slideOutToRight(playersRanksSpinner);
+
+                    playersRanksSpinner.setVisibility(View.GONE);
                 }
                 if (s.length() == 0) {
                     matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
@@ -554,21 +645,23 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
         String pcGameProvider="";
         if (app.getGameManager().getGameByName(selectedGame) != null)
-        pcGameProvider =  app.getGameManager().getGameByName(selectedGame).getPcGameProvider();
+            pcGameProvider =  app.getGameManager().getGameByName(selectedGame).getPcGameProvider();
 
 
-        if (selectedRegion.length() == 0)
-            selectedRegion = "All";
         if (selectedRank.length() == 0)
-            selectedRank = "All";
+            selectedRank = "All Ranks";
         if (requestDescription.length() == 0)
-            requestDescription = R.string.new_request_default_description_message + selectedGame;
+            requestDescription = R.string.new_request_default_description_message + selectedGame +" ?";
+        if (selectedMatchType.length() ==0 )
+            selectedMatchType = "All Matches";
+        if (selectedPlayersNumber.length()==0)
+            selectedPlayersNumber="All Numbers";
 
 
 
         if (checkIsValidRequest()) {
             // Start the loading dialog
-          //  creatingRequestDialog.show();
+            //  creatingRequestDialog.show();
             // Take the user input for the request
             if (selectedPlatform.equalsIgnoreCase("PS") && !app.getUserInformation().getPSNAcc().equals("")){
                 addRequestToFirebase(selectedPlatform,selectedGame,selectedMatchType,selectedRegion,selectedPlayersNumber,selectedRank,requestDescription);
@@ -585,7 +678,7 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
             }
 
             else
-            createGameProviderDialog(selectedPlatform, selectedGame, selectedMatchType, selectedRegion, selectedPlayersNumber, selectedRank, requestDescription);
+                createGameProviderDialog(selectedPlatform, selectedGame, selectedMatchType, selectedRegion, selectedPlayersNumber, selectedRank, requestDescription);
 
         }
 
@@ -607,7 +700,7 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
                 break;
             case R.id.xbox_choice_radiobutton:
                 if (checked)
-                    selectedPlatform = "Xbox";
+                    selectedPlatform = "XBOX";
                 break;
             default:
                 selectedPlatform = "Nothing";
@@ -638,19 +731,10 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
             return false;
         }
 
-
-        // check selected match type
-        String gameKey = app.getGameManager().getGameByName(gamesAutoCompleteTextView.getText().toString().trim()).getGameID();
-        if (matchTypeSpinner.getText().length() == 0 && checkIfCompetitive(gameKey) ) {
-            Toast.makeText(getApplicationContext(), R.string.new_request_type_match_error, Toast.LENGTH_LONG).show();
-            return false;
-        }
-
-
-        // check number of players
-        if (numberOfPlayersSpinner.getText().length() == 0) {
-            Toast.makeText(getApplicationContext(), R.string.new_request_players_number_error, Toast.LENGTH_LONG).show();
-            return false;
+        // check region
+        if (countrySpinner.getText().length()==0){
+            Toast.makeText(getApplicationContext(), R.string.new_request_region_error, Toast.LENGTH_LONG).show();
+            return false ;
         }
 
 
@@ -757,7 +841,7 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
 
         if (selectedPlatform.equalsIgnoreCase("PS"))
-        providerAccountType = String.format(getResources().getString(R.string.provider_account_message), "PSN");
+            providerAccountType = String.format(getResources().getString(R.string.provider_account_message), "PSN");
         else if (selectedPlatform.equalsIgnoreCase("XBOX"))
             providerAccountType = String.format(getResources().getString(R.string.provider_account_message), "Xbox Live");
         else if (selectedPlatform.equalsIgnoreCase("PC"))
@@ -864,13 +948,13 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
         if(app.getSavedRequests().size() >= max)
         {
-            Toast.makeText(getApplicationContext(),"You corss the limit of request",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"You cross the limit of requests",Toast.LENGTH_LONG).show();
             return;
         }
 
         GameModel gameModel = app.getGameManager().getGameByName(selectedGame);
 
-        int numberPlayers = selectedPlayersNumber.equals("All Numbers") ? gameModel.getMaxPlayers():Integer.parseInt(selectedPlayersNumber);
+        int numberPlayers = selectedPlayersNumber.equalsIgnoreCase("All Numbers") ? gameModel.getMaxPlayers():Integer.parseInt(selectedPlayersNumber);
         RequestModel requestModel = new RequestModel(selectedPlatform,selectedGame,app.getUserInformation().getUsername(),requestDescription,selectedRegion,numberPlayers,selectedMatchType,selectedRank);
         requestModel.setAdminName(app.getUserInformation().getUsername());
         requestModel.setAdmin(app.getUserInformation().getUID());
@@ -879,7 +963,7 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
         // Generate random unique id for saved request
         requestModel.setSavedReqUniqueID(UUID.randomUUID().toString());
-        
+
         app.getSavedRequests().add(requestModel);
         addSaveRequestToFirebase();
         isSaveRequest = false;
@@ -905,18 +989,29 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
 
 
+        if (selectedRank.length() == 0)
+            selectedRank = "All Ranks";
+        if (requestDescription.length() == 0)
+            requestDescription = getString(R.string.new_request_default_description_message) + selectedGame + " ?";
+        if (selectedMatchType.length() ==0 )
+            selectedMatchType = "All Matches";
+        if (selectedPlayersNumber.length()==0)
+            selectedPlayersNumber="All Numbers";
+
+
         //
         if (checkIsValidRequest())
         {
 
             if (selectedPlatform.equalsIgnoreCase("PS") && !app.getUserInformation().getPSNAcc().equals("")){
-               prepareSaveReq( selectedGame ,  selectedMatchType ,  selectedRegion ,  selectedPlayersNumber ,  selectedRank , requestDescription);
+                prepareSaveReq( selectedGame ,  selectedMatchType ,  selectedRegion ,  selectedPlayersNumber ,  selectedRank , requestDescription);
             }
             else if (selectedPlatform.equalsIgnoreCase("XBOX") && !app.getUserInformation().getXboxLiveAcc().equals("")){
                 prepareSaveReq( selectedGame ,  selectedMatchType ,  selectedRegion ,  selectedPlayersNumber ,  selectedRank , requestDescription);
             }
             else if (selectedPlatform.equalsIgnoreCase("PC") && app.getUserInformation().getPcGamesAcc().get(pcGameProvider) !=null)
             {
+                Log.i("--->",selectedGame +" 1 "+  selectedMatchType +"2  "+  selectedRegion +"3 "+  selectedPlayersNumber +" 4 "+  selectedRank +" 5 "+ requestDescription+" 6 ");
                 prepareSaveReq( selectedGame ,  selectedMatchType ,  selectedRegion ,  selectedPlayersNumber ,  selectedRank , requestDescription);
             }
 

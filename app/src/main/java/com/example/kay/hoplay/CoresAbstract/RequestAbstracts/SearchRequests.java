@@ -286,6 +286,16 @@ public abstract class SearchRequests extends Fragment {
                 String rank="";
                 String matchType="";
 
+
+                // default values
+                if (rank.length() == 0)
+                    rank = "All Ranks";
+                if (matchType.length() ==0 )
+                    matchType = "All Matches";
+//                if (selectedPlayersNumber.length()==0)
+//                    selectedPlayersNumber="All Numbers";
+
+
                  gameName = searchGameAutoCompleteTextView.getText().toString().trim();
                 region= countrySpinner.getText().toString().trim();
                 if (!numberOfPlayersSpinner.getText().toString().trim().isEmpty()) {

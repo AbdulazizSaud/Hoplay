@@ -1,9 +1,11 @@
 package com.example.kay.hoplay.Cores.RequestCore;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.NewRequest;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
+import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.util.Request;
 import com.google.firebase.database.DataSnapshot;
@@ -11,7 +13,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NewRequestCore extends NewRequest implements FirebasePaths{
+
 
 
 
@@ -63,6 +69,7 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
     protected void addSaveRequestToFirebase() {
 
         DatabaseReference ref = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_SAVED_REQS_PATH);
+
         ref.getParent().child("count").setValue(app.getSavedRequests().size(), new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
@@ -78,7 +85,11 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
             }
         });
 
+
         ref.setValue(app.getSavedRequests());
+
+
+
     }
 
 

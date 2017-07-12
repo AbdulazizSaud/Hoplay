@@ -12,7 +12,7 @@ import java.util.Map;
 
 
 
-public class RequestModel implements Parcelable{
+public  class RequestModel implements Parcelable{
 
     private String platform;
     private String requestId ;

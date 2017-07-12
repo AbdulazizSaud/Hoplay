@@ -153,7 +153,7 @@
     <string name="new_request_create_new_request">Create New Request</string>
     <string name="new_request_request">Request</string>
     <string name="new_request_save_request">Save</string>
-    <string name="new_request_country">All Countries</string>
+    <string name="new_request_country">Region</string>
     <string name="new_request_players_number">Players Number</string>
     <string name="new_request_players_ranks">Players Rank</string>
     <string name="new_request_description">Description</string>
@@ -305,10 +305,11 @@
     <!--                                New Request Activity         -->
     <string name="new_request_game_error">You do not have this game in your library. add the game then continue</string>
     <string name="new_request_type_match_error">You have not specified the match type</string>
+    <string name="new_request_region_error">You have not specified the region</string>
     <string name="new_request_platform_error">You have not specified the platform</string>
     <string name="new_request_players_number_error">You have not specified the players number</string>
     <string name="new_request_no_game_selected_error">You have no specified any game</string>
-    <string name="new_request_default_description_message">Hey , I Play </string>
+    <string name="new_request_default_description_message">Hey, Who want to play &#160; </string>
     <string name="new_request_dialog_title">Creating Request</string>
     <string name="new_request_dialog_message">Just one moment</string>
     <string name="new_request_dialog_no_game_provider_error">Please provide your %1$s account to continue</string>

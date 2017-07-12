@@ -2,7 +2,7 @@
 <resources>
 
     <string-array name="match_types">
-
+        <item>All Matches</item>
         <item>Competitive</item>
         <item>Quick Match</item>
 

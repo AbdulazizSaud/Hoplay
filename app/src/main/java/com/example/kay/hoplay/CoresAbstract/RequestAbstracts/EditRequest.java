@@ -225,6 +225,29 @@ public abstract class  EditRequest extends AppCompatActivity {
         matchTypeSpinner.setAdapter(matchTypeAdapter);
 
 
+
+        // Valid designs - when load
+        if (matchTypeSpinner.toString().equalsIgnoreCase("Competitive")) {
+            matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_competitive_24dp, 0, 0, 0);
+            slideInFromLeft(playersRanksSpinner);
+            playersRanksSpinner.setVisibility(View.VISIBLE);
+        }
+        if (matchTypeSpinner.toString().equalsIgnoreCase("Quick Match")) {
+            matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_quick_match_24dp, 0, 0, 0);
+            slideOutToRight(playersRanksSpinner);
+            playersRanksSpinner.setVisibility(View.GONE);
+
+        }
+        if (matchTypeSpinner.toString().equalsIgnoreCase("All Matches")){
+            matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+            slideOutToRight(playersRanksSpinner);
+            playersRanksSpinner.setVisibility(View.GONE);
+        }
+        if (matchTypeSpinner.length() == 0) {
+            matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+        }
+
+
     }
 
 
@@ -320,9 +343,37 @@ public abstract class  EditRequest extends AppCompatActivity {
 
                 if (checkIfCompetitive(gameKey)) {
                     matchTypeSpinner.setVisibility(View.VISIBLE);
-                    playersRanksSpinner.setVisibility(View.VISIBLE);
                     slideInFromLeft(matchTypeSpinner);
-                    slideInFromLeft(playersRanksSpinner);
+
+                    // In case the user already selected a match type and he change the game
+                    if (matchTypeSpinner.getText().toString().equalsIgnoreCase("Competitive")) {
+                        matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_competitive_24dp, 0, 0, 0);
+
+                        if (playersRanksSpinner.getVisibility() != View.VISIBLE)
+                        slideInFromLeft(playersRanksSpinner);
+
+                        playersRanksSpinner.setVisibility(View.VISIBLE);
+                    }
+                   else if (matchTypeSpinner.getText().toString().equalsIgnoreCase("Quick Match")) {
+                        matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_quick_match_24dp, 0, 0, 0);
+
+                        if (playersRanksSpinner.getVisibility() == View.VISIBLE)
+                        slideOutToRight(playersRanksSpinner);
+
+                        playersRanksSpinner.setVisibility(View.GONE);
+
+                    }
+                    else if (matchTypeSpinner.getText().toString().equalsIgnoreCase("All Matches")){
+                        matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+
+                        if (playersRanksSpinner.getVisibility() == View.VISIBLE)
+                        slideOutToRight(playersRanksSpinner);
+
+                        playersRanksSpinner.setVisibility(View.GONE);
+                    }
+                    if (matchTypeSpinner.length() == 0) {
+                        matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+                    }
 
                 } else {
                     if (matchTypeSpinner.isShown())
@@ -332,6 +383,57 @@ public abstract class  EditRequest extends AppCompatActivity {
                     playersRanksSpinner.setVisibility(View.GONE);
 
                 }
+
+
+
+                // Disable not supported platforms
+                String gameName = s.toString();
+                String  supportedPlatforms = "";
+                try {
+                    supportedPlatforms = app.getGameManager().getGameByName(gameName).getGamePlatforms();
+                    if (!supportedPlatforms.contains("PS") && !supportedPlatforms.contains("XBOX"))
+                    {
+                        psRadiobutton.setEnabled(false);
+                        xboxRadiobutton.setEnabled(false);
+                        pcRadiobutton.setChecked(true);
+                        selectedPlatform = "PC";
+                    }
+                    else if(!supportedPlatforms.contains("PS") && !supportedPlatforms.contains("PC")){
+                        pcRadiobutton.setEnabled(false);
+                        psRadiobutton.setEnabled(false);
+                        xboxRadiobutton.setChecked(true);
+                        selectedPlatform = "XBOX";
+                    }
+                    else if(!supportedPlatforms.contains("PC") && !supportedPlatforms.contains("XBOX")){
+                        pcRadiobutton.setEnabled(false);
+                        xboxRadiobutton.setEnabled(false);
+                        psRadiobutton.setChecked(true);
+                        selectedPlatform = "PS";
+                    }
+                    else if (!supportedPlatforms.contains("PS")){
+                        psRadiobutton.setEnabled(false);
+                        if (selectedPlatform.equalsIgnoreCase("PS")){
+                            selectedPlatform="Nothing";
+                        }
+                    }
+                    else if(!supportedPlatforms.contains("PC"))
+                    {
+                        pcRadiobutton.setEnabled(false);
+                        if (selectedPlatform.equalsIgnoreCase("PC")){
+                            selectedPlatform="Nothing";
+                        }
+                    }
+                    else if (!supportedPlatforms.contains("XBOX")){
+                        xboxRadiobutton.setEnabled(false);
+                        if (selectedPlatform.equalsIgnoreCase("XBOX")){
+                            selectedPlatform="Nothing";
+                        }
+                    }
+
+                }catch (Exception e) {
+
+                }
+
 
 
             }
@@ -374,9 +476,38 @@ public abstract class  EditRequest extends AppCompatActivity {
                 {
                     if (checkIfCompetitive(gameKey)) {
                         matchTypeSpinner.setVisibility(View.VISIBLE);
-                        playersRanksSpinner.setVisibility(View.VISIBLE);
                         slideInFromLeft(matchTypeSpinner);
-                        slideInFromLeft(playersRanksSpinner);
+
+
+                        // In case the user already selected a match type and he change the game
+                        if (matchTypeSpinner.getText().toString().equalsIgnoreCase("Competitive")) {
+                            matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_competitive_24dp, 0, 0, 0);
+
+                            if (playersRanksSpinner.getVisibility() != View.VISIBLE)
+                            slideInFromLeft(playersRanksSpinner);
+
+                            playersRanksSpinner.setVisibility(View.VISIBLE);
+                        }
+                        else if (matchTypeSpinner.getText().toString().equalsIgnoreCase("Quick Match")) {
+                            matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_quick_match_24dp, 0, 0, 0);
+
+                            if (playersRanksSpinner.getVisibility() == View.VISIBLE)
+                            slideOutToRight(playersRanksSpinner);
+
+                            playersRanksSpinner.setVisibility(View.GONE);
+
+                        }
+                        else if (matchTypeSpinner.getText().toString().equalsIgnoreCase("All Matches")){
+                            matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+
+                            if (playersRanksSpinner.getVisibility() == View.VISIBLE)
+                            slideOutToRight(playersRanksSpinner);
+
+                            playersRanksSpinner.setVisibility(View.GONE);
+                        }
+                        if (matchTypeSpinner.length() == 0) {
+                            matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+                        }
 
                     } else {
                         if (matchTypeSpinner.isShown())
@@ -387,6 +518,53 @@ public abstract class  EditRequest extends AppCompatActivity {
 
                     }
                 }
+
+                // Disable not supported platforms
+                 gameName = gamesAutoCompleteTextView.getText().toString();
+                String  supportedPlatforms = "";
+
+                supportedPlatforms = app.getGameManager().getGameByName(gameName).getGamePlatforms();
+                if (!supportedPlatforms.contains("PS") && !supportedPlatforms.contains("XBOX"))
+                {
+                    psRadiobutton.setEnabled(false);
+                    xboxRadiobutton.setEnabled(false);
+                    pcRadiobutton.setChecked(true);
+                    selectedPlatform = "PC";
+                }
+                else if(!supportedPlatforms.contains("PS") && !supportedPlatforms.contains("PC")){
+                    pcRadiobutton.setEnabled(false);
+                    psRadiobutton.setEnabled(false);
+                    xboxRadiobutton.setChecked(true);
+                    selectedPlatform = "XBOX";
+                }
+                else if(!supportedPlatforms.contains("PC") && !supportedPlatforms.contains("XBOX")){
+                    pcRadiobutton.setEnabled(false);
+                    xboxRadiobutton.setEnabled(false);
+                    psRadiobutton.setChecked(true);
+                    selectedPlatform = "PS";
+                }
+                else if (!supportedPlatforms.contains("PS")){
+                    psRadiobutton.setEnabled(false);
+                    if (selectedPlatform.equalsIgnoreCase("PS")){
+                        selectedPlatform="Nothing";
+                    }
+                }
+                else if(!supportedPlatforms.contains("PC"))
+                {
+                    pcRadiobutton.setEnabled(false);
+                    if (selectedPlatform.equalsIgnoreCase("PC")){
+                        selectedPlatform="Nothing";
+                    }
+                }
+                else if (!supportedPlatforms.contains("XBOX")){
+                    xboxRadiobutton.setEnabled(false);
+                    if (selectedPlatform.equalsIgnoreCase("XBOX")){
+                        selectedPlatform="Nothing";
+                    }
+                }
+
+
+
 
 
             }
@@ -477,9 +655,28 @@ public abstract class  EditRequest extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if (s.toString().equalsIgnoreCase("Competitive")) {
                     matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_competitive_24dp, 0, 0, 0);
+
+                    if (playersRanksSpinner.getVisibility() != View.VISIBLE)
+                    slideInFromLeft(playersRanksSpinner);
+
+                    playersRanksSpinner.setVisibility(View.VISIBLE);
                 }
                 if (s.toString().equalsIgnoreCase("Quick Match")) {
                     matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_quick_match_24dp, 0, 0, 0);
+
+                    if (playersRanksSpinner.getVisibility() == View.VISIBLE)
+                    slideOutToRight(playersRanksSpinner);
+
+                    playersRanksSpinner.setVisibility(View.GONE);
+
+                }
+                if (s.toString().equalsIgnoreCase("All Matches")){
+                    matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+
+                    if (playersRanksSpinner.getVisibility() == View.VISIBLE)
+                    slideOutToRight(playersRanksSpinner);
+
+                    playersRanksSpinner.setVisibility(View.GONE);
                 }
                 if (s.length() == 0) {
                     matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
@@ -598,19 +795,26 @@ public abstract class  EditRequest extends AppCompatActivity {
         }
 
 
-        // check selected match type
-        String gameKey = app.getGameManager().getGameByName(gamesAutoCompleteTextView.getText().toString().trim()).getGameID();
-        if (matchTypeSpinner.getText().length() == 0 && checkIfCompetitive(gameKey) ) {
-            Toast.makeText(getApplicationContext(), R.string.new_request_type_match_error, Toast.LENGTH_LONG).show();
-            return false;
+        // check region
+        if (countrySpinner.getText().length()==0){
+            Toast.makeText(getApplicationContext(), R.string.new_request_region_error, Toast.LENGTH_LONG).show();
+            return false ;
         }
 
-
-        // check number of players
-        if (numberOfPlayersSpinner.getText().length() == 0) {
-            Toast.makeText(getApplicationContext(), R.string.new_request_players_number_error, Toast.LENGTH_LONG).show();
-            return false;
-        }
+//
+//        // check selected match type
+//        String gameKey = app.getGameManager().getGameByName(gamesAutoCompleteTextView.getText().toString().trim()).getGameID();
+//        if (matchTypeSpinner.getText().length() == 0 && checkIfCompetitive(gameKey) ) {
+//            Toast.makeText(getApplicationContext(), R.string.new_request_type_match_error, Toast.LENGTH_LONG).show();
+//            return false;
+//        }
+//
+//
+//        // check number of players
+//        if (numberOfPlayersSpinner.getText().length() == 0) {
+//            Toast.makeText(getApplicationContext(), R.string.new_request_players_number_error, Toast.LENGTH_LONG).show();
+//            return false;
+//        }
 
 
         return true;
@@ -635,6 +839,18 @@ public abstract class  EditRequest extends AppCompatActivity {
         String selectedRank = playersRanksSpinner.getText().toString().trim();
         String requestDescription = descriptionEdittext.getText().toString().trim();
         String chosenPlatform = selectedPlatform;
+
+
+
+        if (selectedRank.length() == 0)
+            selectedRank = "All Ranks";
+        if (requestDescription.length() == 0)
+            requestDescription = R.string.new_request_default_description_message + selectedGame +" ?";
+        if (selectedMatchType.length() ==0 )
+            selectedMatchType = "All Matches";
+        if (selectedPlayersNumber.length()==0)
+            selectedPlayersNumber="All Numbers";
+
 
 
         if (checkIsValidRequest())

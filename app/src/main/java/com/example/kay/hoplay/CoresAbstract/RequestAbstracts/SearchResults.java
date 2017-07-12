@@ -144,7 +144,7 @@ public abstract class SearchResults extends AppCompatActivity {
 
                         if (model.getPlatform().equalsIgnoreCase("PS") && !app.getUserInformation().getPSNAcc().equals("")){
                             OnClickHolders(model,v);
-                        }else if(model.getPlatform().equalsIgnoreCase("XBOX") && !app.getUserInformation().getPSNAcc().equals("")){
+                        }else if(model.getPlatform().equalsIgnoreCase("XBOX") && !app.getUserInformation().getXboxLiveAcc().equals("")){
                             OnClickHolders(model,v);
                         }else if(model.getPlatform().equalsIgnoreCase("PC") && app.getUserInformation().getPcGamesAcc().get(pcGameProvider) !=null){
                             OnClickHolders(model,v);
