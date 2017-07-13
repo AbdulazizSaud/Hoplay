@@ -18,6 +18,7 @@ import com.example.kay.hoplay.Models.UserInformation;
 import com.example.kay.hoplay.util.BitmapOptimizer;
 import com.example.kay.hoplay.util.GameManager;
 import com.example.kay.hoplay.util.TimeStamp;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -43,6 +44,7 @@ public class App extends Application implements FirebasePaths {
 
     private static App instance;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseUserNames;
     private DatabaseReference databaseUsersInfo;
@@ -72,6 +74,8 @@ public class App extends Application implements FirebasePaths {
         instance = this;
         mAuth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         getFirebaseDatabase().setPersistenceEnabled(true);
         databaseUserNames = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_USER_NAMES_ATTR);
@@ -223,17 +227,7 @@ public class App extends Application implements FirebasePaths {
 
 
     public String convertFromTimeStampToDate(long timeStamp) {
-
-        return getTimeAgo(timeStamp);
-//
-//        try {
-//
-//            DateFormat sdf = new SimpleDateFormat("MM/dd/yy");
-//            Date netDate = (new Date(Long.parseLong(timeStamp)));
-//            return sdf.format(netDate);
-//        } catch (Exception e) {
-//            return "null";
-//        }
+        return TimeStamp.getTimeAgoFromTimestamp(timeStamp);
     }
 
 
@@ -289,44 +283,9 @@ public class App extends Application implements FirebasePaths {
         return storage;
     }
 
-
-    private String getTimeAgo(long time) {
-        if (time < 1000000000000L) {
-            // if timestamp given in seconds, convert to millis
-            time *= 1000;
-        }
-
-        long now = System.currentTimeMillis();
-        ;
-        if (time > now || time <= 0) {
-            return null;
-        }
-
-
-        int SECOND_MILLIS = 1000;
-        int MINUTE_MILLIS = 60 * SECOND_MILLIS;
-        int HOUR_MILLIS = 60 * MINUTE_MILLIS;
-        int DAY_MILLIS = 24 * HOUR_MILLIS;
-
-        // TODO: localize
-        final long diff = now - time;
-        if (diff < 1000 * 60) {
-            return "just now";
-        } else if (diff < 2 * MINUTE_MILLIS) {
-            return "a minute ago";
-        } else if (diff < 50 * MINUTE_MILLIS) {
-            return diff / MINUTE_MILLIS + " minutes ago";
-        } else if (diff < 90 * MINUTE_MILLIS) {
-            return "an hour ago";
-        } else if (diff < 24 * HOUR_MILLIS) {
-            return diff / HOUR_MILLIS + " hours ago";
-        } else if (diff < 48 * HOUR_MILLIS) {
-            return "yesterday";
-        } else {
-            return diff / DAY_MILLIS + " days ago";
-        }
+    public FirebaseAnalytics getFirebaseAnalytics() {
+        return mFirebaseAnalytics;
     }
-
 }
 
 

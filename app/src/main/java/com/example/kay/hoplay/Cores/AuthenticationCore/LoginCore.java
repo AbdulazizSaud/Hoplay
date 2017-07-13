@@ -3,6 +3,7 @@ package com.example.kay.hoplay.Cores.AuthenticationCore;
 //hello
 
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import android.util.Log;
@@ -17,6 +18,7 @@ import com.example.kay.hoplay.R;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -74,7 +76,7 @@ public class LoginCore extends Login {
     // if fail , it will give the user a failed message
 
     @Override
-    protected void login(String username, String password) {
+    protected void login(final String username, String password) {
 
         if (!username.equals("") || !password.equals("")) {
 

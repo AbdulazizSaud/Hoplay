@@ -75,7 +75,7 @@ public abstract class MainAppMenu extends AppCompatActivity  {
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         instance = this;
-        //Thread.setDefaultUncaughtExceptionHandler(new ErrorHandler(this));
+        Thread.setDefaultUncaughtExceptionHandler(new ErrorHandler(this));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_app);
@@ -209,6 +209,27 @@ public abstract class MainAppMenu extends AppCompatActivity  {
         menuPagerAdapter.setParentRequestFragments(fragments);
         viewPagerMenu.setAdapter(menuPagerAdapter);
         viewPagerMenu.setCurrentItem(2);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                String res = data.getStringExtra("result");
+
+                if(res.equals("lobby"))
+                {
+                    viewPagerMenu.setCurrentItem(2);
+
+
+                } else if (res.equals("view profile"))
+                {
+                    String profileId = data.getStringExtra("profileId");
+
+                }
+
+            }
+        }
     }
 
     public abstract void OnStartActivity();

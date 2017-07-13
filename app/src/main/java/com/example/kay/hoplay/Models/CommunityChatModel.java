@@ -8,7 +8,7 @@ public class CommunityChatModel {
 
 
     // here it should be a behivors something like a opponent id , my id and so long.
-    private String chatKey,chatType,chatName,lastMsg,lastMsgDate,userPictureURL;
+    private String chatKey,chatType,chatName,lastMsg,lastMsgDate,userPictureURL,opponentId;
     private long chatCounter;
     private long timeStamp;
 
@@ -82,5 +82,13 @@ public class CommunityChatModel {
 
     public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public String getOpponentId() {
+        return opponentId;
+    }
+
+    public void setOpponentId(String opponentId) {
+        this.opponentId = opponentId;
     }
 }

@@ -2,7 +2,6 @@ package com.example.kay.hoplay.Cores;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 
 import com.example.kay.hoplay.CoresAbstract.Community;
@@ -60,7 +59,7 @@ public class CommunityCore extends Community implements FirebasePaths {
     };
 
     private void addNewPrivateChat(final DataSnapshot chatRef) {
-        String opponentKey = (String) chatRef.child(FIREBASE_OPPONENT_ID_ATTR).getValue();
+        final String opponentKey = (String) chatRef.child(FIREBASE_OPPONENT_ID_ATTR).getValue();
         if (opponentKey == null)
             return;
 
@@ -83,7 +82,7 @@ public class CommunityCore extends Community implements FirebasePaths {
                         try {
 
 
-                            addUserChatToList(chatRef.getKey(),
+                            CommunityChatModel communityChatModel = addUserChatToList(chatRef.getKey(),
                                     FIREBASE_PRIVATE_ATTR,
                                     userInfo.child("_username_").getValue(String.class),
                                     userInfo.child("_picUrl_").getValue(String.class),
@@ -91,6 +90,7 @@ public class CommunityCore extends Community implements FirebasePaths {
                                     lasMsgSnap.child("_time_stamp_").getValue(Long.class),
                                     lasMsgSnap.child("_counter_").getValue(Long.class)
                             );
+                            communityChatModel.setOpponentId(opponentKey);
 
                         } catch (NullPointerException e) {
 
@@ -120,14 +120,14 @@ public class CommunityCore extends Community implements FirebasePaths {
     private ChildEventListener publicChatListener = new ChildEventListener() {
         @Override
         public void onChildAdded(final DataSnapshot dataSnapshot, String s) {
-            addNewChat(dataSnapshot);
+            addNewPublicChat(dataSnapshot);
 
         }
 
         @Override
         public void onChildChanged(DataSnapshot dataSnapshot, String s) {
             // each time it's added a new thing
-            addNewChat(dataSnapshot);
+            addNewPublicChat(dataSnapshot);
         }
 
         @Override
@@ -146,7 +146,7 @@ public class CommunityCore extends Community implements FirebasePaths {
         }
     };
 
-    private void addNewChat(final DataSnapshot chatRef) {
+    private void addNewPublicChat(final DataSnapshot chatRef) {
         // on first time
         final DatabaseReference refCurrentChat = app.getDatabasChat().child(FIREBASE_PUBLIC_ATTR).child(chatRef.getKey());
         refCurrentChat.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -365,7 +365,10 @@ public class CommunityCore extends Community implements FirebasePaths {
         i.putExtra("room_name", model.getChatName());
         i.putExtra("room_picture", model.getUserPictureURL());
 
-        v.getContext().startActivity(i);
+        if(model.getChatType().equals(FIREBASE_PRIVATE_ATTR))
+            i.putExtra("opponent_key", model.getOpponentId());
+
+        app.getMainAppMenuCore().startActivityForResult(i,1);
     }
 
     private boolean isMe(String userKey) {
@@ -373,8 +376,7 @@ public class CommunityCore extends Community implements FirebasePaths {
     }
 
 
-    private void addUserChatToList(String chatKey, String chatType, String chatName, String pictureURL, String lastMessage, long timeStamp, long messageNumber) {
-
+    private CommunityChatModel addUserChatToList(String chatKey, String chatType, String chatName, String pictureURL, String lastMessage, long timeStamp, long messageNumber) {
         CommunityChatModel communityUserList = new CommunityChatModel();
         communityUserList.setChatKey(chatKey);
         communityUserList.setChatType(chatType);
@@ -384,6 +386,7 @@ public class CommunityCore extends Community implements FirebasePaths {
         communityUserList.setChatCounter(messageNumber);
         communityUserList.setTimeStamp(timeStamp);
         addToList(communityUserList);
+        return communityUserList;
     }
 
 
@@ -397,6 +400,9 @@ public class CommunityCore extends Community implements FirebasePaths {
             chatRef.removeValue();
         }
     }
+
+
+
 
     @Override
     public void onDestroy() {

@@ -29,6 +29,7 @@ import com.example.kay.hoplay.Adapters.ChatAdapter;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameProvider;
 import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.Models.RequestModel;
@@ -113,16 +114,10 @@ public abstract class Chat extends AppCompatActivity {
 
 
 
-        // Users toolbar :
-        Toolbar toolbar = (Toolbar) findViewById(R.id.users_toolbar);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
+
 
 
         app = App.getInstance();
-
-        initControls();
-
 
         //load message
         Intent i = getIntent();
@@ -131,6 +126,20 @@ public abstract class Chat extends AppCompatActivity {
         roomName = i.getStringExtra("room_name");
         roomPictureUrl = i.getStringExtra("room_picture");
         opponentId = i.getStringExtra("friend_key");
+
+
+        chatType = (chatRoomType.equals(FirebasePaths.FIREBASE_PRIVATE_ATTR)) ? TYPE.PRIVATE:TYPE.PUBLIC;
+
+        // Users toolbar :
+        Toolbar toolbar = (Toolbar) findViewById(R.id.users_toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+
+        initControls();
+
+
+
+
 
         // set up chat app mechanisms
         setupChat();
@@ -145,7 +154,6 @@ public abstract class Chat extends AppCompatActivity {
 
         if (chatType == TYPE.PRIVATE )
         getMenuInflater().inflate(R.menu.menu_chat, menu);
-
         else
         getMenuInflater().inflate(R.menu.menu_request_chat,menu);
 
@@ -158,7 +166,6 @@ public abstract class Chat extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
 
         // view profile action
         if (id == R.id.view_profile_menu_action) {

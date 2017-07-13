@@ -3,6 +3,7 @@ package com.example.kay.hoplay.Cores.ChatCore;
 import android.content.Intent;
 import android.util.Log;
 
+import com.example.kay.hoplay.Cores.UserProfileCores.ViewFriendProfileCore;
 import com.example.kay.hoplay.CoresAbstract.ChatAbstracts.Chat;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.PlayerModel;
@@ -28,8 +29,11 @@ public class ChatCore extends Chat implements FirebasePaths {
     private String chatRoomKey = null;
     private String roomName = null, roomPictureUrl = null, chatRoomType = null;
     private long lastMessageCounter;
-    private boolean usersLoaded =false;
+    private boolean usersLoaded = false;
     private DatabaseReference refRoom, refMessages;
+    private String opponentId;
+    private boolean cutLoob = false;
+
     private ChildEventListener messagesPacketsListener = new ChildEventListener() {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -59,8 +63,6 @@ public class ChatCore extends Chat implements FirebasePaths {
         }
     };
 
-    private boolean cutLoob=false;
-
     private ValueEventListener counterListener = new ValueEventListener() {
 
 
@@ -86,8 +88,7 @@ public class ChatCore extends Chat implements FirebasePaths {
 
     // set up chat app
     @Override
-    public void setupChat()
-    {
+    public void setupChat() {
 
         //load message
         Intent i = getIntent();
@@ -98,8 +99,15 @@ public class ChatCore extends Chat implements FirebasePaths {
 
         final boolean isPrivate = chatRoomType.equals(FIREBASE_PRIVATE_ATTR);
         final String currentUID = app.getUserInformation().getUID();
+        String pathChatRoomType;
 
-        String pathChatRoomType = (isPrivate) ? FB_PRIVATE_CHAT_PATH:FB_PUBLIC_CHAT_PATH;
+        if (isPrivate) {
+            pathChatRoomType = FB_PRIVATE_CHAT_PATH;
+            opponentId = i.getStringExtra("opponent_key");
+        } else {
+            pathChatRoomType = FB_PUBLIC_CHAT_PATH;
+            opponentId = null;
+        }
 
         refRoom = app.getFirebaseDatabase().getReferenceFromUrl(pathChatRoomType + chatRoomKey);
         refMessages = refRoom.child("_messages_");
@@ -113,27 +121,25 @@ public class ChatCore extends Chat implements FirebasePaths {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                for(final DataSnapshot users :dataSnapshot.getChildren())
-                {
+                for (final DataSnapshot users : dataSnapshot.getChildren()) {
 
-                    if(isPrivate && currentUID.equals(users.getKey()))
+                    if (isPrivate && currentUID.equals(users.getKey()))
                         continue;
-                    if(isPrivate && cutLoob)
+                    if (isPrivate && cutLoob)
                         break;
 
-                    app.getDatabaseUsersInfo().child(users.getKey()+"/"+FIREBASE_DETAILS_ATTR)
+                    app.getDatabaseUsersInfo().child(users.getKey() + "/" + FIREBASE_DETAILS_ATTR)
                             .addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                    String username =  dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
+                                    String username = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
 
-                                    playerOnChat.put(users.getKey(),new PlayerModel(users.getKey(),username));
+                                    playerOnChat.put(users.getKey(), new PlayerModel(users.getKey(), username));
 
-                                    if(!isPrivate) {
+                                    if (!isPrivate) {
                                         addUserToSubtitle(username);
-                                    }
-                                    else{
+                                    } else {
                                         String bio = dataSnapshot.child(FIREBASE_BIO_ATTR).getValue(String.class);
                                         addUserToSubtitle(bio);
                                         cutLoob = true;
@@ -161,14 +167,14 @@ public class ChatCore extends Chat implements FirebasePaths {
         CallbackHandlerCondition callbackHandlerCondition = new CallbackHandlerCondition() {
             @Override
             public boolean callBack() {
-                if(usersLoaded) {
+                if (usersLoaded) {
                     setRoomDetails(roomName, roomPictureUrl);
                     loadMessages();
                 }
                 return usersLoaded;
             }
         };
-        new HandlerCondition(callbackHandlerCondition,0);
+        new HandlerCondition(callbackHandlerCondition, 0);
 
     }
 
@@ -180,8 +186,7 @@ public class ChatCore extends Chat implements FirebasePaths {
     }
 
 
-    private void addMessage(DataSnapshot dataSnapshot)
-    {
+    private void addMessage(DataSnapshot dataSnapshot) {
 
         if (isEmpty(dataSnapshot))
             return;
@@ -195,10 +200,10 @@ public class ChatCore extends Chat implements FirebasePaths {
 
         PlayerModel playerModel = playerOnChat.get(senderId);
 
-        if(playerModel != null)
+        if (playerModel != null)
             senderUsername = playerModel.getUsername();
 
-        addMessage(chatKey,senderId,senderUsername, message, isYou);
+        addMessage(chatKey, senderId, senderUsername, message, isYou);
 
     }
 
@@ -209,12 +214,12 @@ public class ChatCore extends Chat implements FirebasePaths {
 
             String messageKey = refMessages.push().getKey();
 
-            HashMap<String,Object> map = new HashMap<>();
-            map.put("_message_key_",messageKey);
-            map.put("_message_",messageText);
-            map.put("_username_",app.getUserInformation().getUID());
-            map.put("_time_stamp_",ServerValue.TIMESTAMP);
-            map.put("_counter_",++lastMessageCounter);
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("_message_key_", messageKey);
+            map.put("_message_", messageText);
+            map.put("_username_", app.getUserInformation().getUID());
+            map.put("_time_stamp_", ServerValue.TIMESTAMP);
+            map.put("_counter_", ++lastMessageCounter);
 
             DatabaseReference messageRef = refMessages.child("_packets_").child(messageKey);
             messageRef.setValue(map);
@@ -225,12 +230,21 @@ public class ChatCore extends Chat implements FirebasePaths {
 
     @Override
     protected void viewPorfileProccess() {
+        if (opponentId == null)
+            return;
+
+        Intent i = new Intent(this, ViewFriendProfileCore.class);
+        i.putExtra("user_key", opponentId);
+        startActivity(i);
 
     }
 
     @Override
     protected void viewLobbyProccess() {
-
+        Intent intent = new Intent();
+        intent.putExtra("result", "lobby");
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
 

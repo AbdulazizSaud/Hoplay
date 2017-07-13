@@ -26,6 +26,8 @@ public class ErrorHandler implements java.lang.Thread.UncaughtExceptionHandler {
     }
 
     public void uncaughtException(Thread thread, Throwable exception) {
+        System.exit(1); // kill off the crashed app
+
 
     }
 

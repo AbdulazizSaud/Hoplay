@@ -137,7 +137,7 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
             gameModel =  app.getGameManager().getGameById(requestModel.getGameId());
 
             adminUser = requestModel.getAdminName();
-            adminPicture = requestModel.getPlayers().get(0).getProfilePicture();
+            //adminPicture = requestModel.getPlayers().get(0).getProfilePicture();
 
             lobby.setLobbyInfo(
                     gameModel.getGamePhotoUrl(),
