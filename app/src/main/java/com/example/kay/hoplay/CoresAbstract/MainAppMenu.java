@@ -75,7 +75,7 @@ public abstract class MainAppMenu extends AppCompatActivity  {
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         instance = this;
-        Thread.setDefaultUncaughtExceptionHandler(new ErrorHandler(this));
+        ///Thread.setDefaultUncaughtExceptionHandler(new ErrorHandler(this));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_app);
