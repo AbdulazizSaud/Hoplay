@@ -569,7 +569,7 @@ public abstract class  EditRequest extends AppCompatActivity {
 
 
             // Next focus
-                matchTypeSpinner.requestFocus();
+//                matchTypeSpinner.requestFocus();
 
             }
         });
@@ -594,7 +594,7 @@ public abstract class  EditRequest extends AppCompatActivity {
                 }
 
                 // next focus
-                numberOfPlayersSpinner.requestFocus();
+//                numberOfPlayersSpinner.requestFocus();
             }
         });
 
@@ -620,7 +620,7 @@ public abstract class  EditRequest extends AppCompatActivity {
                 numberOfPlayersSpinner.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.text_color));
 
                 // Next Focus
-                descriptionEdittext.requestFocus();
+//                descriptionEdittext.requestFocus();
 
             }
         });
@@ -691,7 +691,7 @@ public abstract class  EditRequest extends AppCompatActivity {
 
 
                 // next focus
-                countrySpinner.requestFocus();
+//                countrySpinner.requestFocus();
             }
         });
 

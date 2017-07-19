@@ -494,8 +494,11 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
                     }
                 }
 
-                // Next focus
-                matchTypeSpinner.requestFocus();
+
+
+
+//                // Next focus
+//                matchTypeSpinner.requestFocus();
             }
         });
         countrySpinner.addTextChangedListener(new TextWatcher() {
@@ -518,8 +521,7 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
                 }
 
-                // Next Focus
-                numberOfPlayersSpinner.requestFocus();
+//                numberOfPlayersSpinner.requestFocus();
             }
         });
 
@@ -544,9 +546,6 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
                 }
                 numberOfPlayersSpinner.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.text_color));
 
-
-                // Next Focus
-                descriptionEdittext.requestFocus();
 
             }
         });
@@ -615,8 +614,8 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
                     matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
                 }
 
-                // Next Focus
-                countrySpinner.requestFocus();
+//                // Next Focus
+//                countrySpinner.requestFocus();
             }
 
 

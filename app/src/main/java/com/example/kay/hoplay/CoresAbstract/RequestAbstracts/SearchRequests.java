@@ -492,7 +492,7 @@ public abstract class SearchRequests extends Fragment {
                 }
 
                 // Next Focus
-                matchTypeSpinner.requestFocus();
+//                matchTypeSpinner.requestFocus();
 
             }
         });
@@ -524,8 +524,8 @@ public abstract class SearchRequests extends Fragment {
                 countrySpinner.setTextColor(ContextCompat.getColor(getContext(), R.color.text_color));
                 countrySpinner.setTypeface(playbold);
 
-                // NEXT FOCUS
-                numberOfPlayersSpinner.requestFocus();
+//                // NEXT FOCUS
+//                numberOfPlayersSpinner.requestFocus();
             }
         });
 
