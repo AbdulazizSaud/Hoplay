@@ -124,6 +124,7 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
                         if (!receivedRequestModel.getRank().equals(rank))
                             continue;
 
+                    if(!matchType.equals("All Matches"))
                     if (!matchType.equals(receivedRequestModel.getMatchType()))
                         continue;
 
