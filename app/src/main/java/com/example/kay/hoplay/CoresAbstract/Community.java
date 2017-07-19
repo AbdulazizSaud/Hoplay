@@ -199,9 +199,19 @@ public abstract class Community extends Fragment {
                 }
 
 
+
                 communityHolder.setCommunitySubtitle(model.getLastMsg());
 
-                communityHolder.setCounter(String.valueOf(model.getChatCounter()));
+
+                // Hide the counter if unseen messages less than 1 message
+                if (model.getChatCounter()<1){
+                    communityHolder.getChatCounterView().setVisibility(View.GONE);
+                }
+                else{
+                    communityHolder.setCounter(String.valueOf(model.getChatCounter()));
+                }
+
+
                 holder.setTime(app.convertFromTimeStampToDate(model.getTimeStamp()));
 
                 new HandlerCondition(new CallbackHandlerCondition() {

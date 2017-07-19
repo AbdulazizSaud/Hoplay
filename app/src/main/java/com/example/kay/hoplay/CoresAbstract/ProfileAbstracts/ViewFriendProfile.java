@@ -179,7 +179,10 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
                     }
                     holder.setTitle(capitlizedGameName);
                 }else {
-                    holder.setTitle(capitlizedGameName);
+                    if (capitlizedGameName.equalsIgnoreCase("cs:go")){
+                        holder.setTitle(capitlizedGameName.toUpperCase());
+                    } else
+                        holder.setTitle(capitlizedGameName);
                 }
 
                 app.loadingImage(getApplicationContext(),holder,model.getGamePhotoUrl());

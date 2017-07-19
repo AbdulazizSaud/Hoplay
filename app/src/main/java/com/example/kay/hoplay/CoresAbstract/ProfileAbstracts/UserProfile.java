@@ -293,7 +293,10 @@ public abstract class UserProfile extends Fragment {
                     }
                     holder.setTitle(capitlizedGameName);
                 }else {
-                    holder.setTitle(capitlizedGameName);
+                    if (capitlizedGameName.equalsIgnoreCase("cs:go")){
+                        holder.setTitle(capitlizedGameName.toUpperCase());
+                    } else
+                        holder.setTitle(capitlizedGameName);
                 }
 
 

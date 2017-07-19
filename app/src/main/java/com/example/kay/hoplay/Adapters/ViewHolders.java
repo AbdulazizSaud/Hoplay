@@ -73,6 +73,10 @@ public abstract class ViewHolders extends RecyclerView.ViewHolder  implements Vi
             this.chatLastMessage.setText(subtitle);
         }
 
+        public TextView getChatCounterView(){
+            return chatNewMessagesCount;
+        }
+
         public void setCounter(String counter){
             this.chatNewMessagesCount.setText(counter);
         }

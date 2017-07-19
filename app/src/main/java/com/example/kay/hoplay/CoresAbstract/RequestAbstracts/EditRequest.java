@@ -461,7 +461,10 @@ public abstract class  EditRequest extends AppCompatActivity {
                     }
                     gamesAutoCompleteTextView.setText(capitlizedGameName);
                 }else {
-                    gamesAutoCompleteTextView.setText(capitlizedGameName);
+                    if (capitlizedGameName.equalsIgnoreCase("cs:go")){
+                        gamesAutoCompleteTextView.setText(capitlizedGameName.toUpperCase());
+                    } else
+                        gamesAutoCompleteTextView.setText(capitlizedGameName);
                 }
 
 
@@ -565,7 +568,8 @@ public abstract class  EditRequest extends AppCompatActivity {
 
 
 
-
+            // Next focus
+                matchTypeSpinner.requestFocus();
 
             }
         });
@@ -589,7 +593,8 @@ public abstract class  EditRequest extends AppCompatActivity {
 
                 }
 
-
+                // next focus
+                numberOfPlayersSpinner.requestFocus();
             }
         });
 
@@ -614,6 +619,8 @@ public abstract class  EditRequest extends AppCompatActivity {
                 }
                 numberOfPlayersSpinner.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.text_color));
 
+                // Next Focus
+                descriptionEdittext.requestFocus();
 
             }
         });
@@ -681,6 +688,10 @@ public abstract class  EditRequest extends AppCompatActivity {
                 if (s.length() == 0) {
                     matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
                 }
+
+
+                // next focus
+                countrySpinner.requestFocus();
             }
         });
 

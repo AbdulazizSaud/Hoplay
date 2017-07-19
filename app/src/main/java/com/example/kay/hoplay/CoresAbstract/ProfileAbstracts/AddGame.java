@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -237,9 +238,13 @@ public abstract class AddGame extends AppCompatActivity {
                             cpWord= capitlizedGameName.substring(i+1,i+2).toUpperCase() + capitlizedGameName.substring(i+2);
                             capitlizedGameName = capitlizedGameName.replace(capitlizedGameName.charAt(i+1),cpWord.charAt(0));
                         }
+
                     }
                     gameHolder.setTitle(capitlizedGameName);
                 }else {
+                    if (capitlizedGameName.equalsIgnoreCase("cs:go")){
+                        gameHolder.setTitle(capitlizedGameName.toUpperCase());
+                    } else
                     gameHolder.setTitle(capitlizedGameName);
                 }
 

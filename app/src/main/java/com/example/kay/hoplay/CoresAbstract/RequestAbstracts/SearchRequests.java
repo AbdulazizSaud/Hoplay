@@ -459,7 +459,10 @@ public abstract class SearchRequests extends Fragment {
                     }
                     searchGameAutoCompleteTextView.setText(capitlizedGameName);
                 }else {
-                    searchGameAutoCompleteTextView.setText(capitlizedGameName);
+                    if (capitlizedGameName.equalsIgnoreCase("cs:go")){
+                        searchGameAutoCompleteTextView.setText(capitlizedGameName.toUpperCase());
+                    } else
+                        searchGameAutoCompleteTextView.setText(capitlizedGameName);
                 }
 
 
@@ -487,6 +490,9 @@ public abstract class SearchRequests extends Fragment {
                     ranksSpinner.setVisibility(View.GONE);
 
                 }
+
+                // Next Focus
+                matchTypeSpinner.requestFocus();
 
             }
         });
@@ -518,7 +524,8 @@ public abstract class SearchRequests extends Fragment {
                 countrySpinner.setTextColor(ContextCompat.getColor(getContext(), R.color.text_color));
                 countrySpinner.setTypeface(playbold);
 
-
+                // NEXT FOCUS
+                numberOfPlayersSpinner.requestFocus();
             }
         });
 
@@ -545,6 +552,9 @@ public abstract class SearchRequests extends Fragment {
                 }
                 numberOfPlayersSpinner.setTextColor(ContextCompat.getColor(getContext(), R.color.text_color));
                 numberOfPlayersSpinner.setTypeface(playbold);
+
+
+
 
             }
         });

@@ -131,7 +131,9 @@ public abstract class MainAppMenu extends AppCompatActivity  {
         BottomBarTab unreadMessages = bottomBar.getTabAtPosition(1);
 
 
-        unreadMessages.setBadgeCount(5);
+
+        // CHAT NOTIFICATION COUNTER
+//        unreadMessages.setBadgeCount(5);
 
         viewPagerMenu.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
