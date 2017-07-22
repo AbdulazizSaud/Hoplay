@@ -68,6 +68,7 @@ public class App extends Application implements FirebasePaths {
     private MainAppMenuCore mainAppMenuCore;
 
 
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -286,6 +287,9 @@ public class App extends Application implements FirebasePaths {
     public FirebaseAnalytics getFirebaseAnalytics() {
         return mFirebaseAnalytics;
     }
+
+
+
 }
 
 

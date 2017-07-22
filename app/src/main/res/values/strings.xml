@@ -213,6 +213,7 @@
     <string name="search_request_fragment_platform_error">You have not specified the platform</string>
     <string name="search_request_fragment_select_game_error">You have not specified the game</string>
     <string name="search_request_fragment_no_game_error">You do not have this game in your library. add the game then continue</string>
+    <string name="search_request_region_error">You have not specified the region</string>
 
 
     <!--                                Search Request Fragment Layout                                           -->

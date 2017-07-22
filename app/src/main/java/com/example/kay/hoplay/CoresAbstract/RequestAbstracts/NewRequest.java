@@ -497,8 +497,9 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
 
 
-//                // Next focus
-//                matchTypeSpinner.requestFocus();
+
+                // Next focus
+                matchTypeSpinner.requestFocus();
             }
         });
         countrySpinner.addTextChangedListener(new TextWatcher() {

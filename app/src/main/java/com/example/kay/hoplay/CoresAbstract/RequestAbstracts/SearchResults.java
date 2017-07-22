@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -138,6 +139,50 @@ public abstract class SearchResults extends AppCompatActivity {
                 holder.setNumberOfPlayers(model.getPlayers().size()+"/"+String.valueOf(model.getPlayerNumber()));
                 holder.setSubtitle2(model.getAdminName());
 
+                // end-dots if description is more than 36 characters
+                if (model.getDescription().length() >= 36)
+                {
+                    StringBuilder dotsDescription = new StringBuilder(model.getDescription());
+                    dotsDescription.setCharAt(36,'.');
+                    dotsDescription.setCharAt(37,'.');
+                    dotsDescription.setCharAt(38,'.');
+                    dotsDescription.setCharAt(39,'.');
+                    dotsDescription.setCharAt(40,'.');
+                    holder.setSubtitle(dotsDescription.toString());
+                }
+
+
+
+                // Set the request image border width
+                holder.getPicture().setBorderWidth(8);
+
+                // Styling the title and request image border
+                if (model.getPlatform().equalsIgnoreCase("PC"))
+                {
+                    holder.getPicture().setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.pc_color));
+                    holder.getTitleView().setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.pc_color));
+                } else if (model.getPlatform().equalsIgnoreCase("PS")){
+                    holder.getPicture().setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.ps_color));
+                    holder.getTitleView().setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.ps_color));
+                }else {
+                    holder.getPicture().setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.xbox_color));
+                    holder.getTitleView().setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.xbox_color));
+                }
+
+
+
+
+                //Match type icon
+                if (model.getMatchType().equalsIgnoreCase("Competitive"))
+                    holder.getSubtitleImageview().setImageResource(R.drawable.ic_whatshot_competitive_18dp);
+                else if(model.getMatchType().equalsIgnoreCase("Quick Match"))
+                    holder.getSubtitleImageview().setImageResource(R.drawable.ic_whatshot_quick_match_18dp);
+                else
+                    holder.getSubtitleImageview().setImageResource(R.drawable.ic_whatshot_unfocused_24dp);
+
+
+
+                // Game provider settings
                 holder.getView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

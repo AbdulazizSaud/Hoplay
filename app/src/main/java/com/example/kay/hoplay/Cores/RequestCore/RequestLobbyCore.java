@@ -1,6 +1,7 @@
 package com.example.kay.hoplay.Cores.RequestCore;
 
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 
@@ -9,6 +10,7 @@ import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.Models.RequestModel;
+import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Services.CallbackHandlerCondition;
 import com.example.kay.hoplay.Services.HandlerCondition;
 import com.example.kay.hoplay.util.Request;
@@ -48,6 +50,9 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
                         player.setProfilePicture(picture);
 
 
+                        // set the lobby border width
+                        lobby.setGameBorderWidth(8);
+
                         if (player.getUID().equals(app.getUserInformation().getUID()))
                             lobby.getJoinButton().setVisibility(View.INVISIBLE);
 
@@ -57,11 +62,14 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
                             player.setGamePovider("PSN Account");
                             player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PS_GAME_PROVIDER_ATTR).getValue(String.class));
+                            lobby.setGameBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.ps_color));
+
                         }
                         else if (requestModel.getPlatform().equalsIgnoreCase("XBOX"))
                         {
                             player.setGamePovider("XBOX Account");
                             player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_XBOX_GAME_PROVIDER_ATTR).getValue(String.class));
+                            lobby.setGameBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.xbox_color));
                         }
                         else{
                             String pcGameProvider = app.getGameManager().getPcGamesWithProviders().get(requestModel.getGameId().trim());
@@ -69,10 +77,21 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
                             player.setGamePovider(pcGameProvider);
                             if(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR+"/"+pcGameProvider).getValue() !=null)
                                 player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR+"/"+pcGameProvider).getValue(String.class));
+
+                            lobby.setGameBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.pc_color));
                         }
 
                         lobby.addPlayer(player);
                         requestModel.addPlayer(player);
+
+
+                        // Set match type image
+                        if (requestModel.getMatchType().equalsIgnoreCase("Competitive"))
+                            lobby.setMatchImage(R.drawable.ic_whatshot_competitive_24dp);
+                        else if (requestModel.getMatchType().equalsIgnoreCase("Qhick Match"))
+                            lobby.setMatchImage(R.drawable.ic_whatshot_quick_match_24dp);
+                        else
+                            lobby.setMatchImage(R.drawable.ic_whatshot_unfocused_24dp);
 
                     }
 

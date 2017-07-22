@@ -11,6 +11,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -69,8 +70,9 @@ public abstract class UserList extends AppCompatActivity {
         @Override
         public void OnBindHolder(final ViewHolders holder, final FriendCommonModel model , final int position) {
 
-
-
+            // remove loading dialog if friends > 0
+            if (userdListAdapter.getItemCount()>0)
+                hideLoadingAnimation();
 
             holder.getView().setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -175,6 +177,8 @@ public abstract class UserList extends AppCompatActivity {
 
         //testList();
         onStartActivity();
+
+
     }
 
     private void setupRecyclerView() {

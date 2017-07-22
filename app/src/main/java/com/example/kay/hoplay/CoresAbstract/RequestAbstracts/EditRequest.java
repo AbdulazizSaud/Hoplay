@@ -569,7 +569,7 @@ public abstract class  EditRequest extends AppCompatActivity {
 
 
             // Next focus
-//                matchTypeSpinner.requestFocus();
+                matchTypeSpinner.requestFocus();
 
             }
         });

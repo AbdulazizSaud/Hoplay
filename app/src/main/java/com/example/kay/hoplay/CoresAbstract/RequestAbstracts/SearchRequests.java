@@ -107,21 +107,26 @@ public abstract class SearchRequests extends Fragment {
 
 
         // Load  user games
-        new CountDownTimer(3000, 1000) {
+        new CountDownTimer(2000, 1000) {
 
             public void onTick(long millisUntilFinished) {
+
+
+                ArrayList<GameModel> games = app.getGameManager().getAllGamesArrayList();
+                    for (GameModel gameModel : games)
+                    {
+                        gameAdapter.add(gameModel.getGameName());
+                    }
+
 
             }
 
             public void onFinish() {
 
-                ArrayList<GameModel> games = app.getGameManager().getAllGamesArrayList();
-                for (GameModel gameModel : games)
-                {
-                    gameAdapter.add(gameModel.getGameName());
-                }
+
             }
         }.start();
+
 
 
 
@@ -152,27 +157,35 @@ public abstract class SearchRequests extends Fragment {
     private String loadGameInformation(String selectedGame) {
 
 
-        GameModel gameModel = app.getGameManager().getGameByName(selectedGame);
+        final GameModel gameModel = app.getGameManager().getGameByName(selectedGame);
+
+
 
         playersNumberAdapter.clear();
+        playersRanksAdapter.clear();
 
-        playersNumberAdapter.add("All Numbers");
-        for (int i = 1; i <= gameModel.getMaxPlayers(); i++) {
-            playersNumberAdapter.add(Integer.toString(i));
-        }
+        if (gameModel!=null) {
+            playersNumberAdapter.add("All Numbers");
+            for (int i = 2; i <= gameModel.getMaxPlayers(); i++) {
+                playersNumberAdapter.add(Integer.toString(i));
+            }
 
             playersNumberAdapter.notifyDataSetChanged();
 
 
-        playersRanksAdapter.clear();
-        playersRanksAdapter.add("All Ranks");
-        for (Rank rank : gameModel.getGameRanks().getRanksList()) {
-            playersRanksAdapter.add(rank.getRankName());
+
+
+
+            playersRanksAdapter.add("All Ranks");
+            for (Rank rank : gameModel.getGameRanks().getRanksList()) {
+                playersRanksAdapter.add(rank.getRankName());
+            }
+
+            playersRanksAdapter.notifyDataSetChanged();
         }
 
-        playersRanksAdapter.notifyDataSetChanged();
-
-
+        if (gameModel==null)
+            return "";
 
         return gameModel.getGameID();
     }
@@ -288,9 +301,8 @@ public abstract class SearchRequests extends Fragment {
 
 
                 // default values
-                if (rank.length() == 0)
+
                     rank = "All Ranks";
-                if (matchType.length() ==0 )
                     matchType = "All Matches";
 //                if (selectedPlayersNumber.length()==0)
 //                    selectedPlayersNumber="All Numbers";
@@ -302,8 +314,13 @@ public abstract class SearchRequests extends Fragment {
                     int number = numberOfPlayersSpinner.getText().toString().trim().equals("All Numbers") ? 0:Integer.parseInt(numberOfPlayersSpinner.getText().toString().trim());
                     playersNumber = number ;
                 }
+
+                if (!ranksSpinner.getText().toString().trim().isEmpty())
                  rank = ranksSpinner.getText().toString().trim();
+
+                if (!matchTypeSpinner.getText().toString().trim().isEmpty())
                  matchType =matchTypeSpinner.getText().toString().trim();
+
                 RequestModel requestModel;
 
                 if(checkIsValidSearch()){
@@ -431,8 +448,69 @@ public abstract class SearchRequests extends Fragment {
                     searchGameAutoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_games_unfocused_24dp, 0, 0, 0);
                 }
 
+                matchTypeSpinner.setVisibility(View.GONE);
+                numberOfPlayersSpinner.setVisibility(View.GONE);
+
+                // load game standards
+                numberOfPlayersSpinner.setVisibility(View.VISIBLE);
+
+
+                // To clear previous selections
                 numberOfPlayersSpinner.setText("");
                 ranksSpinner.setText("");
+
+
+                // Load max players
+                String gameKey = loadGameInformation(s.toString());
+
+
+
+                if (checkIfCompetitive(gameKey)) {
+                    matchTypeSpinner.setVisibility(View.VISIBLE);
+                    slideInFromLeft(matchTypeSpinner);
+
+                    // In case the user already selected a match type and he change the game
+                    if (matchTypeSpinner.getText().toString().equalsIgnoreCase("Competitive")) {
+                        matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_competitive_24dp, 0, 0, 0);
+
+                        if (ranksSpinner.getVisibility() != View.VISIBLE)
+                            slideInFromLeft(ranksSpinner);
+
+                        ranksSpinner.setVisibility(View.VISIBLE);
+                    }
+                    else if (matchTypeSpinner.getText().toString().equalsIgnoreCase("Quick Match")) {
+                        matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_quick_match_24dp, 0, 0, 0);
+
+                        if (ranksSpinner.getVisibility() == View.VISIBLE)
+                            slideOutToRight(ranksSpinner);
+
+                        ranksSpinner.setVisibility(View.GONE);
+
+                    }
+                    else if (matchTypeSpinner.getText().toString().equalsIgnoreCase("All Matches")){
+                        matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+
+                        if (ranksSpinner.getVisibility() == View.VISIBLE)
+                            slideOutToRight(ranksSpinner);
+
+                        ranksSpinner.setVisibility(View.GONE);
+                    }
+                    if (matchTypeSpinner.length() == 0) {
+                        matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+                    }
+
+                } else {
+                    if (matchTypeSpinner.isShown())
+                        slideOutToRight(matchTypeSpinner);
+                    slideOutToRight(ranksSpinner);
+                    matchTypeSpinner.setVisibility(View.GONE);
+                    ranksSpinner.setVisibility(View.GONE);
+
+                }
+
+
+
+
             }
         });
 
@@ -474,25 +552,52 @@ public abstract class SearchRequests extends Fragment {
                 // Load max players
                 String gameKey = loadGameInformation(name);
 
-
                 if (checkIfCompetitive(gameKey)) {
                     matchTypeSpinner.setVisibility(View.VISIBLE);
-                    ranksSpinner.setVisibility(View.VISIBLE);
                     slideInFromLeft(matchTypeSpinner);
-                    slideInFromLeft(ranksSpinner);
+
+                    // In case the user already selected a match type and he change the game
+                    if (matchTypeSpinner.getText().toString().equalsIgnoreCase("Competitive")) {
+                        matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_competitive_24dp, 0, 0, 0);
+
+                        if (ranksSpinner.getVisibility() != View.VISIBLE)
+                            slideInFromLeft(ranksSpinner);
+
+                        ranksSpinner.setVisibility(View.VISIBLE);
+                    }
+                    else if (matchTypeSpinner.getText().toString().equalsIgnoreCase("Quick Match")) {
+                        matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_quick_match_24dp, 0, 0, 0);
+
+                        if (ranksSpinner.getVisibility() == View.VISIBLE)
+                            slideOutToRight(ranksSpinner);
+
+                        ranksSpinner.setVisibility(View.GONE);
+
+                    }
+                    else if (matchTypeSpinner.getText().toString().equalsIgnoreCase("All Matches")){
+                        matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+
+                        if (ranksSpinner.getVisibility() == View.VISIBLE)
+                            slideOutToRight(ranksSpinner);
+
+                        ranksSpinner.setVisibility(View.GONE);
+                    }
+                    if (matchTypeSpinner.length() == 0) {
+                        matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+                    }
 
                 } else {
                     if (matchTypeSpinner.isShown())
                         slideOutToRight(matchTypeSpinner);
                     slideOutToRight(ranksSpinner);
-
                     matchTypeSpinner.setVisibility(View.GONE);
                     ranksSpinner.setVisibility(View.GONE);
 
                 }
 
+
                 // Next Focus
-//                matchTypeSpinner.requestFocus();
+                matchTypeSpinner.requestFocus();
 
             }
         });
@@ -601,13 +706,26 @@ public abstract class SearchRequests extends Fragment {
                 if (s.toString().equalsIgnoreCase("Competitive")) {
                     matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_competitive_24dp, 0, 0, 0);
 
-                    slideInFromLeft(ranksSpinner);
+                    if (ranksSpinner.getVisibility() != View.VISIBLE)
+                        slideInFromLeft(ranksSpinner);
+
                     ranksSpinner.setVisibility(View.VISIBLE);
                 }
                 if (s.toString().equalsIgnoreCase("Quick Match")) {
                     matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_quick_match_24dp, 0, 0, 0);
 
-                    slideOutToRight(ranksSpinner);
+                    if (ranksSpinner.getVisibility() == View.VISIBLE)
+                        slideOutToRight(ranksSpinner);
+
+                    ranksSpinner.setVisibility(View.GONE);
+
+                }
+                if (s.toString().equalsIgnoreCase("All Matches")){
+                    matchTypeSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_whatshot_unfocused_24dp, 0, 0, 0);
+
+                    if (ranksSpinner.getVisibility() == View.VISIBLE)
+                        slideOutToRight(ranksSpinner);
+
                     ranksSpinner.setVisibility(View.GONE);
                 }
                 if (s.length() == 0) {
@@ -641,6 +759,13 @@ public abstract class SearchRequests extends Fragment {
             Toast.makeText(getContext(), R.string.search_request_fragment_no_game_error, Toast.LENGTH_LONG).show();
             return false;
         }
+
+        // check region
+        if (countrySpinner.getText().length()==0){
+            Toast.makeText(getContext(), R.string.search_request_region_error, Toast.LENGTH_LONG).show();
+            return false ;
+        }
+
 
         return true;
     }

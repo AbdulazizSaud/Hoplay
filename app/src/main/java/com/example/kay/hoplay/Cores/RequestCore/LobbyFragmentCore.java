@@ -55,7 +55,9 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
                             lobby.getJoinButton().setVisibility(View.INVISIBLE);
 
                         // set the lobby border width
-                        lobby.setGameBorderWidth(6);
+                        lobby.setGameBorderWidth(8);
+
+
 
                         if (requestModelRefrance.getPlatform().equalsIgnoreCase("PS"))
                         {
@@ -84,6 +86,14 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
 
                         lobby.addPlayer(player);
                         requestModel.addPlayer(player);
+
+                        // Set match type image
+                        if (requestModel.getMatchType().equalsIgnoreCase("Competitive"))
+                            lobby.setMatchImage(R.drawable.ic_whatshot_competitive_24dp);
+                        else if (requestModel.getMatchType().equalsIgnoreCase("Qhick Match"))
+                            lobby.setMatchImage(R.drawable.ic_whatshot_quick_match_24dp);
+                        else
+                            lobby.setMatchImage(R.drawable.ic_whatshot_unfocused_24dp);
 
                     }
 
@@ -139,6 +149,8 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
             adminUser = requestModel.getAdminName();
             //adminPicture = requestModel.getPlayers().get(0).getProfilePicture();
 
+
+
             lobby.setLobbyInfo(
                     gameModel.getGamePhotoUrl(),
                     requestModel.getMatchType(),
@@ -159,8 +171,6 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
     public LobbyFragmentCore(RequestModelReference requestModelRef) {
         super();
 
-
-        Log.i("----->",requestModelRef.toString());
 
         this.requestModelRefrance = requestModelRef;
         app.getMainAppMenuCore().setRequestModelRef(requestModelRef);
