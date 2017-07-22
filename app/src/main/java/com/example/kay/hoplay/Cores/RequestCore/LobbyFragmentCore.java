@@ -32,6 +32,8 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
     private RequestModelReference requestModelRefrance;
 
 
+    public LobbyFragmentCore(){}
+
     private ChildEventListener onAddPlayerEvent = new ChildEventListener() {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
