@@ -32,7 +32,6 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
     private RequestModelReference requestModelRefrance;
 
 
-    public LobbyFragmentCore(){}
 
     private ChildEventListener onAddPlayerEvent = new ChildEventListener() {
         @Override
@@ -148,19 +147,32 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
 
             gameModel =  app.getGameManager().getGameById(requestModel.getGameId());
 
+
             adminUser = requestModel.getAdminName();
-            //adminPicture = requestModel.getPlayers().get(0).getProfilePicture();
 
+            app.getDatabaseUsersInfo().child(requestModel.getAdmin()+"/"+FIREBASE_PICTURE_URL_PATH).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
+                    adminPicture = dataSnapshot.getValue(String.class);
 
-            lobby.setLobbyInfo(
-                    gameModel.getGamePhotoUrl(),
-                    requestModel.getMatchType(),
-                    adminUser,
-                    adminPicture,
-                    requestModel.getRank(),
-                    requestModel.getRegion()
-            );
+                    lobby.setLobbyInfo(
+                            gameModel.getGamePhotoUrl(),
+                            requestModel.getMatchType(),
+                            adminUser,
+                            adminPicture,
+                            requestModel.getRank(),
+                            requestModel.getRegion()
+                    );
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
 
         }
 
@@ -170,6 +182,11 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
         }
     };
 //
+
+
+    public LobbyFragmentCore(){}
+
+
     public LobbyFragmentCore(RequestModelReference requestModelRef) {
         super();
 

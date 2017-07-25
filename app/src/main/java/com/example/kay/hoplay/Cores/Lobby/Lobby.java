@@ -134,7 +134,13 @@ public class Lobby {
             return;
         }
 
-        playerModels.remove(playerModel);
+
+        for(PlayerModel pl : playerModels)
+        {
+            if(pl.getUID().equals(playerModel.getUID()))
+                playerModels.remove(pl);
+        }
+
         playerModelsHashMap.remove(playerModel);
         mAdapter.notifyDataSetChanged();
 
