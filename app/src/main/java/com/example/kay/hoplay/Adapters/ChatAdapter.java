@@ -3,8 +3,6 @@ package com.example.kay.hoplay.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Models.ChatMessage;
 import com.example.kay.hoplay.R;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -80,7 +77,7 @@ public class ChatAdapter extends BaseAdapter {
         boolean myMsg = chatMessage.isMe() ;//Just a dummy check to simulate whether it me or other sender
         setAlignment(holder, myMsg);
         holder.txtMessage.setText(chatMessage.getMessage());
-        holder.txtInfo.setText(chatMessage.getDateTime());
+        holder.txtInfo.setText(App.getInstance().convertFromTimeStampToDate(chatMessage.getTimestamp()));
         holder.senderUsername.setText(chatMessage.getUsername());
 
         return convertView;

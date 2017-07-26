@@ -1,34 +1,20 @@
 package com.example.kay.hoplay.CoresAbstract.ProfileAbstracts;
 
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.kay.hoplay.Activities.SettingsActivity;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
-import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
-import com.example.kay.hoplay.Cores.UserProfileCores.FriendsListCore;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.RecentGameModel;
 import com.example.kay.hoplay.Services.CallbackHandlerCondition;
@@ -37,8 +23,6 @@ import com.example.kay.hoplay.Services.HandlerCondition;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static android.app.Activity.RESULT_OK;
 
 public abstract class ViewFriendProfile extends AppCompatActivity {
 
@@ -191,12 +175,12 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
                 holder.setSubtitle(model.getActivityDescription());
 
 
-                holder.setTime(app.convertFromTimeStampToDate(model.getTimeStamp()));
+                holder.setTime(app.convertFromTimeStampToTimeAgo(model.getTimeStamp()));
 
                 new HandlerCondition(new CallbackHandlerCondition() {
                     @Override
                     public boolean callBack() {
-                        holder.setTime(app.convertFromTimeStampToDate(model.getTimeStamp()));
+                        holder.setTime(app.convertFromTimeStampToTimeAgo(model.getTimeStamp()));
                         return false;
                     }
                 },10000);

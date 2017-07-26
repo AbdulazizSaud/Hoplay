@@ -68,7 +68,7 @@ public class EditProfileCore extends EditProfile implements FirebasePaths {
 
     @Override
     protected void uploadPicture(final CircleImageView circleImageView) {
-        app.uploadPicture(circleImageView,app.getUserInformation().getUID()).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        app.uploadPicture(circleImageView,FIREBASESTORAGE_USERINFO_ATTR+"/"+app.getUserInformation().getUID()).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 

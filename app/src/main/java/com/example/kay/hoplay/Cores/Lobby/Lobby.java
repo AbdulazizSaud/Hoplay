@@ -22,6 +22,7 @@ import com.example.kay.hoplay.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -135,12 +136,13 @@ public class Lobby {
         }
 
 
-        for(PlayerModel pl : playerModels)
-        {
-            if(pl.getUID().equals(playerModel.getUID()))
-                playerModels.remove(pl);
-        }
 
+        for(Iterator<PlayerModel> it = playerModels.iterator(); it.hasNext();) {
+            PlayerModel s = it.next();
+            if(s.getUID().equals(playerModel.getUID())) {
+                it.remove();
+            }
+        }
         playerModelsHashMap.remove(playerModel);
         mAdapter.notifyDataSetChanged();
 

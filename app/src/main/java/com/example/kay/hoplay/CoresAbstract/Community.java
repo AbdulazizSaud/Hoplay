@@ -26,8 +26,6 @@ import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.Cores.ChatCore.FindUserCore;
-import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
-import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.CommunityChatModel;
 import com.example.kay.hoplay.Services.CallbackHandlerCondition;
@@ -212,13 +210,13 @@ public abstract class Community extends Fragment {
                 }
 
 
-                holder.setTime(app.convertFromTimeStampToDate(model.getTimeStamp()));
+                holder.setTime(app.convertFromTimeStampToTimeAgo(model.getTimeStamp()));
 
                 new HandlerCondition(new CallbackHandlerCondition() {
                     @Override
                     public boolean callBack() {
 
-                        holder.setTime(app.convertFromTimeStampToDate(model.getTimeStamp()));
+                        holder.setTime(app.convertFromTimeStampToTimeAgo(model.getTimeStamp()));
                         return false;
                     }
                 },10000);

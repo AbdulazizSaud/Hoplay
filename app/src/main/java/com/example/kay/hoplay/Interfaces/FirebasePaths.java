@@ -108,6 +108,8 @@ public interface FirebasePaths {
     public static final String FIREBASE_RECENT_GAMES_PATH =FIREBASE_GAMES_REFERENCES+"/"+FIREBASE_RECENT_GAME_ATTR;
 
 
+    public static final String FIREBASESTORAGE_USERINFO_ATTR ="UsersInfo";
+
 
 
 }
