@@ -1,8 +1,9 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/app_background">
+
 
     <include
         android:id="@+id/toolbar"
@@ -10,27 +11,41 @@
         />
 
 
-
-    <RelativeLayout
-        android:id="@+id/chatContainer"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="2dp"
+        android:layout_below="@id/toolbar"
+        android:layout_above="@+id/include"
+        android:id="@+id/chat_linearlayout"
         android:background="@color/app_background">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/game_providers_recyclerview_chat"
+
+
+
+        <RelativeLayout
+            android:id="@+id/chatContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:background="@color/app_background">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/game_providers_recyclerview_chat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
 
 
-        <!--<EditText-->
+            <!--<EditText-->
             <!--android:id="@+id/messageEdit"-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content"-->
@@ -40,7 +55,7 @@
             <!--android:autoText="true"-->
             <!--android:hint="type a message -_-" />-->
 
-        <!--<Button-->
+            <!--<Button-->
             <!--android:id="@+id/chatSendButton"-->
             <!--android:layout_width="40dp"-->
             <!--android:layout_height="40dp"-->
@@ -52,30 +67,36 @@
 
 
 
-        <ListView
-            android:id="@+id/messagesContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/game_providers_recyclerview_chat"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentTop="false"
-            android:listSelector="@android:color/transparent"
-            android:transcriptMode="alwaysScroll"
-            android:divider="@null"
-            android:layout_above="@+id/include"
-            />
-
-        <include layout="@layout/send_message_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/include"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"/>
-
-
-    </RelativeLayout>
+            <ListView
+                android:id="@+id/messagesContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/game_providers_recyclerview_chat"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false"
+                android:listSelector="@android:color/transparent"
+                android:transcriptMode="alwaysScroll"
+                android:divider="@null"
+                />
 
 
 
-</LinearLayout>
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+
+
+    <include layout="@layout/send_message_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/include"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"/>
+
+</RelativeLayout>
+

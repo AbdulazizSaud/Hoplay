@@ -278,7 +278,7 @@ public abstract class Chat extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                // sendBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.sendiconmessagein));
-                sendBtn.setImageResource(R.drawable.ic_send_focused_32dp);
+                sendBtn.setImageResource(R.drawable.ic_send_focused_24dp);
             }
         });
 
@@ -318,7 +318,7 @@ public abstract class Chat extends AppCompatActivity {
     protected boolean sendMessage(String message) {
 
 
-        sendBtn.setImageResource(R.drawable.ic_send_not_focused_32dp);
+        sendBtn.setImageResource(R.drawable.ic_send_not_focused_24dp);
 
         // check if the message is empty
         if(isMessageEmpty(message))

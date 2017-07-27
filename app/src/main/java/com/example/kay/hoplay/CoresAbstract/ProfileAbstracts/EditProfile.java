@@ -13,8 +13,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -77,7 +81,10 @@ public abstract class EditProfile extends AppCompatActivity {
 
         changeUserPhotoTextview = (TextView) findViewById(R.id.change_profile_photo_textview);
         userBioEdittext = (EditText) findViewById(R.id.edit_user_bio_edittext);
+
         gameProviderEdittext = (EditText) findViewById(R.id.edit_profile_game_provider_edittext);
+        gameProviderEdittext.setVisibility(View.INVISIBLE);
+
         gamesProvidersSpinner = (MaterialBetterSpinner) findViewById(R.id.edit_profile_game_providers_spinner);
         closeButton = (ImageView) findViewById(R.id.go_back_to_preferences_from_edit_profile);
         saveButton = (Button) findViewById(R.id.update_edit_profile_button);
@@ -124,20 +131,83 @@ public abstract class EditProfile extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String providor = gamesProvidersAdapter.getItem(position);
+
+
+                // Set the data and the hint if there is not provider account
+                if ((newData.get(providor)).length()>0)
                 gameProviderEdittext.setText(newData.get(providor));
+                else
+                    gameProviderEdittext.setHint("Your "+providor);
+
+
                 currentPosition = position;
             }
         });
 
+
+
+
+        // Game provider Listener
+        gamesProvidersSpinner.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (s.toString().length()>1)
+                {
+                    slideInFromLeft(gameProviderEdittext);
+                    gameProviderEdittext.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    slideOutToRight(gameProviderEdittext);
+                    gameProviderEdittext.setVisibility(View.GONE);
+                }
+
+
+            }
+        });
+
+
+
         userPictureCircleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(v.getContext())
-                        .setTitle("Change Profile Picture")
-                        .setPositiveButton("Change Picture", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
 
+
+                // BETA
+//                new AlertDialog.Builder(v.getContext())
+//                        .setTitle("Change Profile Picture")
+//                        .setPositiveButton("Change Picture", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//
+//                                if (isAllowedPremmision()) {
+//
+//                                    userPictureCircleImageView.setClickable(false);
+//                                    setSaveButtonClickAble(false);
+//
+//                                    Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+//                                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                                    // Start the Intent
+//                                    startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
+//                                }
+//                            }
+//
+//
+//                        }).setNegativeButton("Change Cover",null)
+//                        .show();
+
+                                // Alpha
                                 if (isAllowedPremmision()) {
 
                                     userPictureCircleImageView.setClickable(false);
@@ -148,15 +218,56 @@ public abstract class EditProfile extends AppCompatActivity {
                                     // Start the Intent
                                     startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
                                 }
-                            }
-
-
-                        }).setNegativeButton("Change Cover",null)
-                        .show();
-
 
             }
         });
+
+
+        changeUserPhotoTextview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // BETA
+//                new AlertDialog.Builder(v.getContext())
+//                        .setTitle("Change Profile Picture")
+//                        .setPositiveButton("Change Picture", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//
+//                                if (isAllowedPremmision()) {
+//
+//                                    userPictureCircleImageView.setClickable(false);
+//                                    setSaveButtonClickAble(false);
+//
+//                                    Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+//                                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                                    // Start the Intent
+//                                    startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
+//                                }
+//                            }
+//
+//
+//                        }).setNegativeButton("Change Cover",null)
+//                        .show();
+
+                // Alpha
+                if (isAllowedPremmision()) {
+
+                    userPictureCircleImageView.setClickable(false);
+                    setSaveButtonClickAble(false);
+
+                    Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    // Start the Intent
+                    startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
+                }
+
+            }
+        });
+
+
+
+
 
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,6 +286,9 @@ public abstract class EditProfile extends AppCompatActivity {
 
         setUserProfileInformation();
         OnStartActivity();
+
+
+
 
 
     }
@@ -247,6 +361,19 @@ public abstract class EditProfile extends AppCompatActivity {
 
     }
 
+
+    public void slideInFromLeft(View viewToAnimate) {
+        // If the bound view wasn't previously displayed on screen, it's animated
+
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
+        animation.setDuration(200);
+        viewToAnimate.startAnimation(animation);
+    }
+
+    public void slideOutToRight(View viewToAnimate) {
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_out_right);
+        viewToAnimate.startAnimation(animation);
+    }
 
 
     protected String getBioText()

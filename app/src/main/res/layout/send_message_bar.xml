@@ -43,13 +43,13 @@
 
     <ImageButton
         android:id="@+id/chatSendButton"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="12dp"
         android:layout_gravity="center"
         android:background="@null"
-        app:srcCompat="@drawable/ic_send_not_focused_32dp"
+        app:srcCompat="@drawable/ic_send_not_focused_24dp"
        />
 
 </LinearLayout>

@@ -113,7 +113,7 @@ public class SignUpCore extends Signup implements FirebasePaths{
         HashMap<String,String> map = new HashMap<>();
 
         map.put(FIREBASE_USERNAME_ATTR,username.toLowerCase());
-        map.put(FIREBASE_BIO_ATTR,"i'm a noob");
+        map.put(FIREBASE_BIO_ATTR,"Bio");
         map.put(FIREBASE_ACCOUNT_TYPE_ATTR,"REGULAR");
         map.put(FIREBASE_EMAIL_ATTR,email);
         map.put(FIREBASE_PICTURE_URL_ATTR,"default");

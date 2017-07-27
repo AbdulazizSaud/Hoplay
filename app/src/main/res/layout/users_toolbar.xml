@@ -25,8 +25,9 @@
         >
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="10dp"
             android:layout_alignParentLeft="true"
             android:onClick="toCommunityFragment"
             app:srcCompat="@drawable/ic_arrow_back_24dp"
@@ -41,10 +42,10 @@
 
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
-                android:src="@drawable/test_user"
+                android:src="@drawable/profile_default_photo"
                 app:civ_border_width="1dp"
                 app:civ_border_overlay="true"
                 android:id="@+id/user_in_toolbar_imageview"
@@ -58,9 +59,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="2dp"
+                android:gravity="left"
                 android:textColor="@color/white"
-                android:text="Bakatsuki"
+                android:text="@string/users_toolbar_title"
                 android:textSize="20dp"
                 android:id="@+id/title_users_toolbar"
                 android:layout_alignParentTop="true"
@@ -72,8 +74,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="User1, User2 ,User3 ,User4 ,User5"
+                android:text="@string/users_toolbar_subtitle"
                 android:textSize="12dp"
+                android:gravity="left"
                 android:id="@+id/subtitle_users_toolbar"
                 android:layout_below="@+id/title_users_toolbar"
                 android:layout_alignLeft="@+id/title_users_toolbar"

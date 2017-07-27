@@ -62,7 +62,7 @@ public abstract class UserProfile extends Fragment {
     private LinearLayout toUserRatingsLinearLayout;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private LinearLayoutManager mLayoutManager;
     ArrayList<RecentGameModel> recentGameModels =new ArrayList<RecentGameModel>();
 
 
@@ -186,6 +186,10 @@ public abstract class UserProfile extends Fragment {
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getContext());
+
+        // Add holders in reverese mode : new holders added on the top
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
 

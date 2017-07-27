@@ -72,7 +72,15 @@ public abstract class Community extends Fragment {
         setupRecyclerView(view);
 
 
+        //  declaration BG
         bgChatImageView = (ImageView) view.findViewById(R.id.splash);
+
+        // Community BG declaration imageview
+        if(mAdapter.getItemCount() < 1)
+            bgChatImageView.setVisibility(View.VISIBLE);
+        else
+            bgChatImageView.setVisibility(View.INVISIBLE);
+
 
         // Go to Friends List to start new private chat
         newPrivateChatFloatingActionButton = (FloatingActionButton) view.findViewById(R.id.new_private_chat_floatingactionbutton);
@@ -122,8 +130,12 @@ public abstract class Community extends Fragment {
         communityChatModelHashMap.put(communityUserList.getChatKey(),communityUserList);
         mAdapter.notifyDataSetChanged();
 
-        if(communityUserLists.size() > 0)
+        // Community BG declaration imageview
+        if(mAdapter.getItemCount() < 1)
+            bgChatImageView.setVisibility(View.VISIBLE);
+        else
             bgChatImageView.setVisibility(View.INVISIBLE);
+
     }
 
 
@@ -138,7 +150,10 @@ public abstract class Community extends Fragment {
             }
         }
 
-        if(communityUserLists.size() < 0)
+        // Community BG declaration imageview
+        if(mAdapter.getItemCount() < 1)
+            bgChatImageView.setVisibility(View.VISIBLE);
+        else
             bgChatImageView.setVisibility(View.INVISIBLE);
     }
 
@@ -156,6 +171,16 @@ public abstract class Community extends Fragment {
                 // - get element from your dataset at this position
                 // - replace the contents of the view with that element
                 ViewHolders.CommunityHolder communityHolder = (ViewHolders.CommunityHolder)holder;
+
+
+                // Community BG declaration imageview
+                if(mAdapter.getItemCount() < 1)
+                    bgChatImageView.setVisibility(View.VISIBLE);
+                else
+                    bgChatImageView.setVisibility(View.INVISIBLE);
+
+
+
                 holder.getView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

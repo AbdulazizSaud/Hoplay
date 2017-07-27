@@ -86,7 +86,9 @@
                     android:textColor="@color/text_color"
                     android:fontFamily="sans-serif-light"
                     android:textSize="14dp"
-                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:layout_gravity="left"
+                    android:gravity="left"
                     android:layout_weight="1"
                     android:paddingTop="3dp"
                     android:paddingBottom="3dp" />

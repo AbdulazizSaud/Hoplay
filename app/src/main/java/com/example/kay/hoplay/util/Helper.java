@@ -49,7 +49,9 @@ public class Helper extends Application {
     
     public boolean isValidLogin(String login) {
 
-        String regExpn = "^([a-zA-Z]{4,24})?([a-zA-Z][a-zA-Z0-9_]{4,24})$";
+//        String regExpn = "^([a-zA-Z]{4,24})?([a-zA-Z][a-zA-Z0-9_]{4,24})$";
+
+        String regExpn = "^[a-z0-9_-]{3,15}$";
         CharSequence inputStr = login;
         Pattern pattern = Pattern.compile(regExpn, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(inputStr);
