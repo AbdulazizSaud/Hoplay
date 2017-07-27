@@ -149,11 +149,12 @@ public class Lobby {
         }
 
 
-        if(playerModels.get(0) !=null){
-            PlayerModel pl = playerModels.get(0);
-            updateAdminInfo(pl.getUID(),pl.getUsername(),pl.getProfilePicture());
+        if(playerModels.size() > 0 ) {
+            if (playerModels.get(0) != null) {
+                PlayerModel pl = playerModels.get(0);
+                updateAdminInfo(pl.getUID(), pl.getUsername(), pl.getProfilePicture());
+            }
         }
-
 
         playerModelsHashMap.remove(playerModel);
         mAdapter.notifyDataSetChanged();
