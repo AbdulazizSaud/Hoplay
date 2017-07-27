@@ -192,9 +192,10 @@ public class ChatCore extends Chat implements FirebasePaths {
             return;
 
 
-        String chatKey = dataSnapshot.child("_message_key_").getValue().toString().trim();
-        String senderId = dataSnapshot.child("_username_").getValue().toString().trim();
-        String message = dataSnapshot.child("_message_").getValue().toString().trim();
+        String chatKey = dataSnapshot.child("_message_key_").getValue(String.class);
+        String senderId = dataSnapshot.child("_username_").getValue(String.class);
+        String message = dataSnapshot.child("_message_").getValue(String.class);
+        long timestamp = dataSnapshot.child("_time_stamp_").getValue(long.class);
         String senderUsername = "Someone";
         boolean isYou = senderId.equals(app.getUserInformation().getUID());
 
@@ -203,7 +204,7 @@ public class ChatCore extends Chat implements FirebasePaths {
         if (playerModel != null)
             senderUsername = playerModel.getUsername();
 
-        addMessage(chatKey, senderId, senderUsername, message, isYou);
+        addMessage(chatKey, senderId, senderUsername, message,timestamp, isYou);
 
     }
 

@@ -10,7 +10,7 @@ public class  ChatMessage {
     private String message;
     private String userId;
     private String username;
-    private String dateTime;
+    private long timestamp;
 
     public String getId() {
         return id;
@@ -44,12 +44,12 @@ public class  ChatMessage {
         this.userId = userId;
     }
 
-    public String getDateTime() {
-        return dateTime;
+    public long getTimestamp() {
+        return timestamp;
     }
 
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getUsername() {

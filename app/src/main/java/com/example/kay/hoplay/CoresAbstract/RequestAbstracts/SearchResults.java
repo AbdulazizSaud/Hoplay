@@ -135,7 +135,7 @@ public abstract class SearchResults extends AppCompatActivity {
                 app.loadingImage(getApplication(), holder, model.getRequestPicture());
                 holder.setTitle(model.getRequestTitle());
                 holder.setSubtitle(model.getDescription());
-                holder.setTime(app.convertFromTimeStampToDate(model.getTimeStamp()));
+                holder.setTime(app.convertFromTimeStampToTimeAgo(model.getTimeStamp()));
                 holder.setNumberOfPlayers(model.getPlayers().size()+"/"+String.valueOf(model.getPlayerNumber()));
                 holder.setSubtitle2(model.getAdminName());
 

@@ -289,7 +289,7 @@ public abstract class Chat extends AppCompatActivity {
     }
 
     // this method for adding new message to adapter and display it
-    protected void addMessage(String chatKey,String userId,String username,String message, boolean me) {
+    protected void addMessage(String chatKey,String userId,String username,String message,long timeStamp, boolean me) {
 
         //check if this message is empty
         if (isMessageEmpty(message) ||  chatMessages.containsKey(chatKey)) {
@@ -301,7 +301,7 @@ public abstract class Chat extends AppCompatActivity {
         chatMessage.setUserId(userId);
         chatMessage.setUsername(username);
         chatMessage.setMessage(message);
-        chatMessage.setDateTime(DateFormat.getDateTimeInstance().format(new Date()));
+        chatMessage.setTimestamp(timeStamp);
         chatMessage.setMe(me);
 
         // add to adapter and display it

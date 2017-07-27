@@ -227,10 +227,17 @@ public class App extends Application implements FirebasePaths {
     }
 
 
-    public String convertFromTimeStampToDate(long timeStamp) {
+    public String convertFromTimeStampToTimeAgo(long timeStamp) {
         return TimeStamp.getTimeAgoFromTimestamp(timeStamp);
     }
 
+    public String convertFromTimeStampToDate(long timeStamp)
+    {
+        DateFormat sdf = new SimpleDateFormat("HH:mm");
+        Date netDate = (new Date(Long.parseLong(String.valueOf(timeStamp))));
+
+        return sdf.format(netDate);
+    }
 
     public GameManager getGameManager() {
         return gameManager;

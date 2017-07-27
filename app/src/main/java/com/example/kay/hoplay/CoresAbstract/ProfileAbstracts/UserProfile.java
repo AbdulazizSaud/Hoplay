@@ -311,12 +311,12 @@ public abstract class UserProfile extends Fragment {
 
 
 
-                holder.setTime(app.convertFromTimeStampToDate(model.getTimeStamp()));
+                holder.setTime(app.convertFromTimeStampToTimeAgo(model.getTimeStamp()));
 
                 new HandlerCondition(new CallbackHandlerCondition() {
                     @Override
                     public boolean callBack() {
-                        holder.setTime(app.convertFromTimeStampToDate(model.getTimeStamp()));
+                        holder.setTime(app.convertFromTimeStampToTimeAgo(model.getTimeStamp()));
                         return false;
                     }
                 },10000);
