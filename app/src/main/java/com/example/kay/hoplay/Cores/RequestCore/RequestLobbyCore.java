@@ -152,7 +152,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
     @Override
     protected void OnStartActivity() {
         Intent i = getIntent();
-        String requstId = (String) i.getStringExtra("requestId");
+        final String requstId = (String) i.getStringExtra("requestId");
 
 
         // here we will retreive the data;
@@ -175,14 +175,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
             @Override
             public boolean callBack() {
                 if(isDone)
-                    lobby.setLobbyInfo(
-                            gameModel.getGamePhotoUrl(),
-                            requestModel.getMatchType(),
-                            adminUser,
-                            adminPicture,
-                            requestModel.getRank(),
-                            requestModel.getRegion()
-                    );
+                    lobby.setLobbyInfo(requestModel.getAdmin(), adminUser, adminPicture, requestModel.getRequestPicture(), requestModel.getMatchType(), requestModel.getRank(), requestModel.getRegion());
                 return isDone;
             }
         };

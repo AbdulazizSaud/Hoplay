@@ -21,16 +21,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 
-public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Constants {
+public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, Constants {
 
 
     private RequestModel requestModel;
     private GameModel gameModel;
-    private String adminPicture, adminUser;
     private boolean isDone = false;
     private DatabaseReference requestRef;
     private RequestModelReference requestModelRefrance;
-
 
 
     private ChildEventListener onAddPlayerEvent = new ChildEventListener() {
@@ -42,12 +40,12 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
                 final String username = dataSnapshot.child("username").getValue(String.class);
 
 
-                app.getDatabaseUsersInfo().child(uid+"/"+FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
+                app.getDatabaseUsersInfo().child(uid + "/" + FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         String picture = dataSnapshot.child(FIREBASE_PICTURE_URL_ATTR).getValue(String.class);
 
-                        PlayerModel player = new PlayerModel(uid,username);
+                        PlayerModel player = new PlayerModel(uid, username);
 
                         player.setProfilePicture(picture);
 
@@ -59,28 +57,23 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
                         lobby.setGameBorderWidth(8);
 
 
-
-                        if (requestModelRefrance.getPlatform().equalsIgnoreCase("PS"))
-                        {
+                        if (requestModelRefrance.getPlatform().equalsIgnoreCase("PS")) {
                             player.setGamePovider("PSN Account");
                             player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PS_GAME_PROVIDER_ATTR).getValue(String.class));
                             lobby.setGameBorderColor(ContextCompat.getColor(getContext(), R.color.ps_color));
 
 
-                        }
-                        else if (requestModelRefrance.getPlatform().equalsIgnoreCase("XBOX"))
-                        {
+                        } else if (requestModelRefrance.getPlatform().equalsIgnoreCase("XBOX")) {
                             player.setGamePovider("XBOX Account");
                             player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_XBOX_GAME_PROVIDER_ATTR).getValue(String.class));
                             lobby.setGameBorderColor(ContextCompat.getColor(getContext(), R.color.xbox_color));
 
-                        }
-                        else{
+                        } else {
                             String pcGameProvider = app.getGameManager().getPcGamesWithProviders().get(requestModelRefrance.getGameId().trim());
 
                             player.setGamePovider(pcGameProvider);
-                            if(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR+"/"+pcGameProvider).getValue() !=null)
-                            player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR+"/"+pcGameProvider).getValue(String.class));
+                            if (dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR + "/" + pcGameProvider).getValue() != null)
+                                player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR + "/" + pcGameProvider).getValue(String.class));
                             lobby.setGameBorderColor(ContextCompat.getColor(getContext(), R.color.pc_color));
 
                         }
@@ -105,7 +98,7 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
                 });
 
             } catch (NullPointerException e) {
-                Log.i("---->",e.getMessage());
+                Log.i("---->", e.getMessage());
                 return;
             }
 
@@ -144,26 +137,19 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
             requestModel = dataSnapshot.getValue(RequestModel.class);
 
 
+            gameModel = app.getGameManager().getGameById(requestModel.getGameId());
 
-            gameModel =  app.getGameManager().getGameById(requestModel.getGameId());
 
-
-            adminUser = requestModel.getAdminName();
-
-            app.getDatabaseUsersInfo().child(requestModel.getAdmin()+"/"+FIREBASE_PICTURE_URL_PATH).addListenerForSingleValueEvent(new ValueEventListener() {
+            app.getDatabaseUsersInfo().child(requestModel.getAdmin() + "/" + FIREBASE_PICTURE_URL_PATH).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    adminPicture = dataSnapshot.getValue(String.class);
+                    String adminUid = requestModel.getAdmin();
+                    String adminUser = requestModel.getAdminName();
+                    String adminPicture = dataSnapshot.getValue(String.class);
 
-                    lobby.setLobbyInfo(
-                            gameModel.getGamePhotoUrl(),
-                            requestModel.getMatchType(),
-                            adminUser,
-                            adminPicture,
-                            requestModel.getRank(),
-                            requestModel.getRegion()
-                    );
+
+                    lobby.setLobbyInfo(adminUid, adminUser, adminPicture,gameModel.getGamePhotoUrl(), requestModel.getMatchType(), requestModel.getRank(), requestModel.getRegion());
 
                 }
 
@@ -184,7 +170,8 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
 //
 
 
-    public LobbyFragmentCore(){}
+    public LobbyFragmentCore() {
+    }
 
 
     public LobbyFragmentCore(RequestModelReference requestModelRef) {
@@ -217,7 +204,7 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
                 requestRef.child("players").addChildEventListener(onAddPlayerEvent);
                 return true;
             }
-        },1000);
+        }, 1000);
 
 
         app.getTimeStamp().setTimestampLong();
@@ -225,12 +212,11 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
             @Override
             public boolean callBack() {
 
-                long currentTimestamp= app.getTimeStamp().getTimestampLong();
-                long last48 = requestModel.getTimeStamp()+ DUE_REQUEST_TIME_IN_VALUE_HOURS;
+                long currentTimestamp = app.getTimeStamp().getTimestampLong();
+                long last48 = requestModel.getTimeStamp() + DUE_REQUEST_TIME_IN_VALUE_HOURS;
 
-                if(currentTimestamp !=-1)
-                {
-                    if(currentTimestamp >=last48) {
+                if (currentTimestamp != -1) {
+                    if (currentTimestamp >= last48) {
                         cancelRequest();
                         //Toast.makeText(getContext(),"Your request has been expired",Toast.LENGTH_LONG).show();
                         return true;
@@ -240,23 +226,19 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths,Co
             }
         };
 
-        HandlerCondition condition = new HandlerCondition(callbackHandlerCondition,1000);
+        HandlerCondition condition = new HandlerCondition(callbackHandlerCondition, 1000);
     }
 
 
-
-
-
     @Override
-    protected void cancelRequest(){
+    protected void cancelRequest() {
 
         app.getMainAppMenuCore().cancelRequest();
         removeListener();
 
     }
 
-    private void removeListener()
-    {
+    private void removeListener() {
         requestRef.removeEventListener(onLoadLobbyInformation);
         requestRef.child("player").removeEventListener(onAddPlayerEvent);
     }

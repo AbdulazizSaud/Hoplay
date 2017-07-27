@@ -17,6 +17,7 @@ import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.ChatCore.ChatCore;
+import com.example.kay.hoplay.Models.LobbyInformation;
 import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.R;
 
@@ -47,6 +48,9 @@ public class Lobby {
     private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager linearLayoutManager;
     private ImageView closeRequestButton;
+
+
+    private LobbyInformation lobbyInformation;
 
     private App app;
 
@@ -143,11 +147,20 @@ public class Lobby {
                 it.remove();
             }
         }
+
+
+        if(playerModels.get(0) !=null){
+            PlayerModel pl = playerModels.get(0);
+            updateAdminInfo(pl.getUID(),pl.getUsername(),pl.getProfilePicture());
+        }
+
+
         playerModelsHashMap.remove(playerModel);
         mAdapter.notifyDataSetChanged();
 
 
     }
+
 
 
 
@@ -198,19 +211,32 @@ public class Lobby {
     }
 
 
-    public void setLobbyInfo(
-            String pictureURL, String type,
-            String adminName, String adminPicture,
-            String rank, String region) {
+    public void setLobbyInfo(String adminUid, String adminName, String adminPicture, String lobbyPictureURL, String matchType, String rank, String region) {
 
-        app.loadingImage(gamePhoto, pictureURL);
+
+        lobbyInformation = new LobbyInformation(adminUid,adminName,adminPicture,lobbyPictureURL,matchType,rank,region);
+
+        app.loadingImage(gamePhoto, lobbyPictureURL);
         app.loadingImage(adminPhoto, adminPicture);
-        matchTypeTextview.setText(type);
         adminUsername.setText(adminName);
+
+        matchTypeTextview.setText(matchType);
         mAdapter.notifyDataSetChanged();
 
         regionValueTextview.setText(region);
         rankValueTextview.setText(rank);
+
+    }
+
+    private void updateAdminInfo(String adminUid, String adminName, String adminPicture)
+    {
+        lobbyInformation.setAdminUid(adminUid);
+        lobbyInformation.setAdminName(adminName);
+        lobbyInformation.setAdminPicture(adminPicture);
+
+        adminUsername.setText(adminName);
+        app.loadingImage(adminPhoto, adminPicture);
+        app.loadingImage(adminPhoto, adminPicture);
 
     }
 
