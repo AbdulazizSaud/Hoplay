@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.ListFragment;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import com.example.kay.hoplay.Cores.CommunityCore;
 import com.example.kay.hoplay.Cores.RequestCore.SearchRequestCore;
@@ -15,6 +16,8 @@ import com.example.kay.hoplay.Fragments.ParentRequestFragments;
 import com.example.kay.hoplay.R;
 
 import java.util.ArrayList;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 
 public class MenuPagerAdapter extends FragmentStatePagerAdapter {
@@ -29,8 +32,6 @@ public class MenuPagerAdapter extends FragmentStatePagerAdapter {
             super(fm);
             this.fm = fm;
         }
-
-
 
         @Override
         public Fragment getItem(int position) {

@@ -2,6 +2,7 @@ package com.example.kay.hoplay.CoresAbstract.RequestAbstracts;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -57,6 +58,8 @@ public abstract class SearchResults extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
+        // Set the screen orientation to the portrait mode :
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         app = App.getInstance();
         initControls();
         setupRecyclerView();

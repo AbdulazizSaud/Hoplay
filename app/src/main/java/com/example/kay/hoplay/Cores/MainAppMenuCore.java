@@ -120,7 +120,6 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
                     }
 
-                    welcomeMessage(username);
 
                     // set current user information
                     app.getUserInformation().setUsername(username);
@@ -250,7 +249,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
                 for(DataSnapshot rank  : gameShot.child("ranks").getChildren())
                 {
-                    ranks.add(new Rank(rank.getKey(),rank.getValue(String.class)));
+                    ranks.add(new Rank(rank.getValue().toString(),rank.getValue(String.class)));
                 }
                 GameModel gameModel = new GameModel(gameKey,gameName,gamePhoto,platforms,gameType,maxPlayers,ranks,gameProvider);
                 app.getGameManager().addGame(gameModel);

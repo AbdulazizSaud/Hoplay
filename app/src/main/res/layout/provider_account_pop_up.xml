@@ -44,7 +44,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:textColor="@color/text_color"
-            android:digits="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890-_."
+            android:digits="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890-_.#"
             style="@style/Base.TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
             android:maxLength="27"
             android:drawableRight="@drawable/ic_mood_bad_not_focused_24dp"

@@ -3,6 +3,7 @@ package com.example.kay.hoplay.App;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
@@ -28,6 +29,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.security.PublicKey;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,6 +49,7 @@ public class App extends Application implements FirebasePaths {
     private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseUserNames;
+    private DatabaseReference databaseSupport;
     private DatabaseReference databaseUsersInfo;
     private DatabaseReference databaseChat;
     private DatabaseReference databaseGames;
@@ -72,6 +75,12 @@ public class App extends Application implements FirebasePaths {
     @Override
     public void onCreate() {
         super.onCreate();
+
+
+        // Welcome Message
+        Toast.makeText(getApplicationContext(),R.string.main_app_menu_welcome_message,Toast.LENGTH_SHORT).show();
+
+
         instance = this;
         mAuth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
@@ -84,7 +93,8 @@ public class App extends Application implements FirebasePaths {
         databaseRequests = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FB_REQUESTS_REFERENCE);
         databaseChat = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_CHAT_ATTR);
         databaseGames = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_GAMES_REFERENCES);
-        databaseRegions = firebaseDatabase.getReferenceFromUrl("https://hoplay-18a08.firebaseio.com/_regions_");
+        databaseRegions = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FB_REGIONS_REFERENCE);
+        databaseSupport = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_SUPPORT_REFERENCE);
         userInformation = new UserInformation();
         gameManager = new GameManager();
         timeStamp = new TimeStamp();
@@ -208,6 +218,8 @@ public class App extends Application implements FirebasePaths {
     public DatabaseReference getDatabaseUserNames() {
         return databaseUserNames;
     }
+
+    public DatabaseReference getDatabaseSupport(){return databaseSupport;}
 
     public DatabaseReference getDatabaseRegions() {
         return databaseRegions;

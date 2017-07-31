@@ -300,9 +300,9 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     }
     protected void toMainMenu() {
 
-
+        finish();
         Intent i = new Intent(getApplicationContext(), MainAppMenuCore.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
         overridePendingTransition( R.anim.slide_in_right_layouts, R.anim.slide_out_right_layouts);
 

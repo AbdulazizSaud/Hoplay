@@ -3,6 +3,7 @@ package com.example.kay.hoplay.CoresAbstract.RequestAbstracts;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -111,6 +112,8 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_request);
+        // Set the screen orientation to the portrait mode :
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         initControl();
         fieldsListeners();
         OnStartActivity();
@@ -230,6 +233,18 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
 
     }
+
+
+
+
+    // Remove keyboard when click anywhere :
+    public void removeKeyboard(View v) {
+
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
+
+
 
 
     // Change icon listener for autocomplete and spinners

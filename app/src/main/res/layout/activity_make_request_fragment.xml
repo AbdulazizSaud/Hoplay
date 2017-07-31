@@ -47,13 +47,37 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/line_divider_linearlayout"
             android:text="@string/make_request_fragment_saved_request"
-            android:textSize="23dp"
+            android:textSize="26sp"
             android:textColor="@color/app_color"
             android:id="@+id/saved_activity_message_textview"
             android:layout_marginTop="10dp"
             />
 
-        <!--<include layout="@layout/saved_requests_in_make_requests_fragment"-->
+
+    <ImageView
+        android:id="@+id/no_saved_request_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        app:srcCompat="@drawable/ic_save_64dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/saved_activity_message_textview"
+        android:layout_centerHorizontal="true" />
+
+
+    <TextView
+        android:id="@+id/no_saved_request_message_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/no_saved_request_imageview"
+        android:gravity="center"
+        android:text="@string/make_request_fragment_no_saved_request_message"
+        android:textSize="26sp" />
+
+
+    <!--<include layout="@layout/saved_requests_in_make_requests_fragment"-->
             <!--android:layout_height="match_parent"-->
             <!--android:layout_width="match_parent"-->
             <!--android:clipToPadding="false"-->

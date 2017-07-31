@@ -122,13 +122,11 @@
     <string name="login_do_not_have_account">D o n\'t &#160; &#160; h a v e &#160; &#160;a n &#160; &#160;a c c o u n t  ?</string>
     <string name="login_signup">S I G N &#160; U P</string>
 
-    
-    
 
     <!--                                Login                                                           -->
     <string name="login_signing_in">Signing in ...</string>
-    <string name="login_just_a_moment">Just one moment</string>
-    <string name="login_successful_message">Welcome %1$s ❤️</string>
+    <string name="login_just_a_moment">Just one moment..</string>
+
 
 
     <!--                                Login Activity                                                 -->
@@ -141,17 +139,28 @@
     <string name="make_request_fragment_saved_request">Saved Requests</string>
     <string name="make_request_fragment_add_game">Add Game</string>
     <string name="make_request_fragment_do_not_have_game">You do not have this game. Please add it to your library to continue</string>
+    <string name="make_request_fragment_no_saved_request_message">No Saved Requests</string>
+
+
+    <!--                                Main App Menu                           -->
+    <string name="main_app_menu_welcome_message">Welcome ❤</string>
 
 
     <!--                                Add Game Layout                                                            -->
     <string name="add_game_search_bar">Search for a Game</string>
 
-    
+
     <!--                            Users Toolbar                   -->
     <string name="users_toolbar_title">User</string>
     <string name="users_toolbar_subtitle">Bio</string>
 
-    
+
+    <!--                           Support Activity Layout              -->
+    <string name="support_activity_message">Send Us a Message</string>
+    <string name="support_title">Title</string>
+    <string name="support_message">Message</string>
+    <string name="support_send">Send</string>
+
     <!--                                New Request Activity Layout                                          -->
     <string name="new_request_pc">PC</string>
     <string name="new_request_playstation">Playstation</string>
@@ -162,7 +171,7 @@
     <string name="new_request_request">Request</string>
     <string name="new_request_save_request">Save</string>
     <string name="new_request_country">Region</string>
-    <string name="new_request_players_number">Players Number</string>
+    <string name="new_request_players_number">Number Of Players</string>
     <string name="new_request_players_ranks">Players Rank</string>
     <string name="new_request_description">Description</string>
     <string name="new_request_request_button">R e q u e s t</string>
@@ -170,6 +179,13 @@
     <string name="new_request_match_type">Match Type</string>
     <string name="new_request_match_type_competitive">Competitive</string>
     <string name="new_request_match_type_quick_match">Quick Match</string>
+
+
+    <!--                            Support Activity                        -->
+    <string name="support_title_error">Title is empty</string>
+    <string name="support_message_error">Message is empty</string>
+    <string name="support_error">Something went wrong</string>
+    <string name="support_success_message">Thank you !\n Your message has been successfully sent. We will contact you very soon  </string>
 
 
     <!--                               Game Instance                                                    -->
@@ -193,6 +209,32 @@
     <string name="provider_account_XBOX_console">Xbox</string>
 
 
+
+    <!--                                Deactive Account Layout                     -->
+    <string name="deactive_account_password_hint">Password</string>
+    <string name="deactive_account_authinticate_button">Authinticate</string>
+    <string name="deactive_account_layout_title">Deactive Account</string>
+
+    <!--                                Deactive Account activity                   -->
+    <string name="deactive_account_password_error">Empty password field</string>
+    <string name="deactive_account_wrong_password">Wrong Password</string>
+    <string name="deactive_account_progress_dialog_title">Authintacation</string>
+    <string name="deactive_account_progress_dialog_body">Just one moment..</string>
+
+
+    <!--                                Deactive Account PopUp verification                     -->
+    <string name="deactive_account_popup_message">You are about to deactive your account, you sure you want to continue ?</string>
+    <string name="deactive_account_popup_yes">Y E S</string>
+    <string name="deactive_account_popup_no">N O</string>
+
+
+
+    <!--                                Leave Lobby Dialog                                      -->
+    <string name="leave_lobby_dialog_message">you are about to leave this lobby, you sure you want to continue?</string>
+    <string name="leave_lobby_dialog_yes">Y E S</string>
+    <string name="leave_lobby_dialog_no">N O</string>
+
+
     <!--                                SignUp Layout                                                        -->
     <string name="signup_username">Username</string>
     <string name="signup_password">Password</string>
@@ -201,14 +243,13 @@
     <string name="signup_agrement_message">By tapping &quot;Sign Up&quot; you agree to the</string>
     <string name="signup_terms_and_conditios">terms and conditions </string>
     <string name="signup_signup">S I G N &#160; U P</string>
-    <string name="signup_create_new">C R E A T E   N E W</string>
+    <string name="signup_create_new">C R E A T E &#160; N E W</string>
     <string name="signup_account">A C C O U N T</string>
 
 
     <!--                                SignUp                                                              -->
     <string name="signup_signin_up">Signin Up...</string>
     <string name="signup_just_a_moment">Just a moment</string>
-    <string name="signup_successful_message">Welcome %1$s ❤️</string>
     <string name="signup_user_available_message">User name is Available</string>
 
 
@@ -230,12 +271,14 @@
     <string name="search_request_search">S E A R C H</string>
     <string name="search_request_regions">All Countries</string>
     <string name="search_request_match_type">Match Type</string>
-    <string name="search_request_players_number">Players Number</string>
+    <string name="search_request_players_number">Number Of Players</string>
     <string name="search_request_rank">Players Rank</string>
 
 
     <!--                                User Profile Fragment Layout                                            -->
     <string name="user_fragment_recent_activities">Recent Activities</string>
+    <string name="user_fragment_no_activity_textview">No Activities</string>
+    <string name="user_fragment_create_request_button">Add Activity</string>
 
 
     <!--                                Friend Instance Model                                                   -->
@@ -293,9 +336,6 @@
     <string name="user_profile_details_ratings_number">50</string>
 
 
-    <!--                                 Users Toolbar - for chat activity                                     -->
-    <string name="users_toolbar_username">Bakatsuki</string>
-
 
     <!--                                 New Chat                                     -->
 
@@ -326,10 +366,7 @@
     <string name="new_request_finish_save_request_message">Your request has been saved successfully %1$s &#160; 😃 </string>
 
 
-    <!--                                Deactive Account PopUp verification                     -->
-    <string name="deactive_account_popup_message">You are about to deactive your account 😢, you sure you want to continue ?</string>
-    <string name="deactive_account_popup_yes">Y E S</string>
-    <string name="deactive_account_popup_no">N O</string>
+
 
     <!--                                Search Results Layout                     -->
     <string name="search_results_priority">Order By Time</string>
@@ -403,12 +440,14 @@
     <string name="edit_peofile_game_providers_edittext_hint">Game Provider</string>
     <string name="edit_profile_update_button">U P D A T E</string>
 
+    <!--                                Edit Profile Activity                       -->
+    <string name="edit_profile_success_message">Your info has been updated successfully</string>
+
 
     <!--                                Saved Request On Click Pop up Layout             -->
     <string name="saved_request_on_click_request_button">R E Q U E S T</string>
     <string name="saved_request_on_click_update_button">E D I T</string>
     <string name="saved_request_on_click_delete_button">D E L E T E</string>
-
 
 
     <!--                                Edit Request Layout                             -->
@@ -432,10 +471,14 @@
     <string name="edit_request_match_type_quick_match">Quick Match</string>
 
 
+
+    <!--                            User Friends List Layout                    -->
+    <string name="user_list_layout_no_fiends_message">You do not have any Hoplay friends</string>
+    <string name="user_list_layout_add_friend_button">Add Friends</string>
+
     <!--                            Edit Request Activity                           -->
     <string name="edit_request_dialog_title">Updating Request</string>
     <string name="edit_request_dialog_message">Checking Request Info..</string>
-
 
 
 </resources>

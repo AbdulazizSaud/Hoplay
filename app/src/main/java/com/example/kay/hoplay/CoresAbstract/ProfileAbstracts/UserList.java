@@ -2,9 +2,12 @@ package com.example.kay.hoplay.CoresAbstract.ProfileAbstracts;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -19,17 +22,21 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Cores.ChatCore.FindUserCore;
 import com.example.kay.hoplay.Cores.UserProfileCores.FriendsListCore;
 import com.example.kay.hoplay.CoresAbstract.MainAppMenu;
 import com.example.kay.hoplay.Interfaces.Constants;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.FriendCommonModel;
+import com.google.android.gms.common.data.BitmapTeleporter;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -47,6 +54,13 @@ public abstract class UserList extends AppCompatActivity {
     protected RelativeLayout FriendsLayout;
     private ProgressBar loadUsersProgressBar;
     private     View holderView;
+
+
+
+    // No friends variables
+    protected TextView noFriendsMessage;
+    protected Button addFriendsButton;
+    protected ImageView noFriendsImageview;
 
 
     protected boolean removeFriend;
@@ -70,6 +84,15 @@ public abstract class UserList extends AppCompatActivity {
         @Override
         public void OnBindHolder(final ViewHolders holder, final FriendCommonModel model , final int position) {
 
+
+            // show or hide the noFriendsSection
+            if(mAdapter.getItemCount()<1)
+                showNoFriendsSection();
+            else
+                hideNoFriendsSection();
+
+
+
             // remove loading dialog if friends > 0
             if (userdListAdapter.getItemCount()>0)
                 hideLoadingAnimation();
@@ -91,7 +114,7 @@ public abstract class UserList extends AppCompatActivity {
 //                        showFriendpopup(model, getApplication());
 //
                         // for pre-alpha current version
-                        showDeleteDialog(model,getApplication());
+                        showDeleteDialog(model,getApplication(),mAdapter.getItemCount());
 
                         removeFriendButtonViewHolder(v, position);
                     }
@@ -130,13 +153,24 @@ public abstract class UserList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_list_layout);
 
-        final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
+        // Set the screen orientation to the portrait mode :
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        final Typeface playregular = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
+        final Typeface sansation = Typeface.createFromAsset(getResources().getAssets(), "sansationbold.ttf");
+
         app = App.getInstance();
         mRecyclerView = (RecyclerView) findViewById(R.id.rec_new_chat);
         searchEditText = (EditText)findViewById(R.id.search_new_friend_bar_edittext);
-        searchEditText.setTypeface(playbold);
+        searchEditText.setTypeface(playregular);
         FriendsLayout = (RelativeLayout) findViewById(R.id.activity_new_chat);
         loadUsersProgressBar = (ProgressBar) findViewById(R.id.load_users_progressbar_user_list);
+        noFriendsMessage = (TextView) findViewById(R.id.no_friends_textview);
+        noFriendsMessage.setTypeface(playregular);
+        addFriendsButton = (Button) findViewById(R.id.add_friends_button);
+        addFriendsButton.setTypeface(sansation);
+        noFriendsImageview = (ImageView) findViewById(R.id.no_friends_imageview);
+
         setupRecyclerView();
 
 
@@ -300,7 +334,7 @@ public abstract class UserList extends AppCompatActivity {
 
 
     // for beta
-    protected void showFriendpopup(final FriendCommonModel friendCommonModel,Context c) {
+    protected void showFriendpopup(final FriendCommonModel friendCommonModel, Context c , final int friendsNumber) {
 
 
         final Dialog friendLongClickDialog;
@@ -333,7 +367,7 @@ public abstract class UserList extends AppCompatActivity {
         deleteFriendButtton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                removeFriend(friendCommonModel.getFriendKey().trim());
+                removeFriend(friendCommonModel.getFriendKey().trim(),friendsNumber);
                 slideRightAnimate(getHolderView());
                 friendLongClickDialog.dismiss();
 
@@ -353,7 +387,7 @@ public abstract class UserList extends AppCompatActivity {
     }
 
     // for pre-Alpha - current version
-    protected void showDeleteDialog(final FriendCommonModel friendCommonModel,Context c){
+    protected void showDeleteDialog(final FriendCommonModel friendCommonModel, Context c , final int friendsNumber){
 
         final Dialog friendLongClickDialog;
         friendLongClickDialog = new Dialog(UserList.this);
@@ -385,7 +419,7 @@ public abstract class UserList extends AppCompatActivity {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                removeFriend(friendCommonModel.getFriendKey().trim());
+                removeFriend(friendCommonModel.getFriendKey().trim(),friendsNumber);
                 slideRightAnimate(getHolderView());
                 friendLongClickDialog.dismiss();
 
@@ -422,6 +456,13 @@ public abstract class UserList extends AppCompatActivity {
     }
 
 
+    public void toFindFriendsCore(View view)
+    {
+        finish();
+        Intent i = new Intent(getApplicationContext(), FindUserCore.class);
+        startActivity(i);
+        overridePendingTransition( R.anim.slide_in_left_layout, R.anim.slide_out_left_layout);
+    }
 
 
     protected abstract void OnClickHolders(FriendCommonModel model);
@@ -429,6 +470,8 @@ public abstract class UserList extends AppCompatActivity {
     protected abstract void onStartActivity();
     protected abstract void loadFriendList();
     protected abstract void searchForUser(String value);
-    protected abstract void removeFriend(String friendKey);
+    protected abstract void removeFriend(String friendKey , int FriendsNumber);
     protected abstract boolean OnLongClickHolders(FriendCommonModel model);
+    protected abstract void showNoFriendsSection();
+    protected abstract void hideNoFriendsSection();
 }

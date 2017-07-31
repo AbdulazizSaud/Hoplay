@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_background"
+    android:onClick="removeKeyboard"
     tools:context="com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.EditProfile">
 
 
@@ -23,9 +24,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="34sp"
+        android:textSize="25sp"
         android:text="@string/edit_profile_layout_title_text"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:id="@+id/edit_profile_title_textview"
         android:textColor="@color/app_color"
         android:layout_alignParentTop="true"
@@ -97,13 +98,11 @@
             android:id="@+id/edit_user_bio_edittext"
             style="@style/Base.TextAppearance.AppCompat.Large"
             android:layout_width="320dp"
-            android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_textsms_unfocused_24dp"
             android:drawableLeft="@drawable/ic_textsms_unfocused_24dp"
             android:ems="3"
-            android:layout_marginTop="20dp"
-            android:layout_below="@id/change_user_photo_linearlayout"
+            android:layout_marginTop="21dp"
             android:textColorHint="@color/hint_color"
             android:hint="@string/edit_profile_bio_hint"
             android:paddingLeft="3dp"
@@ -111,7 +110,10 @@
             android:gravity="center"
             android:textColor="@color/text_color"
             android:inputType="textMultiLine"
-            android:maxLength="200" />
+            android:maxLength="200"
+            android:layout_below="@+id/change_user_photo_linearlayout"
+            android:layout_alignLeft="@+id/edit_profile_game_providers_spinner"
+            android:layout_alignStart="@+id/edit_profile_game_providers_spinner" />
 
 
 
@@ -141,6 +143,7 @@
             android:drawableStart="@drawable/ic_sync_unfocused_24dp"
             android:drawableLeft="@drawable/ic_sync_unfocused_24dp"
             android:ems="3"
+
             android:layout_marginTop="10dp"
             android:layout_below="@+id/edit_profile_game_providers_spinner"
             android:textColorHint="@color/hint_color"
@@ -149,7 +152,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@color/text_color"
-            android:inputType="textMultiLine"
+            android:inputType="textPersonName"
             android:maxLength="200" />
 
 

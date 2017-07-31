@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:onClick="removeKeyboard"
+    android:id="@+id/deactive_account_relativelayout"
+    tools:context="com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.DeactiveAccount">
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/ic_report_64dp"
+        android:id="@+id/deactive_account_imageview"
+        />
+
+
+    <TextView
+        android:text="@string/deactive_account_layout_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/app_color"
+        android:textSize="25dp"
+        android:layout_below="@+id/deactive_account_imageview"
+        android:id="@+id/deactive_account_title_textview"
+        />
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:id="@+id/deactive_account_layoutinput"
+        android:layout_below="@+id/deactive_account_title_textview"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="textPassword"
+            style="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="@color/text_color"
+            android:layout_below="@+id/deactive_account_title_textview"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="52dp"
+            android:drawableRight="@drawable/ic_lock_open_not_focused_32dp"
+            android:hint="@string/deactive_account_password_hint"
+            android:paddingLeft="10dp"
+            android:gravity="left"
+            android:textColorHint="@color/hint_color"
+            android:id="@+id/deactive_account_password_edittext" />
+
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:text="@string/deactive_account_authinticate_button"
+        android:textStyle="normal"
+        android:onClick="authinticateListener"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/deactive_account_layoutinput"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/deactive_account_authinticate_button" />
+
+
+</RelativeLayout>

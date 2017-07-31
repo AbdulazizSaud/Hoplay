@@ -2,6 +2,7 @@ package com.example.kay.hoplay.CoresAbstract.ProfileAbstracts;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -58,6 +59,10 @@ public abstract class AddGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_game);
+
+        // Set the screen orientation to the portrait mode :
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
         final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
         app = App.getInstance();
@@ -304,6 +309,9 @@ public abstract class AddGame extends AppCompatActivity {
         // results if it's successed
         Toast.makeText(getApplicationContext(), "Game (" + gameName + ") Added", Toast.LENGTH_LONG).show();
     }
+
+
+
 
 
     protected void showLoadingAnimation() {

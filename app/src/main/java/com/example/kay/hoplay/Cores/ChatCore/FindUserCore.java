@@ -1,6 +1,7 @@
 package com.example.kay.hoplay.Cores.ChatCore;
 
 import android.content.Intent;
+import android.view.View;
 
 import com.example.kay.hoplay.Cores.UserProfileCores.ParentCore.UserListCore;
 import com.example.kay.hoplay.Models.FriendCommonModel;
@@ -79,16 +80,31 @@ public class FindUserCore extends UserListCore {
     protected void onStartActivity() {
         createChat = new CreateChat();
         loadFriendList();
+
+        // Make the no friends section invisible
+        noFriendsMessage.setVisibility(View.GONE);
+        addFriendsButton.setVisibility(View.GONE);
+        noFriendsImageview.setVisibility(View.GONE);
     }
 
     @Override
-    protected void removeFriend(String friendKey) {
+    protected void removeFriend(String friendKey, int friendsNumber) {
 
     }
 
     @Override
     protected boolean OnLongClickHolders(FriendCommonModel model) {
         return false;
+    }
+
+    @Override
+    protected void showNoFriendsSection() {
+
+    }
+
+    @Override
+    protected void hideNoFriendsSection() {
+
     }
 
 

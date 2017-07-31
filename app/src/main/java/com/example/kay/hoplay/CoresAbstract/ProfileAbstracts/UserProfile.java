@@ -4,16 +4,22 @@ package com.example.kay.hoplay.CoresAbstract.ProfileAbstracts;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.ButtonBarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,12 +29,16 @@ import com.example.kay.hoplay.Activities.SettingsActivity;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
+import com.example.kay.hoplay.Cores.ChatCore.FindUserCore;
+import com.example.kay.hoplay.Cores.RequestCore.NewRequestCore;
 import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
 import com.example.kay.hoplay.Cores.UserProfileCores.FriendsListCore;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.RecentGameModel;
 import com.example.kay.hoplay.Services.CallbackHandlerCondition;
 import com.example.kay.hoplay.Services.HandlerCondition;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -64,6 +74,14 @@ public abstract class UserProfile extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     ArrayList<RecentGameModel> recentGameModels =new ArrayList<RecentGameModel>();
+
+
+
+    // No activities section
+    private ImageView noActivityImageview;
+    private TextView noActivityMessage ;
+    private Button addActivityButton;
+
 
 
 
@@ -111,8 +129,16 @@ public abstract class UserProfile extends Fragment {
         toUserRatingsLinearLayout = (LinearLayout) view.findViewById(R.id.ratings_user_profile_linearlayout);
 
 
+        addActivityButton = (Button) view.findViewById(R.id.add_activity_user_fragment_button);
+        noActivityMessage = (TextView) view.findViewById(R.id.no_activity_textview);
+        noActivityImageview = (ImageView) view.findViewById(R.id.no_activity_imageview);
+
+
+
+
         Typeface playregular = Typeface.createFromAsset(getActivity().getAssets() ,"playregular.ttf");
         Typeface playbold = Typeface.createFromAsset(getActivity().getAssets() ,"playbold.ttf");
+        Typeface sansation = Typeface.createFromAsset(getActivity().getAssets() ,"sansationbold.ttf");
 
         usernameProfile.setTypeface(playbold);
         friendsNumberTextView.setTypeface(playregular);
@@ -124,10 +150,11 @@ public abstract class UserProfile extends Fragment {
         recentActivitiesTextView.setTypeface(playregular);
         bioTextView.setTypeface(playregular);
 
-
-
+        addActivityButton.setTypeface(sansation);
+        noActivityMessage.setTypeface(playregular);
 
         setGamesNumber("0");
+
 
     }
 
@@ -172,6 +199,17 @@ public abstract class UserProfile extends Fragment {
         });
 
 
+        addActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getContext(), NewRequestCore.class);
+                startActivity(i);
+                getActivity().overridePendingTransition( R.anim.slide_in_left_layout, R.anim.slide_out_left_layout);
+            }
+        });
+
+
 
     }
 
@@ -197,6 +235,15 @@ public abstract class UserProfile extends Fragment {
 
 
         mAdapter = createAdapter();
+
+        // Show or hide no activity elements
+        if (mAdapter.getItemCount() <1)
+            showNoActivityElements();
+        else
+            hideNoActivityElements();
+
+
+
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -258,6 +305,8 @@ public abstract class UserProfile extends Fragment {
             @Override
             public ViewHolders OnCreateHolder(View v) {
 
+
+
                 v.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -272,7 +321,17 @@ public abstract class UserProfile extends Fragment {
             public void OnBindHolder(final ViewHolders holder, final RecentGameModel model,int position)
             {
 
-               app.loadingImage(getContext(),holder,model.getGamePhotoUrl());
+                // Show or hide no activity elements
+                if (mAdapter.getItemCount() <1)
+                    showNoActivityElements();
+                else
+                    hideNoActivityElements();
+
+
+
+
+
+                app.loadingImage(getContext(),holder,model.getGamePhotoUrl());
 
                 Typeface playbold = Typeface.createFromAsset(getActivity().getAssets(), "playbold.ttf");
                 Typeface playregular = Typeface.createFromAsset(getActivity().getAssets(), "playregular.ttf");
@@ -354,6 +413,37 @@ public abstract class UserProfile extends Fragment {
 
     protected void setNicknameTextView( String name) {bioTextView.setText(name);}
     protected void setUsernameProfile(String name){usernameProfile.setText(name);}
+
+
+    private void showNoActivityElements(){
+
+        Animation slideDown = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up_view);
+
+        recentActivitiesTextView.setVisibility(View.GONE);
+
+        noActivityImageview.setVisibility(View.INVISIBLE);
+        noActivityImageview.startAnimation(slideDown);
+        noActivityImageview.setVisibility(View.VISIBLE);
+
+        noActivityMessage.setVisibility(View.INVISIBLE);
+        noActivityMessage.startAnimation(slideDown);
+        noActivityMessage.setVisibility(View.VISIBLE);
+
+
+        addActivityButton.setVisibility(View.INVISIBLE);
+        addActivityButton.startAnimation(slideDown);
+        addActivityButton.setVisibility(View.VISIBLE);
+    }
+
+    private void hideNoActivityElements()
+    {
+
+        recentActivitiesTextView.setVisibility(View.VISIBLE);
+        noActivityImageview.setVisibility(View.GONE);
+        noActivityMessage.setVisibility(View.GONE);
+        addActivityButton.setVisibility(View.GONE);
+    }
+
 
 
     protected abstract void OnStartActitvty();

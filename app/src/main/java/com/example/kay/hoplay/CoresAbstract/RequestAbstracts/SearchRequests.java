@@ -1,6 +1,7 @@
 package com.example.kay.hoplay.CoresAbstract.RequestAbstracts;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
@@ -17,11 +18,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +43,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 
 /**
@@ -62,7 +67,7 @@ public abstract class SearchRequests extends Fragment {
     private int layoutItemId;
 
 
-
+    private RelativeLayout activityLayout;
 
     protected ArrayList<String> gamesList;
     protected ArrayList<String> regionList;
@@ -96,6 +101,8 @@ public abstract class SearchRequests extends Fragment {
     }
 
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -103,6 +110,16 @@ public abstract class SearchRequests extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_requests_search, container, false);
 
+
+        // Hide keyboard when click anywhre on fragment
+        activityLayout = (RelativeLayout) view.findViewById(R.id.search_request_fragment_relativelayout);
+        activityLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+            }
+        });
 
 
 
@@ -189,6 +206,9 @@ public abstract class SearchRequests extends Fragment {
 
         return gameModel.getGameID();
     }
+
+
+
 
 
     // Init all controls

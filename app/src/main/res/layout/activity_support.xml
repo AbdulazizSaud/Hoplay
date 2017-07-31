@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/support_relativelayout"
+    android:onClick="removeKeyboard"
+    android:background="@color/app_background"
+    tools:context="com.example.kay.hoplay.CoresAbstract.Support">
+
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/ic_bug_report_64dp"
+        android:id="@+id/support_imageview"
+        />
+
+
+    <TextView
+        android:text="@string/support_activity_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/app_color"
+        android:textSize="25dp"
+        android:layout_below="@+id/support_imageview"
+        android:id="@+id/activity_title_message"
+        />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:id="@+id/support_title_textinputlayout"
+        android:layout_below="@+id/activity_title_message"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="textEmailAddress"
+            style="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="@color/text_color"
+            android:layout_below="@+id/activity_title_message"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="52dp"
+            android:hint="@string/support_title"
+            android:paddingLeft="10dp"
+            android:gravity="left"
+            android:drawableRight="@drawable/ic_title_unfocused_32dp"
+            android:drawableEnd="@drawable/ic_title_unfocused_32dp"
+            android:textColorHint="@color/hint_color"
+            android:id="@+id/support_title_edittext" />
+
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:id="@+id/support_message_textinputlayout"
+        android:layout_below="@+id/support_title_textinputlayout"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/text_color"
+            android:layout_below="@+id/activity_title_message"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="52dp"
+            android:drawableRight="@drawable/ic_mail_outline_not_focused_32dp"
+            android:hint="@string/support_message"
+            android:paddingLeft="10dp"
+            android:gravity="left"
+            android:maxLength="440"
+            android:textColorHint="@color/hint_color"
+            android:id="@+id/support_message_edittext" />
+
+
+    </android.support.design.widget.TextInputLayout>
+
+
+
+    <Button
+        android:text="@string/support_send"
+        android:textStyle="normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/support_message_textinputlayout"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:onClick="sendReport"
+        android:layout_marginLeft="10dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/send_support_button" />
+
+
+
+</RelativeLayout>

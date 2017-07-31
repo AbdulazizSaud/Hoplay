@@ -15,45 +15,46 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/ic_sentiment_dissatisfied_64dp"
-        android:id="@+id/sad_face_deactive_account_popup_imageview"
+        app:srcCompat="@drawable/ic_sentiment_very_dissatisfied_64dp"
+        android:id="@+id/sad_face_leave_lobby_imageview"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/sad_face_deactive_account_popup_imageview"
-        android:text="@string/deactive_account_popup_message"
+        android:padding="10dp"
+        android:layout_below="@id/sad_face_leave_lobby_imageview"
+        android:text="@string/leave_lobby_dialog_message"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:layout_marginBottom="20dp"
-        android:id="@+id/deactive_account_message"
+        android:id="@+id/leave_lobby_message_textview"
         />
 
 
     <Button
-        android:text="@string/deactive_account_popup_no"
+        android:text="@string/leave_lobby_dialog_no"
         android:textColor="@color/white"
         style="@style/Base.Widget.AppCompat.Button.Colored"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:id="@+id/deactive_account_no_button"
-        android:layout_alignBaseline="@+id/deactive_account_yes_button"
-        android:layout_alignBottom="@+id/deactive_account_yes_button"
-        android:layout_toRightOf="@+id/sad_face_deactive_account_popup_imageview"
-        android:layout_toEndOf="@+id/sad_face_deactive_account_popup_imageview" />
+        android:id="@+id/leave_lobby_no_button"
+        android:layout_alignBaseline="@+id/leave_lobby_yes_button"
+        android:layout_alignBottom="@+id/leave_lobby_yes_button"
+        android:layout_toRightOf="@+id/sad_face_leave_lobby_imageview"
+        android:layout_toEndOf="@+id/sad_face_leave_lobby_imageview" />
 
     <Button
-        android:text="@string/deactive_account_popup_yes"
+        android:text="@string/leave_lobby_dialog_yes"
         android:textColor="@color/white"
         style="@style/Base.Widget.AppCompat.Button.Colored"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:id="@+id/deactive_account_yes_button"
-        android:layout_alignTop="@+id/deactive_account_message"
-        android:layout_toLeftOf="@+id/sad_face_deactive_account_popup_imageview"
-        android:layout_toStartOf="@+id/sad_face_deactive_account_popup_imageview"
+        android:id="@+id/leave_lobby_yes_button"
+        android:layout_alignTop="@+id/leave_lobby_message_textview"
+        android:layout_toLeftOf="@+id/sad_face_leave_lobby_imageview"
+        android:layout_toStartOf="@+id/sad_face_leave_lobby_imageview"
         android:layout_marginTop="46dp" />
 
 

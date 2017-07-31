@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -245,6 +246,18 @@ public abstract class ChangePassword extends AppCompatActivity {
 
         snackbar.show();
     }
+
+
+
+    // Remove keyboard when click anywhere :
+    public void removeKeyboard(View v) {
+
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
+
+
+
     protected abstract void OnStartActivity();
     protected abstract void validateOldPassword(String oldPassword);
     protected abstract void updateUserPassword(String newPassword);

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -18,8 +19,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +57,11 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
     private Dialog savedRequestPopupDialog;
 
 
+    // No saved requests variables
+    protected ImageView noSavedRequestImageView;
+    protected TextView  noSavedRequestsTextView;
+
+
 
 
     public NewRequestFragment() {
@@ -72,6 +81,9 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
         View view = inflater.inflate(R.layout.activity_make_request_fragment, container, false);
         newRequestButton = (Button) view.findViewById(R.id.new_request_button);
         addGameFloationActionButton = (FloatingActionButton) view.findViewById(R.id.add_new_game_floatinactionbutton);
+
+        noSavedRequestImageView = (ImageView) view.findViewById(R.id.no_saved_request_imageview);
+        noSavedRequestsTextView = (TextView)  view.findViewById(R.id.no_saved_request_message_textview);
 
         addGameFloationActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,9 +113,12 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
 
 
         Typeface sansation = Typeface.createFromAsset(getActivity().getAssets(), "sansationbold.ttf");
+        Typeface playregular = Typeface.createFromAsset(getActivity().getAssets(), "playregular.ttf");
         newRequestButton.setTypeface(sansation);
         savedRequestsMessage.setTypeface(sansation);
         addGameTextView.setTypeface(sansation);
+
+        noSavedRequestsTextView.setTypeface(playregular);
 
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.saved_requests_recyclerview);
@@ -118,6 +133,15 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
 
 
         mAdapter = createAdapter();
+
+
+        // Show or hide no saved requests elements
+        if (mAdapter.getItemCount()<1)
+            showNoSavedRequestElements();
+        else
+            hideNoSavedRequestElements();
+
+
         mRecyclerView.setAdapter(mAdapter);
 
 
@@ -144,6 +168,14 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
             @Override
             public void OnBindHolder(ViewHolders holder, final RequestModel model, final int position) {
                 //ImageLoader loader = App.getInstance().getImageLoader();
+
+
+                // Show or hide no saved requests elements
+                if (mAdapter.getItemCount()<1)
+                    showNoSavedRequestElements();
+                else
+                    hideNoSavedRequestElements();
+
 
 
                 holder.getView().setOnClickListener(new View.OnClickListener() {
@@ -340,7 +372,7 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
     private void showNoGameDialog(){
 
 
-      Dialog   noGameDialog = new Dialog(getContext());
+      final Dialog   noGameDialog = new Dialog(getContext());
         noGameDialog.setContentView(R.layout.activity_no_game_pop_up);
         noGameDialog.show();
 
@@ -373,6 +405,7 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
                 Intent i = new Intent(getActivity().getApplicationContext(), AddGameCore.class);
                 startActivity(i);
                 getActivity().overridePendingTransition( R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
+                noGameDialog.dismiss();
             }
         });
 
@@ -385,6 +418,36 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(lp);
     }
+
+
+
+    protected void showNoSavedRequestElements(){
+
+        Animation slideDown = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up_view);
+
+        savedRequestsMessage.setVisibility(View.GONE);
+
+        noSavedRequestImageView.setVisibility(View.INVISIBLE);
+        noSavedRequestImageView.startAnimation(slideDown);
+        noSavedRequestImageView.setVisibility(View.VISIBLE);
+
+        noSavedRequestsTextView.setVisibility(View.INVISIBLE);
+        noSavedRequestsTextView.startAnimation(slideDown);
+        noSavedRequestsTextView.setVisibility(View.VISIBLE);
+
+
+    }
+
+    protected void hideNoSavedRequestElements()
+    {
+
+        savedRequestsMessage.setVisibility(View.VISIBLE);
+        noSavedRequestImageView.setVisibility(View.GONE);
+        noSavedRequestsTextView.setVisibility(View.GONE);
+
+    }
+
+
 
     protected abstract void OnStartActivity();
 }

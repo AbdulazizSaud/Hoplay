@@ -3,6 +3,7 @@ package com.example.kay.hoplay.CoresAbstract.ProfileAbstracts;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -45,7 +47,7 @@ public abstract class EditProfile extends AppCompatActivity {
 
     private final  int RESULT_LOAD_IMG=1;
 
-    private TextView changeUserPhotoTextview;
+    private TextView changeUserPhotoTextview , activityTitle;
     private EditText userBioEdittext , gameProviderEdittext;
     private  MaterialBetterSpinner gamesProvidersSpinner;
     private ImageView closeButton;
@@ -70,15 +72,17 @@ public abstract class EditProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        // Set the screen orientation to the portrait mode :
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         app = App.getInstance();
 
         currentPosition=-1;
 
         final Typeface playregular = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
         final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
+        final Typeface sansation = Typeface.createFromAsset(getResources().getAssets(), "sansationbold.ttf");
 
-
-
+        activityTitle = (TextView) findViewById(R.id.edit_profile_title_textview) ;
         changeUserPhotoTextview = (TextView) findViewById(R.id.change_profile_photo_textview);
         userBioEdittext = (EditText) findViewById(R.id.edit_user_bio_edittext);
 
@@ -90,11 +94,13 @@ public abstract class EditProfile extends AppCompatActivity {
         saveButton = (Button) findViewById(R.id.update_edit_profile_button);
         userPictureCircleImageView = (CircleImageView) findViewById(R.id.user_profile_photo_circleimageview);
 
+
         changeUserPhotoTextview.setTypeface(playbold);
         userBioEdittext.setTypeface(playregular);
         gameProviderEdittext.setTypeface(playregular);
         gamesProvidersSpinner.setTypeface(playregular);
         saveButton.setTypeface(playregular);
+        activityTitle.setTypeface(sansation);
 
 
         gamesProvidersSpinner.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.text_color));
@@ -280,6 +286,7 @@ public abstract class EditProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveProfileInfo();
+                Toast.makeText(getApplicationContext(),R.string.edit_profile_success_message,Toast.LENGTH_LONG).show();
                 finish();
             }
         });
@@ -310,6 +317,16 @@ public abstract class EditProfile extends AppCompatActivity {
 
         return false;
     }
+
+
+
+    // Remove keyboard when click anywhere :
+    public void removeKeyboard(View v) {
+
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
+
 
 
     private synchronized void setUserProfileInformation() {

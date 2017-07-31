@@ -32,6 +32,9 @@ public interface FirebasePaths {
     public static final String FIREBASE_GAMES_NAME_ATTR_REFERENCES = "name";
     public static final String FIREBASE_GAMES_PHOTO_ATTR_REFERENCES = "photo";
 
+
+
+
     public static final String FIREBASE_GAME_PLATFORMS_ATTR = "platforms";
     public static final String FIREBASE_GAME_PC_GAME_PROVIDER = "pc_game_provider";
     public static final String FIREBASE_USER_CHAT_REFERENCES = "_chat_refs_";
@@ -70,6 +73,13 @@ public interface FirebasePaths {
 
 
 
+    // Support
+    public static final String FIREBASE_SUPPORT_REFERENCE = "_support_";
+    public static  final String FIREBASE_SUPPORT_TITLE_ATTR = "title";
+    public static final String FIREBASE_SUPPORT_MESSAGE_ATTR = "message";
+    public static  final String FIREBASE_SUPPORT_EMAIL_ATTR = "email";
+    public static  final String FIREBASE_SUPPORT_USERNAME = "username";
+    public static final  String FIREBASE_SUPPORT_UID = "UID";
 
     // USER INFO
 

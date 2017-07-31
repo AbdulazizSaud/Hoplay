@@ -577,9 +577,11 @@ public abstract class Signup extends AppCompatActivity implements Constants {
     }
     public void toMainMenuApp(){
 
-
+        finish();
         Intent i = new Intent(getApplicationContext(), MainAppMenuCore.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
+        overridePendingTransition( R.anim.slide_in_right_layouts, R.anim.slide_out_right_layouts);
 
     }
     public void toTermsAndConditions(View v) {
