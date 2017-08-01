@@ -198,13 +198,17 @@ public abstract class Community extends Fragment {
                 holder.getPicture().setBorderWidth(6);
                 holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.app_color));
 
-                app.loadingImage(getContext(),holder, model.getUserPictureURL());
 
 
                 // Capitalize Title letters
-                String requestTitle = model.getChatName();
-                String capitlizedChatTitle = requestTitle.substring(0,1).toUpperCase() +  requestTitle.substring(1);
-                if (requestTitle.contains(" "))
+                String chatTitle = model.getChatName();
+
+                if(chatTitle == null)
+                    return;
+
+                String capitlizedChatTitle = chatTitle.substring(0,1).toUpperCase() +  chatTitle.substring(1);
+
+                if (chatTitle.contains(" "))
                 {
                     // Capitalize game title letters
                     String cpWord= "";
@@ -224,6 +228,7 @@ public abstract class Community extends Fragment {
 
 
                 communityHolder.setCommunitySubtitle(model.getLastMsg());
+                app.loadingImage(getContext(),holder, model.getUserPictureURL());
 
 
                 // Hide the counter if unseen messages less than 1 message

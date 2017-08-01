@@ -46,10 +46,6 @@ import java.util.List;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public abstract class SearchRequests extends Fragment {
 
     protected App app;

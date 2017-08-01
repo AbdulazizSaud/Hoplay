@@ -2,12 +2,14 @@ package com.example.kay.hoplay.CoresAbstract.ProfileAbstracts;
 
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.ButtonBarLayout;
@@ -30,9 +32,11 @@ import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.Cores.ChatCore.FindUserCore;
+import com.example.kay.hoplay.Cores.MainAppMenuCore;
 import com.example.kay.hoplay.Cores.RequestCore.NewRequestCore;
 import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
 import com.example.kay.hoplay.Cores.UserProfileCores.FriendsListCore;
+import com.example.kay.hoplay.CoresAbstract.MainAppMenu;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.RecentGameModel;
 import com.example.kay.hoplay.Services.CallbackHandlerCondition;
@@ -44,6 +48,7 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
 
@@ -53,38 +58,33 @@ import static android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
  */
 public abstract class UserProfile extends Fragment {
 
-    private final static int RESULT_LOAD_IMG=1;
+    private final static int RESULT_LOAD_IMG = 1;
 
-    protected   App app;
+    protected App app;
     private TextView usernameProfile;
     private TextView userGamesTextView;
     private TextView userRatingsTextView;
     private TextView userFriendsTextView;
     private TextView gamesNumberTextView;
-    private TextView ratingsNumberTextView ;
+    private TextView ratingsNumberTextView;
     private TextView friendsNumberTextView;
     private TextView recentActivitiesTextView;
     private TextView bioTextView;
     private CircleImageView userPictureCircleImageView;
     private ImageView profileSettingsImageView;
-    private LinearLayout toUserGamesLinearLayout ;
+    private LinearLayout toUserGamesLinearLayout;
     private LinearLayout toUserFriendsLinearLayout;
     private LinearLayout toUserRatingsLinearLayout;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager mLayoutManager;
-    ArrayList<RecentGameModel> recentGameModels =new ArrayList<RecentGameModel>();
-
+    ArrayList<RecentGameModel> recentGameModels = new ArrayList<RecentGameModel>();
 
 
     // No activities section
     private ImageView noActivityImageview;
-    private TextView noActivityMessage ;
+    private TextView noActivityMessage;
     private Button addActivityButton;
-
-
-
-
 
 
     @Override
@@ -134,11 +134,9 @@ public abstract class UserProfile extends Fragment {
         noActivityImageview = (ImageView) view.findViewById(R.id.no_activity_imageview);
 
 
-
-
-        Typeface playregular = Typeface.createFromAsset(getActivity().getAssets() ,"playregular.ttf");
-        Typeface playbold = Typeface.createFromAsset(getActivity().getAssets() ,"playbold.ttf");
-        Typeface sansation = Typeface.createFromAsset(getActivity().getAssets() ,"sansationbold.ttf");
+        Typeface playregular = Typeface.createFromAsset(getActivity().getAssets(), "playregular.ttf");
+        Typeface playbold = Typeface.createFromAsset(getActivity().getAssets(), "playbold.ttf");
+        Typeface sansation = Typeface.createFromAsset(getActivity().getAssets(), "sansationbold.ttf");
 
         usernameProfile.setTypeface(playbold);
         friendsNumberTextView.setTypeface(playregular);
@@ -162,27 +160,44 @@ public abstract class UserProfile extends Fragment {
         // these  methods used to jump to ( games , scores , following , followers ) activity .
         // I've tried the onClick(View view) method  but  it didn't work .
 
+
+        userPictureCircleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Alpha
+                if (isAllowedPremmision()) {
+
+                    userPictureCircleImageView.setClickable(false);
+
+                    Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    // Start the Intent
+                    startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
+                }
+
+            }
+        });
+
         toUserGamesLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity().getApplicationContext(),AddGameCore.class);
+                Intent i = new Intent(getActivity().getApplicationContext(), AddGameCore.class);
                 startActivity(i);
-                getActivity().overridePendingTransition( R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
+                getActivity().overridePendingTransition(R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
             }
         });
 
         toUserFriendsLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity().getApplicationContext() , FriendsListCore.class);
+                Intent i = new Intent(getActivity().getApplicationContext(), FriendsListCore.class);
                 i.setFlags(FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
-                getActivity().overridePendingTransition( R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
+                getActivity().overridePendingTransition(R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
 
             }
         });
-
-
 
 
         profileSettingsImageView.setOnClickListener(new View.OnClickListener() {
@@ -192,7 +207,7 @@ public abstract class UserProfile extends Fragment {
 
                 Intent i = new Intent(getActivity().getApplicationContext(), SettingsActivity.class);
                 startActivity(i);
-                getActivity().overridePendingTransition( R.anim.slide_in_right_layouts, R.anim.slide_out_right_layouts);
+                getActivity().overridePendingTransition(R.anim.slide_in_right_layouts, R.anim.slide_out_right_layouts);
 
 
             }
@@ -205,14 +220,12 @@ public abstract class UserProfile extends Fragment {
 
                 Intent i = new Intent(getContext(), NewRequestCore.class);
                 startActivity(i);
-                getActivity().overridePendingTransition( R.anim.slide_in_left_layout, R.anim.slide_out_left_layout);
+                getActivity().overridePendingTransition(R.anim.slide_in_left_layout, R.anim.slide_out_left_layout);
             }
         });
 
 
-
     }
-
 
 
     private void setupRecyclerView(View view) {
@@ -237,41 +250,36 @@ public abstract class UserProfile extends Fragment {
         mAdapter = createAdapter();
 
         // Show or hide no activity elements
-        if (mAdapter.getItemCount() <1)
+        if (mAdapter.getItemCount() < 1)
             showNoActivityElements();
         else
             hideNoActivityElements();
-
 
 
         mRecyclerView.setAdapter(mAdapter);
     }
 
     private synchronized void setUserProfileInformation() {
-         app = App.getInstance();
+        app = App.getInstance();
 
 
-        app.loadingImage(userPictureCircleImageView,app.getUserInformation().getPictureURL());
-        usernameProfile.setText("@"+app.getUserInformation().getUsername());
+        app.loadingImage(userPictureCircleImageView, app.getUserInformation().getPictureURL());
+        usernameProfile.setText("@" + app.getUserInformation().getUsername());
         bioTextView.setText(app.getUserInformation().getNickName());
     }
 
 
-
-
-    protected void loadPicture()
-    {
-        app.loadingImage(userPictureCircleImageView,app.getUserInformation().getPictureURL());
+    protected void loadPicture() {
+        app.loadingImage(userPictureCircleImageView, app.getUserInformation().getPictureURL());
 
     }
-    public void addRecentGame(String gameID, String gameName , String gamePhoto ,String platform, String activityDescription , long timestmap)
-    {
 
-        RecentGameModel recentActivity = new RecentGameModel(gameID,gameName,gamePhoto,platform,activityDescription,timestmap);
+    public void addRecentGame(String gameID, String gameName, String gamePhoto, String platform, String activityDescription, long timestmap) {
+
+        RecentGameModel recentActivity = new RecentGameModel(gameID, gameName, gamePhoto, platform, activityDescription, timestmap);
         recentGameModels.add(recentActivity);
         mAdapter.notifyDataSetChanged();
     }
-
 
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -283,28 +291,34 @@ public abstract class UserProfile extends Fragment {
                 // Get the Image from data
 
                 Uri selectedImage = data.getData();
-                Bitmap imgBitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                Bitmap imgBitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), selectedImage);
 
                 userPictureCircleImageView.setImageBitmap(imgBitmap);
 
+                uploadPicture(userPictureCircleImageView);
+
             } else {
+
+                userPictureCircleImageView.setClickable(true);
+
                 Toast.makeText(getContext(), "You haven't picked an Image",
                         Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
+
+            userPictureCircleImageView.setClickable(true);
             Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG)
                     .show();
+            Log.e("--->", e.getLocalizedMessage());
         }
 
     }
 
 
-
-    private CommonAdapter<RecentGameModel> createAdapter(){
-        return new CommonAdapter<RecentGameModel>(recentGameModels,R.layout.new_user_activity) {
+    private CommonAdapter<RecentGameModel> createAdapter() {
+        return new CommonAdapter<RecentGameModel>(recentGameModels, R.layout.new_user_activity) {
             @Override
             public ViewHolders OnCreateHolder(View v) {
-
 
 
                 v.setOnClickListener(new View.OnClickListener() {
@@ -318,56 +332,45 @@ public abstract class UserProfile extends Fragment {
             }
 
             @Override
-            public void OnBindHolder(final ViewHolders holder, final RecentGameModel model,int position)
-            {
+            public void OnBindHolder(final ViewHolders holder, final RecentGameModel model, int position) {
 
                 // Show or hide no activity elements
-                if (mAdapter.getItemCount() <1)
+                if (mAdapter.getItemCount() < 1)
                     showNoActivityElements();
                 else
                     hideNoActivityElements();
 
 
-
-
-
-                app.loadingImage(getContext(),holder,model.getGamePhotoUrl());
+                app.loadingImage(getContext(), holder, model.getGamePhotoUrl());
 
                 Typeface playbold = Typeface.createFromAsset(getActivity().getAssets(), "playbold.ttf");
                 Typeface playregular = Typeface.createFromAsset(getActivity().getAssets(), "playregular.ttf");
 
 
-
-
                 // Capitalize game name letters
                 String gameName = model.getGameName();
-                String capitlizedGameName = gameName.substring(0,1).toUpperCase() +  gameName.substring(1);
-                if (gameName.contains(" "))
-                {
+                String capitlizedGameName = gameName.substring(0, 1).toUpperCase() + gameName.substring(1);
+                if (gameName.contains(" ")) {
                     // Capitalize game title letters
-                    String cpWord= "";
-                    for (int  i = 0 ; i < capitlizedGameName.length(); i++)
-                    {
-                        if (capitlizedGameName.charAt(i) == 32 && capitlizedGameName.charAt(i+1) != 32)
-                        {
-                            cpWord= capitlizedGameName.substring(i+1,i+2).toUpperCase() + capitlizedGameName.substring(i+2);
-                             capitlizedGameName = capitlizedGameName.replace(capitlizedGameName.charAt(i+1),cpWord.charAt(0));
+                    String cpWord = "";
+                    for (int i = 0; i < capitlizedGameName.length(); i++) {
+                        if (capitlizedGameName.charAt(i) == 32 && capitlizedGameName.charAt(i + 1) != 32) {
+                            cpWord = capitlizedGameName.substring(i + 1, i + 2).toUpperCase() + capitlizedGameName.substring(i + 2);
+                            capitlizedGameName = capitlizedGameName.replace(capitlizedGameName.charAt(i + 1), cpWord.charAt(0));
                         }
                     }
                     holder.setTitle(capitlizedGameName);
-                }else {
-                    if (capitlizedGameName.equalsIgnoreCase("cs:go")){
+                } else {
+                    if (capitlizedGameName.equalsIgnoreCase("cs:go")) {
                         holder.setTitle(capitlizedGameName.toUpperCase());
                     } else
                         holder.setTitle(capitlizedGameName);
                 }
 
 
-
                 holder.getTitleView().setTypeface(playbold);
                 holder.setSubtitle(model.getActivityDescription());
                 holder.getSubtitleView().setTypeface(playregular);
-
 
 
                 holder.setTime(app.convertFromTimeStampToTimeAgo(model.getTimeStamp()));
@@ -378,7 +381,7 @@ public abstract class UserProfile extends Fragment {
                         holder.setTime(app.convertFromTimeStampToTimeAgo(model.getTimeStamp()));
                         return false;
                     }
-                },10000);
+                }, 10000);
 
 
                 holder.getTimeView().setTypeface(playregular);
@@ -386,17 +389,16 @@ public abstract class UserProfile extends Fragment {
 
                 holder.getPicture().setBorderWidth(6);
                 // Changing title color depending on the platform
-                if (model.getGamePlatforms().equalsIgnoreCase("PC"))
-                {holder.getTitleView().setTextColor(ContextCompat.getColor(getContext(), R.color.pc_color));
-                    holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.pc_color));}
-                else if (model.getGamePlatforms().equalsIgnoreCase("PS"))
-                {holder.getTitleView().setTextColor(ContextCompat.getColor(getContext(), R.color.ps_color));
-                    holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.ps_color));}
-                else
-                {holder.getTitleView().setTextColor(ContextCompat.getColor(getContext(), R.color.xbox_color));
-                    holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.xbox_color));}
-
-
+                if (model.getGamePlatforms().equalsIgnoreCase("PC")) {
+                    holder.getTitleView().setTextColor(ContextCompat.getColor(getContext(), R.color.pc_color));
+                    holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.pc_color));
+                } else if (model.getGamePlatforms().equalsIgnoreCase("PS")) {
+                    holder.getTitleView().setTextColor(ContextCompat.getColor(getContext(), R.color.ps_color));
+                    holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.ps_color));
+                } else {
+                    holder.getTitleView().setTextColor(ContextCompat.getColor(getContext(), R.color.xbox_color));
+                    holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.xbox_color));
+                }
 
 
             }
@@ -404,18 +406,24 @@ public abstract class UserProfile extends Fragment {
     }
 
 
-    protected void setGamesNumber(String number){
+    protected void setGamesNumber(String number) {
         gamesNumberTextView.setText(number);
     }
-    protected void setFriendsNumber(String number){
+
+    protected void setFriendsNumber(String number) {
         friendsNumberTextView.setText(number);
     }
 
-    protected void setNicknameTextView( String name) {bioTextView.setText(name);}
-    protected void setUsernameProfile(String name){usernameProfile.setText(name);}
+    protected void setNicknameTextView(String name) {
+        bioTextView.setText(name);
+    }
+
+    protected void setUsernameProfile(String name) {
+        usernameProfile.setText(name);
+    }
 
 
-    private void showNoActivityElements(){
+    private void showNoActivityElements() {
 
         Animation slideDown = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up_view);
 
@@ -435,8 +443,7 @@ public abstract class UserProfile extends Fragment {
         addActivityButton.setVisibility(View.VISIBLE);
     }
 
-    private void hideNoActivityElements()
-    {
+    private void hideNoActivityElements() {
 
         recentActivitiesTextView.setVisibility(View.VISIBLE);
         noActivityImageview.setVisibility(View.GONE);
@@ -445,8 +452,30 @@ public abstract class UserProfile extends Fragment {
     }
 
 
+    private boolean isAllowedPremmision() {
+        int permissionCheck = ContextCompat.checkSelfPermission(app.getMainAppMenuCore(),READ_EXTERNAL_STORAGE);
+
+        if ( permissionCheck != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(app.getMainAppMenuCore(),READ_EXTERNAL_STORAGE)) {
+                // Explain to the user why we need to read the contacts
+            }
+            ActivityCompat.requestPermissions(app.getMainAppMenuCore(),
+                    new String[]{READ_EXTERNAL_STORAGE},
+                    0);
+
+        } else return true;
+
+        return false;
+    }
+
+
 
     protected abstract void OnStartActitvty();
+
+    protected abstract void uploadPicture(CircleImageView circleImageView);
+
 
 
 }

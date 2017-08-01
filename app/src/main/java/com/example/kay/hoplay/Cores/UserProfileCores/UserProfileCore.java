@@ -4,11 +4,15 @@ import android.util.Log;
 
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.UserProfile;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.UploadTask;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class UserProfileCore extends UserProfile implements FirebasePaths {
@@ -65,6 +69,19 @@ public class UserProfileCore extends UserProfile implements FirebasePaths {
         loadRecentActivtiy();
 
         app.getDatabaseUsersInfo().child(app.getUserInformation().getUID() + "/" + FIREBASE_DETAILS_ATTR).addChildEventListener(userInformationEventListener);
+    }
+
+    @Override
+    protected void uploadPicture(final CircleImageView circleImageView) {
+        app.uploadPicture(circleImageView,FIREBASESTORAGE_USERINFO_ATTR+"/"+app.getUserInformation().getUID()).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                app.getDatabaseUsersInfo().child(app.getUserInformation().getUID() + "/" + FIREBASE_PICTURE_URL_PATH).setValue(taskSnapshot.getDownloadUrl().toString());
+                circleImageView.setClickable(true);
+
+            }
+        });
     }
 
 

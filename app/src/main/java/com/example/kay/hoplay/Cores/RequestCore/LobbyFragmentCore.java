@@ -57,6 +57,8 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
                         lobby.setGameBorderWidth(8);
 
 
+
+                        // TODO : ERROR
                         if (requestModelRefrance.getPlatform().equalsIgnoreCase("PS")) {
                             player.setGamePovider("PSN Account");
                             player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PS_GAME_PROVIDER_ATTR).getValue(String.class));

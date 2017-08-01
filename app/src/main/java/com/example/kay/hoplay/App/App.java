@@ -3,6 +3,7 @@ package com.example.kay.hoplay.App;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -245,10 +246,10 @@ public class App extends Application implements FirebasePaths {
 
     public String convertFromTimeStampToDate(long timeStamp)
     {
-        DateFormat sdf = new SimpleDateFormat("HH:mm");
+        DateFormat sdf = new SimpleDateFormat("K:mm a");
         Date netDate = (new Date(Long.parseLong(String.valueOf(timeStamp))));
-
-        return sdf.format(netDate);
+        String time = sdf.format(netDate);
+        return time;
     }
 
     public GameManager getGameManager() {

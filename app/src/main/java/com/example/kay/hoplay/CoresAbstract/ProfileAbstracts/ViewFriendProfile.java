@@ -112,6 +112,14 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
                 finish();
             }
         });
+
+        userPictureCircleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+
+
         OnStartActitvty();
     }
 
@@ -226,14 +234,10 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
     protected void setGamesNumber(String number){
         gamesNumberTextView.setText(number);
     }
-
     protected void setFriendsNumber(String number){
         friendsNumberTextView.setText(number);
     }
-
-
     protected void setUsernameProfile(String name){usernameProfile.setText(name);}
-
-
     protected abstract void OnStartActitvty();
+
 }

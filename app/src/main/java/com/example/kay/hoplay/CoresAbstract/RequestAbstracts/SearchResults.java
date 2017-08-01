@@ -13,9 +13,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,9 +34,10 @@ import com.example.kay.hoplay.R;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public abstract class SearchResults extends AppCompatActivity {
-
 
 
     private MaterialBetterSpinner searchPrioritySpinner;
@@ -48,11 +51,10 @@ public abstract class SearchResults extends AppCompatActivity {
     protected App app;
 
 
-
     // Provider Accounht stuff
-    private String pcGameProvider ="";
-   private  Dialog  gameProviderDialog;
-    private   String selectedPlatform = "" ;
+    private String pcGameProvider = "";
+    private Dialog gameProviderDialog;
+    private String selectedPlatform = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +69,7 @@ public abstract class SearchResults extends AppCompatActivity {
         OnStartActivity();
     }
 
-    private void initControls()
-    {
+    private void initControls() {
         searchPrioritySpinner = (MaterialBetterSpinner) findViewById(R.id.search_priority_spinner);
         final Typeface playregular = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
         searchPrioritySpinner.setTypeface(playregular);
@@ -87,6 +88,41 @@ public abstract class SearchResults extends AppCompatActivity {
         // set Order by time as a default
         searchPrioritySpinner.setSelection(0);
 
+        searchPrioritySpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        Collections.sort(requestModels, new Comparator<RequestModel>() {
+                            @Override
+                            public int compare(RequestModel o1, RequestModel o2) {
+                                if (o1.getTimeStamp() == o2.getTimeStamp())
+                                    return 0;
+                                else if (o1.getTimeStamp() > o2.getTimeStamp())
+                                    return 1;
+                                return -1;
+                            }
+                        });
+                        mAdapter.notifyDataSetChanged();
+                        break;
+                    case 1:
+                        Collections.sort(requestModels, new Comparator<RequestModel>() {
+                            @Override
+                            public int compare(RequestModel o1, RequestModel o2) {
+                                if (o1.getPlayerNumber() == o2.getPlayerNumber())
+                                    return 0;
+                                else if (o1.getPlayerNumber() > o2.getPlayerNumber())
+                                    return 1;
+                                return -1;
+                            }
+                        });
+                        mAdapter.notifyDataSetChanged();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
 
     }
 
@@ -109,8 +145,7 @@ public abstract class SearchResults extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    public void addResult(String platform, String requestTitle, String admin, String description, String region, int playerNumber, String matchType, String rank, long timeStamp)
-    {
+    public void addResult(String platform, String requestTitle, String admin, String description, String region, int playerNumber, String matchType, String rank, long timeStamp) {
 
         RequestModel requestModel = new RequestModel(platform, requestTitle, admin, description, region, playerNumber, matchType, rank, timeStamp);
         requestModels.add(requestModel);
@@ -118,14 +153,13 @@ public abstract class SearchResults extends AppCompatActivity {
     }
 
 
-    public void addResult(RequestModel requestModel)
-    {
+    public void addResult(RequestModel requestModel) {
         requestModels.add(requestModel);
         mAdapter.notifyDataSetChanged();
     }
 
-    private CommonAdapter<RequestModel> createAdapter(){
-        return new CommonAdapter<RequestModel>(requestModels,R.layout.request_model) {
+    private CommonAdapter<RequestModel> createAdapter() {
+        return new CommonAdapter<RequestModel>(requestModels, R.layout.request_model) {
             @Override
             public ViewHolders OnCreateHolder(View v) {
 
@@ -139,50 +173,44 @@ public abstract class SearchResults extends AppCompatActivity {
                 holder.setTitle(model.getRequestTitle());
                 holder.setSubtitle(model.getDescription());
                 holder.setTime(app.convertFromTimeStampToTimeAgo(model.getTimeStamp()));
-                holder.setNumberOfPlayers(model.getPlayers().size()+"/"+String.valueOf(model.getPlayerNumber()));
+                holder.setNumberOfPlayers(model.getPlayers().size() + "/" + String.valueOf(model.getPlayerNumber()));
                 holder.setSubtitle2(model.getAdminName());
 
                 // end-dots if description is more than 36 characters
-                if (model.getDescription().length() >= 36)
-                {
+                if (model.getDescription().length() >= 36) {
                     StringBuilder dotsDescription = new StringBuilder(model.getDescription());
-                    dotsDescription.setCharAt(36,'.');
-                    dotsDescription.setCharAt(37,'.');
-                    dotsDescription.setCharAt(38,'.');
-                    dotsDescription.setCharAt(39,'.');
-                    dotsDescription.setCharAt(40,'.');
+                    dotsDescription.setCharAt(36, '.');
+                    dotsDescription.setCharAt(37, '.');
+                    dotsDescription.setCharAt(38, '.');
+                    dotsDescription.setCharAt(39, '.');
+                    dotsDescription.setCharAt(40, '.');
                     holder.setSubtitle(dotsDescription.toString());
                 }
-
 
 
                 // Set the request image border width
                 holder.getPicture().setBorderWidth(8);
 
                 // Styling the title and request image border
-                if (model.getPlatform().equalsIgnoreCase("PC"))
-                {
+                if (model.getPlatform().equalsIgnoreCase("PC")) {
                     holder.getPicture().setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.pc_color));
                     holder.getTitleView().setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.pc_color));
-                } else if (model.getPlatform().equalsIgnoreCase("PS")){
+                } else if (model.getPlatform().equalsIgnoreCase("PS")) {
                     holder.getPicture().setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.ps_color));
                     holder.getTitleView().setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.ps_color));
-                }else {
+                } else {
                     holder.getPicture().setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.xbox_color));
                     holder.getTitleView().setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.xbox_color));
                 }
 
 
-
-
                 //Match type icon
                 if (model.getMatchType().equalsIgnoreCase("Competitive"))
                     holder.getSubtitleImageview().setImageResource(R.drawable.ic_whatshot_competitive_18dp);
-                else if(model.getMatchType().equalsIgnoreCase("Quick Match"))
+                else if (model.getMatchType().equalsIgnoreCase("Quick Match"))
                     holder.getSubtitleImageview().setImageResource(R.drawable.ic_whatshot_quick_match_18dp);
                 else
                     holder.getSubtitleImageview().setImageResource(R.drawable.ic_whatshot_unfocused_24dp);
-
 
 
                 // Game provider settings
@@ -190,13 +218,13 @@ public abstract class SearchResults extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        if (model.getPlatform().equalsIgnoreCase("PS") && !app.getUserInformation().getPSNAcc().equals("")){
-                            OnClickHolders(model,v);
-                        }else if(model.getPlatform().equalsIgnoreCase("XBOX") && !app.getUserInformation().getXboxLiveAcc().equals("")){
-                            OnClickHolders(model,v);
-                        }else if(model.getPlatform().equalsIgnoreCase("PC") && app.getUserInformation().getPcGamesAcc().get(pcGameProvider) !=null){
-                            OnClickHolders(model,v);
-                        }else {
+                        if (model.getPlatform().equalsIgnoreCase("PS") && !app.getUserInformation().getPSNAcc().equals("")) {
+                            OnClickHolders(model, v);
+                        } else if (model.getPlatform().equalsIgnoreCase("XBOX") && !app.getUserInformation().getXboxLiveAcc().equals("")) {
+                            OnClickHolders(model, v);
+                        } else if (model.getPlatform().equalsIgnoreCase("PC") && app.getUserInformation().getPcGamesAcc().get(pcGameProvider) != null) {
+                            OnClickHolders(model, v);
+                        } else {
                             createGameProviderDialog(model);
                         }
 
@@ -209,18 +237,16 @@ public abstract class SearchResults extends AppCompatActivity {
     }
 
     private void goToLobby() {
-        Intent i = new Intent(getApplicationContext(),RequestLobbyCore.class);
+        Intent i = new Intent(getApplicationContext(), RequestLobbyCore.class);
         startActivity(i);
     }
 
 
+    public void createGameProviderDialog(final RequestModel requestModel) {
 
-    public void createGameProviderDialog(final RequestModel requestModel)
-    {
-
-       boolean userEnteredGameProviderAcc = false;
-       pcGameProvider ="";
-   gameProviderDialog = new Dialog(this);
+        boolean userEnteredGameProviderAcc = false;
+        pcGameProvider = "";
+        gameProviderDialog = new Dialog(this);
         gameProviderDialog.setCancelable(false);
         gameProviderDialog.setContentView(R.layout.provider_account_pop_up);
         gameProviderDialog.show();
@@ -231,31 +257,29 @@ public abstract class SearchResults extends AppCompatActivity {
         TextView gameProviderMessage;
         Button saveInfoButton;
         String providerAccountType = "";   // Xbox ID , PSN , PC (STEAM , Battlenet..etc)
-        final EditText gameProviderEdittext ;
-
+        final EditText gameProviderEdittext;
 
 
         gameProviderEdittext = (EditText) gameProviderDialog.findViewById(R.id.game_provider_account_edittext);
         gameProviderMessage = (TextView) gameProviderDialog.findViewById(R.id.popup_message_textview_provide_account);
         saveInfoButton = (Button) gameProviderDialog.findViewById(R.id.save_game_provider_button);
 
-            // get the request platform
-            selectedPlatform = requestModel.getPlatform().trim();
+        // get the request platform
+        selectedPlatform = requestModel.getPlatform().trim();
 
         if (selectedPlatform.equalsIgnoreCase("PS"))
             providerAccountType = String.format(getResources().getString(R.string.provider_account_message), "PSN");
         else if (selectedPlatform.equalsIgnoreCase("XBOX"))
             providerAccountType = String.format(getResources().getString(R.string.provider_account_message), "Xbox Live");
-        else if (selectedPlatform.equalsIgnoreCase("PC"))
-        {
-            pcGameProvider =  app.getGameManager().getGameById(requestModel.getGameId().trim()).getPcGameProvider();
+        else if (selectedPlatform.equalsIgnoreCase("PC")) {
+            pcGameProvider = app.getGameManager().getGameById(requestModel.getGameId().trim()).getPcGameProvider();
             providerAccountType = String.format(getResources().getString(R.string.provider_account_message), pcGameProvider);
         }
 
 
         gameProviderMessage.setText(providerAccountType);
 
-        Typeface sansation = Typeface.createFromAsset(getAssets() ,"sansationbold.ttf");
+        Typeface sansation = Typeface.createFromAsset(getAssets(), "sansationbold.ttf");
         saveInfoButton.setTypeface(sansation);
 
         final Typeface playbold = Typeface.createFromAsset(getAssets(), "playbold.ttf");
@@ -263,8 +287,6 @@ public abstract class SearchResults extends AppCompatActivity {
         gameProviderMessage.setTypeface(playbold);
         gameProviderMessage.setTypeface(playbold);
         gameProviderEdittext.setTypeface(playReg);
-
-
 
 
         // Changing edittext icon
@@ -289,34 +311,28 @@ public abstract class SearchResults extends AppCompatActivity {
         });
 
 
-
         saveInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 // Check if the user entered the game provider id
-                if (gameProviderEdittext.length() > 0)
-                {
-                    saveGameProviderAccount(pcGameProvider,gameProviderEdittext.getText().toString().trim(),selectedPlatform);
-                    OnClickHolders(requestModel,v);
+                if (gameProviderEdittext.length() > 0) {
+                    saveGameProviderAccount(pcGameProvider, gameProviderEdittext.getText().toString().trim(), selectedPlatform);
+                    OnClickHolders(requestModel, v);
                     gameProviderDialog.dismiss();
 
-                }
-                else
-                {
-                    String noGameProviderMsg ="";
+                } else {
+                    String noGameProviderMsg = "";
                     if (selectedPlatform.equalsIgnoreCase("PS"))
                         noGameProviderMsg = String.format(getResources().getString(R.string.new_request_dialog_no_game_provider_error), "PSN");
                     else if (selectedPlatform.equalsIgnoreCase("XBOX"))
                         noGameProviderMsg = String.format(getResources().getString(R.string.new_request_dialog_no_game_provider_error), "Xbox Live");
-                    else if (selectedPlatform.equalsIgnoreCase("PC"))
-                    {
-                        String pcGameProvider =  app.getGameManager().getGameById(requestModel.getGameId()).getPcGameProvider();
+                    else if (selectedPlatform.equalsIgnoreCase("PC")) {
+                        String pcGameProvider = app.getGameManager().getGameById(requestModel.getGameId()).getPcGameProvider();
                         noGameProviderMsg = String.format(getResources().getString(R.string.new_request_dialog_no_game_provider_error), pcGameProvider);
                     }
-                    Toast.makeText(getApplicationContext(),noGameProviderMsg, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), noGameProviderMsg, Toast.LENGTH_LONG).show();
                 }
-
 
 
             }
@@ -333,11 +349,10 @@ public abstract class SearchResults extends AppCompatActivity {
     }
 
 
+    protected abstract void saveGameProviderAccount(String gameProvider, String userGameProviderAcc, String platform);
 
-
-
-    protected abstract void saveGameProviderAccount(String gameProvider,String userGameProviderAcc , String platform );
     protected abstract void OnStartActivity();
+
     protected abstract void OnClickHolders(RequestModel model, View v);
 
 }
