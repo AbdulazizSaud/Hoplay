@@ -175,7 +175,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
             @Override
             public boolean callBack() {
                 if(isDone)
-                    lobby.setLobbyInfo(requestModel.getAdmin(), adminUser, adminPicture, requestModel.getRequestPicture(), requestModel.getMatchType(), requestModel.getRank(), requestModel.getRegion());
+                    lobby.setLobbyInfo(requestModel.getAdmin(), adminUser, adminPicture, requestModel.getRequestPicture(), requestModel.getMatchType(), requestModel.getRank(), requestModel.getRegion(),requestModel.getDescription());
                 return isDone;
             }
         };

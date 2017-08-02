@@ -26,7 +26,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:layout_below="@+id/player_instance_circleimageview"
-        android:textColor="@color/text_color"
+        android:textColor="@color/player0_color"
         android:id="@+id/player_instance_username_textview"
         android:textSize="14sp"/>
 

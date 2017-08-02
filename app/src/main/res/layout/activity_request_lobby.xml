@@ -193,7 +193,7 @@
         android:layout_marginTop="12dp"
         android:textStyle="bold"
         android:id="@+id/admin_username_request_lobby"
-        android:textColor="@color/hint_color"
+        android:textColor="@color/admin_color"
         android:text="@string/request_lobby_room_admin_username"
         android:layout_below="@+id/room_admin_photo_circleimageview"
         android:layout_centerHorizontal="true" />

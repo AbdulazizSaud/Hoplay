@@ -9,7 +9,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -21,9 +20,7 @@ import android.widget.TextView;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
-import com.example.kay.hoplay.Cores.ChatCore.ChatCore;
-import com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.UserList;
-import com.example.kay.hoplay.Models.FriendCommonModel;
+import com.example.kay.hoplay.Cores.UserProfileCores.ViewFriendProfileCore;
 import com.example.kay.hoplay.Models.LobbyInformation;
 import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.R;
@@ -34,7 +31,7 @@ import java.util.Iterator;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Lobby {
+public abstract class Lobby {
 
     private CircleImageView gamePhoto;
     private TextView matchTypeTextview;
@@ -46,6 +43,7 @@ public class Lobby {
     private RecyclerView playersRecyclerview;
     private TextView rankTextView;
     private TextView rankValueTextview;
+    private TextView descriptionTextview;
     private TextView regionTextview;
     private TextView regionValueTextview;
     private Button joinButton;
@@ -60,7 +58,6 @@ public class Lobby {
     private LobbyInformation lobbyInformation;
 
     private App app;
-
     private Context context;
 
     public Lobby(Context c, View v) {
@@ -94,6 +91,9 @@ public class Lobby {
         regionTextview.setTypeface(playbold);
         regionValueTextview = (TextView) v.findViewById(R.id.region_value_request_lobby);
         regionValueTextview.setTypeface(playregular);
+
+        descriptionTextview = (TextView) v.findViewById(R.id.admin_request_description);
+        descriptionTextview.setTypeface(playregular);
 
         joinButton = (Button) v.findViewById(R.id.join_request_lobby_button);
         joinButton.setTypeface(playbold);
@@ -147,16 +147,15 @@ public class Lobby {
         }
 
 
-
-        for(Iterator<PlayerModel> it = playerModels.iterator(); it.hasNext();) {
+        for (Iterator<PlayerModel> it = playerModels.iterator(); it.hasNext(); ) {
             PlayerModel s = it.next();
-            if(s.getUID().equals(playerModel.getUID())) {
+            if (s.getUID().equals(playerModel.getUID())) {
                 it.remove();
             }
         }
 
 
-        if(playerModels.size() > 0 ) {
+        if (playerModels.size() > 0) {
             if (playerModels.get(0) != null) {
                 PlayerModel pl = playerModels.get(0);
                 updateAdminInfo(pl.getUID(), pl.getUsername(), pl.getProfilePicture());
@@ -170,40 +169,46 @@ public class Lobby {
     }
 
 
-
-
-
     public boolean isExsist(String uid) {
         return playerModelsHashMap.containsKey(uid);
     }
 
     private CommonAdapter<PlayerModel> createAdapter() {
-        return new CommonAdapter<PlayerModel>(playerModels, R.layout.player_instance) {
+        return new CommonAdapter<PlayerModel>(playerModels, R.layout.lobby_player_instance) {
 
 
             @Override
             public ViewHolders OnCreateHolder(View v) {
-
-                v.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        // First check if the user is admin or not to show this dialog
-                        // if admin then show the dialog
-                        // if not then just view player profile
-                        showPlayerDialog(context);
-
-                    }
-                });
-
                 return new ViewHolders.PlayerHolder(v);
             }
 
             @Override
-            public void OnBindHolder(ViewHolders holder, PlayerModel model, int position) {
+            public void OnBindHolder(ViewHolders holder, final PlayerModel model, int position) {
 
 
-                app.loadingImage(context,holder, model.getProfilePicture());
+                holder.getView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        // First check
+                        // if not me don't show it (checked)
+                        // if the user is admin show the dialog (checked)
+
+
+                        String uid = app.getUserInformation().getUID();
+
+                        if (model.getUID().equals(uid))
+                            return;
+
+                        boolean isAdmin = lobbyInformation.getAdminUid().equals(uid);
+
+                        showPlayerDialog(context,model.getUID(),isAdmin);
+
+                    }
+                });
+
+
+                app.loadingImage(context, holder, model.getProfilePicture());
 
                 holder.setTitle(model.getUsername());
                 holder.setSubtitle(model.getGamePovider());
@@ -224,25 +229,26 @@ public class Lobby {
     }
 
 
-    public void setLobbyInfo(String adminUid, String adminName, String adminPicture, String lobbyPictureURL, String matchType, String rank, String region) {
+    public void setLobbyInfo(String adminUid, String adminName, String adminPicture, String lobbyPictureURL, String matchType, String rank, String region, String description) {
 
 
-        lobbyInformation = new LobbyInformation(adminUid,adminName,adminPicture,lobbyPictureURL,matchType,rank,region);
+        lobbyInformation = new LobbyInformation(adminUid, adminName, adminPicture, lobbyPictureURL, matchType, rank, region);
 
         app.loadingImage(gamePhoto, lobbyPictureURL);
         app.loadingImage(adminPhoto, adminPicture);
         adminUsername.setText(adminName);
 
-        matchTypeTextview.setText(matchType);
-        mAdapter.notifyDataSetChanged();
 
         regionValueTextview.setText(region);
         rankValueTextview.setText(rank);
+        descriptionTextview.setText(description);
+        matchTypeTextview.setText(matchType);
+        mAdapter.notifyDataSetChanged();
+
 
     }
 
-    private void updateAdminInfo(String adminUid, String adminName, String adminPicture)
-    {
+    private void updateAdminInfo(String adminUid, String adminName, String adminPicture) {
         lobbyInformation.setAdminUid(adminUid);
         lobbyInformation.setAdminName(adminName);
         lobbyInformation.setAdminPicture(adminPicture);
@@ -254,9 +260,7 @@ public class Lobby {
     }
 
 
-
-
-    protected void showPlayerDialog( Context c ) {
+    protected void showPlayerDialog(Context c, final String playerUid, boolean isAdmin) {
 
 
         final Dialog friendLongClickDialog;
@@ -267,12 +271,15 @@ public class Lobby {
 
         friendLongClickDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        Button viewPlayerProfileButton , removePlayerButton ;
+        Button viewPlayerProfileButton, removePlayerButton;
 
-        viewPlayerProfileButton = ( Button) friendLongClickDialog.findViewById(R.id.view_player_profile_button);
-        removePlayerButton = ( Button) friendLongClickDialog.findViewById(R.id.remove_player_button);
+        viewPlayerProfileButton = (Button) friendLongClickDialog.findViewById(R.id.view_player_profile_button);
+        removePlayerButton = (Button) friendLongClickDialog.findViewById(R.id.remove_player_button);
 
-        Typeface sansation = Typeface.createFromAsset(c.getAssets() ,"sansationbold.ttf");
+        removePlayerButton.setVisibility(isAdmin ? View.VISIBLE:View.INVISIBLE);
+
+
+        Typeface sansation = Typeface.createFromAsset(c.getAssets(), "sansationbold.ttf");
         viewPlayerProfileButton.setTypeface(sansation);
         removePlayerButton.setTypeface(sansation);
 
@@ -281,7 +288,10 @@ public class Lobby {
         viewPlayerProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(context,ViewFriendProfileCore.class);
+                i.putExtra("user_key",playerUid);
+                context.startActivity(i);
+                friendLongClickDialog.cancel();
             }
         });
 
@@ -289,7 +299,7 @@ public class Lobby {
         removePlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                removePlayer();
             }
         });
 
@@ -305,18 +315,20 @@ public class Lobby {
     }
 
 
-
-    public void setGameBorderColor(int color){
+    public void setGameBorderColor(int color) {
         gamePhoto.setBorderColor(color);
     }
-    public void setGameBorderWidth(int width){
+
+    public void setGameBorderWidth(int width) {
         gamePhoto.setBorderWidth(width);
     }
-    public void setMatchImage(int resource){
+
+    public void setMatchImage(int resource) {
         matchTypeImageView.setImageResource(resource);
     }
 
 
 
+    public abstract void removePlayer();
 
 }

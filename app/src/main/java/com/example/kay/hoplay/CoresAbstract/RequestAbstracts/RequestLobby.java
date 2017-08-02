@@ -24,7 +24,12 @@ public abstract class RequestLobby extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_lobby);
 
-        lobby = new Lobby(getApplication(), getWindow().getDecorView());
+        lobby = new Lobby(getApplication(), getWindow().getDecorView()) {
+            @Override
+            public void removePlayer() {
+                return;
+            }
+        };
 
         lobby.getJoinButton().setOnClickListener(new View.OnClickListener() {
             @Override

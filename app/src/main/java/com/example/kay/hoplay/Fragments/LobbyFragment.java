@@ -35,7 +35,12 @@ public abstract class LobbyFragment extends ParentRequestFragments {
 
         View view = inflater.inflate(R.layout.activity_request_lobby, container, false);
 
-        lobby = new Lobby(getContext(),view);
+        lobby = new Lobby(getContext(), view) {
+            @Override
+            public void removePlayer() {
+                removePlayer();
+            }
+        };
 
 
         lobby.getCloseRequestButton().setOnClickListener(new View.OnClickListener() {
@@ -115,6 +120,6 @@ public abstract class LobbyFragment extends ParentRequestFragments {
     protected abstract void OnStartActivity();
 
     protected abstract void cancelRequest();
-
+    protected abstract void removePlayer();
 
 }

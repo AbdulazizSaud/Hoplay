@@ -151,7 +151,7 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
                     String adminPicture = dataSnapshot.getValue(String.class);
 
 
-                    lobby.setLobbyInfo(adminUid, adminUser, adminPicture,gameModel.getGamePhotoUrl(), requestModel.getMatchType(), requestModel.getRank(), requestModel.getRegion());
+                    lobby.setLobbyInfo(adminUid, adminUser, adminPicture,gameModel.getGamePhotoUrl(), requestModel.getMatchType(), requestModel.getRank(), requestModel.getRegion(),requestModel.getDescription());
 
                 }
 
@@ -238,6 +238,11 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
         app.getMainAppMenuCore().cancelRequest();
         removeListener();
 
+    }
+
+    @Override
+    protected void removePlayer() {
+    //
     }
 
     private void removeListener() {
