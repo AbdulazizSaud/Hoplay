@@ -88,36 +88,11 @@ public class NewRequestFragmentCore extends NewRequestFragment implements Fireba
             }
         });
 
-        // Show or hide no saved reqs elements
-        if (countSavedReqs()<1)
-            showNoSavedRequestElements();
-        else
-            hideNoSavedRequestElements();
 
 
     }
 
 
-    private long countSavedReqs()
-    {
-
-        final long[] count = {0};
-
-        DatabaseReference userInfoRef =  app.getDatabaseUsersInfo().child(app.getUserInformation().getUID());
-        userInfoRef.child(FIREBASE_GAMES_REFERENCES).child(FIREBASE_SAVED_REQS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                count[0] =  dataSnapshot.getChildrenCount();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        return count[0];
-    }
 
     @Override
     protected void OnStartActivity() {

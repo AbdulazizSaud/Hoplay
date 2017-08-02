@@ -14,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,9 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
     protected TextView  noSavedRequestsTextView;
 
 
+    // Counter of the saved request to keep updated with the items number in the recycler view adapter
+    private int savedReqsCounter = 0 ;
+
 
 
     public NewRequestFragment() {
@@ -76,7 +80,6 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
 
         super.onCreateView(inflater, container, savedInstanceState);
         app = App.getInstance();
-
 
         View view = inflater.inflate(R.layout.activity_make_request_fragment, container, false);
         newRequestButton = (Button) view.findViewById(R.id.new_request_button);
@@ -133,17 +136,15 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
 
 
         mAdapter = createAdapter();
+        mAdapter.notifyDataSetChanged();
 
-
-        // Show or hide no saved requests elements
-        if (mAdapter.getItemCount()<1)
-            showNoSavedRequestElements();
-        else
-            hideNoSavedRequestElements();
 
 
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
 
+        // Make the saved request title gone at first : because user has no games
+        savedRequestsMessage.setVisibility(View.GONE);
 
         OnStartActivity();
         return view;
@@ -163,11 +164,17 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
             @Override
             public ViewHolders OnCreateHolder(View v) {
                 return new ViewHolders.SavedRequestHolder(v);
+
             }
 
             @Override
             public void OnBindHolder(ViewHolders holder, final RequestModel model, final int position) {
                 //ImageLoader loader = App.getInstance().getImageLoader();
+
+
+
+                // Sync the saved reqs counter with the recyclerview adapter
+                savedReqsCounter = mAdapter.getItemCount();
 
 
                 // Show or hide no saved requests elements
@@ -213,7 +220,10 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
                     }
                     holder.setTitle(capitlizedReqtitle);
                 }else {
-                    holder.setTitle(capitlizedReqtitle);
+                    if (capitlizedReqtitle.equalsIgnoreCase("cs:go")){
+                        holder.setTitle(capitlizedReqtitle.toUpperCase());
+                    } else
+                        holder.setTitle(capitlizedReqtitle);
                 }
 
 
@@ -249,6 +259,18 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
     {
         arrayList.add(model);
         mAdapter.notifyDataSetChanged();
+
+
+
+
+        // Show or hide no saved requests elements
+        if (mAdapter.getItemCount()<1)
+            showNoSavedRequestElements();
+        else
+            hideNoSavedRequestElements();
+
+
+
     }
 
 
@@ -261,6 +283,19 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
         app.setSavedRequests(arrayList);
 
         mAdapter.notifyDataSetChanged();
+
+
+        //Decrease the counter
+        savedReqsCounter--;
+
+        // Show or hide no saved requests elements
+        if (savedReqsCounter<1)
+            showNoSavedRequestElements();
+        else
+            hideNoSavedRequestElements();
+
+
+
     }
 
 
@@ -362,6 +397,18 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
         arrayList.set(index,requestModel);
         app.getSavedRequests().set(index,requestModel);
         mAdapter.notifyDataSetChanged();
+
+
+
+
+        // Show or hide no saved requests elements
+        if (mAdapter.getItemCount()<1)
+            showNoSavedRequestElements();
+        else
+            hideNoSavedRequestElements();
+
+
+
 
     }
 

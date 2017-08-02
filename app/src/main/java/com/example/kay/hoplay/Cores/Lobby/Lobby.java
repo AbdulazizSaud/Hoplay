@@ -1,13 +1,18 @@
 package com.example.kay.hoplay.Cores.Lobby;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,6 +22,8 @@ import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.ChatCore.ChatCore;
+import com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.UserList;
+import com.example.kay.hoplay.Models.FriendCommonModel;
 import com.example.kay.hoplay.Models.LobbyInformation;
 import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.R;
@@ -181,6 +188,11 @@ public class Lobby {
                     @Override
                     public void onClick(View v) {
 
+                        // First check if the user is admin or not to show this dialog
+                        // if admin then show the dialog
+                        // if not then just view player profile
+                        showPlayerDialog(context);
+
                     }
                 });
 
@@ -241,6 +253,59 @@ public class Lobby {
 
     }
 
+
+
+
+    protected void showPlayerDialog( Context c ) {
+
+
+        final Dialog friendLongClickDialog;
+        friendLongClickDialog = new Dialog(c);
+        friendLongClickDialog.setContentView(R.layout.players_dialog);
+        friendLongClickDialog.show();
+
+
+        friendLongClickDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        Button viewPlayerProfileButton , removePlayerButton ;
+
+        viewPlayerProfileButton = ( Button) friendLongClickDialog.findViewById(R.id.view_player_profile_button);
+        removePlayerButton = ( Button) friendLongClickDialog.findViewById(R.id.remove_player_button);
+
+        Typeface sansation = Typeface.createFromAsset(c.getAssets() ,"sansationbold.ttf");
+        viewPlayerProfileButton.setTypeface(sansation);
+        removePlayerButton.setTypeface(sansation);
+
+
+        // view player profile
+        viewPlayerProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        // remove player
+        removePlayerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = friendLongClickDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+    }
+
+
+
     public void setGameBorderColor(int color){
         gamePhoto.setBorderColor(color);
     }
@@ -250,6 +315,8 @@ public class Lobby {
     public void setMatchImage(int resource){
         matchTypeImageView.setImageResource(resource);
     }
+
+
 
 
 }

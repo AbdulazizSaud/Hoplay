@@ -1,10 +1,13 @@
 package com.example.kay.hoplay.CoresAbstract.ProfileAbstracts;
 
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +22,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -81,10 +86,15 @@ public abstract class UserProfile extends Fragment {
     ArrayList<RecentGameModel> recentGameModels = new ArrayList<RecentGameModel>();
 
 
+
     // No activities section
     private ImageView noActivityImageview;
     private TextView noActivityMessage;
     private Button addActivityButton;
+
+
+
+
 
 
     @Override
@@ -154,6 +164,8 @@ public abstract class UserProfile extends Fragment {
         setGamesNumber("0");
 
 
+
+
     }
 
     private void setClickableControls() {
@@ -200,6 +212,8 @@ public abstract class UserProfile extends Fragment {
         });
 
 
+
+
         profileSettingsImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -218,14 +232,23 @@ public abstract class UserProfile extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(getContext(), NewRequestCore.class);
-                startActivity(i);
-                getActivity().overridePendingTransition(R.anim.slide_in_left_layout, R.anim.slide_out_left_layout);
+
+                // Check if the user has games or not
+                if(app.getGameManager().getUserGamesNumber()<1)
+                    showNoGameDialog();
+                else{
+                    Intent i = new Intent(getContext(), NewRequestCore.class);
+                    startActivity(i);
+                    getActivity().overridePendingTransition( R.anim.slide_in_left_layout, R.anim.slide_out_left_layout);
+                    }
+
             }
         });
 
 
+
     }
+
 
 
     private void setupRecyclerView(View view) {
@@ -256,6 +279,7 @@ public abstract class UserProfile extends Fragment {
             hideNoActivityElements();
 
 
+
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -280,6 +304,7 @@ public abstract class UserProfile extends Fragment {
         recentGameModels.add(recentActivity);
         mAdapter.notifyDataSetChanged();
     }
+
 
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -315,10 +340,12 @@ public abstract class UserProfile extends Fragment {
     }
 
 
+
     private CommonAdapter<RecentGameModel> createAdapter() {
         return new CommonAdapter<RecentGameModel>(recentGameModels, R.layout.new_user_activity) {
             @Override
             public ViewHolders OnCreateHolder(View v) {
+
 
 
                 v.setOnClickListener(new View.OnClickListener() {
@@ -347,6 +374,8 @@ public abstract class UserProfile extends Fragment {
                 Typeface playregular = Typeface.createFromAsset(getActivity().getAssets(), "playregular.ttf");
 
 
+
+
                 // Capitalize game name letters
                 String gameName = model.getGameName();
                 String capitlizedGameName = gameName.substring(0, 1).toUpperCase() + gameName.substring(1);
@@ -368,9 +397,11 @@ public abstract class UserProfile extends Fragment {
                 }
 
 
+
                 holder.getTitleView().setTypeface(playbold);
                 holder.setSubtitle(model.getActivityDescription());
                 holder.getSubtitleView().setTypeface(playregular);
+
 
 
                 holder.setTime(app.convertFromTimeStampToTimeAgo(model.getTimeStamp()));
@@ -423,7 +454,7 @@ public abstract class UserProfile extends Fragment {
     }
 
 
-    private void showNoActivityElements() {
+    private void showNoActivityElements(){
 
         Animation slideDown = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up_view);
 
@@ -469,6 +500,60 @@ public abstract class UserProfile extends Fragment {
 
         return false;
     }
+
+
+
+
+    private void showNoGameDialog(){
+
+
+        final Dialog noGameDialog = new Dialog(getContext());
+        noGameDialog.setContentView(R.layout.activity_no_game_pop_up);
+        noGameDialog.show();
+
+
+        noGameDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView noGameText;
+        Button addGameButton;
+
+
+
+
+        noGameText = (TextView) noGameDialog.findViewById(R.id.popup_message_textview);
+        addGameButton = (Button) noGameDialog.findViewById(R.id.add_game_button_no_game_popup);
+
+
+
+
+        Typeface sansation = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
+        addGameButton.setTypeface(sansation);
+
+        final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
+        final Typeface playReg = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
+
+        noGameText.setTypeface(playReg);
+
+        addGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity().getApplicationContext(), AddGameCore.class);
+                startActivity(i);
+                getActivity().overridePendingTransition( R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
+                noGameDialog.dismiss();
+            }
+        });
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = noGameDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+    }
+
 
 
 

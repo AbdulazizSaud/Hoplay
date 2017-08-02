@@ -153,8 +153,6 @@ public abstract class SearchRequests extends Fragment {
 
 
 
-
-
         return view;
     }
 

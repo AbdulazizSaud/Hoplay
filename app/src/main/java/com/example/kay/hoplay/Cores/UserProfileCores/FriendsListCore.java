@@ -53,17 +53,10 @@ public class FriendsListCore extends UserListCore {
          userInfoRef.child(FIREBASE_USER_PRIVATE_CHAT).orderByChild(FIREBASE_OPPONENT_ID_ATTR).equalTo(friendKey).addListenerForSingleValueEvent(new ValueEventListener() {
              @Override
              public void onDataChange(DataSnapshot dataSnapshot) {
-                 Log.i("-->",dataSnapshot.toString());
                  Iterable<DataSnapshot> chats =  dataSnapshot.getChildren();
                  for(DataSnapshot chat:chats)
                  {
                      chat.getRef().removeValue();
-
-                     // HERE CALL THE CALL BACK METHOD
-                     if (countFriends(app.getUserInformation().getUID())<1)
-                        showNoFrindsElements();
-                     else
-                         hideNoFriendsElements();
 
                  }
              }
@@ -78,88 +71,9 @@ public class FriendsListCore extends UserListCore {
 
 
 
-
-    private long countFriends(String userID)
-    {
-
-        final long[] count = {0};
-
-        DatabaseReference userInfoRef =  app.getDatabaseUsersInfo().child(userID);
-            userInfoRef.child(FIREBASE_FRIENDS_LIST_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                  count[0] =  dataSnapshot.getChildrenCount();
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-
-        return count[0];
-    }
-
-
-
-
     @Override
     protected boolean OnLongClickHolders(FriendCommonModel model) {
         return true;
-    }
-
-    @Override
-    protected void showNoFriendsSection() {
-
-
-        Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down_view);
-
-        noFriendsMessage.setVisibility(View.INVISIBLE);
-        noFriendsMessage.startAnimation(slideDown);
-        noFriendsMessage.setVisibility(View.VISIBLE);
-
-        noFriendsImageview.setVisibility(View.INVISIBLE);
-        noFriendsImageview.startAnimation(slideDown);
-        noFriendsImageview.setVisibility(View.VISIBLE);
-
-
-        addFriendsButton.setVisibility(View.INVISIBLE);
-        addFriendsButton.startAnimation(slideDown);
-        addFriendsButton.setVisibility(View.VISIBLE);
-
-    }
-
-    @Override
-    protected void hideNoFriendsSection() {
-        noFriendsMessage.setVisibility(View.GONE);
-        addFriendsButton.setVisibility(View.GONE);
-        noFriendsImageview.setVisibility(View.GONE);
-    }
-
-
-    private void showNoFrindsElements(){
-
-        Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down_view);
-
-        noFriendsMessage.setVisibility(View.INVISIBLE);
-        noFriendsMessage.startAnimation(slideDown);
-        noFriendsMessage.setVisibility(View.VISIBLE);
-
-        noFriendsImageview.setVisibility(View.INVISIBLE);
-        noFriendsImageview.startAnimation(slideDown);
-        noFriendsImageview.setVisibility(View.VISIBLE);
-
-
-        addFriendsButton.setVisibility(View.INVISIBLE);
-        addFriendsButton.startAnimation(slideDown);
-        addFriendsButton.setVisibility(View.VISIBLE);
-    }
-
-    private void hideNoFriendsElements()
-    {
-        noFriendsMessage.setVisibility(View.GONE);
-        addFriendsButton.setVisibility(View.GONE);
-        noFriendsImageview.setVisibility(View.GONE);
     }
 
 

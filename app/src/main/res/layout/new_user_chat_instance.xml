@@ -11,6 +11,7 @@
     <!-- Thumbnail Image -->
     <LinearLayout
         android:orientation="horizontal"
+        android:id="@+id/chat_holder_linearlayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
@@ -105,5 +106,16 @@
         </LinearLayout>
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#bdbdbd"
+        android:id="@+id/chat_line_divider_lineaerlayout"
+        android:layout_below="@+id/chat_holder_linearlayout"
+        android:orientation="horizontal">
+    </LinearLayout>
+
 
 </RelativeLayout>

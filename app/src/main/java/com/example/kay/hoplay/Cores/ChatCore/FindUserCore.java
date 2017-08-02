@@ -97,15 +97,7 @@ public class FindUserCore extends UserListCore {
         return false;
     }
 
-    @Override
-    protected void showNoFriendsSection() {
 
-    }
-
-    @Override
-    protected void hideNoFriendsSection() {
-
-    }
 
 
 }

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/app_background"
     android:onClick="removeKeyboard"
+    android:id="@+id/edit_profile_relativelayout"
     tools:context="com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.EditProfile">
 
 
@@ -93,6 +94,28 @@
 
 
 
+    <EditText
+        android:id="@+id/edit_profile_email_edittext"
+        style="@style/Base.TextAppearance.AppCompat.Medium"
+        android:layout_width="320dp"
+        android:background="@drawable/disabled_field_background"
+        android:layout_height="50dp"
+        android:drawableStart="@drawable/ic_mail_outline_focused_24dp"
+        android:drawableLeft="@drawable/ic_mail_outline_focused_24dp"
+        android:ems="3"
+        android:layout_marginTop="21dp"
+        android:textColorHint="@color/hint_color"
+        android:hint="@string/edit_profile_email_hint"
+        android:paddingLeft="6dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/text_color"
+        android:maxLength="200"
+        android:enabled="false"
+        android:layout_below="@+id/change_user_photo_linearlayout"
+        android:layout_alignLeft="@+id/edit_profile_game_providers_spinner"
+        android:layout_alignStart="@+id/edit_profile_game_providers_spinner" />
+
 
         <EditText
             android:id="@+id/edit_user_bio_edittext"
@@ -111,7 +134,7 @@
             android:textColor="@color/text_color"
             android:inputType="textMultiLine"
             android:maxLength="200"
-            android:layout_below="@+id/change_user_photo_linearlayout"
+            android:layout_below="@+id/edit_profile_email_edittext"
             android:layout_alignLeft="@+id/edit_profile_game_providers_spinner"
             android:layout_alignStart="@+id/edit_profile_game_providers_spinner" />
 

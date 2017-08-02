@@ -40,6 +40,7 @@ import java.util.Comparator;
 public abstract class SearchResults extends AppCompatActivity {
 
 
+
     private MaterialBetterSpinner searchPrioritySpinner;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -49,6 +50,7 @@ public abstract class SearchResults extends AppCompatActivity {
     private ArrayAdapter searchPriorityAdapter;
 
     protected App app;
+
 
 
     // Provider Accounht stuff
@@ -67,6 +69,8 @@ public abstract class SearchResults extends AppCompatActivity {
         setupRecyclerView();
 
         OnStartActivity();
+
+
     }
 
     private void initControls() {
@@ -170,7 +174,34 @@ public abstract class SearchResults extends AppCompatActivity {
             public void OnBindHolder(ViewHolders holder, final RequestModel model, int position) {
 
                 app.loadingImage(getApplication(), holder, model.getRequestPicture());
-                holder.setTitle(model.getRequestTitle());
+
+
+
+
+
+                // Capitalize Request Title letters
+                String requestTitle = model.getRequestTitle();
+                String capitlizedReqtitle = requestTitle.substring(0,1).toUpperCase() +  requestTitle.substring(1);
+                if (requestTitle.contains(" "))
+                {
+                    // Capitalize game title letters
+                    String cpWord= "";
+                    for (int  i = 0 ; i < capitlizedReqtitle.length(); i++)
+                    {
+                        if (capitlizedReqtitle.charAt(i) == 32 && capitlizedReqtitle.charAt(i+1) != 32)
+                        {
+                            cpWord= capitlizedReqtitle.substring(i+1,i+2).toUpperCase() + capitlizedReqtitle.substring(i+2);
+                            capitlizedReqtitle = capitlizedReqtitle.replace(capitlizedReqtitle.charAt(i+1),cpWord.charAt(0));
+                        }
+                    }
+                    holder.setTitle(capitlizedReqtitle);
+                }else {
+                    if (capitlizedReqtitle.equalsIgnoreCase("cs:go")){
+                        holder.setTitle(capitlizedReqtitle.toUpperCase());
+                    } else
+                        holder.setTitle(capitlizedReqtitle);
+                }
+
                 holder.setSubtitle(model.getDescription());
                 holder.setTime(app.convertFromTimeStampToTimeAgo(model.getTimeStamp()));
                 holder.setNumberOfPlayers(model.getPlayers().size() + "/" + String.valueOf(model.getPlayerNumber()));
@@ -186,6 +217,14 @@ public abstract class SearchResults extends AppCompatActivity {
                     dotsDescription.setCharAt(40, '.');
                     holder.setSubtitle(dotsDescription.toString());
                 }
+
+                Typeface playbold = Typeface.createFromAsset(getAssets(), "playbold.ttf");
+                Typeface playregular = Typeface.createFromAsset(getAssets(), "playregular.ttf");
+                // Set the font
+                holder.getTitleView().setTypeface(playbold);
+                holder.getSubtitle2().setTypeface(playregular);
+                holder.getSubtitleView().setTypeface(playregular);
+
 
 
                 // Set the request image border width
@@ -204,6 +243,8 @@ public abstract class SearchResults extends AppCompatActivity {
                 }
 
 
+
+
                 //Match type icon
                 if (model.getMatchType().equalsIgnoreCase("Competitive"))
                     holder.getSubtitleImageview().setImageResource(R.drawable.ic_whatshot_competitive_18dp);
@@ -213,18 +254,22 @@ public abstract class SearchResults extends AppCompatActivity {
                     holder.getSubtitleImageview().setImageResource(R.drawable.ic_whatshot_unfocused_24dp);
 
 
+
                 // Game provider settings
                 holder.getView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        if (model.getPlatform().equalsIgnoreCase("PS") && !app.getUserInformation().getPSNAcc().equals("")) {
-                            OnClickHolders(model, v);
-                        } else if (model.getPlatform().equalsIgnoreCase("XBOX") && !app.getUserInformation().getXboxLiveAcc().equals("")) {
-                            OnClickHolders(model, v);
-                        } else if (model.getPlatform().equalsIgnoreCase("PC") && app.getUserInformation().getPcGamesAcc().get(pcGameProvider) != null) {
-                            OnClickHolders(model, v);
-                        } else {
+                        if (app.getGameManager().getGameByName(app.getGameManager().getGameById(model.getGameId()).getGameName()) != null)
+                            pcGameProvider =  app.getGameManager().getGameByName(app.getGameManager().getGameById(model.getGameId()).getGameName()).getPcGameProvider();
+
+                        if (model.getPlatform().equalsIgnoreCase("PS") && !app.getUserInformation().getPSNAcc().equals("")){
+                            OnClickHolders(model,v);
+                        }else if(model.getPlatform().equalsIgnoreCase("XBOX") && !app.getUserInformation().getXboxLiveAcc().equals("")){
+                            OnClickHolders(model,v);
+                        }else if(model.getPlatform().equalsIgnoreCase("PC") && app.getUserInformation().getPcGamesAcc().get(pcGameProvider) !=null){
+                            OnClickHolders(model,v);
+                        }else {
                             createGameProviderDialog(model);
                         }
 
@@ -260,6 +305,7 @@ public abstract class SearchResults extends AppCompatActivity {
         final EditText gameProviderEdittext;
 
 
+
         gameProviderEdittext = (EditText) gameProviderDialog.findViewById(R.id.game_provider_account_edittext);
         gameProviderMessage = (TextView) gameProviderDialog.findViewById(R.id.popup_message_textview_provide_account);
         saveInfoButton = (Button) gameProviderDialog.findViewById(R.id.save_game_provider_button);
@@ -289,6 +335,8 @@ public abstract class SearchResults extends AppCompatActivity {
         gameProviderEdittext.setTypeface(playReg);
 
 
+
+
         // Changing edittext icon
         gameProviderEdittext.addTextChangedListener(new TextWatcher() {
             @Override
@@ -309,6 +357,7 @@ public abstract class SearchResults extends AppCompatActivity {
                 }
             }
         });
+
 
 
         saveInfoButton.setOnClickListener(new View.OnClickListener() {
@@ -333,6 +382,7 @@ public abstract class SearchResults extends AppCompatActivity {
                     }
                     Toast.makeText(getApplicationContext(), noGameProviderMsg, Toast.LENGTH_LONG).show();
                 }
+
 
 
             }

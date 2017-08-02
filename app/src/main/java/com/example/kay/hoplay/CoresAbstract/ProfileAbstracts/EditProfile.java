@@ -8,7 +8,9 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.TransactionTooLargeException;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -27,6 +29,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,11 +51,13 @@ public abstract class EditProfile extends AppCompatActivity {
     private final  int RESULT_LOAD_IMG=1;
 
     private TextView changeUserPhotoTextview , activityTitle;
-    private EditText userBioEdittext , gameProviderEdittext;
+    private EditText userBioEdittext , gameProviderEdittext , emailEdittext;
     private  MaterialBetterSpinner gamesProvidersSpinner;
     private ImageView closeButton;
     private Button saveButton;
     private CircleImageView userPictureCircleImageView;
+
+    private RelativeLayout activityLayout ;
 
     protected ArrayList<String> gamesProvidersList;
     protected ArrayAdapter<String> gamesProvidersAdapter;
@@ -82,6 +87,8 @@ public abstract class EditProfile extends AppCompatActivity {
         final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
         final Typeface sansation = Typeface.createFromAsset(getResources().getAssets(), "sansationbold.ttf");
 
+        activityLayout = (RelativeLayout) findViewById(R.id.edit_profile_relativelayout);
+
         activityTitle = (TextView) findViewById(R.id.edit_profile_title_textview) ;
         changeUserPhotoTextview = (TextView) findViewById(R.id.change_profile_photo_textview);
         userBioEdittext = (EditText) findViewById(R.id.edit_user_bio_edittext);
@@ -93,6 +100,22 @@ public abstract class EditProfile extends AppCompatActivity {
         closeButton = (ImageView) findViewById(R.id.go_back_to_preferences_from_edit_profile);
         saveButton = (Button) findViewById(R.id.update_edit_profile_button);
         userPictureCircleImageView = (CircleImageView) findViewById(R.id.user_profile_photo_circleimageview);
+
+
+
+        // Initialize email edittext
+        emailEdittext = (EditText) findViewById(R.id.edit_profile_email_edittext);
+        emailEdittext.setTypeface(playregular);
+        emailEdittext.setText(app.getUserInformation().getUserEmail());
+        emailEdittext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar snackbar = Snackbar
+                        .make(activityLayout, R.string.edit_profile_change_email_message, Snackbar.LENGTH_LONG);
+
+                snackbar.show();
+            }
+        });
 
 
         changeUserPhotoTextview.setTypeface(playbold);

@@ -75,9 +75,7 @@
         android:text="@string/user_list_layout_no_fiends_message"
         android:textSize="30sp"
         android:layout_below="@+id/no_friends_imageview"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-       />
+        android:layout_centerHorizontal="true" />
 
 
 
@@ -95,7 +93,6 @@
         android:drawableLeft="@drawable/ic_person_add_24dp"
         android:layout_centerHorizontal="true"
         android:id="@+id/add_friends_button" />
-
 
 
 

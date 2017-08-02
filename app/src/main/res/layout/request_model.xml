@@ -98,29 +98,31 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp">
 
-                <LinearLayout
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="dwdwdwdwdwdwdwdwdwdwdwdwdw"
+                        android:text="@string/request_model_description"
                         android:id="@+id/description_request_model"
                         android:textColor="@color/hint_color"
                         android:fontFamily="sans-serif-light"
                         android:textSize="14dp"
                         android:maxLines="1"
-                        android:paddingTop="3dp"
+                        android:singleLine="true"
+                        android:paddingRight="5dp"
+                        android:layout_weight="1"
+
                         android:paddingBottom="3dp" />
-                </LinearLayout>
+
 
 
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.0"
                     android:layout_gravity="center"
+                    android:paddingRight="30dp"
+                    android:gravity="center"
                     android:id="@+id/match_type_request_model"
                     app:srcCompat="@drawable/ic_whatshot_quick_match_18dp"
                     />

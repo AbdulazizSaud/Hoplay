@@ -22,6 +22,7 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -45,12 +46,19 @@ public abstract class AddGame extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     protected EditText searchBar;
     private ArrayList<GameModel> gamesList = new ArrayList<GameModel>();
-    private RecyclerView.Adapter mAdapter;
+    protected RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ProgressBar loadGamesProgressbar;
 
 
+    View holderView;
 
+    // No games variables
+    protected ImageView noGameImageView;
+    protected TextView noGameMessage;
+
+    // Games counter : to keep updated  the
+    private int gamesCounter = 0 ;
 
     protected App app;
     Timer timer = new Timer();
@@ -65,6 +73,8 @@ public abstract class AddGame extends AppCompatActivity {
 
 
         final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
+        final Typeface playregular = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
+
         app = App.getInstance();
         mRecyclerView = (RecyclerView) findViewById(R.id.rec_add_game);
         searchBar = (EditText) findViewById(R.id.search_games_edititext_add_game);
@@ -75,6 +85,14 @@ public abstract class AddGame extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+
+        // No games section
+        noGameImageView = (ImageView) findViewById(R.id.no_games_imageview);
+        noGameMessage = (TextView) findViewById(R.id.no_games_message);
+        noGameMessage.setTypeface(playregular);
+
+
 
 
         // remove the keyboard when start activity
@@ -199,6 +217,20 @@ public abstract class AddGame extends AppCompatActivity {
 
             @Override
             public void OnBindHolder(final ViewHolders holder, final GameModel model, final int position) {
+
+
+                // Sync gamesCounter with the adapter items number
+                gamesCounter = mAdapter.getItemCount();
+
+                // show or hide the noFriendsSection
+                if(mAdapter.getItemCount()<1)
+                    showNoGamesSection();
+                else
+                    hideNoGamesSection();
+
+
+
+
                 // - get element from your dataset at this position
                 // - replace the contents of the view with that element
                 gameHolder = (ViewHolders.UserGameHolder) holder;
@@ -335,8 +367,114 @@ public abstract class AddGame extends AppCompatActivity {
 
     protected abstract void OnStartActivity();
 
-    protected abstract void showOnLongClickDialog(GameModel gameModel);
+    protected void showOnLongClickDialog(final GameModel gameModel) {
 
-    protected abstract void removeGameAnimation(View holderView,int position);
+        final Dialog onLongClickGameDialog;
+        onLongClickGameDialog = new Dialog(AddGame.this);
+        onLongClickGameDialog.setContentView(R.layout.game_long_click_pop_up);
+        onLongClickGameDialog.show();
+
+
+        onLongClickGameDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView verificationDeleteText;
+        Button deleteYesButton , deleteNoButton;
+
+        deleteYesButton = ( Button) onLongClickGameDialog.findViewById(R.id.delete_game_yes_button);
+        deleteNoButton = ( Button) onLongClickGameDialog.findViewById(R.id.delete_game_no_button);
+
+        Typeface sansation = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
+        deleteYesButton.setTypeface(sansation);
+        deleteNoButton.setTypeface(sansation);
+
+
+
+        // Delete Game
+        deleteYesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteGame(gameModel.getGameID(),gameModel.getGameName());
+                slideRightAnimate(getHolderView());
+                onLongClickGameDialog.dismiss();
+
+                // Decrease the number of games
+                gamesCounter--;
+
+                // Show or hide the no games dialog
+                if (gamesCounter<1)
+                    showNoGamesSection();
+                else
+                    hideNoGamesSection();
+            }
+        });
+
+
+        // Remove Dialog
+        deleteNoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onLongClickGameDialog.dismiss();
+            }
+        });
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = onLongClickGameDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+    }
+
+
+
+    protected void removeGameAnimation(View holderView, int position) {
+
+        if (position > -1) {
+            setHolderView(holderView);
+        }
+    }
+
+
+    public View getHolderView() {
+        return holderView;
+    }
+
+    public void setHolderView(View holderView) {
+        this.holderView = holderView;
+    }
+
+    // Animation Deosn't work yet  !
+    private void slideRightAnimate(View viewToAnimate)
+    {
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_out_right);
+
+
+        viewToAnimate.startAnimation(animation);
+        viewToAnimate.setVisibility(View.GONE);
+
+    }
+
+    protected void showNoGamesSection(){
+        Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down_view);
+
+        noGameImageView.setVisibility(View.INVISIBLE);
+        noGameImageView.startAnimation(slideDown);
+        noGameImageView.setVisibility(View.VISIBLE);
+
+        noGameMessage.setVisibility(View.INVISIBLE);
+        noGameMessage.startAnimation(slideDown);
+        noGameMessage.setVisibility(View.VISIBLE);
+
+    }
+    protected void hideNoGamesSection(){
+        noGameImageView.setVisibility(View.GONE);
+        noGameMessage.setVisibility(View.GONE);
+    }
+
+
+    protected abstract void deleteGame(final String gameKey, String gameName);
 
 }

@@ -63,7 +63,13 @@ public abstract class UserList extends AppCompatActivity {
     protected ImageView noFriendsImageview;
 
 
+    // For no friends section : help to sync with the adapter number
+    private int friendsCounter = 0 ;
+
+
     protected boolean removeFriend;
+
+
 
 
 
@@ -83,6 +89,12 @@ public abstract class UserList extends AppCompatActivity {
 
         @Override
         public void OnBindHolder(final ViewHolders holder, final FriendCommonModel model , final int position) {
+
+
+
+
+            // Sync with the adapter number
+            friendsCounter = mAdapter.getItemCount();
 
 
             // show or hide the noFriendsSection
@@ -111,10 +123,10 @@ public abstract class UserList extends AppCompatActivity {
                     if(OnLongClickHolders(model)) {
 
                         // for beta
-//                        showFriendpopup(model, getApplication());
+                        showFriendpopup(model, getApplication(),mAdapter.getItemCount());
 //
                         // for pre-alpha current version
-                        showDeleteDialog(model,getApplication(),mAdapter.getItemCount());
+//                        showDeleteDialog(model,getApplication(),mAdapter.getItemCount());
 
                         removeFriendButtonViewHolder(v, position);
                     }
@@ -172,6 +184,9 @@ public abstract class UserList extends AppCompatActivity {
         noFriendsImageview = (ImageView) findViewById(R.id.no_friends_imageview);
 
         setupRecyclerView();
+
+
+
 
 
         searchEditText.addTextChangedListener(new TextWatcher() {
@@ -333,7 +348,7 @@ public abstract class UserList extends AppCompatActivity {
     }
 
 
-    // for beta
+    // for Alpha
     protected void showFriendpopup(final FriendCommonModel friendCommonModel, Context c , final int friendsNumber) {
 
 
@@ -345,7 +360,7 @@ public abstract class UserList extends AppCompatActivity {
 
         friendLongClickDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        Button chatButton , viewProfileButton , deleteFriendButtton ;
+        Button chatButton  , deleteFriendButtton ;
 
         chatButton = ( Button) friendLongClickDialog.findViewById(R.id.chat_friend_pop_up_button);
         deleteFriendButtton = ( Button) friendLongClickDialog.findViewById(R.id.delete_friend_pop_up_button);
@@ -371,6 +386,18 @@ public abstract class UserList extends AppCompatActivity {
                 slideRightAnimate(getHolderView());
                 friendLongClickDialog.dismiss();
 
+                // decrease friends number
+                friendsCounter--;
+
+                // show or hide the noFriendsSection
+                if(friendsCounter<1)
+                    showNoFriendsSection();
+                else
+                    hideNoFriendsSection();
+
+
+
+
 
             }
         });
@@ -386,7 +413,7 @@ public abstract class UserList extends AppCompatActivity {
 
     }
 
-    // for pre-Alpha - current version
+    // for pre-Alpha
     protected void showDeleteDialog(final FriendCommonModel friendCommonModel, Context c , final int friendsNumber){
 
         final Dialog friendLongClickDialog;
@@ -472,6 +499,31 @@ public abstract class UserList extends AppCompatActivity {
     protected abstract void searchForUser(String value);
     protected abstract void removeFriend(String friendKey , int FriendsNumber);
     protected abstract boolean OnLongClickHolders(FriendCommonModel model);
-    protected abstract void showNoFriendsSection();
-    protected abstract void hideNoFriendsSection();
+
+
+
+    protected void showNoFriendsSection(){
+
+        Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down_view);
+
+        noFriendsMessage.setVisibility(View.INVISIBLE);
+        noFriendsMessage.startAnimation(slideDown);
+        noFriendsMessage.setVisibility(View.VISIBLE);
+
+        noFriendsImageview.setVisibility(View.INVISIBLE);
+        noFriendsImageview.startAnimation(slideDown);
+        noFriendsImageview.setVisibility(View.VISIBLE);
+
+
+        addFriendsButton.setVisibility(View.INVISIBLE);
+        addFriendsButton.startAnimation(slideDown);
+        addFriendsButton.setVisibility(View.VISIBLE);
+    }
+
+    protected void hideNoFriendsSection(){
+        noFriendsMessage.setVisibility(View.GONE);
+        addFriendsButton.setVisibility(View.GONE);
+        noFriendsImageview.setVisibility(View.GONE);
+    }
+
 }

@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kay.hoplay.Activities.SettingsActivity;
 import com.example.kay.hoplay.Cores.AuthenticationCore.LoginCore;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.SupportCore;
@@ -30,6 +31,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+
+import java.io.File;
+import java.io.IOException;
+
+import static android.R.attr.path;
 
 /**
  * Created by Kay on 12/1/2016.
@@ -52,6 +58,28 @@ public class SettingsScreen extends PreferenceFragment {
 
     }
 
+
+
+
+    // Delete cache directory
+    private boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+            return dir.delete();
+        } else if(dir!= null && dir.isFile()) {
+            return dir.delete();
+        } else {
+            return false;
+        }
+    }
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,14 +93,50 @@ public class SettingsScreen extends PreferenceFragment {
         logoutPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
                 //Do whatever you want here
-               App.getInstance().signOut();
-                getActivity().finish();
-                Intent i = new Intent(context, LoginCore.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(i);
+
+
+
+//               App.getInstance().signOut();
+
+
+                // To delete cache
+                try {
+                    File dir = context.getCacheDir();
+                    deleteDir(dir);
+                } catch (Exception e) {}
+
+
+//                getActivity().finish();
+//                Intent i = new Intent(context, LoginCore.class);
+//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(i);
+
+
+                Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+                    public void uncaughtException(Thread t, Throwable e) {
+                        LoginCore.restartApp(context);
+                    }
+                });
 
 
                 Toast.makeText(getActivity().getApplicationContext(),R.string.settings_screen_logout_message,Toast.LENGTH_LONG).show();
+
+
+                // Way 1
+                try {
+                    // clearing app data
+                    String packageName = context.getPackageName();
+                    Runtime runtime = Runtime.getRuntime();
+                    runtime.exec("pm clear "+packageName);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+                 // Way 2
+//                app.clearApplicationData();
+
 
                 return true;
             }

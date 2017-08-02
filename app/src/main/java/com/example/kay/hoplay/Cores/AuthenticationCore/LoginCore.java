@@ -3,6 +3,10 @@ package com.example.kay.hoplay.Cores.AuthenticationCore;
 //hello
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
@@ -66,6 +70,17 @@ public class LoginCore extends Login {
             }
         };
 
+    }
+
+
+    public static void restartApp(Context context)
+    {
+        Intent mStartActivity = new Intent(context, LoginCore.class); //Replace StartActivity with the name of the first activity in your app
+        int mPendingIntentId = 123456;
+        PendingIntent mPendingIntent = PendingIntent.getActivity(context, mPendingIntentId,    mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager mgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+        System.exit(0);
     }
 
 

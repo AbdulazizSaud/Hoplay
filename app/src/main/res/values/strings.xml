@@ -148,6 +148,7 @@
 
     <!--                                Add Game Layout                                                            -->
     <string name="add_game_search_bar">Search for a Game</string>
+    <string name="add_game_no_game_message">You do not have any game</string>
 
 
     <!--                            Users Toolbar                   -->
@@ -351,6 +352,10 @@
     <string name="request_model_time_stamp">5 min ago</string>
 
 
+    <!--                                Players Dialog                                  -->
+    <string name="players_dialog_view_profile">View Profile</string>
+    <string name="players_dialog_remove">Remove</string>
+
     <!--                                New Request Activity         -->
     <string name="new_request_game_error">You do not have this game in your library. add the game then continue</string>
     <string name="new_request_type_match_error">You have not specified the match type</string>
@@ -387,6 +392,7 @@
     <string name="request_lobby_region_text">Region</string>
     <string name="request_lobby_region_value">RegionValue</string>
     <string name="request_lobby_join_button">J O I N</string>
+    <string name="request_lobby_description">Description</string>
 
 
     <!--                                Game Provider Model                     -->
@@ -439,9 +445,11 @@
     <string name="edit_profile_bio_hint">Bio</string>
     <string name="edit_peofile_game_providers_edittext_hint">Game Provider</string>
     <string name="edit_profile_update_button">U P D A T E</string>
+    <string name="edit_profile_email_hint">Email Address</string>
 
     <!--                                Edit Profile Activity                       -->
     <string name="edit_profile_success_message">Your info has been updated successfully</string>
+    <string name="edit_profile_change_email_message">Sorry you can not change the email address, contact us for more details</string>
 
 
     <!--                                Saved Request On Click Pop up Layout             -->
