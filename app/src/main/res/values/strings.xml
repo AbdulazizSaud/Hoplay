@@ -355,6 +355,7 @@
     <!--                                Players Dialog                                  -->
     <string name="players_dialog_view_profile">View Profile</string>
     <string name="players_dialog_remove">Remove</string>
+    <string name="players_dialog_add">Add</string>
 
     <!--                                New Request Activity         -->
     <string name="new_request_game_error">You do not have this game in your library. add the game then continue</string>

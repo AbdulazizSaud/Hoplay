@@ -263,18 +263,19 @@ public abstract class Lobby {
     protected void showPlayerDialog(Context c, final String playerUid, boolean isAdmin) {
 
 
-        final Dialog friendLongClickDialog;
-        friendLongClickDialog = new Dialog(c);
-        friendLongClickDialog.setContentView(R.layout.players_dialog);
-        friendLongClickDialog.show();
+        final Dialog playerDialog;
+        playerDialog = new Dialog(c);
+        playerDialog.setContentView(R.layout.players_dialog);
+        playerDialog.show();
 
 
-        friendLongClickDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        playerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        Button viewPlayerProfileButton, removePlayerButton;
+        Button viewPlayerProfileButton, addPlpayerButton , removePlayerButton;
 
-        viewPlayerProfileButton = (Button) friendLongClickDialog.findViewById(R.id.view_player_profile_button);
-        removePlayerButton = (Button) friendLongClickDialog.findViewById(R.id.remove_player_button);
+        viewPlayerProfileButton = (Button) playerDialog.findViewById(R.id.view_player_profile_button);
+        removePlayerButton = (Button) playerDialog.findViewById(R.id.remove_player_button);
+        addPlpayerButton = (Button) playerDialog.findViewById(R.id.add_player_button);
 
         removePlayerButton.setVisibility(isAdmin ? View.VISIBLE:View.INVISIBLE);
 
@@ -282,6 +283,7 @@ public abstract class Lobby {
         Typeface sansation = Typeface.createFromAsset(c.getAssets(), "sansationbold.ttf");
         viewPlayerProfileButton.setTypeface(sansation);
         removePlayerButton.setTypeface(sansation);
+        addPlpayerButton.setTypeface(sansation);
 
 
         // view player profile
@@ -291,9 +293,21 @@ public abstract class Lobby {
                 Intent i = new Intent(context,ViewFriendProfileCore.class);
                 i.putExtra("user_key",playerUid);
                 context.startActivity(i);
-                friendLongClickDialog.cancel();
+                playerDialog.cancel();
             }
         });
+
+
+
+        // Add player as a friend
+        addPlpayerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Do whatever  you want here baby
+            }
+        });
+
+
 
         // remove player
         removePlayerButton.setOnClickListener(new View.OnClickListener() {
@@ -305,7 +319,7 @@ public abstract class Lobby {
 
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        Window window = friendLongClickDialog.getWindow();
+        Window window = playerDialog.getWindow();
         lp.copyFrom(window.getAttributes());
         //This makes the dialog take up the full width
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
