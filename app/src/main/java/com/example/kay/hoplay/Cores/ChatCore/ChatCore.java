@@ -1,12 +1,17 @@
 package com.example.kay.hoplay.Cores.ChatCore;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
+import com.example.kay.hoplay.Cores.ForgetPasswordCore;
 import com.example.kay.hoplay.Cores.UserProfileCores.ViewFriendProfileCore;
 import com.example.kay.hoplay.CoresAbstract.ChatAbstracts.Chat;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.PlayerModel;
+import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Services.CallbackHandlerCondition;
 import com.example.kay.hoplay.Services.HandlerCondition;
 import com.google.firebase.database.ChildEventListener;
@@ -17,6 +22,7 @@ import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.Random;
 
 
 /**
@@ -33,6 +39,10 @@ public class ChatCore extends Chat implements FirebasePaths {
     private DatabaseReference refRoom, refMessages;
     private String opponentId;
     private boolean cutLoob = false;
+
+
+    // Joiner username
+    private String joinerUsername;
 
     private ChildEventListener messagesPacketsListener = new ChildEventListener() {
         @Override
@@ -119,6 +129,7 @@ public class ChatCore extends Chat implements FirebasePaths {
         refRoom.child(FIREBASE_CHAT_USERS_LIST_PATH).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
 
             }
 
@@ -291,4 +302,54 @@ public class ChatCore extends Chat implements FirebasePaths {
         refMessages.child("_last_message_/_counter_").removeEventListener(counterListener);
 
     }
+
+
+
+
+
+    private void notifyUser(String joinerUsername){
+        NotificationCompat.Builder notification;
+        Random random = new Random();
+
+        final int uniqeID =  random.nextInt(999999999 - 1) + 1;
+
+        notification = new NotificationCompat.Builder(this);
+        notification.setAutoCancel(true);
+
+
+        notification.setSmallIcon(R.drawable.hoplaylogo);
+        notification.setTicker("This is ticker");
+        notification.setWhen(System.currentTimeMillis());
+        notification.setContentTitle("Request");
+        notification.setContentText(joinerUsername+" has joined your request !");
+
+
+        Intent intent = new Intent(this, ChatCore.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        notification.setContentIntent(pendingIntent);
+
+
+        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        nm.notify(uniqeID,notification.build());
+    }
+
+
+
+    private String getJoinerUsername(String userKey){
+
+        app.getDatabaseUsersInfo().child(userKey).child(FIREBASE_DETAILS_ATTR).child(FIREBASE_USERNAME_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                    joinerUsername = dataSnapshot.getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        return joinerUsername;
+    }
+
 }

@@ -178,7 +178,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="68dp"
         android:layout_height="68dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:src="@drawable/profile_default_photo"
         android:layout_gravity="center"
         app:civ_border_color="@color/app_color"
@@ -191,7 +191,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="5dp"
         android:textStyle="bold"
         android:id="@+id/admin_username_request_lobby"
         android:textColor="@color/admin_color"
@@ -202,7 +202,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:id="@+id/admin_request_description"
         android:textColor="@color/hint_color"

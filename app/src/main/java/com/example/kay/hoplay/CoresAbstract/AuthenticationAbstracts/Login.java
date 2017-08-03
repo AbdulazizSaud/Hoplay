@@ -1,5 +1,7 @@
 package com.example.kay.hoplay.CoresAbstract.AuthenticationAbstracts;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -7,6 +9,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -32,6 +35,9 @@ import com.example.kay.hoplay.Cores.ForgetPasswordCore;
 import com.example.kay.hoplay.Cores.MainAppMenuCore;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.R;
+
+import java.util.Random;
+import java.util.UUID;
 
 
 /*
@@ -67,11 +73,15 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         return false;
     }
 
-    // Remove keyboard when click anywhere :
+    // Remove keyboard when click anywhere (the relative layout) :
     public void removeKeyboard(View v) {
 
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
+
+
+
     }
 
     @Override
@@ -313,6 +323,8 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         Intent i = new Intent(this, ForgetPasswordCore.class);
         startActivity(i);
         overridePendingTransition( R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
+
+
     }
 
 
