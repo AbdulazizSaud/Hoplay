@@ -126,33 +126,6 @@ public class ChatCore extends Chat implements FirebasePaths {
 
 
 
-        refRoom.child(FIREBASE_CHAT_USERS_LIST_PATH).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
         // here will be to procedure  in two condition : private, public
         // in case private : it will check the type than it will escape the current user till it find a bio of oppsite user and added to bio of the chat
@@ -303,35 +276,6 @@ public class ChatCore extends Chat implements FirebasePaths {
 
     }
 
-
-
-
-
-    private void notifyUser(String joinerUsername){
-        NotificationCompat.Builder notification;
-        Random random = new Random();
-
-        final int uniqeID =  random.nextInt(999999999 - 1) + 1;
-
-        notification = new NotificationCompat.Builder(this);
-        notification.setAutoCancel(true);
-
-
-        notification.setSmallIcon(R.drawable.hoplaylogo);
-        notification.setTicker("This is ticker");
-        notification.setWhen(System.currentTimeMillis());
-        notification.setContentTitle("Request");
-        notification.setContentText(joinerUsername+" has joined your request !");
-
-
-        Intent intent = new Intent(this, ChatCore.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-        notification.setContentIntent(pendingIntent);
-
-
-        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        nm.notify(uniqeID,notification.build());
-    }
 
 
 

@@ -1,7 +1,10 @@
 package com.example.kay.hoplay.Cores;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.NotificationCompat;
 import android.view.View;
 
 import com.example.kay.hoplay.CoresAbstract.Community;
@@ -9,11 +12,16 @@ import com.example.kay.hoplay.Cores.ChatCore.ChatCore;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.CommunityChatModel;
 import com.example.kay.hoplay.Models.GameModel;
+import com.example.kay.hoplay.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Random;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * Created by Kay on 2/12/2017.
@@ -195,6 +203,9 @@ public class CommunityCore extends Community implements FirebasePaths {
     }
 
     private ChildEventListener privatePendingChatListener;
+
+
+
     private ValueEventListener lastMessageListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -203,14 +214,32 @@ public class CommunityCore extends Community implements FirebasePaths {
             if (dataSnapshot.child("_message_").getValue() == null && dataSnapshot.child("_time_stamp_").getValue() == null)
                 return;
 
-            String chatKey = dataSnapshot.getRef().getParent().getParent().getKey();
-            String msg = dataSnapshot.child("_message_").getValue(String.class);
-            long timeStamp = dataSnapshot.child("_time_stamp_").getValue(Long.class);
-            String currentChatCounterAsString = String.valueOf(dataSnapshot.child("_counter_").getValue(Long.class));
+            final String chatKey = dataSnapshot.getRef().getParent().getParent().getKey();
+            final  String usernameKey = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
+            final String msg = dataSnapshot.child("_message_").getValue(String.class);
+            final long timeStamp = dataSnapshot.child("_time_stamp_").getValue(Long.class);
+            final String currentChatCounterAsString = String.valueOf(dataSnapshot.child("_counter_").getValue(Long.class));
 
 
-            updateLastMessage(chatKey, msg, timeStamp);
-            setCounter(chatKey, currentChatCounterAsString);
+            app.getDatabaseUsersInfo().child(usernameKey).child(FIREBASE_USERNAME_PATH).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    String username = dataSnapshot.getValue(String.class);
+                    if(app.getUserInformation().getUID().equals(usernameKey))
+                        username = "You";
+
+                    updateLastMessage(chatKey,username,msg, timeStamp);
+                    setCounter(username,chatKey, currentChatCounterAsString);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
 
         }
 
@@ -306,12 +335,12 @@ public class CommunityCore extends Community implements FirebasePaths {
     }
 
 
-    private void updateLastMessage(String chatKey, String message, long time) {
+    private void updateLastMessage(String chatKey,String username,String message, long time) {
 
         for (CommunityChatModel communityChatModel : communityUserLists) {
             if (communityChatModel.getChatKey().equals(chatKey)) {
 
-                communityChatModel.setLastMsg(message);
+                communityChatModel.setLastMsg(username+": "+message);
                 communityChatModel.setTimeStamp(time);
                 mAdapter.notifyDataSetChanged();
                 break;
@@ -319,7 +348,7 @@ public class CommunityCore extends Community implements FirebasePaths {
         }
     }
 
-    private void setCounter(final String chatKey, final String currentChatCounterAsString) {
+    private void setCounter(final String username,final String chatKey, final String currentChatCounterAsString) {
         refAuthCurrentUserChats.child(FIREBASE_PRIVATE_ATTR + "/" + chatKey + "/" + FIREBASE_COUNTER_PATH).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot userChatRef) {
@@ -331,6 +360,8 @@ public class CommunityCore extends Community implements FirebasePaths {
                 long value = Long.parseLong(userChatRef.getValue().toString().trim());
                 long res = currentCounter - value;
 
+                if(res > 0)
+                    notifyUser(username);
 
                 updateCounter(chatKey, String.valueOf(res));
             }
@@ -402,6 +433,34 @@ public class CommunityCore extends Community implements FirebasePaths {
     }
 
 
+
+
+
+    private void notifyUser(String joinerUsername){
+        NotificationCompat.Builder notification;
+        Random random = new Random();
+
+        final int uniqeID =  random.nextInt(999999999 - 1) + 1;
+
+        notification = new NotificationCompat.Builder(app.getMainAppMenuCore());
+        notification.setAutoCancel(true);
+
+
+        notification.setSmallIcon(R.drawable.hoplaylogo);
+        notification.setTicker("This is ticker");
+        notification.setWhen(System.currentTimeMillis());
+        notification.setContentTitle("Request");
+        notification.setContentText(joinerUsername+" has joined your request !");
+
+
+        Intent intent = new Intent(app.getMainAppMenuCore(), ChatCore.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(app.getMainAppMenuCore(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        notification.setContentIntent(pendingIntent);
+
+
+        NotificationManager nm = (NotificationManager) app.getMainAppMenuCore().getSystemService(NOTIFICATION_SERVICE);
+        nm.notify(uniqeID,notification.build());
+    }
 
 
     @Override
