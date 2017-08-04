@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-
 public abstract class Community extends Fragment {
 
 //    ListView communityListview ;
@@ -45,11 +44,11 @@ public abstract class Community extends Fragment {
     private ImageView bgChatImageView;
 
     private RecyclerView.LayoutManager mLayoutManager;
-    private  FloatingActionButton newPrivateChatFloatingActionButton;
+    private FloatingActionButton newPrivateChatFloatingActionButton;
 
-    protected HashMap<String,CommunityChatModel> communityChatModelHashMap=new HashMap<>();
+    protected HashMap<String, CommunityChatModel> communityChatModelHashMap = new HashMap<>();
 
-    protected ArrayList<CommunityChatModel> communityUserLists=new ArrayList<CommunityChatModel>();
+    protected ArrayList<CommunityChatModel> communityUserLists = new ArrayList<CommunityChatModel>();
     protected RecyclerView.Adapter mAdapter;
 
     protected App app;
@@ -64,7 +63,7 @@ public abstract class Community extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_community, container, false) ;
+        View view = inflater.inflate(R.layout.fragment_community, container, false);
 //        communityListview = (ListView)  view.findViewById(R.id.community_listview);
 
         setupRecyclerView(view);
@@ -74,7 +73,7 @@ public abstract class Community extends Fragment {
         bgChatImageView = (ImageView) view.findViewById(R.id.splash);
 
         // Community BG declaration imageview
-        if(mAdapter.getItemCount() < 1)
+        if (mAdapter.getItemCount() < 1)
             bgChatImageView.setVisibility(View.VISIBLE);
         else
             bgChatImageView.setVisibility(View.INVISIBLE);
@@ -85,15 +84,13 @@ public abstract class Community extends Fragment {
         newPrivateChatFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(),FindUserCore.class);
+                Intent i = new Intent(getContext(), FindUserCore.class);
                 startActivity(i);
-                getActivity().overridePendingTransition( R.anim.slide_in_up_layouts, R.anim.slide_out_up_layouts);
+                getActivity().overridePendingTransition(R.anim.slide_in_up_layouts, R.anim.slide_out_up_layouts);
 
 
             }
         });
-
-
 
 
         OnStartActivity();
@@ -119,17 +116,17 @@ public abstract class Community extends Fragment {
     }
 
 
-    public void addToList(CommunityChatModel communityUserList){
+    public void addToList(CommunityChatModel communityUserList) {
 
-        if(communityChatModelHashMap.containsKey(communityUserList.getChatKey()))
+        if (communityChatModelHashMap.containsKey(communityUserList.getChatKey()))
             return;
 
         communityUserLists.add(communityUserList);
-        communityChatModelHashMap.put(communityUserList.getChatKey(),communityUserList);
+        communityChatModelHashMap.put(communityUserList.getChatKey(), communityUserList);
         mAdapter.notifyDataSetChanged();
 
         // Community BG declaration imageview
-        if(mAdapter.getItemCount() < 1)
+        if (mAdapter.getItemCount() < 1)
             bgChatImageView.setVisibility(View.VISIBLE);
         else
             bgChatImageView.setVisibility(View.INVISIBLE);
@@ -137,27 +134,27 @@ public abstract class Community extends Fragment {
     }
 
 
+    public void removeFromList(String key) {
 
-    public void removeFromList(String key){
-
-        for(CommunityChatModel communityChatModel : communityUserLists) {
-            if(communityChatModel.getChatKey().equals(key)) {
+        for (CommunityChatModel communityChatModel : communityUserLists) {
+            if (communityChatModel.getChatKey().equals(key)) {
                 communityUserLists.remove(communityChatModel);
+                communityChatModelHashMap.remove(communityChatModel.getChatKey());
                 mAdapter.notifyDataSetChanged();
                 break;
             }
         }
 
         // Community BG declaration imageview
-        if(mAdapter.getItemCount() < 1)
+        if (mAdapter.getItemCount() < 1)
             bgChatImageView.setVisibility(View.VISIBLE);
         else
             bgChatImageView.setVisibility(View.INVISIBLE);
     }
 
 
-    private CommonAdapter<CommunityChatModel> createAdapter(){
-        return new CommonAdapter<CommunityChatModel>(communityUserLists,R.layout.new_user_chat_instance) {
+    private CommonAdapter<CommunityChatModel> createAdapter() {
+        return new CommonAdapter<CommunityChatModel>(communityUserLists, R.layout.new_user_chat_instance) {
             @Override
             public ViewHolders OnCreateHolder(View v) {
 
@@ -165,24 +162,23 @@ public abstract class Community extends Fragment {
             }
 
             @Override
-            public void OnBindHolder(final ViewHolders holder, final CommunityChatModel model , int position) {
+            public void OnBindHolder(final ViewHolders holder, final CommunityChatModel model, int position) {
                 // - get element from your dataset at this position
                 // - replace the contents of the view with that element
-                ViewHolders.CommunityHolder communityHolder = (ViewHolders.CommunityHolder)holder;
+                ViewHolders.CommunityHolder communityHolder = (ViewHolders.CommunityHolder) holder;
 
 
                 // Community BG declaration imageview
-                if(mAdapter.getItemCount() < 1)
+                if (mAdapter.getItemCount() < 1)
                     bgChatImageView.setVisibility(View.VISIBLE);
                 else
                     bgChatImageView.setVisibility(View.INVISIBLE);
 
 
-
                 holder.getView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        OnClickHolders(model,v);
+                        OnClickHolders(model, v);
                     }
                 });
 
@@ -199,46 +195,43 @@ public abstract class Community extends Fragment {
                 holder.getPicture().setBorderColor(ContextCompat.getColor(getContext(), R.color.app_color));
 
 
-
                 // Capitalize Title letters
                 String chatTitle = model.getChatName();
 
-                if(chatTitle == null)
+                if (chatTitle == null)
                     return;
 
-                String capitlizedChatTitle = chatTitle.substring(0,1).toUpperCase() +  chatTitle.substring(1);
+                String capitlizedChatTitle = chatTitle.substring(0, 1).toUpperCase() + chatTitle.substring(1);
 
-                if (chatTitle.contains(" "))
-                {
+                if (chatTitle.contains(" ")) {
                     // Capitalize game title letters
-                    String cpWord= "";
-                    for (int  i = 0 ; i < capitlizedChatTitle.length(); i++)
-                    {
-                        if (capitlizedChatTitle.charAt(i) == 32 && capitlizedChatTitle.charAt(i+1) != 32)
-                        {
-                            cpWord= capitlizedChatTitle.substring(i+1,i+2).toUpperCase() + capitlizedChatTitle.substring(i+2);
-                            capitlizedChatTitle = capitlizedChatTitle.replace(capitlizedChatTitle.charAt(i+1),cpWord.charAt(0));
+                    String cpWord = "";
+                    for (int i = 0; i < capitlizedChatTitle.length(); i++) {
+                        if (capitlizedChatTitle.charAt(i) == 32 && capitlizedChatTitle.charAt(i + 1) != 32) {
+                            cpWord = capitlizedChatTitle.substring(i + 1, i + 2).toUpperCase() + capitlizedChatTitle.substring(i + 2);
+                            capitlizedChatTitle = capitlizedChatTitle.replace(capitlizedChatTitle.charAt(i + 1), cpWord.charAt(0));
                         }
                     }
                     holder.setTitle(capitlizedChatTitle);
-                }else {
+                } else {
                     holder.setTitle(capitlizedChatTitle);
                 }
 
 
-
                 communityHolder.setCommunitySubtitle(model.getLastMsg());
-                app.loadingImage(getContext(),holder, model.getUserPictureURL());
+                app.loadingImage(getContext(), holder, model.getUserPictureURL());
 
 
                 // Hide the counter if unseen messages less than 1 message
-                if (model.getChatCounter()<1){
-                    communityHolder.getChatCounterView().setVisibility(View.GONE);
-                }
-                else{
+                if (model.getChatCounter() < 1) {
+                    communityHolder.getChatCounterView().setVisibility(View.INVISIBLE);
+                } else {
+
+                    communityHolder.getChatCounterView().setVisibility(View.VISIBLE);
                     communityHolder.setCounter(String.valueOf(model.getChatCounter()));
                 }
 
+                communityHolder.setCounter(String.valueOf(model.getChatCounter()));
 
                 holder.setTime(app.convertFromTimeStampToTimeAgo(model.getTimeStamp()));
 
@@ -249,7 +242,7 @@ public abstract class Community extends Fragment {
                         holder.setTime(app.convertFromTimeStampToTimeAgo(model.getTimeStamp()));
                         return false;
                     }
-                },10000);
+                }, 10000);
 //                Log.i("->",""+getAllUnseenMessages());
 
             }
@@ -258,12 +251,13 @@ public abstract class Community extends Fragment {
     }
 
 
-
     protected abstract void removeChatFromlist(CommunityChatModel model);
 
     protected abstract void OnClickHolders(CommunityChatModel model, View v);
+
     protected abstract void OnStartActivity();
-//    public long getAllUnseenMessages()
+
+    //    public long getAllUnseenMessages()
 //    {
 //        for (int i = 0  ; i < communityUserLists.size() ; i++)
 //        {
@@ -273,12 +267,12 @@ public abstract class Community extends Fragment {
 //        Log.i("->" , ""+numberOfUnseenMessages);
 //        return numberOfUnseenMessages;
 //    }
-@Override
-public void onDestroy() {
-    super.onDestroy();
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
 
-    Log.i("Destroy" , "BYEBYE ");
-}
+        Log.i("Destroy", "BYEBYE ");
+    }
 
 
     protected void showOnLongClickDialog(final CommunityChatModel communityChatModel) {
@@ -292,15 +286,14 @@ public void onDestroy() {
         onLongClickGameDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         TextView verificationDeleteText;
-        Button deleteYesButton , deleteNoButton;
+        Button deleteYesButton, deleteNoButton;
 
-        deleteYesButton = ( Button) onLongClickGameDialog.findViewById(R.id.delete_chat_yes_button);
-        deleteNoButton = ( Button) onLongClickGameDialog.findViewById(R.id.delete_chat_no_button);
+        deleteYesButton = (Button) onLongClickGameDialog.findViewById(R.id.delete_chat_yes_button);
+        deleteNoButton = (Button) onLongClickGameDialog.findViewById(R.id.delete_chat_no_button);
 
-        Typeface sansation = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
+        Typeface sansation = Typeface.createFromAsset(getResources().getAssets(), "sansationbold.ttf");
         deleteYesButton.setTypeface(sansation);
         deleteNoButton.setTypeface(sansation);
-
 
 
         // Delete chat

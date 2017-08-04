@@ -220,9 +220,7 @@ public abstract class MainAppMenu extends AppCompatActivity  {
 
                 if(res.equals("lobby"))
                 {
-                    viewPagerMenu.setCurrentItem(2);
-
-
+                    setCurrentViewPagerMenu(2);
                 } else if (res.equals("view profile"))
                 {
                     String profileId = data.getStringExtra("profileId");
@@ -233,6 +231,12 @@ public abstract class MainAppMenu extends AppCompatActivity  {
         }
     }
 
+
+    public void setCurrentViewPagerMenu(int index)
+    {
+        viewPagerMenu.setCurrentItem(index);
+
+    }
     public abstract void OnStartActivity();
 
 }

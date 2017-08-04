@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Random;
 
+import static android.app.Activity.RESULT_OK;
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
@@ -35,6 +36,8 @@ public class CommunityCore extends Community implements FirebasePaths {
     private DatabaseReference refUserInfo;
     private DatabaseReference refPendingChat;
 
+
+    private String joinerUsername;
 
     private ChildEventListener privateSingleChatListener = new ChildEventListener() {
         @Override
@@ -205,7 +208,6 @@ public class CommunityCore extends Community implements FirebasePaths {
     private ChildEventListener privatePendingChatListener;
 
 
-
     private ValueEventListener lastMessageListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -215,7 +217,7 @@ public class CommunityCore extends Community implements FirebasePaths {
                 return;
 
             final String chatKey = dataSnapshot.getRef().getParent().getParent().getKey();
-            final  String usernameKey = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
+            final String usernameKey = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
             final String msg = dataSnapshot.child("_message_").getValue(String.class);
             final long timeStamp = dataSnapshot.child("_time_stamp_").getValue(Long.class);
             final String currentChatCounterAsString = String.valueOf(dataSnapshot.child("_counter_").getValue(Long.class));
@@ -225,12 +227,39 @@ public class CommunityCore extends Community implements FirebasePaths {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    String username = dataSnapshot.getValue(String.class);
-                    if(app.getUserInformation().getUID().equals(usernameKey))
-                        username = "You";
+                    joinerUsername = dataSnapshot.getValue(String.class);
+                    if (app.getUserInformation().getUID().equals(usernameKey))
+                        joinerUsername = "You";
 
-                    updateLastMessage(chatKey,username,msg, timeStamp);
-                    setCounter(username,chatKey, currentChatCounterAsString);
+                    updateLastMessage(chatKey, joinerUsername, msg, timeStamp);
+
+
+                    // this listner for chat counter + notify shit
+
+                    refAuthCurrentUserChats.child(FIREBASE_PRIVATE_ATTR + "/" + chatKey + "/" + FIREBASE_COUNTER_PATH).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot userChatRef) {
+
+                            if (userChatRef.getValue() == null)
+                                return;
+
+                            long currentCounter = Long.parseLong(currentChatCounterAsString);
+                            long value = Long.parseLong(userChatRef.getValue().toString().trim());
+                            long res = currentCounter - value;
+
+                            if (res > 0)
+                                notifyUser(chatKey,joinerUsername, msg);
+
+                            updateCounter(chatKey, String.valueOf(res));
+                        }
+
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
                 }
 
                 @Override
@@ -238,7 +267,6 @@ public class CommunityCore extends Community implements FirebasePaths {
 
                 }
             });
-
 
 
         }
@@ -335,12 +363,12 @@ public class CommunityCore extends Community implements FirebasePaths {
     }
 
 
-    private void updateLastMessage(String chatKey,String username,String message, long time) {
+    private void updateLastMessage(String chatKey, String username, String message, long time) {
 
         for (CommunityChatModel communityChatModel : communityUserLists) {
             if (communityChatModel.getChatKey().equals(chatKey)) {
 
-                communityChatModel.setLastMsg(username+": "+message);
+                communityChatModel.setLastMsg(username + ": " + message);
                 communityChatModel.setTimeStamp(time);
                 mAdapter.notifyDataSetChanged();
                 break;
@@ -348,31 +376,6 @@ public class CommunityCore extends Community implements FirebasePaths {
         }
     }
 
-    private void setCounter(final String username,final String chatKey, final String currentChatCounterAsString) {
-        refAuthCurrentUserChats.child(FIREBASE_PRIVATE_ATTR + "/" + chatKey + "/" + FIREBASE_COUNTER_PATH).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot userChatRef) {
-
-                if (userChatRef.getValue() == null)
-                    return;
-
-                long currentCounter = Long.parseLong(currentChatCounterAsString);
-                long value = Long.parseLong(userChatRef.getValue().toString().trim());
-                long res = currentCounter - value;
-
-                if(res > 0)
-                    notifyUser(username);
-
-                updateCounter(chatKey, String.valueOf(res));
-            }
-
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
 
     private void updateCounter(String chatKey, String counter) {
 
@@ -387,19 +390,22 @@ public class CommunityCore extends Community implements FirebasePaths {
     }
 
 
-
     @Override
     protected void OnClickHolders(CommunityChatModel model, View v) {
         Intent i = new Intent(v.getContext(), ChatCore.class);
+        setChatIntent(model, i);
+
+        app.getMainAppMenuCore().startActivityForResult(i, 1);
+    }
+
+    private void setChatIntent(CommunityChatModel model, Intent i) {
         i.putExtra("room_key", model.getChatKey());
         i.putExtra("room_type", model.getChatType());
         i.putExtra("room_name", model.getChatName());
         i.putExtra("room_picture", model.getUserPictureURL());
 
-        if(model.getChatType().equals(FIREBASE_PRIVATE_ATTR))
+        if (model.getChatType().equals(FIREBASE_PRIVATE_ATTR))
             i.putExtra("opponent_key", model.getOpponentId());
-
-        app.getMainAppMenuCore().startActivityForResult(i,1);
     }
 
     private boolean isMe(String userKey) {
@@ -421,26 +427,23 @@ public class CommunityCore extends Community implements FirebasePaths {
     }
 
 
-
     @Override
     protected void removeChatFromlist(CommunityChatModel model) {
 
         DatabaseReference chatRef = refAuthCurrentUserChats.child(model.getChatType()).child(model.getChatKey());
-        if(chatRef!=null)
-        {
+        if (chatRef != null) {
             chatRef.removeValue();
         }
     }
 
 
-
-
-
-    private void notifyUser(String joinerUsername){
+    private void notifyUser(String chatKey ,String joinerUsername, String message) {
         NotificationCompat.Builder notification;
         Random random = new Random();
 
-        final int uniqeID =  random.nextInt(999999999 - 1) + 1;
+        final int uniqeID = 1;
+
+        CommunityChatModel communityChatModel = communityChatModelHashMap.get(chatKey);
 
         notification = new NotificationCompat.Builder(app.getMainAppMenuCore());
         notification.setAutoCancel(true);
@@ -449,17 +452,22 @@ public class CommunityCore extends Community implements FirebasePaths {
         notification.setSmallIcon(R.drawable.hoplaylogo);
         notification.setTicker("This is ticker");
         notification.setWhen(System.currentTimeMillis());
-        notification.setContentTitle("Request");
-        notification.setContentText(joinerUsername+" has joined your request !");
+        notification.setContentTitle(communityChatModel.getChatName());
+        notification.setContentText(joinerUsername + " " + message);
 
 
-        Intent intent = new Intent(app.getMainAppMenuCore(), ChatCore.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(app.getMainAppMenuCore(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Intent intent = new Intent(getContext(), ChatCore.class);
+        setChatIntent(communityChatModel,intent);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         notification.setContentIntent(pendingIntent);
 
 
+
+
         NotificationManager nm = (NotificationManager) app.getMainAppMenuCore().getSystemService(NOTIFICATION_SERVICE);
-        nm.notify(uniqeID,notification.build());
+        nm.notify(uniqeID, notification.build());
     }
 
 

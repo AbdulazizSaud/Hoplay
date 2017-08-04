@@ -106,15 +106,7 @@ public class App extends Application implements FirebasePaths {
         savedRequests = new ArrayList<RequestModel>();
 
 
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
 
-            @Override
-            public void run() {
-                Log.i("===>","DONE");
-            }
-
-        }, 0, 6000);
 
     }
 
