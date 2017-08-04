@@ -35,7 +35,10 @@ import java.security.PublicKey;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -101,6 +104,18 @@ public class App extends Application implements FirebasePaths {
         gameManager = new GameManager();
         timeStamp = new TimeStamp();
         savedRequests = new ArrayList<RequestModel>();
+
+
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+
+            @Override
+            public void run() {
+                Log.i("===>","DONE");
+            }
+
+        }, 0, 6000);
+
     }
 
 
