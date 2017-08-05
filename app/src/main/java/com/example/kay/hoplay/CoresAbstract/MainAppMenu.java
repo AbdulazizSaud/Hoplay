@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -52,6 +53,12 @@ public abstract class MainAppMenu extends AppCompatActivity  {
     protected  MenuPagerAdapter menuPagerAdapter;
 
     protected boolean isDone=false;
+
+
+    public static BottomBarTab unreadMessages;
+
+
+
 
     /***************************************/
 
@@ -135,12 +142,12 @@ public abstract class MainAppMenu extends AppCompatActivity  {
     {
 
         bottomBar.selectTabAtPosition(3);
-        BottomBarTab unreadMessages = bottomBar.getTabAtPosition(1);
+        unreadMessages = bottomBar.getTabAtPosition(1);
+        unreadMessages.setBadgeBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.app_color));
 
 
 
-        // CHAT NOTIFICATION COUNTER
-//        unreadMessages.setBadgeCount(5);
+
 
         viewPagerMenu.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -176,6 +183,7 @@ public abstract class MainAppMenu extends AppCompatActivity  {
                         break;
                     case R.id.tab_chat_community:
                         viewPagerMenu.setCurrentItem(1, true);
+                        unreadMessages.removeBadge();
                         break;
                     case R.id.tab_make_request:
                         viewPagerMenu.setCurrentItem(2, true);
@@ -201,6 +209,14 @@ public abstract class MainAppMenu extends AppCompatActivity  {
     protected void toLogin() {
         Intent i = new Intent(getApplicationContext(), LoginCore.class);
         startActivity(i);
+
+    }
+
+
+    public static void setChatCounterOnBottombar(long counter){
+        // CHAT NOTIFICATION COUNTER
+
+        unreadMessages.setBadgeCount((int)counter);
 
     }
 

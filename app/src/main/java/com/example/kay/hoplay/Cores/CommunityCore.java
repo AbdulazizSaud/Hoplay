@@ -446,6 +446,9 @@ public class CommunityCore extends Community implements FirebasePaths {
         Intent intent = new Intent(getContext(), ChatCore.class);
         setChatIntent(communityChatModel, intent);
 
+        Random random = new Random();
+        uniqeID = random.nextInt(999999999-1)+1;
+
         ///
         notification = new NotificationCompat.Builder(getContext());
         notification.setAutoCancel(true);
@@ -455,12 +458,12 @@ public class CommunityCore extends Community implements FirebasePaths {
         notification.setContentTitle(communityChatModel.getChatName());
         notification.setContentText(joinerUsername+ message);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), uniqeID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         notification.setContentIntent(pendingIntent);
 
 
         NotificationManager nm = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
-        nm.notify(uniqeID++, notification.build());
+        nm.notify(uniqeID, notification.build());
     }
 
 

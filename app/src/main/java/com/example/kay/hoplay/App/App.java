@@ -66,6 +66,7 @@ public class App extends Application implements FirebasePaths {
     private ImageLoader imageLoader; // Image loader from url
 
 
+
     private UserInformation userInformation;
     private GameManager gameManager;
     private TimeStamp timeStamp;
@@ -74,6 +75,25 @@ public class App extends Application implements FirebasePaths {
     private ArrayList<RequestModel> savedRequests;
 
     private MainAppMenuCore mainAppMenuCore;
+
+
+
+
+    // Chat counter for notification in bottom bar
+    private long chatCounter=0;
+
+
+    public long getChatCounter() {
+        return chatCounter;
+    }
+
+    public void setChatCounter(long chatCounter) {
+        this.chatCounter = chatCounter;
+    }
+
+    public  void increaseChatCounter(long count){
+        chatCounter+=count;
+    }
 
 
 

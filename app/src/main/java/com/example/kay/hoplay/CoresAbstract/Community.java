@@ -69,6 +69,7 @@ public abstract class Community extends Fragment {
         setupRecyclerView(view);
 
 
+
         //  declaration BG
         bgChatImageView = (ImageView) view.findViewById(R.id.splash);
 
@@ -108,8 +109,12 @@ public abstract class Community extends Fragment {
         mRecyclerView.setHasFixedSize(true);
 
 
+
+
         mAdapter = createAdapter();
         mRecyclerView.setAdapter(mAdapter);
+
+
 
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -121,9 +126,14 @@ public abstract class Community extends Fragment {
         if (communityChatModelHashMap.containsKey(communityUserList.getChatKey()))
             return;
 
+
+        // For bottom bar char counter
+        app.increaseChatCounter(communityUserList.getChatCounter());
+
         communityUserLists.add(communityUserList);
         communityChatModelHashMap.put(communityUserList.getChatKey(), communityUserList);
         mAdapter.notifyDataSetChanged();
+
 
         // Community BG declaration imageview
         if (mAdapter.getItemCount() < 1)
@@ -167,6 +177,10 @@ public abstract class Community extends Fragment {
                 // - replace the contents of the view with that element
                 ViewHolders.CommunityHolder communityHolder = (ViewHolders.CommunityHolder) holder;
 
+
+
+                // Set the bottom bar chat counter for unsean messages
+                MainAppMenu.setChatCounterOnBottombar(app.getChatCounter());
 
                 // Community BG declaration imageview
                 if (mAdapter.getItemCount() < 1)
