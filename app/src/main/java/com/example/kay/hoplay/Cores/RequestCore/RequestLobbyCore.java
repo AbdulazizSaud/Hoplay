@@ -26,7 +26,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
     private GameModel gameModel;
     private RequestModel requestModel;
-    private String adminPicture,adminUser;
+    private String adminPicture;
     private boolean isDone=false;
     private  DatabaseReference requestRef;
 
@@ -139,7 +139,6 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
              adminPicture = dataSnapshot.child(FIREBASE_PICTURE_URL_ATTR).getValue(String.class);
-             adminUser  = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
              isDone = true;
         }
 
@@ -175,7 +174,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
             @Override
             public boolean callBack() {
                 if(isDone)
-                    lobby.setLobbyInfo(requestModel.getAdmin(), adminUser, adminPicture, requestModel.getRequestPicture(), requestModel.getMatchType(), requestModel.getRank(), requestModel.getRegion(),requestModel.getDescription());
+                    lobby.setLobbyInfo(requestModel,adminPicture);
                 return isDone;
             }
         };

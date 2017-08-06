@@ -3,6 +3,7 @@ package com.example.kay.hoplay.Cores.RequestCore;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.kay.hoplay.Fragments.LobbyFragment;
 import com.example.kay.hoplay.Interfaces.Constants;
@@ -117,6 +118,13 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
             PlayerModel player = new PlayerModel(dataSnapshot.child("uid").getValue(String.class), dataSnapshot.child("username").getValue(String.class));
             requestModel.removePlayer(player);
             lobby.removePlayer(player);
+
+            if(player.getUID().equals(app.getUserInformation().getUID())) {
+
+                // here you can put message
+                Toast.makeText(app.getMainAppMenuCore(),"You have been kicked by an admin",Toast.LENGTH_LONG).show();
+                cancelRequest();
+            }
         }
 
         @Override
@@ -136,22 +144,22 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
         public void onDataChange(DataSnapshot dataSnapshot) {
 
 
+
+            if(dataSnapshot.getValue(RequestModel.class) == null || dataSnapshot.getValue() == null )
+                app.getMainAppMenuCore().cancelRequest();
+
+
             requestModel = dataSnapshot.getValue(RequestModel.class);
-
-
             gameModel = app.getGameManager().getGameById(requestModel.getGameId());
+            requestModel.setRequestPicture(gameModel.getGamePhotoUrl());
 
 
             app.getDatabaseUsersInfo().child(requestModel.getAdmin() + "/" + FIREBASE_PICTURE_URL_PATH).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    String adminUid = requestModel.getAdmin();
-                    String adminUser = requestModel.getAdminName();
                     String adminPicture = dataSnapshot.getValue(String.class);
-
-
-                    lobby.setLobbyInfo(adminUid, adminUser, adminPicture,gameModel.getGamePhotoUrl(), requestModel.getMatchType(), requestModel.getRank(), requestModel.getRegion(),requestModel.getDescription());
+                    lobby.setLobbyInfo(requestModel,adminPicture);
 
                 }
 
@@ -189,8 +197,9 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
     protected void OnStartActivity() {
 
 
-        if (requestModelRefrance == null)
-            return;
+        if (requestModelRefrance == null) {
+            app.getMainAppMenuCore().cancelRequest();
+        }
 
         String path = requestModelRefrance.getPlatform().toUpperCase() + "/"
                 + requestModelRefrance.getGameId() + "/"
@@ -207,6 +216,7 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
                 return true;
             }
         }, 1000);
+
 
 
         app.getTimeStamp().setTimestampLong();
@@ -234,15 +244,33 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
 
     @Override
     protected void cancelRequest() {
-
-        app.getMainAppMenuCore().cancelRequest();
         removeListener();
+        app.getMainAppMenuCore().cancelRequest();
+    }
+
+    @Override
+    protected void addPlayerToFreind(PlayerModel model) {
+        // users_info -> user key -> _firends_list_
+        final DatabaseReference userFriendsListRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_FRIENDS_LIST_ATTR);
+
+        // Add friend to the friend list
+        userFriendsListRef.child(model.getUID()).setValue(model.getUID());
+    }
+
+    @Override
+    protected void removePlayerFromLobby(PlayerModel model) {
+        if(lobby.getAdminUid().equals(app.getUserInformation().getUID()))
+        {
+            app.getDatabaseRequests().child(lobby.getRequestPath()).child("players").child(model.getUID()).removeValue();
+
+        }
 
     }
 
     @Override
-    protected void removePlayer() {
-    //
+    protected void updateAdminInformation(RequestModel model) {
+        app.getDatabaseRequests().child(lobby.getRequestPath()).child("admin").setValue(model.getAdmin());
+        app.getDatabaseRequests().child(lobby.getRequestPath()).child("adminName").setValue(model.getAdminName());
     }
 
     private void removeListener() {

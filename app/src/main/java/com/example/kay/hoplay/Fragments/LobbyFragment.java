@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.example.kay.hoplay.Cores.AuthenticationCore.LoginCore;
 import com.example.kay.hoplay.Cores.Lobby.Lobby;
+import com.example.kay.hoplay.Models.PlayerModel;
+import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;
 
 
@@ -37,8 +39,18 @@ public abstract class LobbyFragment extends ParentRequestFragments {
 
         lobby = new Lobby(getContext(), view) {
             @Override
-            public void removePlayer() {
-                removePlayer();
+            public void addFriend(PlayerModel model) {
+                addPlayerToFreind(model);
+            }
+
+            @Override
+            public void kickPlayer(PlayerModel model) {
+                removePlayerFromLobby(model);
+            }
+
+            @Override
+            public void updateAdminInfo(RequestModel requestModel) {
+                updateAdminInformation(requestModel);
             }
         };
 
@@ -120,6 +132,8 @@ public abstract class LobbyFragment extends ParentRequestFragments {
     protected abstract void OnStartActivity();
 
     protected abstract void cancelRequest();
-    protected abstract void removePlayer();
+    protected abstract void addPlayerToFreind(PlayerModel model);
+    protected abstract void removePlayerFromLobby(PlayerModel model);
 
+    protected abstract void updateAdminInformation(RequestModel model);
 }

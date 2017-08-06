@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -23,6 +24,7 @@ import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.UserProfileCores.ViewFriendProfileCore;
 import com.example.kay.hoplay.Models.LobbyInformation;
 import com.example.kay.hoplay.Models.PlayerModel;
+import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;
 
 import java.util.ArrayList;
@@ -158,9 +160,18 @@ public abstract class Lobby {
         if (playerModels.size() > 0) {
             if (playerModels.get(0) != null) {
                 PlayerModel pl = playerModels.get(0);
+
+                if (playerModel.getUID().equals(getAdminUid()))
+                {
+                    updateAdminInfo(pl.getUID(),pl.getUsername(),pl.getProfilePicture());
+                }
+
+
                 updateAdminInfo(pl.getUID(), pl.getUsername(), pl.getProfilePicture());
             }
         }
+
+
 
         playerModelsHashMap.remove(playerModel);
         mAdapter.notifyDataSetChanged();
@@ -202,7 +213,7 @@ public abstract class Lobby {
 
                         boolean isAdmin = lobbyInformation.getAdminUid().equals(uid);
 
-                        showPlayerDialog(context,model.getUID(),isAdmin);
+                        showPlayerDialog(context, model, isAdmin);
 
                     }
                 });
@@ -229,20 +240,20 @@ public abstract class Lobby {
     }
 
 
-    public void setLobbyInfo(String adminUid, String adminName, String adminPicture, String lobbyPictureURL, String matchType, String rank, String region, String description) {
+    public void setLobbyInfo(RequestModel model, String adminPicture) {
 
+        lobbyInformation = new LobbyInformation(model);
+        lobbyInformation.setAdminPicture(adminPicture);
 
-        lobbyInformation = new LobbyInformation(adminUid, adminName, adminPicture, lobbyPictureURL, matchType, rank, region);
-
-        app.loadingImage(gamePhoto, lobbyPictureURL);
+        app.loadingImage(gamePhoto, model.getRequestPicture());
         app.loadingImage(adminPhoto, adminPicture);
-        adminUsername.setText(adminName);
+        adminUsername.setText(model.getAdminName());
 
 
-        regionValueTextview.setText(region);
-        rankValueTextview.setText(rank);
-        descriptionTextview.setText(description);
-        matchTypeTextview.setText(matchType);
+        regionValueTextview.setText(model.getRegion());
+        rankValueTextview.setText(model.getRank());
+        descriptionTextview.setText(model.getDescription());
+        matchTypeTextview.setText(model.getMatchType());
         mAdapter.notifyDataSetChanged();
 
 
@@ -257,10 +268,13 @@ public abstract class Lobby {
         app.loadingImage(adminPhoto, adminPicture);
         app.loadingImage(adminPhoto, adminPicture);
 
+        updateAdminInfo(lobbyInformation.getRequestModel());
+
+
     }
 
 
-    protected void showPlayerDialog(Context c, final String playerUid, boolean isAdmin) {
+    protected void showPlayerDialog(Context c, final PlayerModel playerModel, boolean isAdmin) {
 
 
         final Dialog playerDialog;
@@ -271,7 +285,7 @@ public abstract class Lobby {
 
         playerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        Button viewPlayerProfileButton, addPlpayerButton , removePlayerButton;
+        Button viewPlayerProfileButton, addPlpayerButton, removePlayerButton;
 
         viewPlayerProfileButton = (Button) playerDialog.findViewById(R.id.view_player_profile_button);
         removePlayerButton = (Button) playerDialog.findViewById(R.id.remove_player_button);
@@ -290,13 +304,12 @@ public abstract class Lobby {
         viewPlayerProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context,ViewFriendProfileCore.class);
-                i.putExtra("user_key",playerUid);
+                Intent i = new Intent(context, ViewFriendProfileCore.class);
+                i.putExtra("user_key", playerModel.getUID());
                 context.startActivity(i);
                 playerDialog.cancel();
             }
         });
-
 
 
         // Add player as a friend
@@ -304,16 +317,21 @@ public abstract class Lobby {
             @Override
             public void onClick(View v) {
                 // Do whatever  you want here baby
+
+                addFriend(playerModel);
+                playerDialog.cancel();
+
             }
         });
-
 
 
         // remove player
         removePlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                removePlayer();
+                kickPlayer(playerModel);
+                removePlayer(playerModel);
+                playerDialog.cancel();
             }
         });
 
@@ -326,6 +344,15 @@ public abstract class Lobby {
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(lp);
 
+    }
+
+    public String getAdminUid() {
+        return lobbyInformation.getAdminUid();
+    }
+
+
+    public String getRequestPath() {
+        return lobbyInformation.getPlatform() + "/" + lobbyInformation.getGameID() + "/" + lobbyInformation.getRegion() + "/" + lobbyInformation.getRequestID();
     }
 
 
@@ -342,7 +369,11 @@ public abstract class Lobby {
     }
 
 
+    public abstract void addFriend(PlayerModel model);
 
-    public abstract void removePlayer();
+    public abstract void kickPlayer(PlayerModel model);
+
+    public abstract void updateAdminInfo(RequestModel requestModel);
+
 
 }

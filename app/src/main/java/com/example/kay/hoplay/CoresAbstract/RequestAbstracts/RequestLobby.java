@@ -8,6 +8,7 @@ import android.view.View;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.ChatCore.ChatCore;
 import com.example.kay.hoplay.Cores.Lobby.Lobby;
+import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;
 
@@ -26,7 +27,17 @@ public abstract class RequestLobby extends AppCompatActivity {
 
         lobby = new Lobby(getApplication(), getWindow().getDecorView()) {
             @Override
-            public void removePlayer() {
+            public void addFriend(PlayerModel model) {
+                return;
+            }
+
+            @Override
+            public void kickPlayer(PlayerModel model) {
+                return;
+            }
+
+            @Override
+            public void updateAdminInfo(RequestModel requestModel) {
                 return;
             }
         };

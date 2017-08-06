@@ -25,7 +25,7 @@ public class FindUserCore extends UserListCore {
         // users_info -> user key -> _firends_list_
         final DatabaseReference userFriendsListRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_FRIENDS_LIST_ATTR);
 
-//       Add friend to the friend list
+       // Add friend to the friend list
         userFriendsListRef.child(model.getFriendKey()).setValue(model.getFriendKey());
 
     }

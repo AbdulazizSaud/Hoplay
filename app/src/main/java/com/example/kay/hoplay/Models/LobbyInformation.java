@@ -1,36 +1,34 @@
 package com.example.kay.hoplay.Models;
 
 
+import java.lang.ref.ReferenceQueue;
 
 public class LobbyInformation {
 
-    private String adminUid ,adminName,adminPicture;
-    private String  lobbyPictureURL, matchType,rank, region;
 
-    public LobbyInformation(String adminUid, String adminName, String adminPicture, String lobbyPictureURL, String matchType, String rank, String region) {
-        this.adminUid = adminUid;
-        this.adminName = adminName;
-        this.adminPicture = adminPicture;
-        this.lobbyPictureURL = lobbyPictureURL;
-        this.matchType = matchType;
-        this.rank = rank;
-        this.region = region;
+
+    private RequestModel requestModel;
+    private String adminPicture;
+
+    public LobbyInformation(RequestModel model) {
+
+        requestModel = model;
     }
 
     public String getAdminUid() {
-        return adminUid;
+        return requestModel.getAdmin();
     }
 
     public void setAdminUid(String adminUid) {
-        this.adminUid = adminUid;
+        requestModel.setAdmin(adminUid);
     }
 
     public String getAdminName() {
-        return adminName;
+        return requestModel.getAdminName();
     }
 
     public void setAdminName(String adminName) {
-        this.adminName = adminName;
+        requestModel.setAdminName(adminName);
     }
 
     public String getAdminPicture() {
@@ -42,34 +40,58 @@ public class LobbyInformation {
     }
 
     public String getLobbyPictureURL() {
-        return lobbyPictureURL;
+        return requestModel.getRequestPicture();
     }
 
     public void setLobbyPictureURL(String lobbyPictureURL) {
-        this.lobbyPictureURL = lobbyPictureURL;
+       requestModel.setRequestPicture(lobbyPictureURL);
     }
 
     public String getMatchType() {
-        return matchType;
+        return requestModel.getMatchType();
     }
 
     public void setMatchType(String matchType) {
-        this.matchType = matchType;
+        requestModel.setMatchType(matchType);
     }
 
     public String getRank() {
-        return rank;
+        return requestModel.getRank();
     }
 
     public void setRank(String rank) {
-        this.rank = rank;
+        requestModel.setRank(rank);
     }
 
     public String getRegion() {
-        return region;
+        return requestModel.getRegion();
     }
 
     public void setRegion(String region) {
-        this.region = region;
+        requestModel.setRegion(region);
     }
+
+    public String getGameID()
+    {
+        return requestModel.getGameId();
+    }
+
+    public String getPlatform()
+    {
+        return requestModel.getPlatform();
+    }
+
+    public String getRequestID()
+    {
+        return requestModel.getRequestId();
+    }
+
+
+    public RequestModel getRequestModel()
+    {
+        return requestModel;
+    }
+
+
+
 }

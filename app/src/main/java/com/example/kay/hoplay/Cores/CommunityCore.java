@@ -443,14 +443,13 @@ public class CommunityCore extends Community implements FirebasePaths {
 
         CommunityChatModel communityChatModel = communityChatModelHashMap.get(chatKey);
         joinerUsername = communityChatModel.getChatType().equals(FIREBASE_PRIVATE_ATTR) ? "" : joinerUsername+": ";
-        Intent intent = new Intent(getContext(), ChatCore.class);
+        Intent intent = new Intent(app.getMainAppMenuCore(), ChatCore.class);
         setChatIntent(communityChatModel, intent);
 
         Random random = new Random();
         uniqeID = random.nextInt(999999999-1)+1;
-
         ///
-        notification = new NotificationCompat.Builder(getContext());
+        notification = new NotificationCompat.Builder(app.getMainAppMenuCore());
         notification.setAutoCancel(true);
         notification.setSmallIcon(R.drawable.hoplaylogo);
         notification.setTicker("This is ticker");
@@ -458,13 +457,14 @@ public class CommunityCore extends Community implements FirebasePaths {
         notification.setContentTitle(communityChatModel.getChatName());
         notification.setContentText(joinerUsername+ message);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), uniqeID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(app.getMainAppMenuCore(), uniqeID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         notification.setContentIntent(pendingIntent);
 
 
-        NotificationManager nm = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+        NotificationManager nm = (NotificationManager) app.getMainAppMenuCore().getSystemService(NOTIFICATION_SERVICE);
         nm.notify(uniqeID, notification.build());
     }
+
 
 
     @Override

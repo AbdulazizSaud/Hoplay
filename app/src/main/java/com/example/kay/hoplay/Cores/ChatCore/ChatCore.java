@@ -130,6 +130,7 @@ public class ChatCore extends Chat implements FirebasePaths {
         // here will be to procedure  in two condition : private, public
         // in case private : it will check the type than it will escape the current user till it find a bio of oppsite user and added to bio of the chat
         // in case public : it will check the type than it will add all user in chat in bio of the chat
+
         refRoom.child(FIREBASE_CHAT_USERS_LIST_PATH).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
