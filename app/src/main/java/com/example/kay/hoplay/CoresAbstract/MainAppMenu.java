@@ -213,10 +213,10 @@ public abstract class MainAppMenu extends AppCompatActivity  {
     }
 
 
-    public static void setChatCounterOnBottombar(long counter){
+    public static void setChatCounterOnBottombar(int counter){
         // CHAT NOTIFICATION COUNTER
 
-        unreadMessages.setBadgeCount((int)counter);
+        unreadMessages.setBadgeCount(counter);
 
     }
 

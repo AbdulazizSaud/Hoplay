@@ -59,6 +59,9 @@ public abstract class Community extends Fragment {
     }
 
 
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -116,8 +119,12 @@ public abstract class Community extends Fragment {
 
 
 
+
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+
+
     }
 
 
@@ -127,8 +134,6 @@ public abstract class Community extends Fragment {
             return;
 
 
-        // For bottom bar char counter
-        app.increaseChatCounter(communityUserList.getChatCounter());
 
         communityUserLists.add(communityUserList);
         communityChatModelHashMap.put(communityUserList.getChatKey(), communityUserList);
@@ -140,6 +145,10 @@ public abstract class Community extends Fragment {
             bgChatImageView.setVisibility(View.VISIBLE);
         else
             bgChatImageView.setVisibility(View.INVISIBLE);
+
+
+
+
 
     }
 
@@ -179,8 +188,12 @@ public abstract class Community extends Fragment {
 
 
 
-                // Set the bottom bar chat counter for unsean messages
-                MainAppMenu.setChatCounterOnBottombar(app.getChatCounter());
+                //  Set the bottom bar chat counter for unsean messages
+                MainAppMenu.setChatCounterOnBottombar(app.getChatsCounter());
+
+
+
+
 
                 // Community BG declaration imageview
                 if (mAdapter.getItemCount() < 1)
@@ -240,7 +253,7 @@ public abstract class Community extends Fragment {
                 if (model.getChatCounter() < 1) {
                     communityHolder.getChatCounterView().setVisibility(View.INVISIBLE);
                 } else {
-
+                    Log.i("===>","DONE");
                     communityHolder.getChatCounterView().setVisibility(View.VISIBLE);
                     communityHolder.setCounter(String.valueOf(model.getChatCounter()));
                 }
@@ -259,7 +272,15 @@ public abstract class Community extends Fragment {
                 }, 10000);
 //                Log.i("->",""+getAllUnseenMessages());
 
+
+
+
+
+
             }
+
+
+
 
         };
     }

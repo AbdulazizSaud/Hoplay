@@ -37,6 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -79,23 +80,23 @@ public class App extends Application implements FirebasePaths {
 
 
 
-    // Chat counter for notification in bottom bar
-    private long chatCounter=0;
 
+    // Counter for bottom bar
+    private int chatsCounter  = 0 ;
+    private HashMap<String,String> chatsCounterRefs = new HashMap<String,String>();
 
-    public long getChatCounter() {
-        return chatCounter;
+    public HashMap<String, String> getChatsCounterRefs() {
+        return chatsCounterRefs;
     }
 
-    public void setChatCounter(long chatCounter) {
-        this.chatCounter = chatCounter;
+    public void increaseChatsByOne(){
+        ++chatsCounter;
     }
 
-    public  void increaseChatCounter(long count){
-        chatCounter+=count;
+    public int getChatsCounter()
+    {
+        return chatsCounter;
     }
-
-
 
     @Override
     public void onCreate() {

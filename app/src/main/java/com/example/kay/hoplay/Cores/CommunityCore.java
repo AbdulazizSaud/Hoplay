@@ -264,6 +264,7 @@ public class CommunityCore extends Community implements FirebasePaths {
                 long value = Long.parseLong(userChatRef.getValue().toString().trim());
                 long res = currentCounter - value;
 
+
                 if (res > 0)
                     notifyUser(chatKey, joinerUsername, msg);
 
@@ -383,6 +384,14 @@ public class CommunityCore extends Community implements FirebasePaths {
 
         for (CommunityChatModel communityChatModel : communityUserLists) {
             if (communityChatModel.getChatKey().equals(chatKey)) {
+
+                // Check if the chat is exist or not : if it exist then dont increase the chats counter
+                if (Long.parseLong(counter)>0 && !app.getChatsCounterRefs().containsKey(chatKey))
+                {
+                    app.increaseChatsByOne();
+                    app.getChatsCounterRefs().put(chatKey,counter);
+                }
+
                 communityChatModel.setChatCounter(Long.parseLong(counter));
                 mAdapter.notifyDataSetChanged();
                 break;

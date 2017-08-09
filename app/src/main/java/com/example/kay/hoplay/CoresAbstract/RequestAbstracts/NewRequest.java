@@ -681,7 +681,7 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
         if (selectedRank.length() == 0)
             selectedRank = "All Ranks";
         if (requestDescription.length() == 0)
-            requestDescription = R.string.new_request_default_description_message + selectedGame +" ?";
+            requestDescription = getString(R.string.new_request_default_description_message) + selectedGame +" ?";
         if (selectedMatchType.length() ==0 )
             selectedMatchType = "All Matches";
         if (selectedPlayersNumber.length()==0)
