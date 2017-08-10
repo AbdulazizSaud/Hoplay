@@ -1,7 +1,10 @@
 package com.example.kay.hoplay.App;
 
 import android.app.Application;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.widget.Toast;
@@ -17,6 +20,8 @@ import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Services.LruBitmapCache;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.UserInformation;
+import com.example.kay.hoplay.Services.Schema;
+import com.example.kay.hoplay.Services.SchemaHelper;
 import com.example.kay.hoplay.util.BitmapOptimizer;
 import com.example.kay.hoplay.util.GameManager;
 import com.example.kay.hoplay.util.TimeStamp;
@@ -38,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -78,6 +84,7 @@ public class App extends Application implements FirebasePaths {
     private MainAppMenuCore mainAppMenuCore;
 
 
+    private  SchemaHelper schemaHelper;
 
 
 
@@ -129,9 +136,17 @@ public class App extends Application implements FirebasePaths {
 
 
 
+
+
+        // Initiate locqal databse : SQLITE Databse
+        schemaHelper = new SchemaHelper(getApplicationContext());
+
+
+
+
     }
 
-
+    //
     // this method return a instance of this app class
     public static synchronized App getInstance() {
         return instance;
@@ -373,6 +388,11 @@ public class App extends Application implements FirebasePaths {
     }
 
 
+
+    public SchemaHelper getSchemaHelper()
+    {
+        return schemaHelper;
+    }
 
 }
 
