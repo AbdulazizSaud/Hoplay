@@ -130,6 +130,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
 
 
+
         //this abstract method will do some init things
         OnStartActivity();
 
@@ -168,6 +169,14 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         signInButton.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+
+
+    }
 
     // Listener for editexts to change icons whenever the user type anything
     private void changeIconListener() {
@@ -304,7 +313,8 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     //this method switching a to signup actitvty
     protected void toSignUp() {
         Intent i = new Intent(this, SignUpCore.class);
-        startActivity(i);
+        i.putExtra("FirstTime","NO");
+        startActivityForResult(i,123);
         overridePendingTransition( R.anim.slide_in_up_layouts, R.anim.slide_out_up_layouts);
 
     }

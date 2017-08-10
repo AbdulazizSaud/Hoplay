@@ -59,6 +59,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
     ProgressDialog loadingDialog;
 
 
+
     /***************************************/
 
     // Main methods
@@ -573,6 +574,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 
     // switch activity methods
     public void toLogin() {
+
        finish();
     }
     public void toMainMenuApp(){
