@@ -20,6 +20,7 @@ import com.example.kay.hoplay.CoresAbstract.AuthenticationAbstracts.Login;
 import com.example.kay.hoplay.R;
 
 
+import com.example.kay.hoplay.Services.SchemaHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -101,7 +102,13 @@ public class LoginCore extends Login {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
+
+                        SchemaHelper schemaHelper = new SchemaHelper(LoginCore.this);
+                        firstTime = schemaHelper.isStamped();
+                        Log.i("===============>","its :"+firstTime);
+                        schemaHelper.removeStamp();
                         toMainMenu();
+
                     } else {
                         // results if it's failed
                         loadingDialog(false);

@@ -323,12 +323,17 @@ public abstract class Community extends Fragment {
         TextView verificationDeleteText;
         Button deleteYesButton, deleteNoButton;
 
+
+        verificationDeleteText = (TextView) onLongClickGameDialog.findViewById(R.id.delete_verification_text);
         deleteYesButton = (Button) onLongClickGameDialog.findViewById(R.id.delete_chat_yes_button);
         deleteNoButton = (Button) onLongClickGameDialog.findViewById(R.id.delete_chat_no_button);
 
+
+        Typeface playregular = Typeface.createFromAsset(getResources().getAssets() ,"playregular.ttf");
         Typeface sansation = Typeface.createFromAsset(getResources().getAssets(), "sansationbold.ttf");
         deleteYesButton.setTypeface(sansation);
         deleteNoButton.setTypeface(sansation);
+        verificationDeleteText.setTypeface(playregular);
 
 
         // Delete chat

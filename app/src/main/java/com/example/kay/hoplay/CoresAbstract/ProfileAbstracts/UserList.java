@@ -38,6 +38,8 @@ import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Models.FriendCommonModel;
 import com.google.android.gms.common.data.BitmapTeleporter;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;

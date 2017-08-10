@@ -31,14 +31,18 @@ import android.widget.Toast;
 import com.example.kay.hoplay.Adapters.CommonAdapter;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Cores.MainAppMenuCore;
 import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
 import com.example.kay.hoplay.Interfaces.Constants;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.R;
+import com.example.kay.hoplay.Services.SchemaHelper;
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static android.icu.lang.UCharacter.SentenceBreak.SP;
 
 public abstract class AddGame extends AppCompatActivity {
 
@@ -62,6 +66,13 @@ public abstract class AddGame extends AppCompatActivity {
 
     protected App app;
     Timer timer = new Timer();
+
+
+
+    // Tour Section
+    // Came from varible for the tour
+    private String cameFrom ="";
+    private Button tourButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +98,15 @@ public abstract class AddGame extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
+
         // No games section
         noGameImageView = (ImageView) findViewById(R.id.no_games_imageview);
         noGameMessage = (TextView) findViewById(R.id.no_games_message);
         noGameMessage.setTypeface(playregular);
 
 
+        // Tour section
+        tourButton = (Button) findViewById(R.id.tour_finish_button);
 
 
         // remove the keyboard when start activity
@@ -132,13 +146,58 @@ public abstract class AddGame extends AppCompatActivity {
             }
         });
         OnStartActivity();
+
+
+
+        // **********************************************************************************************************************
+
+
+        // ** Tour Section  **
+
+        // Detect which previous activity : for the tour
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                cameFrom= "userProfile";
+            } else {
+                cameFrom= extras.getString("CameFrom");
+            }
+        } else {
+            cameFrom= (String) savedInstanceState.getSerializable("CameFrom");
+        }
+
+
+        // change design if it came from the login activity
+        if (cameFrom.equalsIgnoreCase("login"))
+        {
+
+            showtourDialog();
+
+            tourButton.setVisibility(View.VISIBLE);
+            tourButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), MainAppMenuCore.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    overridePendingTransition( R.anim.slide_in_right_layouts, R.anim.slide_out_right_layouts);
+                }
+            });
+
+        } // Change design if it came from userProfile
+        else
+        {
+            tourButton.setVisibility(View.GONE);
+        }
+
+
+
+        // **********************************************************************************************************************
+
     }
 
 
-    private void reloadGameList() {
-
-
-    }
+    private void reloadGameList() {}
 
 
     private void searchProcess(final String value) {
@@ -380,13 +439,16 @@ public abstract class AddGame extends AppCompatActivity {
         TextView verificationDeleteText;
         Button deleteYesButton , deleteNoButton;
 
+        verificationDeleteText = (TextView) onLongClickGameDialog.findViewById(R.id.delete_verification_text);
         deleteYesButton = ( Button) onLongClickGameDialog.findViewById(R.id.delete_game_yes_button);
         deleteNoButton = ( Button) onLongClickGameDialog.findViewById(R.id.delete_game_no_button);
 
         Typeface sansation = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
+        Typeface playregular = Typeface.createFromAsset(getResources().getAssets() ,"playregular.ttf");
+
         deleteYesButton.setTypeface(sansation);
         deleteNoButton.setTypeface(sansation);
-
+        verificationDeleteText.setTypeface(playregular);
 
 
         // Delete Game
@@ -420,6 +482,80 @@ public abstract class AddGame extends AppCompatActivity {
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         Window window = onLongClickGameDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+    }
+
+
+
+    protected void showtourDialog() {
+
+        final Dialog tourDialog;
+        tourDialog = new Dialog(AddGame.this);
+        tourDialog.setContentView(R.layout.tour_dialog);
+        tourDialog.show();
+
+        tourDialog.setCancelable(false);
+
+        tourDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView greetingTextview , tourMessageTextview;
+        Button addGamesButton , skipButton;
+
+
+        SchemaHelper schemaHelper = new SchemaHelper(this);
+
+
+
+        Typeface sansation = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
+        Typeface playregular = Typeface.createFromAsset(getResources().getAssets() ,"playregular.ttf");
+
+        greetingTextview = (TextView) tourDialog.findViewById(R.id.tour_dialog_greeting) ;
+        greetingTextview.setTypeface(playregular);
+
+        tourMessageTextview = (TextView) tourDialog.findViewById(R.id.tour_message_dialog);
+        tourMessageTextview.setTypeface(playregular);
+
+        addGamesButton = ( Button) tourDialog.findViewById(R.id.add_games_tour_button);
+        skipButton = ( Button) tourDialog.findViewById(R.id.skip_button_dialog);
+
+        String greetingWithUsername = String.format(getResources().getString(R.string.add_game_tour_greeting), schemaHelper.getUsernameByIndex(1));
+        greetingTextview.setText(greetingWithUsername);
+
+        addGamesButton.setTypeface(sansation);
+        skipButton.setTypeface(sansation);
+
+
+        // Show the add game activity
+        addGamesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tourDialog.dismiss();
+            }
+        });
+
+
+
+        // Skip the add game activity and go to the main app menu
+        skipButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MainAppMenuCore.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
+                overridePendingTransition( R.anim.slide_in_right_layouts, R.anim.slide_out_right_layouts);
+            }
+        });
+
+
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = tourDialog.getWindow();
         lp.copyFrom(window.getAttributes());
         //This makes the dialog take up the full width
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;

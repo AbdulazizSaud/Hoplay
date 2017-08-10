@@ -134,14 +134,8 @@ public class App extends Application implements FirebasePaths {
         savedRequests = new ArrayList<RequestModel>();
 
 
-
-
-
-
         // Initiate locqal databse : SQLITE Databse
         schemaHelper = new SchemaHelper(getApplicationContext());
-
-
 
 
     }

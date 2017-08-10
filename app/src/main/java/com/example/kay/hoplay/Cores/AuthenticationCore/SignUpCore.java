@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.example.kay.hoplay.CoresAbstract.AuthenticationAbstracts.Signup;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.R;
+import com.example.kay.hoplay.Services.SchemaHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,6 +26,7 @@ public class SignUpCore extends Signup implements FirebasePaths{
 
     // Get firebase authentication from App
     private FirebaseAuth appAuth;
+    private SchemaHelper schemaHelper = new SchemaHelper(this);
 
 
     @Override
@@ -66,6 +68,11 @@ public class SignUpCore extends Signup implements FirebasePaths{
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
+                                                // Put a signup stamp for the signup tour when the user logged in
+                                                // save the username in local database : used in tour
+                                                schemaHelper.signUpStamp();
+                                                schemaHelper.insertUsername(username,1);
+                                                schemaHelper.close();
                                                Toast.makeText(getApplicationContext(),"Verificetion sent to your email",Toast.LENGTH_LONG).show();
                                             }
                                         }

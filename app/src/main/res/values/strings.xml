@@ -149,9 +149,16 @@
     <!--                                Add Game Layout                                                            -->
     <string name="add_game_search_bar">Search for a Game</string>
     <string name="add_game_no_game_message">You do not have any game</string>
+
+
+
+    <!--                                Tour Dialog                                 -->
+    <string name="add_game_tour_greeting">Hi %1$s ,</string>
     <string name="add_game_tour_message">You will not be able to create or search for a game request unless you have that game in your library</string>
     <string name="add_game_skip_button">S K I P</string>
     <string name="add_game_done_button">D O N E</string>
+    <string name="add_game_add_game_button">Add Games</string>
+    <string name="add_game_tour_button">Continue</string>
 
 
     <!--                            Users Toolbar                   -->

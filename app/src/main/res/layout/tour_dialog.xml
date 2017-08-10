@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/pop_up_backgrounds"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/ic_tag_faces_64dp"
+        android:id="@+id/tour_smile_face_imageview"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/add_game_tour_greeting"
+        android:textSize="20sp"
+        android:id="@+id/tour_dialog_greeting"
+        android:layout_below="@+id/tour_smile_face_imageview"
+        android:gravity="center"
+       />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/add_game_tour_message"
+        android:textSize="20sp"
+        android:id="@+id/tour_message_dialog"
+        android:layout_below="@+id/tour_dialog_greeting"
+        android:gravity="center"
+        android:padding="20dp"/>
+
+    <Button
+        android:id="@+id/add_games_tour_button"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:textStyle="bold"
+        android:text="@string/add_game_add_game_button"
+        android:layout_below="@+id/tour_message_dialog"
+        android:layout_toLeftOf="@+id/tour_smile_face_imageview"
+        android:layout_toStartOf="@+id/tour_smile_face_imageview" />
+
+    <Button
+        android:id="@+id/skip_button_dialog"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:textStyle="bold"
+        android:text="@string/add_game_skip_button"
+        android:layout_below="@+id/tour_message_dialog"
+        android:layout_toRightOf="@+id/tour_smile_face_imageview"
+        android:layout_toEndOf="@+id/tour_smile_face_imageview" />
+
+
+
+
+
+</RelativeLayout>

@@ -34,8 +34,12 @@ import com.example.kay.hoplay.Cores.AuthenticationCore.SignUpCore;
 import com.example.kay.hoplay.Cores.ForgetPasswordCore;
 import com.example.kay.hoplay.Cores.MainAppMenuCore;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
+import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.R;
+import com.example.kay.hoplay.Services.SchemaHelper;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
@@ -64,6 +68,8 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
 
 
+    // For displaying the tour activities
+    protected boolean firstTime = false;
 
     /***************************************/
 
@@ -137,6 +143,8 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         initControls();
         animateViews();
         changeIconListener();
+
+
 
 
     }
@@ -313,18 +321,29 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     //this method switching a to signup actitvty
     protected void toSignUp() {
         Intent i = new Intent(this, SignUpCore.class);
-        i.putExtra("FirstTime","NO");
-        startActivityForResult(i,123);
+        startActivity(i);
         overridePendingTransition( R.anim.slide_in_up_layouts, R.anim.slide_out_up_layouts);
 
     }
     protected void toMainMenu() {
 
         finish();
-        Intent i = new Intent(getApplicationContext(), MainAppMenuCore.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(i);
-        overridePendingTransition( R.anim.slide_in_right_layouts, R.anim.slide_out_right_layouts);
+
+        if (firstTime)
+        {
+            Intent i = new Intent(getApplicationContext(), AddGameCore.class);
+            i.putExtra("CameFrom","Login");
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+            overridePendingTransition( R.anim.slide_in_right_layouts, R.anim.slide_out_right_layouts);
+
+        }else {
+            Intent i = new Intent(getApplicationContext(), MainAppMenuCore.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+            overridePendingTransition( R.anim.slide_in_right_layouts, R.anim.slide_out_right_layouts);
+
+        }
 
     }
 
