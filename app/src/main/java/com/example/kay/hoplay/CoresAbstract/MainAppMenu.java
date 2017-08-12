@@ -108,6 +108,16 @@ public abstract class MainAppMenu extends AppCompatActivity  {
 
     /***************************************/
 
+    protected void welcomeMessage(String username) {
+        // success message
+        String Msg = String.format(getResources().getString(R.string.main_app_menu_welcome_message), username);
+
+        // results if it's successed
+        Toast.makeText(getApplicationContext(), Msg,Toast.LENGTH_LONG).show();
+
+    }
+
+
     private void initControl(final Bundle savedInstanceState) {
         viewPagerMenu = (ViewPager) findViewById(R.id.view_pager);
 

@@ -121,6 +121,17 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     }
 
 
+
+                    Log.i("-------------->","ITS : "+App.isWelcomed);
+                    // To show the message once
+                    if (!App.isWelcomed)
+                    {
+                        welcomeMessage(username);
+                        App.isWelcomed=true;
+                    }
+
+
+
                     // set current user information
                     app.getUserInformation().setUsername(username);
                     app.getUserInformation().setBio(bio);

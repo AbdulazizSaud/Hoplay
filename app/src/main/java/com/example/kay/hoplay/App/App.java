@@ -88,6 +88,11 @@ public class App extends Application implements FirebasePaths {
 
 
 
+    // Use this variable to show the welcome message once
+    public static boolean isWelcomed = false;
+
+
+
     // Counter for bottom bar
     private int chatsCounter  = 0 ;
     private HashMap<String,String> chatsCounterRefs = new HashMap<String,String>();
@@ -108,10 +113,6 @@ public class App extends Application implements FirebasePaths {
     @Override
     public void onCreate() {
         super.onCreate();
-
-
-        // Welcome Message
-        Toast.makeText(getApplicationContext(),R.string.main_app_menu_welcome_message,Toast.LENGTH_SHORT).show();
 
 
         instance = this;
@@ -136,6 +137,7 @@ public class App extends Application implements FirebasePaths {
 
         // Initiate locqal databse : SQLITE Databse
         schemaHelper = new SchemaHelper(getApplicationContext());
+
 
 
     }
