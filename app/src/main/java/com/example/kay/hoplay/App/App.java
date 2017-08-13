@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -15,6 +16,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.kay.hoplay.Adapters.ViewHolders;
 import com.example.kay.hoplay.Cores.MainAppMenuCore;
 import com.example.kay.hoplay.Fragments.ParentRequestFragments;
+import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Services.LruBitmapCache;
@@ -92,6 +94,21 @@ public class App extends Application implements FirebasePaths {
     public static boolean isWelcomed = false;
 
 
+    // Games adapter for search request auto complete edittext : its used here for future use : such as ADD GAME SEARCH DIALOG : SEARCH REQ FRAGMENT
+    public static ArrayAdapter<String> gameAdapter;
+    public static int whosFirstLoaded = 0 ;
+    public static void loadGames() {
+
+
+        ArrayList<GameModel> games = instance.getGameManager().getAllGamesArrayList();
+        for (GameModel gameModel : games) {
+            gameAdapter.add(gameModel.getGameName());
+        }
+        gameAdapter.notifyDataSetChanged();
+
+    }
+
+
 
     // Counter for bottom bar
     private int chatsCounter  = 0 ;
@@ -138,6 +155,11 @@ public class App extends Application implements FirebasePaths {
         // Initiate locqal databse : SQLITE Databse
         schemaHelper = new SchemaHelper(getApplicationContext());
 
+
+        // gameAdapter for search request
+        ArrayList<String> list = new ArrayList<String>();
+        gameAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, list);
 
 
     }

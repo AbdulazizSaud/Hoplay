@@ -81,6 +81,8 @@ public abstract class NewRequestFragment extends ParentRequestFragments {
         super.onCreateView(inflater, container, savedInstanceState);
         app = App.getInstance();
 
+        Log.i("=====>","NEW REQ FRAGMENT STARTED");
+
         View view = inflater.inflate(R.layout.activity_make_request_fragment, container, false);
         newRequestButton = (Button) view.findViewById(R.id.new_request_button);
         addGameFloationActionButton = (FloatingActionButton) view.findViewById(R.id.add_new_game_floatinactionbutton);

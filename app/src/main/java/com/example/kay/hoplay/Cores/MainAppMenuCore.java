@@ -8,6 +8,7 @@ import com.example.kay.hoplay.Cores.RequestCore.LobbyFragmentCore;
 import com.example.kay.hoplay.Cores.RequestCore.NewRequestFragmentCore;
 import com.example.kay.hoplay.CoresAbstract.MainAppMenu;
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.SearchRequests;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.Models.Rank;
@@ -104,7 +105,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     String picUrl = dataSnapshot.child(FIREBASE_PICTURE_URL_PATH).getValue(String.class);
 
                     if (dataSnapshot.hasChild(FIREBASE_USER_PS_GAME_PROVIDER))
-                     PSNAcc = dataSnapshot.child(FIREBASE_USER_PS_GAME_PROVIDER).getValue(String.class);
+                        PSNAcc = dataSnapshot.child(FIREBASE_USER_PS_GAME_PROVIDER).getValue(String.class);
                     if (dataSnapshot.hasChild(FIREBASE_USER_XBOX_GAME_PROVIDER))
                         XboxLiveAcc = dataSnapshot.child(FIREBASE_USER_XBOX_GAME_PROVIDER).getValue(String.class);
 
@@ -122,7 +123,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
 
 
-                    Log.i("-------------->","ITS : "+App.isWelcomed);
+
                     // To show the message once
                     if (!App.isWelcomed)
                     {
@@ -266,6 +267,9 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                 app.getGameManager().addGame(gameModel);
 
                 app.getGameManager().getPcGamesWithProviders().put(gameKey,gameProvider);
+
+
+
             }
 
             @Override
@@ -273,6 +277,14 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
             }
         });
+
+
+
+            // Load games in auto complete edititext : search request
+            App.gameAdapter.clear();
+            App.loadGames();
+
+
     }
 
 
@@ -289,7 +301,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
 
                 if(dataSnapshot.getValue() !=null)
-                setRequestModelRef(dataSnapshot.getValue(RequestModelReference.class));
+                    setRequestModelRef(dataSnapshot.getValue(RequestModelReference.class));
 
                 if(dataSnapshot.getValue() !=null) {
 

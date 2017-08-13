@@ -121,8 +121,8 @@ public abstract class MainAppMenu extends AppCompatActivity  {
     private void initControl(final Bundle savedInstanceState) {
         viewPagerMenu = (ViewPager) findViewById(R.id.view_pager);
 
-        // Prevent destroyin old fragments
-        viewPagerMenu.setOffscreenPageLimit(4);
+        // Prevent destroyin old fragments : it was 4
+        viewPagerMenu.setOffscreenPageLimit(2);
 
 
         bottomBar = (BottomBar) findViewById(R.id.bottomBar);

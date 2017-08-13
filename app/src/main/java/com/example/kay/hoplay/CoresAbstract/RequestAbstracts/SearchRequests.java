@@ -39,16 +39,18 @@ import com.example.kay.hoplay.util.BitmapOptimizer;
 import com.google.firebase.database.ServerValue;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
 public abstract class SearchRequests extends Fragment {
 
-    protected App app;
+    protected static App app;
 
     protected ImageView pcChoice;
     protected ImageView psChoice;
@@ -58,7 +60,7 @@ public abstract class SearchRequests extends Fragment {
     protected TextView pcMessage;
     protected TextView psMessage;
     protected TextView xboxMessage;
-    protected AutoCompleteTextView searchGameAutoCompleteTextView;
+    protected static AutoCompleteTextView searchGameAutoCompleteTextView;
 
     private int layoutItemId;
 
@@ -70,7 +72,7 @@ public abstract class SearchRequests extends Fragment {
     protected ArrayList<String> playerNumberList;
     protected ArrayList<String> ranksList;
 
-    protected ArrayAdapter<String> gameAdapter;
+
     protected ArrayAdapter regionAdapter;
     protected ArrayAdapter playersNumberAdapter;
     protected ArrayAdapter playersRanksAdapter;
@@ -107,6 +109,8 @@ public abstract class SearchRequests extends Fragment {
         View view = inflater.inflate(R.layout.fragment_requests_search, container, false);
 
 
+
+
         // Hide keyboard when click anywhre on fragment
         activityLayout = (RelativeLayout) view.findViewById(R.id.search_request_fragment_relativelayout);
         activityLayout.setOnClickListener(new View.OnClickListener() {
@@ -116,30 +120,6 @@ public abstract class SearchRequests extends Fragment {
                 imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
             }
         });
-
-
-
-        // Load  user games
-        new CountDownTimer(2000, 1000) {
-
-            public void onTick(long millisUntilFinished) {
-
-
-                ArrayList<GameModel> games = app.getGameManager().getAllGamesArrayList();
-                    for (GameModel gameModel : games)
-                    {
-                        gameAdapter.add(gameModel.getGameName());
-                    }
-
-
-            }
-
-            public void onFinish() {
-
-
-            }
-        }.start();
-
 
 
 
@@ -163,6 +143,8 @@ public abstract class SearchRequests extends Fragment {
         xboxChoice.setImageBitmap(ps4Logo);
 
     }
+
+
 
 
     private String loadGameInformation(String selectedGame) {
@@ -271,8 +253,7 @@ public abstract class SearchRequests extends Fragment {
 
 
 
-        gameAdapter = new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_dropdown_item_1line, gamesList);
+
 
         regionAdapter = new SpinnerAdapter(getContext(),
                 R.layout.spinnner_item, regionList);
@@ -300,8 +281,28 @@ public abstract class SearchRequests extends Fragment {
         ranksSpinner.setAdapter(playersRanksAdapter);
         countrySpinner.setAdapter(regionAdapter);
         searchGameAutoCompleteTextView.setThreshold(1);
-        searchGameAutoCompleteTextView.setAdapter(gameAdapter);
         matchTypeSpinner.setAdapter(matchTypeAdapter);
+
+
+
+
+//        // Load  user games
+        App.gameAdapter.clear();
+        new CountDownTimer(3000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            public void onFinish() {
+
+                App.loadGames();
+                searchGameAutoCompleteTextView.setAdapter(App.gameAdapter);
+            }
+        }.start();
+
+
+
 
         searchRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -316,13 +317,13 @@ public abstract class SearchRequests extends Fragment {
 
                 // default values
 
-                    rank = "All Ranks";
-                    matchType = "All Matches";
+                rank = "All Ranks";
+                matchType = "All Matches";
 //                if (selectedPlayersNumber.length()==0)
 //                    selectedPlayersNumber="All Numbers";
 
 
-                 gameName = searchGameAutoCompleteTextView.getText().toString().trim();
+                gameName = searchGameAutoCompleteTextView.getText().toString().trim();
                 region= countrySpinner.getText().toString().trim();
                 if (!numberOfPlayersSpinner.getText().toString().trim().isEmpty()) {
                     int number = numberOfPlayersSpinner.getText().toString().trim().equals("All Numbers") ? 0:Integer.parseInt(numberOfPlayersSpinner.getText().toString().trim());
@@ -330,10 +331,10 @@ public abstract class SearchRequests extends Fragment {
                 }
 
                 if (!ranksSpinner.getText().toString().trim().isEmpty())
-                 rank = ranksSpinner.getText().toString().trim();
+                    rank = ranksSpinner.getText().toString().trim();
 
                 if (!matchTypeSpinner.getText().toString().trim().isEmpty())
-                 matchType =matchTypeSpinner.getText().toString().trim();
+                    matchType =matchTypeSpinner.getText().toString().trim();
 
                 RequestModel requestModel;
 
@@ -612,6 +613,7 @@ public abstract class SearchRequests extends Fragment {
 
                 // Next Focus
                 matchTypeSpinner.requestFocus();
+
 
             }
         });
