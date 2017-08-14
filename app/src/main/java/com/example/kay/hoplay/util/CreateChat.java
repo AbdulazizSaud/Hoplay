@@ -1,10 +1,21 @@
 package com.example.kay.hoplay.util;
 
+import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
+import android.content.Intent;
+
 import com.example.kay.hoplay.App.App;
+import com.example.kay.hoplay.Cores.ChatCore.ChatCore;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
+import com.example.kay.hoplay.Models.FriendCommonModel;
 import com.example.kay.hoplay.Models.RequestModel;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -21,7 +32,7 @@ public class CreateChat implements FirebasePaths {
     }
 
 
-    public String createPrivateFirebaseChat(String UID, String friendUID) {
+    private String createPrivateFirebaseChat(String UID, String friendUID) {
 
         // path --> /Chat/_private_
         DatabaseReference refPrivate = app.getFirebaseDatabase().getReferenceFromUrl(FB_PRIVATE_CHAT_PATH);
@@ -129,4 +140,54 @@ public class CreateChat implements FirebasePaths {
         roomUsers.child(userId).setValue(userId);
     }
 
+
+
+    private void jumpToPrivateChat(Context c , FriendCommonModel model, String roomKey) {
+        Intent chatActivity = new Intent(c, ChatCore.class);
+        chatActivity.putExtra("room_key", roomKey);
+        chatActivity.putExtra("room_type", FIREBASE_PRIVATE_ATTR);
+        chatActivity.putExtra("room_name", model.getFriendUsername());
+        chatActivity.putExtra("room_picture", model.getUserPictureURL());
+
+        chatActivity.putExtra("friend_key", model.getFriendKey());
+
+        c.startActivity(chatActivity);
+    }
+
+
+
+    public void createPrivateChat(final Context activity,final FriendCommonModel model) {
+        final String opponentKey = model.getFriendKey();
+        final String  currentUserId = app.getUserInformation().getUID();
+        String privateChatPath = currentUserId + "/" + FIREBASE_USER_PRIVATE_CHAT;
+
+
+        DatabaseReference chatRef = app.getDatabaseUsersInfo().child(privateChatPath);
+        final Query query = chatRef.orderByChild(FIREBASE_OPPONENT_ID_ATTR).startAt(opponentKey).endAt(opponentKey + "\uf8ff").limitToFirst(1);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String roomKey;
+                if (dataSnapshot.getValue() == null) {
+                    roomKey = createPrivateFirebaseChat(currentUserId, model.getFriendKey());
+
+
+                    jumpToPrivateChat(activity,model, roomKey);
+                } else {
+                    Iterable<DataSnapshot> chatRoom = dataSnapshot.getChildren();
+                    for (DataSnapshot data : chatRoom)
+                        jumpToPrivateChat(activity,model, data.getKey());
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 }

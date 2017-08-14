@@ -47,6 +47,7 @@ public abstract class Community extends Fragment {
     private FloatingActionButton newPrivateChatFloatingActionButton;
 
     protected HashMap<String, CommunityChatModel> communityChatModelHashMap = new HashMap<>();
+    protected HashMap<String, CommunityChatModel> deletedCommunityChatModelHashMap = new HashMap<>();
 
     protected ArrayList<CommunityChatModel> communityUserLists = new ArrayList<CommunityChatModel>();
     protected RecyclerView.Adapter mAdapter;
@@ -130,8 +131,15 @@ public abstract class Community extends Fragment {
 
     public void addToList(CommunityChatModel communityUserList) {
 
-        if (communityChatModelHashMap.containsKey(communityUserList.getChatKey()))
+        boolean isDeleted  = app.getSchemaHelper().isExistKey(communityUserList.getChatKey());
+
+        if (communityChatModelHashMap.containsKey(communityUserList.getChatKey()) || isDeleted )
+        {
+            if(isDeleted) {
+                deletedCommunityChatModelHashMap.put(communityUserList.getChatKey(), communityUserList);
+            }
             return;
+        }
 
 
 

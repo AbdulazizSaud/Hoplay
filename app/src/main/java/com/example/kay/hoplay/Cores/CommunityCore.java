@@ -264,7 +264,6 @@ public class CommunityCore extends Community implements FirebasePaths {
                 long value = Long.parseLong(userChatRef.getValue().toString().trim());
                 long res = currentCounter - value;
 
-
                 if (res > 0)
                     notifyUser(chatKey, joinerUsername, msg);
 
@@ -367,15 +366,27 @@ public class CommunityCore extends Community implements FirebasePaths {
 
     private void updateLastMessage(String chatKey, String username, String message, long time) {
 
-        for (CommunityChatModel communityChatModel : communityUserLists) {
-            if (communityChatModel.getChatKey().equals(chatKey)) {
 
-                communityChatModel.setLastMsg(username + ": " + message);
-                communityChatModel.setTimeStamp(time);
-                mAdapter.notifyDataSetChanged();
-                break;
-            }
+        boolean isChatDeleted = app.getSchemaHelper().isExistKey(chatKey);
+
+        CommunityChatModel communityChatModel = isChatDeleted ? deletedCommunityChatModelHashMap.get(chatKey) :communityChatModelHashMap.get(chatKey) ;
+
+
+
+        boolean b = time != app.getSchemaHelper().searchTimeStampByKey(chatKey);
+
+
+        if(isChatDeleted && b ) {
+            app.getSchemaHelper().deleteKey(chatKey);
+            addToList(communityChatModel);
+            deletedCommunityChatModelHashMap.remove(communityChatModel);
         }
+
+        communityChatModel.setLastMsg(username + ": " + message);
+        communityChatModel.setTimeStamp(time);
+        mAdapter.notifyDataSetChanged();
+
+
     }
 
 
@@ -440,20 +451,26 @@ public class CommunityCore extends Community implements FirebasePaths {
     @Override
     protected void removeChatFromlist(CommunityChatModel model) {
 
-        DatabaseReference chatRef = refAuthCurrentUserChats.child(model.getChatType()).child(model.getChatKey());
-        if (chatRef != null) {
-            chatRef.removeValue();
-        }
+        deletedCommunityChatModelHashMap.put(model.getChatKey(),model);
+        app.getSchemaHelper().insertKey(model.getChatKey(),model.getTimeStamp());
+        removeFromList(model.getChatKey());
     }
 
 
     private void notifyUser(String chatKey, String joinerUsername, String message) {
         NotificationCompat.Builder notification;
 
-        CommunityChatModel communityChatModel = communityChatModelHashMap.get(chatKey);
+
+
+        CommunityChatModel communityChatModel = communityChatModelHashMap.get(chatKey) == null? deletedCommunityChatModelHashMap.get(chatKey) : communityChatModelHashMap.get(chatKey);
+
+        if(communityChatModel == null)
+            return;
+
         joinerUsername = communityChatModel.getChatType().equals(FIREBASE_PRIVATE_ATTR) ? "" : joinerUsername+": ";
         Intent intent = new Intent(app.getMainAppMenuCore(), ChatCore.class);
         setChatIntent(communityChatModel, intent);
+
 
         Random random = new Random();
         uniqeID = random.nextInt(999999999-1)+1;

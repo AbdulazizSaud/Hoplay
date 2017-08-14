@@ -21,7 +21,8 @@ public class FindUserCore extends UserListCore {
     @Override
     protected void OnClickHolders(final FriendCommonModel model) {
         String currentUserId = app.getAuth().getCurrentUser().getUid();
-        checkChatExist(model, currentUserId);
+        createChat.createPrivateChat(getApplicationContext(),model);
+
         // users_info -> user key -> _firends_list_
         final DatabaseReference userFriendsListRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_FRIENDS_LIST_ATTR);
 
@@ -30,51 +31,9 @@ public class FindUserCore extends UserListCore {
 
     }
 
-    private void jumpToPrivateChat(FriendCommonModel model, String roomKey) {
-        Intent chatActivity = new Intent(getApplicationContext(), ChatCore.class);
-        chatActivity.putExtra("room_key", roomKey);
-        chatActivity.putExtra("room_type", FIREBASE_PRIVATE_ATTR);
-        chatActivity.putExtra("room_name", model.getFriendUsername());
-        chatActivity.putExtra("room_picture", model.getUserPictureURL());
-
-        chatActivity.putExtra("friend_key", model.getFriendKey());
-
-        finish();
-        startActivity(chatActivity);
-    }
 
 
-    private void checkChatExist(final FriendCommonModel model, final String currentUserId) {
-        final String opponentKey = model.getFriendKey();
-        String privateChatPath = currentUserId + "/" + FIREBASE_USER_PRIVATE_CHAT;
 
-
-        DatabaseReference chatRef = app.getDatabaseUsersInfo().child(privateChatPath);
-        final Query query = chatRef.orderByChild(FIREBASE_OPPONENT_ID_ATTR).startAt(opponentKey).endAt(opponentKey + "\uf8ff").limitToFirst(1);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String roomKey;
-                if (dataSnapshot.getValue() == null) {
-                    roomKey = createChat.createPrivateFirebaseChat(currentUserId, model.getFriendKey());
-
-                    jumpToPrivateChat(model, roomKey);
-                } else {
-                    Iterable<DataSnapshot> chatRoom = dataSnapshot.getChildren();
-                    for (DataSnapshot data : chatRoom)
-                        jumpToPrivateChat(model, data.getKey());
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-    }
 
     @Override
     protected void onStartActivity() {
@@ -85,6 +44,11 @@ public class FindUserCore extends UserListCore {
         noFriendsMessage.setVisibility(View.GONE);
         addFriendsButton.setVisibility(View.GONE);
         noFriendsImageview.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void createChat(FriendCommonModel friendCommonModel) {
+        return;
     }
 
     @Override

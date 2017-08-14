@@ -12,15 +12,17 @@ import com.example.kay.hoplay.Cores.UserProfileCores.ParentCore.UserListCore;
 import com.example.kay.hoplay.CoresAbstract.MainAppMenu;
 import com.example.kay.hoplay.Models.FriendCommonModel;
 import com.example.kay.hoplay.R;
+import com.example.kay.hoplay.util.CreateChat;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
 public class FriendsListCore extends UserListCore {
 
-
+    CreateChat createChat;
     @Override
     protected void OnClickHolders(FriendCommonModel model)
     {
@@ -32,6 +34,7 @@ public class FriendsListCore extends UserListCore {
     @Override
     protected void onStartActivity() {
 
+        createChat = new CreateChat();
 
         // hide the search bar
         searchEditText.setVisibility(EditText.GONE);
@@ -39,6 +42,11 @@ public class FriendsListCore extends UserListCore {
         hideLoadingAnimation();
 
         loadFriendList();
+    }
+
+    @Override
+    protected void createChat(FriendCommonModel friendCommonModel) {
+        createChat.createPrivateChat(getApplicationContext(),friendCommonModel);
     }
 
 
@@ -68,7 +76,6 @@ public class FriendsListCore extends UserListCore {
          });
 
     }
-
 
 
     @Override

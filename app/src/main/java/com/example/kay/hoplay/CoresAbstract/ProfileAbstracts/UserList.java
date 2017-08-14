@@ -69,7 +69,6 @@ public abstract class UserList extends AppCompatActivity {
     private int friendsCounter = 0 ;
 
 
-    protected boolean removeFriend;
 
 
 
@@ -376,7 +375,7 @@ public abstract class UserList extends AppCompatActivity {
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                createChat(friendCommonModel);
             }
         });
 
@@ -494,16 +493,6 @@ public abstract class UserList extends AppCompatActivity {
     }
 
 
-    protected abstract void OnClickHolders(FriendCommonModel model);
-
-    protected abstract void onStartActivity();
-    protected abstract void loadFriendList();
-    protected abstract void searchForUser(String value);
-    protected abstract void removeFriend(String friendKey , int FriendsNumber);
-    protected abstract boolean OnLongClickHolders(FriendCommonModel model);
-
-
-
     protected void showNoFriendsSection(){
 
         Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down_view);
@@ -527,5 +516,20 @@ public abstract class UserList extends AppCompatActivity {
         addFriendsButton.setVisibility(View.GONE);
         noFriendsImageview.setVisibility(View.GONE);
     }
+
+
+
+    protected abstract void OnClickHolders(FriendCommonModel model);
+
+    protected abstract void onStartActivity();
+    protected abstract void loadFriendList();
+    protected abstract void searchForUser(String value);
+    protected abstract void createChat(FriendCommonModel friendCommonModel);
+    protected abstract void removeFriend(String friendKey , int FriendsNumber);
+    protected abstract boolean OnLongClickHolders(FriendCommonModel model);
+
+
+
+
 
 }

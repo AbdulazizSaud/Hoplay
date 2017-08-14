@@ -302,6 +302,9 @@ public class SchemaHelper extends SQLiteOpenHelper {
         cursor.close();
 
 
+        if(timeStamp.isEmpty() ||timeStamp == null || timeStamp.equals("") || timeStamp.equals("\\s+"))
+            timeStamp = "-1";
+
         return Long.parseLong(timeStamp);
 
 
