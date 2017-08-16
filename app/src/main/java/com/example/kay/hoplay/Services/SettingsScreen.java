@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kay.hoplay.Activities.SettingsActivity;
+import com.example.kay.hoplay.Activities.TermsAndConditions;
 import com.example.kay.hoplay.Cores.AuthenticationCore.LoginCore;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.SupportCore;
@@ -157,6 +158,21 @@ public class SettingsScreen extends PreferenceFragment {
             }
         });
 
+
+
+        // Go to Terms and conditions
+        Preference termsAndConditions = (Preference) findPreference("settings_terms");
+        termsAndConditions.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                Intent i = new Intent(context, TermsAndConditions.class);
+                i.putExtra("FromPref","Yes");
+                startActivity(i);
+
+                return true;
+            }
+        });
 
         // go to edit profile activity
         Preference editProfilePref = (Preference) findPreference("settings_edit_profile");

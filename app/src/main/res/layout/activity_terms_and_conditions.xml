@@ -12,9 +12,210 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
+
+
+        <TextView
+            android:id="@+id/terms_and_conditions_title_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/text_color"
+            android:text="@string/terms_and_conditions_title"
+            android:layout_centerHorizontal="true"
+            android:scrollbars = "vertical"
+            android:textSize="30sp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentTop="true"
+            />
+
+        <TextView
+            android:id="@+id/terms_and_conditions_intro_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/text_color"
+            android:layout_below="@id/terms_and_conditions_title_textview"
+            android:text="@string/terms_and_conditions_intro"
+            android:layout_centerHorizontal="true"
+            android:scrollbars = "vertical"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+
+            />
+
+        <TextView
+            android:id="@+id/terms_and_conditions_1_textview"
+            android:layout_below="@id/terms_and_conditions_intro_textview"
+            android:text="@string/terms_and_conditions_term1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/text_color"
+            android:layout_centerHorizontal="true"
+            android:scrollbars = "vertical"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+
+            />
+
+        <TextView
+            android:id="@+id/terms_and_conditions_2_textview"
+            android:layout_below="@id/terms_and_conditions_1_textview"
+            android:text="@string/terms_and_conditions_term2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/text_color"
+            android:layout_centerHorizontal="true"
+            android:scrollbars = "vertical"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+
+            />
+
+        <TextView
+            android:id="@+id/terms_and_conditions_3_textview"
+            android:layout_below="@id/terms_and_conditions_2_textview"
+            android:text="@string/terms_and_conditions_term3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/text_color"
+            android:layout_centerHorizontal="true"
+            android:scrollbars = "vertical"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+
+            />
+
+
+        <TextView
+            android:id="@+id/terms_and_conditions_4_textview"
+            android:layout_below="@id/terms_and_conditions_3_textview"
+            android:text="@string/terms_and_conditions_term4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/text_color"
+            android:layout_centerHorizontal="true"
+            android:scrollbars = "vertical"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            />
+
+
+        <TextView
+            android:id="@+id/terms_and_conditions_5_textview"
+            android:layout_below="@id/terms_and_conditions_4_textview"
+            android:text="@string/terms_and_conditions_term5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/text_color"
+            android:layout_centerHorizontal="true"
+            android:scrollbars = "vertical"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            />
+
+
+        <TextView
+            android:id="@+id/terms_and_conditions_6_textview"
+            android:layout_below="@id/terms_and_conditions_5_textview"
+            android:text="@string/terms_and_conditions_term6"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/text_color"
+            android:layout_centerHorizontal="true"
+            android:scrollbars = "vertical"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            />
+
+
+
+        <TextView
+            android:id="@+id/terms_and_conditions_7_textview"
+            android:layout_below="@id/terms_and_conditions_6_textview"
+            android:text="@string/terms_and_conditions_term7"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/text_color"
+            android:layout_centerHorizontal="true"
+            android:scrollbars = "vertical"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            />
+
+
+
+        <TextView
+            android:id="@+id/terms_and_conditions_8_textview"
+            android:layout_below="@id/terms_and_conditions_7_textview"
+            android:text="@string/terms_and_conditions_term8"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/text_color"
+            android:scrollbars = "vertical"
+            android:paddingLeft="10dp"
+            android:gravity="left"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:paddingBottom="5dp"
+            android:textStyle="bold"
+            />
+
+
+        <TextView
+            android:id="@+id/terms_and_conditions_8_1_textview"
+            android:layout_below="@id/terms_and_conditions_8_textview"
+            android:text="@string/terms_and_conditions_term8.1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/text_color"
+            android:layout_centerHorizontal="true"
+            android:scrollbars = "vertical"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:textSize="15sp"
+            />
+
+
+        <TextView
+            android:id="@+id/terms_and_conditions_8_2_textview"
+            android:layout_below="@id/terms_and_conditions_8_1_textview"
+            android:text="@string/terms_and_conditions_term8.2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/text_color"
+            android:layout_centerHorizontal="true"
+            android:scrollbars = "vertical"
+            android:padding="10dp"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:id="@+id/terms_and_conditions_8.3_textview"
+            android:layout_below="@id/terms_and_conditions_8_2_textview"
+            android:text="@string/terms_and_conditions_term8.3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/text_color"
+            android:layout_centerHorizontal="true"
+            android:scrollbars = "vertical"
+            android:padding="10dp"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp"
+            />
+
+
         <Button
             android:id="@+id/agree_terms_and_conditions_button"
-            android:layout_below="@id/terms_and_conditions_textview"
+            android:layout_below="@id/terms_and_conditions_8.3_textview"
             android:layout_centerHorizontal="true"
             android:textColor="@color/white"
             android:layout_alignParentBottom="true"
@@ -24,21 +225,14 @@
             android:background="@color/app_color"
             android:text="@string/terms_and_conditions_agree"
             android:textStyle="bold"
-            android:onClick="toAppMenu">
+            android:onClick="agreeOnTerms">
 
         </Button>
 
-        <TextView
-            android:id="@+id/terms_and_conditions_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textColor="@color/text_color"
-            android:text="@string/terms_and_conditions_message"
-            android:layout_centerHorizontal="true"
-            android:scrollbars = "vertical"
-            android:textSize="30dp"
-            android:layout_alignParentTop="true"
-            >
-        </TextView>
+
+
+
+
+
     </RelativeLayout>
 </ScrollView>

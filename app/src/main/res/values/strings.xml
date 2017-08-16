@@ -266,7 +266,20 @@
 
     <!--                                Terms And Conditions Layout                                               -->
     <string name="terms_and_conditions_agree">A g r e e</string>
-    <string name="terms_and_conditions_message">Terms and conditions</string>
+    <string name="terms_and_conditions_title">Terms and Conditions</string>
+    <string name="terms_and_conditions_intro">Welcome to Hoplay App, an Application aims to make the ultimate gaming experience, and form a better gaming community.</string>
+    <string name="terms_and_conditions_term1">1. The User shall use Hoplay app at his/her sole risk and expense. Software is made available for use on “as is” basis.</string>
+    <string name="terms_and_conditions_term2">2. The Administration may not be held liable for any illegal acts of the User or any third parties.</string>
+    <string name="terms_and_conditions_term3">3. The Administration shall bear no liability for any statements of the User published with use of Hoplay Software. Also, the Administration shall not be liable for any (mis)conduct of the User while using the Hoplay Software.</string>
+    <string name="terms_and_conditions_term4">4. The Administration shall bear no liability for loss by the User of access to his/her account on the Site (including loss of login, password or any other details required for access to and use of Hoplay Software).</string>
+    <string name="terms_and_conditions_term5">5. The Administration shall bear no liability for any missing, inaccurate or incorrect data specified by the User when using the qaChat Software.</string>
+    <string name="terms_and_conditions_term6">6. The Administration shall not reimburse the User for any expenses connected with acquiring of the rights to use the Hoplay app Supplemental Functionality including in case where the User’s access to the Hoplay app is suspended as a result, inter alia, of breaching the Hoplay Terms and Conditions, and/or should this Agreement is suspended or terminated by any reason.</string>
+    <string name="terms_and_conditions_term7">7. The Administration shall not be obliged to present to the User any documents or other evidences of User’s breach hereof as a result of which the User was fully or partially denied a right to access the Hoplay app.</string>
+    <string name="terms_and_conditions_term8">8. The User shall not:</string>
+    <string name="terms_and_conditions_term8.1">8.1. reproduce, duplicate, copy, sell, disseminate, trade in or resell the Hoplay Software and/ or the right to use the same for any purpose whatsoever other than where such transactions have been expressly authorized in accordance herewith.</string>
+    <string name="terms_and_conditions_term8.2">8.2. distribute any audiovisual and/ or graphic images contained in Hoplay Software or any elements of its design or user interface outside the Hoplay app, whether for a commercial or non-commercial purpose, unless upon prior written permission from concerned right holders.</string>
+    <string name="terms_and_conditions_term8.3">8.3. use Software by any means not stipulated herein or not admissible in the ordinary operation of Hoplay Software.</string>
+
 
 
     <!--                                    Search Request Fragment                                             -->

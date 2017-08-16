@@ -27,6 +27,8 @@ import com.example.kay.hoplay.Services.SchemaHelper;
 import com.example.kay.hoplay.util.BitmapOptimizer;
 import com.example.kay.hoplay.util.GameManager;
 import com.example.kay.hoplay.util.TimeStamp;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +40,9 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.security.PublicKey;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -160,6 +165,40 @@ public class App extends Application implements FirebasePaths {
         ArrayList<String> list = new ArrayList<String>();
         gameAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, list);
+
+
+
+//
+//        FileInputStream serviceAccount = null;
+//        try {
+//            serviceAccount = new FileInputStream("google-services.json");
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//
+//        FirebaseOptions options = null;
+//        try {
+//            options = new FirebaseOptions.Builder().setCredential(FirebaseCredentials.fromCertificate(serviceAccount))
+//                    .setDatabaseUrl("https://hoplay-18a08.firebaseio.com/")
+//                    .build();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        FirebaseApp.initializeApp(options);
+//
+//
+//
+//        Task<UserRecord> task = FirebaseAuth.getInstance().getUserByEmail("khaled.f.alhindi@gmail.com")
+//                .addOnSuccessListener(userRecord -> {
+//                    // See the UserRecord reference doc for the contents of userRecord.
+//                    System.out.println("Successfully fetched user data: " + userRecord.getEmail());
+//                })
+//                .addOnFailureListener(e -> {
+//                    System.err.println("Error fetching user data: " + e.getMessage());
+//                });
+
+
 
 
     }

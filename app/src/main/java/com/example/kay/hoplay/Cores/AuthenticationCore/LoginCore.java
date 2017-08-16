@@ -98,6 +98,7 @@ public class LoginCore extends Login {
 
             loadingDialog(true);
 
+
             mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
