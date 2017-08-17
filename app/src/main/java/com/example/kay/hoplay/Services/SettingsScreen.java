@@ -26,6 +26,7 @@ import com.example.kay.hoplay.Cores.SupportCore;
 import com.example.kay.hoplay.Cores.UserProfileCores.ChangePasswordCore;
 import com.example.kay.hoplay.Cores.UserProfileCores.DeactiveAccountCore;
 import com.example.kay.hoplay.Cores.UserProfileCores.EditProfileCore;
+import com.example.kay.hoplay.CoresAbstract.AuthenticationAbstracts.Login;
 import com.example.kay.hoplay.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -182,6 +183,66 @@ public class SettingsScreen extends PreferenceFragment {
 
                 Intent i = new Intent(context, EditProfileCore.class);
                 startActivity(i);
+                return true;
+            }
+        });
+
+
+
+        // About Preference
+        Preference aboutPref = (Preference) findPreference("settings_version");
+        aboutPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+
+                final Dialog aboutDialog;
+                aboutDialog = new Dialog(getActivity());
+                aboutDialog.setContentView(R.layout.about_dialog);
+                aboutDialog.show();
+
+                aboutDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                TextView appName , appVersion , appCopyright;
+                Button okButton;
+
+
+                appName = (TextView) aboutDialog.findViewById(R.id.app_name_about_dialog);
+                appVersion = (TextView) aboutDialog.findViewById(R.id.app_version_about_dialog);
+                appCopyright = (TextView) aboutDialog.findViewById(R.id.app_copyright_about_dialog);
+
+                okButton = (Button) aboutDialog.findViewById(R.id.ok_button_about_dialog);
+
+                Typeface playregular = Typeface.createFromAsset(getResources().getAssets() ,"playregular.ttf");
+                Typeface playbold = Typeface.createFromAsset(getResources().getAssets() ,"playbold.ttf");
+                Typeface sansationbold = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
+
+                appName.setTypeface(playbold);
+                appVersion.setTypeface(playregular);
+                appCopyright.setTypeface(playregular);
+                okButton.setTypeface(sansationbold);
+
+                // Dismis dialog
+                okButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        aboutDialog.dismiss();
+                    }
+                });
+
+
+
+
+
+                WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                Window window = aboutDialog.getWindow();
+                lp.copyFrom(window.getAttributes());
+                //This makes the dialog take up the full width
+                lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                window.setAttributes(lp);
+
+
                 return true;
             }
         });

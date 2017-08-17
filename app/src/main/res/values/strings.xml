@@ -71,7 +71,7 @@
     <string name="settings_header_about">About</string>
     <string name="settings_terms">Terms of use</string>
     <string name="settings_thanks">Acknowledgements</string>
-    <string name="settings_version">Version</string>
+    <string name="settings_version">Hoplay v1.0</string>
     <string name="settings_copyright_info">Copyright info</string>
     <string name="settings_header_others">Others</string>
     <string name="settings_contact_us">Contact us</string>
@@ -90,6 +90,12 @@
     <!--                                        Settings  Screen                                    -->
     <string name="settings_screen_logout_message">Come back soon</string>
 
+
+    <!--                                    About Dialog                            -->
+    <string name="about_dialog_app_name">Hoplay</string>
+    <string name="about_dialog_version">Version 1.0</string>
+    <string name="about_dialog_copyright_info">Copyright © 2017 Hoplay.online</string>
+    <string name="about_dialog_ok">O K</string>
 
     <!--                               Errors  Messages                                              -->
     <string name="error_field_empty">Required fields are empty</string>
@@ -280,6 +286,11 @@
     <string name="terms_and_conditions_term8.2">8.2. distribute any audiovisual and/ or graphic images contained in Hoplay Software or any elements of its design or user interface outside the Hoplay app, whether for a commercial or non-commercial purpose, unless upon prior written permission from concerned right holders.</string>
     <string name="terms_and_conditions_term8.3">8.3. use Software by any means not stipulated herein or not admissible in the ordinary operation of Hoplay Software.</string>
 
+
+
+    <!--                                Email Verfication Dialog                        -->
+    <string name="verification_email_message">Sorry, Your account is not verified !</string>
+    <string name="verification_email_button">Resend verification email</string>
 
 
     <!--                                    Search Request Fragment                                             -->

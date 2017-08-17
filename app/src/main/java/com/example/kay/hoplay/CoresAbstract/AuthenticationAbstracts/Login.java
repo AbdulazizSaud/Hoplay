@@ -1,11 +1,14 @@
 package com.example.kay.hoplay.CoresAbstract.AuthenticationAbstracts;
 
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +22,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -35,6 +39,7 @@ import com.example.kay.hoplay.Cores.ForgetPasswordCore;
 import com.example.kay.hoplay.Cores.MainAppMenuCore;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
+import com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.AddGame;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Services.SchemaHelper;
@@ -364,6 +369,53 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         // Kill the application
         int pid = android.os.Process.myPid();
         android.os.Process.killProcess(pid);
+
+    }
+
+
+
+    protected void showVerificationEmailDialog() {
+
+        final Dialog verificationEmailDialog;
+        verificationEmailDialog = new Dialog(Login.this);
+        verificationEmailDialog.setContentView(R.layout.verification_email_dialog);
+        verificationEmailDialog.show();
+
+        verificationEmailDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView resendEmailMessage;
+        Button resendEmailButton;
+
+
+        resendEmailMessage = (TextView) verificationEmailDialog.findViewById(R.id.email_verification_message);
+        resendEmailButton = (Button) verificationEmailDialog.findViewById(R.id.resend_verfication_email_button);
+
+        Typeface playregular = Typeface.createFromAsset(getResources().getAssets() ,"playregular.ttf");
+        Typeface playbold = Typeface.createFromAsset(getResources().getAssets() ,"playbold.ttf");
+
+        resendEmailMessage.setTypeface(playregular);
+        resendEmailButton.setTypeface(playbold);
+
+
+        // Resend Verification Email
+        resendEmailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = verificationEmailDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
 
     }
 

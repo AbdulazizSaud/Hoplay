@@ -11,11 +11,6 @@
         android:title="@string/settings_header_general"
         >
 
-        <CheckBoxPreference
-            android:key="allowMessages"
-            android:title="@string/settings_allow_messages"
-            android:summary="@string/settings_allow_messages_summary">
-        </CheckBoxPreference>
 
         <Preference
             android:key="settings_edit_profile"
@@ -34,9 +29,6 @@
             android:enabled="true"
             android:summary="" />
 
-        <Preference
-            android:key="settings_blocked_list"
-            android:title="@string/settings_view_blocked_list" />
 
 
 
@@ -51,11 +43,7 @@
             android:title="@string/settings_terms"
             android:summary="" />
 
-        <Preference
-            android:key="settings_thanks"
-            android:title="@string/settings_thanks"
 
-            android:summary="" />
 
         <Preference
             android:key="settings_version"
