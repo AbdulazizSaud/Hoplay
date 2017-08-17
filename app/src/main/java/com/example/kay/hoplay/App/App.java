@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -27,10 +28,13 @@ import com.example.kay.hoplay.Services.SchemaHelper;
 import com.example.kay.hoplay.util.BitmapOptimizer;
 import com.example.kay.hoplay.util.GameManager;
 import com.example.kay.hoplay.util.TimeStamp;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -444,6 +448,28 @@ public class App extends Application implements FirebasePaths {
         return dir.delete();
     }
 
+
+
+    public void sendEmailVerification(FirebaseUser user, final String username)
+    {
+        user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            // Put a signup stamp for the signup tour when the user logged in
+                            // save the username in local database : used in tour
+
+                            if(!username.equals("none")) {
+                                schemaHelper.signUpStamp();
+                                schemaHelper.insertUsername(username, 1);
+                                schemaHelper.close();
+                            }
+                            Toast.makeText(getApplicationContext(),"Verificetion sent to your email",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
 
 
     public SchemaHelper getSchemaHelper()

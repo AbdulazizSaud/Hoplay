@@ -63,20 +63,7 @@ public class SignUpCore extends Signup implements FirebasePaths{
 //                            String strMeatMsg = String.format(getResources().getString(R.string.signup_successful_message), username);
 //                            Toast.makeText(getApplicationContext(), strMeatMsg, Toast.LENGTH_LONG).show();
                             // switch to main AppMenu
-                            user.sendEmailVerification()
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                // Put a signup stamp for the signup tour when the user logged in
-                                                // save the username in local database : used in tour
-                                                schemaHelper.signUpStamp();
-                                                schemaHelper.insertUsername(username,1);
-                                                schemaHelper.close();
-                                               Toast.makeText(getApplicationContext(),"Verificetion sent to your email",Toast.LENGTH_LONG).show();
-                                            }
-                                        }
-                                    });
+                            app.sendEmailVerification(user,username);
                             toMainMenuApp();
 
 
