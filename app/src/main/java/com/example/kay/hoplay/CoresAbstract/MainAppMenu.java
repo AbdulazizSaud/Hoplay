@@ -277,51 +277,6 @@ public abstract class MainAppMenu extends AppCompatActivity  {
 
 
 
-    protected void showVerificationEmailDialog(final FirebaseUser firebaseUser , final String username) {
-
-        final Dialog verificationEmailDialog;
-        verificationEmailDialog = new Dialog(MainAppMenu.this);
-        verificationEmailDialog.setContentView(R.layout.verification_email_dialog);
-        verificationEmailDialog.show();
-
-        verificationEmailDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        TextView resendEmailMessage;
-        Button resendEmailButton;
-
-
-        resendEmailMessage = (TextView) verificationEmailDialog.findViewById(R.id.email_verification_message);
-        resendEmailButton = (Button) verificationEmailDialog.findViewById(R.id.resend_verfication_email_button);
-
-        Typeface playregular = Typeface.createFromAsset(getResources().getAssets() ,"playregular.ttf");
-        Typeface playbold = Typeface.createFromAsset(getResources().getAssets() ,"playbold.ttf");
-
-        resendEmailMessage.setTypeface(playregular);
-        resendEmailButton.setTypeface(playbold);
-
-
-        // Resend Verification Email
-        resendEmailButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                app.sendEmailVerification(firebaseUser,username);
-
-            }
-        });
-
-
-
-
-
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        Window window = verificationEmailDialog.getWindow();
-        lp.copyFrom(window.getAttributes());
-        //This makes the dialog take up the full width
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        window.setAttributes(lp);
-
-    }
 
 
     protected abstract void OnStartActivity();

@@ -39,10 +39,12 @@ import com.example.kay.hoplay.Cores.ForgetPasswordCore;
 import com.example.kay.hoplay.Cores.MainAppMenuCore;
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.UserProfileCores.AddGameCore;
+import com.example.kay.hoplay.CoresAbstract.MainAppMenu;
 import com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.AddGame;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Services.SchemaHelper;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -373,7 +375,49 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     }
 
 
+    protected void showVerificationEmailDialog(final FirebaseUser firebaseUser , final String username) {
 
+        final Dialog verificationEmailDialog;
+        verificationEmailDialog = new Dialog(this);
+        verificationEmailDialog.setContentView(R.layout.verification_email_dialog);
+        verificationEmailDialog.show();
+
+        verificationEmailDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView resendEmailMessage;
+        Button resendEmailButton;
+
+
+        resendEmailMessage = (TextView) verificationEmailDialog.findViewById(R.id.email_verification_message);
+        resendEmailButton = (Button) verificationEmailDialog.findViewById(R.id.resend_verfication_email_button);
+
+        Typeface playregular = Typeface.createFromAsset(getResources().getAssets() ,"playregular.ttf");
+        Typeface playbold = Typeface.createFromAsset(getResources().getAssets() ,"playbold.ttf");
+
+        resendEmailMessage.setTypeface(playregular);
+        resendEmailButton.setTypeface(playbold);
+
+
+        // Resend Verification Email
+        resendEmailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                app.sendEmailVerification(firebaseUser,username);
+
+            }
+        });
+
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = verificationEmailDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+    }
 
 
     // abstract methods, Note : I made some comment descripe these methods on Login Activity
@@ -385,8 +429,6 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
 
         if (show)
             loadingDialog.show();
-
-
         else
             loadingDialog.dismiss();
     }

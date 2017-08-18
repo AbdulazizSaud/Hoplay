@@ -64,7 +64,7 @@ public class LoginCore extends Login {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
+                if (user != null && user.isEmailVerified()) {
                     app.getUserInformation().setUID(user.getUid());
                     toMainMenu();
                 }
@@ -113,8 +113,11 @@ public class LoginCore extends Login {
 
                         if(!mAuth.getCurrentUser().isEmailVerified())
                         {
-                            app.sendEmailVerification(firebaseUser,username);
-                        }else {
+                            showVerificationEmailDialog(firebaseUser,username);
+                            loadingDialog(false);
+                            mAuth.signOut();
+
+                        } else {
                             toMainMenu();
                         }
 

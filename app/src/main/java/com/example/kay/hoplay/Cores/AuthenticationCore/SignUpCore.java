@@ -64,7 +64,7 @@ public class SignUpCore extends Signup implements FirebasePaths{
 //                            Toast.makeText(getApplicationContext(), strMeatMsg, Toast.LENGTH_LONG).show();
                             // switch to main AppMenu
                             app.sendEmailVerification(user,username);
-                            toMainMenuApp();
+                            toLogin();
 
 
                         } else {
