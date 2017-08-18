@@ -106,9 +106,17 @@ public class LoginCore extends Login {
 
                         SchemaHelper schemaHelper = new SchemaHelper(LoginCore.this);
                         firstTime = schemaHelper.isStamped();
-                        Log.i("===============>","its :"+firstTime);
+
                         schemaHelper.removeStamp();
-                        toMainMenu();
+
+                        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+                        if(!mAuth.getCurrentUser().isEmailVerified())
+                        {
+                            app.sendEmailVerification(firebaseUser,username);
+                        }else {
+                            toMainMenu();
+                        }
 
                     } else {
                         // results if it's failed

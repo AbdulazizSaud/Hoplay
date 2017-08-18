@@ -70,10 +70,6 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     // User is sign out
                     toLogin();
                 } else if(!user.isEmailVerified()){
-
-
-                    showVerificationEmailDialog(user,"none");
-
                     Toast.makeText(getApplicationContext(),"You need to verify your account",Toast.LENGTH_SHORT).show();
                     mAuth.signOut();
                     toLogin();
