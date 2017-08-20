@@ -115,7 +115,6 @@ public class LoginCore extends Login {
                         {
                             showVerificationEmailDialog(firebaseUser,username);
                             loadingDialog(false);
-                            mAuth.signOut();
 
                         } else {
                             toMainMenu();
