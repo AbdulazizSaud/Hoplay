@@ -36,6 +36,7 @@ import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 
 public abstract class SearchResults extends AppCompatActivity {
 
@@ -45,10 +46,13 @@ public abstract class SearchResults extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
     private ArrayList<RequestModel> requestModels;
     private ArrayList<String> searchPriorityList;
     private ArrayAdapter searchPriorityAdapter;
 
+
+    protected HashMap<String,RequestModel> requestModelHashMap = new HashMap<>();
     protected App app;
 
 
@@ -58,6 +62,7 @@ public abstract class SearchResults extends AppCompatActivity {
     private Dialog gameProviderDialog;
     private String selectedPlatform = "";
 
+    protected HashMap<String,RequestModel> requestModelsHashMap =new HashMap<>();
 
 
     @Override
@@ -160,9 +165,19 @@ public abstract class SearchResults extends AppCompatActivity {
 
 
     public void addResult(RequestModel requestModel) {
+        requestModelsHashMap.put(requestModel.getRequestId(),requestModel);
         requestModels.add(requestModel);
         mAdapter.notifyDataSetChanged();
     }
+
+
+    protected void removeRequest(RequestModel requestModel)
+    {
+        requestModelsHashMap.remove(requestModel);
+        requestModels.remove(requestModel);
+        mAdapter.notifyDataSetChanged();
+    }
+
 
     private CommonAdapter<RequestModel> createAdapter() {
         return new CommonAdapter<RequestModel>(requestModels, R.layout.request_model) {
@@ -404,10 +419,9 @@ public abstract class SearchResults extends AppCompatActivity {
 
 
 
+
     protected abstract void saveGameProviderAccount(String gameProvider, String userGameProviderAcc, String platform);
-
     protected abstract void OnStartActivity();
-
     protected abstract void OnClickHolders(RequestModel model, View v);
 
 }

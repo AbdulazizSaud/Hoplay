@@ -30,16 +30,48 @@ public class SearchResultsCore extends SearchResults {
     protected void OnStartActivity() {
         ArrayList<RequestModel> requestsModel = app.getSearchRequestResult();
 
-        for(RequestModel request : requestsModel)
+        for(final RequestModel request : requestsModel)
         {
 
             GameModel gameModel = app.getGameManager().getGameById(request.getGameId());
+
+            final String requestPath = request.getPlatform()+"/"+request.getGameId()+"/"+request.getRegion()+"/"+request.getRequestId();
+
+
+            app.getDatabaseRequests().child(requestPath).child("players").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                    if(dataSnapshot.getValue() == null) {
+
+                        if (requestModelsHashMap.containsKey(request.getRequestId())) {
+                            removeRequest(request);
+                        }
+
+                        app.getDatabaseRequests().child(requestPath).child("players").removeEventListener(this);
+                        return;
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
 
             if(gameModel == null)
             {
 
                 // here we have issue
                 String path = request.getMatchType()+"/"+request.getGameId();
+
+
+
+                Log.i("-->",app.getDatabaseRequests().child(requestPath).child("players").toString());
+
+
                 app.getDatabaseGames().child(path)
                         .addListenerForSingleValueEvent(getGameInfo(request));
             } else {

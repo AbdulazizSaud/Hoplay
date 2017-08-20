@@ -1,13 +1,11 @@
 package com.example.kay.hoplay.Fragments;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +14,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.kay.hoplay.Cores.AuthenticationCore.LoginCore;
-import com.example.kay.hoplay.Cores.Lobby.Lobby;
+import com.example.kay.hoplay.CoresAbstract.Lobby.Lobby;
 import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;

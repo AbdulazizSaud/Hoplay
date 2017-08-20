@@ -1,4 +1,4 @@
-package com.example.kay.hoplay.Cores.Lobby;
+package com.example.kay.hoplay.CoresAbstract.Lobby;
 
 
 import android.app.Dialog;
@@ -9,7 +9,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -355,6 +354,10 @@ public abstract class Lobby {
         return lobbyInformation.getPlatform() + "/" + lobbyInformation.getGameID() + "/" + lobbyInformation.getRegion() + "/" + lobbyInformation.getRequestID();
     }
 
+    public int getCurrentPlayerNumber()
+    {
+        return playerModels.size();
+    }
 
     public void setGameBorderColor(int color) {
         gamePhoto.setBorderColor(color);

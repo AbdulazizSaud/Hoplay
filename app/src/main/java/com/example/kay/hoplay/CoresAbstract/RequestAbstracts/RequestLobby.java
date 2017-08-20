@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.example.kay.hoplay.App.App;
 import com.example.kay.hoplay.Cores.ChatCore.ChatCore;
-import com.example.kay.hoplay.Cores.Lobby.Lobby;
+import com.example.kay.hoplay.CoresAbstract.Lobby.Lobby;
 import com.example.kay.hoplay.Models.PlayerModel;
 import com.example.kay.hoplay.Models.RequestModel;
 import com.example.kay.hoplay.R;

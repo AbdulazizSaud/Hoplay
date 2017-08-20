@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.RequestLobby;
 import com.example.kay.hoplay.Interfaces.FirebasePaths;
@@ -118,8 +119,22 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
             PlayerModel player = new PlayerModel(dataSnapshot.child("uid").getValue(String.class), dataSnapshot.child("username").getValue(String.class));
 
-            if (player.getUID().equals(app.getUserInformation().getUID()))
-                lobby.getJoinButton().setVisibility(View.VISIBLE);
+
+            requestModel.removePlayer(player);
+            lobby.removePlayer(player);
+
+            if(lobby.getCurrentPlayerNumber() < 1)
+                finish();
+
+
+            if(player.getUID().equals(app.getUserInformation().getUID())) {
+
+                // here you can put message
+                Toast.makeText(app.getMainAppMenuCore(),"You have been kicked by an admin",Toast.LENGTH_LONG).show();
+
+                requestRef.child("player").removeEventListener(onAddPlayerEvent);
+                app.getMainAppMenuCore().cancelRequest();
+            }
         }
 
         @Override

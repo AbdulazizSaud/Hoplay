@@ -367,10 +367,14 @@ public class CommunityCore extends Community implements FirebasePaths {
     private void updateLastMessage(String chatKey, String username, String message, long time) {
 
 
+
         boolean isChatDeleted = app.getSchemaHelper().isExistKey(chatKey);
 
         CommunityChatModel communityChatModel = isChatDeleted ? deletedCommunityChatModelHashMap.get(chatKey) :communityChatModelHashMap.get(chatKey) ;
 
+
+        if(communityChatModel == null)
+            return;
 
 
         boolean b = time != app.getSchemaHelper().searchTimeStampByKey(chatKey);
