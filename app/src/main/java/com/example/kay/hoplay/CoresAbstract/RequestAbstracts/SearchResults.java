@@ -58,6 +58,8 @@ public abstract class SearchResults extends AppCompatActivity {
     private Dialog gameProviderDialog;
     private String selectedPlatform = "";
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -397,6 +399,9 @@ public abstract class SearchResults extends AppCompatActivity {
         window.setAttributes(lp);
 
     }
+
+
+
 
 
     protected abstract void saveGameProviderAccount(String gameProvider, String userGameProviderAcc, String platform);

@@ -33,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kay.hoplay.Cores.AuthenticationCore.SignUpCore;
 import com.example.kay.hoplay.Cores.ForgetPasswordCore;
@@ -44,6 +45,7 @@ import com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.AddGame;
 import com.example.kay.hoplay.Models.GameModel;
 import com.example.kay.hoplay.R;
 import com.example.kay.hoplay.Services.SchemaHelper;
+import com.example.kay.hoplay.util.Helper;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
@@ -306,6 +308,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
                 String username = usernameSignIn.getText().toString().trim();
                 String password = passwordSignIn.getText().toString().trim();
 
+                if (validUsernameAndPassword(username,password))
                 login(username, password);
             }
         });
@@ -322,6 +325,37 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     }
 
 
+    private boolean validUsernameAndPassword(String username , String password)
+    {
+        Helper helper = new Helper();
+
+
+        if (username.length()<1)
+        {
+
+            Toast.makeText(getApplicationContext(),getString(R.string.error_empty_email_field),Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (password.length()<1)
+        {
+
+            Toast.makeText(getApplicationContext(),getString(R.string.error_empty_password),Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (!helper.isValidEmail(username))
+        {
+
+            Toast.makeText(getApplicationContext(),getString(R.string.error_email),Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+
+        return true;
+
+
+    }
 
 
 
@@ -332,6 +366,8 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         overridePendingTransition( R.anim.slide_in_up_layouts, R.anim.slide_out_up_layouts);
 
     }
+
+
     protected void toMainMenu() {
 
         finish();

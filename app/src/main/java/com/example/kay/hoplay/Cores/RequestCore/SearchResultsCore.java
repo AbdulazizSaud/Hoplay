@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.kay.hoplay.Cores.ChatCore.ChatCore;
 import com.example.kay.hoplay.CoresAbstract.RequestAbstracts.SearchResults;
@@ -58,9 +59,11 @@ public class SearchResultsCore extends SearchResults {
     protected void OnClickHolders(RequestModel model, View v) {
         Intent i = new Intent(v.getContext(), RequestLobbyCore.class);
 
-        // here we will send the data;
-        i.putExtra("requestId",model.getRequestId());
-        v.getContext().startActivity(i);
+
+            // here we will send the data;
+            i.putExtra("requestId",model.getRequestId());
+            v.getContext().startActivity(i);
+
     }
 
     private ValueEventListener getGameInfo(final RequestModel request) {

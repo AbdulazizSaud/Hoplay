@@ -107,7 +107,6 @@ public class LoginCore extends Login {
                         SchemaHelper schemaHelper = new SchemaHelper(LoginCore.this);
                         firstTime = schemaHelper.isStamped();
 
-                        schemaHelper.removeStamp();
 
                         FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
@@ -117,6 +116,7 @@ public class LoginCore extends Login {
                             loadingDialog(false);
 
                         } else {
+                            schemaHelper.removeStamp();
                             toMainMenu();
                         }
 

@@ -106,8 +106,10 @@
     <string name="error_login_taken">Username is already taken</string>
     <string name="error_email_taken">User with this mail is already registered</string>
     <string name="error_password">Invalid password.</string>
-    <string name="error_email">Email invalid.</string>
+    <string name="error_email">invalid Email.</string>
     <string name="error_confirm_password">Passwords do not match</string>
+    <string name="error_empty_email_field">Email field is empty</string>
+    <string name="error_empty_password">Password field is empty</string>
 
 
     <!--                                Forget Password Layout                                       -->

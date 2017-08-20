@@ -347,6 +347,9 @@ public class SchemaHelper extends SQLiteOpenHelper {
             signUpStampList.add(itemId);
 
 
+            Log.i("=====>","ITS -_- :"+itemId);
+
+
             if (!itemId.equalsIgnoreCase("NOT-FOUND"));
             found = true ;
 
