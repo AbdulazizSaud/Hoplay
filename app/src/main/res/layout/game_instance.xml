@@ -16,6 +16,7 @@
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
+        android:id="@+id/game_holder_content_linearlayout"
         android:background="@color/app_background"
         >
 
@@ -42,7 +43,7 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
@@ -58,7 +59,24 @@
                         android:text="@string/game_instance_game_name"
                         android:textSize="16dp"
                         android:layout_weight="1"
-                        android:layout_marginRight="8dp" />
+                   />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ADDED"
+                        android:textColor="@color/hint_color"
+                        android:textStyle="bold"
+                        android:paddingRight="20dp"
+                        android:layout_weight="0.1"
+                        android:layout_gravity="right"
+                        android:gravity="right"
+                        android:id="@+id/game_added_mark"
+                        />
+
+
                 </LinearLayout>
 
 
@@ -122,5 +140,14 @@
         </LinearLayout>
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/hint_color"
+        android:layout_below="@+id/game_holder_content_linearlayout"></LinearLayout>
+
+
 
 </RelativeLayout>

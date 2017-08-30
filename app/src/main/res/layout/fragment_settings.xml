@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/settings_fragment_relativelayout"
-    tools:context="com.example.kay.hoplay.Fragments.SettingsFragment"
+    tools:context="com.hoplay.kay.hoplay.Fragments.SettingsFragment"
     android:background="@color/app_background">
 
-    <fragment class = "com.example.kay.hoplay.Services.SettingsScreen"
+    <fragment class = "com.hoplay.kay.hoplay.Services.SettingsScreen"
         android:id="@+id/settingsPF"
         android:layout_weight="1"
         android:layout_width="match_parent"

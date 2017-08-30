@@ -19,7 +19,7 @@ import android.content.Context;
 import android.text.Spannable;
 import android.util.SparseIntArray;
 
-import com.example.kay.hoplay.R;
+import com.hoplay.kay.hoplay.R;
 
 
 /**

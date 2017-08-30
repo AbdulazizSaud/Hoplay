@@ -24,7 +24,7 @@ import android.text.SpannableStringBuilder;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import com.example.kay.hoplay.R;
+import com.hoplay.kay.hoplay.R;
 
 /**
  * @author Hieu Rocker (rockerhieu@gmail.com).

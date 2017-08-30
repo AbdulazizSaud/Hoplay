@@ -66,17 +66,17 @@
 
 
         <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:gravity="left|center"
-            android:digits="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890-_"
-            android:textColor="@color/text_color"
-            android:layout_height="wrap_content"
-            style="@style/Base.TextAppearance.AppCompat.Large"
-            android:maxLength="27"
-            android:drawableRight="@drawable/ic_person_outline_not_focuesed_32dp"
             android:id="@+id/username_sign_up_edittext"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:digits="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890-_"
+            android:drawableRight="@drawable/ic_person_outline_not_focuesed_32dp"
+            android:gravity="left|center"
             android:hint="@string/signup_username"
+            android:maxLength="27"
+            android:textColor="@color/text_color"
             android:textColorHint="@color/hint_color"
 
             />
@@ -94,7 +94,7 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:gravity="left|center"
-            style="@style/Base.TextAppearance.AppCompat.Large"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_height="50dp"
             android:drawableRight="@drawable/ic_mail_outline_not_focused_32dp"
             android:id="@+id/email_sign_up_edittext"
@@ -126,7 +126,7 @@
             android:textColor="@color/text_color"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_lock_open_not_focused_32dp"
-            style="@style/Base.TextAppearance.AppCompat.Large"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColorHint="@color/hint_color"
             android:id="@+id/password_sign_up_edittext"
             android:hint="@string/signup_password"
@@ -153,7 +153,7 @@
             android:layout_height="wrap_content"
             android:maxLength="35"
             android:gravity="left|center"
-            style="@style/Base.TextAppearance.AppCompat.Large"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
             android:id="@+id/confirm_password_edittext"
             android:hint="@string/signup_confirm_password"
             android:textColor="@color/text_color"
@@ -187,11 +187,11 @@
         android:id="@+id/terms_and_conditions_textview"
         android:textSize="17dp"
         android:layout_marginTop="15dp"
-        android:textColor="#ff0000"
+        android:textColor="#B30000"
+        android:layout_centerHorizontal="true"
         android:onClick="toTermsAndConditions"
         android:layout_below="@+id/agreement_textview"
-        android:layout_alignStart="@+id/account_textview"
-        android:layout_alignLeft="@id/create_new_textview"
+
         />
 
     <Button

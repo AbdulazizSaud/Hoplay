@@ -20,7 +20,7 @@ import android.content.Context;
 import android.widget.GridView;
 
 import emojicon.emoji.Emojicon;
-import com.example.kay.hoplay.R;
+import com.hoplay.kay.hoplay.R;
 
 /**
  * @author Daniele Ricci

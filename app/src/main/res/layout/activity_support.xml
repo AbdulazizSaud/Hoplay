@@ -7,7 +7,7 @@
     android:id="@+id/support_relativelayout"
     android:onClick="removeKeyboard"
     android:background="@color/app_background"
-    tools:context="com.example.kay.hoplay.CoresAbstract.Support">
+    tools:context="com.hoplay.kay.hoplay.CoresAbstract.Support">
 
 
 

@@ -7,7 +7,7 @@
 
     <!--                                   Strings related to Settings                                       -->
 
-    <!-- Example General settings -->
+    <!-- hoplay General settings -->
     <string name="pref_header_general">General</string>
     <string name="pref_title_social_recommendations">Enable social recommendations</string>
     <string name="pref_description_social_recommendations">Recommendations for people to contact
@@ -16,17 +16,17 @@
     <string name="pref_title_display_name">Display name</string>
     <string name="pref_default_display_name">John Smith</string>
     <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
-    <string-array name="pref_example_list_titles">
+    <string-array name="pref_hoplay_list_titles">
         <item>Always</item>
         <item>When possible</item>
         <item>Never</item>
     </string-array>
-    <string-array name="pref_example_list_values">
+    <string-array name="pref_hoplay_list_values">
         <item>1</item>
         <item>0</item>
         <item>-1</item>
     </string-array>
-    <!-- Example settings for Data & Sync -->
+    <!-- hoplay settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
     <string name="pref_title_sync_frequency">Sync frequency</string>
     <string-array name="pref_sync_frequency_titles">
@@ -260,7 +260,7 @@
     <string name="signup_email">Email Address</string>
     <string name="signup_confirm_password">Confirm Password</string>
     <string name="signup_agrement_message">By tapping &quot;Sign Up&quot; you agree to the</string>
-    <string name="signup_terms_and_conditios">terms and conditions </string>
+    <string name="signup_terms_and_conditios">Terms and Conditions </string>
     <string name="signup_signup">S I G N &#160; U P</string>
     <string name="signup_create_new">C R E A T E &#160; N E W</string>
     <string name="signup_account">A C C O U N T</string>

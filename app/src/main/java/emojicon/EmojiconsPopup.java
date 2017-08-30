@@ -46,7 +46,7 @@ import emojicon.emoji.Objects;
 import emojicon.emoji.People;
 import emojicon.emoji.Places;
 import emojicon.emoji.Symbols;
-import com.example.kay.hoplay.R;
+import com.hoplay.kay.hoplay.R;
 
 
 /**

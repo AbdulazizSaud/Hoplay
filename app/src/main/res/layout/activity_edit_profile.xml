@@ -7,7 +7,7 @@
     android:background="@color/app_background"
     android:onClick="removeKeyboard"
     android:id="@+id/edit_profile_relativelayout"
-    tools:context="com.example.kay.hoplay.CoresAbstract.ProfileAbstracts.EditProfile">
+    tools:context="com.hoplay.kay.hoplay.CoresAbstract.ProfileAbstracts.EditProfile">
 
 
     <ImageView

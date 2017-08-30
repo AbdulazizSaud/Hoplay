@@ -27,7 +27,7 @@ import java.util.List;
 
 import emojicon.EmojiconGridView.OnEmojiconClickedListener;
 import emojicon.emoji.Emojicon;
-import com.example.kay.hoplay.R;
+import com.hoplay.kay.hoplay.R;
 
 /**
  * @author Ankush Sachdeva (sankush@yahoo.co.in)

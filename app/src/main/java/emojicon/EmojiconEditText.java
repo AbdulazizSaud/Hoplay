@@ -22,8 +22,8 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.widget.EditText;
 
-import com.example.kay.hoplay.R;
-import com.example.kay.hoplay.*;
+import com.hoplay.kay.hoplay.R;
+import com.hoplay.kay.hoplay.*;
 
 /**
  * @author Hieu Rocker (rockerhieu@gmail.com).

@@ -53,7 +53,7 @@
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/username_sign_in_edittext"
-                    style="@style/Base.TextAppearance.AppCompat.Large"
+                    style="@style/Base.TextAppearance.AppCompat.Medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/ic_person_outline_not_focuesed_32dp"
@@ -75,7 +75,7 @@
                 >
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/password_edittext"
-                    style="@style/Base.TextAppearance.AppCompat.Large"
+                    style="@style/Base.TextAppearance.AppCompat.Medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="5"

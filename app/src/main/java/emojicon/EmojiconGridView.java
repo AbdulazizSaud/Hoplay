@@ -26,7 +26,7 @@ import java.util.Arrays;
 
 import emojicon.emoji.Emojicon;
 import emojicon.emoji.People;
-import com.example.kay.hoplay.R;
+import com.hoplay.kay.hoplay.R;
 
 /**
  * @author Hieu Rocker (rockerhieu@gmail.com)
