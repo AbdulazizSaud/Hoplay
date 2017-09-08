@@ -73,6 +73,8 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
             return;
 
         String gameId = model.getGameID();
+
+
         gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(region);
 
 
