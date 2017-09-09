@@ -121,9 +121,6 @@ public abstract class SearchRequests extends Fragment {
             }
         });
 
-
-
-
         initControls(view);
         changePlatformColors();
         firledsListeners();
@@ -254,6 +251,7 @@ public abstract class SearchRequests extends Fragment {
 
 
 
+        regionList.add("All");
 
         regionAdapter = new SpinnerAdapter(getContext(),
                 R.layout.spinnner_item, regionList);
@@ -802,6 +800,8 @@ public abstract class SearchRequests extends Fragment {
         Intent i = new Intent(getContext(),SearchResultsCore.class);
         startActivity(i);
     }
+
+
 
     protected abstract void OnStartActivity();
 

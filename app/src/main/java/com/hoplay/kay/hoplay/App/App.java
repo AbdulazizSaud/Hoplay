@@ -77,7 +77,7 @@ public class App extends Application implements FirebasePaths {
     private DatabaseReference databaseChat;
     private DatabaseReference databaseGames;
     private DatabaseReference databaseRequests;
-    private DatabaseReference databaseRegions;
+ private DatabaseReference databaseRegions;
     private FirebaseAuth mAuth;  // firebase auth
     private FirebaseStorage storage;
     private FirebaseAuth.AuthStateListener mAuthStateListener;

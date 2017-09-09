@@ -29,6 +29,9 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
     private String rank;
     DatabaseReference gameRef;
 
+
+    private long currentTimeStamp;
+
     @Override
     protected void OnStartActivity() {
         // Load regions
@@ -53,6 +56,22 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
             }
         });
 
+
+        app.getTimeStamp().setTimestampLong();
+
+        CallbackHandlerCondition callback = new CallbackHandlerCondition() {
+            @Override
+            public boolean callBack() {
+                if (app.getTimeStamp().getTimestampLong() != -1)
+                    currentTimeStamp =  app.getTimeStamp().getTimestampLong();
+
+                return app.getTimeStamp().getTimestampLong() != -1;
+            }
+        };
+
+        new HandlerCondition(callback, 0);
+
+
     }
 
 
@@ -69,31 +88,33 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
 
 
         GameModel model = app.getGameManager().getGameByName(gameName.toLowerCase());
+
         if (model == null)
             return;
 
         String gameId = model.getGameID();
 
+        if(region.equals("All"))
+        {
+            Log.i("-->","yo");
 
-        gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(region);
+            requestModelArrayList = new ArrayList<>();
 
+            for(String reg : regionList)
+            {
+                Log.i("-->",reg);
+                //gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(reg);
+                //searchQuery2(currentTimeStamp);
 
-        //------------------------
-        app.getTimeStamp().setTimestampLong();
-
-        CallbackHandlerCondition callback = new CallbackHandlerCondition() {
-            @Override
-            public boolean callBack() {
-                if (app.getTimeStamp().getTimestampLong() != -1)
-                    searchQuery(app.getTimeStamp().getTimestampLong());
-
-                return app.getTimeStamp().getTimestampLong() != -1;
             }
-        };
+            // app.setSearchRequestResult(requestModelArrayList);
+            //goToResultLayout();
+        } else {
+            Log.i("-->","xxxxxxxxx = "+region);
 
-        new HandlerCondition(callback, 0);
-        //------------------------
-
+            gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(region);
+            searchQuery(currentTimeStamp);
+        }
 
     }
 
@@ -143,6 +164,54 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
             }
         });
     }
+
+
+
+    private void searchQuery2(long currentTimestamp) {
+
+        long last48 = currentTimestamp - DUE_REQUEST_TIME_IN_VALUE_HOURS;
+
+        final Query query = gameRef.orderByChild(FIREBASE_REQUEST_TIME_STAMP_ATTR).startAt(last48).endAt(currentTimestamp);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot == null)
+                    return;
+
+                Log.i("--->",dataSnapshot.toString());
+
+                Iterable<DataSnapshot> shots = dataSnapshot.getChildren();
+                for (DataSnapshot shot : shots) {
+
+                    RequestModel receivedRequestModel = shot.getValue(RequestModel.class);
+
+                    if (playersNumber != 0)
+                        if (receivedRequestModel.getPlayerNumber() != playersNumber)
+                            continue;
+
+                    if (!rank.equals("All Ranks"))
+                        if (!receivedRequestModel.getRank().equals(rank))
+                            continue;
+
+                    if(!matchType.equals("All Matches"))
+                        if (!matchType.equals(receivedRequestModel.getMatchType()))
+                            continue;
+
+                    receivedRequestModel.setRequestId(shot.getKey());
+                    requestModelArrayList.add(receivedRequestModel);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
 
 
 }
