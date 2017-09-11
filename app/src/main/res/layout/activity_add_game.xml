@@ -5,7 +5,7 @@
     android:id="@+id/add_new_game_relativelayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_background"
+    android:background="@drawable/hoplay_bg"
     android:focusable="true">
 
 
@@ -19,7 +19,7 @@
             android:paddingRight="20dp"
             android:maxLines="1"
             android:maxLength="27"
-            android:digits=" qwertyuiopasdfghjklzxcvbnm1234567890"
+            android:digits=" qwertyuiopasdfghjklzxcvbnm:_-QWERTYUIOPASDFGHJKLZXCVBNM1234567890"
             android:textColorHint="@color/hint_color"
             android:textColor="@color/text_color"
             android:background="@drawable/white_card_background"
@@ -87,7 +87,28 @@
         android:onClick="toAppMenu"
         android:text="@string/add_game_tour_button" />
 
+    <TextView
+        android:id="@+id/no_games_results_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:visibility="gone"
+        android:layout_below="@+id/no_games_results_imageview"
+        android:text="@string/add_game_no_results_message"
+        android:layout_alignTop="@+id/no_games_imageview"
+        android:layout_centerHorizontal="true" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/no_games_results_imageview"
+        app:srcCompat="@drawable/ic_sentiment_dissatisfied_64dp"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:layout_below="@+id/load_games_progressbar_add_game"
+        android:layout_alignLeft="@+id/no_games_imageview"
+        android:layout_alignStart="@+id/no_games_imageview" />
 
 
 </RelativeLayout>

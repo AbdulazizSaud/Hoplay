@@ -2,6 +2,7 @@ package com.hoplay.kay.hoplay.Cores.UserProfileCores;
 
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 
 import com.hoplay.kay.hoplay.CoresAbstract.ProfileAbstracts.ViewFriendProfile;
 import com.hoplay.kay.hoplay.Interfaces.FirebasePaths;
@@ -10,11 +11,25 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.hoplay.kay.hoplay.Services.CallbackHandlerCondition;
+import com.hoplay.kay.hoplay.Services.HandlerCondition;
 
 
 public class ViewFriendProfileCore extends ViewFriendProfile  implements FirebasePaths {
 
     String friendKey,friendUsername,friendPicture;
+
+    boolean isFriend = false ;
+    boolean isDone = false;
+
+    @Override
+    protected void addThisUser(String userKey) {
+        DatabaseReference userRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID());
+
+        // Add this user as a friend
+        userRef.child(FIREBASE_FRIENDS_LIST_ATTR).child(userKey).setValue(userKey);
+        addFriendButton.setVisibility(View.GONE);
+    }
 
     @Override
     protected void OnStartActitvty() {
@@ -25,12 +40,60 @@ public class ViewFriendProfileCore extends ViewFriendProfile  implements Firebas
         friendPicture = i.getStringExtra("user_picture");
 
 
+        // set this user key
+        userKey = friendKey;
+
+        // Remove add friend button if this user is a friend
+        checkIfFriend(friendKey);
+        CallbackHandlerCondition callback = new CallbackHandlerCondition() {
+            @Override
+            public boolean callBack() {
+                if(isDone)
+                {
+                    if (isFriend)
+                    {
+                        addFriendButton.setVisibility(View.GONE);
+                    }
+                }
+                return isDone;
+            }
+        };
+        new HandlerCondition(callback, 0);
+
+
+
+
         setUsernameProfile(friendUsername);
 
         loadFriendData(friendKey);
         loadRecentActivtiy(friendKey);
 
 
+    }
+
+
+    private void checkIfFriend(final String friendKey){
+
+        final DatabaseReference userRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID());
+
+        // now we check if the current user friend with this guy or not
+        userRef.child(FIREBASE_FRIENDS_LIST_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild(friendKey))
+                    isFriend = true;
+                else
+                    isFriend = false;
+
+                isDone = true ;
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void loadFriendData(String key)

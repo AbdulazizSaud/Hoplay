@@ -157,6 +157,7 @@
     <!--                                Add Game Layout                                                            -->
     <string name="add_game_search_bar">Search for a Game</string>
     <string name="add_game_no_game_message">You do not have any game</string>
+    <string name="add_game_no_results_message">No Results</string>
 
 
 
@@ -454,6 +455,23 @@
     <string name="friend_on_long_click_yes">Y E S</string>
     <string name="friend_on_long_click_no">N O</string>
 
+
+    <!--                                    Game Not Added Dialog       -->
+    <string name="game_not_added_do_mean">Do you mean this game</string>
+    <string name="game_not_added_game_name">Game Name</string>
+    <string name="game_not_added_message">Would you like to add this game \n then continue?</string>
+    <string name="game_not_added_yes">Y e s</string>
+    <string name="game_not_added_no">N o</string>
+
+    
+    <!--                                    Game Not Found Dialog           -->
+    <string name="game_not_found_sorry">Sorry, we could not find this game</string>
+    <string name="game_not_found_message">If you believe this game should \n be added, please let us know !</string>
+    <string name="game_not_found_contact_us">Contact Us</string>
+    <string name="game_not_found_discard">Discard</string>
+
+
+
     <!--                                Chat holder On Long Click                       -->
     <string name="chat_long_click_pop_up_delete_text">Are you sure you want to delete this chat?</string>
     <string name="chat_long_click_pop_up_delete_yes">Y E S</string>
@@ -522,6 +540,7 @@
     <!--                            User Friends List Layout                    -->
     <string name="user_list_layout_no_fiends_message">You do not have any Hoplay friends</string>
     <string name="user_list_layout_add_friend_button">Add Friends</string>
+    <string name="user_list_layout_not_found">Not Found</string>
 
     <!--                            Edit Request Activity                           -->
     <string name="edit_request_dialog_title">Updating Request</string>

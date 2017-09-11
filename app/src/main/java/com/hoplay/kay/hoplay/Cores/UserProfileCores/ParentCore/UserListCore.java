@@ -95,6 +95,7 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
                         addUser(shot.getKey(), shot);
                     }
                     hideLoadingAnimation();
+                    hideNotFoundSearch();
                 }
 
             }

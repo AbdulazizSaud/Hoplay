@@ -144,6 +144,7 @@ public class CreateChat implements FirebasePaths {
 
     private void jumpToPrivateChat(Context c , FriendCommonModel model, String roomKey) {
         Intent chatActivity = new Intent(c, ChatCore.class);
+        chatActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         chatActivity.putExtra("room_key", roomKey);
         chatActivity.putExtra("room_type", FIREBASE_PRIVATE_ATTR);
         chatActivity.putExtra("room_name", model.getFriendUsername());

@@ -1,10 +1,13 @@
 package com.hoplay.kay.hoplay.CoresAbstract.RequestAbstracts;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
@@ -16,6 +19,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
@@ -28,15 +33,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hoplay.kay.hoplay.Activities.SettingsActivity;
 import com.hoplay.kay.hoplay.Adapters.SpinnerAdapter;
 import com.hoplay.kay.hoplay.App.App;
 import com.hoplay.kay.hoplay.Cores.RequestCore.SearchResultsCore;
+import com.hoplay.kay.hoplay.Cores.SupportCore;
+import com.hoplay.kay.hoplay.Models.CommunityChatModel;
 import com.hoplay.kay.hoplay.Models.GameModel;
 import com.hoplay.kay.hoplay.Models.Rank;
 import com.hoplay.kay.hoplay.Models.RequestModel;
 import com.hoplay.kay.hoplay.R;
+import com.hoplay.kay.hoplay.Services.CallbackHandlerCondition;
+import com.hoplay.kay.hoplay.Services.HandlerCondition;
 import com.hoplay.kay.hoplay.util.BitmapOptimizer;
 import com.google.firebase.database.ServerValue;
+import com.pkmmte.view.CircularImageView;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.lang.reflect.Array;
@@ -46,11 +57,23 @@ import java.util.HashMap;
 import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
 public abstract class SearchRequests extends Fragment {
 
     protected static App app;
+
+
+
+    // Not added game and not found dialog variables
+    protected  GameModel notAddedGame = null;
+    protected  Boolean isDone = false ;
+    protected boolean oneDialogAtTime = false;
+    protected boolean whichDialog = false ; // false means the not found game dailog as  a default
+    protected boolean isDoneForLoadingRanks = false;
+
 
     protected ImageView pcChoice;
     protected ImageView psChoice;
@@ -205,6 +228,7 @@ public abstract class SearchRequests extends Fragment {
         numberOfPlayersSpinner = (MaterialBetterSpinner) view.findViewById(R.id.players_number_spinner_search_request);
         searchRequestButton = (Button) view.findViewById(R.id.search_button_search_request);
         searchGameAutoCompleteTextView.setTypeface(playbold);
+
         ranksSpinner.setTypeface(playregular);
         numberOfPlayersSpinner.setTypeface(playregular);
         countrySpinner.setTypeface(playregular);
@@ -770,7 +794,36 @@ public abstract class SearchRequests extends Fragment {
         // Check selected game is in the user games
         if (!userHasTheGame(searchGameAutoCompleteTextView.getText().toString().trim())) {
 
-            Toast.makeText(getContext(), R.string.search_request_fragment_no_game_error, Toast.LENGTH_LONG).show();
+            if (isTextValidate(searchGameAutoCompleteTextView.getText().toString().trim()))
+            {
+                searchForGame(searchGameAutoCompleteTextView.getText().toString().trim());
+
+
+                CallbackHandlerCondition callback = new CallbackHandlerCondition() {
+                    @Override
+                    public boolean callBack() {
+                        if(isDone)
+                        {
+                            if(notAddedGame != null && !oneDialogAtTime && whichDialog)
+                            {
+                                showGameNotAddedDialog();
+                            }
+                            if (!whichDialog)
+                                showGameNotFoundDialog();
+
+                        }
+                        return isDone;
+                    }
+                };
+                new HandlerCondition(callback, 0);
+
+
+
+            }
+
+
+//
+//            Toast.makeText(getContext(), R.string.search_request_fragment_no_game_error, Toast.LENGTH_LONG).show();
             return false;
         }
 
@@ -784,6 +837,226 @@ public abstract class SearchRequests extends Fragment {
         return true;
     }
 
+
+
+
+
+
+
+
+
+    protected void showGameNotFoundDialog() {
+
+        final Dialog gameNotFoundDialog;
+        gameNotFoundDialog = new Dialog(getContext());
+        gameNotFoundDialog.setContentView(R.layout.game_not_found_dialog);
+        gameNotFoundDialog.show();
+        gameNotFoundDialog.setCancelable(false);
+
+
+        // Dealing with constraints
+        oneDialogAtTime = true;
+
+
+        gameNotFoundDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView titleTextView,messageTextView;
+        Button contactUsButton, discardButton;
+
+
+        titleTextView = (TextView) gameNotFoundDialog.findViewById(R.id.game_not_found_title_textview);
+        messageTextView = (TextView) gameNotFoundDialog.findViewById(R.id.game_not_found_message_textview);
+        contactUsButton = (Button) gameNotFoundDialog.findViewById(R.id.game_not_found_contact_us_button);
+        discardButton = (Button) gameNotFoundDialog.findViewById(R.id.game_not_found_discard_button);
+
+
+        Typeface playregular = Typeface.createFromAsset(getResources().getAssets() ,"playregular.ttf");
+        Typeface sansation = Typeface.createFromAsset(getResources().getAssets(), "sansationbold.ttf");
+        contactUsButton.setTypeface(sansation);
+        discardButton.setTypeface(sansation);
+
+        titleTextView.setTypeface(playregular);
+        messageTextView.setTypeface(playregular);
+
+
+        contactUsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity().getApplicationContext(), SupportCore.class);
+                startActivity(i);
+                getActivity().overridePendingTransition(R.anim.slide_in_right_layouts, R.anim.slide_out_right_layouts);
+            }
+        });
+
+
+        // Remove Dialog
+        discardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gameNotFoundDialog.dismiss();
+                oneDialogAtTime = false ;
+            }
+        });
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = gameNotFoundDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+    }
+
+
+    protected void showGameNotAddedDialog(){
+
+
+        final Dialog gameNotAddedDialog;
+        gameNotAddedDialog = new Dialog(getContext());
+        gameNotAddedDialog.setContentView(R.layout.game_not_added_dialog);
+        gameNotAddedDialog.show();
+        gameNotAddedDialog.setCancelable(false);
+
+        // Dealing with constraints
+        oneDialogAtTime = true ;
+
+        gameNotAddedDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
+        CircleImageView gamePhotoCircleImageView;
+        TextView titleTextView , gameNameTextView ,messageTextView;
+        Button yesButton, noButton;
+
+
+        titleTextView = (TextView) gameNotAddedDialog.findViewById(R.id.game_not_added_title);
+        messageTextView = (TextView) gameNotAddedDialog.findViewById(R.id.game_not_added_message_textview);
+        gameNameTextView = (TextView) gameNotAddedDialog.findViewById(R.id.game_name_game_not_added_textview);
+
+        gamePhotoCircleImageView = (CircleImageView) gameNotAddedDialog.findViewById(R.id.game_photo_game_not_added_circleimageview);
+
+        yesButton = (Button) gameNotAddedDialog.findViewById(R.id.yes_add_game_game_not_added_button);
+        noButton = (Button) gameNotAddedDialog.findViewById(R.id.no_add_game_game_not_added_button);
+
+
+        Typeface playregular = Typeface.createFromAsset(getResources().getAssets() ,"playregular.ttf");
+        Typeface sansation = Typeface.createFromAsset(getResources().getAssets(), "sansationbold.ttf");
+        Typeface playbold = Typeface.createFromAsset(getResources().getAssets(),"playbold.ttf");
+
+        yesButton.setTypeface(sansation);
+        noButton.setTypeface(sansation);
+
+        titleTextView.setTypeface(playregular);
+        messageTextView.setTypeface(playregular);
+
+
+        // Load game image and name
+        app.loadingImage(gamePhotoCircleImageView,notAddedGame.getGamePhotoUrl());
+        gameNameTextView.setText(notAddedGame.getGameName());
+
+        final String gameName = notAddedGame.getGameName();
+
+        // Add the game then continue button
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                addGame(notAddedGame);
+                oneDialogAtTime = false ;
+                whichDialog = false ;
+                loadRanksForNotAddedGame(notAddedGame);
+
+
+
+                if (!notAddedGame.getGameType().equalsIgnoreCase("_coop_"))
+                {
+                    CallbackHandlerCondition callback = new CallbackHandlerCondition() {
+                        @Override
+                        public boolean callBack() {
+                            if(isDoneForLoadingRanks)
+                            {
+                                searchGameAutoCompleteTextView.setText(gameName);
+                            }
+                            return isDoneForLoadingRanks;
+                        }
+                    };
+                    new HandlerCondition(callback, 0);
+
+                }else{
+
+                    new CountDownTimer(3000, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        public void onFinish() {
+
+                            searchGameAutoCompleteTextView.setText(gameName);
+                        }
+                    }.start();
+
+                }
+
+
+                gameNotAddedDialog.dismiss();
+                Toast.makeText(getContext(),gameName+" added Successfully to your library",Toast.LENGTH_LONG).show();
+                notAddedGame = null ;
+            }
+        });
+
+        // Remove Dialog
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gameNotAddedDialog.dismiss();
+                notAddedGame = null ;
+                oneDialogAtTime = false ;
+                whichDialog = false;
+
+            }
+        });
+
+
+
+        // Change photo border color and game name color depend on the user platform selection
+        gamePhotoCircleImageView.setBorderWidth(6);
+        gameNameTextView.setTypeface(playbold);
+        if (currentPlatform.equalsIgnoreCase("PS"))
+        {
+            gamePhotoCircleImageView.setBorderColor(ContextCompat.getColor(getContext(), R.color.ps_color));
+            gameNameTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.ps_color));
+        }
+        else if(currentPlatform.equalsIgnoreCase("XBOX"))
+        {
+            gamePhotoCircleImageView.setBorderColor(ContextCompat.getColor(getContext(), R.color.xbox_color));
+            gameNameTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.xbox_color));
+        }
+        else {
+            gamePhotoCircleImageView.setBorderColor(ContextCompat.getColor(getContext(), R.color.pc_color));
+            gameNameTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.pc_color));
+        }
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = gameNotAddedDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+
+    }
+
+
+
+    protected abstract void searchForGame(String value);
+
+    private boolean isTextValidate(String value) {
+        return !value.equals("") && !value.equals("\\s+") && null != value;
+    }
 
 
     protected boolean checkIfCompetitive(String gameKey) {
@@ -806,4 +1079,6 @@ public abstract class SearchRequests extends Fragment {
     protected abstract void OnStartActivity();
 
     protected abstract void searchForRequest(RequestModel requestModel);
+    protected abstract void addGame(GameModel gameModel);
+    protected abstract void loadRanksForNotAddedGame(GameModel gameModel);
 }

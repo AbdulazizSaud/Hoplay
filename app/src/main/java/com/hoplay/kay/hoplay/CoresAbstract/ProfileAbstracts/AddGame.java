@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ import com.hoplay.kay.hoplay.Services.SchemaHelper;
 import com.hoplay.kay.hoplay.util.GameManager;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -53,10 +55,22 @@ public abstract class AddGame extends AppCompatActivity {
     private ArrayList<GameModel> gamesList = new ArrayList<GameModel>();
     protected RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ProgressBar loadGamesProgressbar;
+    protected ProgressBar loadGamesProgressbar;
+
+
 
 
     View holderView;
+
+
+    // no results variables
+    protected TextView noResultsTextView;
+    protected ImageView noResultsImageView;
+    private boolean noReaction = false;
+    Handler handler = new Handler();
+    Runnable runnable;
+
+
 
     // No games variables
     protected ImageView noGameImageView;
@@ -74,6 +88,22 @@ public abstract class AddGame extends AppCompatActivity {
     // Came from varible for the tour
     private String cameFrom ="";
     private Button tourButton;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+      handler.removeCallbacks(runnable);
+    }
+
+
+    @Override
+    protected void onStop() {
+
+        handler.removeCallbacks(runnable);
+        super.onStop();
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +128,10 @@ public abstract class AddGame extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-
+        // no results section
+        noResultsTextView = (TextView) findViewById(R.id.no_games_results_textview);
+        noResultsImageView = (ImageView) findViewById(R.id.no_games_results_imageview);
+        noResultsTextView.setTypeface(playregular);
 
         // No games section
         noGameImageView = (ImageView) findViewById(R.id.no_games_imageview);
@@ -129,6 +162,8 @@ public abstract class AddGame extends AppCompatActivity {
                 // Just to push
                 final String value = s.toString().toLowerCase().trim();
                 showLoadingAnimation();
+                hideNoGamesSection();
+                noReaction = false ;
 
                 // chinging search icon when user search for a game
                 // search icon changing animation
@@ -144,9 +179,37 @@ public abstract class AddGame extends AppCompatActivity {
                 } else {
                     reloadGameList();
                 }
+
+
+
             }
         });
         OnStartActivity();
+
+
+
+        handler.postDelayed(runnable = new Runnable()  {
+            @Override
+            public void run() {
+                //Do something after 1000ms
+                if (loadGamesProgressbar.getVisibility()== View.VISIBLE )
+                {
+
+                    showNoResultsSection();
+                    loadGamesProgressbar.setVisibility(View.GONE);
+                    hideNoGamesSection();
+                    noReaction = true;
+                }else
+                {
+                    if (!noReaction)
+                    hideNoResultsSection();
+                }
+                handler.postDelayed(this,5000);
+
+            }
+        }, 5000);
+
+
 
 
 
@@ -198,6 +261,7 @@ public abstract class AddGame extends AppCompatActivity {
     }
 
 
+
     private void reloadGameList() {}
 
 
@@ -235,6 +299,17 @@ public abstract class AddGame extends AppCompatActivity {
         gamesList.removeAll(gameModelLinkedList);
         mAdapter.notifyDataSetChanged();
 
+    }
+
+
+    protected void showNoResultsSection()
+    {
+        noResultsTextView.setVisibility(View.VISIBLE);
+        noResultsImageView.setVisibility(View.VISIBLE);
+    }
+    protected void hideNoResultsSection(){
+        noResultsImageView.setVisibility(View.GONE);
+        noResultsTextView.setVisibility(View.GONE);
     }
 
 
@@ -299,6 +374,7 @@ public abstract class AddGame extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         OnClickHolders(model, v);
+                        ((ViewHolders.UserGameHolder) holder).getAddedMark().setVisibility(View.VISIBLE);
                     }
                 });
 
@@ -367,9 +443,9 @@ public abstract class AddGame extends AppCompatActivity {
 
                 // Game added mark on each game holder
                 if (app.getGameManager().checkIfHasGameByName(gameHolder.getTitle().getText().toString()))
-                    gameHolder.getAddedMark().setVisibility(View.VISIBLE);
+                    ((ViewHolders.UserGameHolder) holder).getAddedMark().setVisibility(View.VISIBLE);
                 else
-                    gameHolder.getAddedMark().setVisibility(View.GONE);
+                    ((ViewHolders.UserGameHolder) holder).getAddedMark().setVisibility(View.GONE);
 
 
 

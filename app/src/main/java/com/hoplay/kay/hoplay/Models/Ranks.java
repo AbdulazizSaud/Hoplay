@@ -41,8 +41,12 @@ public class Ranks {
         return null;
     }
 
+    public void setRanksList(ArrayList<Rank> ranksList) {
+        this.ranksList = ranksList;
+    }
 
     public ArrayList<Rank> getRanksList() {
         return ranksList;
     }
+
 }

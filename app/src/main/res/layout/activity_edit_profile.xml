@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_background"
+    android:background="@drawable/hoplay_bg"
     android:onClick="removeKeyboard"
     android:id="@+id/edit_profile_relativelayout"
     tools:context="com.hoplay.kay.hoplay.CoresAbstract.ProfileAbstracts.EditProfile">
 
 
     <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/go_back_to_preferences_from_edit_profile"
-        app:srcCompat="@drawable/ic_close_24dp"
+        app:srcCompat="@drawable/ic_close_32dp"
         android:layout_margin="20dp"
         android:padding="0dp"
         android:layout_alignParentTop="true"
@@ -41,7 +41,6 @@
         android:orientation="horizontal"
         android:id="@+id/change_user_photo_linearlayout"
         android:layout_below="@+id/edit_profile_title_textview"
-        android:background="@color/app_background"
         android:layout_marginTop="20dp"
         >
 
@@ -55,7 +54,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/app_background"
             android:layout_weight="1.0"
             android:layout_gravity="center"
             >

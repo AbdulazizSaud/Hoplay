@@ -106,7 +106,6 @@ public abstract class  EditRequest extends AppCompatActivity {
         if (bundle !=null)
         {
             UpdatedRequest = (RequestModel) bundle.getParcelable("savedReq");
-            Log.e("===>",UpdatedRequest.getGameId());
         }
 
 

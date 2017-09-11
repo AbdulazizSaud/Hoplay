@@ -261,7 +261,6 @@ public abstract class Community extends Fragment {
                 if (model.getChatCounter() < 1) {
                     communityHolder.getChatCounterView().setVisibility(View.INVISIBLE);
                 } else {
-                    Log.i("===>","DONE");
                     communityHolder.getChatCounterView().setVisibility(View.VISIBLE);
                     communityHolder.setCounter(String.valueOf(model.getChatCounter()));
                 }
