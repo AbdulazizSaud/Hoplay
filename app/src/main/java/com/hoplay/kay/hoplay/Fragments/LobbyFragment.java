@@ -24,6 +24,8 @@ public abstract class LobbyFragment extends ParentRequestFragments {
 
 
     protected Lobby lobby;
+    protected boolean leaveing=false;
+
     public LobbyFragment() {
         super();
     }
@@ -102,6 +104,7 @@ public abstract class LobbyFragment extends ParentRequestFragments {
         leaveLobbyYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                leaveing = true;
                 cancelRequest();
                 leaveLobbyDialog.dismiss();
             }

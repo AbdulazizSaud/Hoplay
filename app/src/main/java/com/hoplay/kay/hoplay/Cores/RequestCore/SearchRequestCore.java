@@ -44,7 +44,10 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
 
                 if (dataSnapshot != null) {
                     for (DataSnapshot region : dataSnapshot.getChildren()) {
-                        regionAdapter.add(region.getValue(String.class).trim());
+                        String reg = region.getValue(String.class);
+
+                        regionAdapter.add(reg);
+                        regionList.add(reg);
                     }
                 }
 
@@ -96,21 +99,34 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
 
         if(region.equals("All"))
         {
-            Log.i("-->","yo");
 
             requestModelArrayList = new ArrayList<>();
 
             for(String reg : regionList)
             {
-                Log.i("-->",reg);
-                //gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(reg);
-                //searchQuery2(currentTimeStamp);
+                if(reg.equals("All"))
+                    continue;
+
+                gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(reg);
+                searchQuery2(currentTimeStamp);
 
             }
-            // app.setSearchRequestResult(requestModelArrayList);
-            //goToResultLayout();
+
+
+            CallbackHandlerCondition callback = new CallbackHandlerCondition() {
+                @Override
+                public boolean callBack() {
+                     app.setSearchRequestResult(requestModelArrayList);
+                     goToResultLayout();
+
+                    return true;
+                }
+            };
+
+            new HandlerCondition(callback, 1000);
+
+
         } else {
-            Log.i("-->","xxxxxxxxx = "+region);
 
             gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(region);
             searchQuery(currentTimeStamp);
@@ -181,7 +197,6 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
                 if (dataSnapshot == null)
                     return;
 
-                Log.i("--->",dataSnapshot.toString());
 
                 Iterable<DataSnapshot> shots = dataSnapshot.getChildren();
                 for (DataSnapshot shot : shots) {

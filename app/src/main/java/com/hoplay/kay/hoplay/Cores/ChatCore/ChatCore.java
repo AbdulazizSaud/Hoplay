@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.hoplay.kay.hoplay.Cores.ForgetPasswordCore;
 import com.hoplay.kay.hoplay.Cores.UserProfileCores.ViewFriendProfileCore;
@@ -39,6 +40,10 @@ public class ChatCore extends Chat implements FirebasePaths {
     private DatabaseReference refRoom, refMessages;
     private String opponentId;
     private boolean cutLoob = false;
+    boolean isPrivate;
+    String currentUID;
+
+
 
 
     // Joiner username
@@ -96,6 +101,71 @@ public class ChatCore extends Chat implements FirebasePaths {
         }
     };
 
+    private ChildEventListener playerOnRoom =  new ChildEventListener() {
+        @Override
+        public void onChildAdded(final DataSnapshot user, String s) {
+
+
+               if (isPrivate && currentUID.equals(user.getKey()))
+                        return;
+
+
+            app.getDatabaseUsersInfo().child(user.getKey() + "/" + FIREBASE_DETAILS_ATTR)
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                    String username = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
+
+                                    playerOnChat.put(user.getKey(), new PlayerModel(user.getKey(), username));
+
+                                    if (!isPrivate) {
+                                        addUserToSubtitle(username);
+                                    } else {
+                                        String bio = dataSnapshot.child(FIREBASE_BIO_ATTR).getValue(String.class);
+                                        addUserToSubtitle(bio);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+//
+
+        }
+
+        @Override
+        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            if(dataSnapshot.getKey().equals(currentUID))
+                return;
+
+            PlayerModel playerModel = playerOnChat.get(dataSnapshot.getKey());
+            String message = roomName+":"+playerModel.getUsername()+" Left the lobby";
+
+            playerOnChat.remove(dataSnapshot.getKey());
+            leaveMessage(playerModel.getUsername(),message);
+            Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
+
     // set up chat app
     @Override
     public void setupChat() {
@@ -107,8 +177,8 @@ public class ChatCore extends Chat implements FirebasePaths {
         roomName = i.getStringExtra("room_name");
         roomPictureUrl = i.getStringExtra("room_picture");
 
-        final boolean isPrivate = chatRoomType.equals(FIREBASE_PRIVATE_ATTR);
-        final String currentUID = app.getUserInformation().getUID();
+          isPrivate = chatRoomType.equals(FIREBASE_PRIVATE_ATTR);
+          currentUID = app.getUserInformation().getUID();
         String pathChatRoomType;
 
         if (isPrivate) {
@@ -120,76 +190,16 @@ public class ChatCore extends Chat implements FirebasePaths {
         }
 
         refRoom = app.getFirebaseDatabase().getReferenceFromUrl(pathChatRoomType + chatRoomKey);
+
         refMessages = refRoom.child("_messages_");
-
-
-
-
-
 
         // here will be to procedure  in two condition : private, public
         // in case private : it will check the type than it will escape the current user till it find a bio of oppsite user and added to bio of the chat
         // in case public : it will check the type than it will add all user in chat in bio of the chat
 
-        refRoom.child(FIREBASE_CHAT_USERS_LIST_PATH).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                for (final DataSnapshot users : dataSnapshot.getChildren()) {
-
-                    if (isPrivate && currentUID.equals(users.getKey()))
-                        continue;
-                    if (isPrivate && cutLoob)
-                        break;
-
-                    app.getDatabaseUsersInfo().child(users.getKey() + "/" + FIREBASE_DETAILS_ATTR)
-                            .addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                    String username = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
-
-                                    playerOnChat.put(users.getKey(), new PlayerModel(users.getKey(), username));
-
-                                    if (!isPrivate) {
-                                        addUserToSubtitle(username);
-                                    } else {
-                                        String bio = dataSnapshot.child(FIREBASE_BIO_ATTR).getValue(String.class);
-                                        addUserToSubtitle(bio);
-                                        cutLoob = true;
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                }
-                            });
-
-
-                }
-                usersLoaded = true;
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        // make delay till the users is loaded
-        CallbackHandlerCondition callbackHandlerCondition = new CallbackHandlerCondition() {
-            @Override
-            public boolean callBack() {
-                if (usersLoaded) {
-                    setRoomDetails(roomName, roomPictureUrl);
-                    loadMessages();
-                }
-                return usersLoaded;
-            }
-        };
-        new HandlerCondition(callbackHandlerCondition, 0);
+        refRoom.child(FIREBASE_CHAT_USERS_LIST_PATH).addChildEventListener(playerOnRoom);
+        loadMessages();
+        setRoomDetails(roomName, roomPictureUrl);
 
     }
 
@@ -279,22 +289,5 @@ public class ChatCore extends Chat implements FirebasePaths {
 
 
 
-
-    private String getJoinerUsername(String userKey){
-
-        app.getDatabaseUsersInfo().child(userKey).child(FIREBASE_DETAILS_ATTR).child(FIREBASE_USERNAME_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                    joinerUsername = dataSnapshot.getValue().toString();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        return joinerUsername;
-    }
 
 }

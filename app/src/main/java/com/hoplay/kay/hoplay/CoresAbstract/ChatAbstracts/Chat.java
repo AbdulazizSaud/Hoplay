@@ -464,6 +464,21 @@ public abstract class Chat extends AppCompatActivity {
 
 
 
+    public void leaveMessage(String username,String message)
+    {
+        ChatMessage chatMessage = new ChatMessage();
+        chatMessage.setId("");
+        chatMessage.setUserId("");
+        chatMessage.setUsername("");
+        chatMessage.setMessage(message);
+        chatMessage.setTimestamp(0);
+
+        // add to adapter and display it
+        chatMessages.put("",chatMessage);
+        adapter.add(chatMessage);
+        adapter.notifyDataSetChanged();
+    }
+
     // this abstract method is for implements the chat mechinsim
     protected abstract void setupChat();
     protected abstract void sendMessageToFirebase(String message);

@@ -119,11 +119,11 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
             requestModel.removePlayer(player);
             lobby.removePlayer(player);
 
-            if(player.getUID().equals(app.getUserInformation().getUID())) {
-
+            if(player.getUID().equals(app.getUserInformation().getUID()) && !leaveing) {
                 // here you can put message
                 Toast.makeText(app.getMainAppMenuCore(),"You have been kicked by an admin",Toast.LENGTH_LONG).show();
                 cancelRequest();
+
             }
         }
 
@@ -246,6 +246,7 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
     protected void cancelRequest() {
         removeListener();
         app.getMainAppMenuCore().cancelRequest();
+        leaveing = true;
     }
 
 
