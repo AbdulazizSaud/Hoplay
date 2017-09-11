@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_background"
+    android:background="@drawable/hoplay_bg"
     tools:context="com.hoplay.kay.hoplay.CoresAbstract.RequestAbstracts.RequestLobby">
 
 
@@ -17,7 +17,7 @@
         android:layout_marginLeft="20dp"
         android:id="@+id/close_request_lobby_imageview"
         android:layout_marginTop="20dp"
-        app:srcCompat="@drawable/ic_close_24dp" />
+        app:srcCompat="@drawable/ic_close_32dp" />
 
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -69,11 +69,12 @@
                 android:id="@+id/region_value_request_lobby"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:paddingLeft="20dp"
                 android:text="@string/request_lobby_region_value"
                 android:textColor="@color/hint_color"
-                android:textSize="20sp"
+                android:textSize="14sp"
             />
 
 
@@ -144,7 +145,7 @@
                 android:gravity="center"
                 android:text="@string/request_lobby_rank_value"
                 android:textColor="@color/hint_color"
-                android:textSize="20sp"
+                android:textSize="14sp"
            />
 
 

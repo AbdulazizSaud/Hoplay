@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/settings_fragment_relativelayout"
     tools:context="com.hoplay.kay.hoplay.Fragments.SettingsFragment"
-    android:background="@color/app_background">
+    android:background="@drawable/hoplay_bg">
 
     <fragment class = "com.hoplay.kay.hoplay.Services.SettingsScreen"
         android:id="@+id/settingsPF"

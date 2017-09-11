@@ -290,7 +290,7 @@ public abstract class Lobby {
         removePlayerButton = (Button) playerDialog.findViewById(R.id.remove_player_button);
         addPlpayerButton = (Button) playerDialog.findViewById(R.id.add_player_button);
 
-        removePlayerButton.setVisibility(isAdmin ? View.VISIBLE:View.INVISIBLE);
+        removePlayerButton.setVisibility(isAdmin ? View.VISIBLE:View.GONE);
 
 
         Typeface sansation = Typeface.createFromAsset(c.getAssets(), "sansationbold.ttf");

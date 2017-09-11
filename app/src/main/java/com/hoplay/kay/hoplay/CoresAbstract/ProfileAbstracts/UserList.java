@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -58,6 +59,13 @@ public abstract class UserList extends AppCompatActivity {
     private     View holderView;
 
 
+
+    // no search results variables
+    protected TextView noUsersFoundTextView;
+    protected ImageView noUsersFoundImageView;
+    private boolean noReaction = false;
+    Handler handler = new Handler();
+    Runnable runnable;
 
     // No friends variables
     protected TextView noFriendsMessage;
@@ -184,6 +192,12 @@ public abstract class UserList extends AppCompatActivity {
         addFriendsButton.setTypeface(sansation);
         noFriendsImageview = (ImageView) findViewById(R.id.no_friends_imageview);
 
+
+        // no search results  variables
+        noUsersFoundTextView = (TextView) findViewById(R.id.no_users_found_textview);
+        noUsersFoundImageView = (ImageView) findViewById(R.id.no_users_found_imageview);
+
+
         setupRecyclerView();
 
 
@@ -207,6 +221,7 @@ public abstract class UserList extends AppCompatActivity {
                 // Just to push
                 final String value = s.toString().toLowerCase().trim();
                 showLoadingAnimation();
+                noReaction = false ;
 
                 // chinging search icon when user search for a game
                 // search icon changing animation
@@ -225,8 +240,35 @@ public abstract class UserList extends AppCompatActivity {
             }
         });
 
+
+
+
         //testList();
         onStartActivity();
+
+
+
+        handler.postDelayed(runnable = new Runnable()  {
+            @Override
+            public void run() {
+                //Do something after 1000ms
+                if (loadUsersProgressBar.getVisibility()== View.VISIBLE )
+                {
+
+                    showNotFoundSearch();
+                    loadUsersProgressBar.setVisibility(View.GONE);
+                    hideNoFriendsSection();
+                    noReaction = true;
+                }else
+                {
+                    if (!noReaction)
+                        hideNotFoundSearch();
+                }
+                handler.postDelayed(this,5000);
+
+            }
+        }, 5000);
+
 
 
     }
@@ -248,6 +290,33 @@ public abstract class UserList extends AppCompatActivity {
 
     }
 
+
+    protected void showNotFoundSearch()
+    {
+        noUsersFoundImageView.setVisibility(View.VISIBLE);
+        noUsersFoundTextView.setVisibility(View.VISIBLE);
+    }
+    protected void hideNotFoundSearch()
+    {
+        noUsersFoundImageView.setVisibility(View.GONE);
+        noUsersFoundTextView.setVisibility(View.GONE);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        handler.removeCallbacks(runnable);
+    }
+
+
+    @Override
+    protected void onStop() {
+
+        handler.removeCallbacks(runnable);
+        super.onStop();
+    }
 
     private void searchProcess(final String value) {
 

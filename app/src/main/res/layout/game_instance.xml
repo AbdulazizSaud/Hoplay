@@ -3,7 +3,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/app_background"
     android:orientation="vertical"
     android:padding="1dp">
 
@@ -17,7 +16,7 @@
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:id="@+id/game_holder_content_linearlayout"
-        android:background="@color/app_background"
+
         >
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -57,7 +56,7 @@
                         android:textColor="@color/text_color"
                         android:fontFamily="sans-serif-light"
                         android:text="@string/game_instance_game_name"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:layout_weight="1"
                    />
 
@@ -67,10 +66,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ADDED"
+                        android:textSize="14sp"
                         android:textColor="@color/hint_color"
                         android:textStyle="bold"
-                        android:paddingRight="20dp"
-                        android:layout_weight="0.1"
+                        android:paddingRight="14dp"
                         android:layout_gravity="right"
                         android:gravity="right"
                         android:id="@+id/game_added_mark"
@@ -95,7 +94,7 @@
                     android:id="@+id/game_available_platforms_textview"
                     android:textColor="@color/hint_color"
                     android:fontFamily="sans-serif-light"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:maxLines="1"
                     android:layout_weight="1"
                     android:paddingTop="3dp"
@@ -106,6 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingTop="5dp"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"

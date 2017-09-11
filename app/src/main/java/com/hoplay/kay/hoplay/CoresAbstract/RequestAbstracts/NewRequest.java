@@ -187,7 +187,7 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
 
 
         gameAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, gamesList);
+                R.layout.auto_complete_text_view_list_item, gamesList);
 
         regionAdapter = new SpinnerAdapter(getApplicationContext(),
                 R.layout.spinnner_item, regionList);

@@ -9,17 +9,17 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Cores.AuthenticationCore.SignUpCore"
-    android:background="@color/app_background"
+    android:background="@drawable/hoplay_bg"
     android:clickable="true"
     android:id="@+id/sign_up_relativeLayout"
     android:onClick="removeKeyboard"
     >
 
     <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/go_back_to_main_imageview"
-        app:srcCompat="@drawable/ic_close_24dp"
+        app:srcCompat="@drawable/ic_close_32dp"
         android:layout_marginRight="20dp"
         android:padding="0dp"
         android:layout_alignParentTop="true"

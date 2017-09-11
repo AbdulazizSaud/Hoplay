@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hoplay.kay.hoplay.Adapters.CommonAdapter;
 import com.hoplay.kay.hoplay.App.App;
@@ -29,6 +30,8 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
     protected App app;
     private ImageView backBtn;
 
+
+    protected ImageView addFriendButton;
     private TextView usernameProfile;
     private TextView userBioTextView;
     private TextView userGamesTextView;
@@ -47,6 +50,7 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     ArrayList<RecentGameModel> recentGameModels =new ArrayList<RecentGameModel>();
+    protected String userKey = "";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +76,8 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
         toUserFriendsLinearLayout = (LinearLayout) findViewById(R.id.friends_user_profile_linearlayout);
         toUserRatingsLinearLayout = (LinearLayout) findViewById(R.id.ratings_user_profile_linearlayout);
         userBioTextView = (TextView)  findViewById(R.id.view_user_profile_bio_textView);
+        addFriendButton = (ImageView) findViewById(R.id.add_friend_view_user_profile);
+
 
 
 
@@ -120,7 +126,24 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
         });
 
 
+
+        // Load user info
         OnStartActitvty();
+
+        // Add this user as a friend
+        addFriendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (userKey!="" && !usernameProfile.getText().toString().isEmpty())
+                {
+                    addThisUser(userKey);
+                    Toast.makeText(getApplicationContext(),usernameProfile.getText().toString()+" added successfully",Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+
     }
 
 
@@ -238,6 +261,7 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
         friendsNumberTextView.setText(number);
     }
     protected void setUsernameProfile(String name){usernameProfile.setText(name);}
+    protected abstract void addThisUser(String userKey);
     protected abstract void OnStartActitvty();
 
 }

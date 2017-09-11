@@ -3,7 +3,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/app_background"
     android:orientation="vertical"
     android:padding="1dp">
 
@@ -17,7 +16,7 @@
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:id="@+id/request_holder_linearlayout"
-        android:background="@color/app_background"
+
         >
 
         <de.hdodenhof.circleimageview.CircleImageView

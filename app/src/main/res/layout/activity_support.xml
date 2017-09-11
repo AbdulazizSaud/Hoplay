@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/support_relativelayout"
     android:onClick="removeKeyboard"
-    android:background="@color/app_background"
+    android:background="@drawable/hoplay_bg"
     tools:context="com.hoplay.kay.hoplay.CoresAbstract.Support">
 
 

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/pop_up_backgrounds">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        app:srcCompat="@drawable/ic_sentiment_dissatisfied_64dp"
+        android:id="@+id/game_not_found_sad_imageview"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/game_not_found_sorry"
+        android:textSize="20sp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/game_not_found_title_textview"
+        android:layout_below="@+id/game_not_found_sad_imageview"
+        android:gravity="center"
+        android:padding="10dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/game_not_found_message"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/game_not_found_message_textview"
+        android:layout_below="@+id/game_not_found_title_textview"
+        android:gravity="center"
+        android:padding="10dp"/>
+
+
+
+    <Button
+        android:id="@+id/game_not_found_contact_us_button"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:textStyle="bold"
+        android:text="@string/game_not_found_contact_us"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/game_not_found_message_textview"
+        android:layout_alignLeft="@+id/game_not_found_message_textview"
+        android:layout_alignStart="@+id/game_not_found_message_textview" />
+
+    <Button
+        android:id="@+id/game_not_found_discard_button"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        android:text="@string/game_not_found_discard"
+        android:layout_alignTop="@+id/game_not_found_contact_us_button"
+        android:layout_alignRight="@+id/game_not_found_message_textview"
+        android:layout_alignEnd="@+id/game_not_found_message_textview" />
+
+
+
+
+
+
+</RelativeLayout>

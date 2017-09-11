@@ -168,7 +168,7 @@ public class App extends Application implements FirebasePaths {
         // gameAdapter for search request
         ArrayList<String> list = new ArrayList<String>();
         gameAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, list);
+                R.layout.auto_complete_text_view_list_item, list);
 
 
 

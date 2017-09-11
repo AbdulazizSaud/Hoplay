@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/app_background">
+    android:background="@drawable/hoplay_bg">
 
 
     <include
@@ -22,7 +22,7 @@
         android:layout_below="@id/toolbar"
         android:layout_above="@+id/include"
         android:id="@+id/chat_linearlayout"
-        android:background="@color/app_background">
+        android:background="@drawable/hoplay_bg">
 
 
 
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@color/app_background">
+            android:background="@drawable/hoplay_bg">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/game_providers_recyclerview_chat"

@@ -346,10 +346,6 @@ public class SchemaHelper extends SQLiteOpenHelper {
                     cursor.getColumnIndexOrThrow(Schema.SchemaInfo.COLUMN_NAME_SIGNUP_STAMP));
             signUpStampList.add(itemId);
 
-
-            Log.i("=====>","ITS -_- :"+itemId);
-
-
             if (!itemId.equalsIgnoreCase("NOT-FOUND"));
             found = true ;
 

@@ -139,6 +139,7 @@ public class AddGameCore extends AddGame implements FirebasePaths {
                             addGame(shot.getKey(), gameType, shot);
                     }
                     hideLoadingAnimation();
+                    hideNoResultsSection();
 
                 }
 
