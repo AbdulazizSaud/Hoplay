@@ -29,6 +29,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -84,6 +85,7 @@ public abstract class UserProfile extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     ArrayList<RecentGameModel> recentGameModels = new ArrayList<RecentGameModel>();
+    ArrayList<RecentGameModel> tmpRecentGameModels = new ArrayList<RecentGameModel>();
 
 
 
@@ -270,6 +272,8 @@ public abstract class UserProfile extends Fragment {
         // specify an adapter (see also next hoplay)
 
 
+
+
         mAdapter = createAdapter();
 
         // Show or hide no activity elements
@@ -277,6 +281,7 @@ public abstract class UserProfile extends Fragment {
             showNoActivityElements();
         else
             hideNoActivityElements();
+
 
 
 

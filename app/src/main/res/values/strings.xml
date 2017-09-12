@@ -439,6 +439,10 @@
     <string name="game_provider_model_text">%1$s joined room \n %2$s ID: %3$s </string>
 
 
+    <!--                                User Left chat inflater                     -->
+    <string name="user_left_chat_textview">%1$s left chat</string>
+
+
     <!--                                Friend pop up menu                                  -->
     <string name="friend_pop_up_menu_chat_button">C h a t</string>
     <string name="friend_pop_up_menu_view_profile_button">View Profile</string>

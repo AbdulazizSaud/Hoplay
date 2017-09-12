@@ -33,6 +33,9 @@ public class CommunityCore extends Community implements FirebasePaths {
     private DatabaseReference refUserInfo;
     private DatabaseReference refPendingChat;
     private int uniqeID=0;
+    private  String pastMessage = "PAST MESSAGE";
+    private  String newMessage = "NEW MESSAGE";
+    private boolean isFirstMessage = true;
 
 
     private ChildEventListener privateSingleChatListener = new ChildEventListener() {
@@ -264,7 +267,11 @@ public class CommunityCore extends Community implements FirebasePaths {
                 long value = Long.parseLong(userChatRef.getValue().toString().trim());
                 long res = currentCounter - value;
 
-                if (res > 0)
+                // set the new message , past message will change in the notification method
+                newMessage = msg;
+
+
+                if (res > 0 && !newMessage.equalsIgnoreCase(pastMessage))
                     notifyUser(chatKey, joinerUsername, msg);
 
                 updateCounter(chatKey, String.valueOf(res));
@@ -478,7 +485,9 @@ public class CommunityCore extends Community implements FirebasePaths {
 
         Random random = new Random();
         uniqeID = random.nextInt(999999999-1)+1;
-        ///
+
+
+
         notification = new NotificationCompat.Builder(app.getMainAppMenuCore());
         notification.setAutoCancel(true);
         notification.setSmallIcon(R.drawable.hoplaylogo);
@@ -493,6 +502,10 @@ public class CommunityCore extends Community implements FirebasePaths {
 
         NotificationManager nm = (NotificationManager) app.getMainAppMenuCore().getSystemService(NOTIFICATION_SERVICE);
         nm.notify(uniqeID, notification.build());
+
+        // set the message as a past message to avoid repeatness
+        pastMessage = message;
+
     }
 
 
