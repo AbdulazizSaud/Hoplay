@@ -3,6 +3,7 @@ package com.hoplay.kay.hoplay.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,9 +76,15 @@ public class ChatAdapter extends BaseAdapter {
         }
 
         boolean myMsg = chatMessage.isMe() ;//Just a dummy check to simulate whether it me or other sender
-        setAlignment(holder, myMsg);
+        setAlignment(holder, myMsg,chatMessage.isHotKeys());
         holder.txtMessage.setText(chatMessage.getMessage());
-        holder.txtInfo.setText(App.getInstance().convertFromTimeStampToDate(chatMessage.getTimestamp()));
+        try {
+            holder.txtInfo.setText(App.getInstance().convertFromTimeStampToDate((long)chatMessage.getTimestamp()));
+
+        }catch (ClassCastException e)
+        {
+
+        }
         holder.senderUsername.setText(chatMessage.getUsername());
 
         return convertView;
@@ -91,7 +98,36 @@ public class ChatAdapter extends BaseAdapter {
         chatMessages.addAll(messages);
     }
 
-    private void setAlignment(ViewHolder holder, boolean isMe) {
+    private void setAlignment(ViewHolder holder, boolean isMe, boolean isHotkey) {
+
+        if(isHotkey)
+        {
+
+            holder.contentWithBG.setBackgroundResource(R.drawable.user_left_chat_bg);
+            holder.senderUsername.setVisibility(View.GONE);
+
+            holder.txtMessage.setTextColor(context.getResources().getColor(R.color.text_color));
+            holder.txtMessage.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
+
+            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) holder.contentWithBG.getLayoutParams();
+            layoutParams.gravity = Gravity.CENTER;
+            holder.contentWithBG.setLayoutParams(layoutParams);
+
+            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) holder.content.getLayoutParams();
+            lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
+            lp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            holder.content.setLayoutParams(lp);
+            layoutParams = (LinearLayout.LayoutParams) holder.txtMessage.getLayoutParams();
+            layoutParams.gravity = Gravity.CENTER;
+            holder.txtMessage.setLayoutParams(layoutParams);
+
+            layoutParams = (LinearLayout.LayoutParams) holder.txtInfo.getLayoutParams();
+            layoutParams.gravity = Gravity.CENTER;
+            holder.txtInfo.setLayoutParams(layoutParams);
+
+            return;
+        }
+
         if (!isMe) {
             holder.contentWithBG.setBackgroundResource(R.drawable.out_message_bg);
             holder.senderUsername.setVisibility(View.VISIBLE);

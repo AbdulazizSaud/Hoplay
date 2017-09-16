@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.hoplay.kay.hoplay.util.setMessagePack;
 
 
 public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, Constants {
@@ -245,6 +246,11 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
     @Override
     protected void cancelRequest() {
         removeListener();
+
+
+        setChatValuePack("_leave_","left from the request",app.getUserInformation().getUsername());
+
+
         app.getMainAppMenuCore().cancelRequest();
         leaveing = true;
     }
@@ -265,6 +271,7 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
         {
             app.getDatabaseRequests().child(lobby.getRequestPath()).child("players").child(model.getUID()).removeValue();
 
+            setChatValuePack("_kicked_","Kicked from the request",model.getUsername());
         }
 
     }
@@ -278,5 +285,12 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
     private void removeListener() {
         requestRef.removeEventListener(onLoadLobbyInformation);
         requestRef.child("player").removeEventListener(onAddPlayerEvent);
+    }
+
+
+    private void setChatValuePack(String status, String message,String username)
+    {
+        DatabaseReference refMessages = app.getFirebaseDatabase().getReferenceFromUrl(FB_PUBLIC_CHAT_PATH).child(requestModel.getRequestId()).child("_messages_");
+        new setMessagePack(refMessages,username+ " "+message,status);
     }
 }

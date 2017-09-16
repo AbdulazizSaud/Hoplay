@@ -8,9 +8,9 @@ public class  ChatMessage {
     private String id;
     private boolean isMe;
     private String message;
-    private String userId;
+    private Object timestamp;
+    private long counter;
     private String username;
-    private long timestamp;
 
     public String getId() {
         return id;
@@ -36,19 +36,13 @@ public class  ChatMessage {
         this.message = message;
     }
 
-    public String getUserId() {
-        return userId;
-    }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
-    public long getTimestamp() {
+    public Object getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(Object timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -58,5 +52,18 @@ public class  ChatMessage {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public long getCounter() {
+        return counter;
+    }
+
+    public void setCounter(long counter) {
+        this.counter = counter;
+    }
+
+    public boolean isHotKeys()
+    {
+        return username.equals("_leave_") || username.equals("_join_") || username.equals("_kicked_");
     }
 }

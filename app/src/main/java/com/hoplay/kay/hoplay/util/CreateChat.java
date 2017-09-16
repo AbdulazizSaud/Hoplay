@@ -8,6 +8,7 @@ import android.content.Intent;
 import com.hoplay.kay.hoplay.App.App;
 import com.hoplay.kay.hoplay.Cores.ChatCore.ChatCore;
 import com.hoplay.kay.hoplay.Interfaces.FirebasePaths;
+import com.hoplay.kay.hoplay.Models.ChatMessage;
 import com.hoplay.kay.hoplay.Models.FriendCommonModel;
 import com.hoplay.kay.hoplay.Models.RequestModel;
 import com.google.firebase.database.DataSnapshot;
@@ -55,13 +56,16 @@ public class CreateChat implements FirebasePaths {
 
         // path --> /Chat/_private/[KEY]/_messages_
         DatabaseReference messagesRef = chatRoom.child(FIREBASE_CHAT_MESSAGES);
-        HashMap<String, Object> messageMap = new HashMap<>();
 
-        messageMap.put("_message_", "hello");
-        messageMap.put("_username_", "test");
-        messageMap.put("_time_stamp_", ServerValue.TIMESTAMP);
-        messageMap.put("_counter_", 0);
-        messagesRef.child("_last_message_").setValue(messageMap);
+        ChatMessage chatMessage = new ChatMessage();
+        chatMessage.setId(key);
+        chatMessage.setMessage("hello");
+        chatMessage.setUsername("Null");
+        chatMessage.setTimestamp(ServerValue.TIMESTAMP);
+        chatMessage.setCounter(0);
+
+        messagesRef.child("_last_message_").setValue(chatMessage);
+
 
 
         // Set Referance for users
@@ -108,13 +112,17 @@ public class CreateChat implements FirebasePaths {
 
         // path --> /Chat/_public_/[KEY]/_messages_
         DatabaseReference messagesRef = chatRoom.child(FIREBASE_CHAT_MESSAGES);
-        HashMap<String, Object> messageMap = new HashMap<>();
 
-        messageMap.put("_message_", "hello");
-        messageMap.put("_username_", "test");
-        messageMap.put("_time_stamp_", ServerValue.TIMESTAMP);
-        messageMap.put("_counter_", 0);
-        messagesRef.child("_last_message_").setValue(messageMap);
+
+        ChatMessage chatMessage = new ChatMessage();
+        chatMessage.setId(key);
+        chatMessage.setMessage("hello");
+        chatMessage.setUsername("Null");
+        chatMessage.setTimestamp(ServerValue.TIMESTAMP);
+        chatMessage.setCounter(0);
+
+        messagesRef.child("_last_message_").setValue(chatMessage);
+
 
 
         // Set Referance for users

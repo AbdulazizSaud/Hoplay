@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.hoplay.kay.hoplay.util.setMessagePack;
 
 
 public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
@@ -206,7 +207,6 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
             return;
 
 
-
         if(app.getMainAppMenuCore().getRequestModelRef() !=null)
             app.getMainAppMenuCore().cancelRequest();
 
@@ -234,6 +234,12 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
                         gameModel.getGameType(),
                         requestModel.getPlatform(),
                         requestModel.getRegion());
+
+
+
+
+                DatabaseReference refMessages = app.getFirebaseDatabase().getReferenceFromUrl(FB_PUBLIC_CHAT_PATH).child(reqId).child("_messages_");
+                new setMessagePack(refMessages,app.getUserInformation().getUsername()+ " Joined the request","_join_");
 
 
                 app.switchMainAppMenuFragment(new LobbyFragmentCore(request.getRequestModelReference()));

@@ -96,8 +96,6 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
 
-
-
     }
 
     @Override

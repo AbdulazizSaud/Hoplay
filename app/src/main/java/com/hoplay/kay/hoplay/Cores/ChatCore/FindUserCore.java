@@ -20,7 +20,6 @@ public class FindUserCore extends UserListCore {
 
     @Override
     protected void OnClickHolders(final FriendCommonModel model) {
-        String currentUserId = app.getAuth().getCurrentUser().getUid();
         createChat.createPrivateChat(getApplicationContext(),model);
 
         // users_info -> user key -> _firends_list_

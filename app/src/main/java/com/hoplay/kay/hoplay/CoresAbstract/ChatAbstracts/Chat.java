@@ -302,24 +302,16 @@ public abstract class Chat extends AppCompatActivity {
     }
 
     // this method for adding new message to adapter and display it
-    protected void addMessage(String chatKey,String userId,String username,String message,long timeStamp, boolean me) {
+    protected void addMessage(ChatMessage message) {
 
         //check if this message is empty
-        if (isMessageEmpty(message) ||  chatMessages.containsKey(chatKey)) {
+        if (isMessageEmpty(message.getMessage()) ||  chatMessages.containsKey(message.getId())) {
             return;
         }
-        // set a message
-        ChatMessage chatMessage = new ChatMessage();
-        chatMessage.setId(chatKey);
-        chatMessage.setUserId(userId);
-        chatMessage.setUsername(username);
-        chatMessage.setMessage(message);
-        chatMessage.setTimestamp(timeStamp);
-        chatMessage.setMe(me);
 
         // add to adapter and display it
-        chatMessages.put(chatKey,chatMessage);
-        adapter.add(chatMessage);
+        chatMessages.put(message.getId(),message);
+        adapter.add(message);
         adapter.notifyDataSetChanged();
 
         // scroll the message layout container
@@ -468,7 +460,6 @@ public abstract class Chat extends AppCompatActivity {
     {
         ChatMessage chatMessage = new ChatMessage();
         chatMessage.setId("");
-        chatMessage.setUserId("");
         chatMessage.setUsername("");
         chatMessage.setMessage(message);
         chatMessage.setTimestamp(0);

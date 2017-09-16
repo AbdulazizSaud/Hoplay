@@ -11,6 +11,7 @@ import android.view.View;
 import com.hoplay.kay.hoplay.CoresAbstract.Community;
 import com.hoplay.kay.hoplay.Cores.ChatCore.ChatCore;
 import com.hoplay.kay.hoplay.Interfaces.FirebasePaths;
+import com.hoplay.kay.hoplay.Models.ChatMessage;
 import com.hoplay.kay.hoplay.Models.CommunityChatModel;
 import com.hoplay.kay.hoplay.Models.GameModel;
 import com.hoplay.kay.hoplay.R;
@@ -41,7 +42,6 @@ public class CommunityCore extends Community implements FirebasePaths {
     private ChildEventListener privateSingleChatListener = new ChildEventListener() {
         @Override
         public void onChildAdded(final DataSnapshot dataSnapshot, String s) {
-
             addNewPrivateChat(dataSnapshot);
         }
 
@@ -68,64 +68,6 @@ public class CommunityCore extends Community implements FirebasePaths {
         }
     };
 
-    private void addNewPrivateChat(final DataSnapshot chatRef) {
-        final String opponentKey = (String) chatRef.child(FIREBASE_OPPONENT_ID_ATTR).getValue();
-        if (opponentKey == null)
-            return;
-
-        // on first time
-        final DatabaseReference refCurrentChat = app.getDatabasChat().child(FIREBASE_PRIVATE_ATTR).child(chatRef.getKey());
-
-        refUserInfo = app.getDatabaseUsersInfo().child(opponentKey).child(FIREBASE_DETAILS_ATTR);
-
-        refUserInfo.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(final DataSnapshot userInfo) {
-
-                refCurrentChat.child("_messages_/_last_message_").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot lasMsgSnap) {
-
-                        if (lasMsgSnap.child("_message_").getValue() == null)
-                            return;
-
-                        try {
-
-
-                            CommunityChatModel communityChatModel = addUserChatToList(chatRef.getKey(),
-                                    FIREBASE_PRIVATE_ATTR,
-                                    userInfo.child("_username_").getValue(String.class),
-                                    userInfo.child("_picUrl_").getValue(String.class),
-                                    lasMsgSnap.child("_message_").getValue(String.class),
-                                    lasMsgSnap.child("_time_stamp_").getValue(Long.class),
-                                    lasMsgSnap.child("_counter_").getValue(Long.class)
-                            );
-                            communityChatModel.setOpponentId(opponentKey);
-
-                        } catch (NullPointerException e) {
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        DatabaseReference refLastMessage = refCurrentChat.child("_messages_/_last_message_");
-        refLastMessage.addValueEventListener(lastMessageListener);
-    }
 
     private ChildEventListener publicChatListener = new ChildEventListener() {
         @Override
@@ -156,6 +98,71 @@ public class CommunityCore extends Community implements FirebasePaths {
         }
     };
 
+
+
+    private void addNewPrivateChat(final DataSnapshot chatRef) {
+        final String opponentKey = (String) chatRef.child(FIREBASE_OPPONENT_ID_ATTR).getValue();
+        if (opponentKey == null)
+            return;
+
+        // on first time
+        final DatabaseReference refCurrentChat = app.getDatabasChat().child(FIREBASE_PRIVATE_ATTR).child(chatRef.getKey());
+
+        refUserInfo = app.getDatabaseUsersInfo().child(opponentKey).child(FIREBASE_DETAILS_ATTR);
+
+        refUserInfo.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(final DataSnapshot userInfo) {
+
+                refCurrentChat.child("_messages_/_last_message_").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot lasMsgSnap) {
+
+
+
+                        if (lasMsgSnap.getValue() == null || lasMsgSnap.child("message").getValue() == null)
+                            return;
+
+                        try {
+
+                            ChatMessage message = lasMsgSnap.getValue(ChatMessage.class);
+
+                            CommunityChatModel communityChatModel = addUserChatToList(chatRef.getKey(),
+                                    FIREBASE_PRIVATE_ATTR,
+                                    userInfo.child("_username_").getValue(String.class),
+                                    userInfo.child("_picUrl_").getValue(String.class),
+                                    message.getMessage(),
+                                    (long)message.getTimestamp(),
+                                    message.getCounter()
+                            );
+                            communityChatModel.setOpponentId(opponentKey);
+
+                        } catch (NullPointerException e) {
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        DatabaseReference refLastMessage = refCurrentChat.child("_messages_/_last_message_");
+        refLastMessage.addValueEventListener(lastMessageListener);
+    }
+
+
     private void addNewPublicChat(final DataSnapshot chatRef) {
         // on first time
         final DatabaseReference refCurrentChat = app.getDatabasChat().child(FIREBASE_PUBLIC_ATTR).child(chatRef.getKey());
@@ -184,14 +191,17 @@ public class CommunityCore extends Community implements FirebasePaths {
                     }
                 }
 
+                ChatMessage message = lastMessageSnapshots.getValue(ChatMessage.class);
+
+
                 addUserChatToList(
                         chatRef.getKey(),
                         FIREBASE_PUBLIC_ATTR,
                         chatName,
                         chatPicture,
-                        lastMessageSnapshots.child("_message_").getValue(String.class),
-                        lastMessageSnapshots.child("_time_stamp_").getValue(Long.class),
-                        lastMessageSnapshots.child("_counter_").getValue(Long.class)
+                        message.getMessage(),
+                        (long)message.getTimestamp(),
+                        message.getCounter()
                 );
             }
 
@@ -211,16 +221,17 @@ public class CommunityCore extends Community implements FirebasePaths {
         @Override
         public void onDataChange(DataSnapshot lastMsgInfo) {
 
+            ChatMessage message = lastMsgInfo.getValue(ChatMessage.class);
 
-
-            if (lastMsgInfo.child("_message_").getValue() == null && lastMsgInfo.child("_time_stamp_").getValue() == null)
+            if (message == null)
                 return;
 
+
             final String chatKey = lastMsgInfo.getRef().getParent().getParent().getKey();
-            final String usernameKey = lastMsgInfo.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
-            final String msg = lastMsgInfo.child("_message_").getValue(String.class);
-            final long timeStamp = lastMsgInfo.child("_time_stamp_").getValue(Long.class);
-            final String currentChatCounterAsString = String.valueOf(lastMsgInfo.child("_counter_").getValue(Long.class));
+            final String usernameKey = message.getUsername();
+            final String msg = message.getMessage();
+            final long timeStamp = (long)message.getTimestamp();
+            final String currentChatCounterAsString = String.valueOf(message.getCounter());
 
            final String type = (lastMsgInfo.getRef().toString().contains(FIREBASE_PRIVATE_ATTR)) ? FIREBASE_PRIVATE_ATTR : FIREBASE_PUBLIC_ATTR;
 
@@ -446,6 +457,7 @@ public class CommunityCore extends Community implements FirebasePaths {
 
 
     private CommunityChatModel addUserChatToList(String chatKey, String chatType, String chatName, String pictureURL, String lastMessage, long timeStamp, long messageNumber) {
+
         CommunityChatModel communityUserList = new CommunityChatModel();
         communityUserList.setChatKey(chatKey);
         communityUserList.setChatType(chatType);

@@ -11,6 +11,7 @@ import com.hoplay.kay.hoplay.Cores.ForgetPasswordCore;
 import com.hoplay.kay.hoplay.Cores.UserProfileCores.ViewFriendProfileCore;
 import com.hoplay.kay.hoplay.CoresAbstract.ChatAbstracts.Chat;
 import com.hoplay.kay.hoplay.Interfaces.FirebasePaths;
+import com.hoplay.kay.hoplay.Models.ChatMessage;
 import com.hoplay.kay.hoplay.Models.PlayerModel;
 import com.hoplay.kay.hoplay.R;
 import com.hoplay.kay.hoplay.Services.CallbackHandlerCondition;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.hoplay.kay.hoplay.util.setMessagePack;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -36,18 +38,14 @@ public class ChatCore extends Chat implements FirebasePaths {
     private String chatRoomKey = null;
     private String roomName = null, roomPictureUrl = null, chatRoomType = null;
     private long lastMessageCounter;
-    private boolean usersLoaded = false;
     private DatabaseReference refRoom, refMessages;
     private String opponentId;
-    private boolean cutLoob = false;
-    boolean isPrivate;
-    String currentUID;
+    private boolean isPrivate;
+    private String currentUID;
 
 
 
 
-    // Joiner username
-    private String joinerUsername;
 
     private ChildEventListener messagesPacketsListener = new ChildEventListener() {
         @Override
@@ -206,30 +204,36 @@ public class ChatCore extends Chat implements FirebasePaths {
 
     public void loadMessages() {
 
-        refMessages.child("_last_message_/_counter_").addValueEventListener(counterListener);
+        refMessages.child("_last_message_/counter").addValueEventListener(counterListener);
         refMessages.child("_packets_").addChildEventListener(messagesPacketsListener);
     }
 
 
     private void addMessage(DataSnapshot dataSnapshot) {
 
+
+
         if (isEmpty(dataSnapshot))
             return;
 
 
-        String chatKey = dataSnapshot.child("_message_key_").getValue(String.class);
-        String senderId = dataSnapshot.child("_username_").getValue(String.class);
-        String message = dataSnapshot.child("_message_").getValue(String.class);
-        long timestamp = dataSnapshot.child("_time_stamp_").getValue(long.class);
+        ChatMessage message =dataSnapshot.getValue(ChatMessage.class);
+
+        String senderId = message.getUsername();
         String senderUsername = "Someone";
         boolean isYou = senderId.equals(app.getUserInformation().getUID());
+
+        message.setMe(isYou);
 
         PlayerModel playerModel = playerOnChat.get(senderId);
 
         if (playerModel != null)
             senderUsername = playerModel.getUsername();
+        else if (message.isHotKeys())
+            senderUsername = senderId;
 
-        addMessage(chatKey, senderId, senderUsername, message,timestamp, isYou);
+        message.setUsername(senderUsername);
+        addMessage(message);
 
     }
 
@@ -237,20 +241,7 @@ public class ChatCore extends Chat implements FirebasePaths {
     protected void sendMessageToFirebase(String messageText) {
 
         if (sendMessage(messageText)) {
-
-            String messageKey = refMessages.push().getKey();
-
-            HashMap<String, Object> map = new HashMap<>();
-            map.put("_message_key_", messageKey);
-            map.put("_message_", messageText);
-            map.put("_username_", app.getUserInformation().getUID());
-            map.put("_time_stamp_", ServerValue.TIMESTAMP);
-            map.put("_counter_", ++lastMessageCounter);
-
-            DatabaseReference messageRef = refMessages.child("_packets_").child(messageKey);
-            messageRef.setValue(map);
-            DatabaseReference lastMessageRef = refMessages.child("_last_message_");
-            lastMessageRef.setValue(map);
+            new setMessagePack(refMessages,messageText,app.getUserInformation().getUID(),++lastMessageCounter);
         }
     }
 
@@ -275,7 +266,7 @@ public class ChatCore extends Chat implements FirebasePaths {
 
 
     private boolean isEmpty(DataSnapshot dataSnapshot) {
-        return dataSnapshot.child("_username_").getValue() == null || dataSnapshot.child("_message_").getValue() == null;
+        return dataSnapshot.child("username").getValue() == null || dataSnapshot.child("message").getValue() == null;
     }
 
 
@@ -286,6 +277,8 @@ public class ChatCore extends Chat implements FirebasePaths {
         refMessages.child("_last_message_/_counter_").removeEventListener(counterListener);
 
     }
+
+
 
 
 
