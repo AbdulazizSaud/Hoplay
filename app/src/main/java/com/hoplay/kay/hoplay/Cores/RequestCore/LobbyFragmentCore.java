@@ -248,7 +248,7 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
         removeListener();
 
 
-        setChatValuePack("_leave_","left from the request",app.getUserInformation().getUsername());
+        setChatValuePack("_leave_","left the lobby",app.getUserInformation().getUsername());
 
 
         app.getMainAppMenuCore().cancelRequest();
@@ -271,7 +271,7 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
         {
             app.getDatabaseRequests().child(lobby.getRequestPath()).child("players").child(model.getUID()).removeValue();
 
-            setChatValuePack("_kicked_","Kicked from the request",model.getUsername());
+            setChatValuePack("_kicked_","Kicked from the lobby",model.getUsername());
         }
 
     }
