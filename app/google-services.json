@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1072815129013:android:b0dc500dd277ae63",
         "android_client_info": {
-          "package_name": "com.example.kay.hoplay"
+          "package_name": "com.hoplay.kay.hoplay"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "1072815129013-bfisi14lc29clvcetrflj1bc2hcrpvc7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.kay.hoplay",
+            "package_name": "com.hoplay.kay.hoplay",
             "certificate_hash": "86ABC7E95ABD99DE8F919B3FDF351A7743CBC54B"
           }
         },
@@ -26,7 +26,7 @@
           "client_id": "1072815129013-npniroifg0u7ndtq9dlik4ajn3up4s28.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.kay.hoplay",
+            "package_name": "com.hoplay.kay.hoplay",
             "certificate_hash": "7D23A8FCAB6CB4EF90EAC0B885048BD3CB179BD7"
           }
         },

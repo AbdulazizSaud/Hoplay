@@ -3,6 +3,7 @@ package com.hoplay.kay.hoplay.Cores;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
@@ -500,13 +501,17 @@ public class CommunityCore extends Community implements FirebasePaths {
 
 
 
+        Uri sound = Uri.parse("android.resource://" + app.getPackageName() + "/" + R.raw.communicationchannel);
+
+
         notification = new NotificationCompat.Builder(app.getMainAppMenuCore());
         notification.setAutoCancel(true);
-        notification.setSmallIcon(R.drawable.hoplaylogo);
+        notification.setSmallIcon(R.drawable.ic_stat_hoplaylogo);
         notification.setTicker("This is ticker");
         notification.setWhen(System.currentTimeMillis());
         notification.setContentTitle(communityChatModel.getChatName());
         notification.setContentText(joinerUsername+ message);
+        notification.setSound(sound);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(app.getMainAppMenuCore(), uniqeID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         notification.setContentIntent(pendingIntent);
