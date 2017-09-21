@@ -219,7 +219,10 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
         }, 1000);
 
 
+        checkLobbyExpire();
+    }
 
+    private void checkLobbyExpire() {
         app.getTimeStamp().setTimestampLong();
         CallbackHandlerCondition callbackHandlerCondition = new CallbackHandlerCondition() {
             @Override
