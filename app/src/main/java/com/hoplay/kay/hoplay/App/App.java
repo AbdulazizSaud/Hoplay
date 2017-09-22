@@ -92,6 +92,8 @@ public class App extends Application implements FirebasePaths {
 
     private ArrayList<RequestModel> savedRequests;
 
+    private ArrayList<String> regionList = new ArrayList<>();
+
     private MainAppMenuCore mainAppMenuCore;
 
 
@@ -365,6 +367,13 @@ public class App extends Application implements FirebasePaths {
         return timeStamp;
     }
 
+    public ArrayList<String> getRegionList() {
+        return regionList;
+    }
+
+    public void setRegionList(ArrayList<String> regionList) {
+        this.regionList = regionList;
+    }
 
     public void setSearchRequestResult(ArrayList<RequestModel> resultList) {
         this.requestResultList = resultList;

@@ -156,12 +156,7 @@ public abstract class SearchResults extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    public void addResult(String platform, String requestTitle, String admin, String description, String region, int playerNumber, String matchType, String rank, long timeStamp) {
 
-        RequestModel requestModel = new RequestModel(platform, requestTitle, admin, description, region, playerNumber, matchType, rank, timeStamp);
-        requestModels.add(requestModel);
-        mAdapter.notifyDataSetChanged();
-    }
 
 
     public void addResult(RequestModel requestModel) {
@@ -191,9 +186,6 @@ public abstract class SearchResults extends AppCompatActivity {
             public void OnBindHolder(ViewHolders holder, final RequestModel model, int position) {
 
                 app.loadingImage(getApplication(), holder, model.getRequestPicture());
-
-
-
 
 
                 // Capitalize Request Title letters

@@ -1,6 +1,7 @@
 package com.hoplay.kay.hoplay.Cores.RequestCore;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
@@ -167,11 +168,17 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
     @Override
     protected void OnStartActivity() {
         Intent i = getIntent();
-        final String requstId = (String) i.getStringExtra("requestId");
 
+
+
+        Bundle bundle = i.getExtras();
+
+        if (bundle != null) {
+            requestModel = bundle.getParcelable("requestModel");
+        }
 
         // here we will retreive the data;
-        requestModel = app.getRequestModelResult(requstId);
+
         gameModel =  app.getGameManager().getGameById(requestModel.getGameId());
 
         String path = requestModel.getPlatform().toUpperCase()+"/"+requestModel.getGameId()+"/"+requestModel.getRegion()+"/"

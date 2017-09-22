@@ -1,5 +1,7 @@
 package com.hoplay.kay.hoplay.Cores.RequestCore;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.hoplay.kay.hoplay.CoresAbstract.RequestAbstracts.SearchRequests;
@@ -23,16 +25,8 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
 
     private ArrayList<RequestModel> requestModelArrayList = new ArrayList<>();
 
-    private String gameName;
-    private String region;
-    private String gamePlat;
-    private String matchType;
-    private int playersNumber;
-    private String rank;
-    DatabaseReference gameRef;
-
-
     private long currentTimeStamp;
+
 
     @Override
     protected void searchForGame(String value) {
@@ -162,56 +156,15 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
     @Override
     protected void searchForRequest(RequestModel requestModel) {
 
+        Intent i = new Intent(getActivity().getApplicationContext(),SearchResultsCore.class);
 
-        gameName = requestModel.getRequestTitle();
-        region = requestModel.getRegion();
-        gamePlat = requestModel.getPlatform();
-        matchType = requestModel.getMatchType();
-        playersNumber = requestModel.getPlayerNumber();
-        rank = requestModel.getRank();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("requestModel",requestModel);
 
-
-        GameModel model = app.getGameManager().getGameByName(gameName.toLowerCase());
-
-        if (model == null)
-            return;
-
-        String gameId = model.getGameID();
-
-        if(region.equals("All"))
-        {
-
-            requestModelArrayList = new ArrayList<>();
-
-            for(String reg : regionList)
-            {
-                if(reg.equals("All"))
-                    continue;
-
-                gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(reg);
-                searchQuery2(currentTimeStamp);
-
-            }
-
-
-            CallbackHandlerCondition callback = new CallbackHandlerCondition() {
-                @Override
-                public boolean callBack() {
-                     app.setSearchRequestResult(requestModelArrayList);
-                     goToResultLayout();
-
-                    return true;
-                }
-            };
-
-            new HandlerCondition(callback, 1000);
-
-
-        } else {
-
-            gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(region);
-            searchQuery(currentTimeStamp);
-        }
+        app.setRegionList(regionList);
+        i.putExtras(bundle);
+        i.putExtra("currentTimestamp",currentTimeStamp);
+        startActivity(i);
 
     }
 
@@ -252,97 +205,9 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
     }
 
 
-    private void searchQuery(long currentTimestamp) {
-
-        long last48 = currentTimestamp - DUE_REQUEST_TIME_IN_VALUE_HOURS;
-
-        final Query query = gameRef.orderByChild(FIREBASE_REQUEST_TIME_STAMP_ATTR).startAt(last48).endAt(currentTimestamp);
-        requestModelArrayList = new ArrayList<>();
-
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                if (dataSnapshot == null)
-                    return;
-
-                Iterable<DataSnapshot> shots = dataSnapshot.getChildren();
-                for (DataSnapshot shot : shots) {
-
-                    RequestModel receivedRequestModel = shot.getValue(RequestModel.class);
-
-                    if (playersNumber != 0)
-                        if (receivedRequestModel.getPlayerNumber() != playersNumber)
-                            continue;
-
-                    if (!rank.equals("All Ranks"))
-                        if (!receivedRequestModel.getRank().equals(rank))
-                            continue;
-
-                    if(!matchType.equals("All Matches"))
-                    if (!matchType.equals(receivedRequestModel.getMatchType()))
-                        continue;
-
-                    receivedRequestModel.setRequestId(shot.getKey());
-                    requestModelArrayList.add(receivedRequestModel);
-
-                }
-                app.setSearchRequestResult(requestModelArrayList);
-                goToResultLayout();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
 
 
 
-    private void searchQuery2(long currentTimestamp) {
-
-        long last48 = currentTimestamp - DUE_REQUEST_TIME_IN_VALUE_HOURS;
-
-        final Query query = gameRef.orderByChild(FIREBASE_REQUEST_TIME_STAMP_ATTR).startAt(last48).endAt(currentTimestamp);
-
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                if (dataSnapshot == null)
-                    return;
-
-
-                Iterable<DataSnapshot> shots = dataSnapshot.getChildren();
-                for (DataSnapshot shot : shots) {
-
-                    RequestModel receivedRequestModel = shot.getValue(RequestModel.class);
-
-                    if (playersNumber != 0)
-                        if (receivedRequestModel.getPlayerNumber() != playersNumber)
-                            continue;
-
-                    if (!rank.equals("All Ranks"))
-                        if (!receivedRequestModel.getRank().equals(rank))
-                            continue;
-
-                    if(!matchType.equals("All Matches"))
-                        if (!matchType.equals(receivedRequestModel.getMatchType()))
-                            continue;
-
-                    receivedRequestModel.setRequestId(shot.getKey());
-                    requestModelArrayList.add(receivedRequestModel);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
 
 
 

@@ -78,7 +78,7 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
                             player.setGamePovider(pcGameProvider);
                             if (dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR + "/" + pcGameProvider).getValue() != null)
                                 player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR + "/" + pcGameProvider).getValue(String.class));
-                            lobby.setGameBorderColor(ContextCompat.getColor(getContext(), R.color.pc_color));
+                                //lobby.setGameBorderColor(ContextCompat.getColor(getContext(), R.color.pc_color));
 
                         }
 
