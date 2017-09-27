@@ -358,10 +358,21 @@ public abstract class SearchRequests extends Fragment {
                 if (!matchTypeSpinner.getText().toString().trim().isEmpty())
                     matchType =matchTypeSpinner.getText().toString().trim();
 
-                RequestModel requestModel;
+                RequestModel requestModel = new RequestModel();
 
                 if(checkIsValidSearch()){
-                    requestModel=new RequestModel(currentPlatform,gameName,region,playersNumber,matchType,rank,-1);
+
+                    requestModel.setPlatform(currentPlatform);
+                    requestModel.setGameName(gameName);
+                    requestModel.setRegion(region);
+                    requestModel.setPlayerNumber(playersNumber);
+                    requestModel.setMatchType(matchType);
+                    requestModel.setRank(rank);
+
+                    // Set game id
+                    GameModel gameModel = app.getGameManager().getGameByName(gameName);
+                    requestModel.setGameId(gameModel.getGameID());
+
                     searchForRequest(requestModel);
                 }
 

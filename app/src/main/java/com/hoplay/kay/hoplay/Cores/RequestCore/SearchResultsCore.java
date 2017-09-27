@@ -48,18 +48,83 @@ public class SearchResultsCore extends SearchResults implements FirebasePaths, C
     protected void OnStartActivity() {
 
 
+        // get All game data
         Intent intent = getIntent();
-
 
         Bundle bundle = intent.getExtras();
         long currentTimeStamp = intent.getLongExtra("currentTimestamp", 0);
+        RequestModel searchModel = bundle.getParcelable("requestModel");
 
 
-        RequestModel searchModel = new RequestModel();
+        final long playersNumber = searchModel.getPlayerNumber();
+        final String rank = searchModel.getRank();
+        final String matchType = searchModel.getMatchType();
 
-        if (bundle != null) {
-            searchModel = bundle.getParcelable("requestModel");
-        }
+        // Set ref
+        DatabaseReference gameRef = app.getDatabaseRequests().child(searchModel.getPlatform()).child(searchModel.getGameId()).child(searchModel.getRegion());
+
+
+        // Impelement query orderd by the last timestamp cap
+        long last48= currentTimeStamp - DUE_REQUEST_TIME_IN_VALUE_HOURS;
+        final Query query= gameRef.orderByChild(FIREBASE_REQUEST_TIME_STAMP_ATTR).startAt(last48).endAt(currentTimeStamp);
+
+
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+
+                Log.i("onChildAdded --->",dataSnapshot.toString());
+
+
+                RequestModel receivedRequestModel = dataSnapshot.getValue(RequestModel.class);
+
+                if(receivedRequestModel.getPlayers() == null)
+                    return;
+
+                if (playersNumber != 0)
+                    if (receivedRequestModel.getPlayerNumber() != playersNumber)
+                        return;
+
+                if (!rank.equals("All Ranks"))
+                    if (!receivedRequestModel.getRank().equals(rank))
+                        return;
+
+                if(!matchType.equals("All Matches"))
+                    if (!matchType.equals(receivedRequestModel.getMatchType()))
+                        return;
+
+                receivedRequestModel.setRequestId(dataSnapshot.getKey());
+
+
+
+                addResult(receivedRequestModel);
+
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Log.i("onChildChanged --->",dataSnapshot.toString());
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
 
     }

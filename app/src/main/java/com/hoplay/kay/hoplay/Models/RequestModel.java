@@ -28,7 +28,7 @@ public  class RequestModel implements Parcelable{
 
     private String adminName;
     private String requestPicture;
-    private String gameId;
+    private String gameId,gameName;
     private HashMap<String,PlayerModel> players;
 
 
@@ -272,6 +272,14 @@ public  class RequestModel implements Parcelable{
     {
         if(players.containsKey(playerModel.getUID()))
             players.remove(playerModel.getUID());
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
+
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
     }
 }
 
