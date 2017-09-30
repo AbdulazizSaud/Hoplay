@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/hoplay_bg"
+    android:background="@drawable/hoplay_bg_not_stretched"
     android:onClick="removeKeyboard"
     android:id="@+id/deactive_account_relativelayout"
     tools:context="com.hoplay.kay.hoplay.CoresAbstract.ProfileAbstracts.DeactiveAccount">

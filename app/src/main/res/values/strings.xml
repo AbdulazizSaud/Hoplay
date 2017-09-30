@@ -350,7 +350,7 @@
 
 
     <!--                                 No Connection Layout                                                   -->
-    <string name="no_connection_service_unavailable">Service Unavailable (-_-)</string>
+    <string name="no_connection_service_unavailable">No Internet Connection -_-</string>
 
 
     <!--                                 Saved Request Instance                                                 -->
@@ -410,6 +410,10 @@
 
 
 
+
+    <!--                            Promo code                                                  -->
+    <string name="promo_code_skip">Skip</string>
+    <string name="promo_code_done">Done</string>
 
 
 

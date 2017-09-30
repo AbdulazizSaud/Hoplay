@@ -27,6 +27,8 @@ public interface FirebasePaths {
 
 
     public static final String FIREBASE_SAVED_REQUESTS_REQUESTS_ATTR="Requests";
+    public static final String FIREBASE_PROMO_CODE_POINTS_ATTR ="Points";
+    public static final String FIREBASE_PROMO_CODE_ATTR ="_promo_code_";
 
     public static final String FIREBASE_GAMES_REFERENCES = "_games_";
     public static final String FIREBASE_GAMES_NAME_ATTR_REFERENCES = "name";

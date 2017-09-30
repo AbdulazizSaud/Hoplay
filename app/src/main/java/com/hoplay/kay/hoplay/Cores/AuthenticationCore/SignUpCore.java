@@ -5,9 +5,12 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.hoplay.kay.hoplay.App.App;
 import com.hoplay.kay.hoplay.CoresAbstract.AuthenticationAbstracts.Signup;
 import com.hoplay.kay.hoplay.Interfaces.FirebasePaths;
 import com.hoplay.kay.hoplay.R;
+import com.hoplay.kay.hoplay.Services.CallbackHandlerCondition;
+import com.hoplay.kay.hoplay.Services.HandlerCondition;
 import com.hoplay.kay.hoplay.Services.SchemaHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,6 +31,7 @@ public class SignUpCore extends Signup implements FirebasePaths{
     private FirebaseAuth appAuth;
     private SchemaHelper schemaHelper = new SchemaHelper(this);
 
+    private boolean isDone=false,isExists = false;
 
     @Override
     public void OnStartActivity() {
@@ -43,7 +47,7 @@ public class SignUpCore extends Signup implements FirebasePaths{
     // if fail , it will give the user a failed message
 
     @Override
-    protected void signUp(final String email, final String username, final String password, final String nickname) {
+    protected void signUp(final String email, final String username, final String password,final String promoCode) {
 
 
         loadingDialog(true);
@@ -56,8 +60,7 @@ public class SignUpCore extends Signup implements FirebasePaths{
 
 
                             FirebaseUser user = appAuth.getCurrentUser();
-
-                            insertInfoToDatabase(user.getUid(),email,username);
+                            insertInfoToDatabase(user.getUid(),email,username,promoCode);
 
 //                            // success message
 //                            String strMeatMsg = String.format(getResources().getString(R.string.signup_successful_message), username);
@@ -101,23 +104,89 @@ public class SignUpCore extends Signup implements FirebasePaths{
 
 
 
-    private void insertInfoToDatabase(final String UID,final String email, final String username) {
 
-        DatabaseReference usersInfoRef = app.getDatabaseUsersInfo().child(UID);
 
-        HashMap<String,String> map = new HashMap<>();
+    private void setNewPromoCode(final String promoCode,final String username)
+    {
+
+
+        DatabaseReference usernamesRef = app.getDatabaseUserNames();
+
+        usernamesRef.child(promoCode).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() != null)
+                {
+
+                    DatabaseReference promoRef = app.getDatabasePromoCode();
+                    promoRef.child(promoCode+"/users/"+username).setValue(false);
+
+                    HashMap<String,Object> pointStructure = new HashMap<>();
+
+                    pointStructure.put("points",0);
+                    pointStructure.put("users","null");
+                    promoRef.child(username).setValue(pointStructure);
+
+                    isExists = true;
+
+                }
+                isDone = true;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+    }
+
+    private void insertInfoToDatabase(final String UID,final String email, final String username,final String promoCode) {
+
+        final DatabaseReference usersInfoRef = app.getDatabaseUsersInfo().child(UID);
+
+        final HashMap<String,String> map = new HashMap<>();
 
         map.put(FIREBASE_USERNAME_ATTR,username.toLowerCase());
         map.put(FIREBASE_BIO_ATTR,"Bio");
         map.put(FIREBASE_ACCOUNT_TYPE_ATTR,"REGULAR");
         map.put(FIREBASE_EMAIL_ATTR,email);
         map.put(FIREBASE_PICTURE_URL_ATTR,"default");
-        usersInfoRef.child(FIREBASE_DETAILS_ATTR).setValue(map);
+
+        // promoCode
+        if(promoCode != null)
+        setNewPromoCode(promoCode,username);
+        else {
+            isDone = true;
+        }
+        //-------------------
+
+
+        CallbackHandlerCondition callbackHandlerCondition = new CallbackHandlerCondition() {
+            @Override
+            public boolean callBack() {
+
+                if(isExists)
+                {
+                    map.put(FIREBASE_PROMO_CODE_ATTR,promoCode);
+                }
+
+                if(isDone) {
+                    usersInfoRef.child(FIREBASE_DETAILS_ATTR).setValue(map);
+                    return true;
+                }
+                return false;
+            }
+        };
+
+
+        new HandlerCondition(callbackHandlerCondition,0);
 
         // user name list
         app.getDatabaseUserNames().child(username).setValue(UID);
-
-
 
     }
 

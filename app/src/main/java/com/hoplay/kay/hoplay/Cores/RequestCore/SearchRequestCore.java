@@ -225,6 +225,7 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
         app.getGameManager().addGame(gameModel);
     }
 
+
     @Override
     protected void loadRanksForNotAddedGame(final GameModel gameModel) {
         app.getDatabaseGames().child(gameModel.getGameType() + "/" + gameModel.getGameID()).addListenerForSingleValueEvent(new ValueEventListener() {

@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/hoplay_bg"
+        android:background="@drawable/hoplay_bg_not_stretched"
         android:orientation="vertical" >
 
 

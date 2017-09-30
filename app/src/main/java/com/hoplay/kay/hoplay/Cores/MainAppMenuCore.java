@@ -99,10 +99,15 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     String XboxLiveAcc = "";
                     HashMap<String,String> pcGamesAccs = new HashMap<String, String>() ;
 
+
+
                     String username = dataSnapshot.child(FIREBASE_USERNAME_PATH).getValue(String.class);
                     String bio = dataSnapshot.child(FIREBASE_BIO_PATH).getValue(String.class);
                     String accountType = dataSnapshot.child(FIREBASE_ACCOUNT_TYPE_PATH).getValue(String.class);
                     String picUrl = dataSnapshot.child(FIREBASE_PICTURE_URL_PATH).getValue(String.class);
+
+                    String promoCode = dataSnapshot.child(FIREBASE_DETAILS_ATTR+"/"+FIREBASE_PROMO_CODE_ATTR).getValue(String.class);
+
 
                     if (dataSnapshot.hasChild(FIREBASE_USER_PS_GAME_PROVIDER))
                         PSNAcc = dataSnapshot.child(FIREBASE_USER_PS_GAME_PROVIDER).getValue(String.class);
@@ -121,6 +126,11 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
                     }
 
+
+                    if(promoCode !=null)
+                    {
+                    app.getDatabasePromoCode().child(promoCode+"/users/"+username).setValue(true);
+                    }
 
 
 

@@ -9,7 +9,7 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         tools:context=".Cores.AuthenticationCore.LoginCore"
-        android:background="@drawable/hoplay_bg"
+        android:background="@drawable/hoplay_bg_not_stretched"
         android:id="@+id/sign_in_relativeLayout"
         android:onClick="removeKeyboard"
         android:layout_width="match_parent"

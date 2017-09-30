@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/hoplay_bg"
+    android:background="@drawable/hoplay_bg_not_stretched"
     tools:context="com.hoplay.kay.hoplay.Activities.SettingsActivity">
 
 </RelativeLayout>

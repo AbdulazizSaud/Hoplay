@@ -64,13 +64,25 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
                         if (requestModelRefrance.getPlatform().equalsIgnoreCase("PS")) {
                             player.setGamePovider("PSN Account");
                             player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PS_GAME_PROVIDER_ATTR).getValue(String.class));
-                            lobby.setGameBorderColor(ContextCompat.getColor(getContext(), R.color.ps_color));
 
+                            try {
+
+                            }catch (Exception e)
+                            {
+                                lobby.setGameBorderColor(ContextCompat.getColor(getContext(), R.color.ps_color));
+                            }
 
                         } else if (requestModelRefrance.getPlatform().equalsIgnoreCase("XBOX")) {
                             player.setGamePovider("XBOX Account");
                             player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_XBOX_GAME_PROVIDER_ATTR).getValue(String.class));
-                            lobby.setGameBorderColor(ContextCompat.getColor(getContext(), R.color.xbox_color));
+
+                            try {
+
+                            }catch (Exception e)
+                            {
+                                lobby.setGameBorderColor(ContextCompat.getColor(getContext(), R.color.xbox_color));
+                            }
+
 
                         } else {
                             String pcGameProvider = app.getGameManager().getPcGamesWithProviders().get(requestModelRefrance.getGameId().trim());
@@ -78,7 +90,15 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
                             player.setGamePovider(pcGameProvider);
                             if (dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR + "/" + pcGameProvider).getValue() != null)
                                 player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR + "/" + pcGameProvider).getValue(String.class));
-                            lobby.setGameBorderColor(ContextCompat.getColor(getContext(), R.color.pc_color));
+
+                            try
+                            {
+                                lobby.setGameBorderColor(ContextCompat.getColor(getContext(), R.color.pc_color));
+                            }
+                            catch(Exception e)
+                            {
+
+                            }
 
                         }
 

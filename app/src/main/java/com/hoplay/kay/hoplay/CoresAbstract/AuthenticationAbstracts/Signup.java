@@ -1,9 +1,12 @@
 package com.hoplay.kay.hoplay.CoresAbstract.AuthenticationAbstracts;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +16,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -23,6 +27,7 @@ import android.widget.TextView;
 import com.hoplay.kay.hoplay.Cores.MainAppMenuCore;
 import com.hoplay.kay.hoplay.Activities.TermsAndConditions;
 import com.hoplay.kay.hoplay.App.App;
+import com.hoplay.kay.hoplay.Cores.UserProfileCores.AddGameCore;
 import com.hoplay.kay.hoplay.Interfaces.Constants;
 import com.hoplay.kay.hoplay.R;
 import com.hoplay.kay.hoplay.util.Helper;
@@ -173,18 +178,23 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 
 
 
-                    // Next Focus : to the email
-                usernameSignUp.setOnKeyListener(new View.OnKeyListener() {
-                    @Override
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-                        if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.ACTION_DOWN || keyCode == KeyEvent.KEYCODE_FORWARD )
-                            emailSignUp.requestFocus();
 
-                        return true;
-                    }
-                });
+                // NOTICE : This code word but it has problem with entering numeric input , so i commented it .. the next Focus
+                // Codes in email and password  .. etc  . is commednted as well
 
+//                    // Next Focus : to the email
+//                usernameSignUp.setOnKeyListener(new View.OnKeyListener() {
+//                    @Override
+//                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+//
+//                        if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.ACTION_DOWN || keyCode == KeyEvent.KEYCODE_FORWARD )
+//                            emailSignUp.requestFocus();
+//
+//                        return true;
+//                    }
+//                });
+//
 
 
 
@@ -216,17 +226,17 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 
 
                 // Next Focus : confirm password
-                passwordSignUp.setOnKeyListener(new View.OnKeyListener() {
-                    @Override
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                        if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.ACTION_DOWN || keyCode == KeyEvent.KEYCODE_FORWARD )
-                            confirmPasswordEdititext.requestFocus();
-
-                        return true;
-                    }
-                });
-
+//                passwordSignUp.setOnKeyListener(new View.OnKeyListener() {
+//                    @Override
+//                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+//
+//                        if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.ACTION_DOWN || keyCode == KeyEvent.KEYCODE_FORWARD )
+//                            confirmPasswordEdititext.requestFocus();
+//
+//                        return true;
+//                    }
+//                });
+//
 
             }
         });
@@ -282,16 +292,16 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 
 
                 // Next Focus : password
-                emailSignUp.setOnKeyListener(new View.OnKeyListener() {
-                    @Override
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                        if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.ACTION_DOWN || keyCode == KeyEvent.KEYCODE_FORWARD )
-                            passwordSignUp.requestFocus();
-
-                        return true;
-                    }
-                });
+//                emailSignUp.setOnKeyListener(new View.OnKeyListener() {
+//                    @Override
+//                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+//
+//                        if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.ACTION_DOWN || keyCode == KeyEvent.KEYCODE_FORWARD )
+//                            passwordSignUp.requestFocus();
+//
+//                        return true;
+//                    }
+//                });
 
 
             }
@@ -384,7 +394,9 @@ public abstract class Signup extends AppCompatActivity implements Constants {
                 boolean validated = usernameValidation() && emailValidtion() && passwordValidation() && confirmPasswordvalidation();
 
                 if(validated && userAvailable)
-                    signUp(email,username,password,nickname);
+                {
+                    showPromoCodeDialog(email,username,password);
+                }
             }
         });
 
@@ -642,9 +654,9 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 
     // switch activity methods
     public void toLogin() {
-
-       finish();
+        finish();
     }
+
     public void toMainMenuApp(){
 
         finish();
@@ -676,6 +688,99 @@ public abstract class Signup extends AppCompatActivity implements Constants {
         else
             loadingDialog.dismiss();
     }
+
+
+
+    private void showPromoCodeDialog(final String email,final String username,final String password){
+
+
+        final Dialog promoCodeDialog = new Dialog(this);
+        promoCodeDialog.setContentView(R.layout.promo_code_dialog);
+        promoCodeDialog.show();
+        promoCodeDialog.setCancelable(false);
+
+
+        promoCodeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
+        final EditText promoCodeEdittext ;
+        Button doneBtn , skipBtn ;
+
+
+        promoCodeEdittext = (EditText) promoCodeDialog.findViewById(R.id.promo_code_edittext);
+                doneBtn = (Button) promoCodeDialog.findViewById(R.id.promo_code_done_button);
+                skipBtn = (Button)  promoCodeDialog.findViewById(R.id.promo_code_skip_button);
+
+        promoCodeEdittext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                promoCodeEdittext.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_person_outline_focuesed_32dp, 0);
+                if(s.length() == 0)
+                {
+                    promoCodeEdittext.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_person_outline_not_focuesed_32dp, 0);
+                }
+
+
+            }
+        });
+
+
+        Typeface sansation = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
+        doneBtn.setTypeface(sansation);
+        skipBtn.setTypeface(sansation);
+
+        final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
+        final Typeface playReg = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
+
+        promoCodeEdittext.setTypeface(playReg);
+
+
+
+        skipBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signUp(email,username,password,null);
+            }
+        });
+
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String promoCodeText  =  promoCodeEdittext.getText().toString().trim();
+                String promoCode =promoCodeText.isEmpty() ? "null" : promoCodeText;
+                signUp(email,username,password,promoCode);
+
+            }
+        });
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = promoCodeDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+
+    }
+
+
+
+
+
 
     // abstract methods
     protected abstract void signUp(String email,String username,String password,String nickname);

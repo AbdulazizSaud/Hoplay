@@ -221,17 +221,21 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         });
 
 
+
+        // NOTE : I commented this code a, it work but it has some problem on some numeric inputs
+
+
         // Next Focus : to the password
-         usernameSignIn.setOnKeyListener(new View.OnKeyListener() {
-             @Override
-             public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                 if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.ACTION_DOWN || keyCode == KeyEvent.KEYCODE_FORWARD )
-                    passwordSignIn.requestFocus();
-
-                 return true;
-             }
-         });
+//         usernameSignIn.setOnKeyListener(new View.OnKeyListener() {
+//             @Override
+//             public boolean onKey(View v, int keyCode, KeyEvent event) {
+//
+//                 if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.ACTION_DOWN || keyCode == KeyEvent.KEYCODE_FORWARD )
+//                    passwordSignIn.requestFocus();
+//
+//                 return true;
+//             }
+//         });
 
 
         passwordSignIn.addTextChangedListener(new TextWatcher() {

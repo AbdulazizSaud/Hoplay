@@ -1,11 +1,18 @@
 package com.hoplay.kay.hoplay.App;
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Application;
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -14,7 +21,9 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.hoplay.kay.hoplay.Activities.NoConnection;
 import com.hoplay.kay.hoplay.Adapters.ViewHolders;
+import com.hoplay.kay.hoplay.Cores.AuthenticationCore.LoginCore;
 import com.hoplay.kay.hoplay.Cores.MainAppMenuCore;
 import com.hoplay.kay.hoplay.Fragments.ParentRequestFragments;
 import com.hoplay.kay.hoplay.Models.GameModel;
@@ -77,7 +86,8 @@ public class App extends Application implements FirebasePaths {
     private DatabaseReference databaseChat;
     private DatabaseReference databaseGames;
     private DatabaseReference databaseRequests;
- private DatabaseReference databaseRegions;
+    private DatabaseReference databaseRegions;
+    private DatabaseReference databasePromoCode;
     private FirebaseAuth mAuth;  // firebase auth
     private FirebaseStorage storage;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -97,7 +107,8 @@ public class App extends Application implements FirebasePaths {
 
     private  SchemaHelper schemaHelper;
 
-
+    // No connection variables
+    public static Boolean noConnectionActivityIsActive = false ;
 
     // Use this variable to show the welcome message once
     public static boolean isWelcomed = false;
@@ -155,6 +166,7 @@ public class App extends Application implements FirebasePaths {
         databaseGames = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_GAMES_REFERENCES);
         databaseRegions = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FB_REGIONS_REFERENCE);
         databaseSupport = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_SUPPORT_REFERENCE);
+        databasePromoCode = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_PROMO_CODE_POINTS_ATTR);
         userInformation = new UserInformation();
         gameManager = new GameManager();
         timeStamp = new TimeStamp();
@@ -172,40 +184,46 @@ public class App extends Application implements FirebasePaths {
 
 
 
-//
-//        FileInputStream serviceAccount = null;
-//        try {
-//            serviceAccount = new FileInputStream("google-services.json");
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-//        FirebaseOptions options = null;
-//        try {
-//            options = new FirebaseOptions.Builder().setCredential(FirebaseCredentials.fromCertificate(serviceAccount))
-//                    .setDatabaseUrl("https://hoplay-18a08.firebaseio.com/")
-//                    .build();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        FirebaseApp.initializeApp(options);
-//
-//
-//
-//        Task<UserRecord> task = FirebaseAuth.getInstance().getUserByEmail("khaled.f.alhindi@gmail.com")
-//                .addOnSuccessListener(userRecord -> {
-//                    // See the UserRecord reference doc for the contents of userRecord.
-//                    System.out.println("Successfully fetched user data: " + userRecord.getEmail());
-//                })
-//                .addOnFailureListener(e -> {
-//                    System.err.println("Error fetching user data: " + e.getMessage());
-//                });
 
+
+
+        // Check Rapidly for network connection
+
+        final Handler handler = new Handler();
+        final int delay = 1000; //milliseconds
+
+
+        handler.postDelayed(new Runnable(){
+            public void run(){
+                //do something
+                if (!isNetworkAvailable())
+                {
+                    if (!noConnectionActivityIsActive)
+                    {
+                        Intent i = new Intent(getApplicationContext() , NoConnection.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(i);
+                    }
+
+                }
+
+
+                handler.postDelayed(this, delay);
+            }
+        }, delay);
 
 
 
     }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+
 
     //
     // this method return a instance of this app class
@@ -475,6 +493,10 @@ public class App extends Application implements FirebasePaths {
     public SchemaHelper getSchemaHelper()
     {
         return schemaHelper;
+    }
+
+    public DatabaseReference getDatabasePromoCode() {
+        return databasePromoCode;
     }
 
 }
