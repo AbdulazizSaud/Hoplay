@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/pop_up_backgrounds"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        app:srcCompat="@drawable/ic_bubble_64dp"
+        android:id="@+id/survey_dialog_imageview"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/survey_dialog_message"
+        android:textSize="20sp"
+        android:id="@+id/message_survey_dialog_textview"
+        android:layout_below="@+id/survey_dialog_imageview"
+        android:gravity="center"
+        android:padding="20dp"/>
+
+
+    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:id="@+id/how_you_know_survey_dialog_spinner"
+        android:layout_below="@+id/message_survey_dialog_textview"
+        android:hint="@string/survey_dialog_choose_hint"
+        android:gravity="center"
+        android:paddingLeft="3dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:textColorHint="@color/hint_color"
+        android:textColor="@color/text_color"
+        android:drawableLeft="@drawable/ic_feedback_unfocused_24dp"
+        />
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/how_you_know_survey_dialog_spinner"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/survey_dialog_textinputlayout"
+        android:visibility="gone"
+        >
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/friend_username_survey_dialog_edittext"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_person_outline_not_focuesed_32dp"
+            android:drawableRight="@drawable/ic_person_outline_not_focuesed_32dp"
+            android:ems="3"
+            android:textColorHint="@color/hint_color"
+            android:hint="@string/survey_dialog_friend_username"
+            android:textColor="@color/text_color"
+            android:inputType="textEmailAddress"
+            android:maxLength="100" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+
+    <Button
+        android:id="@+id/skip_survey_dialog_button"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:textStyle="bold"
+        android:text="@string/survey_dialog_skip"
+        android:layout_below="@+id/survey_dialog_textinputlayout"
+        android:layout_toLeftOf="@+id/survey_dialog_imageview"
+        android:layout_toStartOf="@+id/survey_dialog_imageview" />
+
+    <Button
+        android:id="@+id/done_survey_dialog_button"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:textStyle="bold"
+        android:text="@string/survey_dialog_done"
+        android:layout_below="@+id/survey_dialog_textinputlayout"
+        android:layout_toRightOf="@+id/survey_dialog_imageview"
+        android:layout_toEndOf="@+id/survey_dialog_imageview" />
+
+
+
+
+
+</RelativeLayout>

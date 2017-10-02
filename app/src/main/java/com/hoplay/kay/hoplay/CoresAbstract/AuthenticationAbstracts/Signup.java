@@ -8,30 +8,37 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.sax.EndElementListener;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Display;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hoplay.kay.hoplay.Adapters.SpinnerAdapter;
 import com.hoplay.kay.hoplay.Cores.MainAppMenuCore;
 import com.hoplay.kay.hoplay.Activities.TermsAndConditions;
 import com.hoplay.kay.hoplay.App.App;
-import com.hoplay.kay.hoplay.Cores.UserProfileCores.AddGameCore;
 import com.hoplay.kay.hoplay.Interfaces.Constants;
 import com.hoplay.kay.hoplay.R;
 import com.hoplay.kay.hoplay.util.Helper;
+import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -395,7 +402,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 
                 if(validated && userAvailable)
                 {
-                    showPromoCodeDialog(email,username,password);
+                    showSurveyDialog(email,username,password);
                 }
             }
         });
@@ -690,28 +697,77 @@ public abstract class Signup extends AppCompatActivity implements Constants {
     }
 
 
+    public void slideInFromLeft(View viewToAnimate) {
+        // If the bound view wasn't previously displayed on screen, it's animated
 
-    private void showPromoCodeDialog(final String email,final String username,final String password){
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
+        animation.setDuration(200);
+        viewToAnimate.startAnimation(animation);
+    }
+
+    public void slideOutToRight(View viewToAnimate) {
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_out_right);
+        viewToAnimate.startAnimation(animation);
+    }
 
 
-        final Dialog promoCodeDialog = new Dialog(this);
-        promoCodeDialog.setContentView(R.layout.promo_code_dialog);
-        promoCodeDialog.show();
-        promoCodeDialog.setCancelable(false);
 
 
-        promoCodeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+    private void showSurveyDialog(final String email,final String username,final String password){
 
 
-        final EditText promoCodeEdittext ;
+        final Dialog surveyDialog = new Dialog(this);
+        surveyDialog.setContentView(R.layout.sign_up_survey_dialog);
+        surveyDialog.show();
+        surveyDialog.setCancelable(false);
+
+
+
+        surveyDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
+        final MaterialBetterSpinner feedBackSpinner;
+         ArrayAdapter feedBacksAdapter;
+        feedBacksAdapter = new SpinnerAdapter(getApplicationContext(), R.layout.spinnner_item,
+                new ArrayList());
+
+        feedBacksAdapter.add("Ads");
+        feedBacksAdapter.add("Friend-Relative");
+        feedBacksAdapter.add("Other");
+
+
+
+
+        TextView surveyMessage ;
+        final EditText friendSurveyEdittext ;
+        final TextInputLayout friendSurveyInputLayout;
         Button doneBtn , skipBtn ;
 
 
-        promoCodeEdittext = (EditText) promoCodeDialog.findViewById(R.id.promo_code_edittext);
-                doneBtn = (Button) promoCodeDialog.findViewById(R.id.promo_code_done_button);
-                skipBtn = (Button)  promoCodeDialog.findViewById(R.id.promo_code_skip_button);
+        friendSurveyInputLayout = (TextInputLayout) surveyDialog.findViewById(R.id.survey_dialog_textinputlayout);
+        feedBackSpinner = (MaterialBetterSpinner) surveyDialog.findViewById(R.id.how_you_know_survey_dialog_spinner);
+        friendSurveyEdittext = (EditText) surveyDialog.findViewById(R.id.friend_username_survey_dialog_edittext);
+        doneBtn = (Button) surveyDialog.findViewById(R.id.done_survey_dialog_button);
+        skipBtn = (Button)  surveyDialog.findViewById(R.id.skip_survey_dialog_button);
+        surveyMessage = (TextView) surveyDialog.findViewById(R.id.message_survey_dialog_textview);
 
-        promoCodeEdittext.addTextChangedListener(new TextWatcher() {
+
+        feedBackSpinner.setAdapter(feedBacksAdapter);
+
+        Typeface sansation = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
+        doneBtn.setTypeface(sansation);
+        skipBtn.setTypeface(sansation);
+
+        final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
+        final Typeface playReg = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
+
+        feedBackSpinner.setTypeface(playbold);
+        friendSurveyEdittext.setTypeface(playReg);
+        surveyMessage.setTypeface(playReg);
+
+
+        friendSurveyEdittext.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -724,25 +780,54 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 
             @Override
             public void afterTextChanged(Editable s) {
-                promoCodeEdittext.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_person_outline_focuesed_32dp, 0);
+                friendSurveyEdittext.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_person_outline_focuesed_32dp, 0);
                 if(s.length() == 0)
                 {
-                    promoCodeEdittext.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_person_outline_not_focuesed_32dp, 0);
+                    friendSurveyEdittext.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_person_outline_not_focuesed_32dp, 0);
                 }
+
 
 
             }
         });
 
 
-        Typeface sansation = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
-        doneBtn.setTypeface(sansation);
-        skipBtn.setTypeface(sansation);
 
-        final Typeface playbold = Typeface.createFromAsset(getResources().getAssets(), "playbold.ttf");
-        final Typeface playReg = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
+        feedBackSpinner.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        promoCodeEdittext.setTypeface(playReg);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+                feedBackSpinner.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.text_color));
+                feedBackSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_feedback_focused_24dp, 0, 0, 0);
+                if (s.length() == 0) {
+                    feedBackSpinner.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_feedback_unfocused_24dp, 0, 0, 0);
+
+                }
+                else {
+                    if (feedBackSpinner.getText().toString().equalsIgnoreCase("Friend-Relative"))
+                    {
+                        slideInFromLeft(friendSurveyInputLayout);
+                        friendSurveyInputLayout.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        slideOutToRight(friendSurveyInputLayout);
+                        friendSurveyInputLayout.setVisibility(View.GONE);
+                    }
+                }
+
+            }
+        });
 
 
 
@@ -758,7 +843,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
             public void onClick(View v) {
 
 
-                String promoCodeText  =  promoCodeEdittext.getText().toString().trim();
+                String promoCodeText  =  friendSurveyEdittext.getText().toString().trim();
                 String promoCode =promoCodeText.isEmpty() ? "null" : promoCodeText;
                 signUp(email,username,password,promoCode);
 
@@ -767,7 +852,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        Window window = promoCodeDialog.getWindow();
+        Window window = surveyDialog.getWindow();
         lp.copyFrom(window.getAttributes());
         //This makes the dialog take up the full width
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;

@@ -411,9 +411,13 @@
 
 
 
-    <!--                            Promo code                                                  -->
-    <string name="promo_code_skip">Skip</string>
-    <string name="promo_code_done">Done</string>
+    <!--                            Sign Up Survey Dialog                                                -->
+    <string name="survey_dialog_skip">Skip</string>
+    <string name="survey_dialog_done">Done</string>
+    <string name="survey_dialog_message">How did you know about us?</string>
+    <string name="survey_dialog_friend_username">Friend-Relative Username</string>
+    <string name="survey_dialog_choose_hint">Choose</string>
+
 
 
 
