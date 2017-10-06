@@ -186,6 +186,7 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
         ranksList = new ArrayList<>();
 
 
+
         gameAdapter = new ArrayAdapter<String>(this,
                 R.layout.auto_complete_text_view_list_item, gamesList);
 

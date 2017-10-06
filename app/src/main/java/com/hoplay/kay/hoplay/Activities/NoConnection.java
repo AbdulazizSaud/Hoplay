@@ -35,6 +35,8 @@ public class NoConnection extends AppCompatActivity {
         handler.postDelayed(new Runnable(){
             public void run(){
                 //do something
+
+
                 if (isNetworkAvailable())
                 {
                    finish();
@@ -72,14 +74,12 @@ public class NoConnection extends AppCompatActivity {
         App.noConnectionActivityIsActive = false;
     }
 
+
+
     @Override
     public void onBackPressed() {
         // do nothing.
     }
 
 
-    public  void destroyThisActivity()
-    {
-          finish();
-    }
 }

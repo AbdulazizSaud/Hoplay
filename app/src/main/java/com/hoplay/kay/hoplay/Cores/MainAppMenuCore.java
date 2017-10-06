@@ -21,6 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.hoplay.kay.hoplay.Services.FirebaseInstanceIdService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -129,7 +130,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
                     if(promoCode !=null)
                     {
-                    app.getDatabasePromoCode().child(promoCode+"/users/"+username).setValue(true);
+                    app.getDatabasePromoCode().child(promoCode.toLowerCase()+"/users/"+username.toLowerCase()).setValue(true);
                     }
 
 
@@ -144,7 +145,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
 
                     // set current user information
-                    app.getUserInformation().setUsername(username);
+                    app.getUserInformation().setUsername(username.toLowerCase());
                     app.getUserInformation().setBio(bio);
                     app.getUserInformation().setPremium(false);
                     app.getUserInformation().setNickName(bio);
@@ -152,6 +153,12 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     app.getUserInformation().setPSNAcc(PSNAcc);
                     app.getUserInformation().setXboxLiveAcc(XboxLiveAcc);
                     app.getUserInformation().setPcGamesAcc(pcGamesAccs);
+
+
+                    // User Token
+                    app.setUserToken(FirebaseInstanceIdService.recentRoken);
+                    Log.i("===>",FirebaseInstanceIdService.recentRoken);
+                    app.getDatabaseUsersTokens().child(app.getUserInformation().getUID()).setValue(app.getUserToken());
 
 
 //                    app.getUserInformation().setPictureBitMap(app.getBitmapFromUrl(picUrl));

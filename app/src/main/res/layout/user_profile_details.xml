@@ -8,25 +8,50 @@
     android:background="@color/app_background">
 
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@color/app_background"
-        android:orientation="horizontal">
+        android:paddingTop="20dp">
 
-        <Space
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1.0" />
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HP"
+                android:id="@+id/hopy_points_textview"
+                android:textColor="@color/app_color"
+                android:textSize="20sp"
+                android:drawableRight="@drawable/ic_bubble_chart_20sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/text_color"
+                android:textSize="20sp"
+                android:id="@+id/hopy_points_value"
+               android:gravity="center"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="3.0"
             android:background="@color/app_background"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true">
 
 
             <!-- Inculde user photo here -->
@@ -35,7 +60,6 @@
                 layout="@layout/user_profile_photo_with_border"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginLeft="10dp"></include>
 
 
@@ -57,12 +81,16 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="right|end"
-            android:layout_weight="1.0"
+            android:layout_weight="1"
             android:background="@null"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
             app:srcCompat="@drawable/ic_settings_24dp" />
 
 
-    </LinearLayout>
+
+    </RelativeLayout>
 
 
     <LinearLayout
@@ -71,6 +99,7 @@
         android:orientation="horizontal"
         android:background="@color/app_background"
         android:layout_marginTop="10dp"
+        android:weightSum="3"
         >
 
 

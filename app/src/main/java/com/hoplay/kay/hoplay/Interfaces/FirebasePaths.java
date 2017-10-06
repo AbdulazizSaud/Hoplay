@@ -122,6 +122,6 @@ public interface FirebasePaths {
 
     public static final String FIREBASESTORAGE_USERINFO_ATTR ="UsersInfo";
 
-
+    public static  final String FIREBASE_USERS_TOKENS_ATTR = "_users_tokens_";
 
 }

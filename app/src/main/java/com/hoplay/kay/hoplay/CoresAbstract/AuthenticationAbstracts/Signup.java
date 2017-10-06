@@ -387,7 +387,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 
 
                 final String email = emailSignUp.getText().toString().trim();
-                final String username  =usernameSignUp.getText().toString().trim();
+                final String username  =usernameSignUp.getText().toString().trim().toLowerCase();
                 final String password  = passwordSignUp.getText().toString().trim();
                 final String nickname = username;
 
@@ -402,7 +402,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 
                 if(validated && userAvailable)
                 {
-                    showSurveyDialog(email,username,password);
+                    showSurveyDialog(email,username.toLowerCase(),password);
                 }
             }
         });
@@ -834,7 +834,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
         skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signUp(email,username,password,null);
+                signUp(email,username.toLowerCase(),password,null);
             }
         });
 
@@ -843,9 +843,9 @@ public abstract class Signup extends AppCompatActivity implements Constants {
             public void onClick(View v) {
 
 
-                String promoCodeText  =  friendSurveyEdittext.getText().toString().trim();
+                String promoCodeText  =  friendSurveyEdittext.getText().toString().trim().toLowerCase();
                 String promoCode =promoCodeText.isEmpty() ? "null" : promoCodeText;
-                signUp(email,username,password,promoCode);
+                signUp(email,username.toLowerCase(),password,promoCode.toLowerCase());
 
             }
         });

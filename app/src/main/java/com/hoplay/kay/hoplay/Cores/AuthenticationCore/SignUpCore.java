@@ -60,13 +60,13 @@ public class SignUpCore extends Signup implements FirebasePaths{
 
 
                             FirebaseUser user = appAuth.getCurrentUser();
-                            insertInfoToDatabase(user.getUid(),email,username,promoCode);
+                            insertInfoToDatabase(user.getUid(),email,username.toLowerCase(),promoCode);
 
 //                            // success message
 //                            String strMeatMsg = String.format(getResources().getString(R.string.signup_successful_message), username);
 //                            Toast.makeText(getApplicationContext(), strMeatMsg, Toast.LENGTH_LONG).show();
                             // switch to main AppMenu
-                            app.sendEmailVerification(user,username);
+                            app.sendEmailVerification(user,username.toLowerCase());
                             toLogin();
 
 
@@ -119,13 +119,13 @@ public class SignUpCore extends Signup implements FirebasePaths{
                 {
 
                     DatabaseReference promoRef = app.getDatabasePromoCode();
-                    promoRef.child(promoCode+"/users/"+username).setValue(false);
+                    promoRef.child(promoCode+"/users/"+username.toLowerCase()).setValue(false);
 
                     HashMap<String,Object> pointStructure = new HashMap<>();
 
                     pointStructure.put("points",0);
                     pointStructure.put("users","null");
-                    promoRef.child(username).setValue(pointStructure);
+                    promoRef.child(username.toLowerCase()).setValue(pointStructure);
 
                     isExists = true;
 

@@ -75,6 +75,8 @@ public abstract class UserProfile extends Fragment {
     private TextView ratingsNumberTextView;
     private TextView friendsNumberTextView;
     private TextView recentActivitiesTextView;
+    private TextView hopyPointsTextview;
+    private TextView hopyPointsValueTextview;
     private TextView bioTextView;
     private CircleImageView userPictureCircleImageView;
     private ImageView profileSettingsImageView;
@@ -141,6 +143,11 @@ public abstract class UserProfile extends Fragment {
         toUserRatingsLinearLayout = (LinearLayout) view.findViewById(R.id.ratings_user_profile_linearlayout);
 
 
+        // Points Variables
+        hopyPointsTextview = (TextView) view.findViewById(R.id.hopy_points_textview);
+        hopyPointsValueTextview = (TextView) view.findViewById(R.id.hopy_points_value);
+
+
         addActivityButton = (Button) view.findViewById(R.id.add_activity_user_fragment_button);
         noActivityMessage = (TextView) view.findViewById(R.id.no_activity_textview);
         noActivityImageview = (ImageView) view.findViewById(R.id.no_activity_imageview);
@@ -152,6 +159,8 @@ public abstract class UserProfile extends Fragment {
 
         usernameProfile.setTypeface(playbold);
         friendsNumberTextView.setTypeface(playregular);
+        hopyPointsTextview.setTypeface(playbold);
+        hopyPointsValueTextview.setTypeface(playregular);
         userFriendsTextView.setTypeface(playregular);
         userGamesTextView.setTypeface(playregular);
         userRatingsTextView.setTypeface(playregular);

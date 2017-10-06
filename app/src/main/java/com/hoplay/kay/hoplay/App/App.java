@@ -88,6 +88,7 @@ public class App extends Application implements FirebasePaths {
     private DatabaseReference databaseRequests;
     private DatabaseReference databaseRegions;
     private DatabaseReference databasePromoCode;
+    private DatabaseReference databaseUsersTokens;
     private FirebaseAuth mAuth;  // firebase auth
     private FirebaseStorage storage;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -112,6 +113,19 @@ public class App extends Application implements FirebasePaths {
 
     // Use this variable to show the welcome message once
     public static boolean isWelcomed = false;
+
+
+
+    // Uset Token
+    private String userToken = "";
+
+    public String getUserToken() {
+        return userToken;
+    }
+
+    public void setUserToken(String userToken) {
+        this.userToken = userToken;
+    }
 
 
     // Games adapter for search request auto complete edittext : its used here for future use : such as ADD GAME SEARCH DIALOG : SEARCH REQ FRAGMENT
@@ -167,6 +181,10 @@ public class App extends Application implements FirebasePaths {
         databaseRegions = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FB_REGIONS_REFERENCE);
         databaseSupport = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_SUPPORT_REFERENCE);
         databasePromoCode = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_PROMO_CODE_POINTS_ATTR);
+        databaseUsersTokens = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_USERS_TOKENS_ATTR);
+
+
+
         userInformation = new UserInformation();
         gameManager = new GameManager();
         timeStamp = new TimeStamp();
@@ -334,6 +352,8 @@ public class App extends Application implements FirebasePaths {
     public DatabaseReference getDatabasChat() {
         return databaseChat;
     }
+
+    public DatabaseReference getDatabaseUsersTokens() { return databaseUsersTokens;}
 
     public DatabaseReference getDatabaseGames() {
         return databaseGames;
