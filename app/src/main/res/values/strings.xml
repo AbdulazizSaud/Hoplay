@@ -260,7 +260,7 @@
     <string name="signup_password">Password</string>
     <string name="signup_email">Email Address</string>
     <string name="signup_confirm_password">Confirm Password</string>
-    <string name="signup_agrement_message">By tapping &quot;Sign Up&quot; you agree to the</string>
+    <string name="signup_agrement_message">By tapping &quot; Sign Up &quot;  you agree to the</string>
     <string name="signup_terms_and_conditios">Terms and Conditions </string>
     <string name="signup_signup">S I G N &#160; U P</string>
     <string name="signup_create_new">C R E A T E &#160; N E W</string>
