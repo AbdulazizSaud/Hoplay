@@ -109,7 +109,14 @@ public class App extends Application implements FirebasePaths {
     private  SchemaHelper schemaHelper;
 
     // No connection variables
-    public static Boolean noConnectionActivityIsActive = false ;
+    public static Runnable noConnectionRunnable;
+    public static Handler noConnectionHandler ;
+    public static Boolean
+             noConnectionActivityIsActive = false , settingsActivityIsActive = false , termsActivityIsActive = false , loginActivityIsActive = false
+            , signUpActivityIsActive = false , chatActivityIsActive = false  , addGameActivityIsActive = false  , changePasswordActivityIsActive = false ,
+            deactiveActivityIsActive = false , editProfileActivityIsActive = false  ,userListActivityIsActive = false , viewFriendProfileActivityIsActive = false,
+            editRequestActivityIsActive = false , newRequestActivityIsActive = false, requestLobbyActivityIsActive = false, searchResultsActivityIsActive= false,
+            forgetPasswordActivityIsActive = false, mainAppMenuActivityIsActive = false,supportActivityIsActive = false ;
 
     // Use this variable to show the welcome message once
     public static boolean isWelcomed = false;
@@ -161,6 +168,8 @@ public class App extends Application implements FirebasePaths {
         return chatsCounter;
     }
 
+
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -182,7 +191,6 @@ public class App extends Application implements FirebasePaths {
         databaseSupport = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_SUPPORT_REFERENCE);
         databasePromoCode = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_PROMO_CODE_POINTS_ATTR);
         databaseUsersTokens = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_USERS_TOKENS_ATTR);
-
 
 
         userInformation = new UserInformation();
@@ -207,16 +215,20 @@ public class App extends Application implements FirebasePaths {
 
         // Check Rapidly for network connection
 
-        final Handler handler = new Handler();
+       noConnectionHandler = new Handler();
         final int delay = 1000; //milliseconds
 
 
-        handler.postDelayed(new Runnable(){
+        noConnectionHandler.postDelayed(noConnectionRunnable = new Runnable(){
             public void run(){
                 //do something
                 if (!isNetworkAvailable())
                 {
-                    if (!noConnectionActivityIsActive)
+
+                    if ((settingsActivityIsActive || termsActivityIsActive || loginActivityIsActive || signUpActivityIsActive ||
+                            chatActivityIsActive ||  addGameActivityIsActive  || changePasswordActivityIsActive || deactiveActivityIsActive || editProfileActivityIsActive
+                            || userListActivityIsActive || viewFriendProfileActivityIsActive || editRequestActivityIsActive || newRequestActivityIsActive || requestLobbyActivityIsActive
+                   || searchResultsActivityIsActive || forgetPasswordActivityIsActive || mainAppMenuActivityIsActive || supportActivityIsActive) && !noConnectionActivityIsActive)
                     {
                         Intent i = new Intent(getApplicationContext() , NoConnection.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -226,7 +238,7 @@ public class App extends Application implements FirebasePaths {
                 }
 
 
-                handler.postDelayed(this, delay);
+                noConnectionHandler.postDelayed(this, delay);
             }
         }, delay);
 
@@ -514,6 +526,8 @@ public class App extends Application implements FirebasePaths {
     {
         return schemaHelper;
     }
+
+
 
     public DatabaseReference getDatabasePromoCode() {
         return databasePromoCode;

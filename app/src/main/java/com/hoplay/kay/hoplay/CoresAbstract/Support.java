@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hoplay.kay.hoplay.App.App;
 import com.hoplay.kay.hoplay.R;
 
 public abstract class Support extends AppCompatActivity  {
@@ -146,6 +147,17 @@ public abstract class Support extends AppCompatActivity  {
     }
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        App.supportActivityIsActive = true ;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App.supportActivityIsActive = false;
+    }
 
     // Remove keyboard when click anywhere :
     public void removeKeyboard(View v) {

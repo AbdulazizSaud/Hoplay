@@ -52,6 +52,18 @@ public abstract class ViewFriendProfile extends AppCompatActivity {
     ArrayList<RecentGameModel> recentGameModels =new ArrayList<RecentGameModel>();
     protected String userKey = "";
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        App.viewFriendProfileActivityIsActive = true ;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App.viewFriendProfileActivityIsActive = false;
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_user_profile);

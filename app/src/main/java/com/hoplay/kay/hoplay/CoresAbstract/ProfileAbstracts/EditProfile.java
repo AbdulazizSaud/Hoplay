@@ -74,6 +74,18 @@ public abstract class EditProfile extends AppCompatActivity {
     protected final String PROVIDOR_PC = "PC Account:";
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        App.editProfileActivityIsActive = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App.editProfileActivityIsActive = false;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);

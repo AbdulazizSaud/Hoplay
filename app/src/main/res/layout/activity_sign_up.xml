@@ -12,7 +12,6 @@
     android:background="@drawable/hoplay_bg_not_stretched"
     android:clickable="true"
     android:id="@+id/sign_up_relativeLayout"
-    android:onClick="removeKeyboard"
     >
 
     <ImageView
@@ -35,8 +34,7 @@
         android:layout_marginRight="65dp"
         android:textColor="@color/app_color"
         android:layout_below="@+id/go_back_to_main_imageview"
-        android:layout_centerHorizontal="true"
-        android:onClick="removeKeyboard"/>
+        android:layout_centerHorizontal="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,8 +45,7 @@
         android:id="@+id/account_textview"
         android:textColor="@color/app_color"
         android:layout_below="@+id/create_new_textview"
-        android:layout_centerHorizontal="true"
-        android:onClick="removeKeyboard"/>
+        android:layout_centerHorizontal="true" />
 
 
 

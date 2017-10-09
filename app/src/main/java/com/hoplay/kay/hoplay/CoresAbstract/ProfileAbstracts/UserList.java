@@ -78,11 +78,6 @@ public abstract class UserList extends AppCompatActivity {
 
 
 
-
-
-
-
-
     private ArrayList<FriendCommonModel> usersList = new ArrayList<FriendCommonModel>();
     private ArrayList<FriendCommonModel> friendsList = new ArrayList<FriendCommonModel>();
 
@@ -314,8 +309,18 @@ public abstract class UserList extends AppCompatActivity {
     @Override
     protected void onStop() {
 
-        handler.removeCallbacks(runnable);
+
         super.onStop();
+        handler.removeCallbacks(runnable);
+        App.userListActivityIsActive = false;
+    }
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        App.userListActivityIsActive = true ;
     }
 
     private void searchProcess(final String value) {

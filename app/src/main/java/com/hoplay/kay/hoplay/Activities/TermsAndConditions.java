@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.hoplay.kay.hoplay.App.App;
 import com.hoplay.kay.hoplay.Cores.AuthenticationCore.SignUpCore;
 import com.hoplay.kay.hoplay.R;
 
@@ -23,6 +24,18 @@ public class TermsAndConditions extends AppCompatActivity {
     private TextView intro , term1 , term2 , term3 , term4 , term5 , term6 , term7 , term8 , term8_1 , term8_2,term8_3;
     private Button   agreeButton;
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        App.termsActivityIsActive = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App.termsActivityIsActive = false;
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

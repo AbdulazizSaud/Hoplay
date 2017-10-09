@@ -75,4 +75,7 @@ public abstract class RequestLobby extends AppCompatActivity {
 
     protected abstract void OnStartActivity();
     protected abstract void joinToRequest();
+
+
+
 }

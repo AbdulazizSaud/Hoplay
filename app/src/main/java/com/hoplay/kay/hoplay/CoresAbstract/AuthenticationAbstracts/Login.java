@@ -77,7 +77,7 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     private LinearLayoutCompat signinBlock;
 
 
-
+    private RelativeLayout rootView ;
     // For displaying the tour activities
     protected boolean firstTime = false;
 
@@ -87,15 +87,6 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         return false;
-    }
-
-    // Remove keyboard when click anywhere (the relative layout) :
-    public void removeKeyboard(View v) {
-
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-
-
     }
 
     @Override
@@ -115,8 +106,17 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     }
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        App.loginActivityIsActive = true;
+    }
 
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App.loginActivityIsActive = false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,8 +152,22 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         animateViews();
         actionControls();
 
+        // remove keyboard when click anywhere
+        rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            }
+        });
 
-
+        logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            }
+        });
 
     }
 
@@ -270,10 +284,9 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
         Typeface sansationbold = Typeface.createFromAsset(getAssets(), "sansationbold.ttf");
         Typeface playregular = Typeface.createFromAsset(getAssets(),"playregular.ttf");
 
-
+        rootView = (RelativeLayout) findViewById(R.id.sign_in_relativeLayout) ;
 
         logo = (ImageView) findViewById(R.id.logo_imageview);
-
 
 
         signupBtn = (Button) findViewById(R.id.sign_up_btn);

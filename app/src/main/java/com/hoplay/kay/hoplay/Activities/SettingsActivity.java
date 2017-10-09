@@ -34,6 +34,18 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        App.settingsActivityIsActive = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App.settingsActivityIsActive = false;
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
 

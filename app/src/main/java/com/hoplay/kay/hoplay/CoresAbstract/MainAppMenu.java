@@ -87,7 +87,7 @@ public abstract class MainAppMenu extends AppCompatActivity  {
     @Override
     protected void onStart() {
         super.onStart();
-
+        App.mainAppMenuActivityIsActive = true ;
     }
 
     @Override
@@ -275,9 +275,11 @@ public abstract class MainAppMenu extends AppCompatActivity  {
 
     }
 
-
-
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App.mainAppMenuActivityIsActive = false ;
+    }
 
     protected abstract void OnStartActivity();
 

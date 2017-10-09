@@ -123,7 +123,17 @@ public abstract class  EditRequest extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        App.editRequestActivityIsActive = true ;
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App.editRequestActivityIsActive = false;
+    }
 
     private void initControl() {
 

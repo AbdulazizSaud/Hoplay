@@ -41,6 +41,18 @@ public abstract class DeactiveAccount extends AppCompatActivity {
     protected ProgressDialog loadingDialog ;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        App.deactiveActivityIsActive = true ;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App.deactiveActivityIsActive = false ;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deactive_account);

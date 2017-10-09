@@ -99,10 +99,17 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
     private String pcGameProvider;
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        App.newRequestActivityIsActive = true ;
+    }
 
-
-
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App.newRequestActivityIsActive = false ;
+    }
 
     /***************************************/
 

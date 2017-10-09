@@ -102,6 +102,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
     @Override
     protected void onStop() {
         super.onStop();
+        App.signUpActivityIsActive = false;
     }
 
 
@@ -136,6 +137,11 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        App.signUpActivityIsActive = true ;
+    }
 
     // Change icon on edittexts
     private void viewListener() {

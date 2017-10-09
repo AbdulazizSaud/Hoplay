@@ -11,7 +11,6 @@
         tools:context=".Cores.AuthenticationCore.LoginCore"
         android:background="@drawable/hoplay_bg_not_stretched"
         android:id="@+id/sign_in_relativeLayout"
-        android:onClick="removeKeyboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -29,7 +28,6 @@
             android:layout_marginTop="50dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:onClick="removeKeyboard"
 
             />
 

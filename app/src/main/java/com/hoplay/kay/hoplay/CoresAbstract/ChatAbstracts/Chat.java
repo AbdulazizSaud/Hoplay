@@ -101,6 +101,18 @@ public abstract class Chat extends AppCompatActivity {
 //    protected ArrayList<GameProvider> providersList = new ArrayList<GameProvider>();
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        App.chatActivityIsActive = true ;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App.chatActivityIsActive = false;
+    }
+
     /***************************************/
 
 

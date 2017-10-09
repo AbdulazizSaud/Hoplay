@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.hoplay.kay.hoplay.App.App;
@@ -18,6 +19,8 @@ import com.hoplay.kay.hoplay.R;
 public class NoConnection extends AppCompatActivity {
 
     TextView connectionMessageTextView ;
+    Runnable runnable;
+    final Handler handler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +33,9 @@ public class NoConnection extends AppCompatActivity {
 
 
         // Check continuously if the user has network connection
-        final Handler handler = new Handler();
+
         final int delay = 1000; //milliseconds
-        handler.postDelayed(new Runnable(){
+        handler.postDelayed(runnable= new Runnable(){
             public void run(){
                 //do something
 
@@ -40,6 +43,7 @@ public class NoConnection extends AppCompatActivity {
                 if (isNetworkAvailable())
                 {
                    finish();
+                    handler.removeCallbacks(runnable);
                 }
 
                 handler.postDelayed(this, delay);
@@ -76,10 +80,20 @@ public class NoConnection extends AppCompatActivity {
 
 
 
+
+
     @Override
     public void onBackPressed() {
         // do nothing.
     }
 
 
+
+    //    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        handler.post(runnable);
+//        App.noConnectionHandler.post(App.noConnectionRunnable);
+//    }
 }

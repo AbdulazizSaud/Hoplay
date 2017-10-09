@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.hoplay.kay.hoplay.App.App;
 import com.hoplay.kay.hoplay.Cores.AuthenticationCore.LoginCore;
 import com.hoplay.kay.hoplay.R;
 import com.hoplay.kay.hoplay.util.Helper;
@@ -26,6 +27,18 @@ public abstract class ForgetPassword extends AppCompatActivity  {
     protected Button forgetPasswordButton;
     protected EditText forgetPasswordEditText;
     protected TextView findAccountTextView;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        App.forgetPasswordActivityIsActive = true ;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App.forgetPasswordActivityIsActive = false ;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

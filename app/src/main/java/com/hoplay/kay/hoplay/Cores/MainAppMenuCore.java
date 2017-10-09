@@ -143,6 +143,11 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     }
 
 
+                    // Assign Points
+
+
+
+
 
                     // set current user information
                     app.getUserInformation().setUsername(username.toLowerCase());

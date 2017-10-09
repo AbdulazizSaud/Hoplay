@@ -80,6 +80,18 @@ public abstract class SearchResults extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        App.searchResultsActivityIsActive = true ;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App.searchResultsActivityIsActive = false ;
+    }
+
     private void initControls() {
         searchPrioritySpinner = (MaterialBetterSpinner) findViewById(R.id.search_priority_spinner);
         final Typeface playregular = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");

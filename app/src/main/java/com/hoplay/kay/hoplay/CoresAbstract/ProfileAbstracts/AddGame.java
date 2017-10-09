@@ -100,8 +100,10 @@ public abstract class AddGame extends AppCompatActivity {
     @Override
     protected void onStop() {
 
-        handler.removeCallbacks(runnable);
+
         super.onStop();
+        handler.removeCallbacks(runnable);
+        App.addGameActivityIsActive = false ;
     }
 
 
@@ -264,6 +266,11 @@ public abstract class AddGame extends AppCompatActivity {
 
     private void reloadGameList() {}
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        App.addGameActivityIsActive = true ;
+    }
 
     private void searchProcess(final String value) {
 

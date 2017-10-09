@@ -50,7 +50,17 @@ public abstract class ChangePassword extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        App.changePasswordActivityIsActive = true ;
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App.changePasswordActivityIsActive = false ;
+    }
 
     private void initControls()
     {
