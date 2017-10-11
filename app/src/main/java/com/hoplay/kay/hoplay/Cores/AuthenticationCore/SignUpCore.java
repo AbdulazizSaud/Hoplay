@@ -1,6 +1,7 @@
 package com.hoplay.kay.hoplay.Cores.AuthenticationCore;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
@@ -32,6 +33,9 @@ public class SignUpCore extends Signup implements FirebasePaths{
     private SchemaHelper schemaHelper = new SchemaHelper(this);
 
     private boolean isDone=false,isExists = false;
+
+
+
 
     @Override
     public void OnStartActivity() {
@@ -90,7 +94,6 @@ public class SignUpCore extends Signup implements FirebasePaths{
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 currenCheckingStatus = (dataSnapshot.exists()) ? USER_EXIST : USER_NOT_EXIST;
-                checkingUsername=false;
                 checkUserCallBack();
             }
 

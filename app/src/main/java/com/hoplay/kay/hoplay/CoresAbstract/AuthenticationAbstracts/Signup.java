@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.sax.EndElementListener;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -29,6 +30,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hoplay.kay.hoplay.Activities.NoConnection;
 import com.hoplay.kay.hoplay.Adapters.SpinnerAdapter;
 import com.hoplay.kay.hoplay.Cores.MainAppMenuCore;
 import com.hoplay.kay.hoplay.Activities.TermsAndConditions;
@@ -65,12 +67,12 @@ public abstract class Signup extends AppCompatActivity implements Constants {
     protected App app =  App.getInstance();
 
 
-    protected Timer inputChecker = new Timer();
-    protected boolean checkingUsername=false;
     protected int currenCheckingStatus;
 
     ProgressDialog loadingDialog;
 
+    Handler handler = new Handler();
+    Runnable runnable;
 
 
     /***************************************/
@@ -159,7 +161,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
+            public void afterTextChanged(final Editable s) {
 
                 usernameSignUp.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_person_outline_focuesed_32dp, 0);
                 if(s.length() == 0)
@@ -170,24 +172,22 @@ public abstract class Signup extends AppCompatActivity implements Constants {
                 if(!usernameValidation()) return;
 
 
-                final String username = s.toString().toLowerCase().trim();
-                currenCheckingStatus = USER_SEARCHING;
 
-                inputChecker.cancel();
-                inputChecker =new Timer();
 
-                inputChecker.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
 
-                        if(!checkingUsername) {
+                handler.postDelayed(runnable = new Runnable(){
+                    public void run(){
+                        //do something
+                        final String username = s.toString().toLowerCase().trim();
+                        currenCheckingStatus = USER_SEARCHING;
 
-                            checkingUsername = true;
                             checkUsername(username);
-                        }
 
+
+                        handler.postDelayed(this, 1000);
                     }
-                },1000);
+                }, 1000);
+
 
 
 
@@ -403,7 +403,9 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 //                    return;
 //                }
 
-                boolean userAvailable = !checkingUsername && currenCheckingStatus == USER_NOT_EXIST;
+
+
+                boolean userAvailable = currenCheckingStatus == USER_NOT_EXIST;
                 boolean validated = usernameValidation() && emailValidtion() && passwordValidation() && confirmPasswordvalidation();
 
                 if(validated && userAvailable)
@@ -841,6 +843,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
             @Override
             public void onClick(View v) {
                 signUp(email,username.toLowerCase(),password,null);
+                handler.removeCallbacks(runnable);
             }
         });
 
@@ -852,6 +855,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
                 String promoCodeText  =  friendSurveyEdittext.getText().toString().trim().toLowerCase();
                 String promoCode =promoCodeText.isEmpty() ? "null" : promoCodeText;
                 signUp(email,username.toLowerCase(),password,promoCode.toLowerCase());
+                handler.removeCallbacks(runnable);
 
             }
         });
