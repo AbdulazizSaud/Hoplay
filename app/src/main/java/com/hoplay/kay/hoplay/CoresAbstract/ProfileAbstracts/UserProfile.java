@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -96,7 +97,8 @@ public abstract class UserProfile extends Fragment {
     private TextView noActivityMessage;
     private Button addActivityButton;
 
-
+    Handler handler = new Handler();
+    Runnable runnable;
 
 
 
@@ -118,6 +120,21 @@ public abstract class UserProfile extends Fragment {
 
 
         setUserProfileInformation();
+
+
+
+        handler.postDelayed(runnable = new Runnable(){
+            public void run(){
+                //do something
+
+                hopyPointsValueTextview.setText(app.getUserInformation().getHopyPoints());
+
+                handler.postDelayed(this, 1000);
+            }
+        }, 1000);
+
+
+
 
         return view;
     }
@@ -197,6 +214,7 @@ public abstract class UserProfile extends Fragment {
                             android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     // Start the Intent
                     startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
+
                 }
 
             }
@@ -208,6 +226,8 @@ public abstract class UserProfile extends Fragment {
                 Intent i = new Intent(getActivity().getApplicationContext(), AddGameCore.class);
                 startActivity(i);
                 getActivity().overridePendingTransition(R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
+                //Stop Handler
+                handler.removeCallbacks(runnable);
             }
         });
 
@@ -218,6 +238,8 @@ public abstract class UserProfile extends Fragment {
                 i.setFlags(FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
                 getActivity().overridePendingTransition(R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
+                //Stop Handler
+                handler.removeCallbacks(runnable);
 
             }
         });
@@ -233,6 +255,8 @@ public abstract class UserProfile extends Fragment {
                 Intent i = new Intent(getActivity().getApplicationContext(), SettingsActivity.class);
                 startActivity(i);
                 getActivity().overridePendingTransition(R.anim.slide_in_right_layouts, R.anim.slide_out_right_layouts);
+                //Stop Handler
+                handler.removeCallbacks(runnable);
 
 
             }
@@ -251,6 +275,8 @@ public abstract class UserProfile extends Fragment {
                     Intent i = new Intent(getContext(), NewRequestCore.class);
                     startActivity(i);
                     getActivity().overridePendingTransition( R.anim.slide_in_left_layout, R.anim.slide_out_left_layout);
+                    //Stop Handler
+                    handler.removeCallbacks(runnable);
                     }
 
             }
@@ -304,6 +330,7 @@ public abstract class UserProfile extends Fragment {
         app.loadingImage(userPictureCircleImageView, app.getUserInformation().getPictureURL());
         usernameProfile.setText("@" + app.getUserInformation().getUsername());
         bioTextView.setText(app.getUserInformation().getNickName());
+        hopyPointsValueTextview.setText(app.getUserInformation().getHopyPoints());
     }
 
 
@@ -554,6 +581,8 @@ public abstract class UserProfile extends Fragment {
                 Intent i = new Intent(getActivity().getApplicationContext(), AddGameCore.class);
                 startActivity(i);
                 getActivity().overridePendingTransition( R.anim.slide_in_down_layouts, R.anim.slide_out_down_layouts);
+                //Stop Handler
+                handler.removeCallbacks(runnable);
                 noGameDialog.dismiss();
             }
         });

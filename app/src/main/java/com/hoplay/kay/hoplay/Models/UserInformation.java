@@ -12,6 +12,15 @@ public class UserInformation {
     private String username,pictureURL,UID,nickName , userEmail,bio;
     private boolean isPremium=false;
     private String PSNAcc , XboxLiveAcc;
+    private String hopyPoints;
+
+    public String getHopyPoints() {
+        return hopyPoints;
+    }
+
+    public void setHopyPoints(String hopyPoints) {
+        this.hopyPoints = hopyPoints;
+    }
 
     // first string for the game provder , second one for the account
     private HashMap<String,String>  pcGamesAcc ;

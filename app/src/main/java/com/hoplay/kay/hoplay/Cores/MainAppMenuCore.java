@@ -1,11 +1,13 @@
 package com.hoplay.kay.hoplay.Cores;
 
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.hoplay.kay.hoplay.Cores.RequestCore.LobbyFragmentCore;
 import com.hoplay.kay.hoplay.Cores.RequestCore.NewRequestFragmentCore;
+import com.hoplay.kay.hoplay.CoresAbstract.Lobby.Lobby;
 import com.hoplay.kay.hoplay.CoresAbstract.MainAppMenu;
 import com.hoplay.kay.hoplay.App.App;
 import com.hoplay.kay.hoplay.CoresAbstract.RequestAbstracts.SearchRequests;
@@ -21,7 +23,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.hoplay.kay.hoplay.Services.CallbackHandlerCondition;
 import com.hoplay.kay.hoplay.Services.FirebaseInstanceIdService;
+import com.hoplay.kay.hoplay.Services.HandlerCondition;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +38,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
 
     private RequestModelReference requestModelRef;
+    Boolean pointsIsDone = false ;
 
 
     @Override
@@ -110,6 +115,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     String promoCode = dataSnapshot.child(FIREBASE_DETAILS_ATTR+"/"+FIREBASE_PROMO_CODE_ATTR).getValue(String.class);
 
 
+
                     if (dataSnapshot.hasChild(FIREBASE_USER_PS_GAME_PROVIDER))
                         PSNAcc = dataSnapshot.child(FIREBASE_USER_PS_GAME_PROVIDER).getValue(String.class);
                     if (dataSnapshot.hasChild(FIREBASE_USER_XBOX_GAME_PROVIDER))
@@ -135,17 +141,13 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
 
 
+
                     // To show the message once
                     if (!App.isWelcomed)
                     {
                         welcomeMessage(username);
                         App.isWelcomed=true;
                     }
-
-
-                    // Assign Points
-
-
 
 
 
@@ -158,6 +160,42 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     app.getUserInformation().setPSNAcc(PSNAcc);
                     app.getUserInformation().setXboxLiveAcc(XboxLiveAcc);
                     app.getUserInformation().setPcGamesAcc(pcGamesAccs);
+
+
+
+                    // Assign Points
+                    final Long[] userPoints = new Long[1];
+                    try {
+
+                        app.getDatabasePromoCode().child("pointing").child(app.getUserInformation().getUsername().toLowerCase()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                                for (DataSnapshot childSnapshot : dataSnapshot.getChildren())
+                                {
+                                    if (childSnapshot.getValue() != null)
+                                    {
+                                        try {
+                                            userPoints[0] = childSnapshot.getValue(Long.class);
+                                        }catch (Exception e){}
+
+                                    }
+
+                                }
+
+                                Log.i("===================>","POINTS -->"+userPoints[0]);
+                                pointsIsDone = true ;
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+                    }catch (Exception e){}
+
 
 
                     // User Token
@@ -181,6 +219,45 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
                     // check addRequestToFirebase
                     checkRequest();
+
+
+
+                    // Assign Points
+                    CallbackHandlerCondition callback = new CallbackHandlerCondition() {
+                        @Override
+                        public boolean callBack() {
+                            if(pointsIsDone)
+                            {
+                                // Default value
+                                app.getUserInformation().setHopyPoints("0");
+
+                                // Get value
+                                if (userPoints[0] !=null)
+                               app.getUserInformation().setHopyPoints(userPoints[0].toString());
+                            }
+                            return pointsIsDone;
+                        }
+                    };
+                    new HandlerCondition(callback, 0);
+
+
+
+
+//
+//                    new CountDownTimer(2000, 1000) {
+//
+//                        public void onTick(long millisUntilFinished) {
+//
+//                        }
+//
+//                        public void onFinish() {
+//                            Log.i("=================>","POINTS --> "+ userPoints[0]);
+//                        }
+//                    }.start();
+//
+
+
+
 
                 }
                 else
