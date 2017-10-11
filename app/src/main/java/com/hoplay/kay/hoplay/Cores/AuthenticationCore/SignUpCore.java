@@ -119,13 +119,13 @@ public class SignUpCore extends Signup implements FirebasePaths{
                 {
 
                     DatabaseReference promoRef = app.getDatabasePromoCode();
-                    promoRef.child(promoCode+"/users/"+username.toLowerCase()).setValue(false);
+                    promoRef.child("pointing/"+promoCode+"/users/"+username.toLowerCase()).setValue(false);
 
                     HashMap<String,Object> pointStructure = new HashMap<>();
 
                     pointStructure.put("points",0);
                     pointStructure.put("users","null");
-                    promoRef.child(username.toLowerCase()).setValue(pointStructure);
+                    promoRef.child("pointing").child(username.toLowerCase()).setValue(pointStructure);
 
                     isExists = true;
 

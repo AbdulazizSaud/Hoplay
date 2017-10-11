@@ -130,7 +130,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
                     if(promoCode !=null)
                     {
-                    app.getDatabasePromoCode().child(promoCode.toLowerCase()+"/users/"+username.toLowerCase()).setValue(true);
+                    app.getDatabasePromoCode().child("pointing/"+promoCode.toLowerCase()+"/users/"+username.toLowerCase()).setValue(true);
                     }
 
 
