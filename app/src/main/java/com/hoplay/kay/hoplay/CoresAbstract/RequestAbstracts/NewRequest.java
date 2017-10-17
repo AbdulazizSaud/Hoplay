@@ -859,7 +859,7 @@ public abstract class NewRequest extends AppCompatActivity implements Constants{
         userEnteredGameProviderAcc = false;
         pcGameProvider ="";
         gameProviderDialog = new Dialog(this);
-        gameProviderDialog.setCancelable(false);
+        gameProviderDialog.setCancelable(true);
         gameProviderDialog.setContentView(R.layout.provider_account_pop_up);
         gameProviderDialog.show();
 
