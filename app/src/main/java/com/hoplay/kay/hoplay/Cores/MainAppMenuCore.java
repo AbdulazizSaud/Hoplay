@@ -161,40 +161,24 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     app.getUserInformation().setXboxLiveAcc(XboxLiveAcc);
                     app.getUserInformation().setPcGamesAcc(pcGamesAccs);
 
+                    app.getUserInformation().setHopyPoints("0");
 
+                    app.getDatabasePromoCode().child("pointing").child(app.getUserInformation().getUsername().toLowerCase()).child("points").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    // Assign Points
-                    final Long[] userPoints = new Long[1];
-                    try {
+                            if(dataSnapshot.getValue() == null)
+                            return;
 
-                        app.getDatabasePromoCode().child("pointing").child(app.getUserInformation().getUsername().toLowerCase()).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
+                            long point = dataSnapshot.getValue(Long.class);
+                            app.getUserInformation().setHopyPoints(String.valueOf(point));
+                        }
 
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                                for (DataSnapshot childSnapshot : dataSnapshot.getChildren())
-                                {
-                                    if (childSnapshot.getValue() != null)
-                                    {
-                                        try {
-                                            userPoints[0] = childSnapshot.getValue(Long.class);
-                                        }catch (Exception e){}
-
-                                    }
-
-                                }
-
-                                Log.i("===================>","POINTS -->"+userPoints[0]);
-                                pointsIsDone = true ;
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-
-                    }catch (Exception e){}
+                        }
+                    });
 
 
 
@@ -202,12 +186,6 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
                     app.setUserToken(FirebaseInstanceIdService.recentRoken);
                     Log.i("===>",FirebaseInstanceIdService.recentRoken);
                     app.getDatabaseUsersTokens().child(app.getUserInformation().getUID()).setValue(app.getUserToken());
-
-
-//                    app.getUserInformation().setPictureBitMap(app.getBitmapFromUrl(picUrl));
-//
-//                    Log.i("-------->",)
-
 
                     // load games
                     loadFavorGamesList();
@@ -219,27 +197,6 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
                     // check addRequestToFirebase
                     checkRequest();
-
-
-
-                    // Assign Points
-                    CallbackHandlerCondition callback = new CallbackHandlerCondition() {
-                        @Override
-                        public boolean callBack() {
-                            if(pointsIsDone)
-                            {
-                                // Default value
-                                app.getUserInformation().setHopyPoints("0");
-
-                                // Get value
-                                if (userPoints[0] !=null)
-                               app.getUserInformation().setHopyPoints(userPoints[0].toString());
-                            }
-                            return pointsIsDone;
-                        }
-                    };
-                    new HandlerCondition(callback, 0);
-
 
 
 

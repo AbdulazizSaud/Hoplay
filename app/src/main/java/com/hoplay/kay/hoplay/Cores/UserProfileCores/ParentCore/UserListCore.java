@@ -75,7 +75,10 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
     protected void searchForUser(String value) {
 
         DatabaseReference userRef = app.getDatabaseUsersInfo();
+
+
         Query query = userRef.orderByChild(FIREBASE_USERNAME_PATH).startAt(value).endAt(value+"\uf8ff").limitToFirst(10);
+
         getData(query);
     }
 

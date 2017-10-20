@@ -2,6 +2,7 @@ package com.hoplay.kay.hoplay.Cores.ChatCore;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.hoplay.kay.hoplay.Cores.UserProfileCores.ParentCore.UserListCore;
 import com.hoplay.kay.hoplay.Models.FriendCommonModel;
@@ -26,7 +27,25 @@ public class FindUserCore extends UserListCore {
         final DatabaseReference userFriendsListRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_FRIENDS_LIST_ATTR);
 
        // Add friend to the friend list
-        userFriendsListRef.child(model.getFriendKey()).setValue(model.getFriendKey());
+
+        userFriendsListRef.child(model.getFriendKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.getValue() == null){
+                    dataSnapshot.getRef().setValue(model.getFriendKey());
+                    Toast.makeText(getApplicationContext(),"Added to your friends list",Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 

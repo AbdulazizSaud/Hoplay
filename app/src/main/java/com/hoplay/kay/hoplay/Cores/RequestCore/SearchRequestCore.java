@@ -265,11 +265,13 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if (dataSnapshot == null)
+                if (dataSnapshot.getValue() == null) {
+                    query.removeEventListener(this);
                     return;
-
+                }
                 Iterable<DataSnapshot> shots = dataSnapshot.getChildren();
                 for (DataSnapshot shot : shots) {
+
 
                     RequestModel receivedRequestModel = shot.getValue(RequestModel.class);
 
@@ -285,7 +287,11 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
                     if (!matchType.equals(receivedRequestModel.getMatchType()))
                         continue;
 
+
+
+
                     receivedRequestModel.setRequestId(shot.getKey());
+
                     requestModelArrayList.add(receivedRequestModel);
 
                 }

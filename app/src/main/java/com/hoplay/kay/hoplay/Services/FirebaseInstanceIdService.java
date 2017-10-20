@@ -8,9 +8,6 @@ import com.hoplay.kay.hoplay.App.App;
 
 import java.io.IOException;
 
-/**
- * Created by khaledAlhindi on 10/4/2017 AD.
- */
 
 public class FirebaseInstanceIdService  extends com.google.firebase.iid.FirebaseInstanceIdService{
 
