@@ -728,7 +728,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
         final Dialog surveyDialog = new Dialog(this);
         surveyDialog.setContentView(R.layout.sign_up_survey_dialog);
         surveyDialog.show();
-        surveyDialog.setCancelable(false);
+
 
 
 

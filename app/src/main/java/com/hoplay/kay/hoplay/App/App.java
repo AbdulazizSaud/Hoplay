@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -21,6 +22,9 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.hoplay.kay.hoplay.Activities.NoConnection;
 import com.hoplay.kay.hoplay.Adapters.ViewHolders;
 import com.hoplay.kay.hoplay.Cores.AuthenticationCore.LoginCore;
@@ -96,6 +100,8 @@ public class App extends Application implements FirebasePaths {
 
 
 
+
+
     private UserInformation userInformation;
     private GameManager gameManager;
     private TimeStamp timeStamp;
@@ -123,7 +129,7 @@ public class App extends Application implements FirebasePaths {
 
 
 
-    // Uset Token
+    // User Token
     private String userToken = "";
 
     public String getUserToken() {
@@ -212,7 +218,6 @@ public class App extends Application implements FirebasePaths {
 
 
 
-
         // Check Rapidly for network connection
 
        noConnectionHandler = new Handler();
@@ -245,6 +250,7 @@ public class App extends Application implements FirebasePaths {
 
 
     }
+
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager

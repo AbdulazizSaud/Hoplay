@@ -36,6 +36,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.hoplay.kay.hoplay.Cores.AuthenticationCore.SignUpCore;
 import com.hoplay.kay.hoplay.Cores.ForgetPasswordCore;
 import com.hoplay.kay.hoplay.Cores.MainAppMenuCore;
@@ -80,6 +83,9 @@ public abstract class Login extends AppCompatActivity implements View.OnKeyListe
     private RelativeLayout rootView ;
     // For displaying the tour activities
     protected boolean firstTime = false;
+
+
+    
 
     /***************************************/
 
