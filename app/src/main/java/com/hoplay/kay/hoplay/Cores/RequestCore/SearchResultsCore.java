@@ -30,10 +30,12 @@ public class SearchResultsCore extends SearchResults {
     protected void OnStartActivity() {
         ArrayList<RequestModel> requestsModel = app.getSearchRequestResult();
 
+
         for(final RequestModel request : requestsModel)
         {
 
             GameModel gameModel = app.getGameManager().getGameById(request.getGameId());
+
 
             final String requestPath = request.getPlatform()+"/"+request.getGameId()+"/"+request.getRegion()+"/"+request.getRequestId();
 
@@ -50,7 +52,6 @@ public class SearchResultsCore extends SearchResults {
                         }
 
                         app.getDatabaseRequests().child(requestPath).child("players").removeEventListener(this);
-                        return;
                     }
                 }
 
@@ -67,14 +68,10 @@ public class SearchResultsCore extends SearchResults {
                 // here we have issue
                 String path = request.getMatchType()+"/"+request.getGameId();
 
-
-
-                Log.i("-->",app.getDatabaseRequests().child(requestPath).child("players").toString());
-
-
                 app.getDatabaseGames().child(path)
                         .addListenerForSingleValueEvent(getGameInfo(request));
             } else {
+                Log.i("x3-->",request.getGameId() + " "+ gameModel.getGamePhotoUrl());
 
                 if(request.getPlayers() == null)
                     continue;

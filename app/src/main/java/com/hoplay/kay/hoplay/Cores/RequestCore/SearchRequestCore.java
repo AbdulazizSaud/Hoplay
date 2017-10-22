@@ -72,7 +72,6 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
                     }
 
 
-
                 }
 
 
@@ -102,15 +101,14 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
         String gamPic = dataSnapshot.child("photo").getValue(String.class);
         int maxPlayer = dataSnapshot.child("max_player").getValue(Integer.class);
         String supportedPlatformes = dataSnapshot.child(FIREBASE_GAME_PLATFORMS_ATTR).getValue(String.class);
-        String gameProvider= dataSnapshot.child(FIREBASE_GAME_PC_GAME_PROVIDER).getValue(String.class);
+        String gameProvider = dataSnapshot.child(FIREBASE_GAME_PC_GAME_PROVIDER).getValue(String.class);
 
-        GameModel gameModel = new GameModel(gameId, gameNameWithCapitalLetter, gamPic, supportedPlatformes,gametype,maxPlayer,gameProvider);
+        GameModel gameModel = new GameModel(gameId, gameNameWithCapitalLetter, gamPic, supportedPlatformes, gametype, maxPlayer, gameProvider);
 
         notAddedGame = gameModel;
 
 
     }
-
 
 
     @Override
@@ -147,7 +145,7 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
             @Override
             public boolean callBack() {
                 if (app.getTimeStamp().getTimestampLong() != -1)
-                    currentTimeStamp =  app.getTimeStamp().getTimestampLong();
+                    currentTimeStamp = app.getTimeStamp().getTimestampLong();
 
                 return app.getTimeStamp().getTimestampLong() != -1;
             }
@@ -178,18 +176,16 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
 
         String gameId = model.getGameID();
 
-        if(region.equals("All"))
-        {
+        if (region.equals("All")) {
 
             requestModelArrayList = new ArrayList<>();
 
-            for(String reg : regionList)
-            {
-                if(reg.equals("All"))
+            for (String reg : regionList) {
+                if (reg.equals("All"))
                     continue;
 
                 gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(reg);
-                searchQuery2(currentTimeStamp);
+                excuteQuery(currentTimeStamp,true);
 
             }
 
@@ -197,8 +193,8 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
             CallbackHandlerCondition callback = new CallbackHandlerCondition() {
                 @Override
                 public boolean callBack() {
-                     app.setSearchRequestResult(requestModelArrayList);
-                     goToResultLayout();
+                    app.setSearchRequestResult(requestModelArrayList);
+                    goToResultLayout();
 
                     return true;
                 }
@@ -210,7 +206,7 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
         } else {
 
             gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(region);
-            searchQuery(currentTimeStamp);
+            excuteQuery(currentTimeStamp,false);
         }
 
     }
@@ -233,9 +229,8 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<Rank> ranks = new ArrayList<>();
 
-                for(DataSnapshot rank  : dataSnapshot.child("ranks").getChildren())
-                {
-                    ranks.add(new Rank(rank.getValue().toString(),rank.getValue(String.class)));
+                for (DataSnapshot rank : dataSnapshot.child("ranks").getChildren()) {
+                    ranks.add(new Rank(rank.getValue().toString(), rank.getValue(String.class)));
                 }
 
                 Ranks ranksAsClass = new Ranks();
@@ -253,95 +248,54 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
     }
 
 
-    private void searchQuery(long currentTimestamp) {
 
+    private void requestValidator(DataSnapshot shot) {
+        RequestModel receivedRequestModel = shot.getValue(RequestModel.class);
+
+        if (playersNumber != 0)
+            if (receivedRequestModel.getPlayerNumber() != playersNumber)
+                return;
+
+        if (!rank.equals("All Ranks"))
+            if (!receivedRequestModel.getRank().equals(rank))
+                return;
+
+        if (!matchType.equals("All Matches"))
+            if (!matchType.equals(receivedRequestModel.getMatchType()))
+                return;
+
+        receivedRequestModel.setRequestId(shot.getKey());
+
+        if (receivedRequestModel.getPlayers() != null)
+            requestModelArrayList.add(receivedRequestModel);
+    }
+
+
+
+    private void excuteQuery(long currentTimestamp, final boolean loopQuery)
+    {
         long last48 = currentTimestamp - DUE_REQUEST_TIME_IN_VALUE_HOURS;
 
         final Query query = gameRef.orderByChild(FIREBASE_REQUEST_TIME_STAMP_ATTR).startAt(last48).endAt(currentTimestamp);
         requestModelArrayList = new ArrayList<>();
+        gameRef.keepSynced(true);
+        query.keepSynced(true);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> shots = dataSnapshot.getChildren();
+                for (DataSnapshot shot : shots) {
 
-                if (dataSnapshot.getValue() == null) {
+                    requestValidator(shot);
+
+                }
+
+                if(!loopQuery) {
                     query.removeEventListener(this);
-                    return;
-                }
-                Iterable<DataSnapshot> shots = dataSnapshot.getChildren();
-                for (DataSnapshot shot : shots) {
-
-
-                    RequestModel receivedRequestModel = shot.getValue(RequestModel.class);
-
-                    if (playersNumber != 0)
-                        if (receivedRequestModel.getPlayerNumber() != playersNumber)
-                            continue;
-
-                    if (!rank.equals("All Ranks"))
-                        if (!receivedRequestModel.getRank().equals(rank))
-                            continue;
-
-                    if(!matchType.equals("All Matches"))
-                    if (!matchType.equals(receivedRequestModel.getMatchType()))
-                        continue;
-
-
-
-
-                    receivedRequestModel.setRequestId(shot.getKey());
-
-                    requestModelArrayList.add(receivedRequestModel);
-
-                }
-                app.setSearchRequestResult(requestModelArrayList);
-                goToResultLayout();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
-
-
-
-    private void searchQuery2(long currentTimestamp) {
-
-        long last48 = currentTimestamp - DUE_REQUEST_TIME_IN_VALUE_HOURS;
-
-        final Query query = gameRef.orderByChild(FIREBASE_REQUEST_TIME_STAMP_ATTR).startAt(last48).endAt(currentTimestamp);
-
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                if (dataSnapshot == null)
-                    return;
-
-
-                Iterable<DataSnapshot> shots = dataSnapshot.getChildren();
-                for (DataSnapshot shot : shots) {
-
-                    RequestModel receivedRequestModel = shot.getValue(RequestModel.class);
-
-                    if (playersNumber != 0)
-                        if (receivedRequestModel.getPlayerNumber() != playersNumber)
-                            continue;
-
-                    if (!rank.equals("All Ranks"))
-                        if (!receivedRequestModel.getRank().equals(rank))
-                            continue;
-
-                    if(!matchType.equals("All Matches"))
-                        if (!matchType.equals(receivedRequestModel.getMatchType()))
-                            continue;
-
-                    receivedRequestModel.setRequestId(shot.getKey());
-                    requestModelArrayList.add(receivedRequestModel);
-
+                    app.setSearchRequestResult(requestModelArrayList);
+                    goToResultLayout();
                 }
             }
 
@@ -349,8 +303,8 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-    }
 
+    }
 
 
 }

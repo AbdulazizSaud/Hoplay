@@ -188,6 +188,7 @@ public class App extends Application implements FirebasePaths {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         getFirebaseDatabase().setPersistenceEnabled(true);
+
         databaseUserNames = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_USER_NAMES_ATTR);
         databaseUsersInfo = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_USERS_INFO_ATTR);
         databaseRequests = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FB_REQUESTS_REFERENCE);
@@ -456,8 +457,8 @@ public class App extends Application implements FirebasePaths {
         return mainAppMenuCore;
     }
 
-    public void switchMainAppMenuFragment(ParentRequestFragments fragments) {
-        mainAppMenuCore.switchFragment(fragments);
+    public void switchMainAppMenuFragment(ParentRequestFragments fragments,int numberFragment) {
+        mainAppMenuCore.switchFragment(fragments,numberFragment);
     }
 
 

@@ -98,7 +98,7 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
 
 
         Request request = new Request(platform,gameName,matchType,region,numberOfPlayers,rank,description);
-        app.switchMainAppMenuFragment(new LobbyFragmentCore(request.getRequestModelReference()));
+        app.switchMainAppMenuFragment(new LobbyFragmentCore(request.getRequestModelReference()),2);
 
     }
 

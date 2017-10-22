@@ -242,11 +242,11 @@ public abstract class MainAppMenu extends AppCompatActivity  {
     }
 
 
-    public void switchFragment(ParentRequestFragments fragments)
+    public void switchFragment(ParentRequestFragments fragments,int number)
     {
         menuPagerAdapter.setParentRequestFragments(fragments);
         viewPagerMenu.setAdapter(menuPagerAdapter);
-        viewPagerMenu.setCurrentItem(2);
+        viewPagerMenu.setCurrentItem(number);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

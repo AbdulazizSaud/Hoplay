@@ -242,7 +242,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
                 new setMessagePack(refMessages,app.getUserInformation().getUsername()+ " Joined the request","_join_");
 
 
-                app.switchMainAppMenuFragment(new LobbyFragmentCore(request.getRequestModelReference()));
+                app.switchMainAppMenuFragment(new LobbyFragmentCore(request.getRequestModelReference()),2);
                 jumpToLobbyChat(requestModel,FIREBASE_PUBLIC_ATTR);
 
                 return true;

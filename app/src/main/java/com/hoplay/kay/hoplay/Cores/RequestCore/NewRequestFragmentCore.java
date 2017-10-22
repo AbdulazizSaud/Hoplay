@@ -69,7 +69,7 @@ public class NewRequestFragmentCore extends NewRequestFragment implements Fireba
     protected void addRequestToFirebase(String platform, String gameName, String matchType, String region, String numberOfPlayers, String rank, String description) {
 
         Request request = new Request(platform,gameName,matchType,region,numberOfPlayers,rank,description);
-        app.switchMainAppMenuFragment(new LobbyFragmentCore(request.getRequestModelReference()));
+        app.switchMainAppMenuFragment(new LobbyFragmentCore(request.getRequestModelReference()),2);
     }
 
     @Override

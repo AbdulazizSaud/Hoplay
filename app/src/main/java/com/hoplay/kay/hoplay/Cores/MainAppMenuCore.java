@@ -423,7 +423,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
         app.getDatabasChat().child(FIREBASE_PUBLIC_ATTR+"/" + requestModelRef.getRequestId()).child(FIREBASE_CHAT_USERS_LIST_PATH).child(uid).removeValue();
 
-        app.switchMainAppMenuFragment(new NewRequestFragmentCore());
+        app.switchMainAppMenuFragment(new NewRequestFragmentCore(),2);
     }
 
 
