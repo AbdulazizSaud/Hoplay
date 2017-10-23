@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
 import com.hoplay.kay.hoplay.Adapters.CommonAdapter;
 import com.hoplay.kay.hoplay.Adapters.ViewHolders;
 import com.hoplay.kay.hoplay.App.App;
@@ -31,6 +33,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.hoplay.kay.hoplay.Interfaces.FirebasePaths.FIREBASE_USER_PC_GAME_PROVIDER_ATTR;
+import static com.hoplay.kay.hoplay.Interfaces.FirebasePaths.FIREBASE_USER_PS_GAME_PROVIDER_ATTR;
+import static com.hoplay.kay.hoplay.Interfaces.FirebasePaths.FIREBASE_USER_XBOX_GAME_PROVIDER_ATTR;
 
 public abstract class Lobby {
 
@@ -61,14 +67,14 @@ public abstract class Lobby {
     private App app;
     private Context context;
 
-    public Lobby(Context c, View v) {
+    public Lobby(Context c, View v,boolean invisableJoinButton) {
         app = App.getInstance();
         this.context = c;
-        initControls(v);
+        initControls(v,invisableJoinButton);
         setupRecyclerView(v);
     }
 
-    private void initControls(View v) {
+    private void initControls(View v,boolean invisableJoinButton) {
 
 
         final Typeface playbold = Typeface.createFromAsset(context.getResources().getAssets(), "playbold.ttf");
@@ -104,6 +110,9 @@ public abstract class Lobby {
 
         playerModels = new ArrayList<PlayerModel>();
         playerModelsHashMap = new HashMap<>();
+
+        if (invisableJoinButton)
+            joinButton.setVisibility(View.INVISIBLE);
 
 
     }
@@ -367,11 +376,58 @@ public abstract class Lobby {
         gamePhoto.setBorderWidth(width);
     }
 
-    public void setMatchImage(int resource) {
+    private void setMatchImage(int resource) {
         matchTypeImageView.setImageResource(resource);
     }
 
 
+
+    public void setMatchTypeImage(RequestModel requestModel) {
+        // Set match type image
+        if (requestModel.getMatchType().equalsIgnoreCase("Competitive"))
+            setMatchImage(R.drawable.ic_whatshot_competitive_24dp);
+        else if (requestModel.getMatchType().equalsIgnoreCase("Qhick Match"))
+            setMatchImage(R.drawable.ic_whatshot_quick_match_24dp);
+        else
+            setMatchImage(R.drawable.ic_whatshot_unfocused_24dp);
+    }
+
+
+
+
+    public void setupPlayerInformation(DataSnapshot dataSnapshot, RequestModel requestModel, PlayerModel player) {
+        // set the lobby border width
+        setGameBorderWidth(8);
+
+        if (player.getUID().equals(app.getUserInformation().getUID()))
+            getJoinButton().setVisibility(View.INVISIBLE);
+
+
+        if (requestModel.getPlatform().equalsIgnoreCase("PS"))
+        {
+
+            player.setGamePovider("PSN Account");
+            player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PS_GAME_PROVIDER_ATTR).getValue(String.class));
+            setGameBorderColor(ContextCompat.getColor(context, R.color.ps_color));
+
+        }
+        else if (requestModel.getPlatform().equalsIgnoreCase("XBOX"))
+        {
+            player.setGamePovider("XBOX Account");
+            player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_XBOX_GAME_PROVIDER_ATTR).getValue(String.class));
+            setGameBorderColor(ContextCompat.getColor(context, R.color.xbox_color));
+        }
+        else{
+            String pcGameProvider = app.getGameManager().getPcGamesWithProviders().get(requestModel.getGameId().trim());
+
+            player.setGamePovider(pcGameProvider);
+            if(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR+"/"+pcGameProvider).getValue() !=null)
+                player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR+"/"+pcGameProvider).getValue(String.class));
+
+            setGameBorderColor(ContextCompat.getColor(context, R.color.pc_color));
+        }
+    }
+    
     public abstract void addFriend(PlayerModel model);
 
     public abstract void kickPlayer(PlayerModel model);

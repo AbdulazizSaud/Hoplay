@@ -150,9 +150,6 @@ public abstract class Chat extends AppCompatActivity {
         initControls();
 
 
-
-
-
         // set up chat app mechanisms
         setupChat();
 

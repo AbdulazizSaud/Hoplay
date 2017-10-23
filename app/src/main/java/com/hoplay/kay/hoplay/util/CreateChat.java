@@ -60,7 +60,7 @@ public class CreateChat implements FirebasePaths {
         ChatMessage chatMessage = new ChatMessage();
         chatMessage.setId(key);
         chatMessage.setMessage("hello");
-        chatMessage.setUsername("Null");
+        chatMessage.setUsername("");
         chatMessage.setTimestamp(ServerValue.TIMESTAMP);
         chatMessage.setCounter(0);
 
@@ -117,7 +117,7 @@ public class CreateChat implements FirebasePaths {
         ChatMessage chatMessage = new ChatMessage();
         chatMessage.setId(key);
         chatMessage.setMessage("hello");
-        chatMessage.setUsername("Null");
+        chatMessage.setUsername("");
         chatMessage.setTimestamp(ServerValue.TIMESTAMP);
         chatMessage.setCounter(0);
 

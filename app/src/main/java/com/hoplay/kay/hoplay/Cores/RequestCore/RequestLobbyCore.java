@@ -35,79 +35,33 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
     private ChildEventListener onAddPlayerEvent = new ChildEventListener() {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-            try {
 
-
-                final String uid = dataSnapshot.child("uid").getValue(String.class);
-                final String username = dataSnapshot.child("username").getValue(String.class);
-
-
-                app.getDatabaseUsersInfo().child(uid+"/"+FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        String picture = dataSnapshot.child(FIREBASE_PICTURE_URL_ATTR).getValue(String.class);
-
-                        PlayerModel player = new PlayerModel(uid,username);
-
-                        player.setProfilePicture(picture);
-
-
-                        // set the lobby border width
-                        lobby.setGameBorderWidth(8);
-
-                        if (player.getUID().equals(app.getUserInformation().getUID()))
-                            lobby.getJoinButton().setVisibility(View.INVISIBLE);
-
-
-                        if (requestModel.getPlatform().equalsIgnoreCase("PS"))
-                        {
-
-                            player.setGamePovider("PSN Account");
-                            player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PS_GAME_PROVIDER_ATTR).getValue(String.class));
-                            lobby.setGameBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.ps_color));
-
-                        }
-                        else if (requestModel.getPlatform().equalsIgnoreCase("XBOX"))
-                        {
-                            player.setGamePovider("XBOX Account");
-                            player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_XBOX_GAME_PROVIDER_ATTR).getValue(String.class));
-                            lobby.setGameBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.xbox_color));
-                        }
-                        else{
-                            String pcGameProvider = app.getGameManager().getPcGamesWithProviders().get(requestModel.getGameId().trim());
-
-                            player.setGamePovider(pcGameProvider);
-                            if(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR+"/"+pcGameProvider).getValue() !=null)
-                                player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR+"/"+pcGameProvider).getValue(String.class));
-
-                            lobby.setGameBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.pc_color));
-                        }
-
-                        lobby.addPlayer(player);
-                        requestModel.addPlayer(player);
-
-
-                        // Set match type image
-                        if (requestModel.getMatchType().equalsIgnoreCase("Competitive"))
-                            lobby.setMatchImage(R.drawable.ic_whatshot_competitive_24dp);
-                        else if (requestModel.getMatchType().equalsIgnoreCase("Qhick Match"))
-                            lobby.setMatchImage(R.drawable.ic_whatshot_quick_match_24dp);
-                        else
-                            lobby.setMatchImage(R.drawable.ic_whatshot_unfocused_24dp);
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-            } catch (NullPointerException e) {
-                Log.i("---->",e.getMessage());
+            if(dataSnapshot.getValue() == null)
                 return;
-            }
 
+            final String uid = dataSnapshot.child("uid").getValue(String.class);
+            final String username = dataSnapshot.child("username").getValue(String.class);
+            app.getDatabaseUsersInfo().child(uid+"/"+FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String picture = dataSnapshot.child(FIREBASE_PICTURE_URL_ATTR).getValue(String.class);
+
+                    PlayerModel player = new PlayerModel(uid,username);
+
+                    player.setProfilePicture(picture);
+                    lobby.setupPlayerInformation(dataSnapshot,requestModel, player);
+
+
+                    lobby.addPlayer(player);
+                    requestModel.addPlayer(player);
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
 
         @Override
@@ -151,6 +105,9 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
 
 
 
+
+
+
     private ValueEventListener getAdminInfo = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -183,6 +140,7 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         if (requestModel == null)
             return;
 
+
         app.getDatabaseUsersInfo().child(requestModel.getAdmin()).child(FIREBASE_DETAILS_ATTR)
                 .addListenerForSingleValueEvent(getAdminInfo);
 
@@ -198,6 +156,8 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         new HandlerCondition(callback, 0);
 
 
+        lobby.setMatchTypeImage(requestModel);
+
     }
 
     @Override
@@ -206,9 +166,15 @@ public class RequestLobbyCore extends RequestLobby implements FirebasePaths {
         if(lobby.isExsist(app.getUserInformation().getUID()))
             return;
 
+        if(lobby.getCurrentPlayerNumber() == requestModel.getPlayerNumber())
+        {
+            Toast.makeText(this,"Lobby is full",Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        if(app.getMainAppMenuCore().getRequestModelRef() !=null)
+        if(app.getMainAppMenuCore().getRequestModelRef() !=null) {
             app.getMainAppMenuCore().cancelRequest();
+        }
 
         CallbackHandlerCondition callbackHandlerCondition = new CallbackHandlerCondition() {
             @Override

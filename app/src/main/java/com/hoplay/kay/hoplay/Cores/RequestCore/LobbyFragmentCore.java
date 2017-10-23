@@ -45,73 +45,19 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
                 app.getDatabaseUsersInfo().child(uid + "/" + FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        String picture = dataSnapshot.child(FIREBASE_PICTURE_URL_ATTR).getValue(String.class);
+
 
                         PlayerModel player = new PlayerModel(uid, username);
+                        String picture = dataSnapshot.child(FIREBASE_PICTURE_URL_ATTR).getValue(String.class);
+
 
                         player.setProfilePicture(picture);
+                        lobby.setupPlayerInformation(dataSnapshot, requestModel, player);
 
-
-                        if (player.getUID().equals(app.getUserInformation().getUID()))
-                            lobby.getJoinButton().setVisibility(View.INVISIBLE);
-
-                        // set the lobby border width
-                        lobby.setGameBorderWidth(8);
-
-
-
-                        // TODO : ERROR
-                        if (requestModelRefrance.getPlatform().equalsIgnoreCase("PS")) {
-                            player.setGamePovider("PSN Account");
-                            player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PS_GAME_PROVIDER_ATTR).getValue(String.class));
-
-                            try {
-
-                            }catch (Exception e)
-                            {
-                                lobby.setGameBorderColor(ContextCompat.getColor(getContext(), R.color.ps_color));
-                            }
-
-                        } else if (requestModelRefrance.getPlatform().equalsIgnoreCase("XBOX")) {
-                            player.setGamePovider("XBOX Account");
-                            player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_XBOX_GAME_PROVIDER_ATTR).getValue(String.class));
-
-                            try {
-
-                            }catch (Exception e)
-                            {
-                                lobby.setGameBorderColor(ContextCompat.getColor(getContext(), R.color.xbox_color));
-                            }
-
-
-                        } else {
-                            String pcGameProvider = app.getGameManager().getPcGamesWithProviders().get(requestModelRefrance.getGameId().trim());
-
-                            player.setGamePovider(pcGameProvider);
-                            if (dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR + "/" + pcGameProvider).getValue() != null)
-                                player.setGameProviderAcc(dataSnapshot.child(FIREBASE_USER_PC_GAME_PROVIDER_ATTR + "/" + pcGameProvider).getValue(String.class));
-
-                            try
-                            {
-                                lobby.setGameBorderColor(ContextCompat.getColor(getContext(), R.color.pc_color));
-                            }
-                            catch(Exception e)
-                            {
-
-                            }
-
-                        }
 
                         lobby.addPlayer(player);
                         requestModel.addPlayer(player);
 
-                        // Set match type image
-                        if (requestModel.getMatchType().equalsIgnoreCase("Competitive"))
-                            lobby.setMatchImage(R.drawable.ic_whatshot_competitive_24dp);
-                        else if (requestModel.getMatchType().equalsIgnoreCase("Qhick Match"))
-                            lobby.setMatchImage(R.drawable.ic_whatshot_quick_match_24dp);
-                        else
-                            lobby.setMatchImage(R.drawable.ic_whatshot_unfocused_24dp);
 
                     }
 
@@ -140,9 +86,9 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
             requestModel.removePlayer(player);
             lobby.removePlayer(player);
 
-            if(player.getUID().equals(app.getUserInformation().getUID()) && !leaveing) {
+            if (player.getUID().equals(app.getUserInformation().getUID()) && !leaveing) {
                 // here you can put message
-                Toast.makeText(app.getMainAppMenuCore(),"You have been kicked by an admin",Toast.LENGTH_LONG).show();
+                Toast.makeText(app.getMainAppMenuCore(), "You have been kicked by an admin", Toast.LENGTH_LONG).show();
                 cancelRequest();
 
             }
@@ -165,8 +111,7 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
         public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-
-            if(dataSnapshot.getValue(RequestModel.class) == null || dataSnapshot.getValue() == null )
+            if (dataSnapshot.getValue(RequestModel.class) == null || dataSnapshot.getValue() == null)
                 app.getMainAppMenuCore().cancelRequest();
 
 
@@ -174,13 +119,14 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
             gameModel = app.getGameManager().getGameById(requestModel.getGameId());
             requestModel.setRequestPicture(gameModel.getGamePhotoUrl());
 
+            lobby.setMatchTypeImage(requestModel);
 
             app.getDatabaseUsersInfo().child(requestModel.getAdmin() + "/" + FIREBASE_PICTURE_URL_PATH).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
                     String adminPicture = dataSnapshot.getValue(String.class);
-                    lobby.setLobbyInfo(requestModel,adminPicture);
+                    lobby.setLobbyInfo(requestModel, adminPicture);
 
                 }
 
@@ -270,9 +216,7 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
     protected void cancelRequest() {
         removeListener();
 
-
-        setChatValuePack("_leave_","left the lobby",app.getUserInformation().getUsername());
-
+        setChatValuePack("_leave_", "left the lobby", app.getUserInformation().getUsername());
 
         app.getMainAppMenuCore().cancelRequest();
         leaveing = true;
@@ -290,11 +234,10 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
 
     @Override
     protected void removePlayerFromLobby(PlayerModel model) {
-        if(lobby.getAdminUid().equals(app.getUserInformation().getUID()))
-        {
+        if (lobby.getAdminUid().equals(app.getUserInformation().getUID())) {
             app.getDatabaseRequests().child(lobby.getRequestPath()).child("players").child(model.getUID()).removeValue();
 
-            setChatValuePack("_kicked_","Kicked from the lobby",model.getUsername());
+            setChatValuePack("_kicked_", "Kicked from the lobby", model.getUsername());
         }
 
     }
@@ -311,9 +254,8 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
     }
 
 
-    private void setChatValuePack(String status, String message,String username)
-    {
+    private void setChatValuePack(String status, String message, String username) {
         DatabaseReference refMessages = app.getFirebaseDatabase().getReferenceFromUrl(FB_PUBLIC_CHAT_PATH).child(requestModel.getRequestId()).child("_messages_");
-        new setMessagePack(refMessages,username+ " "+message,status);
+        new setMessagePack(refMessages, username + " " + message, status);
     }
 }

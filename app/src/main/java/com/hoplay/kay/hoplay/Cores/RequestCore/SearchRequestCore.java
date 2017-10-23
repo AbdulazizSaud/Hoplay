@@ -1,7 +1,5 @@
 package com.hoplay.kay.hoplay.Cores.RequestCore;
 
-import android.util.Log;
-
 import com.hoplay.kay.hoplay.CoresAbstract.RequestAbstracts.SearchRequests;
 import com.hoplay.kay.hoplay.Interfaces.Constants;
 import com.hoplay.kay.hoplay.Interfaces.FirebasePaths;
@@ -23,12 +21,12 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
 
     private ArrayList<RequestModel> requestModelArrayList = new ArrayList<>();
 
-    private String gameName;
-    private String region;
-    private String gamePlat;
-    private String matchType;
-    private int playersNumber;
-    private String rank;
+    private String gameNameSelected;
+    private String regionSelected;
+    private String gamePlatSelected;
+    private String matchTypeSelected;
+    private int playersNumberSeleceted;
+    private String rankSelected;
     DatabaseReference gameRef;
 
 
@@ -156,21 +154,21 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
                     currentTimeStamp = app.getTimeStamp().getTimestampLong();
 
 
-                    gameName = requestModel.getRequestTitle();
-                    region = requestModel.getRegion();
-                    gamePlat = requestModel.getPlatform();
-                    matchType = requestModel.getMatchType();
-                    playersNumber = requestModel.getPlayerNumber();
-                    rank = requestModel.getRank();
+                    gameNameSelected = requestModel.getRequestTitle();
+                    regionSelected = requestModel.getRegion();
+                    gamePlatSelected = requestModel.getPlatform();
+                    matchTypeSelected = requestModel.getMatchType();
+                    playersNumberSeleceted = requestModel.getPlayerNumber();
+                    rankSelected = requestModel.getRank();
 
 
-                    GameModel model = app.getGameManager().getGameByName(gameName.toLowerCase());
+                    GameModel model = app.getGameManager().getGameByName(gameNameSelected.toLowerCase());
 
                     if (model != null) {
 
                         String gameId = model.getGameID();
 
-                        if (region.equals("All")) {
+                        if (regionSelected.equals("All")) {
 
                             requestModelArrayList = new ArrayList<>();
 
@@ -178,7 +176,7 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
                                 if (reg.equals("All"))
                                     continue;
 
-                                gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(reg);
+                                gameRef = app.getDatabaseRequests().child(gamePlatSelected).child(gameId).child(reg);
 
                                 excuteQuery(currentTimeStamp, true);
 
@@ -200,7 +198,7 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
 
                         } else {
 
-                            gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(region);
+                            gameRef = app.getDatabaseRequests().child(gamePlatSelected).child(gameId).child(regionSelected);
                             excuteQuery(currentTimeStamp, false);
                         }
 
@@ -295,22 +293,23 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
     private void requestValidator(DataSnapshot shot) {
         RequestModel receivedRequestModel = shot.getValue(RequestModel.class);
 
-        if (playersNumber != 0)
-            if (receivedRequestModel.getPlayerNumber() != playersNumber)
+        if (receivedRequestModel.getPlayers() == null)
+            return;
+
+        if (playersNumberSeleceted != 0 || receivedRequestModel.getPlayerNumber() != playersNumberSeleceted)
+            return;
+
+        if (!rankSelected.equals("All Ranks"))
+            if (!receivedRequestModel.getRank().equals(rankSelected))
                 return;
 
-        if (!rank.equals("All Ranks"))
-            if (!receivedRequestModel.getRank().equals(rank))
-                return;
-
-        if (!matchType.equals("All Matches"))
-            if (!matchType.equals(receivedRequestModel.getMatchType()))
+        if (!matchTypeSelected.equals("All Matches"))
+            if (!matchTypeSelected.equals(receivedRequestModel.getMatchType()))
                 return;
 
         receivedRequestModel.setRequestId(shot.getKey());
 
-        if (receivedRequestModel.getPlayers() != null)
-            requestModelArrayList.add(receivedRequestModel);
+        requestModelArrayList.add(receivedRequestModel);
     }
 
 

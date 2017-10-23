@@ -36,7 +36,7 @@ public abstract class LobbyFragment extends ParentRequestFragments {
 
         View view = inflater.inflate(R.layout.activity_request_lobby, container, false);
 
-        lobby = new Lobby(getContext(), view) {
+        lobby = new Lobby(getContext(), view,true) {
             @Override
             public void addFriend(PlayerModel model) {
                 addPlayerToFreind(model);

@@ -1,7 +1,9 @@
 package com.hoplay.kay.hoplay.Models;
 
 
-public class PlayerModel{
+import java.io.Serializable;
+
+public class PlayerModel implements Serializable {
 
     private String username,UID , gamePovider , gameProviderAcc,profilePicture;
 

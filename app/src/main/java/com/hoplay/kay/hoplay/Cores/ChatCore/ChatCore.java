@@ -2,11 +2,15 @@ package com.hoplay.kay.hoplay.Cores.ChatCore;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hoplay.kay.hoplay.Cores.ForgetPasswordCore;
 import com.hoplay.kay.hoplay.Cores.UserProfileCores.ViewFriendProfileCore;
 import com.hoplay.kay.hoplay.CoresAbstract.ChatAbstracts.Chat;
@@ -44,7 +48,7 @@ public class ChatCore extends Chat implements FirebasePaths {
     private String currentUID;
 
 
-
+    private SharedPreferences mPrefs;
 
 
     private ChildEventListener messagesPacketsListener = new ChildEventListener() {
@@ -99,37 +103,39 @@ public class ChatCore extends Chat implements FirebasePaths {
         }
     };
 
-    private ChildEventListener playerOnRoom =  new ChildEventListener() {
+    private ChildEventListener playerOnRoom = new ChildEventListener() {
         @Override
         public void onChildAdded(final DataSnapshot user, String s) {
 
 
-               if (isPrivate && currentUID.equals(user.getKey()))
-                        return;
+            if (isPrivate && currentUID.equals(user.getKey()))
+                return;
 
 
             app.getDatabaseUsersInfo().child(user.getKey() + "/" + FIREBASE_DETAILS_ATTR)
-                            .addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                    String username = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
+                            String username = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
 
-                                    playerOnChat.put(user.getKey(), new PlayerModel(user.getKey(), username));
 
-                                    if (!isPrivate) {
-                                        addUserToSubtitle(username);
-                                    } else {
-                                        String bio = dataSnapshot.child(FIREBASE_BIO_ATTR).getValue(String.class);
-                                        addUserToSubtitle(bio);
-                                    }
-                                }
+                            playerOnChat.put(user.getKey(), new PlayerModel(user.getKey(), username));
+                            savePlayers();
 
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
+                            if (!isPrivate) {
+                                addUserToSubtitle(username);
+                            } else {
+                                String bio = dataSnapshot.child(FIREBASE_BIO_ATTR).getValue(String.class);
+                                addUserToSubtitle(bio);
+                            }
+                        }
 
-                                }
-                            });
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
 //
 
         }
@@ -142,15 +148,19 @@ public class ChatCore extends Chat implements FirebasePaths {
         @Override
         public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-            if(dataSnapshot.getKey().equals(currentUID))
+            if (dataSnapshot.getKey().equals(currentUID))
                 return;
 
             PlayerModel playerModel = playerOnChat.get(dataSnapshot.getKey());
-            String message = roomName+":"+playerModel.getUsername()+" Left the lobby";
+            String message = roomName + ":" + playerModel.getUsername() + " Left the lobby";
 
             playerOnChat.remove(dataSnapshot.getKey());
-            leaveMessage(playerModel.getUsername(),message);
-            Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+            savePlayers();
+
+            leaveMessage(playerModel.getUsername(), message);
+            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+
+            savePlayers();
         }
 
         @Override
@@ -175,8 +185,8 @@ public class ChatCore extends Chat implements FirebasePaths {
         roomName = i.getStringExtra("room_name");
         roomPictureUrl = i.getStringExtra("room_picture");
 
-          isPrivate = chatRoomType.equals(FIREBASE_PRIVATE_ATTR);
-          currentUID = app.getUserInformation().getUID();
+        isPrivate = chatRoomType.equals(FIREBASE_PRIVATE_ATTR);
+        currentUID = app.getUserInformation().getUID();
         String pathChatRoomType;
 
         if (isPrivate) {
@@ -187,6 +197,11 @@ public class ChatCore extends Chat implements FirebasePaths {
             opponentId = null;
         }
 
+         mPrefs = getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE);
+
+        playerOnChat = retreivePlayers();
+
+
         refRoom = app.getFirebaseDatabase().getReferenceFromUrl(pathChatRoomType + chatRoomKey);
 
         refMessages = refRoom.child("_messages_");
@@ -196,7 +211,25 @@ public class ChatCore extends Chat implements FirebasePaths {
         // in case public : it will check the type than it will add all user in chat in bio of the chat
 
         refRoom.child(FIREBASE_CHAT_USERS_LIST_PATH).addChildEventListener(playerOnRoom);
-        loadMessages();
+
+
+        int cooldownTime = 0;
+
+        if(playerOnChat == null) {
+            playerOnChat = new HashMap<String, PlayerModel>();
+            cooldownTime = 1000;
+        }
+
+
+        new HandlerCondition(new CallbackHandlerCondition() {
+            @Override
+            public boolean callBack() {
+                loadMessages();
+                return true;
+            }
+        },cooldownTime);
+
+
         setRoomDetails(roomName, roomPictureUrl);
 
     }
@@ -212,20 +245,21 @@ public class ChatCore extends Chat implements FirebasePaths {
     private void addMessage(DataSnapshot dataSnapshot) {
 
 
-
         if (isEmpty(dataSnapshot))
             return;
 
 
-        ChatMessage message =dataSnapshot.getValue(ChatMessage.class);
+        ChatMessage message = dataSnapshot.getValue(ChatMessage.class);
 
         String senderId = message.getUsername();
+
         String senderUsername = "Someone";
         boolean isYou = senderId.equals(app.getUserInformation().getUID());
 
         message.setMe(isYou);
 
         PlayerModel playerModel = playerOnChat.get(senderId);
+
 
         if (playerModel != null)
             senderUsername = playerModel.getUsername();
@@ -241,7 +275,7 @@ public class ChatCore extends Chat implements FirebasePaths {
     protected void sendMessageToFirebase(String messageText) {
 
         if (sendMessage(messageText)) {
-            new setMessagePack(refMessages,messageText,app.getUserInformation().getUID(),++lastMessageCounter);
+            new setMessagePack(refMessages, messageText, app.getUserInformation().getUID(), ++lastMessageCounter);
         }
     }
 
@@ -279,8 +313,23 @@ public class ChatCore extends Chat implements FirebasePaths {
     }
 
 
+    private void savePlayers() {
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(playerOnChat);
+        prefsEditor.putString(chatRoomKey, json);
+        prefsEditor.apply();
+    }
+
+    private HashMap<String, PlayerModel> retreivePlayers() {
+        Gson gson = new Gson();
+        String json = mPrefs.getString(chatRoomKey, "");
+
+        HashMap<String, PlayerModel> playerModelHashMap = gson.fromJson(json, new TypeToken<HashMap<String, PlayerModel>>(){}.getType() ) ;
 
 
+        return playerModelHashMap;
+    }
 
 
 }
