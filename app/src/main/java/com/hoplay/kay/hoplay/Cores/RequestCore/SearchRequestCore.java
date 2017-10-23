@@ -293,10 +293,9 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
     private void requestValidator(DataSnapshot shot) {
         RequestModel receivedRequestModel = shot.getValue(RequestModel.class);
 
-        if (receivedRequestModel.getPlayers() == null)
-            return;
 
-        if (playersNumberSeleceted != 0 || receivedRequestModel.getPlayerNumber() != playersNumberSeleceted)
+        if (playersNumberSeleceted != 0 )
+            if(receivedRequestModel.getPlayerNumber() != playersNumberSeleceted)
             return;
 
         if (!rankSelected.equals("All Ranks"))
@@ -309,7 +308,8 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
 
         receivedRequestModel.setRequestId(shot.getKey());
 
-        requestModelArrayList.add(receivedRequestModel);
+        if (receivedRequestModel.getPlayers() != null)
+            requestModelArrayList.add(receivedRequestModel);
     }
 
 
