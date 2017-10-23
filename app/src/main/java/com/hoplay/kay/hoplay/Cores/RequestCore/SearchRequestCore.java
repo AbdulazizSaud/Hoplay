@@ -139,13 +139,75 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
         });
 
 
+    }
+
+
+    @Override
+    protected void searchForRequest(final RequestModel requestModel) {
+
+
         app.getTimeStamp().setTimestampLong();
+
 
         CallbackHandlerCondition callback = new CallbackHandlerCondition() {
             @Override
             public boolean callBack() {
-                if (app.getTimeStamp().getTimestampLong() != -1)
+                if (app.getTimeStamp().getTimestampLong() != -1) {
                     currentTimeStamp = app.getTimeStamp().getTimestampLong();
+
+
+                    gameName = requestModel.getRequestTitle();
+                    region = requestModel.getRegion();
+                    gamePlat = requestModel.getPlatform();
+                    matchType = requestModel.getMatchType();
+                    playersNumber = requestModel.getPlayerNumber();
+                    rank = requestModel.getRank();
+
+
+                    GameModel model = app.getGameManager().getGameByName(gameName.toLowerCase());
+
+                    if (model != null) {
+
+                        String gameId = model.getGameID();
+
+                        if (region.equals("All")) {
+
+                            requestModelArrayList = new ArrayList<>();
+
+                            for (String reg : regionList) {
+                                if (reg.equals("All"))
+                                    continue;
+
+                                gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(reg);
+
+                                excuteQuery(currentTimeStamp, true);
+
+                            }
+
+
+                            CallbackHandlerCondition callBackSwapLayout = new CallbackHandlerCondition() {
+                                @Override
+                                public boolean callBack() {
+                                    app.setSearchRequestResult(requestModelArrayList);
+                                    goToResultLayout();
+
+                                    return true;
+                                }
+                            };
+
+                            new HandlerCondition(callBackSwapLayout, 1000);
+
+
+                        } else {
+
+                            gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(region);
+                            excuteQuery(currentTimeStamp, false);
+                        }
+
+
+                    }
+
+                }
 
                 return app.getTimeStamp().getTimestampLong() != -1;
             }
@@ -153,61 +215,6 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
 
         new HandlerCondition(callback, 0);
 
-
-    }
-
-
-    @Override
-    protected void searchForRequest(RequestModel requestModel) {
-
-
-        gameName = requestModel.getRequestTitle();
-        region = requestModel.getRegion();
-        gamePlat = requestModel.getPlatform();
-        matchType = requestModel.getMatchType();
-        playersNumber = requestModel.getPlayerNumber();
-        rank = requestModel.getRank();
-
-
-        GameModel model = app.getGameManager().getGameByName(gameName.toLowerCase());
-
-        if (model == null)
-            return;
-
-        String gameId = model.getGameID();
-
-        if (region.equals("All")) {
-
-            requestModelArrayList = new ArrayList<>();
-
-            for (String reg : regionList) {
-                if (reg.equals("All"))
-                    continue;
-
-                gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(reg);
-                excuteQuery(currentTimeStamp,true);
-
-            }
-
-
-            CallbackHandlerCondition callback = new CallbackHandlerCondition() {
-                @Override
-                public boolean callBack() {
-                    app.setSearchRequestResult(requestModelArrayList);
-                    goToResultLayout();
-
-                    return true;
-                }
-            };
-
-            new HandlerCondition(callback, 1000);
-
-
-        } else {
-
-            gameRef = app.getDatabaseRequests().child(gamePlat).child(gameId).child(region);
-            excuteQuery(currentTimeStamp,false);
-        }
 
     }
 
@@ -248,6 +255,42 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
     }
 
 
+    private void excuteQuery(long currentTimeStamp, final boolean loopQuery) {
+
+
+        long last48 = currentTimeStamp - DUE_REQUEST_TIME_IN_VALUE_HOURS;
+
+        final Query query = gameRef.orderByChild(FIREBASE_REQUEST_TIME_STAMP_ATTR).startAt(last48).endAt(currentTimeStamp);
+        requestModelArrayList = new ArrayList<>();
+        gameRef.keepSynced(true);
+        query.keepSynced(true);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> shots = dataSnapshot.getChildren();
+                for (DataSnapshot shot : shots) {
+
+                    requestValidator(shot);
+
+                }
+
+                if (!loopQuery) {
+                    query.removeEventListener(this);
+                    app.setSearchRequestResult(requestModelArrayList);
+                    goToResultLayout();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+    }
+
 
     private void requestValidator(DataSnapshot shot) {
         RequestModel receivedRequestModel = shot.getValue(RequestModel.class);
@@ -268,42 +311,6 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
 
         if (receivedRequestModel.getPlayers() != null)
             requestModelArrayList.add(receivedRequestModel);
-    }
-
-
-
-    private void excuteQuery(long currentTimestamp, final boolean loopQuery)
-    {
-        long last48 = currentTimestamp - DUE_REQUEST_TIME_IN_VALUE_HOURS;
-
-        final Query query = gameRef.orderByChild(FIREBASE_REQUEST_TIME_STAMP_ATTR).startAt(last48).endAt(currentTimestamp);
-        requestModelArrayList = new ArrayList<>();
-        gameRef.keepSynced(true);
-        query.keepSynced(true);
-
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> shots = dataSnapshot.getChildren();
-                for (DataSnapshot shot : shots) {
-
-                    requestValidator(shot);
-
-                }
-
-                if(!loopQuery) {
-                    query.removeEventListener(this);
-                    app.setSearchRequestResult(requestModelArrayList);
-                    goToResultLayout();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
     }
 
 

@@ -71,7 +71,6 @@ public class SearchResultsCore extends SearchResults {
                 app.getDatabaseGames().child(path)
                         .addListenerForSingleValueEvent(getGameInfo(request));
             } else {
-                Log.i("x3-->",request.getGameId() + " "+ gameModel.getGamePhotoUrl());
 
                 if(request.getPlayers() == null)
                     continue;
