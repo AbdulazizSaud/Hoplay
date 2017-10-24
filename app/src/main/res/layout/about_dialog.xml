@@ -37,7 +37,7 @@
         android:layout_marginTop="5dp"
         android:textSize="20sp"
         android:layout_below="@id/app_name_about_dialog"
-        android:text="Version 1.0"
+        android:text="Version 3.0.2"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:id="@+id/app_version_about_dialog"
