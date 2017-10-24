@@ -77,6 +77,7 @@ public interface FirebasePaths {
 
     // Support
     public static final String FIREBASE_SUPPORT_REFERENCE = "_support_";
+    public static final String FIREBASE_SUPPORT_TIME_ATTR = "timestamp";
     public static  final String FIREBASE_SUPPORT_TITLE_ATTR = "title";
     public static final String FIREBASE_SUPPORT_MESSAGE_ATTR = "message";
     public static  final String FIREBASE_SUPPORT_EMAIL_ATTR = "email";
