@@ -40,8 +40,7 @@ public class SupportCore extends Support implements FirebasePaths{
     private FirebaseAuth mAuth;
     private App app;
     Session session = null ;
-    String mailContent = "";
-    String mailSubject ="";
+
 
     @Override
     protected void OnStartActivity() {
