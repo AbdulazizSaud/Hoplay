@@ -41,9 +41,25 @@ public class SignUpCore extends Signup implements FirebasePaths{
     public void OnStartActivity() {
         //.
         appAuth = FirebaseAuth.getInstance();
-
+        loadSecurityQuestion();
     }
 
+
+    private void loadSecurityQuestion()
+    {
+        DatabaseReference securityRef = app.getDatabaseSecurity();
+        securityRef.child(FIREBASE_SECURITY_QUESTION_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                securityQuestion = dataSnapshot.getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     // this method will do auth to crearte a new user
     // receive:  username , password, email
@@ -51,7 +67,7 @@ public class SignUpCore extends Signup implements FirebasePaths{
     // if fail , it will give the user a failed message
 
     @Override
-    protected void signUp(final String email, final String username, final String password,final String promoCode) {
+    protected void signUp(final String email, final String username, final String password,final String promoCode,final String securityAnswer) {
 
 
         loadingDialog(true);
@@ -64,7 +80,7 @@ public class SignUpCore extends Signup implements FirebasePaths{
 
 
                             FirebaseUser user = appAuth.getCurrentUser();
-                            insertInfoToDatabase(user.getUid(),email,username.toLowerCase(),promoCode);
+                            insertInfoToDatabase(user.getUid(),email,username.toLowerCase(),promoCode,securityAnswer);
 
 //                            // success message
 //                            String strMeatMsg = String.format(getResources().getString(R.string.signup_successful_message), username);
@@ -147,7 +163,7 @@ public class SignUpCore extends Signup implements FirebasePaths{
 
     }
 
-    private void insertInfoToDatabase(final String UID,final String email, final String username,final String promoCode) {
+    private void insertInfoToDatabase(final String UID,final String email, final String username,final String promoCode,final String securityAnswer) {
 
         final DatabaseReference usersInfoRef = app.getDatabaseUsersInfo().child(UID);
 
@@ -158,6 +174,7 @@ public class SignUpCore extends Signup implements FirebasePaths{
         map.put(FIREBASE_ACCOUNT_TYPE_ATTR,"REGULAR");
         map.put(FIREBASE_EMAIL_ATTR,email);
         map.put(FIREBASE_PICTURE_URL_ATTR,"default");
+        map.put(FIREBASE_SECURITY_ANSWER_ATTR,securityAnswer);
 
         // promoCode
         if(promoCode != null)

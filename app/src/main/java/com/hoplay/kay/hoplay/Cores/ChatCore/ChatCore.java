@@ -178,12 +178,18 @@ public class ChatCore extends Chat implements FirebasePaths {
     @Override
     public void setupChat() {
 
+
+
+
         //load message
         Intent i = getIntent();
         chatRoomKey = i.getStringExtra("room_key");
         chatRoomType = i.getStringExtra("room_type");
         roomName = i.getStringExtra("room_name");
         roomPictureUrl = i.getStringExtra("room_picture");
+
+        // Set the oponent name to use it in add friend method
+        opponentName = roomName ;
 
         isPrivate = chatRoomType.equals(FIREBASE_PRIVATE_ATTR);
         currentUID = app.getUserInformation().getUID();
@@ -296,6 +302,40 @@ public class ChatCore extends Chat implements FirebasePaths {
         intent.putExtra("result", "lobby");
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    @Override
+    protected void checkIsFriend(final String opponentKey) {
+        final DatabaseReference userRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID());
+
+
+        // now we check if the current user friend with this guy or not
+        userRef.child(FIREBASE_FRIENDS_LIST_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild(opponentKey))
+                    isFriend = true;
+                else
+                    isFriend = false;
+
+
+                isDone = true ;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void addThisUserAsFriend() {
+        DatabaseReference userRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID());
+
+        // Add this user as a friend
+        userRef.child(FIREBASE_FRIENDS_LIST_ATTR).child(opponentId).setValue(opponentId);
+
     }
 
 

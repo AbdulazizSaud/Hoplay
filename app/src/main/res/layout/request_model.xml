@@ -107,6 +107,8 @@
                         android:fontFamily="sans-serif-light"
                         android:textSize="14dp"
                         android:maxLines="1"
+                        android:layout_gravity="left"
+                        android:gravity="left"
                         android:singleLine="true"
                         android:paddingRight="5dp"
                         android:layout_weight="1"

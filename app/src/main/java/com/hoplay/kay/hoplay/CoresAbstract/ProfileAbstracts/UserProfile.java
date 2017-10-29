@@ -453,7 +453,7 @@ public abstract class UserProfile extends Fragment {
                         holder.setTime(app.convertFromTimeStampToTimeAgo(model.getTimeStamp()));
                         return false;
                     }
-                }, 10000);
+                }, 20000);
 
 
                 holder.getTimeView().setTypeface(playregular);

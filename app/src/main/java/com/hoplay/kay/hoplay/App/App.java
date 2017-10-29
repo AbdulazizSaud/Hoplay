@@ -87,6 +87,7 @@ public class App extends Application implements FirebasePaths {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseUserNames;
     private DatabaseReference databaseSupport;
+    private DatabaseReference databaseSecurity;
     private DatabaseReference databaseUsersInfo;
     private DatabaseReference databaseChat;
     private DatabaseReference databaseGames;
@@ -177,6 +178,7 @@ public class App extends Application implements FirebasePaths {
 
 
 
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -197,6 +199,7 @@ public class App extends Application implements FirebasePaths {
         databaseGames = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_GAMES_REFERENCES);
         databaseRegions = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FB_REGIONS_REFERENCE);
         databaseSupport = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_SUPPORT_REFERENCE);
+        databaseSecurity = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_SECURITY_ATTR);
         databasePromoCode = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_PROMO_CODE_POINTS_ATTR);
         databaseUsersTokens = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_USERS_TOKENS_ATTR);
 
@@ -397,6 +400,9 @@ public class App extends Application implements FirebasePaths {
         return userInformation;
     }
 
+    public DatabaseReference getDatabaseSecurity() {
+        return databaseSecurity;
+    }
 
     public void setmAuthStateListener(FirebaseAuth.AuthStateListener mAuthStateListener) {
         this.mAuthStateListener = mAuthStateListener;

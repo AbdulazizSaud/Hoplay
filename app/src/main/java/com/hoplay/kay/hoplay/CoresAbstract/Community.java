@@ -276,7 +276,7 @@ public abstract class Community extends Fragment {
                         holder.setTime(app.convertFromTimeStampToTimeAgo(model.getTimeStamp()));
                         return false;
                     }
-                }, 10000);
+                }, 20000);
 //                Log.i("->",""+getAllUnseenMessages());
 
 

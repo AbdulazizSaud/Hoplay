@@ -29,6 +29,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hoplay.kay.hoplay.Activities.NoConnection;
 import com.hoplay.kay.hoplay.Adapters.SpinnerAdapter;
@@ -74,6 +75,9 @@ public abstract class Signup extends AppCompatActivity implements Constants {
     Handler handler = new Handler();
     Runnable runnable;
 
+
+    // Security
+    protected String securityQuestion = "What is your favorite video game character ?";
 
     /***************************************/
 
@@ -410,7 +414,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 
                 if(validated && userAvailable)
                 {
-                    showSurveyDialog(email,username.toLowerCase(),password);
+                    showSecurityQuestionDialog(email,username.toLowerCase(),password);
                 }
             }
         });
@@ -722,7 +726,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 
 
 
-    private void showSurveyDialog(final String email,final String username,final String password){
+    private void showSurveyDialog(final String email,final String username,final String password , final String securityAnswer){
 
 
         final Dialog surveyDialog = new Dialog(this);
@@ -842,7 +846,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
         skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signUp(email,username.toLowerCase(),password,null);
+                signUp(email,username.toLowerCase(),password,null,securityAnswer);
                 handler.removeCallbacks(runnable);
             }
         });
@@ -854,7 +858,7 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 
                 String promoCodeText  =  friendSurveyEdittext.getText().toString().trim().toLowerCase();
                 String promoCode =promoCodeText.isEmpty() ? "null" : promoCodeText;
-                signUp(email,username.toLowerCase(),password,promoCode.toLowerCase());
+                signUp(email,username.toLowerCase(),password,promoCode.toLowerCase(),securityAnswer);
                 handler.removeCallbacks(runnable);
 
             }
@@ -874,11 +878,102 @@ public abstract class Signup extends AppCompatActivity implements Constants {
 
 
 
+    private void showSecurityQuestionDialog(final String email,final String username,final String password){
+
+
+        final Dialog securityDialog = new Dialog(this);
+        securityDialog.setContentView(R.layout.security_question_dialog);
+        securityDialog.show();
+
+
+
+
+        securityDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
+
+        TextView securityQuestionTextview ;
+        final EditText securityAnswerEdittext ;
+        final TextInputLayout securityAnserInputLayout;
+        Button doneBtn , skipBtn ;
+
+
+        securityAnserInputLayout = (TextInputLayout) securityDialog.findViewById(R.id.security_question_inputlayout);
+        securityAnswerEdittext = (EditText) securityDialog.findViewById(R.id.security_question_edittext);
+        doneBtn = (Button) securityDialog.findViewById(R.id.done_security_dialog_button);
+        securityQuestionTextview = (TextView) securityDialog.findViewById(R.id.security_question_textview);
+        securityQuestionTextview.setText(securityQuestion);
+
+
+
+
+        Typeface sansation = Typeface.createFromAsset(getResources().getAssets() ,"sansationbold.ttf");
+        doneBtn.setTypeface(sansation);
+
+
+
+        final Typeface playReg = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
+
+        securityQuestionTextview.setTypeface(playReg);
+        securityAnswerEdittext.setTypeface(playReg);
+        securityAnserInputLayout.setTypeface(playReg);
+
+
+        securityAnswerEdittext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                securityAnswerEdittext.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_games_focused_24dp, 0);
+                if(s.length() == 0)
+                {
+                    securityAnswerEdittext.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_games_unfocused_24dp, 0);
+                }
+
+            }
+        });
+
+
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!securityAnswerEdittext.getText().toString().isEmpty())
+                {
+                        showSurveyDialog(email, username, password,securityAnswerEdittext.getText().toString().trim());
+                }else {
+                    Toast.makeText(getApplicationContext(),"You have not answered",Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = securityDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+
+    }
+
 
 
 
     // abstract methods
-    protected abstract void signUp(String email,String username,String password,String nickname);
+    protected abstract void signUp(String email,String username,String password,String nickname,String securityAnswer);
     protected abstract void OnStartActivity();
     protected abstract void checkUsername(String value);
 

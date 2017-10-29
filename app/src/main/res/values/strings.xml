@@ -71,7 +71,7 @@
     <string name="settings_header_about">About</string>
     <string name="settings_terms">Terms of use</string>
     <string name="settings_thanks">Acknowledgements</string>
-    <string name="settings_version">Hoplay v1.0</string>
+    <string name="settings_version">Hoplay v2.0.4</string>
     <string name="settings_copyright_info">Copyright info</string>
     <string name="settings_header_others">Others</string>
     <string name="settings_contact_us">Contact us</string>
@@ -110,6 +110,12 @@
     <string name="error_confirm_password">Passwords do not match</string>
     <string name="error_empty_email_field">Email field is empty</string>
     <string name="error_empty_password">Password field is empty</string>
+
+
+
+    <!--                                Security Dialog Layout      -->
+    <string name="security_dialog_message">What is your favorite video game character ?</string>
+    <string name="security_dialog_edittext_hint">Answer</string>
 
 
     <!--                                Forget Password Layout                                       -->

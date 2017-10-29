@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hoplay.kay.hoplay.Adapters.ChatAdapter;
 import com.hoplay.kay.hoplay.Adapters.CommonAdapter;
@@ -35,6 +36,8 @@ import com.hoplay.kay.hoplay.Models.PlayerModel;
 import com.hoplay.kay.hoplay.Models.RequestModel;
 import com.hoplay.kay.hoplay.R;
 import com.hoplay.kay.hoplay.Models.ChatMessage;
+import com.hoplay.kay.hoplay.Services.CallbackHandlerCondition;
+import com.hoplay.kay.hoplay.Services.HandlerCondition;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -92,6 +95,10 @@ public abstract class Chat extends AppCompatActivity {
     protected String opponentId;
 
 
+    // Variables for add friend menu
+    protected boolean isFriend = false ;
+    protected boolean isDone = false;
+    protected String opponentName = "";
 
 
 //    // Game providers recyclerview components
@@ -139,6 +146,7 @@ public abstract class Chat extends AppCompatActivity {
         roomPictureUrl = i.getStringExtra("room_picture");
         opponentId = i.getStringExtra("friend_key");
 
+        Log.i("===========>","FIRST :"+opponentId);
 
         chatType = (chatRoomType.equals(FirebasePaths.FIREBASE_PRIVATE_ATTR)) ? TYPE.PRIVATE:TYPE.PUBLIC;
 
@@ -155,16 +163,39 @@ public abstract class Chat extends AppCompatActivity {
 
 
 
+        // Set proper menu after checking the opponent : is friend or not
+        checkIsFriend(opponentId);
+
+
+
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
 
-        if (chatType == TYPE.PRIVATE )
-        getMenuInflater().inflate(R.menu.menu_chat, menu);
-        else
-        getMenuInflater().inflate(R.menu.menu_request_chat,menu);
+        CallbackHandlerCondition callback = new CallbackHandlerCondition() {
+            @Override
+            public boolean callBack() {
+                if(isDone)
+                {
+                    if (!isFriend)
+                    {
+                        getMenuInflater().inflate(R.menu.menu_chat_with_add_friend, menu);
+                    }
+                    else {
+                        if (chatType == TYPE.PRIVATE )
+                            getMenuInflater().inflate(R.menu.menu_chat, menu);
+                        else
+                            getMenuInflater().inflate(R.menu.menu_request_chat,menu);
+                    }
+                }
+                return isDone;
+            }
+        };
+        new HandlerCondition(callback, 0);
+
+
 
         return true;
     }
@@ -185,6 +216,14 @@ public abstract class Chat extends AppCompatActivity {
         // view lobby action
         if (id == R.id.view_lobby_menu_action) {
             viewLobbyProccess();
+            return true;
+        }
+
+        // Add friend
+        if (id == R.id.add_friend_menu_action) {
+            addThisUserAsFriend();
+            Toast.makeText(getApplicationContext(),opponentName+" Successfully added",Toast.LENGTH_LONG).show();
+
             return true;
         }
 
@@ -484,5 +523,7 @@ public abstract class Chat extends AppCompatActivity {
     protected abstract void sendMessageToFirebase(String message);
     protected abstract void viewPorfileProccess();
     protected abstract void viewLobbyProccess();
+    protected abstract void checkIsFriend(String Key);
+    protected abstract void addThisUserAsFriend();
 
 }

@@ -89,6 +89,7 @@ public interface FirebasePaths {
 
     public static final String FIREBASE_USERNAME_ATTR = "_username_";
     public static final String FIREBASE_BIO_ATTR = "_bio_";
+    public static final String FIREBASE_SECURITY_ANSWER_ATTR="_security_answer_";
     public static final String FIREBASE_ACCOUNT_TYPE_ATTR = "acc_type";
     public static final String FIREBASE_PICTURE_URL_ATTR =  "_picUrl_";
     public static final String FIREBASE_NICKNAME_ATTR =  "_nickname_";
@@ -124,5 +125,11 @@ public interface FirebasePaths {
     public static final String FIREBASESTORAGE_USERINFO_ATTR ="UsersInfo";
 
     public static  final String FIREBASE_USERS_TOKENS_ATTR = "_users_tokens_";
+
+
+
+    // Security
+    public static final String FIREBASE_SECURITY_ATTR="Security";
+    public static final String FIREBASE_SECURITY_QUESTION_ATTR="_question_";
 
 }

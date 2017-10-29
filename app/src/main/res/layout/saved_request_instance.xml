@@ -85,6 +85,8 @@
                     android:textSize="14dp"
                     android:singleLine="true"
                     android:layout_weight="1"
+                    android:layout_gravity="left"
+                    android:gravity="left"
                     android:paddingTop="3dp"
                     android:paddingBottom="3dp" />
 
