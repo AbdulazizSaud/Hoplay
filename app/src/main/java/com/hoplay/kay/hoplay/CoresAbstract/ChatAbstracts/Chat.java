@@ -161,13 +161,6 @@ public abstract class Chat extends AppCompatActivity {
         // set up chat app mechanisms
         setupChat();
 
-
-
-        // Set proper menu after checking the opponent : is friend or not
-        checkIsFriend(opponentId);
-
-
-
     }
 
     @Override
@@ -179,16 +172,18 @@ public abstract class Chat extends AppCompatActivity {
             public boolean callBack() {
                 if(isDone)
                 {
-                    if (!isFriend)
-                    {
-                        getMenuInflater().inflate(R.menu.menu_chat_with_add_friend, menu);
-                    }
-                    else {
-                        if (chatType == TYPE.PRIVATE )
+
+                    if (chatType == TYPE.PRIVATE )
+                        {
+                            if (!isFriend)
+                                getMenuInflater().inflate(R.menu.menu_chat_with_add_friend, menu);
+                            else
                             getMenuInflater().inflate(R.menu.menu_chat, menu);
-                        else
+
+                        }
+                        else if(chatType == TYPE.PUBLIC)
                             getMenuInflater().inflate(R.menu.menu_request_chat,menu);
-                    }
+
                 }
                 return isDone;
             }

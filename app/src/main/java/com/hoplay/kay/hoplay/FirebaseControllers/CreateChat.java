@@ -1,7 +1,5 @@
-package com.hoplay.kay.hoplay.util;
+package com.hoplay.kay.hoplay.FirebaseControllers;
 
-import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 
@@ -17,9 +15,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
-
 
 
 public class CreateChat implements FirebasePaths {

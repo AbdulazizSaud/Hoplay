@@ -9,7 +9,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.sax.EndElementListener;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
@@ -31,19 +30,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hoplay.kay.hoplay.Activities.NoConnection;
 import com.hoplay.kay.hoplay.Adapters.SpinnerAdapter;
 import com.hoplay.kay.hoplay.Cores.MainAppMenuCore;
 import com.hoplay.kay.hoplay.Activities.TermsAndConditions;
 import com.hoplay.kay.hoplay.App.App;
 import com.hoplay.kay.hoplay.Interfaces.Constants;
 import com.hoplay.kay.hoplay.R;
-import com.hoplay.kay.hoplay.util.Helper;
+import com.hoplay.kay.hoplay.Services.Helper;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by azoz-pc on 2/6/2017.

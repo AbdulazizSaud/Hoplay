@@ -1,4 +1,4 @@
-package com.hoplay.kay.hoplay.util;
+package com.hoplay.kay.hoplay.Services;
 
 import android.app.Activity;
 import android.app.Application;

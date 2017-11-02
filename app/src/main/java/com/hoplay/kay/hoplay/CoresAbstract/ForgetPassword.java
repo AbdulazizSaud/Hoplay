@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.hoplay.kay.hoplay.App.App;
 import com.hoplay.kay.hoplay.Cores.AuthenticationCore.LoginCore;
 import com.hoplay.kay.hoplay.R;
-import com.hoplay.kay.hoplay.util.Helper;
+import com.hoplay.kay.hoplay.Services.Helper;
 
 /**
  * Created by Kay on 2/10/2017.

@@ -1,16 +1,14 @@
 package com.hoplay.kay.hoplay.Cores.ChatCore;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.Toast;
 
 import com.hoplay.kay.hoplay.Cores.UserProfileCores.ParentCore.UserListCore;
 import com.hoplay.kay.hoplay.Models.FriendCommonModel;
-import com.hoplay.kay.hoplay.util.CreateChat;
+import com.hoplay.kay.hoplay.FirebaseControllers.CreateChat;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 

@@ -106,49 +106,16 @@ public class CommunityCore extends Community implements FirebasePaths {
         if (opponentKey == null)
             return;
 
-        // on first time
         final DatabaseReference refCurrentChat = app.getDatabasChat().child(FIREBASE_PRIVATE_ATTR).child(chatRef.getKey());
 
-        refUserInfo = app.getDatabaseUsersInfo().child(opponentKey).child(FIREBASE_DETAILS_ATTR);
 
+        // get the last message
+        refUserInfo = app.getDatabaseUsersInfo().child(opponentKey).child(FIREBASE_DETAILS_ATTR);
         refUserInfo.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot userInfo) {
 
-                refCurrentChat.child("_messages_/_last_message_").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot lasMsgSnap) {
-
-
-
-                        if (lasMsgSnap.getValue() == null || lasMsgSnap.child("message").getValue() == null)
-                            return;
-
-                        try {
-
-                            ChatMessage message = lasMsgSnap.getValue(ChatMessage.class);
-
-                            CommunityChatModel communityChatModel = addUserChatToList(chatRef.getKey(),
-                                    FIREBASE_PRIVATE_ATTR,
-                                    userInfo.child("_username_").getValue(String.class),
-                                    userInfo.child("_picUrl_").getValue(String.class),
-                                    message.getMessage(),
-                                    (long)message.getTimestamp(),
-                                    message.getCounter()
-                            );
-                            communityChatModel.setOpponentId(opponentKey);
-
-                        } catch (NullPointerException e) {
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+                setLastMessage(userInfo, refCurrentChat, chatRef, opponentKey);
 
 
             }
@@ -162,6 +129,7 @@ public class CommunityCore extends Community implements FirebasePaths {
         DatabaseReference refLastMessage = refCurrentChat.child("_messages_/_last_message_");
         refLastMessage.addValueEventListener(lastMessageListener);
     }
+
 
 
     private void addNewPublicChat(final DataSnapshot chatRef) {
@@ -215,7 +183,6 @@ public class CommunityCore extends Community implements FirebasePaths {
         refLastMessage.addValueEventListener(lastMessageListener);
     }
 
-    private ChildEventListener privatePendingChatListener;
 
 
     private ValueEventListener lastMessageListener = new ValueEventListener() {
@@ -236,6 +203,8 @@ public class CommunityCore extends Community implements FirebasePaths {
 
            final String type = (lastMsgInfo.getRef().toString().contains(FIREBASE_PRIVATE_ATTR)) ? FIREBASE_PRIVATE_ATTR : FIREBASE_PUBLIC_ATTR;
 
+
+           // get players information
             app.getDatabaseUsersInfo().child(usernameKey).child(FIREBASE_USERNAME_PATH).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -264,6 +233,45 @@ public class CommunityCore extends Community implements FirebasePaths {
 
         }
     };
+
+    private void setLastMessage(final DataSnapshot userInfo, DatabaseReference refCurrentChat, final DataSnapshot chatRef, final String opponentKey) {
+        refCurrentChat.child("_messages_/_last_message_").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot lasMsgSnap) {
+
+
+
+                if (lasMsgSnap.getValue() == null || lasMsgSnap.child("message").getValue() == null)
+                    return;
+
+                try {
+
+                    ChatMessage message = lasMsgSnap.getValue(ChatMessage.class);
+
+                    CommunityChatModel communityChatModel = addUserChatToList(chatRef.getKey(),
+                            FIREBASE_PRIVATE_ATTR,
+                            userInfo.child("_username_").getValue(String.class),
+                            userInfo.child("_picUrl_").getValue(String.class),
+                            message.getMessage(),
+                            (long)message.getTimestamp(),
+                            message.getCounter()
+                    );
+                    communityChatModel.setOpponentId(opponentKey);
+
+                } catch (NullPointerException e) {
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
 
     private void setCounter(final String chatKey, String chatType, final String joinerUsername, final String msg, final String currentChatCounterAsString) {
         // this listner for chat counter + notify shit
@@ -329,7 +337,7 @@ public class CommunityCore extends Community implements FirebasePaths {
 
     @NonNull
     private ChildEventListener getPendingChatEventListener() {
-        return privatePendingChatListener = new ChildEventListener() {
+        return  new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 setPendingChatToUserRef(dataSnapshot, refPendingChat);

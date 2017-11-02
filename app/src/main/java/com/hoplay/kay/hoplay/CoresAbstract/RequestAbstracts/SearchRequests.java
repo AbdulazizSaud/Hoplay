@@ -10,12 +10,10 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,33 +31,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hoplay.kay.hoplay.Activities.SettingsActivity;
 import com.hoplay.kay.hoplay.Adapters.SpinnerAdapter;
 import com.hoplay.kay.hoplay.App.App;
 import com.hoplay.kay.hoplay.Cores.RequestCore.SearchResultsCore;
 import com.hoplay.kay.hoplay.Cores.SupportCore;
-import com.hoplay.kay.hoplay.Models.CommunityChatModel;
 import com.hoplay.kay.hoplay.Models.GameModel;
 import com.hoplay.kay.hoplay.Models.Rank;
 import com.hoplay.kay.hoplay.Models.RequestModel;
 import com.hoplay.kay.hoplay.R;
 import com.hoplay.kay.hoplay.Services.CallbackHandlerCondition;
 import com.hoplay.kay.hoplay.Services.HandlerCondition;
-import com.hoplay.kay.hoplay.util.BitmapOptimizer;
-import com.google.firebase.database.ServerValue;
-import com.pkmmte.view.CircularImageView;
+import com.hoplay.kay.hoplay.Services.BitmapOptimizer;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.IllegalFormatCodePointException;
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static android.content.Context.INPUT_METHOD_SERVICE;
 
 public abstract class SearchRequests extends Fragment {
 

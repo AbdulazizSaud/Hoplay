@@ -398,19 +398,15 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
         DatabaseReference requestRef = app.getDatabaseRequests().child(path);
 
-        requestRef.child("players").addListenerForSingleValueEvent(new ValueEventListener() {
+
+        requestRef.child("players").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(!dataSnapshot.exists() || dataSnapshot.getValue() == null )
+                        return;
 
-                Iterable<DataSnapshot> shots = dataSnapshot.getChildren();
-
-                for (DataSnapshot snapshot : shots) {
-                    if (snapshot.child("uid").getValue(String.class).equals(uid)) {
-                        snapshot.getRef().setValue(null);
-                        setRequestModelRef(requestModelRef);
-                        break;
-                    }
-                }
+                dataSnapshot.getRef().removeValue();
+                setRequestModelRef(requestModelRef);
             }
 
             @Override
@@ -418,6 +414,7 @@ public class MainAppMenuCore extends MainAppMenu implements FirebasePaths{
 
             }
         });
+
         app.getDatabaseUsersInfo().child(uid + "/" + FIREBASE_USER_REQUESTS_ATTR).removeValue();
         app.getDatabaseUsersInfo().child(uid + "/" + FIREBASE_USER_PUBLIC_CHAT + "/" + requestModelRef.getRequestId()).removeValue();
 

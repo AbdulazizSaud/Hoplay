@@ -1,4 +1,4 @@
-package com.hoplay.kay.hoplay.util;
+package com.hoplay.kay.hoplay.FirebaseControllers;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ServerValue;
@@ -8,10 +8,10 @@ import com.hoplay.kay.hoplay.Models.ChatMessage;
  * Created by BOXTECH on 9/14/2017.
  */
 
-public class setMessagePack {
+public class MessagePack {
 
 
-    public setMessagePack(DatabaseReference refMessages,String messageText,String username,long currentCounter)
+    public MessagePack(DatabaseReference refMessages, String messageText, String username, long currentCounter)
     {
 
         String messageKey = refMessages.push().getKey();
@@ -30,7 +30,7 @@ public class setMessagePack {
 
     }
 
-    public setMessagePack(DatabaseReference refMessages,String messageText,String username)
+    public MessagePack(DatabaseReference refMessages, String messageText, String username)
     {
 
         String messageKey = refMessages.push().getKey();

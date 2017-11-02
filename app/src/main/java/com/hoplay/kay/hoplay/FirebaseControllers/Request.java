@@ -1,4 +1,4 @@
-package com.hoplay.kay.hoplay.util;
+package com.hoplay.kay.hoplay.FirebaseControllers;
 
 import com.hoplay.kay.hoplay.App.App;
 import com.hoplay.kay.hoplay.Interfaces.FirebasePaths;

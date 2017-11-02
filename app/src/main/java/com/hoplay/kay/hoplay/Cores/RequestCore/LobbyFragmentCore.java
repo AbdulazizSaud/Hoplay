@@ -1,8 +1,6 @@
 package com.hoplay.kay.hoplay.Cores.RequestCore;
 
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.hoplay.kay.hoplay.Fragments.LobbyFragment;
@@ -12,7 +10,6 @@ import com.hoplay.kay.hoplay.Models.GameModel;
 import com.hoplay.kay.hoplay.Models.PlayerModel;
 import com.hoplay.kay.hoplay.Models.RequestModel;
 import com.hoplay.kay.hoplay.Models.RequestModelReference;
-import com.hoplay.kay.hoplay.R;
 import com.hoplay.kay.hoplay.Services.CallbackHandlerCondition;
 import com.hoplay.kay.hoplay.Services.HandlerCondition;
 import com.google.firebase.database.ChildEventListener;
@@ -20,7 +17,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-import com.hoplay.kay.hoplay.util.setMessagePack;
+import com.hoplay.kay.hoplay.FirebaseControllers.MessagePack;
 
 
 public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, Constants {
@@ -256,6 +253,6 @@ public class LobbyFragmentCore extends LobbyFragment implements FirebasePaths, C
 
     private void setChatValuePack(String status, String message, String username) {
         DatabaseReference refMessages = app.getFirebaseDatabase().getReferenceFromUrl(FB_PUBLIC_CHAT_PATH).child(requestModel.getRequestId()).child("_messages_");
-        new setMessagePack(refMessages, username + " " + message, status);
+        new MessagePack(refMessages, username + " " + message, status);
     }
 }

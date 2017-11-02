@@ -1,35 +1,27 @@
 package com.hoplay.kay.hoplay.Cores.ChatCore;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.NotificationCompat;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.hoplay.kay.hoplay.Cores.ForgetPasswordCore;
 import com.hoplay.kay.hoplay.Cores.UserProfileCores.ViewFriendProfileCore;
 import com.hoplay.kay.hoplay.CoresAbstract.ChatAbstracts.Chat;
 import com.hoplay.kay.hoplay.Interfaces.FirebasePaths;
 import com.hoplay.kay.hoplay.Models.ChatMessage;
 import com.hoplay.kay.hoplay.Models.PlayerModel;
-import com.hoplay.kay.hoplay.R;
 import com.hoplay.kay.hoplay.Services.CallbackHandlerCondition;
 import com.hoplay.kay.hoplay.Services.HandlerCondition;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
-import com.hoplay.kay.hoplay.util.setMessagePack;
+import com.hoplay.kay.hoplay.FirebaseControllers.MessagePack;
 
 import java.util.HashMap;
-import java.util.Random;
 
 
 /**
@@ -111,32 +103,7 @@ public class ChatCore extends Chat implements FirebasePaths {
             if (isPrivate && currentUID.equals(user.getKey()))
                 return;
 
-
-            app.getDatabaseUsersInfo().child(user.getKey() + "/" + FIREBASE_DETAILS_ATTR)
-                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                            String username = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
-
-
-                            playerOnChat.put(user.getKey(), new PlayerModel(user.getKey(), username));
-                            savePlayers();
-
-                            if (!isPrivate) {
-                                addUserToSubtitle(username);
-                            } else {
-                                String bio = dataSnapshot.child(FIREBASE_BIO_ATTR).getValue(String.class);
-                                addUserToSubtitle(bio);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-//
+            setPlayerInfo(user);
 
         }
 
@@ -174,11 +141,10 @@ public class ChatCore extends Chat implements FirebasePaths {
         }
     };
 
+
     // set up chat app
     @Override
     public void setupChat() {
-
-
 
 
         //load message
@@ -198,6 +164,11 @@ public class ChatCore extends Chat implements FirebasePaths {
         if (isPrivate) {
             pathChatRoomType = FB_PRIVATE_CHAT_PATH;
             opponentId = i.getStringExtra("opponent_key");
+
+            // Set proper menu after checking the opponent : is friend or not
+            checkIsFriend(opponentId);
+
+
         } else {
             pathChatRoomType = FB_PUBLIC_CHAT_PATH;
             opponentId = null;
@@ -281,7 +252,7 @@ public class ChatCore extends Chat implements FirebasePaths {
     protected void sendMessageToFirebase(String messageText) {
 
         if (sendMessage(messageText)) {
-            new setMessagePack(refMessages, messageText, app.getUserInformation().getUID(), ++lastMessageCounter);
+            new MessagePack(refMessages, messageText, app.getUserInformation().getUID(), ++lastMessageCounter);
         }
     }
 
@@ -342,17 +313,32 @@ public class ChatCore extends Chat implements FirebasePaths {
     private boolean isEmpty(DataSnapshot dataSnapshot) {
         return dataSnapshot.child("username").getValue() == null || dataSnapshot.child("message").getValue() == null;
     }
+    private void setPlayerInfo(final DataSnapshot user) {
+        app.getDatabaseUsersInfo().child(user.getKey() + "/" + FIREBASE_DETAILS_ATTR)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        String username = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        refMessages.child("_packets_").removeEventListener(messagesPacketsListener);
-        refMessages.child("_last_message_/_counter_").removeEventListener(counterListener);
+                        playerOnChat.put(user.getKey(), new PlayerModel(user.getKey(), username));
+                        savePlayers();
 
+                        if (!isPrivate) {
+                            addUserToSubtitle(username);
+                        } else {
+                            String bio = dataSnapshot.child(FIREBASE_BIO_ATTR).getValue(String.class);
+                            addUserToSubtitle(bio);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
     }
-
-
     private void savePlayers() {
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
@@ -370,6 +356,17 @@ public class ChatCore extends Chat implements FirebasePaths {
 
         return playerModelHashMap;
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        refMessages.child("_packets_").removeEventListener(messagesPacketsListener);
+        refMessages.child("_last_message_/_counter_").removeEventListener(counterListener);
+
+    }
+
+
+
 
 
 }

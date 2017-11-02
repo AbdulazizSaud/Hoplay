@@ -1,6 +1,4 @@
-package com.hoplay.kay.hoplay.util;
-
-import android.util.Log;
+package com.hoplay.kay.hoplay.FirebaseControllers;
 
 
 import com.hoplay.kay.hoplay.App.App;
@@ -8,7 +6,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 

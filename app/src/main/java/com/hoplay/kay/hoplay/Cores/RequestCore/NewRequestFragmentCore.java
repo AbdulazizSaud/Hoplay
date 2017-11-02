@@ -5,12 +5,11 @@ import android.view.View;
 import com.hoplay.kay.hoplay.Fragments.NewRequestFragment;
 import com.hoplay.kay.hoplay.Interfaces.FirebasePaths;
 import com.hoplay.kay.hoplay.Models.RequestModel;
-import com.hoplay.kay.hoplay.util.Request;
+import com.hoplay.kay.hoplay.FirebaseControllers.Request;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 
 
 public class NewRequestFragmentCore extends NewRequestFragment implements FirebasePaths {

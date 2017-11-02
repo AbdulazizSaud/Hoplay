@@ -1,20 +1,15 @@
 package com.hoplay.kay.hoplay.Cores.RequestCore;
 
-import android.util.Log;
 import android.widget.Toast;
 
 import com.hoplay.kay.hoplay.CoresAbstract.RequestAbstracts.NewRequest;
 import com.hoplay.kay.hoplay.Interfaces.FirebasePaths;
-import com.hoplay.kay.hoplay.Models.RequestModel;
 import com.hoplay.kay.hoplay.R;
-import com.hoplay.kay.hoplay.util.Request;
+import com.hoplay.kay.hoplay.FirebaseControllers.Request;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class NewRequestCore extends NewRequest implements FirebasePaths{
 

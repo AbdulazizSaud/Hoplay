@@ -14,18 +14,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,19 +30,14 @@ import com.hoplay.kay.hoplay.Adapters.CommonAdapter;
 import com.hoplay.kay.hoplay.Adapters.ViewHolders;
 import com.hoplay.kay.hoplay.App.App;
 import com.hoplay.kay.hoplay.Cores.MainAppMenuCore;
-import com.hoplay.kay.hoplay.Cores.UserProfileCores.AddGameCore;
 import com.hoplay.kay.hoplay.Interfaces.Constants;
 import com.hoplay.kay.hoplay.Models.GameModel;
 import com.hoplay.kay.hoplay.R;
 import com.hoplay.kay.hoplay.Services.SchemaHelper;
-import com.hoplay.kay.hoplay.util.GameManager;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static android.icu.lang.UCharacter.SentenceBreak.SP;
 
 public abstract class AddGame extends AppCompatActivity {
 

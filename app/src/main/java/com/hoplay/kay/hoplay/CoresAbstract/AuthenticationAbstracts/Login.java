@@ -1,8 +1,6 @@
 package com.hoplay.kay.hoplay.CoresAbstract.AuthenticationAbstracts;
 
 import android.app.Dialog;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -10,9 +8,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -26,35 +22,22 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 import com.hoplay.kay.hoplay.Cores.AuthenticationCore.SignUpCore;
 import com.hoplay.kay.hoplay.Cores.ForgetPasswordCore;
 import com.hoplay.kay.hoplay.Cores.MainAppMenuCore;
 import com.hoplay.kay.hoplay.App.App;
 import com.hoplay.kay.hoplay.Cores.UserProfileCores.AddGameCore;
-import com.hoplay.kay.hoplay.CoresAbstract.MainAppMenu;
-import com.hoplay.kay.hoplay.CoresAbstract.ProfileAbstracts.AddGame;
-import com.hoplay.kay.hoplay.Models.GameModel;
 import com.hoplay.kay.hoplay.R;
-import com.hoplay.kay.hoplay.Services.SchemaHelper;
-import com.hoplay.kay.hoplay.util.Helper;
+import com.hoplay.kay.hoplay.Services.Helper;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.UUID;
 
 
 /*
