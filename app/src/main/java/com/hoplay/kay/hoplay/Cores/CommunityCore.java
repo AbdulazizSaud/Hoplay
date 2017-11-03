@@ -515,7 +515,7 @@ public class CommunityCore extends Community implements FirebasePaths {
         notification = new NotificationCompat.Builder(app.getMainAppMenuCore());
         notification.setAutoCancel(true);
         notification.setSmallIcon(R.drawable.ic_stat_hoplaylogo);
-        notification.setTicker("This is ticker");
+        notification.setTicker(message);
         notification.setWhen(System.currentTimeMillis());
         notification.setContentTitle(communityChatModel.getChatName());
         notification.setContentText(joinerUsername+ message);

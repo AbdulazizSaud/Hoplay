@@ -92,13 +92,14 @@ public abstract class Chat extends AppCompatActivity {
     protected HashMap<String,PlayerModel> playerOnChat = new HashMap<>();
 
     protected String chatRoomKey,roomName = null, roomPictureUrl = null, chatRoomType = null;
-    protected String opponentId;
+    protected String opponentKey;
 
 
     // Variables for add friend menu
     protected boolean isFriend = false ;
     protected boolean isDone = false;
     protected String opponentName = "";
+    private boolean requestMenuAdded = false;
 
 
 //    // Game providers recyclerview components
@@ -144,9 +145,9 @@ public abstract class Chat extends AppCompatActivity {
         chatRoomType = i.getStringExtra("room_type");
         roomName = i.getStringExtra("room_name");
         roomPictureUrl = i.getStringExtra("room_picture");
-        opponentId = i.getStringExtra("friend_key");
+        opponentKey = i.getStringExtra("friend_key");
 
-        Log.i("===========>","FIRST :"+opponentId);
+
 
         chatType = (chatRoomType.equals(FirebasePaths.FIREBASE_PRIVATE_ATTR)) ? TYPE.PRIVATE:TYPE.PUBLIC;
 
@@ -161,34 +162,48 @@ public abstract class Chat extends AppCompatActivity {
         // set up chat app mechanisms
         setupChat();
 
+
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
 
-        CallbackHandlerCondition callback = new CallbackHandlerCondition() {
-            @Override
-            public boolean callBack() {
-                if(isDone)
-                {
 
-                    if (chatType == TYPE.PRIVATE )
+        if(chatType == TYPE.PUBLIC)
+        {
+            Log.i("======>","ITS PUBLIC ");
+            getMenuInflater().inflate(R.menu.menu_request_chat,menu);
+        }
+        else {
+            CallbackHandlerCondition callback = new CallbackHandlerCondition() {
+                @Override
+                public boolean callBack() {
+
+
+                    if(isDone)
+                    {
+
+                        if (chatType == TYPE.PRIVATE )
                         {
+                            Log.i("======>","ITS PRIVATE ");
                             if (!isFriend)
                                 getMenuInflater().inflate(R.menu.menu_chat_with_add_friend, menu);
                             else
-                            getMenuInflater().inflate(R.menu.menu_chat, menu);
+                                getMenuInflater().inflate(R.menu.menu_chat, menu);
 
                         }
-                        else if(chatType == TYPE.PUBLIC)
-                            getMenuInflater().inflate(R.menu.menu_request_chat,menu);
 
+
+
+                    }
+                    return isDone;
                 }
-                return isDone;
-            }
-        };
-        new HandlerCondition(callback, 0);
+            };
+            new HandlerCondition(callback, 0);
+        }
+
 
 
 

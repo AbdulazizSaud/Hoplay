@@ -3,6 +3,7 @@ package com.hoplay.kay.hoplay.Cores.ChatCore;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -35,9 +36,8 @@ public class ChatCore extends Chat implements FirebasePaths {
     private String roomName = null, roomPictureUrl = null, chatRoomType = null;
     private long lastMessageCounter;
     private DatabaseReference refRoom, refMessages;
-    private String opponentId;
     private boolean isPrivate;
-    private String currentUID;
+    private String currentUID , opponentId;
 
 
     private SharedPreferences mPrefs;
@@ -165,8 +165,12 @@ public class ChatCore extends Chat implements FirebasePaths {
             pathChatRoomType = FB_PRIVATE_CHAT_PATH;
             opponentId = i.getStringExtra("opponent_key");
 
+
             // Set proper menu after checking the opponent : is friend or not
-            checkIsFriend(opponentId);
+            if (opponentId!=null)
+                  checkIsFriend(opponentId);
+            else
+                checkIsFriend(opponentKey);
 
 
         } else {
