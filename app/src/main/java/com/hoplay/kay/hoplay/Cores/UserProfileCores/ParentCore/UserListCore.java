@@ -33,12 +33,16 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
         friendList.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(final DataSnapshot rootSnapshots, String s) {
-                usersData.child(rootSnapshots.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                usersData.child(rootSnapshots.getKey()+"/"+FIREBASE_DETAILS_ATTR).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        if(dataSnapshot.getValue() !=null)
-                        addUser(rootSnapshots.getKey(),dataSnapshot);
+                        if(dataSnapshot.getValue() !=null){
+                            Log.i("--->", rootSnapshots.toString()+"..."  + dataSnapshot.getValue().toString());
+
+                            addUser(rootSnapshots.getKey(),dataSnapshot);
+
+                        }
                     }
 
                     @Override
@@ -113,8 +117,8 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
 
     private void addUser(String key , DataSnapshot dataSnapshot) {
 
-        String username = dataSnapshot.child(FIREBASE_USERNAME_PATH).getValue(String.class);
-        String picUrl = dataSnapshot.child(FIREBASE_PICTURE_URL_PATH).getValue(String.class);
+        String username = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
+        String picUrl = dataSnapshot.child(FIREBASE_PICTURE_URL_ATTR).getValue(String.class);
 
         if(!username.equals(app.getUserInformation().getUsername()) && !checkIsInList(username))
         {
