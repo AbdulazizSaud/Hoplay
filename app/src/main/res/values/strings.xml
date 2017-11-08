@@ -356,7 +356,7 @@
 
 
     <!--                                 No Connection Layout                                                   -->
-    <string name="no_connection_service_unavailable">No Internet Connection -_-</string>
+    <string name="no_connection_service_unavailable">No Internet Connection</string>
 
 
     <!--                                 Saved Request Instance                                                 -->
