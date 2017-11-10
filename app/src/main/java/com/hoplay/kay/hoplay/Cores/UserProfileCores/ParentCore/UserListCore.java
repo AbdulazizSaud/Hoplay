@@ -24,8 +24,8 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
     @Override
     public void loadFriendList()
     {
-        final String UID =  app.getAuth().getCurrentUser().getUid();
 
+        final String UID =  app.getAuth().getCurrentUser().getUid();
 
         final DatabaseReference usersData = app.getDatabaseUsersInfo();
         DatabaseReference friendList = usersData.child(UID).child(FIREBASE_FRIENDS_LIST_ATTR);
@@ -38,9 +38,8 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         if(dataSnapshot.getValue() !=null){
-                            Log.i("--->", rootSnapshots.toString()+"..."  + dataSnapshot.getValue().toString());
+                            addUser(rootSnapshots.getKey(),true);
 
-                            addUser(rootSnapshots.getKey(),dataSnapshot);
 
                         }
                     }
@@ -75,13 +74,13 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
     }
 
 
+
     @Override
     protected void searchForUser(String value) {
 
-        DatabaseReference userRef = app.getDatabaseUsersInfo();
+        DatabaseReference userNamesRef = app.getDatabaseUserNames();
 
-
-        Query query = userRef.orderByChild(FIREBASE_USERNAME_PATH).startAt(value).endAt(value+"\uf8ff").limitToFirst(10);
+        Query query = userNamesRef.orderByKey().startAt(value).endAt(value+"\uf8ff").limitToFirst(10);
 
         getData(query);
     }
@@ -94,12 +93,14 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+
                 if(dataSnapshot.getValue() != null)
                 {
+
                     Iterable<DataSnapshot> iterable = dataSnapshot.getChildren();
 
                     for (DataSnapshot shot : iterable) {
-                        addUser(shot.getKey(), shot);
+                        addUser(shot.getValue(String.class),false);
                     }
                     hideLoadingAnimation();
                     hideNotFoundSearch();
@@ -115,15 +116,40 @@ public abstract class UserListCore extends UserList implements FirebasePaths{
         });
     }
 
-    private void addUser(String key , DataSnapshot dataSnapshot) {
+    private void addUser(final String key, final boolean isFriend) {
 
-        String username = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
-        String picUrl = dataSnapshot.child(FIREBASE_PICTURE_URL_ATTR).getValue(String.class);
 
-        if(!username.equals(app.getUserInformation().getUsername()) && !checkIsInList(username))
-        {
-            addToUserList(key,username,picUrl,true);
-        }
+        DatabaseReference userInfo = app.getDatabaseUsersInfo().child(key+"/"+FIREBASE_DETAILS_ATTR);
+
+
+        userInfo.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String username = dataSnapshot.child(FIREBASE_USERNAME_ATTR).getValue(String.class);
+                String picUrl = dataSnapshot.child(FIREBASE_PICTURE_URL_ATTR).getValue(String.class);
+
+                if(username == null || picUrl == null)
+                    return;
+
+                if(!username.equals(app.getUserInformation().getUsername()) && !checkIsInList(username))
+                {
+
+                    addToUserList(key,username,picUrl,true);
+
+                    if(isFriend)
+                        addToFriendList(key,username,picUrl);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
 

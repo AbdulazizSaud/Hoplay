@@ -230,6 +230,7 @@ public abstract class UserList extends AppCompatActivity {
                     searchProcess(value);
 
                 } else {
+                    reloadFriendList();
                 }
 
             }
@@ -333,7 +334,9 @@ public abstract class UserList extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+                if(!value.isEmpty())
                 searchForUser(value);
+
             }
         }, Constants.COOL_DOWN_TIMER_MIllI_SECOND);
     }
@@ -349,12 +352,21 @@ public abstract class UserList extends AppCompatActivity {
         friendCommonModel.setUserPictureURL(picture);
 
         usersList.add(friendCommonModel);
-        friendsList.add(friendCommonModel);
 
         if(withNotifyChanges)
         mAdapter.notifyDataSetChanged();
     }
 
+
+
+    protected void addToFriendList(String userKey , String username,String picture){
+        FriendCommonModel  friendCommonModel = new FriendCommonModel();
+        friendCommonModel.setFriendKey(userKey);
+        friendCommonModel.setFriendUsername(username);
+        friendCommonModel.setUserPictureURL(picture);
+
+        friendsList.add(friendCommonModel);
+    }
 
     protected void updateAdapter(String value) {
 
@@ -381,9 +393,8 @@ public abstract class UserList extends AppCompatActivity {
         return !value.equals("") && !value.equals("\\s+") && null != value || !value.isEmpty();
     }
 
-    private void reloadFriendList() {
-        usersList.clear();
-
+    protected  void reloadFriendList() {
+        clearLists();
         for(FriendCommonModel commonModel : friendsList)
         {
             addToUserList(commonModel.getFriendKey(),commonModel.getFriendUsername(),commonModel.getUserPictureURL(),false);
@@ -401,6 +412,12 @@ public abstract class UserList extends AppCompatActivity {
         return false;
     }
 
+
+    protected void clearLists()
+    {
+        usersList.clear();
+        userdListAdapter.notifyDataSetChanged();
+    }
 
     protected void showLoadingAnimation() {
         mRecyclerView.setVisibility(RecyclerView.INVISIBLE);
@@ -590,6 +607,11 @@ public abstract class UserList extends AppCompatActivity {
         addFriendsButton.setVisibility(View.GONE);
         noFriendsImageview.setVisibility(View.GONE);
     }
+
+
+
+
+
 
 
 
