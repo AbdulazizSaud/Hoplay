@@ -2,8 +2,12 @@ package com.hoplay.kay.hoplay.Cores.RequestCore;
 
 import android.widget.Toast;
 
+import com.google.firebase.database.Query;
 import com.hoplay.kay.hoplay.CoresAbstract.RequestAbstracts.NewRequest;
 import com.hoplay.kay.hoplay.Interfaces.FirebasePaths;
+import com.hoplay.kay.hoplay.Models.GameModel;
+import com.hoplay.kay.hoplay.Models.Rank;
+import com.hoplay.kay.hoplay.Models.Ranks;
 import com.hoplay.kay.hoplay.R;
 import com.hoplay.kay.hoplay.FirebaseControllers.Request;
 import com.google.firebase.database.DataSnapshot;
@@ -11,10 +15,112 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class NewRequestCore extends NewRequest implements FirebasePaths{
 
 
+    @Override
+    protected void addGame(GameModel gameModel) {
+        // Create game ref for users
+        DatabaseReference userFavorGameRef = app.getDatabaseUsersInfo().child(app.getUserInformation().getUID()).child(FIREBASE_FAVOR_GAMES_PATH);
+        userFavorGameRef.child(gameModel.getGameID()).setValue(gameModel.getGameType());
 
+        // add the game to the game manager
+        app.getGameManager().addGame(gameModel);
+    }
+
+
+
+    private void getData(Query query, String gameType) {
+        query.addListenerForSingleValueEvent(createSearchForGameListener(gameType));
+
+    }
+
+
+    public ValueEventListener createSearchForGameListener(final String gameType) {
+
+
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.getValue() != null) {
+
+                    Iterable<DataSnapshot> iterable = dataSnapshot.getChildren();
+
+                    for (DataSnapshot shot : iterable) {
+                        String gameName = shot.child("name").getValue().toString().trim();
+                        getGameInfo(shot.getKey(), gameType, shot);
+                        isDone = true;
+                        whichDialog = true;
+
+                    }
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        };
+
+        return listener;
+    }
+
+
+
+    private void getGameInfo(String key, String gametype, DataSnapshot dataSnapshot) {
+
+
+        String gameId = key;
+        String gameName = dataSnapshot.child("name").getValue().toString().trim();
+
+        // Capitlizing the first letter of a game
+        String gameNameWithCapitalLetter = gameName.substring(0, 1).toUpperCase() + gameName.substring(1);
+
+
+        String gamPic = dataSnapshot.child("photo").getValue(String.class);
+        int maxPlayer = dataSnapshot.child("max_player").getValue(Integer.class);
+        String supportedPlatformes = dataSnapshot.child(FIREBASE_GAME_PLATFORMS_ATTR).getValue(String.class);
+        String gameProvider = dataSnapshot.child(FIREBASE_GAME_PC_GAME_PROVIDER).getValue(String.class);
+
+        GameModel gameModel = new GameModel(gameId, gameNameWithCapitalLetter, gamPic, supportedPlatformes, gametype, maxPlayer, gameProvider);
+
+        notAddedGame = gameModel;
+
+
+    }
+
+
+
+    @Override
+    protected void searchForGame(String value) {
+
+
+        // Just to push
+        DatabaseReference gamesRef = app.getDatabaseGames();
+
+        Query nameQuery = gamesRef.child("_competitive_").orderByChild("name").startAt(value).endAt(value + "\uf8ff").limitToFirst(10);
+        getData(nameQuery, "_competitive_");
+        nameQuery = gamesRef.child("_coop_").orderByChild("name").startAt(value).endAt(value + "\uf8ff").limitToFirst(10);
+        getData(nameQuery, "_coop_");
+
+
+
+        Query tagQuery = gamesRef.child("_competitive_").orderByChild("tags/"+value).equalTo(true);
+        getData(tagQuery, "_competitive_");
+        tagQuery = gamesRef.child("_coop_").orderByChild("tags/"+value).equalTo(true);
+        getData(tagQuery, "_coop_");
+
+
+
+    }
 
     protected void OnStartActivity() {
 
@@ -84,6 +190,33 @@ public class NewRequestCore extends NewRequest implements FirebasePaths{
         ref.setValue(app.getSavedRequests());
 
 
+
+    }
+
+    @Override
+    protected void loadRanksForNotAddedGame(final GameModel gameModel) {
+
+        app.getDatabaseGames().child(gameModel.getGameType() + "/" + gameModel.getGameID()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<Rank> ranks = new ArrayList<>();
+
+                for (DataSnapshot rank : dataSnapshot.child("ranks").getChildren()) {
+                    ranks.add(new Rank(rank.getValue().toString(), rank.getValue(String.class)));
+                }
+
+                Ranks ranksAsClass = new Ranks();
+                ranksAsClass.setRanksList(ranks);
+                app.getGameManager().getGameByName(gameModel.getGameName()).setGameRanks(ranksAsClass);
+                isDoneForLoadingRanks = true;
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 

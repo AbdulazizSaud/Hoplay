@@ -112,7 +112,6 @@
     <string name="error_empty_password">Password field is empty</string>
 
 
-
     <!--                                Security Dialog Layout      -->
     <string name="security_dialog_message">What is your favorite video game character ?</string>
     <string name="security_dialog_edittext_hint">Answer</string>
@@ -142,7 +141,6 @@
     <string name="login_just_a_moment">Just one moment..</string>
 
 
-
     <!--                                Login Activity                                                 -->
     <string name="login_auth_welcome">Welcome , </string>
     <string name="login_please_check_email_or_password">Please check your email or password</string>
@@ -164,7 +162,6 @@
     <string name="add_game_search_bar">Search for a Game</string>
     <string name="add_game_no_game_message">You do not have any game</string>
     <string name="add_game_no_results_message">No Results</string>
-
 
 
     <!--                                Tour Dialog                                 -->
@@ -235,7 +232,6 @@
     <string name="provider_account_XBOX_console">Xbox</string>
 
 
-
     <!--                                Deactive Account Layout                     -->
     <string name="deactive_account_password_hint">Password</string>
     <string name="deactive_account_authinticate_button">Authinticate</string>
@@ -252,7 +248,6 @@
     <string name="deactive_account_popup_message">You are about to deactive your account, you sure you want to continue ?</string>
     <string name="deactive_account_popup_yes">Y E S</string>
     <string name="deactive_account_popup_no">N O</string>
-
 
 
     <!--                                Leave Lobby Dialog                                      -->
@@ -294,7 +289,6 @@
     <string name="terms_and_conditions_term8.1">8.1. reproduce, duplicate, copy, sell, disseminate, trade in or resell the Hoplay Software and/ or the right to use the same for any purpose whatsoever other than where such transactions have been expressly authorized in accordance herewith.</string>
     <string name="terms_and_conditions_term8.2">8.2. distribute any audiovisual and/ or graphic images contained in Hoplay Software or any elements of its design or user interface outside the Hoplay app, whether for a commercial or non-commercial purpose, unless upon prior written permission from concerned right holders.</string>
     <string name="terms_and_conditions_term8.3">8.3. use Software by any means not stipulated herein or not admissible in the ordinary operation of Hoplay Software.</string>
-
 
 
     <!--                                Email Verfication Dialog                        -->
@@ -380,7 +374,6 @@
     <string name="user_profile_details_ratings_number">50</string>
 
 
-
     <!--                                 New Chat                                     -->
 
     <string name="search_user_message">Search for user</string>
@@ -415,16 +408,12 @@
     <string name="new_request_finish_save_request_message">Your request has been saved successfully %1$s &#160; 😃 </string>
 
 
-
-
     <!--                            Sign Up Survey Dialog                                                -->
     <string name="survey_dialog_skip">Skip</string>
     <string name="survey_dialog_done">Done</string>
     <string name="survey_dialog_message">How did you know about us?</string>
     <string name="survey_dialog_friend_username">Friend-Relative Username</string>
     <string name="survey_dialog_choose_hint">Choose</string>
-
-
 
 
     <!--                                Search Results Layout                     -->
@@ -481,13 +470,12 @@
     <string name="game_not_added_yes">Y e s</string>
     <string name="game_not_added_no">N o</string>
 
-    
+
     <!--                                    Game Not Found Dialog           -->
     <string name="game_not_found_sorry">Sorry, we could not find this game</string>
     <string name="game_not_found_message">If you believe this game should \n be added, please let us know !</string>
     <string name="game_not_found_contact_us">Contact Us</string>
     <string name="game_not_found_discard">Discard</string>
-
 
 
     <!--                                Chat holder On Long Click                       -->
@@ -554,7 +542,6 @@
     <string name="edit_request_match_type_quick_match">Quick Match</string>
 
 
-
     <!--                            User Friends List Layout                    -->
     <string name="user_list_layout_no_fiends_message">You do not have any Hoplay friends</string>
     <string name="user_list_layout_add_friend_button">Add Friends</string>
@@ -563,6 +550,11 @@
     <!--                            Edit Request Activity                           -->
     <string name="edit_request_dialog_title">Updating Request</string>
     <string name="edit_request_dialog_message">Checking Request Info..</string>
+
+
+    <!--                            Update Layout                 -->
+    <string name="update_layout_message">Please update your \n application to continue</string>
+    <string name="update_layout_button">U p d a t e</string>
 
 
 </resources>

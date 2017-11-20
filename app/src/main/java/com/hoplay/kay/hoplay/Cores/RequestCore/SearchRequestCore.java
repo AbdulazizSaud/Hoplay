@@ -35,12 +35,26 @@ public class SearchRequestCore extends SearchRequests implements FirebasePaths, 
     @Override
     protected void searchForGame(String value) {
 
+
         // Just to push
         DatabaseReference gamesRef = app.getDatabaseGames();
-        Query query = gamesRef.child("_competitive_").orderByChild("name").startAt(value).endAt(value + "\uf8ff").limitToFirst(10);
-        getData(query, "_competitive_");
-        query = gamesRef.child("_coop_").orderByChild("name").startAt(value).endAt(value + "\uf8ff").limitToFirst(10);
-        getData(query, "_coop_");
+
+        Query nameQuery = gamesRef.child("_competitive_").orderByChild("name").startAt(value).endAt(value + "\uf8ff").limitToFirst(10);
+        getData(nameQuery, "_competitive_");
+        nameQuery = gamesRef.child("_coop_").orderByChild("name").startAt(value).endAt(value + "\uf8ff").limitToFirst(10);
+        getData(nameQuery, "_coop_");
+
+
+
+        Query tagQuery = gamesRef.child("_competitive_").orderByChild("tags/"+value).equalTo(true);
+        getData(tagQuery, "_competitive_");
+        tagQuery = gamesRef.child("_coop_").orderByChild("tags/"+value).equalTo(true);
+        getData(tagQuery, "_coop_");
+
+
+
+
+
     }
 
 

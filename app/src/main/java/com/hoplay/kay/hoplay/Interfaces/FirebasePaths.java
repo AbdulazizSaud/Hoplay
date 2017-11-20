@@ -127,6 +127,11 @@ public interface FirebasePaths {
     public static  final String FIREBASE_USERS_TOKENS_ATTR = "_users_tokens_";
 
 
+    // Version
+    public static final String FIREBASE_VERSION_ATTR="Version";
+    public static final String FIREBASE_VERSION_CODE_ATTR="version_code";
+    public static final String FIREBASE_VERSION_NAME_ATTR="version_name";
+
 
     // Security
     public static final String FIREBASE_SECURITY_ATTR="Security";

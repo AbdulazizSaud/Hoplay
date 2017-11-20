@@ -27,8 +27,8 @@ public class NoConnection extends AppCompatActivity {
         setContentView(R.layout.no_connection);
 
         connectionMessageTextView = (TextView) findViewById(R.id.connection_error_textview);
-        Typeface sansationbold = Typeface.createFromAsset(getAssets(), "sansationbold.ttf");
-        connectionMessageTextView.setTypeface(sansationbold);
+        Typeface playbold = Typeface.createFromAsset(getAssets(), "playbold.ttf");
+        connectionMessageTextView.setTypeface(playbold);
 
 
 

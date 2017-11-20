@@ -15,6 +15,9 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.hoplay.kay.hoplay.Activities.NoConnection;
 import com.hoplay.kay.hoplay.Adapters.ViewHolders;
 import com.hoplay.kay.hoplay.Cores.MainAppMenuCore;
@@ -72,6 +75,7 @@ public class App extends Application implements FirebasePaths {
     private DatabaseReference databaseRegions;
     private DatabaseReference databasePromoCode;
     private DatabaseReference databaseUsersTokens;
+    private DatabaseReference databaseVersion;
     private FirebaseAuth mAuth;  // firebase auth
     private FirebaseStorage storage;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -105,6 +109,10 @@ public class App extends Application implements FirebasePaths {
 
     // Use this variable to show the welcome message once
     public static boolean isWelcomed = false;
+
+
+    // Version Variables
+    public static String versionName ="";
 
 
 
@@ -161,13 +169,19 @@ public class App extends Application implements FirebasePaths {
         super.onCreate();
 
 
+
+
+
         instance = this;
         mAuth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
         firebaseDatabase = FirebaseDatabase.getInstance();
         getFirebaseDatabase().setPersistenceEnabled(true);
+
+        databaseVersion = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_VERSION_ATTR);
+        // Get Last Version Name
+        checkVersion();
 
         databaseUserNames = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_USER_NAMES_ATTR);
         databaseUsersInfo = firebaseDatabase.getReferenceFromUrl(FB_ROOT).child(FIREBASE_USERS_INFO_ATTR);
@@ -349,6 +363,11 @@ public class App extends Application implements FirebasePaths {
         return databaseUsersInfo;
     }
 
+    public DatabaseReference getDatabaseVersion() {
+        return databaseVersion;
+    }
+
+
     public DatabaseReference getDatabasChat() {
         return databaseChat;
     }
@@ -518,6 +537,25 @@ public class App extends Application implements FirebasePaths {
         return schemaHelper;
     }
 
+
+    private void checkVersion()
+    {
+
+        databaseVersion.keepSynced(true);
+
+      databaseVersion.addListenerForSingleValueEvent(new ValueEventListener() {
+          @Override
+          public void onDataChange(DataSnapshot dataSnapshot) {
+              versionName = dataSnapshot.child(FIREBASE_VERSION_NAME_ATTR).getValue(String.class);
+          }
+
+          @Override
+          public void onCancelled(DatabaseError databaseError) {
+
+          }
+      });
+
+    }
 
 
     public DatabaseReference getDatabasePromoCode() {

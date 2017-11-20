@@ -164,7 +164,6 @@
             android:drawableStart="@drawable/ic_sync_unfocused_24dp"
             android:drawableLeft="@drawable/ic_sync_unfocused_24dp"
             android:ems="3"
-
             android:layout_marginTop="10dp"
             android:layout_below="@+id/edit_profile_game_providers_spinner"
             android:textColorHint="@color/hint_color"

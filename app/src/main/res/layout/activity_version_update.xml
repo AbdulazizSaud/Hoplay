@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/new_update_bg"
+    style="@style/UpdateTheme"
+    tools:context="com.hoplay.kay.hoplay.Activities.VersionUpdate">
+
+
+
+
+    <ImageView
+        android:layout_width="360dp"
+        android:id="@+id/logo_update_imageview"
+        android:layout_height="200dp"
+        android:src="@drawable/borderedlogo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="69dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo_update_imageview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:textSize="20sp"
+        android:id="@+id/message_update_textview"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="@string/update_layout_message"/>
+
+
+
+
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/to_update_webview_button"
+        android:layout_below="@id/message_update_textview"
+        android:layout_width="150dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"
+        android:background="@drawable/transparent_bg_btn"
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"
+        android:text="@string/update_layout_button" />
+
+
+
+</RelativeLayout>

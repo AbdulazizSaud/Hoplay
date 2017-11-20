@@ -23,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -102,6 +103,10 @@ public abstract class Chat extends AppCompatActivity {
     private boolean requestMenuAdded = false;
 
 
+        // TOOLBAR : ROOM
+    Toolbar toolbar ;
+
+
 //    // Game providers recyclerview components
 //    private RecyclerView gameProviderRecyclerView;
 //    RecyclerView.LayoutManager mLayoutManager;
@@ -152,7 +157,7 @@ public abstract class Chat extends AppCompatActivity {
         chatType = (chatRoomType.equals(FirebasePaths.FIREBASE_PRIVATE_ATTR)) ? TYPE.PRIVATE:TYPE.PUBLIC;
 
         // Users toolbar :
-        Toolbar toolbar = (Toolbar) findViewById(R.id.users_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.users_toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
@@ -288,6 +293,9 @@ public abstract class Chat extends AppCompatActivity {
 
         final Typeface playregular = Typeface.createFromAsset(getResources().getAssets(), "playregular.ttf");
         // init a layout contatins
+
+
+
         rootView = findViewById(R.id.chatContainer);
         messagesContainer = (ListView) findViewById(R.id.messagesContainer);
         messageET = (EmojiconEditText) findViewById(R.id.messageEdit);
@@ -349,6 +357,23 @@ public abstract class Chat extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+
+
+        // View user profile if the room is private , view lobby if the room is public
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (chatType == TYPE.PRIVATE)
+                {
+                    viewPorfileProccess();
+                }
+                else {
+                    viewLobbyProccess();
+                }
             }
         });
 
